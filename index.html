@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nahuel Villar — Industrial Designer</title>
-  <link rel="icon" type="image/png" href="images/logo.png">
+  <link rel="icon" type="image/png" href="/images/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -230,7 +230,7 @@
 <!-- NAV -->
 <nav class="nav" id="nav">
   <div class="nav-logo" onclick="go('home')">
-    <img src="images/logo.png" alt="NV">
+    <img src="/images/logo.png" alt="NV">
   </div>
   <ul class="nav-links" id="navLinks">
     <li><a onclick="go('home')" id="nl-work">Work</a></li>
@@ -261,7 +261,7 @@
     <main class="projects-grid">
       <div class="project-card-wrap fu d1" onclick="go('project','flujo')">
         <div class="project-card">
-          <img class="project-card-img" src="images/flujo_cover.jpg" alt="Flujo" style="object-position:center 20%">
+          <img class="project-card-img" src="/images/flujo_cover.jpg" alt="Flujo" style="object-position:center 20%">
           <div class="project-card-overlay">
             <span class="card-num">01</span>
             <div class="project-card-meta">
@@ -275,7 +275,7 @@
       </div>
       <div class="project-card-wrap fu d2" onclick="go('project','incline')">
         <div class="project-card">
-          <img class="project-card-img" src="images/incline1.jpg" alt="Incline" style="object-position:center 30%">
+          <img class="project-card-img" src="/images/incline1.jpg" alt="Incline" style="object-position:center 30%">
           <div class="project-card-overlay">
             <span class="card-num">02</span>
             <div class="project-card-meta">
@@ -289,7 +289,7 @@
       </div>
       <div class="project-card-wrap fu d3" onclick="go('project','core')">
         <div class="project-card">
-          <img class="project-card-img" src="images/core1.jpg" alt="Core" style="object-position:right 15%">
+          <img class="project-card-img" src="/images/core1.jpg" alt="Core" style="object-position:right 15%">
           <div class="project-card-overlay">
             <span class="card-num">03</span>
             <div class="project-card-meta">
@@ -303,7 +303,7 @@
       </div>
       <div class="project-card-wrap fu d4" onclick="go('project','pausa')">
         <div class="project-card">
-          <img class="project-card-img" src="images/pausa1.jpg" alt="Pausa" style="object-position:center 25%">
+          <img class="project-card-img" src="/images/pausa1.jpg" alt="Pausa" style="object-position:center 25%">
           <div class="project-card-overlay">
             <span class="card-num">04</span>
             <div class="project-card-meta">
@@ -359,7 +359,7 @@
     <div class="about-wrap">
       <div class="about-top">
         <div class="fu">
-          <img class="about-photo" src="images/photo.jpg" alt="Nahuel Villar">
+          <img class="about-photo" src="/images/photo.jpg" alt="Nahuel Villar">
         </div>
         <div class="fu d2">
           <div class="about-bio">
@@ -465,7 +465,7 @@ const PROJECTS = {
     tagline:'A wall lamp built on the logic of breath — printed, minimal, meditative.',
     specs:[{l:'Category',v:'Lighting Design'},{l:'Year',v:'2025'},{l:'Materials',v:'PETG, Standard Components'},{l:'Process',v:'FDM 3D Print'}],
     desc:['FLUJO began with two constraints: fewer parts, and a geometry that could only exist through 3D printing. Not a form that happens to be printed — one that demands it. Every surface, curve, and transition was designed to exploit what additive manufacturing makes possible and no other process allows. The result is a wall lamp that feels simultaneously resolved and alive.','The conceptual anchor is breath: movement that is internal, rhythmic, and continuous. That abstraction found its form in a morphology with no hard breaks and no decorative gestures — just geometry responding to light. Printed in PETG, the object earns its shape entirely through structural logic.'],
-    panels:['images/flujo_cover.jpg','images/flujo2.jpg','images/flujo3.jpg','images/flujo4.jpg','images/flujo5.jpg','images/flujo6.jpg','videos/flujo-reel.mp4','videos/flujo-uso.mp4'],
+    panels:['/images/flujo_cover.jpg','/images/flujo2.jpg','/images/flujo3.jpg','/images/flujo4.jpg','/images/flujo5.jpg','/images/flujo6.jpg','/videos/flujo-reel.mp4','/videos/flujo-uso.mp4'],
     prev:null, next:'incline'
   },
   incline: {
@@ -474,7 +474,7 @@ const PROJECTS = {
     tagline:'A modular planter system that adapts to the geometry of small-city living.',
     specs:[{l:'Category',v:'Product Design'},{l:'Year',v:'2024'},{l:'Materials',v:'Polypropylene'},{l:'Process',v:'Rotational Molding'}],
     desc:['INCLINE was born from a specific frustration: most outdoor planters are designed for space that compact city terraces simply do not have. The project responds with a system built around adaptability — configurable in height, length, and width without sacrificing visual coherence.','Two complementary modules form the core of the system. Their relationship is combinatorial, not fixed. Users assemble what they need, expand when they want, and maintain structural stability throughout. Rotational molding in polypropylene reinforces that flexibility with material consistency and manufacturing efficiency.','The morphology was kept deliberately quiet. INCLINE does not compete with the plants, the furniture, or the architecture around it. It integrates. That restraint is not a stylistic choice — it is the design.'],
-    panels:['images/incline1.jpg','images/incline3.jpg','images/incline2.jpg','images/incline4.jpg','images/incline5.jpg'],
+    panels:['/images/incline1.jpg','/images/incline3.jpg','/images/incline2.jpg','/images/incline4.jpg','/images/incline5.jpg'],
     prev:'flujo', next:'core'
   },
   core: {
@@ -483,7 +483,7 @@ const PROJECTS = {
     tagline:'Under Armour\'s performance identity, compressed into a roll-on.',
     specs:[{l:'Category',v:'Product Redesign'},{l:'Year',v:'2024'},{l:'Client',v:'Under Armour (academic)'},{l:'Process',v:'Injection, Blow Molding & Ultrasonic Welding'}],
     desc:['CORE asks a single question: what would it look like if Under Armour designed a deodorant? The answer lives in the details — the grip geometry, the surface texture, the weight of the cap in hand. Every decision was calibrated to communicate precision and physical confidence at a scale the brand rarely operates in.','The real design challenge was technical: translating a brand language built for large-format products into a form compatible with injection molding, blow molding, and ultrasonic welding. Every radius and rib had to earn its place. Decorative complexity was not an option.','The outcome is a compact, performance-coded object that holds its own next to an Under Armour sneaker. Small in scale, dense in intent.'],
-    panels:['images/core1.jpg','images/core2.jpg','images/core3.jpg','images/core4.jpg'],
+    panels:['/images/core1.jpg','/images/core2.jpg','/images/core3.jpg','/images/core4.jpg'],
     prev:'incline', next:'pausa'
   },
   pausa: {
@@ -492,7 +492,7 @@ const PROJECTS = {
     tagline:'Outdoor furniture that gives permission to stop.',
     specs:[{l:'Category',v:'Furniture Design'},{l:'Year',v:'2024'},{l:'Client',v:'Myke Outdoors'},{l:'Materials',v:'Aluminum, Nautical Fabric, Dekton'}],
     desc:['PAUSA started as a brief from Myke Outdoors: expand the catalog, reach a younger audience, challenge the visual heaviness of traditional exterior furniture. What emerged was less a collection of objects and more a proposition about time — the kind of furniture that makes stopping feel earned.','The concept of pause shaped every decision. These are pieces designed for coffee, for reading, for sitting in stillness. Their proportions are controlled, their weight reduced, their presence understated — not as a stylistic choice, but because lightness is what makes a pause feel possible.','Three materials governed the entire collection: aluminum profiles, nautical fabric, and Dekton surfaces. Working within that constraint became generative. It forced structural honesty and gave the collection a coherence that feels both rigorous and effortless.'],
-    panels:['images/pausa1.jpg','images/pausa2.jpg','images/pausa3.jpg','images/pausa4.jpg','videos/pausa-reel.mp4'],
+    panels:['/images/pausa1.jpg','/images/pausa2.jpg','/images/pausa3.jpg','/images/pausa4.jpg','/videos/pausa-reel.mp4'],
     prev:'core', next:null
   }
 };
