@@ -175,19 +175,44 @@
   .d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s} .d4{transition-delay:.32s}
 
   /* RESPONSIVE */
+  /* hamburger */
+  .nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; }
+  .nav-hamburger span { display:block; width:22px; height:2px; background:var(--color-text); transition:all .3s; }
+  .nav-mobile { display:none; position:fixed; inset:0; top:var(--nav-height); background:var(--color-bg); z-index:190; flex-direction:column; align-items:center; justify-content:center; gap:40px; }
+  .nav-mobile.open { display:flex; }
+  .nav-mobile a { font-size:2rem; font-family:var(--font-display); font-weight:600; letter-spacing:-.02em; color:var(--color-text); cursor:pointer; }
+
   @media(max-width:900px){
     .home-hero,.proj-header,.about-top { grid-template-columns:1fr; }
     .hero-desc { margin-left:0; }
-    .projects-grid { grid-template-columns:1fr 1fr; }
-    .project-card { aspect-ratio:3/2; }
-    .proj-desc { grid-template-columns:1fr; gap:16px; }
+    .projects-grid { grid-template-columns:1fr 1fr; padding:0 24px 0; }
+    .project-card { aspect-ratio:4/5; }
+    .proj-desc { grid-template-columns:1fr; gap:16px; padding:0 24px clamp(40px,6vw,64px); }
     .about-cv { grid-template-columns:1fr 1fr; }
     .contact-grid { grid-template-columns:1fr; }
+    .home-hero { padding:24px 24px 20px; }
+    .proj-header { padding:40px 24px 32px; }
+    .panels-bar { padding:0 24px 14px; }
+    .panels-track { padding:0 24px 20px; }
+    .proj-footer-nav { padding:32px 24px; }
+    .contact-wrap { padding:40px 24px 24px; }
+    .about-wrap { padding:0 24px; }
+    .home-footer { padding:16px 24px 20px; }
+    .proj-header-right { text-align:left; }
+    .proj-header-right .proj-specs { direction:ltr; }
+    .proj-header-right .proj-specs > * { text-align:left; }
+    .proj-tagline { text-align:left; }
   }
   @media(max-width:600px){
     .nav-links { display:none; }
+    .nav-hamburger { display:flex; }
     .about-cv { grid-template-columns:1fr; }
-    .proj-specs { grid-template-columns:1fr; }
+    .proj-specs { grid-template-columns:1fr 1fr; }
+    .projects-grid { grid-template-columns:1fr 1fr; gap:6px; }
+    .home-hero h1 { font-size:clamp(2.4rem,10vw,3.5rem); }
+    .proj-title { font-size:clamp(2.2rem,10vw,3.5rem); }
+    .pnav-title { font-size:1.2rem; }
+    .rights { font-size:.65rem; }
   }
   </style>
 </head>
@@ -207,7 +232,15 @@
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8l5 5"/></svg>
     All work
   </div>
+  <div class="nav-hamburger" id="navHamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
+<div class="nav-mobile" id="navMobile">
+  <a onclick="go('home');toggleMenu()">Work</a>
+  <a onclick="go('about');toggleMenu()">About</a>
+  <a onclick="go('contact');toggleMenu()">Contact</a>
+</div>
 
 <!-- HOME -->
 <div class="page active" id="page-home">
@@ -444,6 +477,11 @@ const PROJECTS = {
 };
 
 let cur = 'home';
+
+function toggleMenu() {
+  const m = document.getElementById('navMobile');
+  m.classList.toggle('open');
+}
 
 function go(page, id) {
   const active = document.querySelector('.page.active');
