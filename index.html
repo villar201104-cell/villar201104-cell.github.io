@@ -186,7 +186,7 @@
     .home-hero,.proj-header,.about-top { grid-template-columns:1fr; }
     .hero-desc { margin-left:0; }
     .projects-grid { grid-template-columns:1fr 1fr; padding:0 24px 0; }
-    .project-card { aspect-ratio:4/5; }
+    .project-card { aspect-ratio:7/10; }
     .proj-desc { grid-template-columns:1fr; gap:16px; padding:0 24px clamp(40px,6vw,64px); }
     .about-cv { grid-template-columns:1fr 1fr; }
     .contact-grid { grid-template-columns:1fr; }
@@ -202,10 +202,12 @@
     .proj-header-right .proj-specs { direction:ltr; }
     .proj-header-right .proj-specs > * { text-align:left; }
     .proj-tagline { text-align:left; }
-  }
-  @media(max-width:600px){
     .nav-links { display:none; }
     .nav-hamburger { display:flex; }
+    .desc-body p { font-size:1rem; }
+    .about-bio p { font-size:.9rem; }
+  }
+  @media(max-width:600px){
     .about-cv { grid-template-columns:1fr; }
     .proj-specs { grid-template-columns:1fr 1fr; }
     .projects-grid { grid-template-columns:1fr 1fr; gap:6px; }
