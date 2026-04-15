@@ -61,7 +61,12 @@
 
   /* PROJECT GRID */
   .projects-grid { width:100%; padding:0 clamp(80px,10vw,160px) 0; display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
-  .project-card { position:relative; cursor:pointer; overflow:hidden; aspect-ratio:7/10; background:var(--color-bg-alt); }
+  .project-card-wrap { cursor:pointer; }
+  .project-card { position:relative; overflow:hidden; aspect-ratio:7/10; background:var(--color-bg-alt); }
+  .card-mobile-label { display:none; padding:8px 2px 0; }
+  .cml-num { font-size:.65rem; color:var(--color-muted); margin-right:8px; }
+  .cml-title { font-family:var(--font-display); font-size:.95rem; font-weight:600; margin-right:6px; }
+  .cml-cat { font-size:.7rem; color:var(--color-muted); }
   .project-card-img { width:100%; height:100%; object-fit:cover; transition:transform .8s var(--ease); }
   .project-card:hover .project-card-img { transform:scale(1.04); }
   .project-card-overlay { position:absolute; inset:0; background:rgba(10,10,10,0); transition:background .5s; display:flex; flex-direction:column; justify-content:flex-end; padding:32px; }
@@ -206,6 +211,8 @@
     .nav-hamburger { display:flex; }
     .desc-body p { font-size:1rem; }
     .about-bio p { font-size:.9rem; }
+    .project-card-overlay { display:none; }
+    .card-mobile-label { display:block; }
   }
   @media(max-width:600px){
     .about-cv { grid-template-columns:1fr; }
@@ -252,49 +259,61 @@
       <p class="hero-desc fu d1">Industrial Designer based in Miami, Florida. <span class="hero-quote">Form follows function. Identity follows conviction.</span></p>
     </header>
     <main class="projects-grid">
-      <div class="project-card fu d1" onclick="go('project','flujo')">
-        <img class="project-card-img" src="images/flujo_cover.jpg" alt="Flujo" style="object-position:center 20%">
-        <div class="project-card-overlay">
-          <span class="card-num">01</span>
-          <div class="project-card-meta">
-            <p class="card-label">Lighting · 2025</p>
-            <h2 class="card-title">Flujo</h2>
-            <p class="card-desc">A wall lamp built on the logic of breath — printed, minimal, meditative.</p>
+      <div class="project-card-wrap fu d1" onclick="go('project','flujo')">
+        <div class="project-card">
+          <img class="project-card-img" src="images/flujo_cover.jpg" alt="Flujo" style="object-position:center 20%">
+          <div class="project-card-overlay">
+            <span class="card-num">01</span>
+            <div class="project-card-meta">
+              <p class="card-label">Lighting · 2025</p>
+              <h2 class="card-title">Flujo</h2>
+              <p class="card-desc">A wall lamp built on the logic of breath — printed, minimal, meditative.</p>
+            </div>
           </div>
         </div>
+        <div class="card-mobile-label"><span class="cml-num">01</span><span class="cml-title">Flujo</span><span class="cml-cat">Lighting · 2025</span></div>
       </div>
-      <div class="project-card fu d2" onclick="go('project','incline')">
-        <img class="project-card-img" src="images/incline1.jpg" alt="Incline" style="object-position:center 30%">
-        <div class="project-card-overlay">
-          <span class="card-num">02</span>
-          <div class="project-card-meta">
-            <p class="card-label">Product · 2024</p>
-            <h2 class="card-title">Incline</h2>
-            <p class="card-desc">A modular planter system that adapts to the geometry of small-city living.</p>
+      <div class="project-card-wrap fu d2" onclick="go('project','incline')">
+        <div class="project-card">
+          <img class="project-card-img" src="images/incline1.jpg" alt="Incline" style="object-position:center 30%">
+          <div class="project-card-overlay">
+            <span class="card-num">02</span>
+            <div class="project-card-meta">
+              <p class="card-label">Product · 2024</p>
+              <h2 class="card-title">Incline</h2>
+              <p class="card-desc">A modular planter system that adapts to the geometry of small-city living.</p>
+            </div>
           </div>
         </div>
+        <div class="card-mobile-label"><span class="cml-num">02</span><span class="cml-title">Incline</span><span class="cml-cat">Product · 2024</span></div>
       </div>
-      <div class="project-card fu d3" onclick="go('project','core')">
-        <img class="project-card-img" src="images/core1.jpg" alt="Core" style="object-position:right 15%">
-        <div class="project-card-overlay">
-          <span class="card-num">03</span>
-          <div class="project-card-meta">
-            <p class="card-label">Product Redesign · 2024</p>
-            <h2 class="card-title">Core</h2>
-            <p class="card-desc">Under Armour's performance identity, compressed into a roll-on.</p>
+      <div class="project-card-wrap fu d3" onclick="go('project','core')">
+        <div class="project-card">
+          <img class="project-card-img" src="images/core1.jpg" alt="Core" style="object-position:right 15%">
+          <div class="project-card-overlay">
+            <span class="card-num">03</span>
+            <div class="project-card-meta">
+              <p class="card-label">Product Redesign · 2024</p>
+              <h2 class="card-title">Core</h2>
+              <p class="card-desc">Under Armour's performance identity, compressed into a roll-on.</p>
+            </div>
           </div>
         </div>
+        <div class="card-mobile-label"><span class="cml-num">03</span><span class="cml-title">Core</span><span class="cml-cat">Product Redesign · 2024</span></div>
       </div>
-      <div class="project-card fu d4" onclick="go('project','pausa')">
-        <img class="project-card-img" src="images/pausa1.jpg" alt="Pausa" style="object-position:center 25%">
-        <div class="project-card-overlay">
-          <span class="card-num">04</span>
-          <div class="project-card-meta">
-            <p class="card-label">Furniture · 2024</p>
-            <h2 class="card-title">Pausa</h2>
-            <p class="card-desc">Outdoor furniture that gives permission to stop.</p>
+      <div class="project-card-wrap fu d4" onclick="go('project','pausa')">
+        <div class="project-card">
+          <img class="project-card-img" src="images/pausa1.jpg" alt="Pausa" style="object-position:center 25%">
+          <div class="project-card-overlay">
+            <span class="card-num">04</span>
+            <div class="project-card-meta">
+              <p class="card-label">Furniture · 2024</p>
+              <h2 class="card-title">Pausa</h2>
+              <p class="card-desc">Outdoor furniture that gives permission to stop.</p>
+            </div>
           </div>
         </div>
+        <div class="card-mobile-label"><span class="cml-num">04</span><span class="cml-title">Pausa</span><span class="cml-cat">Furniture · 2024</span></div>
       </div>
     </main>
     <div class="home-footer">
