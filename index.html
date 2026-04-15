@@ -504,7 +504,7 @@ function toggleMenu() {
   m.classList.toggle('open');
 }
 
-function go(page, id) {
+function go(page, id, pushState=true) {
   const active = document.querySelector('.page.active');
   if(active) { active.classList.add('exit'); active.classList.remove('active'); setTimeout(()=>active.classList.remove('exit'),300); }
   setTimeout(()=>{
@@ -514,7 +514,34 @@ function go(page, id) {
     updateNav(page);
     requestAnimationFrame(()=>next.querySelectorAll('.fu').forEach(el=>{el.classList.remove('in');requestAnimationFrame(()=>el.classList.add('in'))}));
   },100);
+  if(pushState) {
+    const url = page==='home' ? '/' : page==='project' ? '/project/'+id : '/'+page;
+    history.pushState({page, id}, '', url);
+  }
 }
+
+window.addEventListener('popstate', e => {
+  if(e.state) {
+    go(e.state.page, e.state.id, false);
+  } else {
+    go('home', null, false);
+  }
+});
+
+// Handle direct URL on load
+(function() {
+  const path = location.pathname;
+  if(path.startsWith('/project/')) {
+    const id = path.split('/')[2];
+    if(id && PROJECTS[id]) go('project', id, false);
+  } else if(path === '/about') {
+    go('about', null, false);
+  } else if(path === '/contact') {
+    go('contact', null, false);
+  } else {
+    history.replaceState({page:'home', id:null}, '', '/');
+  }
+})();
 
 function updateNav(page) {
   document.getElementById('navLinks').style.display = page==='project'?'none':'flex';
