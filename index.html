@@ -528,8 +528,15 @@ window.addEventListener('popstate', e => {
   }
 });
 
-// Handle direct URL on load
+// Handle direct URL on load (also restores from 404.html redirect)
 (function() {
+  // Check if we were redirected here from 404.html
+  const saved = sessionStorage.getItem('spa_redirect');
+  if(saved) {
+    sessionStorage.removeItem('spa_redirect');
+    const url = new URL(saved);
+    history.replaceState(null, null, url.pathname + url.search + url.hash);
+  }
   const path = location.pathname;
   if(path.startsWith('/project/')) {
     const id = path.split('/')[2];
