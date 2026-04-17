@@ -223,6 +223,49 @@
     .pnav-title { font-size:1.2rem; }
     .rights { font-size:.65rem; }
   }
+
+  /* ── Flujo Process Section ── */
+  .process-header{padding:clamp(56px,7vw,96px) clamp(80px,10vw,160px) clamp(40px,5vw,56px);display:flex;align-items:baseline;justify-content:space-between;border-top:1px solid var(--color-border)}
+  .process-kicker{font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--color-muted);font-family:var(--font-display)}
+  .process-title{font-family:var(--font-display);font-size:clamp(2rem,3.5vw,3rem);font-weight:600;letter-spacing:-.02em;line-height:1.1;margin-top:10px}
+  .origins-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--color-border);margin:0 clamp(80px,10vw,160px)}
+  .origins-col{background:var(--color-bg);padding:32px 28px 40px;display:flex;flex-direction:column;gap:16px}
+  .origins-cross{font-size:.85rem;color:var(--color-muted);font-family:var(--font-display);font-weight:300}
+  .origins-stat{font-size:.88rem;line-height:1.68;color:var(--color-soft)}
+  .origins-stat strong{color:var(--color-text);font-weight:600}
+  .origins-question{margin:0 clamp(80px,10vw,160px);padding:36px 0 clamp(64px,8vw,100px);border-bottom:1px solid var(--color-border);font-family:var(--font-display);font-size:clamp(1rem,1.6vw,1.35rem);font-style:italic;font-weight:400;color:var(--color-muted);line-height:1.55}
+  .origins-question em{color:var(--color-text);font-style:italic;font-weight:500}
+  .split-block{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--color-border)}
+  .split-left{padding:clamp(48px,6vw,80px) clamp(80px,10vw,160px);display:flex;flex-direction:column;justify-content:center}
+  .split-right{min-height:400px}
+  .split-right.flip{order:-1}
+  .split-tag{font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--color-muted);margin-bottom:16px;display:block}
+  .split-h{font-family:var(--font-display);font-size:clamp(1.4rem,2.2vw,1.9rem);font-weight:600;letter-spacing:-.02em;line-height:1.15;margin-bottom:24px}
+  .split-body{font-size:clamp(.9rem,1.1vw,1rem);line-height:1.78;color:var(--color-soft);max-width:420px}
+  .split-body p{margin-bottom:14px}
+  .split-body p:last-child{margin-bottom:0}
+  .split-specs{margin-top:28px;padding-top:24px;border-top:1px solid var(--color-border);display:flex;gap:28px;flex-wrap:wrap}
+  .evo-wrap{padding:clamp(56px,7vw,96px) clamp(80px,10vw,160px);border-bottom:1px solid var(--color-border)}
+  .evo-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:40px}
+  .evo-title{font-family:var(--font-display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em}
+  .evo-subtitle{font-size:.78rem;color:var(--color-muted);letter-spacing:.08em}
+  .evo-cols{display:grid;gap:1px;background:var(--color-border);border:1px solid var(--color-border);overflow:hidden}
+  .evo-col{background:var(--color-bg);padding:28px 28px 20px}
+  .evo-phase-name{font-family:var(--font-display);font-size:1.05rem;font-weight:600;margin-bottom:4px}
+  .evo-phase-sub{font-size:.82rem;color:var(--color-muted);font-style:italic;margin-bottom:14px}
+  .evo-desc{font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);margin-bottom:18px}
+  .proto-wrap{padding:clamp(56px,7vw,96px) clamp(80px,10vw,160px)}
+  .proto-header{margin-bottom:40px}
+  .proto-title{font-family:var(--font-display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:8px}
+  .proto-intro{font-size:clamp(.9rem,1.1vw,1rem);color:var(--color-muted);line-height:1.65;max-width:480px}
+  .proto-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--color-border);border:1px solid var(--color-border)}
+  .proto-col{background:var(--color-bg);padding:26px 28px 28px}
+  .proto-col-h{font-family:var(--font-display);font-size:1.05rem;font-weight:600;margin-bottom:3px;display:flex;align-items:center;gap:8px}
+  .proto-col-arrow{color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body)}
+  .proto-col-body{font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);margin-top:10px}
+  .proto-imgs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--color-border);border:1px solid var(--color-border)}
+  .process-closing{padding:clamp(56px,7vw,80px) clamp(80px,10vw,160px);border-top:1px solid var(--color-border);font-family:var(--font-display);font-size:clamp(1.05rem,1.7vw,1.4rem);font-style:italic;font-weight:400;color:var(--color-muted);line-height:1.55}
+  .process-closing em{color:var(--color-text);font-style:italic}
   </style>
 </head>
 <body>
@@ -629,6 +672,144 @@ function buildProject(id) {
       </div>
       <div class="panels-track" id="pt">${panels}</div>
     </section>
+    ${id==='flujo' ? `
+    <div class="process-header">
+      <div>
+        <div class="process-kicker">Design Process</div>
+        <div class="process-title">Beyond the lamp</div>
+      </div>
+    </div>
+    <div class="origins-grid">
+      <div class="origins-col">
+        <img src="/images/flujo-process-1.png" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <div class="origins-cross">+</div>
+        <div class="origins-stat">A zen object doesn't decorate — it <strong>accompanies</strong>. The intent was to go beyond the lamp concept: create something sculptural that makes people question what it is and how it's made.</div>
+      </div>
+      <div class="origins-col">
+        <img src="/images/flujo-process-2.png" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <div class="origins-cross">+</div>
+        <div class="origins-stat">3D printing wasn't just the process — it was the <strong>opportunity</strong>. Embedding a three-dimensional internal pattern inside the screen: something impossible to manufacture as a single piece through any other method.</div>
+      </div>
+    </div>
+    <div class="origins-question">
+      With only 2 bodies and an additive process —<br>
+      how do you make a lamp that <em>could only exist this way</em>?
+    </div>
+    <div class="split-block">
+      <div class="split-left">
+        <span class="split-tag">Name &amp; Identity</span>
+        <div class="split-h">Flujo</div>
+        <div class="split-body">
+          <p>The name comes from imagining a water current — <em>flujo</em>, flow. Water as a reference not for its form but for its qualities: the way it moves, the way it feels against the skin, the sound it makes, the calm it carries.</p>
+          <p>The blue color isn't decorative — it's a direct reading of the element. It connects the object to something the senses already know, anchoring the zen intention in something immediate and familiar.</p>
+        </div>
+      </div>
+      <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
+        <img src="/images/flujo-render-identity.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+    </div>
+    <div class="split-block">
+      <div class="split-right flip" style="background:var(--color-bg);overflow:hidden;">
+        <img src="/images/flujo-render-concept.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <div class="split-left">
+        <span class="split-tag">Concept</span>
+        <div class="split-h">An object<br>that reveals itself</div>
+        <div class="split-body">
+          <p>The design intent was to move beyond the functional concept of a wall lamp. Flujo is conceived as a sculptural object: switched off, it presents an apparently flat, uniform surface. Switched on, the internal three-dimensional pattern emerges from within.</p>
+          <p>This dual state — the shift between rest and activation — is what places the object in a zen context. It doesn't impose its presence; it suggests it.</p>
+        </div>
+        <div class="split-specs">
+          <div class="split-spec"><div class="spec-label">Material</div><div class="spec-value">PETG</div></div>
+          <div class="split-spec"><div class="spec-label">Process</div><div class="spec-value">FDM 3D printing</div></div>
+          <div class="split-spec"><div class="spec-label">Bodies</div><div class="spec-value">2 main</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="split-block">
+      <div class="split-left">
+        <span class="split-tag">Key Decisions</span>
+        <div class="split-h">Screen + support:<br>two roles, one system</div>
+        <div class="split-body">
+          <p>The screen concentrates all formal complexity: an internal three-dimensional pattern and branching extensions at its top and bottom edges that modulate the light distribution. PETG was chosen for its thermal resistance and translucency — its low heat sensitivity protects the material from the light source, while its translucency keeps the internal pattern hidden until the lamp is on.</p>
+          <p>The wall support integrates the bipin base, designed following the same morphological language as the body itself. It mounts onto standard Argentine recessed electrical boxes with 2 screws. The connection between both bodies is a bayonet joint: the screen slides over an extruded circumference with a central channel, locks into position with a rotation, and allows multiple angle configurations without tools.</p>
+        </div>
+        <div class="split-specs">
+          <div class="split-spec"><div class="spec-label">Light source</div><div class="spec-value">Bipin</div></div>
+          <div class="split-spec"><div class="spec-label">Mount</div><div class="spec-value">Standard AR box</div></div>
+          <div class="split-spec"><div class="spec-label">Joint</div><div class="spec-value">Rotary bayonet</div></div>
+        </div>
+      </div>
+      <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
+        <img src="/images/flujo-render-decisions.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+    </div>
+    <div class="evo-wrap">
+      <div class="evo-header">
+        <div class="evo-title">Design Evolution</div>
+        <div class="evo-subtitle">2 phases</div>
+      </div>
+      <div class="evo-cols" style="grid-template-columns:1088fr 1617fr;column-gap:1px;row-gap:1px;background:var(--color-border);border:1px solid var(--color-border);">
+        <div class="evo-col">
+          <div class="evo-phase-name">Ideation</div>
+          <div class="evo-phase-sub">Form exploration</div>
+          <div class="evo-desc">Exploring the screen as a sculptural object. Defining the internal three-dimensional pattern and the branching extensions at both edges that modulate light output.</div>
+        </div>
+        <div class="evo-col">
+          <div class="evo-phase-name">Iteration</div>
+          <div class="evo-phase-sub">Physical testing</div>
+          <div class="evo-desc">PETG over PLA for translucency and thermal resistance. 0.4mm nozzle for definition of the internal pattern. Wall thickness between 0.8mm and 1mm — where the difference in how much light passes through becomes visible, and where the screen either holds its form or flexes.</div>
+        </div>
+        <div style="background:var(--color-bg);padding:16px 2%;">
+          <img src="/images/flujo-evo-ideation.png" style="width:100%;display:block;">
+        </div>
+        <div style="background:var(--color-bg);padding:16px 2%;">
+          <img src="/images/flujo-evo-iteration.png" style="width:100%;display:block;">
+        </div>
+      </div>
+    </div>
+    <div class="proto-wrap">
+      <div class="proto-header">
+        <div class="proto-title">Prototyping</div>
+        <div class="proto-intro">Physical validation at every stage. The prototype as a design tool, not a presentation prop.</div>
+      </div>
+      <div class="proto-cols">
+        <div class="proto-col">
+          <div class="proto-col-h">Takeouts <span class="proto-col-arrow">→</span></div>
+          <div class="proto-col-body">Screen wall thickness calibrated to balance translucency and rigidity. Bayonet geometry adjusted for precise rotation with no play.</div>
+        </div>
+        <div class="proto-col">
+          <div class="proto-col-h">Building <span class="proto-col-arrow">→</span></div>
+          <div class="proto-col-body">FDM prints in PETG at 1:1 scale to evaluate how the internal pattern interacts with the light source and what it projects onto the wall and surrounding space.</div>
+        </div>
+        <div class="proto-col">
+          <div class="proto-col-h">Testing <span class="proto-col-arrow">→</span></div>
+          <div class="proto-col-body">On/off comparison: how invisible the pattern is without light, and how present it becomes when activated. Perception of the bayonet joint as a formal element.</div>
+        </div>
+      </div>
+      <div class="proto-imgs">
+        <div style="background:var(--color-bg);padding:16px;">
+          <div style="aspect-ratio:4/5;overflow:hidden;background:var(--color-bg);">
+            <img src="/images/flujo-proto-takeouts.png" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+        </div>
+        <div style="background:var(--color-bg);padding:16px;">
+          <div style="aspect-ratio:4/5;overflow:hidden;background:#0A0A0A;">
+            <video src="/videos/flujo-proto-building-web.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video>
+          </div>
+        </div>
+        <div style="background:var(--color-bg);padding:16px;">
+          <div style="aspect-ratio:4/5;overflow:hidden;background:#0A0A0A;">
+            <video src="/videos/flujo-proto-testing-web.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="process-closing">
+      An object that, switched off, invites you to look at it.
+      Switched on, <em>reveals what was always inside</em>.
+    </div>
+    ` : ''}
     <nav class="proj-footer-nav">${prev}${next}</nav>
     <footer class="footer"><p>© 2026 Nahuel Villar</p><p>Miami, FL</p></footer>`;
   initDrag(document.getElementById('pt'));
