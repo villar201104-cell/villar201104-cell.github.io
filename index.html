@@ -304,7 +304,7 @@
     <main class="projects-grid">
       <div class="project-card-wrap fu d1" onclick="go('project','flujo')">
         <div class="project-card">
-          <img class="project-card-img" src="/images/flujo_cover.jpg" alt="Flujo" style="object-position:center 20%">
+          <img class="project-card-img" src="/images/flujo-hero.jpg" alt="Flujo" style="object-position:center 20%">
           <div class="project-card-overlay">
             <span class="card-num">01</span>
             <div class="project-card-meta">
@@ -318,7 +318,7 @@
       </div>
       <div class="project-card-wrap fu d2" onclick="go('project','incline')">
         <div class="project-card">
-          <img class="project-card-img" src="/images/incline1.jpg" alt="Incline" style="object-position:center 30%">
+          <img class="project-card-img" src="/images/incline-hero.jpg" alt="Incline" style="object-position:center 30%">
           <div class="project-card-overlay">
             <span class="card-num">02</span>
             <div class="project-card-meta">
@@ -346,7 +346,7 @@
       </div>
       <div class="project-card-wrap fu d4" onclick="go('project','pausa')">
         <div class="project-card">
-          <img class="project-card-img" src="/images/pausa1.jpg" alt="Pausa" style="object-position:center 25%">
+          <img class="project-card-img" src="/images/pausa-hero.jpg" alt="Pausa" style="object-position:center 25%">
           <div class="project-card-overlay">
             <span class="card-num">04</span>
             <div class="project-card-meta">
@@ -512,12 +512,12 @@ const PROJECTS = {
     prev:null, next:'incline'
   },
   incline: {
-    hPanels:[3,4],
+    hPanels:[2,3],
     title:'Incline', eyebrow:'02 — Product Design',
     tagline:'A modular planter system that adapts to the geometry of small-city living.',
     specs:[{l:'Category',v:'Product Design'},{l:'Year',v:'2024'},{l:'Materials',v:'Polypropylene'},{l:'Process',v:'Rotational Molding'}],
     desc:['INCLINE was born from a specific frustration: most outdoor planters are designed for space that compact city terraces simply do not have. The project responds with a system built around adaptability — configurable in height, length, and width without sacrificing visual coherence.','Two complementary modules form the core of the system. Their relationship is combinatorial, not fixed. Users assemble what they need, expand when they want, and maintain structural stability throughout. Rotational molding in polypropylene reinforces that flexibility with material consistency and manufacturing efficiency.','The morphology was kept deliberately quiet. INCLINE does not compete with the plants, the furniture, or the architecture around it. It integrates. That restraint is not a stylistic choice — it is the design.'],
-    panels:['/images/incline1.jpg','/images/incline3.jpg','/images/incline2.jpg','/images/incline4.jpg','/images/incline5.jpg'],
+    panels:['/images/incline1.jpg','/images/incline3.jpg','/images/incline4.jpg','/images/incline5.jpg'],
     prev:'flujo', next:'core'
   },
   core: {
@@ -808,6 +808,107 @@ function buildProject(id) {
     <div class="process-closing">
       An object that, switched off, invites you to look at it.
       Switched on, <em>reveals what was always inside</em>.
+    </div>
+    ` : id==='incline' ? `
+    <div class="process-header">
+      <div>
+        <div class="process-kicker">Design Process</div>
+        <div class="process-title">A system that branches</div>
+      </div>
+    </div>
+    <div class="origins-grid">
+      <div class="origins-col">
+        <img src="/images/incline-process-branches.jpg" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <div class="origins-cross">+</div>
+        <div class="origins-stat">Tree branches don't grow from a planner's grid. They emerge from a <strong>node</strong> and radiate outward — always inclined. That organic logic became the structural principle of the system.</div>
+      </div>
+      <div class="origins-col">
+        <img src="/images/incline-process-sketch.jpg" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <div class="origins-cross">+</div>
+        <div class="origins-stat">Buenos Aires terraces are small. Most planters are designed for space that compact city balconies simply don't have — wasting the <strong>vertical dimension entirely</strong>.</div>
+      </div>
+    </div>
+    <div class="origins-question">
+      With a single body and a 3-point snap —<br>
+      how do you build a planter that <em>grows in any direction</em>?
+    </div>
+    <div class="split-block">
+      <div class="split-left">
+        <span class="split-tag">Name &amp; Concept</span>
+        <div class="split-h">Incline</div>
+        <div class="split-body">
+          <p>The name comes from the defining visual quality of tree branches: they don't grow straight up — they <em>incline</em>. Every branch departs from a node at an angle, reaching toward light. That gesture — directional, structural, alive — became the guiding idea of the project.</p>
+          <p>Incline is not just a planter. It is a system designed with the same logic as the thing it holds: something that starts from a fixed point and expands outward, adapting its shape to the space and the light available.</p>
+        </div>
+        <div class="split-specs">
+          <div class="split-spec"><div class="spec-label">Material</div><div class="spec-value">Polypropylene</div></div>
+          <div class="split-spec"><div class="spec-label">Process</div><div class="spec-value">Rotational Molding</div></div>
+        </div>
+      </div>
+      <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
+        <img src="/images/incline-render-concept.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+    </div>
+    <div class="split-block">
+      <div class="split-right flip" style="background:var(--color-bg);overflow:hidden;">
+        <img src="/images/incline-render-system.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <div class="split-left">
+        <span class="split-tag">System Logic</span>
+        <div class="split-h">One body,<br>two variants</div>
+        <div class="split-body">
+          <p>The system is built on a single core module, available in two configurations: one with two connection branches, one with three. This gives the user direct control over density — two branches for linear growth, three for exponential branching.</p>
+          <p>Any combination works. The same connection geometry links every module to every other, in any direction, across all three axes. The system doesn't prescribe a configuration — it enables one.</p>
+        </div>
+        <div class="split-specs">
+          <div class="split-spec"><div class="spec-label">Expansion</div><div class="spec-value">X, Y, Z axes</div></div>
+          <div class="split-spec"><div class="spec-label">Variants</div><div class="spec-value">2-branch, 3-branch</div></div>
+          <div class="split-spec"><div class="spec-label">Connection</div><div class="spec-value">3-point snap fit</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="split-block">
+      <div class="split-left">
+        <span class="split-tag">Key Decisions</span>
+        <div class="split-h">Snap fit + water flow:<br>function drives form</div>
+        <div class="split-body">
+          <p>The connection between modules does double duty: it locks them together and serves as the structural support point. The first module rests on the ground; every subsequent module connects to the one below — the joint is both connection and leg.</p>
+          <p>Water management was integrated from the start. A grid of perforated points at the base of each module allows water to drain from upper modules into lower ones, so the entire stack can be irrigated from the top. The color — a universal gray — was chosen to disappear into any terrace context, letting the plants take the focus.</p>
+        </div>
+        <div class="split-specs">
+          <div class="split-spec"><div class="spec-label">Drainage</div><div class="spec-value">Module to module</div></div>
+          <div class="split-spec"><div class="spec-label">Base</div><div class="spec-value">Snap fit doubles as feet</div></div>
+        </div>
+      </div>
+      <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
+        <img src="/images/incline-render-decisions.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+    </div>
+    <div class="proto-wrap" style="padding:clamp(56px,7vw,96px) clamp(80px,10vw,160px); border-bottom:1px solid var(--color-border);">
+      <div style="margin-bottom:40px;">
+        <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:8px;">Prototyping</div>
+        <div style="font-size:clamp(.9rem,1.1vw,1rem);color:var(--color-muted);line-height:1.65;max-width:480px;">From paper model to planted system — validating morphology, dimensions, and the connection between modules before committing to the final material.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:1px;background:var(--color-border);border:1px solid var(--color-border);">
+        <div style="background:var(--color-bg);padding:26px 28px 16px;display:flex;flex-direction:column;gap:12px;">
+          <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Paper model <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ scale model</span></div>
+          <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">A scale model built to validate the morphology of the module — how the form reads in three dimensions, how the volumes relate to each other, and whether the proportions hold before committing to print.</div>
+        </div>
+        <div style="background:var(--color-bg);padding:26px 28px 16px;display:flex;flex-direction:column;gap:12px;">
+          <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Final prototype <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ planted &amp; assembled</span></div>
+          <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">The printed system assembled with soil and plants — verifying the structural behavior of the connection under load and the water drainage between modules in use.</div>
+        </div>
+        <div style="background:var(--color-bg);padding:16px 2%;">
+          <img src="/images/incline-proto-paper.jpg" style="width:100%;display:block;">
+        </div>
+        <div style="background:var(--color-bg);padding:16px 2%;">
+          <img src="/images/incline-proto-printed.jpg" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:bottom;display:block;">
+        </div>
+      </div>
+    </div>
+    <div class="process-closing">
+      A single body. Two variants.<br>
+      <em>Infinite configurations — and everything it needs to keep growing.</em>
     </div>
     ` : ''}
     <nav class="proj-footer-nav">${prev}${next}</nav>
