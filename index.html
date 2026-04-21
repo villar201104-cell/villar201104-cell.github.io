@@ -266,6 +266,26 @@
   .proto-imgs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--color-border);border:1px solid var(--color-border)}
   .process-closing{padding:clamp(56px,7vw,80px) clamp(80px,10vw,160px);border-top:1px solid var(--color-border);font-family:var(--font-display);font-size:clamp(1.05rem,1.7vw,1.4rem);font-style:italic;font-weight:400;color:var(--color-muted);line-height:1.55}
   .process-closing em{color:var(--color-text);font-style:italic}
+  .proto-3col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--color-border);border:1px solid var(--color-border)}
+  .proto-item{background:var(--color-bg);display:flex;flex-direction:column}
+  .proto-item-text{padding:26px 28px 16px;display:flex;flex-direction:column;gap:12px;flex:1}
+  .proto-item-img{padding:16px 2%}
+
+  @media(max-width:900px){
+    .process-header{padding:40px 24px 28px}
+    .origins-grid{grid-template-columns:1fr;margin:0 24px}
+    .origins-question{margin:0 24px;padding:28px 0 48px}
+    .split-block{grid-template-columns:1fr}
+    .split-right{min-height:260px}
+    .split-right.flip{order:0}
+    .split-left{padding:40px 24px}
+    .proto-wrap{padding:40px 24px}
+    .proto-3col{grid-template-columns:1fr}
+    .process-closing{padding:40px 24px}
+  }
+  @media(max-width:600px){
+    .split-right{min-height:200px}
+  }
   </style>
 </head>
 <body>
@@ -889,27 +909,27 @@ function buildProject(id) {
         <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:8px;">Prototyping</div>
         <div style="font-size:clamp(.9rem,1.1vw,1rem);color:var(--color-muted);line-height:1.65;max-width:480px;">From hand sketches to a planted system — validating the branching logic, morphology, and connection geometry before committing to the final material.</div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto auto;gap:1px;background:var(--color-border);border:1px solid var(--color-border);">
-        <div style="background:var(--color-bg);padding:26px 28px 16px;display:flex;flex-direction:column;gap:12px;">
-          <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Sketches <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ system exploration</span></div>
-          <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">Hand sketches exploring the branching logic — working out the two module variants, the connection geometry, and how the configuration can grow in any direction before moving into 3D.</div>
+      <div class="proto-3col">
+        <div class="proto-item">
+          <div class="proto-item-text">
+            <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Sketches <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ system exploration</span></div>
+            <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">Hand sketches exploring the branching logic — working out the two module variants, the connection geometry, and how the configuration can grow in any direction before moving into 3D.</div>
+          </div>
+          <div class="proto-item-img"><img src="/images/incline-proto-bocetos.jpg" style="width:100%;display:block;"></div>
         </div>
-        <div style="background:var(--color-bg);padding:26px 28px 16px;display:flex;flex-direction:column;gap:12px;">
-          <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Paper model <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ scale model</span></div>
-          <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">A scale model built to validate the morphology of the module — how the form reads in three dimensions, how the volumes relate to each other, and whether the proportions hold before committing to print.</div>
+        <div class="proto-item">
+          <div class="proto-item-text">
+            <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Paper model <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ scale model</span></div>
+            <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">A scale model built to validate the morphology of the module — how the form reads in three dimensions, how the volumes relate to each other, and whether the proportions hold before committing to print.</div>
+          </div>
+          <div class="proto-item-img"><img src="/images/incline-proto-papel.jpg" style="width:100%;display:block;"></div>
         </div>
-        <div style="background:var(--color-bg);padding:26px 28px 16px;display:flex;flex-direction:column;gap:12px;">
-          <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Final prototype <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ planted &amp; assembled</span></div>
-          <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">The printed system assembled with soil and plants — verifying the structural behavior of the connection under load and the water drainage between modules in use.</div>
-        </div>
-        <div style="background:var(--color-bg);padding:16px 2%;">
-          <img src="/images/incline-proto-bocetos.jpg" style="width:100%;display:block;">
-        </div>
-        <div style="background:var(--color-bg);padding:16px 2%;">
-          <img src="/images/incline-proto-papel.jpg" style="width:100%;display:block;">
-        </div>
-        <div style="background:var(--color-bg);padding:16px 2%;">
-          <img src="/images/incline-proto-impreso.jpg" style="width:100%;display:block;">
+        <div class="proto-item">
+          <div class="proto-item-text">
+            <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Final prototype <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ planted &amp; assembled</span></div>
+            <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">The printed system assembled with soil and plants — verifying the structural behavior of the connection under load and the water drainage between modules in use.</div>
+          </div>
+          <div class="proto-item-img"><img src="/images/incline-proto-impreso.jpg" style="width:100%;display:block;"></div>
         </div>
       </div>
     </div>
