@@ -267,6 +267,7 @@
   .process-closing{padding:clamp(56px,7vw,80px) clamp(80px,10vw,160px);border-top:1px solid var(--color-border);font-family:var(--font-display);font-size:clamp(1.05rem,1.7vw,1.4rem);font-style:italic;font-weight:400;color:var(--color-muted);line-height:1.55}
   .process-closing em{color:var(--color-text);font-style:italic}
   .proto-3col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--color-border);border:1px solid var(--color-border)}
+  .proto-2col{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--color-border);border:1px solid var(--color-border)}
   .proto-item{background:var(--color-bg);display:flex;flex-direction:column}
   .proto-item-text{padding:26px 28px 16px;display:flex;flex-direction:column;gap:12px;flex:1}
   .proto-item-img{padding:16px 2%}
@@ -281,6 +282,7 @@
     .split-left{padding:40px 24px}
     .proto-wrap{padding:40px 24px}
     .proto-3col{grid-template-columns:1fr}
+    .proto-2col{grid-template-columns:1fr}
     .process-closing{padding:40px 24px}
   }
   @media(max-width:600px){
@@ -555,7 +557,7 @@ const PROJECTS = {
     tagline:'Outdoor furniture that gives permission to stop.',
     specs:[{l:'Category',v:'Furniture Design'},{l:'Year',v:'2024'},{l:'Client',v:'Myke Outdoors'},{l:'Materials',v:'Aluminum, Nautical Fabric, Dekton'}],
     desc:['PAUSA started as a brief from Myke Outdoors: expand the catalog, reach a younger audience, challenge the visual heaviness of traditional exterior furniture. What emerged was less a collection of objects and more a proposition about time, the kind of furniture that makes stopping feel earned.','The concept of pause shaped every decision. These are pieces designed for coffee, for reading, for sitting in stillness. Their proportions are controlled, their weight reduced, their presence understated, not as a stylistic choice, but because lightness is what makes a pause feel possible.','Three materials governed the entire collection: aluminum profiles, nautical fabric, and Dekton surfaces. Working within that constraint became generative. It forced structural honesty and gave the collection a coherence that feels both rigorous and effortless.'],
-    panels:['/images/pausa1.jpg','/images/pausa2.jpg','/images/pausa-bocetos.jpg','/images/pausa3.jpg','/images/pausa4.jpg','/videos/pausa-reel.mp4'],
+    panels:['/images/pausa1.jpg','/images/pausa2.jpg','/images/pausa3.jpg','/images/pausa4.jpg','/videos/pausa-reel.mp4'],
     prev:'incline', next:'core'
   }
 };
@@ -936,6 +938,90 @@ function buildProject(id) {
     <div class="process-closing">
       A single body. Two variants.<br>
       <em>Infinite configurations, and everything it needs to keep growing.</em>
+    </div>
+    ` : id==='pausa' ? `
+    <div class="process-header">
+      <div>
+        <div class="process-kicker">Process</div>
+        <div class="process-title">Same language.<br>New scale.</div>
+      </div>
+    </div>
+    <div class="origins-grid">
+      <div class="origins-col">
+        <img src="/images/pausa-brief.png" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <div class="origins-cross">The brief</div>
+        <div class="origins-stat">Myke Outdoors partnered with the faculty to explore a new catalog direction: furniture that carried the brand's robustness and durability, but was easier to move, viable for smaller spaces, and built exclusively from <strong>aluminum profiles, nautical fabric, and Dekton.</strong> The material vocabulary was fixed. Everything else was open.</div>
+      </div>
+      <div class="origins-col">
+        <img src="/images/pausa-insight.png" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <div class="origins-cross">The insight</div>
+        <div class="origins-stat">Myke's existing pieces were built for permanence: large formats, complex structures, heavy footprints. The problem was not the material. It was the structural complexity. <strong>More parts meant more material, more weight, and less adaptability.</strong> Welded and ground aluminum profiles already deliver inherent robustness. The excess had been in the structure, not the steel.</div>
+      </div>
+    </div>
+    <div class="origins-question">
+      How do you keep the weight of a brand<br>without adding <em>the weight of the object?</em>
+    </div>
+    <div class="split-block">
+      <div class="split-left">
+        <span class="split-tag">Collection Concept</span>
+        <div class="split-h">Three pieces.<br>One pause.</div>
+        <div class="split-body">
+          <p>A collection needs internal logic. EASE is the primary piece: a stool that invites you to sit without committing to a full chair. DWELL follows as its natural companion: a side table that holds a coffee, a book, the small things a moment needs. LINGER closes the set: a magazine rack that keeps something within reach without demanding attention. Each piece works alone. Together, they compose a pause.</p>
+          <p>The names were chosen to resist the object. EASE, DWELL, LINGER are states, not products. That distinction matters: the furniture does not define the moment, it enables it.</p>
+        </div>
+        <div class="split-specs">
+          <div class="split-spec"><div class="spec-label">Collection</div><div class="spec-value">3 pieces</div></div>
+          <div class="split-spec"><div class="spec-label">Pieces</div><div class="spec-value">EASE, DWELL, LINGER</div></div>
+          <div class="split-spec"><div class="spec-label">Client</div><div class="spec-value">Myke Outdoor Living (academic)</div></div>
+        </div>
+      </div>
+      <div class="split-right" style="overflow:hidden;">
+        <img src="/images/pausa-render-concept.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+    </div>
+    <div class="split-block">
+      <div class="split-right flip" style="overflow:hidden;">
+        <img src="/images/pausa-render-materials.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <div class="split-left">
+        <span class="split-tag">Material &amp; Construction</span>
+        <div class="split-h">Three materials.<br>No exceptions.</div>
+        <div class="split-body">
+          <p>Working within Myke's material vocabulary was not a limitation, it was the brief. Aluminum profiles at 40x20mm form the structural skeleton of every piece: welded at the joints and finished by grinding, the connections disappear into the profile. The result reads as a continuous element rather than an assembly, which is what keeps the pieces feeling resolved at a smaller scale.</p>
+          <p>Nautical fabric provides the seating and storage surfaces for EASE and LINGER: UV-resistant, weather-tolerant, and deliberately warm against the precision of the aluminum. Dekton covers the table surface of DWELL: dense, heat-resistant, and visually consistent with the brand's existing catalog. Three materials. No substitutions.</p>
+        </div>
+        <div class="split-specs">
+          <div class="split-spec"><div class="spec-label">Structure</div><div class="spec-value">Aluminum profiles 40x20mm</div></div>
+          <div class="split-spec"><div class="spec-label">Surfaces</div><div class="spec-value">Nautical fabric + Dekton</div></div>
+          <div class="split-spec"><div class="spec-label">Finish</div><div class="spec-value">Welded + ground</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="proto-wrap" style="padding:clamp(56px,7vw,96px) clamp(80px,10vw,160px); border-bottom:1px solid var(--color-border);">
+      <div style="margin-bottom:40px;">
+        <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:8px;">Prototyping</div>
+        <div style="font-size:clamp(.9rem,1.1vw,1rem);color:var(--color-muted);line-height:1.65;max-width:480px;">From hand sketches to a scale model, working out the proportions, structural logic, and collection coherence before committing to the final renders.</div>
+      </div>
+      <div class="proto-2col">
+        <div class="proto-item">
+          <div class="proto-item-text">
+            <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Sketches <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ form exploration</span></div>
+            <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">Hand sketches exploring the form language of each piece, the relationship between the aluminum structure and the soft surfaces, and the visual coherence of the collection before moving to 3D.</div>
+          </div>
+          <div class="proto-item-img"><img src="/images/pausa-bocetos.jpg" style="width:100%;display:block;"></div>
+        </div>
+        <div class="proto-item">
+          <div class="proto-item-text">
+            <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Scale model <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ proportions verified</span></div>
+            <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">A scale model built to validate the proportions of each piece and the visual weight of the collection as a set, confirming the balance between structural presence and lightness before the final renders.</div>
+          </div>
+          <div class="proto-item-img"><img src="/images/pausa-maqueta.jpg" style="width:100%;display:block;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="process-closing">
+      Three materials. Three pieces.<br>
+      <em>One brief that asked for less, and delivered more.</em>
     </div>
     ` : id==='core' ? `
     <div class="process-header">
