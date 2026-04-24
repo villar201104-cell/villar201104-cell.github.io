@@ -538,25 +538,25 @@ const PROJECTS = {
     specs:[{l:'Category',v:'Product Design'},{l:'Year',v:'2024'},{l:'Materials',v:'Polypropylene'},{l:'Process',v:'Rotational Molding'}],
     desc:['INCLINE was born from a specific frustration: most outdoor planters are designed for space that compact city terraces simply do not have. The project responds with a system built around adaptability, configurable in height, length, and width without sacrificing visual coherence.','Two complementary modules form the core of the system. Their relationship is combinatorial, not fixed. Users assemble what they need, expand when they want, and maintain structural stability throughout. Rotational molding in polypropylene reinforces that flexibility with material consistency and manufacturing efficiency.','The morphology was kept deliberately quiet. INCLINE does not compete with the plants, the furniture, or the architecture around it. It integrates. That restraint is not a stylistic choice, it is the design.'],
     panels:['/images/incline1.jpg','/images/incline3.jpg','/images/incline4.jpg','/images/incline5.jpg'],
-    prev:'flujo', next:'core'
+    prev:'flujo', next:'pausa'
   },
   core: {
     hPanels:[],
-    title:'Core', eyebrow:'03. Product Redesign',
+    title:'Core', eyebrow:'04. Product Redesign',
     tagline:'Under Armour\'s performance identity, compressed into a roll-on.',
     specs:[{l:'Category',v:'Product Redesign'},{l:'Year',v:'2024'},{l:'Client',v:'Under Armour (academic)'},{l:'Process',v:'Injection, Blow Molding & Ultrasonic Welding'}],
     desc:['CORE asks a single question: what would it look like if Under Armour designed a deodorant? The answer lives in the details, the grip geometry, the surface texture, the weight of the cap in hand. Every decision was calibrated to communicate precision and physical confidence at a scale the brand rarely operates in.','The real design challenge was technical: translating a brand language built for large-format products into a form compatible with injection molding, blow molding, and ultrasonic welding. Every radius and rib had to earn its place. Decorative complexity was not an option.','The outcome is a compact, performance-coded object that holds its own next to an Under Armour sneaker. Small in scale, dense in intent.'],
     panels:['/images/core1.jpg','/images/core2.jpg','/images/core3.jpg','/images/core4.jpg'],
-    prev:'incline', next:'pausa'
+    prev:'pausa', next:null
   },
   pausa: {
     hPanels:[],
-    title:'Pausa', eyebrow:'04. Furniture',
+    title:'Pausa', eyebrow:'03. Furniture',
     tagline:'Outdoor furniture that gives permission to stop.',
     specs:[{l:'Category',v:'Furniture Design'},{l:'Year',v:'2024'},{l:'Client',v:'Myke Outdoors'},{l:'Materials',v:'Aluminum, Nautical Fabric, Dekton'}],
     desc:['PAUSA started as a brief from Myke Outdoors: expand the catalog, reach a younger audience, challenge the visual heaviness of traditional exterior furniture. What emerged was less a collection of objects and more a proposition about time, the kind of furniture that makes stopping feel earned.','The concept of pause shaped every decision. These are pieces designed for coffee, for reading, for sitting in stillness. Their proportions are controlled, their weight reduced, their presence understated, not as a stylistic choice, but because lightness is what makes a pause feel possible.','Three materials governed the entire collection: aluminum profiles, nautical fabric, and Dekton surfaces. Working within that constraint became generative. It forced structural honesty and gave the collection a coherence that feels both rigorous and effortless.'],
     panels:['/images/pausa1.jpg','/images/pausa2.jpg','/images/pausa-bocetos.jpg','/images/pausa3.jpg','/images/pausa4.jpg','/videos/pausa-reel.mp4'],
-    prev:'core', next:null
+    prev:'incline', next:'core'
   }
 };
 
@@ -712,7 +712,7 @@ function buildProject(id) {
       </div>
     </div>
     <div class="origins-question">
-      With only 2 bodies and an additive process ,<br>
+      With only 2 bodies and an additive process,<br>
       how do you make a lamp that <em>could only exist this way</em>?
     </div>
     <div class="split-block">
@@ -720,8 +720,8 @@ function buildProject(id) {
         <span class="split-tag">Name &amp; Identity</span>
         <div class="split-h">Flujo</div>
         <div class="split-body">
-          <p>The name comes from imagining a water current , <em>flujo</em>, flow. Water as a reference not for its form but for its qualities: the way it moves, the way it feels against the skin, the sound it makes, the calm it carries.</p>
-          <p>The blue color isn't decorative, it's a direct reading of the element. It connects the object to something the senses already know, anchoring the zen intention in something immediate and familiar.</p>
+          <p>The name comes from imagining a water current, <em>flujo</em>, flow. Water as a reference not for its form but for its qualities: the way it moves, the way it feels against the skin, the sound it makes, the calm it carries.</p>
+          <p>The blue is not decorative. It is a direct reading of the element, connecting the object to something the senses already recognize. The color anchors the zen intention in something immediate, something the eye understands before the mind does.</p>
         </div>
       </div>
       <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
@@ -736,8 +736,8 @@ function buildProject(id) {
         <span class="split-tag">Concept</span>
         <div class="split-h">An object<br>that reveals itself</div>
         <div class="split-body">
-          <p>The design intent was to move beyond the functional concept of a wall lamp. Flujo is conceived as a sculptural object: switched off, it presents an apparently flat, uniform surface. Switched on, the internal three-dimensional pattern emerges from within.</p>
-          <p>This dual state, the shift between rest and activation, is what places the object in a zen context. It doesn't impose its presence; it suggests it.</p>
+          <p>Flujo is conceived as a sculptural object first, a lamp second. Switched off, it presents an apparently flat, uniform surface with no visible internal structure. Switched on, the three-dimensional pattern printed inside the screen emerges from within, transforming the object completely.</p>
+          <p>That shift between states, between rest and activation, is what places Flujo in a zen context. It doesn't impose its presence. It suggests it, and waits to be turned on.</p>
         </div>
         <div class="split-specs">
           <div class="split-spec"><div class="spec-label">Material</div><div class="spec-value">PETG</div></div>
@@ -751,8 +751,8 @@ function buildProject(id) {
         <span class="split-tag">Key Decisions</span>
         <div class="split-h">Screen + support:<br>two roles, one system</div>
         <div class="split-body">
-          <p>The screen concentrates all formal complexity: an internal three-dimensional pattern and branching extensions at its top and bottom edges that modulate the light distribution. PETG was chosen for its thermal resistance and translucency, its low heat sensitivity protects the material from the light source, while its translucency keeps the internal pattern hidden until the lamp is on.</p>
-          <p>The wall support integrates the bipin base, designed following the same morphological language as the body itself. It mounts onto standard Argentine recessed electrical boxes with 2 screws. The connection between both bodies is a bayonet joint: the screen slides over an extruded circumference with a central channel, locks into position with a rotation, and allows multiple angle configurations without tools.</p>
+          <p>The screen carries all formal complexity: a three-dimensional internal pattern and branching extensions at its top and bottom edges that modulate how light distributes across the wall. PETG was chosen for two simultaneous reasons: its thermal resistance protects the material from the heat of the light source, and its translucency keeps the internal pattern invisible until the lamp is on. Both properties are required. Neither alone is enough.</p>
+          <p>The wall support integrates the bipin base and follows the same morphological language as the screen. It mounts onto standard Argentine recessed electrical boxes with 2 screws. The connection between the two bodies is a bayonet joint: the screen slides over an extruded ring with a central channel, locks with a quarter-turn rotation, and allows multiple angle configurations without tools. No adhesives, no screws between bodies.</p>
         </div>
         <div class="split-specs">
           <div class="split-spec"><div class="spec-label">Light source</div><div class="spec-value">Bipin</div></div>
@@ -849,7 +849,7 @@ function buildProject(id) {
       </div>
     </div>
     <div class="origins-question">
-      With a single body and a 3-point snap ,<br>
+      With a single body and a 3-point snap,<br>
       how do you build a planter that <em>grows in any direction</em>?
     </div>
     <div class="split-block">
@@ -877,8 +877,8 @@ function buildProject(id) {
         <span class="split-tag">System Logic</span>
         <div class="split-h">One body,<br>two variants</div>
         <div class="split-body">
-          <p>The system is built on a single core module, available in two configurations: one with two connection branches, one with three. This gives the user direct control over density, two branches for linear growth, three for exponential branching.</p>
-          <p>Any combination works. The same connection geometry links every module to every other, in any direction, across all three axes. The system doesn't prescribe a configuration, it enables one.</p>
+          <p>The system is built on a single module body, available in two configurations: one with two connection branches for linear growth, one with three for exponential branching. The user controls the density and direction of the arrangement simply by choosing which variant to connect next.</p>
+          <p>Any combination of the two variants works together. The same 3-point snap fit geometry links every module to every other, in any direction, across all three axes. The system doesn't prescribe a configuration. It enables one.</p>
         </div>
         <div class="split-specs">
           <div class="split-spec"><div class="spec-label">Expansion</div><div class="spec-value">X, Y, Z axes</div></div>
@@ -892,8 +892,8 @@ function buildProject(id) {
         <span class="split-tag">Key Decisions</span>
         <div class="split-h">Snap fit + water flow:<br>function drives form</div>
         <div class="split-body">
-          <p>The connection between modules does double duty: it locks them together and serves as the structural support point. The first module rests on the ground; every subsequent module connects to the one below, the joint is both connection and leg.</p>
-          <p>Water management was integrated from the start. A grid of perforated points at the base of each module allows water to drain from upper modules into lower ones, so the entire stack can be irrigated from the top. The color, a universal gray, was chosen to disappear into any terrace context, letting the plants take the focus.</p>
+          <p>The 3-point snap fit does more than connect modules: the three contact points double as the structural feet of each unit. The first module rests directly on the ground through them. Every subsequent module rests on the one below through the same joint. The connection and the support are one and the same component.</p>
+          <p>Water management was integrated from the start. Perforated points at the base of each module allow water to drain downward from one module to the next, so the entire stack can be irrigated from the top without moving anything. The color, a neutral gray, was chosen to recede into any terrace context, letting the plants and the configuration take the focus.</p>
         </div>
         <div class="split-specs">
           <div class="split-spec"><div class="spec-label">Drainage</div><div class="spec-value">Module to module</div></div>
@@ -936,6 +936,117 @@ function buildProject(id) {
     <div class="process-closing">
       A single body. Two variants.<br>
       <em>Infinite configurations, and everything it needs to keep growing.</em>
+    </div>
+    ` : id==='core' ? `
+    <div class="process-header">
+      <div>
+        <div class="process-kicker">Design Process</div>
+        <div class="process-title">Protection compressed</div>
+      </div>
+    </div>
+    <div class="origins-grid">
+      <div class="origins-col">
+        <img src="/images/core-brief.jpg" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <div class="origins-cross">The brief</div>
+        <div class="origins-stat">Under Armour's catalog is built for visibility at scale: footwear, apparel, large-format gear. The brief asked for something the brand had never operated at this size: a roll-on deodorant that could carry the same performance identity <strong>in the palm of a hand.</strong></div>
+      </div>
+      <div class="origins-col">
+        <img src="/images/core-insight.jpg" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <div class="origins-cross">The insight</div>
+        <div class="origins-stat">The challenge wasn't adding UA features to a standard roll-on. It was finding which elements of the brand's visual language could survive the compression, and which had to be <strong>reinvented for the constraints of personal care manufacturing.</strong></div>
+      </div>
+    </div>
+    <div class="origins-question">
+      How do you compress an identity built for armor<br>into something that <em>fits in a gym bag?</em>
+    </div>
+    <div class="split-block">
+      <div class="split-left">
+        <span class="split-tag">Name &amp; Concept</span>
+        <div class="split-h">Core: the first layer<br>of protection</div>
+        <div class="split-body">
+          <p>Before the jersey, before the gear. Core applies the protection closest to the body. The name positions the product not as athletic gear but as the foundation beneath it, the essential layer of the routine.</p>
+          <p>The form balances two forces: the upper body is smooth and tapered, communicating fluidity and lightness; the lower section is covered in hexagonal bas-relief, communicating grip, protection, and structural density. Neither cancels the other. Together they read as dynamic and controlled.</p>
+          <p>The cap is translucent by decision: it exposes the sphere even when the product is closed, because the sphere is the core, the functional heart of the object. The name and the form reinforce each other. Revealing it was not optional.</p>
+        </div>
+        <div class="split-specs">
+          <div class="split-spec"><div class="spec-label">Name</div><div class="spec-value">Core</div></div>
+          <div class="split-spec"><div class="spec-label">Category</div><div class="spec-value">Roll-on deodorant</div></div>
+          <div class="split-spec"><div class="spec-label">Client</div><div class="spec-value">Under Armour (academic)</div></div>
+        </div>
+      </div>
+      <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
+        <img src="/images/core-render-concept.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+    </div>
+    <div class="split-block">
+      <div class="split-right flip" style="background:var(--color-bg);overflow:hidden;">
+        <img src="/images/core-render-identity.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <div class="split-left">
+        <span class="split-tag">Identity &amp; Finish</span>
+        <div class="split-h">Armor language<br>in bas-relief</div>
+        <div class="split-body">
+          <p>The hexagonal texture on the lower body serves a double function: it is the visual identity marker and the ergonomic grip zone. The faceted relief is sized so fingers lock naturally into the surface, making the hold instinctive. The reference is sports protective plating, translated into a form the hand can feel without being told.</p>
+          <p>The palette was benchmarked against UA's most recent product launches. Dark steel gray is the base: dense, performance-coded, consistent with the brand's material language. Teal is the accent, but its placement was a deliberate choice: it lives on the sphere, not on the body. The most eye-catching color marks the functional core of the product, not the container. The body recedes; the sphere commands attention.</p>
+        </div>
+        <div class="split-specs">
+          <div class="split-spec"><div class="spec-label">Base</div><div class="spec-value">Steel gray (PP)</div></div>
+          <div class="split-spec"><div class="spec-label">Accent</div><div class="spec-value">Teal (sphere only)</div></div>
+          <div class="split-spec"><div class="spec-label">Texture</div><div class="spec-value">Hexagonal bas-relief grip</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="split-block">
+      <div class="split-left">
+        <span class="split-tag">Production</span>
+        <div class="split-h">Every radius<br>justified by process</div>
+        <div class="split-body">
+          <p>The body is blow-molded in PP: the only process that can achieve the form's dimensional complexity, including the transition from smooth upper section to textured relief, without adding unnecessary wall thickness. The cap, sphere, sphere housing, and label are all PP, keeping the entire system within one material family for visual consistency and end-of-life simplicity.</p>
+          <p>The cap opens by rotation on a threaded connection, giving the user a controlled and deliberate action. Internally, the sphere housing connects to the body via a bayonet thread, allowing the applicator assembly to be locked in a single quarter-turn during manufacturing. Permanent structural joins are made with ultrasonic welding, avoiding adhesives and maintaining material integrity throughout.</p>
+        </div>
+        <div class="split-specs">
+          <div class="split-spec"><div class="spec-label">Body</div><div class="spec-value">Blow molding (PP)</div></div>
+          <div class="split-spec"><div class="spec-label">Cap &amp; parts</div><div class="spec-value">Injection (PP translucent)</div></div>
+          <div class="split-spec"><div class="spec-label">Closure</div><div class="spec-value">Screw cap + bayonet (internal)</div></div>
+          <div class="split-spec"><div class="spec-label">Assembly</div><div class="spec-value">Ultrasonic welding</div></div>
+        </div>
+      </div>
+      <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
+        <img src="/images/core-render-production.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+    </div>
+    <div class="proto-wrap" style="padding:clamp(56px,7vw,96px) clamp(80px,10vw,160px); border-bottom:1px solid var(--color-border);">
+      <div style="margin-bottom:40px;">
+        <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:8px;">Prototyping</div>
+        <div style="font-size:clamp(.9rem,1.1vw,1rem);color:var(--color-muted);line-height:1.65;max-width:480px;">From hand sketches to a physical prototype, working out the form language, proportions, and component relationships before committing to the final design.</div>
+      </div>
+      <div class="proto-3col">
+        <div class="proto-item">
+          <div class="proto-item-text">
+            <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Sketches <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ form exploration</span></div>
+            <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">Hand sketches exploring the form language, the relationship between the cylindrical body and the hexagonal texture, and the balance between fluid and robust before moving into 3D modeling.</div>
+          </div>
+          <div class="proto-item-img"><img src="/images/core-bocetos.jpg" style="width:100%;display:block;"></div>
+        </div>
+        <div class="proto-item">
+          <div class="proto-item-text">
+            <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Iteration <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ scale validation</span></div>
+            <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">A 3D printed model placed next to an existing roll-on to validate scale, grip proportions, and ergonomic logic before committing to the final design. The comparison made clear what the numbers alone could not.</div>
+          </div>
+          <div class="proto-item-img"><img src="/images/core-iteration.jpg" style="width:100%;display:block;"></div>
+        </div>
+        <div class="proto-item">
+          <div class="proto-item-text">
+            <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Physical prototype <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ assembled &amp; verified</span></div>
+            <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">The assembled prototype validating the grip geometry, the presence of the hexagonal texture in hand, and the visual weight of the product before final finish decisions.</div>
+          </div>
+          <div class="proto-item-img"><img src="/images/core-proto-physical.jpg" style="width:100%;display:block;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="process-closing">
+      A brand's armor language,<br>
+      <em>compressed into a daily essential.</em>
     </div>
     ` : ''}
     <nav class="proj-footer-nav">${prev}${next}</nav>
