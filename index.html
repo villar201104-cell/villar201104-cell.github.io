@@ -60,7 +60,24 @@
   .hero-quote { display:block; margin-top:14px; font-family:var(--font-display); font-size:clamp(.95rem,1.15vw,1.05rem); font-weight:600; letter-spacing:-.01em; color:var(--color-text); line-height:1.5; }
 
   /* PROJECT GRID */
+  .work-section-label { font-size:.68rem; font-weight:500; letter-spacing:.16em; text-transform:uppercase; color:var(--color-muted); padding:0 clamp(80px,10vw,160px); margin-bottom:12px; display:block; }
   .projects-grid { width:100%; padding:0 clamp(80px,10vw,160px) 0; display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+  .extras-section { padding:clamp(32px,4vw,56px) clamp(80px,10vw,160px) 0; border-top:1px solid var(--color-border); margin-top:clamp(24px,3vw,40px); }
+  .extras-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:12px; }
+  .extra-card-wrap { cursor:pointer; }
+  .extra-card { position:relative; overflow:hidden; aspect-ratio:7/10; background:var(--color-bg-alt); }
+  .extra-card-img { width:100%; height:100%; object-fit:cover; transition:transform .8s var(--ease); }
+  .extra-card-wrap:hover .extra-card-img { transform:scale(1.04); }
+  .extra-card-overlay { position:absolute; inset:0; background:rgba(10,10,10,0); transition:background .5s; display:flex; flex-direction:column; justify-content:flex-end; padding:28px; }
+  .extra-card-wrap:hover .extra-card-overlay { background:rgba(10,10,10,.58); }
+  .extra-card-meta { transform:translateY(14px); opacity:0; transition:transform .5s var(--ease), opacity .4s; }
+  .extra-card-wrap:hover .extra-card-meta { transform:translateY(0); opacity:1; }
+  .extra-card-num { font-size:.72rem; font-weight:600; letter-spacing:.12em; color:rgba(255,255,255,.35); margin-bottom:8px; display:block; }
+  .extra-card-title { font-family:var(--font-display); font-size:1.3rem; font-weight:600; color:#fff; letter-spacing:-.02em; margin-bottom:4px; }
+  .extra-card-desc { font-size:.82rem; color:rgba(255,255,255,.7); line-height:1.5; }
+  .extra-card-mobile-label { display:none; padding:10px 0 4px; }
+  .extra-cml-title { font-family:var(--font-display); font-size:.95rem; font-weight:600; display:block; }
+  .extra-cml-cat { font-size:.75rem; color:var(--color-muted); display:block; margin-top:2px; }
   .project-card-wrap { cursor:pointer; }
   .project-card { position:relative; overflow:hidden; aspect-ratio:7/10; background:var(--color-bg-alt); }
   .card-mobile-label { display:none; padding:8px 2px 0; }
@@ -192,6 +209,12 @@
     .hero-desc { margin-left:0; }
     .projects-grid { grid-template-columns:1fr 1fr; padding:0 24px 0; }
     .project-card { aspect-ratio:7/10; }
+    .work-section-label { padding:0 24px; }
+    .extras-section { padding:28px 24px 0; }
+    .extras-grid { grid-template-columns:1fr; }
+    .extra-card { aspect-ratio:4/3; }
+    .extra-card-overlay { display:none; }
+    .extra-card-mobile-label { display:block; }
     .proj-desc { grid-template-columns:1fr; gap:16px; padding:0 24px clamp(40px,6vw,64px); }
     .about-cv { grid-template-columns:1fr 1fr; }
     .contact-grid { grid-template-columns:1fr; }
@@ -323,6 +346,7 @@
       <h1 class="fu">Nahuel<br><em>Villar</em></h1>
       <p class="hero-desc fu d1">Industrial Designer based in Miami, Florida. <span class="hero-quote">Form follows function. Identity follows conviction.</span></p>
     </header>
+    <span class="work-section-label fu d2">Selected work</span>
     <main class="projects-grid">
       <div class="project-card-wrap fu d1" onclick="go('project','flujo')">
         <div class="project-card">
@@ -381,6 +405,24 @@
         <div class="card-mobile-label"><span class="cml-num">04</span><span class="cml-title">Core</span><span class="cml-cat">Product Redesign · 2024</span></div>
       </div>
     </main>
+    <div class="extras-section">
+      <span class="work-section-label" style="padding:0;">Add-ons</span>
+      <div class="extras-grid">
+        <div class="extra-card-wrap" onclick="go('project','promix')">
+          <div class="extra-card">
+            <img class="extra-card-img" src="/images/promix-hero.jpg" alt="Promix" style="object-position:center center;">
+            <div class="extra-card-overlay">
+              <div class="extra-card-meta">
+                <span class="extra-card-num">+ Product Redesign · 2025</span>
+                <div class="extra-card-title">Promix</div>
+                <div class="extra-card-desc">A cap redesign that integrates cable storage into the Philips ProMix hand blender.</div>
+              </div>
+            </div>
+          </div>
+          <div class="extra-card-mobile-label"><span class="extra-cml-title">Promix</span><span class="extra-cml-cat">Product Redesign · 2025</span></div>
+        </div>
+      </div>
+    </div>
     <div class="home-footer">
       <div class="home-footer-top">
         <p class="rights">© 2026 Nahuel Villar. All Rights Reserved</p>
@@ -550,6 +592,15 @@ const PROJECTS = {
     desc:['CORE asks a single question: what would it look like if Under Armour designed a deodorant? The answer lives in the details, the grip geometry, the surface texture, the weight of the cap in hand. Every decision was calibrated to communicate precision and physical confidence at a scale the brand rarely operates in.','The real design challenge was technical: translating a brand language built for large-format products into a form compatible with injection molding, blow molding, and ultrasonic welding. Every radius and rib had to earn its place. Decorative complexity was not an option.','The outcome is a compact, performance-coded object that holds its own next to an Under Armour sneaker. Small in scale, dense in intent.'],
     panels:['/images/core1.jpg','/images/core2.jpg','/images/core4.jpg'],
     prev:'pausa', next:null
+  },
+  promix: {
+    hPanels:[],
+    title:'Promix', eyebrow:'+ Product Redesign',
+    tagline:'A cap redesign that integrates cable and plug storage into the Philips ProMix hand blender.',
+    specs:[{l:'Category',v:'Product Redesign'},{l:'Year',v:'2025'},{l:'Client',v:'Philips (academic)'},{l:'Material',v:'PP'},{l:'Process',v:'Injection Molding'}],
+    desc:['The project began with a full product survey of the Philips ProMix hand blender: mapping each component, its function, its relationship to the rest of the system, and the gaps left unaddressed. The goal was not to fix a predefined problem but to find where the product had something left to give.','After analyzing the entire assembly, the cap stood out as the only component without a structural or functional role beyond basic protection. Every other part earned its place. The cap did not. That gap became the opportunity: a single component that could be redesigned to add a real convenience without touching anything else in the product.','The redesign integrates cable and plug storage directly into the cap body. A recessed channel guides the cable from a dedicated plug housing to the storage wrap. The piece connects to the existing rear casing via a snap-fit using lateral fins, with no modifications to the product architecture. Injection-molded in PP. Dimensions: 22 x 33 x 65 mm.'],
+    panels:['/images/promix-panel.jpg','/images/promix-plano-tapa.jpg','/images/promix-plano-explotada.jpg','/images/promix-plano-conjunto.jpg'],
+    prev:null, next:null
   },
   pausa: {
     hPanels:[],
@@ -1134,7 +1185,92 @@ function buildProject(id) {
       A brand's armor language,<br>
       <em>compressed into a daily essential.</em>
     </div>
-    ` : ''}
+    \` : id==='promix' ? \`
+    <div class="process-header">
+      <div>
+        <div class="process-kicker">Design Process</div>
+        <div class="process-title">Survey first.<br>Redesign second.</div>
+      </div>
+    </div>
+    <div class="origins-grid">
+      <div class="origins-col">
+        <img src="/images/promix-survey.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;">
+        <div class="origins-cross">The survey</div>
+        <div class="origins-stat">The starting point was not a problem statement but a complete product analysis: mapping every component of the ProMix hand blender, its function, its relationship to the rest of the system, and <strong>where the product left value on the table.</strong></div>
+      </div>
+      <div class="origins-col">
+        <img src="/images/promix-finding.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;">
+        <div class="origins-cross">The finding</div>
+        <div class="origins-stat">After analyzing the full assembly, one component stood out: the cap. Every other part performed a structural or functional role. The cap did not. It protected the blender shaft and nothing more. <strong>That absence of purpose was the opportunity.</strong></div>
+      </div>
+    </div>
+    <div class="origins-question">
+      If every other part earns its place,<br>
+      what do you do with <em>the one that doesn't?</em>
+    </div>
+    <div class="split-block">
+      <div class="split-left">
+        <span class="split-tag">The Opportunity</span>
+        <div class="split-h">A component<br>with room to spare.</div>
+        <div class="split-body">
+          <p>The cap occupied volume without using it. Its interior was hollow, its exterior passive. That unused space became the brief: redesign the cap to hold the power cable and plug during storage, eliminating the main source of cable wear without altering any other part of the product.</p>
+          <p>The constraint was precise: one component, no changes to the existing architecture, compatible with the rear casing as found. The solution had to come entirely from within the cap itself.</p>
+        </div>
+        <div class="split-specs">
+          <div class="split-spec"><div class="spec-label">Approach</div><div class="spec-value">Single-component redesign</div></div>
+          <div class="split-spec"><div class="spec-label">Constraint</div><div class="spec-value">No architecture changes</div></div>
+        </div>
+      </div>
+      <div class="split-right" style="overflow:hidden;">
+        <img src="/images/promix-render-opportunity.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+    </div>
+    <div class="split-block">
+      <div class="split-right flip" style="overflow:hidden;">
+        <img src="/images/promix-render-solution.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <div class="split-left">
+        <span class="split-tag">The Solution</span>
+        <div class="split-h">New form.<br>Real function.</div>
+        <div class="split-body">
+          <p>A recessed channel runs along the underside of the cap, guiding the cable from the plug bay to the storage wrap. The plug seats in a dedicated housing integrated into the cap body. Nothing is added to the product; the cap is simply redesigned to do more with the space it already occupies.</p>
+          <p>The piece connects to the existing rear casing via a snap-fit using lateral fins. No modifications to the product architecture, no additional fasteners. Injection-molded in PP for material consistency with the original assembly.</p>
+        </div>
+        <div class="split-specs">
+          <div class="split-spec"><div class="spec-label">Material</div><div class="spec-value">PP</div></div>
+          <div class="split-spec"><div class="spec-label">Connection</div><div class="spec-value">Lateral fin snap-fit</div></div>
+          <div class="split-spec"><div class="spec-label">Dimensions</div><div class="spec-value">22 × 33 × 65 mm</div></div>
+          <div class="split-spec"><div class="spec-label">Process</div><div class="spec-value">Injection molding</div></div>
+        </div>
+      </div>
+    </div>
+    <div style="padding:clamp(56px,7vw,96px) clamp(80px,10vw,160px); border-bottom:1px solid var(--color-border);">
+      <div style="margin-bottom:40px;">
+        <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:8px;">Prototyping</div>
+        <div style="font-size:clamp(.9rem,1.1vw,1rem);color:var(--color-muted);line-height:1.65;max-width:480px;">From the original product to a printed redesign, validating the snap-fit geometry and cable fit before committing to final tolerances.</div>
+      </div>
+      <div class="proto-2col">
+        <div class="proto-item">
+          <div class="proto-item-text">
+            <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Iteration <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ snap fit / cable fit</span></div>
+            <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">Testing the critical connection points: the lateral fin snap-fit against the rear casing and the cable channel clearance. Physical testing at this stage confirmed the geometry before moving to a full assembly print.</div>
+          </div>
+          <div class="proto-item-img"><img src="/images/promix-iteration.jpg" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block;"></div>
+        </div>
+        <div class="proto-item">
+          <div class="proto-item-text">
+            <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Fit test <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ printed + assembled</span></div>
+            <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">The redesigned cap 3D printed and assembled onto the original ProMix casing. The snap-fit locked correctly, the plug housing seated flush, and the cable routed clean through the channel. The prototype was then post-processed — sanded and painted — to match the finish of the original product and read as a production-ready piece.</div>
+          </div>
+          <div class="proto-item-img"><img src="/images/promix-fittest.jpg" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="process-closing">
+      One component redesigned.<br>
+      <em>Everything else, untouched.</em>
+    </div>
+    \` : ''}
     <nav class="proj-footer-nav">${prev}${next}</nav>
     <footer class="footer"><p>© 2026 Nahuel Villar</p><p>Miami, FL</p></footer>`;
   initDrag(document.getElementById('pt'));
