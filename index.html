@@ -1496,29 +1496,35 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
     return t;
   }
 
-  document.querySelectorAll('.flip-text').forEach(el=>{
-    const orig = el.textContent;
-    const alt  = el.dataset.alt;
-    let timer = null;
-    let isAlt = false;
-    let busy  = false;
+  const items = Array.from(document.querySelectorAll('.flip-text')).map(el=>({
+    el,
+    orig: el.textContent,
+    alt:  el.dataset.alt,
+    timer: null,
+    busy: false
+  }));
 
-    function runType(target, cb){
-      if(timer) clearInterval(timer);
-      busy = true;
-      timer = typewrite(el, target, 30, ()=>{ busy = false; if(cb) cb(); });
-    }
+  let isAlt = false;
 
-    el.addEventListener('mouseenter', ()=>{
-      if(busy || isAlt) return;
-      runType(alt, ()=>{ isAlt = true; });
+  function runAll(toAlt){
+    if(items.some(it=>it.busy)) return;
+    let done = 0;
+    items.forEach(it=>{
+      it.busy = true;
+      if(it.timer) clearInterval(it.timer);
+      it.timer = typewrite(it.el, toAlt ? it.alt : it.orig, 30, ()=>{
+        it.busy = false;
+        done++;
+        if(done === items.length) isAlt = toAlt;
+      });
     });
+  }
 
-    el.addEventListener('mouseleave', ()=>{
-      if(busy || !isAlt) return;
-      runType(orig, ()=>{ isAlt = false; });
-    });
-  });
+  const container = document.querySelector('.hero-text-col');
+  if(container){
+    container.addEventListener('mouseenter', ()=>{ if(!isAlt) runAll(true); });
+    container.addEventListener('mouseleave', ()=>{ if(isAlt) runAll(false); });
+  }
 })();
 </script>
 </body>
