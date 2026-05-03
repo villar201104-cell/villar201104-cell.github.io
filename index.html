@@ -314,11 +314,61 @@
     .extras-grid{grid-template-columns:1fr 1fr;gap:6px}
     .extra-card{aspect-ratio:7/10}
   }
+
+  /* ── Blinking cursor after Villar ── */
+  .type-cursor {
+    display:inline-block;
+    font-style:normal;
+    font-weight:300;
+    color:var(--color-muted);
+    animation:blink-cursor 1s step-end infinite;
+    margin-left:2px;
+  }
+  @keyframes blink-cursor {
+    0%,100%{opacity:1}
+    50%{opacity:0}
+  }
+
+  /* ── Custom cursor (desktop only) ── */
+  .c-dot {
+    position:fixed; top:0; left:0;
+    width:7px; height:7px;
+    background:var(--color-text);
+    border-radius:50%;
+    pointer-events:none;
+    z-index:9999;
+    transform:translate(-50%,-50%);
+    transition:width .2s,height .2s,background .2s;
+    will-change:transform;
+  }
+  .c-ring {
+    position:fixed; top:0; left:0;
+    width:34px; height:34px;
+    border:1.5px solid var(--color-text);
+    border-radius:50%;
+    pointer-events:none;
+    z-index:9998;
+    transform:translate(-50%,-50%);
+    transition:width .25s var(--ease),height .25s var(--ease),border-color .2s,opacity .3s;
+    will-change:transform;
+    opacity:0;
+  }
+  .c-ring.active{opacity:1}
+  .has-custom-cursor,.has-custom-cursor *{cursor:none!important}
+  .c-dot.hover{width:5px;height:5px;background:var(--color-muted)}
+  .c-ring.hover{width:48px;height:48px}
+  @media(max-width:900px){
+    .c-dot,.c-ring{display:none}
+  }
   </style>
 </head>
 <body>
 
 <!-- NAV -->
+<!-- Custom cursor -->
+<div class="c-dot" id="cDot"></div>
+<div class="c-ring" id="cRing"></div>
+
 <nav class="nav" id="nav">
   <div class="nav-logo" onclick="go('home')">
     <img src="/images/logo.png" alt="NV">
@@ -346,7 +396,7 @@
 <div class="page active" id="page-home">
   <div class="page-content">
     <header class="home-hero">
-      <h1 class="fu">Nahuel<br><em>Villar</em></h1>
+      <h1 class="fu">Nahuel<br><em>Villar<span class="type-cursor">_</span></em></h1>
       <p class="hero-desc fu d1">Industrial Designer based in Miami, Florida. <span class="hero-quote">Form follows function. Identity follows conviction.</span></p>
     </header>
     <span class="work-section-label fu d2">Selected work</span>
@@ -1346,6 +1396,57 @@ document.querySelectorAll('.page').forEach(p=>p.addEventListener('scroll',()=>{
 
 // Init home animations
 requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el=>el.classList.add('in')));
+
+// ── Custom cursor ──
+(function(){
+  const dot = document.getElementById('cDot');
+  const ring = document.getElementById('cRing');
+  if(!dot || !ring) return;
+
+  let mx=0, my=0, rx=0, ry=0, raf;
+  const HOVER_SEL = 'a,button,[onclick],.project-card-wrap,.extra-card-wrap,.nav-back,.pnav-btn,.nav-logo,.nav-hamburger,.lb-close,.lb-arrow,.c-item';
+
+  // Activate on first mouse move
+  let activated = false;
+  document.addEventListener('mousemove', e=>{
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx+'px';
+    dot.style.top  = my+'px';
+    if(!activated){
+      activated = true;
+      document.body.classList.add('has-custom-cursor');
+      ring.classList.add('active');
+      if(!raf) raf = requestAnimationFrame(animRing);
+    }
+  }, {passive:true});
+
+  // Ring follows with smooth lag
+  function animRing(){
+    rx += (mx - rx) * 0.13;
+    ry += (my - ry) * 0.13;
+    ring.style.left = rx+'px';
+    ring.style.top  = ry+'px';
+    raf = requestAnimationFrame(animRing);
+  }
+
+  // Hover state: shrink dot, expand ring
+  document.addEventListener('mouseover', e=>{
+    if(e.target.closest(HOVER_SEL)){
+      dot.classList.add('hover');
+      ring.classList.add('hover');
+    }
+  });
+  document.addEventListener('mouseout', e=>{
+    if(e.target.closest(HOVER_SEL)){
+      dot.classList.remove('hover');
+      ring.classList.remove('hover');
+    }
+  });
+
+  // Hide when leaving window
+  document.addEventListener('mouseleave', ()=>{ dot.style.opacity='0'; ring.style.opacity='0'; });
+  document.addEventListener('mouseenter', ()=>{ dot.style.opacity='1'; ring.style.opacity='1'; });
+})();
 </script>
 </body>
 </html>
