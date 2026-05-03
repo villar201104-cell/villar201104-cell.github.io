@@ -56,8 +56,9 @@
   .home-hero { padding:clamp(20px,2vw,32px) clamp(80px,10vw,160px) clamp(20px,2vw,28px); display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:end; }
   .home-hero h1 { font-family:var(--font-display); font-size:clamp(3rem,5.5vw,5rem); font-weight:700; line-height:1.0; letter-spacing:-.03em; }
   .home-hero h1 em { font-style:normal; font-weight:300; color:var(--color-muted); }
-  .hero-desc { font-size:clamp(.9rem,1.1vw,1rem); color:var(--color-soft); line-height:1.72; max-width:340px; margin-left:auto; padding-bottom:8px; }
-  .hero-quote { margin-top:14px; font-family:var(--font-display); font-size:clamp(.95rem,1.15vw,1.05rem); font-weight:600; letter-spacing:-.01em; color:var(--color-text); line-height:1.5; max-width:340px; margin-left:auto; padding-bottom:8px; }
+  .hero-text-col { margin-left:auto; max-width:340px; padding-bottom:8px; }
+  .hero-desc { font-size:clamp(.9rem,1.1vw,1rem); color:var(--color-soft); line-height:1.72; }
+  .hero-quote { margin-top:14px; font-family:var(--font-display); font-size:clamp(.95rem,1.15vw,1.05rem); font-weight:600; letter-spacing:-.01em; color:var(--color-text); line-height:1.5; }
 
   /* PROJECT GRID */
   .work-section-label { font-size:.68rem; font-weight:500; letter-spacing:.16em; text-transform:uppercase; color:var(--color-muted); padding:0 clamp(80px,10vw,160px); margin-bottom:12px; display:block; }
@@ -206,8 +207,7 @@
 
   @media(max-width:900px){
     .home-hero,.proj-header,.about-top { grid-template-columns:1fr; }
-    .hero-desc { margin-left:0; }
-    .hero-quote { margin-left:0; }
+    .hero-text-col { margin-left:0; }
     .projects-grid { grid-template-columns:1fr 1fr; padding:0 24px 0; }
     .project-card { aspect-ratio:7/10; }
     .work-section-label { padding:0 24px; }
@@ -410,8 +410,10 @@
   <div class="page-content">
     <header class="home-hero">
       <h1 class="fu">Nahuel<br><em>Villar<span class="type-cursor">_</span></em></h1>
-      <p class="hero-desc fu d1"><span class="flip-text" data-alt="Born and Raised in Argentina.">Industrial Designer based in Miami, Florida.</span></p>
-      <p class="hero-quote fu d1"><span class="flip-text" data-alt="Obsessed with the craft — every detail is a decision.">Form follows function. Identity follows conviction.</span></p>
+      <div class="hero-text-col fu d1">
+        <p class="hero-desc"><span class="flip-text" data-alt="Born and Raised in Argentina.">Industrial Designer based in Miami, Florida.</span></p>
+        <p class="hero-quote"><span class="flip-text" data-alt="Obsessed with the craft, every detail is a decision.">Form follows function. Identity follows conviction.</span></p>
+      </div>
     </header>
     <span class="work-section-label fu d2">Selected work</span>
     <main class="projects-grid">
