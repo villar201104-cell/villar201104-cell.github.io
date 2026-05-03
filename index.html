@@ -211,8 +211,8 @@
     .project-card { aspect-ratio:7/10; }
     .work-section-label { padding:0 24px; }
     .extras-section { padding:28px 24px 0; }
-    .extras-grid { grid-template-columns:1fr; }
-    .extra-card { aspect-ratio:4/3; }
+    .extras-grid { grid-template-columns:1fr 1fr; }
+    .extra-card { aspect-ratio:7/10; }
     .extra-card-overlay { display:none; }
     .extra-card-mobile-label { display:block; }
     .proj-desc { grid-template-columns:1fr; gap:16px; padding:0 24px clamp(40px,6vw,64px); }
@@ -300,16 +300,19 @@
     .origins-grid{grid-template-columns:1fr;margin:0 24px}
     .origins-question{margin:0 24px;padding:28px 0 48px}
     .split-block{grid-template-columns:1fr}
-    .split-right{min-height:260px}
+    .split-right{aspect-ratio:4/3;min-height:unset}
     .split-right.flip{order:0}
     .split-left{padding:40px 24px}
     .proto-wrap{padding:40px 24px}
     .proto-3col{grid-template-columns:1fr}
     .proto-2col{grid-template-columns:1fr}
     .process-closing{padding:40px 24px}
+    .evo-wrap{padding:40px 24px}
+    .evo-cols{grid-template-columns:1fr !important}
   }
   @media(max-width:600px){
-    .split-right{min-height:200px}
+    .extras-grid{grid-template-columns:1fr 1fr;gap:6px}
+    .extra-card{aspect-ratio:7/10}
   }
   </style>
 </head>
@@ -1246,7 +1249,7 @@ function buildProject(id) {
         </div>
       </div>
     </div>
-    <div style="padding:clamp(56px,7vw,96px) clamp(80px,10vw,160px); border-bottom:1px solid var(--color-border);">
+    <div class="proto-wrap" style="border-bottom:1px solid var(--color-border);">
       <div style="margin-bottom:40px;">
         <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:8px;">Prototyping</div>
         <div style="font-size:clamp(.9rem,1.1vw,1rem);color:var(--color-muted);line-height:1.65;max-width:480px;">From the original product to a printed redesign, validating the snap-fit geometry and cable fit before committing to final tolerances.</div>
