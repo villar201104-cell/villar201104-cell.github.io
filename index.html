@@ -370,7 +370,7 @@
   /* on dark zones: white */
   .c-cross.on-dark .c-arm{background:var(--color-bg)}
   @media(max-width:900px){.c-cross{display:none}}
-  /* ── Intro: binary center-out reveal ── */
+  /* ── Intro: binary already visible + center-out reveal ── */
   #intro{position:fixed;inset:0;background:transparent;z-index:99999;display:flex;align-items:center;justify-content:center;cursor:pointer}
   #intro.hidden{visibility:hidden;pointer-events:none}
   #intro-cv{position:absolute;inset:0;width:100%;height:100%;display:block}
@@ -394,12 +394,19 @@
 <body>
 <script>
 (function(){
-  // Binary intro: appears from the center, then disappears from the center to reveal the real site.
+  // Binary intro: starts already filled with 0/1, then reveals the site from the center outward.
   var DPR = Math.min(window.devicePixelRatio || 1, 2);
   var BCELL = 10;
   var cells = [];
   var cachedW = -1, cachedH = -1;
   var done = false;
+  var startTime = null;
+
+  // Tweak here if you want it faster/slower.
+  var HOLD_TIME = 0.75;      // how long the binary screen stays before revealing
+  var REVEAL_TIME = 1.35;    // how long the center-out reveal takes
+  var FEATHER = 0.18;        // softness of the reveal edge
+  var MAX_DURATION = HOLD_TIME + REVEAL_TIME + 0.18;
 
   function ez(t){
     t = Math.max(0, Math.min(1, t));
@@ -412,11 +419,11 @@
     var maxD = Math.sqrt(mx * mx + my * my);
     cells = [];
 
-    var cols = Math.ceil(W / BCELL) + 1;
-    var rows = Math.ceil(H / BCELL) + 1;
+    var cols = Math.ceil(W / BCELL) + 2;
+    var rows = Math.ceil(H / BCELL) + 2;
 
-    for(var r = 0; r < rows; r++){
-      for(var c = 0; c < cols; c++){
+    for(var r = -1; r < rows; r++){
+      for(var c = -1; c < cols; c++){
         var px = c * BCELL + BCELL / 2;
         var py = r * BCELL + BCELL / 2;
         var dist = Math.sqrt((px - mx) * (px - mx) + (py - my) * (py - my)) / maxD;
@@ -424,7 +431,8 @@
           x: c * BCELL,
           y: r * BCELL,
           bit: Math.random() > 0.5 ? '1' : '0',
-          order: dist * 0.72 + Math.random() * 0.28
+          // Mostly radial, with a very small random offset so it feels organic but doesn't leave late remnants.
+          order: Math.max(0, Math.min(1, dist * 0.92 + Math.random() * 0.08))
         });
       }
     }
@@ -433,15 +441,22 @@
   function finish(){
     if(done) return;
     done = true;
+    var cv = document.getElementById('intro-cv');
+    if(cv){
+      var ctx = cv.getContext('2d');
+      ctx.setTransform(1,0,0,1,0,0);
+      ctx.clearRect(0,0,cv.width,cv.height);
+    }
     var intro = document.getElementById('intro');
     if(intro) intro.classList.add('hidden');
     window.dispatchEvent(new CustomEvent('intro-done'));
   }
 
-  function frame(ts, t0, cv){
+  function draw(ts, cv){
     if(done) return;
+    if(startTime === null) startTime = ts;
 
-    var dt = (ts - t0) / 1000;
+    var dt = (ts - startTime) / 1000;
     var W = window.innerWidth, H = window.innerHeight;
 
     if(W !== cachedW || H !== cachedH){
@@ -459,38 +474,33 @@
     var BG  = getComputedStyle(document.body).getPropertyValue('--color-bg').trim() || '#FBFBF9';
     var INK = getComputedStyle(document.body).getPropertyValue('--color-text').trim() || '#0A0A0A';
 
-    // Timing:
-    // 0.0 → 1.65s  0/1 appear from the center
-    // 1.65 → 2.05s small hold
-    // 2.05 → 3.75s 0/1 and white cover disappear from the center, revealing the website gradually
-    var appearClock = ez(dt / 1.65);
-    var revealClock = ez(Math.max(0, (dt - 2.05) / 1.7));
+    // Reveal clock starts after the initial hold.
+    var revealClock = ez((dt - HOLD_TIME) / REVEAL_TIME);
 
-    // The canvas itself is the cover. Each cell becomes transparent center-out.
+    // First draw the white cover per cell. Cells disappear from the center outward.
     cells.forEach(function(cell){
-      var reveal = ez((revealClock - cell.order) / 0.20);
-      var coverAlpha = 1 - reveal;
-      if(coverAlpha <= 0.01) return;
-      ctx.globalAlpha = coverAlpha;
+      var reveal = ez((revealClock - cell.order) / FEATHER);
+      var alpha = 1 - reveal;
+      if(alpha <= 0.005) return;
+      ctx.globalAlpha = alpha;
       ctx.fillStyle = BG;
-      ctx.fillRect(cell.x, cell.y, BCELL + 1, BCELL + 1);
+      // Slight overlap avoids thin white/transparent seams between cells.
+      ctx.fillRect(cell.x - 0.5, cell.y - 0.5, BCELL + 1.5, BCELL + 1.5);
     });
 
+    // Then draw 0/1 over the still-covered cells only.
     ctx.font = 'bold ' + Math.max(6, Math.round(BCELL * 0.72)) + 'px "Courier New", monospace';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillStyle = INK;
 
     cells.forEach(function(cell){
-      var appear = ez((appearClock - cell.order) / 0.18);
-      if(appear < 0.01) return;
+      var reveal = ez((revealClock - cell.order) / FEATHER);
+      var alpha = (1 - reveal) * 0.72;
+      if(alpha <= 0.01) return;
 
-      var reveal = ez((revealClock - cell.order) / 0.20);
-      var alpha = appear * (1 - reveal) * 0.72;
-      if(alpha < 0.01) return;
-
-      // Very subtle initial binary flicker. It stops before the reveal begins.
-      if(dt < 1.75 && Math.random() < 0.012){
+      // Tiny flicker only during the hold, not during the reveal. This avoids remnant-looking edges.
+      if(dt < HOLD_TIME - 0.1 && Math.random() < 0.01){
         cell.bit = cell.bit === '1' ? '0' : '1';
       }
 
@@ -500,35 +510,36 @@
 
     ctx.globalAlpha = 1;
 
-    if(dt < 3.9){
-      requestAnimationFrame(function(ts2){ frame(ts2, t0, cv); });
+    if(dt < MAX_DURATION){
+      requestAnimationFrame(function(nextTs){ draw(nextTs, cv); });
     } else {
       finish();
     }
   }
 
+  // Make sure the binary is already there as soon as possible, not after a separate appear animation.
   document.addEventListener('DOMContentLoaded', function(){
     var intro = document.getElementById('intro');
-    if(intro){
-      intro.addEventListener('click', finish);
-    }
-  });
-
-  window.addEventListener('load', function(){
     var cv = document.getElementById('intro-cv');
     if(!cv) return;
+
     var W = window.innerWidth, H = window.innerHeight;
     cv.width = W * DPR;
     cv.height = H * DPR;
     cv.style.width = W + 'px';
     cv.style.height = H + 'px';
     buildCells(W, H);
-    requestAnimationFrame(function(ts){ frame(ts, ts, cv); });
+
+    if(intro){
+      intro.addEventListener('click', finish);
+    }
+
+    requestAnimationFrame(function(ts){ draw(ts, cv); });
   });
 })();
 </script>
 
-<!-- Intro: binary center-out reveal -->
+<!-- Intro: binary already visible + center-out reveal -->
 <div id="intro">
   <canvas id="intro-cv"></canvas>
 </div>
