@@ -370,10 +370,9 @@
   /* on dark zones: white */
   .c-cross.on-dark .c-arm{background:var(--color-bg)}
   @media(max-width:900px){.c-cross{display:none}}
-  /* ── Intro: binary only → direct reveal ── */
-  #intro{position:fixed;inset:0;background:var(--color-bg);z-index:99999;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:intro-out .85s ease 2.6s forwards}
-  #intro.dismiss{animation:intro-out .45s ease 0s forwards}
-  @keyframes intro-out{0%{opacity:1}100%{opacity:0;visibility:hidden;pointer-events:none}}
+  /* ── Intro: binary center-out reveal ── */
+  #intro{position:fixed;inset:0;background:transparent;z-index:99999;display:flex;align-items:center;justify-content:center;cursor:pointer}
+  #intro.hidden{visibility:hidden;pointer-events:none}
   #intro-cv{position:absolute;inset:0;width:100%;height:100%;display:block}
 
   /* ── Scroll reveal ── */
@@ -395,11 +394,12 @@
 <body>
 <script>
 (function(){
-  // Binary-only intro: 0/1 animation, then the overlay fades directly into the real website.
+  // Binary intro: appears from the center, then disappears from the center to reveal the real site.
   var DPR = Math.min(window.devicePixelRatio || 1, 2);
   var BCELL = 10;
   var cells = [];
   var cachedW = -1, cachedH = -1;
+  var done = false;
 
   function ez(t){
     t = Math.max(0, Math.min(1, t));
@@ -410,8 +410,8 @@
     cachedW = W; cachedH = H;
     var mx = W / 2, my = H / 2;
     var maxD = Math.sqrt(mx * mx + my * my);
-
     cells = [];
+
     var cols = Math.ceil(W / BCELL) + 1;
     var rows = Math.ceil(H / BCELL) + 1;
 
@@ -419,19 +419,28 @@
       for(var c = 0; c < cols; c++){
         var px = c * BCELL + BCELL / 2;
         var py = r * BCELL + BCELL / 2;
-        var centerOrder = Math.sqrt((px - mx) * (px - mx) + (py - my) * (py - my)) / maxD;
+        var dist = Math.sqrt((px - mx) * (px - mx) + (py - my) * (py - my)) / maxD;
         cells.push({
           x: c * BCELL,
           y: r * BCELL,
           bit: Math.random() > 0.5 ? '1' : '0',
-          order: centerOrder * 0.7 + Math.random() * 0.3,
-          swap: Math.random() * 0.8
+          order: dist * 0.72 + Math.random() * 0.28
         });
       }
     }
   }
 
+  function finish(){
+    if(done) return;
+    done = true;
+    var intro = document.getElementById('intro');
+    if(intro) intro.classList.add('hidden');
+    window.dispatchEvent(new CustomEvent('intro-done'));
+  }
+
   function frame(ts, t0, cv){
+    if(done) return;
+
     var dt = (ts - t0) / 1000;
     var W = window.innerWidth, H = window.innerHeight;
 
@@ -447,14 +456,25 @@
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     ctx.clearRect(0, 0, W, H);
 
+    var BG  = getComputedStyle(document.body).getPropertyValue('--color-bg').trim() || '#FBFBF9';
     var INK = getComputedStyle(document.body).getPropertyValue('--color-text').trim() || '#0A0A0A';
 
     // Timing:
-    // 0.0 → 1.7s: binary spreads center-out
-    // 1.7 → 2.6s: binary holds and softly stabilizes
-    // 2.6 → 3.45s: the whole intro fades by CSS, revealing the site directly
-    var spread = ez(dt / 1.7);
-    var settle = ez(Math.max(0, (dt - 1.15) / 1.15));
+    // 0.0 → 1.65s  0/1 appear from the center
+    // 1.65 → 2.05s small hold
+    // 2.05 → 3.75s 0/1 and white cover disappear from the center, revealing the website gradually
+    var appearClock = ez(dt / 1.65);
+    var revealClock = ez(Math.max(0, (dt - 2.05) / 1.7));
+
+    // The canvas itself is the cover. Each cell becomes transparent center-out.
+    cells.forEach(function(cell){
+      var reveal = ez((revealClock - cell.order) / 0.20);
+      var coverAlpha = 1 - reveal;
+      if(coverAlpha <= 0.01) return;
+      ctx.globalAlpha = coverAlpha;
+      ctx.fillStyle = BG;
+      ctx.fillRect(cell.x, cell.y, BCELL + 1, BCELL + 1);
+    });
 
     ctx.font = 'bold ' + Math.max(6, Math.round(BCELL * 0.72)) + 'px "Courier New", monospace';
     ctx.textAlign = 'center';
@@ -462,32 +482,36 @@
     ctx.fillStyle = INK;
 
     cells.forEach(function(cell){
-      var appear = ez((spread - cell.order) / 0.18);
+      var appear = ez((appearClock - cell.order) / 0.18);
       if(appear < 0.01) return;
 
-      // A very subtle flicker at the beginning, then it calms down before the reveal.
-      if(dt < 1.9 && Math.random() < 0.018 * (1 - settle)){
+      var reveal = ez((revealClock - cell.order) / 0.20);
+      var alpha = appear * (1 - reveal) * 0.72;
+      if(alpha < 0.01) return;
+
+      // Very subtle initial binary flicker. It stops before the reveal begins.
+      if(dt < 1.75 && Math.random() < 0.012){
         cell.bit = cell.bit === '1' ? '0' : '1';
       }
 
-      ctx.globalAlpha = appear * (0.42 + 0.30 * settle);
+      ctx.globalAlpha = alpha;
       ctx.fillText(cell.bit, cell.x + BCELL / 2, cell.y + BCELL / 2);
     });
 
     ctx.globalAlpha = 1;
-    if(dt < 3.45) requestAnimationFrame(function(ts2){ frame(ts2, t0, cv); });
+
+    if(dt < 3.9){
+      requestAnimationFrame(function(ts2){ frame(ts2, t0, cv); });
+    } else {
+      finish();
+    }
   }
 
   document.addEventListener('DOMContentLoaded', function(){
     var intro = document.getElementById('intro');
     if(intro){
-      intro.addEventListener('click', function(){
-        intro.classList.add('dismiss');
-        window.dispatchEvent(new CustomEvent('intro-done'));
-      });
+      intro.addEventListener('click', finish);
     }
-    // Auto-dispatch once the CSS fade is complete: 2.6s delay + 0.85s fade.
-    setTimeout(function(){ window.dispatchEvent(new CustomEvent('intro-done')); }, 3450);
   });
 
   window.addEventListener('load', function(){
@@ -504,7 +528,7 @@
 })();
 </script>
 
-<!-- Intro: binary → pixel → reveal -->
+<!-- Intro: binary center-out reveal -->
 <div id="intro">
   <canvas id="intro-cv"></canvas>
 </div>
