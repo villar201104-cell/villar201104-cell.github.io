@@ -370,11 +370,10 @@
   /* on dark zones: white */
   .c-cross.on-dark .c-arm{background:var(--color-bg)}
   @media(max-width:900px){.c-cross{display:none}}
-  /* ── Intro: marca de centro ── */
-  #intro{position:fixed;inset:0;background:var(--color-bg);z-index:99999;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:intro-out .7s ease 1.7s forwards}
-  #intro.dismiss{animation:intro-out .4s ease 0s forwards}
-  @keyframes intro-out{0%{opacity:1}100%{opacity:0;visibility:hidden;pointer-events:none}}
-  #intro-cv{position:absolute;inset:0;width:100%;height:100%}
+  /* ── Intro: binary → pixels → direct reveal ── */
+  #intro{position:fixed;inset:0;background:transparent;z-index:99999;display:flex;align-items:center;justify-content:center;cursor:pointer;pointer-events:auto}
+  #intro.done{opacity:0;visibility:hidden;pointer-events:none}
+  #intro-cv{position:absolute;inset:0;width:100%;height:100%;display:block}
 
   /* ── Scroll reveal ── */
   body.js-loaded .split-block,
@@ -395,59 +394,103 @@
 <body>
 <script>
 (function(){
-  // Click to dismiss early
-  document.addEventListener('DOMContentLoaded', function(){
-    var el=document.getElementById('intro');
-    if(el) el.addEventListener('click',function(){
-      el.classList.add('dismiss');
-      window.dispatchEvent(new CustomEvent('intro-done'));
-    });
-    // Auto-dispatch when intro fades (2.8s delay + 0.7s fade)
-    setTimeout(function(){ window.dispatchEvent(new CustomEvent('intro-done')); }, 3700);
-  });
-
-  // Binary → Pixel → Reveal animation
-  var DPR = Math.min(window.devicePixelRatio||1,2);
+  // Binary → Pixel → Direct Reveal animation
+  var DPR = Math.min(window.devicePixelRatio || 1, 2);
   var BCELL = 10;  // binary grid (readable digits)
   var PCELL = 4;   // pixel grid (fine grain)
   var binCells = [], pixCells = [];
   var cachedW = -1, cachedH = -1;
   var pixCanvas = null;
+  var introFinished = false;
 
-  function ez(t){ return 1-Math.pow(1-Math.max(0,Math.min(1,t)),3); }
+  function ez(t){ return 1 - Math.pow(1 - Math.max(0, Math.min(1, t)), 3); }
+
+  function finishIntro(){
+    if(introFinished) return;
+    introFinished = true;
+    var intro = document.getElementById('intro');
+    if(intro) intro.classList.add('done');
+    window.dispatchEvent(new CustomEvent('intro-done'));
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    var intro = document.getElementById('intro');
+    if(intro) intro.addEventListener('click', finishIntro);
+  });
 
   // Cache of img element → offscreen canvas for pixel color sampling
   var imgCache = [];
   function getImgCanvas(imgEl){
-    for(var k=0;k<imgCache.length;k++) if(imgCache[k][0]===imgEl) return imgCache[k][1];
+    for(var k=0; k<imgCache.length; k++) if(imgCache[k][0] === imgEl) return imgCache[k][1];
     try{
-      var c=document.createElement('canvas');
-      c.width=imgEl.naturalWidth||1; c.height=imgEl.naturalHeight||1;
-      c.getContext('2d').drawImage(imgEl,0,0);
-      imgCache.push([imgEl,c]); return c;
-    }catch(e){ imgCache.push([imgEl,null]); return null; }
+      var c = document.createElement('canvas');
+      c.width = imgEl.naturalWidth || 1;
+      c.height = imgEl.naturalHeight || 1;
+      c.getContext('2d').drawImage(imgEl, 0, 0);
+      imgCache.push([imgEl, c]);
+      return c;
+    }catch(e){
+      imgCache.push([imgEl, null]);
+      return null;
+    }
+  }
+
+  function posFactor(token, axis){
+    token = (token || 'center').trim().toLowerCase();
+    if(token === 'left' || token === 'top') return 0;
+    if(token === 'right' || token === 'bottom') return 1;
+    if(token === 'center') return 0.5;
+    if(token.endsWith('%')) return parseFloat(token) / 100;
+    return 0.5;
+  }
+
+  function sampleImageColor(img, sx, sy){
+    var c = getImgCanvas(img);
+    if(!c) return [28,28,28];
+
+    var rect = img.getBoundingClientRect();
+    var cs = getComputedStyle(img);
+    var fit = cs.objectFit || 'fill';
+    var op = (cs.objectPosition || '50% 50%').split(/\s+/);
+    var ox = posFactor(op[0], 'x');
+    var oy = posFactor(op[1] || op[0], 'y');
+
+    var nw = img.naturalWidth || c.width || 1;
+    var nh = img.naturalHeight || c.height || 1;
+    var scaleX = rect.width / nw;
+    var scaleY = rect.height / nh;
+    var drawW = rect.width, drawH = rect.height, offX = 0, offY = 0, scale = 1;
+
+    if(fit === 'cover' || fit === 'contain'){
+      scale = fit === 'cover' ? Math.max(scaleX, scaleY) : Math.min(scaleX, scaleY);
+      drawW = nw * scale;
+      drawH = nh * scale;
+      offX = (rect.width - drawW) * ox;
+      offY = (rect.height - drawH) * oy;
+      scaleX = scaleY = scale;
+    }
+
+    var ix = Math.round((sx - rect.left - offX) / scaleX);
+    var iy = Math.round((sy - rect.top  - offY) / scaleY);
+    ix = Math.max(0, Math.min(c.width - 1, ix));
+    iy = Math.max(0, Math.min(c.height - 1, iy));
+
+    var d = c.getContext('2d').getImageData(ix, iy, 1, 1).data;
+    return [d[0], d[1], d[2]];
   }
 
   // Get effective rendered color at a point in the DOM
   function domColor(el, sx, sy){
     var node = el;
     while(node && node.tagName && node.tagName !== 'HTML'){
-      if(node.tagName === 'IMG' && node.complete && node.naturalWidth>0){
-        var c = getImgCanvas(node);
-        if(c){
-          var rect = node.getBoundingClientRect();
-          var ix = Math.max(0,Math.min(c.width-1,  Math.round((sx-rect.left)/rect.width*c.width)));
-          var iy = Math.max(0,Math.min(c.height-1, Math.round((sy-rect.top)/rect.height*c.height)));
-          var d = c.getContext('2d').getImageData(ix,iy,1,1).data;
-          return [d[0],d[1],d[2]];
-        }
-        return [28,28,28];
+      if(node.tagName === 'IMG' && node.complete && node.naturalWidth > 0){
+        return sampleImageColor(node, sx, sy);
       }
       var bg = getComputedStyle(node).backgroundColor;
       var m = bg.match(/[\d.]+/g);
-      if(m && m.length>=3){
-        var a = m.length>=4 ? parseFloat(m[3]) : 1;
-        if(a>0.05) return [parseInt(m[0]),parseInt(m[1]),parseInt(m[2])];
+      if(m && m.length >= 3){
+        var a = m.length >= 4 ? parseFloat(m[3]) : 1;
+        if(a > 0.05) return [parseInt(m[0]), parseInt(m[1]), parseInt(m[2])];
       }
       node = node.parentElement;
     }
@@ -455,141 +498,176 @@
   }
 
   function buildCells(W, H){
-    cachedW = W; cachedH = H;
-    var mx=W/2, my=H/2, maxD=Math.sqrt(mx*mx+my*my);
-    function order(px,py){ return Math.sqrt((px-mx)*(px-mx)+(py-my)*(py-my))/maxD*0.65+Math.random()*0.35; }
+    cachedW = W;
+    cachedH = H;
 
-    // Sample actual page colors — use display:none so elementFromPoint sees through intro
-    var SCOLS=60, SROWS=34;
-    var pageRGB = new Array(SCOLS*SROWS);
+    var mx = W / 2, my = H / 2, maxD = Math.sqrt(mx*mx + my*my);
+    function order(px, py){
+      return Math.sqrt((px-mx)*(px-mx) + (py-my)*(py-my)) / maxD * 0.65 + Math.random() * 0.35;
+    }
+
+    // Sample actual page colors. Temporarily hide intro so elementFromPoint sees the website underneath.
+    var SCOLS = 120, SROWS = 68;
+    var pageRGB = new Array(SCOLS * SROWS);
     var intro = document.getElementById('intro');
-    var savedDisplay = intro ? intro.style.display : '';
-    if(intro) intro.style.display = 'none'; // removed from hit-testing synchronously
+    var savedVisibility = intro ? intro.style.visibility : '';
+    var savedPointer = intro ? intro.style.pointerEvents : '';
+    if(intro){
+      intro.style.visibility = 'hidden';
+      intro.style.pointerEvents = 'none';
+    }
 
-    for(var sr=0;sr<SROWS;sr++){
-      for(var sc=0;sc<SCOLS;sc++){
-        var sx=Math.round((sc+0.5)*W/SCOLS), sy=Math.round((sr+0.5)*H/SROWS);
-        var el=document.elementFromPoint(sx,sy);
-        // Guard: skip if we accidentally got intro elements
-        if(el && (el.id==='intro'||el.id==='intro-cv')) el=null;
-        pageRGB[sr*SCOLS+sc] = el ? domColor(el,sx,sy) : [251,251,249];
+    for(var sr=0; sr<SROWS; sr++){
+      for(var sc=0; sc<SCOLS; sc++){
+        var sx = Math.round((sc + 0.5) * W / SCOLS);
+        var sy = Math.round((sr + 0.5) * H / SROWS);
+        var el = document.elementFromPoint(sx, sy);
+        pageRGB[sr * SCOLS + sc] = el ? domColor(el, sx, sy) : [251,251,249];
       }
     }
-    if(intro) intro.style.display = savedDisplay;
 
-    function getColor(px,py){
-      var sc=Math.max(0,Math.min(SCOLS-1,Math.round(px/W*(SCOLS-1))));
-      var sr=Math.max(0,Math.min(SROWS-1,Math.round(py/H*(SROWS-1))));
-      return pageRGB[sr*SCOLS+sc]||[251,251,249];
+    if(intro){
+      intro.style.visibility = savedVisibility;
+      intro.style.pointerEvents = savedPointer;
+    }
+
+    function getColor(px, py){
+      var sc = Math.max(0, Math.min(SCOLS-1, Math.floor(px / W * SCOLS)));
+      var sr = Math.max(0, Math.min(SROWS-1, Math.floor(py / H * SROWS)));
+      return pageRGB[sr * SCOLS + sc] || [251,251,249];
     }
 
     // Binary grid
-    var bc=Math.ceil(W/BCELL)+1, br=Math.ceil(H/BCELL)+1;
-    binCells=[];
-    for(var r=0;r<br;r++) for(var c=0;c<bc;c++){
-      var px=c*BCELL+BCELL/2, py=r*BCELL+BCELL/2;
-      binCells.push({x:c*BCELL,y:r*BCELL,bit:Math.random()>.5?'1':'0',order:order(px,py)});
+    var bc = Math.ceil(W / BCELL) + 1;
+    var br = Math.ceil(H / BCELL) + 1;
+    binCells = [];
+    for(var r=0; r<br; r++) for(var c=0; c<bc; c++){
+      var px = c * BCELL + BCELL/2;
+      var py = r * BCELL + BCELL/2;
+      binCells.push({x:c*BCELL, y:r*BCELL, bit:Math.random()>.5?'1':'0', order:order(px,py)});
     }
 
-    // Pixel grid — same order distribution as binary
-    var pc=Math.ceil(W/PCELL)+1, pr2=Math.ceil(H/PCELL)+1;
-    pixCells=[];
-    for(var r2=0;r2<pr2;r2++) for(var c2=0;c2<pc;c2++){
-      var px2=c2*PCELL+PCELL/2, py2=r2*PCELL+PCELL/2;
-      var col=getColor(px2,py2);
-      var n=(Math.random()-0.5)*14;
+    // Pixel grid — sampled from the final website state
+    var pc = Math.ceil(W / PCELL) + 1;
+    var pr = Math.ceil(H / PCELL) + 1;
+    pixCells = [];
+    for(var r2=0; r2<pr; r2++) for(var c2=0; c2<pc; c2++){
+      var px2 = c2 * PCELL + PCELL/2;
+      var py2 = r2 * PCELL + PCELL/2;
+      var col = getColor(px2, py2);
       pixCells.push({
         x:c2*PCELL, y:r2*PCELL,
-        r:Math.max(0,Math.min(255,col[0]+n)),
-        g:Math.max(0,Math.min(255,col[1]+n)),
-        b:Math.max(0,Math.min(255,col[2]+n)),
-        order:order(px2,py2) // same center-out spread logic
+        r:col[0], g:col[1], b:col[2],
+        order:order(px2, py2)
       });
     }
 
-    pixCanvas=document.createElement('canvas');
-    pixCanvas.width=Math.ceil(W); pixCanvas.height=Math.ceil(H);
+    pixCanvas = document.createElement('canvas');
+    pixCanvas.width = Math.ceil(W);
+    pixCanvas.height = Math.ceil(H);
   }
 
   function frame(ts, t0, cv){
-    var dt=(ts-t0)/1000;
-    var W=window.innerWidth, H=window.innerHeight;
+    if(introFinished) return;
 
-    if(W!==cachedW||H!==cachedH){
-      cv.width=W*DPR; cv.height=H*DPR;
-      cv.style.width=W+'px'; cv.style.height=H+'px';
-      buildCells(W,H);
+    var dt = (ts - t0) / 1000;
+    var W = window.innerWidth, H = window.innerHeight;
+
+    if(W !== cachedW || H !== cachedH){
+      cv.width = W * DPR;
+      cv.height = H * DPR;
+      cv.style.width = W + 'px';
+      cv.style.height = H + 'px';
+      buildCells(W, H);
     }
 
-    var ctx=cv.getContext('2d');
-    ctx.setTransform(DPR,0,0,DPR,0,0);
-    ctx.clearRect(0,0,W,H);
-    var INK=getComputedStyle(document.body).getPropertyValue('--color-text').trim()||'#0A0A0A';
+    var ctx = cv.getContext('2d');
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    ctx.clearRect(0, 0, W, H);
 
-    // ── Phase timing (slower, readable) ──
-    // p1: binary spreads across screen  0 → 1.2s
-    // p2: pixels replace binary         1.0 → 2.3s  (pixels use this as THEIR spread clock)
-    // p3: everything dissolves          2.3 → 3.1s
-    var p1 = dt/1.2;
-    var p2 = ez(Math.max(0,(dt-1.0)/1.3));
-    var p3 = ez(Math.max(0,(dt-2.3)/0.8));
-    var fade = 1-p3;
+    var BG = getComputedStyle(document.body).getPropertyValue('--color-bg').trim() || '#FBFBF9';
+    var INK = getComputedStyle(document.body).getPropertyValue('--color-text').trim() || '#0A0A0A';
 
-    // ── Phase 1: binary digits (spread center-out via p1) ──
-    ctx.font='bold '+Math.max(6,Math.round(BCELL*0.72))+'px "Courier New",monospace';
-    ctx.textAlign='center'; ctx.textBaseline='middle';
+    // Timing designed to avoid the sequence "pixels → white → website".
+    // 0.0–1.6  binary appears over a clean background.
+    // 1.15–3.0 pixels build until they cover the whole viewport.
+    // 3.0–3.7  the clean background fades away BEHIND the complete pixel layer.
+    // 3.7–4.6  only the pixel layer fades, revealing the exact same website colors underneath.
+    var p1 = dt / 1.6;
+    var p2 = ez((dt - 1.15) / 1.85);
+    var bgFade = dt < 3.0 ? 1 : 1 - ez((dt - 3.0) / 0.7);
+    var pixelFade = dt < 3.7 ? 1 : 1 - ez((dt - 3.7) / 0.9);
+
+    // Stable intro background. It fades only after the pixel layer is complete.
+    if(bgFade > 0.001){
+      ctx.globalAlpha = bgFade;
+      ctx.fillStyle = BG;
+      ctx.fillRect(0, 0, W, H);
+    }
+
+    // Phase 1: binary digits
+    ctx.font = 'bold ' + Math.max(6, Math.round(BCELL * 0.72)) + 'px "Courier New", monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
     binCells.forEach(function(cell){
-      var appear=ez(Math.max(0,(p1-cell.order)/0.15));
-      if(appear<0.01) return;
-      // Binary fades out as pixels arrive
-      var textA=appear * Math.max(0,1-p2*2.5) * fade;
-      if(textA<0.01) return;
-      ctx.globalAlpha=textA*0.72;
-      ctx.fillStyle=INK;
-      ctx.fillText(cell.bit, cell.x+BCELL/2, cell.y+BCELL/2);
+      var appear = ez((p1 - cell.order) / 0.15);
+      if(appear < 0.01) return;
+      var textA = appear * Math.max(0, 1 - p2 * 2.4) * Math.max(0, bgFade) * 0.72;
+      if(textA < 0.01) return;
+      ctx.globalAlpha = textA;
+      ctx.fillStyle = INK;
+      ctx.fillText(cell.bit, cell.x + BCELL/2, cell.y + BCELL/2);
     });
 
-    // ── Phase 2: pixels (spread center-out via p2, same pattern as binary) ──
-    if(p2>0.01 && pixCanvas){
-      var pctx=pixCanvas.getContext('2d');
-      var iW=pixCanvas.width, iH=pixCanvas.height;
-      var imgd=pctx.createImageData(iW,iH);
-      var data=imgd.data;
+    // Phase 2 + 3: full color pixel layer sampled from the final page
+    if(p2 > 0.01 && pixCanvas){
+      var pctx = pixCanvas.getContext('2d');
+      var iW = pixCanvas.width, iH = pixCanvas.height;
+      var imgd = pctx.createImageData(iW, iH);
+      var data = imgd.data;
 
       pixCells.forEach(function(cell){
-        // Pixels use p2 as their own spread clock — center-out just like binary used p1
-        var appear=ez(Math.max(0,(p2-cell.order)/0.15));
-        var alpha=Math.round(appear*fade*255);
-        if(alpha<2) return;
-        var x0=cell.x, y0=cell.y;
-        var x1=Math.min(iW,x0+PCELL), y1=Math.min(iH,y0+PCELL);
-        var cr=cell.r, cg=cell.g, cb=cell.b;
-        for(var py=y0;py<y1;py++){
-          var row=py*iW;
-          for(var px=x0;px<x1;px++){
-            var i=(row+px)*4;
-            data[i]=cr; data[i+1]=cg; data[i+2]=cb; data[i+3]=alpha;
+        var appear = ez((p2 - cell.order) / 0.15);
+        var alpha = Math.round(appear * pixelFade * 255);
+        if(alpha < 2) return;
+        var x0 = cell.x, y0 = cell.y;
+        var x1 = Math.min(iW, x0 + PCELL);
+        var y1 = Math.min(iH, y0 + PCELL);
+        for(var py=y0; py<y1; py++){
+          var row = py * iW;
+          for(var px=x0; px<x1; px++){
+            var i = (row + px) * 4;
+            data[i] = cell.r;
+            data[i+1] = cell.g;
+            data[i+2] = cell.b;
+            data[i+3] = alpha;
           }
         }
       });
 
-      pctx.putImageData(imgd,0,0);
-      ctx.globalAlpha=1;
-      ctx.drawImage(pixCanvas,0,0);
+      pctx.putImageData(imgd, 0, 0);
+      ctx.globalAlpha = 1;
+      ctx.drawImage(pixCanvas, 0, 0);
     }
 
-    ctx.globalAlpha=1;
-    if(dt<3.1) requestAnimationFrame(function(ts2){ frame(ts2,t0,cv); });
+    ctx.globalAlpha = 1;
+    if(dt < 4.6){
+      requestAnimationFrame(function(ts2){ frame(ts2, t0, cv); });
+    }else{
+      finishIntro();
+    }
   }
 
-  window.addEventListener('load',function(){
-    var cv=document.getElementById('intro-cv');
+  window.addEventListener('load', function(){
+    var cv = document.getElementById('intro-cv');
     if(!cv) return;
-    var W=window.innerWidth, H=window.innerHeight;
-    cv.width=W*DPR; cv.height=H*DPR;
-    cv.style.width=W+'px'; cv.style.height=H+'px';
-    buildCells(W,H);
-    requestAnimationFrame(function(ts){ frame(ts,ts,cv); });
+    var W = window.innerWidth, H = window.innerHeight;
+    cv.width = W * DPR;
+    cv.height = H * DPR;
+    cv.style.width = W + 'px';
+    cv.style.height = H + 'px';
+    buildCells(W, H);
+    requestAnimationFrame(function(ts){ frame(ts, ts, cv); });
   });
 })();
 </script>
