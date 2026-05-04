@@ -370,9 +370,106 @@
   /* on dark zones: white */
   .c-cross.on-dark .c-arm{background:#fff}
   @media(max-width:900px){.c-cross{display:none}}
+  /* ── Intro: marca de centro ── */
+  #intro{position:fixed;inset:0;background:var(--color-bg);z-index:99999;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:intro-out .7s ease 2.2s forwards}
+  #intro.dismiss{animation:intro-out .4s ease 0s forwards}
+  @keyframes intro-out{0%{opacity:1}100%{opacity:0;visibility:hidden;pointer-events:none}}
+  #intro-cv{position:absolute;inset:0;width:100%;height:100%}
+
+  /* ── Scroll reveal ── */
+  body.js-loaded .split-block,
+  body.js-loaded .proto-wrap,
+  body.js-loaded .process-closing,
+  body.js-loaded .evo-wrap,
+  body.js-loaded .origins-grid,
+  body.js-loaded .origins-question{opacity:0;transform:translateY(36px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  body.js-loaded .split-block.sr-in,
+  body.js-loaded .proto-wrap.sr-in,
+  body.js-loaded .process-closing.sr-in,
+  body.js-loaded .evo-wrap.sr-in,
+  body.js-loaded .origins-grid.sr-in,
+  body.js-loaded .origins-question.sr-in{opacity:1;transform:translateY(0)}
+
   </style>
 </head>
 <body>
+<script>
+(function(){
+  // Click to dismiss early
+  document.addEventListener('DOMContentLoaded', function(){
+    var el=document.getElementById('intro');
+    if(el) el.addEventListener('click',function(){ el.classList.add('dismiss'); });
+  });
+
+  // Marca de centro — canvas animation
+  var DPR=Math.min(window.devicePixelRatio||1,2);
+  function ez(t){return 1-Math.pow(1-Math.max(0,Math.min(1,t)),3);}
+  function seg(v,a,b){return Math.max(0,Math.min(1,(v-a)/(b-a)));}
+
+  function frame(ts, t0, cv){
+    var dt=(ts-t0)/1000;
+    var W=window.innerWidth, H=window.innerHeight;
+    cv.width=W*DPR; cv.height=H*DPR;
+    cv.style.width=W+'px'; cv.style.height=H+'px';
+    var cx=cv.getContext('2d'); cx.scale(DPR,DPR);
+    var mx=W/2, my=H/2;
+    cx.clearRect(0,0,W,H);
+
+    var p1=ez(seg(dt,0,0.55));    // solid arms grow
+    var p2=ez(seg(dt,0.25,0.8));  // center circle
+    var p3=ez(seg(dt,0.65,1.5));  // dashed extensions
+
+    var INK=getComputedStyle(document.body).getPropertyValue('--color-text').trim()||'#0A0A0A';
+    cx.strokeStyle=INK; cx.fillStyle=INK;
+
+    var gap=Math.min(W,H)*0.032;
+    var arm=Math.min(W,H)*0.07;
+
+    // 4 solid arms
+    cx.lineWidth=1.2;
+    [[0,-1],[0,1],[-1,0],[1,0]].forEach(function(d){
+      cx.beginPath();
+      cx.moveTo(mx+d[0]*gap, my+d[1]*gap);
+      cx.lineTo(mx+d[0]*(gap+arm*p1), my+d[1]*(gap+arm*p1));
+      cx.stroke();
+    });
+
+    // Center circle
+    if(p2>0){
+      cx.lineWidth=1;
+      cx.beginPath(); cx.arc(mx,my,gap*p2,0,Math.PI*2); cx.stroke();
+    }
+
+    // Dashed extensions reaching toward screen edges
+    if(p3>0){
+      cx.setLineDash([6,10]); cx.lineWidth=0.8;
+      var extX=(W/2-gap-arm)*p3;
+      var extY=(H/2-gap-arm)*p3;
+      [[0,-extY],[0,extY],[-extX,0],[extX,0]].forEach(function(d,i){
+        var isV=(i<2);
+        cx.beginPath();
+        cx.moveTo(mx+(isV?0:d[0]>0?gap+arm:-(gap+arm)), my+(isV?d[1]>0?gap+arm:-(gap+arm):0));
+        cx.lineTo(mx+d[0], my+d[1]);
+        cx.stroke();
+      });
+      cx.setLineDash([]);
+    }
+
+    if(dt<2.0) requestAnimationFrame(function(ts2){ frame(ts2,t0,cv); });
+  }
+
+  window.addEventListener('load',function(){
+    var cv=document.getElementById('intro-cv');
+    if(!cv) return;
+    requestAnimationFrame(function(ts){ frame(ts,ts,cv); });
+  });
+})();
+</script>
+
+<!-- Intro: marca de centro -->
+<div id="intro">
+  <canvas id="intro-cv"></canvas>
+</div>
 
 <!-- NAV -->
 <!-- Custom cursor: crosshair -->
@@ -702,8 +799,10 @@ function go(page, id, pushState=true) {
     requestAnimationFrame(()=>next.querySelectorAll('.fu').forEach(el=>{el.classList.remove('in');requestAnimationFrame(()=>el.classList.add('in'))}));
   },100);
   if(pushState) {
-    const url = page==='home' ? '/' : page==='project' ? '/project/'+id : '/'+page;
-    history.pushState({page, id}, '', url);
+    try {
+      const url = page==='home' ? '/' : page==='project' ? '/project/'+id : '/'+page;
+      history.pushState({page, id}, '', url);
+    } catch(e) {}
   }
 }
 
@@ -717,24 +816,26 @@ window.addEventListener('popstate', e => {
 
 // Handle direct URL on load (also restores from 404.html redirect)
 (function() {
-  // Check if we were redirected here from 404.html
-  const saved = sessionStorage.getItem('spa_redirect');
-  if(saved) {
-    sessionStorage.removeItem('spa_redirect');
-    const url = new URL(saved);
-    history.replaceState(null, null, url.pathname + url.search + url.hash);
-  }
-  const path = location.pathname;
-  if(path.startsWith('/project/')) {
-    const id = path.split('/')[2];
-    if(id && PROJECTS[id]) go('project', id, false);
-  } else if(path === '/about') {
-    go('about', null, false);
-  } else if(path === '/contact') {
-    go('contact', null, false);
-  } else {
-    history.replaceState({page:'home', id:null}, '', '/');
-  }
+  try {
+    // Check if we were redirected here from 404.html
+    const saved = sessionStorage.getItem('spa_redirect');
+    if(saved) {
+      sessionStorage.removeItem('spa_redirect');
+      const url = new URL(saved);
+      history.replaceState(null, null, url.pathname + url.search + url.hash);
+    }
+    const path = location.pathname;
+    if(path.startsWith('/project/')) {
+      const id = path.split('/')[2];
+      if(id && PROJECTS[id]) go('project', id, false);
+    } else if(path === '/about') {
+      go('about', null, false);
+    } else if(path === '/contact') {
+      go('contact', null, false);
+    } else {
+      try { history.replaceState({page:'home', id:null}, '', location.href); } catch(e) {}
+    }
+  } catch(e) {}
 })();
 
 function updateNav(page) {
@@ -1499,6 +1600,42 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
     container.addEventListener('mouseleave', ()=>{ if(isAlt) runAll(false); });
   }
 })();
+
+/* ── Dice intro handled via CSS animation — no JS timeout needed ── */
+
+/* ── Scroll reveal (IntersectionObserver) ── */
+(function(){
+  document.body.classList.add('js-loaded');
+
+  const SEL = '.split-block,.proto-wrap,.process-closing,.evo-wrap,.origins-grid,.origins-question';
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('sr-in'); obs.unobserve(e.target); }
+    });
+  }, {threshold: 0.1});
+
+  function observe(){
+    document.querySelectorAll(SEL).forEach(el=>{
+      if(!el.classList.contains('sr-in')) obs.observe(el);
+    });
+  }
+  observe();
+
+  // Re-observe after project pages are built
+  const _build = window.buildProject;
+  if(_build) window.buildProject = function(id){
+    _build(id);
+    requestAnimationFrame(observe);
+  };
+
+  // Also hook into go() to re-observe on page change
+  const _go = window.go;
+  if(_go) window.go = function(...args){
+    _go(...args);
+    setTimeout(observe, 150);
+  };
+})();
+
 </script>
 </body>
 </html>
