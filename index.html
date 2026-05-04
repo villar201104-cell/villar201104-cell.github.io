@@ -389,6 +389,109 @@
   body.js-loaded .origins-grid.sr-in,
   body.js-loaded .origins-question.sr-in{opacity:1;transform:translateY(0)}
 
+
+
+  /* ── Mobile optimization pass ── */
+  @media(max-width:900px){
+    body{overflow-x:hidden;}
+
+    /* Home: cleaner first impression without changing the intro */
+    .home-hero{padding:34px 20px 24px;gap:22px;align-items:start;}
+    .home-hero h1{font-size:clamp(3.1rem,16vw,5.2rem);line-height:.95;letter-spacing:-.045em;}
+    .hero-text-col{max-width:100%;text-align:left;margin-left:0;padding-bottom:0;}
+    .hero-desc{font-size:.92rem;line-height:1.6;max-width:320px;}
+    .hero-quote{font-size:.98rem;line-height:1.45;max-width:320px;margin-top:10px;}
+    .work-section-label{padding:0 20px;margin-bottom:10px;}
+    .projects-grid{padding:0 20px;gap:12px;}
+    .extras-section{padding:34px 20px 0;margin-top:32px;}
+    .home-footer{padding:22px 20px 24px;}
+
+    /* Project header: make each project feel like an editorial page */
+    .proj-header{padding:42px 20px 30px;grid-template-columns:1fr;gap:24px;}
+    .proj-eyebrow{font-size:.68rem;margin-bottom:10px;}
+    .proj-title{font-size:clamp(3rem,17vw,5rem);line-height:.92;letter-spacing:-.045em;}
+    .proj-header-right{text-align:left;}
+    .proj-tagline{font-size:1rem;line-height:1.58;text-align:left;margin-bottom:24px;max-width:460px;}
+    .proj-specs{direction:ltr!important;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--color-border);border-left:1px solid var(--color-border);padding-top:0;}
+    .proj-header-right .proj-specs > *{text-align:left!important;direction:ltr!important;}
+    .proj-specs > div{padding:14px 12px;border-right:1px solid var(--color-border);border-bottom:1px solid var(--color-border);min-height:68px;}
+    .spec-label{font-size:.62rem;line-height:1.35;margin-bottom:5px;}
+    .spec-value{font-size:.82rem;line-height:1.35;}
+
+    /* Project description: no justified text on mobile */
+    .proj-desc{padding:0 20px 42px;grid-template-columns:1fr;gap:14px;}
+    .desc-label{font-size:.72rem;padding-top:0;letter-spacing:.14em;}
+    .desc-body p{font-size:1rem;line-height:1.7;text-align:left;margin-bottom:15px;}
+
+    /* Project panels: easier to browse and open on touch screens */
+    .panels-wrap{margin-bottom:54px;}
+    .panels-bar{padding:0 20px 12px;gap:18px;align-items:flex-end;}
+    .panels-bar span{font-size:.62rem;line-height:1.35;}
+    .panels-track{padding:0 20px 18px;gap:10px;scroll-snap-type:x mandatory;}
+    .panel-item{height:min(68vh,560px);max-height:560px;scroll-snap-align:start;border-radius:4px;}
+    .panel-item img,.panel-video video{height:100%;width:100%;object-fit:contain;}
+    .panel-video::after{content:'Tap to expand';font-size:.58rem;top:10px;left:10px;}
+
+    /* Process pages inside projects */
+    .process-header{padding:46px 20px 30px;align-items:flex-start;}
+    .process-title{font-size:clamp(2rem,10vw,3.2rem);line-height:1.05;}
+    .origins-grid{margin:0 20px;gap:12px;background:transparent;}
+    .origins-col{border:1px solid var(--color-border);padding:18px 18px 22px;gap:14px;}
+    .origins-stat{font-size:.92rem;line-height:1.62;}
+    .origins-question{margin:0 20px;padding:30px 0 50px;font-size:1.05rem;line-height:1.5;}
+    .split-block{grid-template-columns:1fr;border-bottom:1px solid var(--color-border);}
+    .split-left{padding:42px 20px;}
+    .split-right,.split-right.flip{order:0;min-height:unset;aspect-ratio:4/3;}
+    .split-h{font-size:clamp(1.55rem,8vw,2.25rem);line-height:1.08;margin-bottom:18px;}
+    .split-body{font-size:.96rem;line-height:1.68;max-width:none;}
+    .split-body p{margin-bottom:13px;}
+    .split-specs{margin-top:22px;padding-top:18px;gap:18px;}
+
+    .evo-wrap,.proto-wrap{padding:46px 20px;}
+    .evo-header{margin-bottom:26px;align-items:flex-start;gap:8px;flex-direction:column;}
+    .evo-title,.proto-title{font-size:1.2rem;}
+    .evo-cols,.proto-cols,.proto-imgs,.proto-3col,.proto-2col{display:grid;grid-template-columns:1fr!important;gap:12px;background:transparent;border:0;}
+    .evo-col,.proto-col,.proto-item{border:1px solid var(--color-border);background:var(--color-bg);}
+    .evo-col,.proto-col{padding:22px 20px;}
+    .evo-desc,.proto-col-body{font-size:.94rem;line-height:1.62;}
+    .proto-item-text{padding:22px 20px 12px;}
+    .proto-item-img{padding:12px;}
+    .process-closing{padding:46px 20px;font-size:1.08rem;line-height:1.5;}
+
+    .proj-footer-nav{padding:34px 20px;gap:20px;align-items:flex-start;}
+    .pnav-title{font-size:1.25rem;}
+    .footer{padding:14px 20px;}
+  }
+
+  @media(max-width:600px){
+    .nav{padding:0 18px;}
+    .nav-logo img{height:46px;}
+    .home-hero{padding:30px 18px 22px;}
+    .projects-grid{padding:0 18px;grid-template-columns:1fr;gap:24px;}
+    .project-card{aspect-ratio:4/5;}
+    .card-mobile-label{padding:10px 2px 0;}
+    .cml-title{font-size:1.08rem;}
+    .cml-cat{display:block;margin-top:3px;font-size:.74rem;}
+    .extras-grid{grid-template-columns:1fr;gap:24px;}
+    .extra-card{aspect-ratio:4/5;}
+
+    .proj-header{padding:38px 18px 28px;}
+    .proj-desc{padding-left:18px;padding-right:18px;}
+    .panels-bar,.panels-track{padding-left:18px;padding-right:18px;}
+    .panel-item{height:min(64vh,520px);}
+    .proj-specs{grid-template-columns:1fr 1fr;}
+    .proj-specs > div{padding:13px 10px;}
+
+    .about-wrap{padding:34px 18px 60px;}
+    .about-top{gap:28px;margin-bottom:44px;}
+    .about-bio p{text-align:left;font-size:.94rem;line-height:1.68;}
+    .about-cv{border-top:0;gap:28px;padding-top:0;}
+    .cv-block{border-top:1px solid var(--color-border);padding-top:24px;}
+    .contact-wrap{padding:42px 18px 30px;}
+    .c-item{padding:28px 22px;min-height:132px;}
+    .home-footer-top{align-items:flex-start;gap:18px;flex-direction:column;}
+  }
+
   </style>
 </head>
 <body>
@@ -972,8 +1075,8 @@ function buildProject(id) {
   _curPanels = p.panels;
   const panels = p.panels.map((src,i)=>{
     const isH = (p.hPanels||[]).includes(i);
-    if(src.endsWith('.mp4')) return `<div class="panel-item panel-video${isH?' panel-landscape':''}" ondblclick="openVideoLightbox('${src}',${i})"><video src="${src}" autoplay muted loop playsinline></video></div>`;
-    return `<div class="panel-item${isH?' panel-landscape':''}" ondblclick="if(!_dragged)openLightbox('${src}',${i})"><img src="${src}" draggable="false"></div>`;
+    if(src.endsWith('.mp4')) return `<div class="panel-item panel-video${isH?' panel-landscape':''}" onclick="if(window.matchMedia('(max-width:900px)').matches&&!_dragged)openVideoLightbox('${src}',${i})" ondblclick="openVideoLightbox('${src}',${i})"><video src="${src}" autoplay muted loop playsinline></video></div>`;
+    return `<div class="panel-item${isH?' panel-landscape':''}" onclick="if(window.matchMedia('(max-width:900px)').matches&&!_dragged)openLightbox('${src}',${i})" ondblclick="if(!_dragged)openLightbox('${src}',${i})"><img src="${src}" draggable="false"></div>`;
   }).join('');
   const specs  = p.specs.map(s=>`<div><p class="spec-label">${s.l}</p><p class="spec-value">${s.v}</p></div>`).join('');
   const desc   = p.desc.map(d=>`<p>${d}</p>`).join('');
@@ -987,7 +1090,7 @@ function buildProject(id) {
     <section class="proj-desc fu"><p class="desc-label">About</p><div class="desc-body">${desc}</div></section>
     <section class="panels-wrap" data-cursor="light">
       <div class="panels-bar">
-        <span class="scroll-hint"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" style="animation:none;margin-right:2px"><circle cx="9" cy="9" r="6"/><path d="M9 6v3l2 2"/></svg> Double click to expand</span>
+        <span class="scroll-hint"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" style="animation:none;margin-right:2px"><circle cx="9" cy="9" r="6"/><path d="M9 6v3l2 2"/></svg> Tap / double click to expand</span>
         <span class="scroll-hint">Drag to explore <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 9h10M9 4l5 5-5 5"/></svg></span>
       </div>
       <div class="panels-track" id="pt">${panels}</div>
@@ -1570,13 +1673,16 @@ function initDrag(el) {
   el.addEventListener('touchstart', e=>{
     tx=e.touches[0].pageX; tsl=el.scrollLeft;
     tvX=0; tlX=tx; tlT=Date.now();
+    _dragged=false;
     cancelAnimationFrame(rafId);
   },{passive:true});
   el.addEventListener('touchmove', e=>{
     const now=Date.now(), dt=now-tlT||1;
+    const dx=e.touches[0].pageX-tx;
+    if(Math.abs(dx)>6) _dragged=true;
     tvX=(tlX-e.touches[0].pageX)/dt*14;
     tlX=e.touches[0].pageX; tlT=now;
-    el.scrollLeft=tsl-(e.touches[0].pageX-tx);
+    el.scrollLeft=tsl-dx;
   },{passive:true});
   el.addEventListener('touchend', ()=>{ velX=tvX; requestAnimationFrame(momentum); });
 }
