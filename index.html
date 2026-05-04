@@ -56,7 +56,7 @@
   .home-hero { padding:clamp(20px,2vw,32px) clamp(80px,10vw,160px) clamp(20px,2vw,28px); display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:end; }
   .home-hero h1 { font-family:var(--font-display); font-size:clamp(3rem,5.5vw,5rem); font-weight:700; line-height:1.0; letter-spacing:-.03em; }
   .home-hero h1 em { font-style:normal; font-weight:300; color:var(--color-muted); }
-  .hero-text-col { margin-left:auto; max-width:340px; padding-bottom:8px; }
+  .hero-text-col { margin-left:auto; max-width:340px; padding-bottom:8px; text-align:right; }
   .hero-desc { font-size:clamp(.9rem,1.1vw,1rem); color:var(--color-soft); line-height:1.72; }
   .hero-quote { margin-top:14px; font-family:var(--font-display); font-size:clamp(.95rem,1.15vw,1.05rem); font-weight:600; letter-spacing:-.01em; color:var(--color-text); line-height:1.5; }
 
@@ -338,49 +338,50 @@
     50%{opacity:0}
   }
 
-  /* ── Custom cursor (desktop only) ── */
-  .c-dot {
-    position:fixed; top:0; left:0;
-    width:7px; height:7px;
-    background:var(--color-text);
-    border-radius:50%;
+  /* ── Custom cursor: crosshair (desktop only) ── */
+  .has-custom-cursor,.has-custom-cursor *{cursor:none!important}
+  .c-cross{
+    position:fixed;top:0;left:0;
+    width:44px;height:44px;
     pointer-events:none;
     z-index:9999;
     transform:translate(-50%,-50%);
-    transition:width .2s,height .2s,background .2s;
-    will-change:transform;
-  }
-  .c-ring {
-    position:fixed; top:0; left:0;
-    width:26px; height:26px;
-    border:1.5px solid var(--color-text);
-    border-radius:50%;
-    pointer-events:none;
-    z-index:9998;
-    transform:translate(-50%,-50%);
-    transition:width .25s var(--ease),height .25s var(--ease),border-color .2s,opacity .3s;
-    will-change:transform;
     opacity:0;
+    transition:opacity .3s;
   }
-  .c-ring.active{opacity:1}
-  .has-custom-cursor,.has-custom-cursor *{cursor:none!important}
-  .c-dot.hover{width:5px;height:5px;background:var(--color-muted)}
-  .c-ring.hover{width:40px;height:40px}
-  .c-dot.on-dark{background:#fff}
-  .c-dot.on-dark.hover{background:rgba(255,255,255,.6)}
-  .c-ring.on-dark{border-color:#fff}
-  .c-ring.on-dark.hover{border-color:#fff}
-  @media(max-width:900px){
-    .c-dot,.c-ring{display:none}
+  .c-cross.active{opacity:1}
+  .c-arm{
+    position:absolute;
+    background:var(--color-text);
+    border-radius:1px;
+    transition:all .22s cubic-bezier(.23,1,.32,1), background .2s;
   }
+  /* vertical arms */
+  .c-arm-t{width:1.5px;height:11px;left:50%;transform:translateX(-50%);top:auto;bottom:calc(50% + 5px)}
+  .c-arm-b{width:1.5px;height:11px;left:50%;transform:translateX(-50%);top:calc(50% + 5px)}
+  /* horizontal arms */
+  .c-arm-l{height:1.5px;width:11px;top:50%;transform:translateY(-50%);right:calc(50% + 5px)}
+  .c-arm-r{height:1.5px;width:11px;top:50%;transform:translateY(-50%);left:calc(50% + 5px)}
+  /* hover: arms open outward */
+  .c-cross.hover .c-arm-t{bottom:calc(50% + 10px);height:13px}
+  .c-cross.hover .c-arm-b{top:calc(50% + 10px);height:13px}
+  .c-cross.hover .c-arm-l{right:calc(50% + 10px);width:13px}
+  .c-cross.hover .c-arm-r{left:calc(50% + 10px);width:13px}
+  /* on dark zones: white */
+  .c-cross.on-dark .c-arm{background:#fff}
+  @media(max-width:900px){.c-cross{display:none}}
   </style>
 </head>
 <body>
 
 <!-- NAV -->
-<!-- Custom cursor -->
-<div class="c-dot" id="cDot"></div>
-<div class="c-ring" id="cRing"></div>
+<!-- Custom cursor: crosshair -->
+<div class="c-cross" id="cCross">
+  <div class="c-arm c-arm-t"></div>
+  <div class="c-arm c-arm-b"></div>
+  <div class="c-arm c-arm-l"></div>
+  <div class="c-arm c-arm-r"></div>
+</div>
 
 <nav class="nav" id="nav">
   <div class="nav-logo" onclick="go('home')">
@@ -416,7 +417,7 @@
       </div>
     </header>
     <span class="work-section-label fu d2">Selected work</span>
-    <main class="projects-grid">
+    <main class="projects-grid" data-cursor="light">
       <div class="project-card-wrap fu d1" onclick="go('project','flujo')">
         <div class="project-card">
           <img class="project-card-img" src="/images/flujo-hero.png" alt="Flujo" style="object-position:center 20%">
@@ -476,7 +477,7 @@
     </main>
     <div class="extras-section">
       <span class="work-section-label" style="padding:0;">Add-ons</span>
-      <div class="extras-grid">
+      <div class="extras-grid" data-cursor="light">
         <div class="extra-card-wrap" onclick="go('project','promix')">
           <div class="extra-card">
             <img class="extra-card-img" src="/images/promix-hero.jpg" alt="Promix" style="object-position:center center;">
@@ -549,12 +550,7 @@
       </div>
       <div class="about-cv fu d2">
         <div class="cv-block">
-          <h4>Selected Projects</h4>
-          <div class="cv-item">
-            <p class="cv-item-title">Flujo <span style="font-weight:400;color:var(--color-muted)">, Best Project · Cohort</span></p>
-            <p class="cv-item-sub">Industrial Design 1 · Universidad de Palermo · 2025<br>Designed a fully functional product within a strict constraint: a fixed limit on the number of components and permitted materials. The challenge forced a rigorous problem-solving approach, eliminating every element that wasn't structurally or experientially essential. Selected as the best project of the cohort.</p>
-          </div>
-          <h4 style="margin-top:28px">Experience</h4>
+          <h4>Experience</h4>
           <div class="cv-item">
             <p class="cv-item-title">Independent Product Design Practice <span style="font-weight:400;color:var(--color-muted)">Remote · USA · Ongoing</span></p>
             <p class="cv-item-sub">Design and redesign of functional components with a focus on usability and manufacturability. Work spans concept ideation through rapid prototyping and iterative testing using 3D printing and fabrication tools.</p>
@@ -563,6 +559,10 @@
           <div class="cv-item">
             <p class="cv-item-title">Universidad de Palermo <span style="font-weight:400;color:var(--color-muted)">Expected Spring 2027</span></p>
             <p class="cv-item-sub">Buenos Aires, Argentina<br>BFA Industrial Design · 3.4 GPA</p>
+          </div>
+          <div class="cv-item">
+            <p class="cv-item-title">Universidad de Palermo <span style="font-weight:400;color:var(--color-muted)">2023 – 2026</span></p>
+            <p class="cv-item-sub">Buenos Aires, Argentina<br>Associate Degree in Industrial Design · 3.4 GPA</p>
           </div>
           <div class="cv-item">
             <p class="cv-item-title">Villa Devoto School <span style="font-weight:400;color:var(--color-muted)">2018 – 2022</span></p>
@@ -809,7 +809,7 @@ function buildProject(id) {
       <div class="proj-header-right fu d2"><p class="proj-tagline">${p.tagline}</p><div class="proj-specs">${specs}</div></div>
     </header>
     <section class="proj-desc fu"><p class="desc-label">About</p><div class="desc-body">${desc}</div></section>
-    <section class="panels-wrap" data-cursor="light">
+    <section class="panels-wrap">
       <div class="panels-bar">
         <span class="scroll-hint"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" style="animation:none;margin-right:2px"><circle cx="9" cy="9" r="6"/><path d="M9 6v3l2 2"/></svg> Double click to expand</span>
         <span class="scroll-hint">Drag to explore <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 9h10M9 4l5 5-5 5"/></svg></span>
@@ -938,12 +938,12 @@ function buildProject(id) {
           </div>
         </div>
         <div style="background:var(--color-bg);padding:16px;">
-          <div style="aspect-ratio:4/5;overflow:hidden;background:#0A0A0A;" data-cursor="light">
+          <div style="aspect-ratio:4/5;overflow:hidden;background:#0A0A0A;">
             <video src="/videos/flujo-proto-building-web.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video>
           </div>
         </div>
         <div style="background:var(--color-bg);padding:16px;">
-          <div style="aspect-ratio:4/5;overflow:hidden;background:#0A0A0A;" data-cursor="light">
+          <div style="aspect-ratio:4/5;overflow:hidden;background:#0A0A0A;">
             <video src="/videos/flujo-proto-testing-web.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video>
           </div>
         </div>
@@ -1413,69 +1413,42 @@ document.querySelectorAll('.page').forEach(p=>p.addEventListener('scroll',()=>{
 // Init home animations
 requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el=>el.classList.add('in')));
 
-// ── Custom cursor ──
+// ── Custom cursor: crosshair ──
 (function(){
-  const dot = document.getElementById('cDot');
-  const ring = document.getElementById('cRing');
-  if(!dot || !ring) return;
+  const cross = document.getElementById('cCross');
+  if(!cross) return;
 
-  let mx=0, my=0, rx=0, ry=0, raf;
   const HOVER_SEL = 'a,button,[onclick],.project-card-wrap,.extra-card-wrap,.nav-back,.pnav-btn,.nav-logo,.nav-hamburger,.lb-close,.lb-arrow,.c-item';
-
-  // Activate on first mouse move
   let activated = false;
+
   document.addEventListener('mousemove', e=>{
-    mx = e.clientX; my = e.clientY;
-    dot.style.left = mx+'px';
-    dot.style.top  = my+'px';
+    cross.style.left = e.clientX + 'px';
+    cross.style.top  = e.clientY + 'px';
     if(!activated){
       activated = true;
       document.body.classList.add('has-custom-cursor');
-      ring.classList.add('active');
-      if(!raf) raf = requestAnimationFrame(animRing);
+      cross.classList.add('active');
     }
   }, {passive:true});
 
-  // Ring follows with smooth lag
-  function animRing(){
-    rx += (mx - rx) * 0.13;
-    ry += (my - ry) * 0.13;
-    ring.style.left = rx+'px';
-    ring.style.top  = ry+'px';
-    raf = requestAnimationFrame(animRing);
-  }
-
-  // Dark zone: switch cursor to white
+  // Dark zone: white arms
   document.addEventListener('mouseover', e=>{
-    if(e.target.closest('[data-cursor="light"]')){
-      dot.classList.add('on-dark');
-      ring.classList.add('on-dark');
-    }
+    if(e.target.closest('[data-cursor="light"]')) cross.classList.add('on-dark');
   });
   document.addEventListener('mouseout', e=>{
-    if(e.target.closest('[data-cursor="light"]')){
-      dot.classList.remove('on-dark');
-      ring.classList.remove('on-dark');
-    }
+    if(e.target.closest('[data-cursor="light"]')) cross.classList.remove('on-dark');
   });
 
-  // Hover state: shrink dot, expand ring
+  // Hover: arms open outward
   document.addEventListener('mouseover', e=>{
-    if(e.target.closest(HOVER_SEL)){
-      dot.classList.add('hover');
-      ring.classList.add('hover');
-    }
+    if(e.target.closest(HOVER_SEL)) cross.classList.add('hover');
   });
   document.addEventListener('mouseout', e=>{
-    if(e.target.closest(HOVER_SEL)){
-      dot.classList.remove('hover');
-      ring.classList.remove('hover');
-    }
+    if(e.target.closest(HOVER_SEL)) cross.classList.remove('hover');
   });
 
-  // Hide when leaving window
-  document.addEventListener('mouseleave', ()=>{ dot.style.opacity='0'; ring.style.opacity='0'; });
-  document.addEventListener('mouseenter', ()=>{ dot.style.opacity='1'; ring.style.opacity='1'; });
+  document.addEventListener('mouseleave', ()=>{ cross.style.opacity='0'; });
+  document.addEventListener('mouseenter', ()=>{ cross.style.opacity=''; });
 })();
 
 /* ── Typewriter flip for hero text ── */
