@@ -368,10 +368,10 @@
   .c-cross.hover .c-arm-l{right:calc(50% + 8px);width:8px}
   .c-cross.hover .c-arm-r{left:calc(50% + 8px);width:8px}
   /* on dark zones: white */
-  .c-cross.on-dark .c-arm{background:#fff}
+  .c-cross.on-dark .c-arm{background:var(--color-bg)}
   @media(max-width:900px){.c-cross{display:none}}
   /* ── Intro: marca de centro ── */
-  #intro{position:fixed;inset:0;background:var(--color-bg);z-index:99999;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:intro-out .7s ease 2.2s forwards}
+  #intro{position:fixed;inset:0;background:var(--color-bg);z-index:99999;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:intro-out .7s ease 1.7s forwards}
   #intro.dismiss{animation:intro-out .4s ease 0s forwards}
   @keyframes intro-out{0%{opacity:1}100%{opacity:0;visibility:hidden;pointer-events:none}}
   #intro-cv{position:absolute;inset:0;width:100%;height:100%}
@@ -398,7 +398,12 @@
   // Click to dismiss early
   document.addEventListener('DOMContentLoaded', function(){
     var el=document.getElementById('intro');
-    if(el) el.addEventListener('click',function(){ el.classList.add('dismiss'); });
+    if(el) el.addEventListener('click',function(){
+      el.classList.add('dismiss');
+      window.dispatchEvent(new CustomEvent('intro-done'));
+    });
+    // Auto-dispatch when intro fades (1.7s delay + 0.7s fade)
+    setTimeout(function(){ window.dispatchEvent(new CustomEvent('intro-done')); }, 2400);
   });
 
   // Marca de centro — canvas animation
@@ -415,9 +420,9 @@
     var mx=W/2, my=H/2;
     cx.clearRect(0,0,W,H);
 
-    var p1=ez(seg(dt,0,0.55));    // solid arms grow
-    var p2=ez(seg(dt,0.25,0.8));  // center circle
-    var p3=ez(seg(dt,0.65,1.5));  // dashed extensions
+    var p1=ez(seg(dt,0,0.41));    // solid arms grow
+    var p2=ez(seg(dt,0.19,0.6));  // center circle
+    var p3=ez(seg(dt,0.49,1.13)); // dashed extensions
 
     var INK=getComputedStyle(document.body).getPropertyValue('--color-text').trim()||'#0A0A0A';
     cx.strokeStyle=INK; cx.fillStyle=INK;
@@ -455,7 +460,7 @@
       cx.setLineDash([]);
     }
 
-    if(dt<2.0) requestAnimationFrame(function(ts2){ frame(ts2,t0,cv); });
+    if(dt<1.5) requestAnimationFrame(function(ts2){ frame(ts2,t0,cv); });
   }
 
   window.addEventListener('load',function(){
@@ -615,7 +620,7 @@
 </div>
 
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
+<div class="lightbox" id="lightbox" data-cursor="light">
   <span class="lb-close" id="lbClose">✕ close</span>
   <div class="lb-arrow lb-prev" id="lbPrev" onclick="lbNav(-1)">
     <svg viewBox="0 0 20 20"><path d="M13 4L7 10l6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -910,7 +915,7 @@ function buildProject(id) {
       <div class="proj-header-right fu d2"><p class="proj-tagline">${p.tagline}</p><div class="proj-specs">${specs}</div></div>
     </header>
     <section class="proj-desc fu"><p class="desc-label">About</p><div class="desc-body">${desc}</div></section>
-    <section class="panels-wrap">
+    <section class="panels-wrap" data-cursor="light">
       <div class="panels-bar">
         <span class="scroll-hint"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" style="animation:none;margin-right:2px"><circle cx="9" cy="9" r="6"/><path d="M9 6v3l2 2"/></svg> Double click to expand</span>
         <span class="scroll-hint">Drag to explore <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 9h10M9 4l5 5-5 5"/></svg></span>
@@ -1578,6 +1583,9 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
     busy: false
   }));
 
+  // Clear text immediately so it types in after intro
+  items.forEach(it => { it.el.textContent = ''; });
+
   let isAlt = false;
 
   function runAll(toAlt){
@@ -1586,7 +1594,7 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
     items.forEach(it=>{
       it.busy = true;
       if(it.timer) clearInterval(it.timer);
-      it.timer = typewrite(it.el, toAlt ? it.alt : it.orig, 30, ()=>{
+      it.timer = typewrite(it.el, toAlt ? it.alt : it.orig, 28, ()=>{
         it.busy = false;
         done++;
         if(done === items.length) isAlt = toAlt;
@@ -1594,9 +1602,17 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
     });
   }
 
+  // Type in original text once intro ends
+  let introDone = false;
+  window.addEventListener('intro-done', function(){
+    if(introDone) return;
+    introDone = true;
+    runAll(false);
+  });
+
   const container = document.querySelector('.hero-text-col');
   if(container){
-    container.addEventListener('mouseenter', ()=>{ if(!isAlt) runAll(true); });
+    container.addEventListener('mouseenter', ()=>{ if(!isAlt && !items.some(it=>it.busy)) runAll(true); });
     container.addEventListener('mouseleave', ()=>{ if(isAlt) runAll(false); });
   }
 })();
