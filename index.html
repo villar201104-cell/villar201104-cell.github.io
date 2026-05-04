@@ -427,9 +427,9 @@
     .panels-wrap{margin-bottom:54px;}
     .panels-bar{padding:0 20px 12px;gap:18px;align-items:flex-end;}
     .panels-bar span{font-size:.62rem;line-height:1.35;}
-    .panels-track{padding:0 20px 18px;gap:10px;scroll-snap-type:x mandatory;}
+    .panels-track{padding:0 16px 18px;gap:4px;scroll-snap-type:x mandatory;}
     .panel-item{height:min(68vh,560px);max-height:560px;scroll-snap-align:start;border-radius:4px;}
-    .panel-item img,.panel-video video{height:100%;width:100%;object-fit:contain;}
+    .panel-item img,.panel-video video{height:100%;width:auto;object-fit:contain;}
     .panel-video::after{content:'Tap to expand';font-size:.58rem;top:10px;left:10px;}
 
     /* Process pages inside projects */
@@ -449,10 +449,30 @@
     .split-specs{margin-top:22px;padding-top:18px;gap:18px;}
 
     .evo-wrap,.proto-wrap{padding:46px 20px;}
+    .proto-wrap{display:grid;grid-template-columns:1fr;gap:12px;}
+    .proto-header,.proto-wrap > div[style*="margin-bottom:40px"]{margin-bottom:18px!important;}
     .evo-header{margin-bottom:26px;align-items:flex-start;gap:8px;flex-direction:column;}
     .evo-title,.proto-title{font-size:1.2rem;}
     .evo-cols,.proto-cols,.proto-imgs,.proto-3col,.proto-2col{display:grid;grid-template-columns:1fr!important;gap:12px;background:transparent;border:0;}
+
+    /* Mobile alternation: every written block is followed by its related render. */
+    .evo-cols > :nth-child(1){order:1;}
+    .evo-cols > :nth-child(3){order:2;}
+    .evo-cols > :nth-child(2){order:3;}
+    .evo-cols > :nth-child(4){order:4;}
+
+    /* Flujo uses separate text and image rows in prototyping; contents lets mobile interleave them. */
+    .proto-wrap .proto-cols,
+    .proto-wrap .proto-imgs{display:contents!important;}
+    .proto-wrap .proto-cols > :nth-child(1){order:1;}
+    .proto-wrap .proto-imgs > :nth-child(1){order:2;}
+    .proto-wrap .proto-cols > :nth-child(2){order:3;}
+    .proto-wrap .proto-imgs > :nth-child(2){order:4;}
+    .proto-wrap .proto-cols > :nth-child(3){order:5;}
+    .proto-wrap .proto-imgs > :nth-child(3){order:6;}
+
     .evo-col,.proto-col,.proto-item{border:1px solid var(--color-border);background:var(--color-bg);}
+    .proto-imgs > div{border:1px solid var(--color-border);background:var(--color-bg)!important;padding:12px!important;}
     .evo-col,.proto-col{padding:22px 20px;}
     .evo-desc,.proto-col-body{font-size:.94rem;line-height:1.62;}
     .proto-item-text{padding:22px 20px 12px;}
@@ -469,16 +489,20 @@
     .nav-logo img{height:46px;}
     .home-hero{padding:30px 18px 22px;}
     .projects-grid{padding:0 18px;grid-template-columns:1fr;gap:24px;}
-    .project-card{aspect-ratio:4/5;}
+    .project-card{aspect-ratio:7/10;}
     .card-mobile-label{padding:10px 2px 0;}
     .cml-title{font-size:1.08rem;}
     .cml-cat{display:block;margin-top:3px;font-size:.74rem;}
     .extras-grid{grid-template-columns:1fr;gap:24px;}
-    .extra-card{aspect-ratio:4/5;}
+    .extra-card{aspect-ratio:7/10;}
+
+    /* Preserve original hero-card proportions on mobile: no new 4/5 crop. */
+    .project-card-img,.extra-card-img{object-fit:cover;}
 
     .proj-header{padding:38px 18px 28px;}
     .proj-desc{padding-left:18px;padding-right:18px;}
-    .panels-bar,.panels-track{padding-left:18px;padding-right:18px;}
+    .panels-bar{padding-left:18px;padding-right:18px;}
+    .panels-track{padding-left:10px;padding-right:10px;gap:4px;}
     .panel-item{height:min(64vh,520px);}
     .proj-specs{grid-template-columns:1fr 1fr;}
     .proj-specs > div{padding:13px 10px;}
