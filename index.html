@@ -788,7 +788,7 @@
     <img src="/images/logo.png" alt="NV">
   </div>
   <ul class="nav-links" id="navLinks">
-    <li><a onclick="go('home')" id="nl-work">Work</a></li>
+    <li><a onclick="go('home')" id="nl-work" class="active">Work</a></li>
     <li><a onclick="go('about')" id="nl-about">About</a></li>
     <li><a onclick="go('contact')" id="nl-contact">Contact</a></li>
   </ul>
@@ -953,7 +953,7 @@
         </div>
         <div class="fu d2">
           <div class="about-bio">
-            <p>Hi, I’m Nahuel, an Argentine industrial designer who moved to the United States and is currently in the final semesters of my degree. I’m focused on building a path into the real world of design, with work that connects concept, material, and experience.</p>
+            <p>Hi, I’m Nahuel, an Argentine industrial designer currently based in the United States and finishing the final semesters of my degree.</p>
             <p>When I start a project, something usually bugs me first, a product that doesn't hold up, a solution that solved the wrong problem, a form that exists for attention rather than reason. That friction is where I begin.</p>
             <p>I design with conviction. When I commit to a project I go deep, into the material logic, the use scenario, the thing it needs to communicate without saying it. I see design as a structured system where identity, material, production, and intention must align. And I think it should contribute clarity, not noise.</p>
             <p>What frustrates me most about design today is how often the market comes first and the problem second. Form is not decoration, but consequence. Design is not a reaction to trends, it is a position.</p>
@@ -1149,6 +1149,7 @@ window.addEventListener('popstate', e => {
     } else if(path === '/contact') {
       go('contact', null, false);
     } else {
+      updateNav('home');
       try { history.replaceState({page:'home', id:null}, '', location.href); } catch(e) {}
     }
   } catch(e) {}
