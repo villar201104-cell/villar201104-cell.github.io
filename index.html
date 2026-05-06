@@ -1739,13 +1739,22 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   let activated = false;
 
   document.addEventListener('mousemove', e=>{
+    // Hide the custom cursor near native scrollbars.
+    // Browser scrollbars live outside the page, so the default cursor can appear there;
+    // hiding the cross prevents it from looking frozen while dragging the scrollbar.
+    const scrollbarZone = e.clientX >= window.innerWidth - 18 || e.clientY >= window.innerHeight - 18;
+    if(scrollbarZone){
+      cross.classList.remove('active');
+      return;
+    }
+
     cross.style.left = e.clientX + 'px';
     cross.style.top  = e.clientY + 'px';
     if(!activated){
       activated = true;
       document.body.classList.add('has-custom-cursor');
-      cross.classList.add('active');
     }
+    cross.classList.add('active');
   }, {passive:true});
 
   // Dark zone: white arms
