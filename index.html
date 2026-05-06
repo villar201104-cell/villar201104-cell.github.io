@@ -83,9 +83,9 @@
   .addon-placeholder-top { position:absolute; left:18px; top:16px; font-size:.62rem; letter-spacing:.16em; text-transform:uppercase; color:var(--color-muted); }
   .addon-placeholder-title { position:absolute; left:20px; right:20px; top:22px; max-width:72%; font-family:var(--font-display); font-size:1.36rem; line-height:.94; letter-spacing:-.04em; font-weight:600; color:var(--color-text); }
   .addon-placeholder-title span { display:block; color:var(--color-muted); font-weight:400; }
-  .addon-placeholder-center { position:absolute; left:18px; right:18px; top:54%; transform:translateY(-50%); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; text-align:center; }
+  .addon-placeholder-center { position:absolute; left:50%; top:54%; width:72%; max-width:260px; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; gap:18px; text-align:center; }
   .addon-placeholder-meta { font-size:.62rem; letter-spacing:.16em; text-transform:uppercase; color:var(--color-muted); }
-  .addon-placeholder-bar { width:64%; height:4px; background:rgba(10,10,10,.08); overflow:hidden; margin:0 auto; }
+  .addon-placeholder-bar { width:100%; height:4px; background:rgba(10,10,10,.08); overflow:hidden; }
   .addon-placeholder-bar::before { content:''; display:block; width:36%; height:100%; background:var(--color-text); animation:addonProgress 4.2s cubic-bezier(.22,1,.36,1) infinite; }
   .addon-placeholder-small { font-size:.8rem; color:var(--color-muted); }
   .addon-placeholder-footer { position:absolute; left:18px; right:18px; bottom:18px; display:flex; justify-content:space-between; align-items:center; font-size:.64rem; letter-spacing:.16em; text-transform:uppercase; color:var(--color-muted); }
@@ -226,7 +226,7 @@
   .nav-mobile.open { display:flex; }
   .nav-mobile a { font-size:2rem; font-family:var(--font-display); font-weight:600; letter-spacing:-.02em; color:var(--color-text); cursor:pointer; }
 
-    @keyframes addonProgress { 0% { transform:translateX(-120%); } 45%,65% { transform:translateX(0); } 100% { transform:translateX(220%); } }
+    @keyframes addonProgress { 0% { transform:translateX(-120%); } 40%,68% { transform:translateX(0); } 100% { transform:translateX(220%); } }
 
 @media(max-width:900px){
     .home-hero,.proj-header,.about-top { grid-template-columns:1fr; }
@@ -1893,17 +1893,40 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   if(!layer || !aboutPage) return;
 
   const files = [
+    { file:'flujo-render-concept.jpg', src:'/images/flujo-render-concept.jpg' },
+    { file:'flujo-render-decisions.jpg', src:'/images/flujo-render-decisions.jpg' },
     { file:'flujo-render-identity.jpg', src:'/images/flujo-render-identity.jpg' },
+    { file:'flujo-evo-ideation.png', src:'/images/flujo-evo-ideation.png' },
+    { file:'flujo-evo-iteration.png', src:'/images/flujo-evo-iteration.png' },
+    { file:'flujo-process-1.png', src:'/images/flujo-process-1.png' },
+    { file:'flujo-process-2.png', src:'/images/flujo-process-2.png' },
+
+    { file:'incline-render-concept.jpg', src:'/images/incline-render-concept.jpg' },
+    { file:'incline-render-decisions.jpg', src:'/images/incline-render-decisions.jpg' },
+    { file:'incline-render-system.jpg', src:'/images/incline-render-system.jpg' },
     { file:'incline-process-sketch.jpg', src:'/images/incline-process-sketch.jpg' },
+    { file:'incline-process-branches.jpg', src:'/images/incline-process-branches.jpg' },
+
+    { file:'pausa-render-concept.jpg', src:'/images/pausa-render-concept.jpg' },
     { file:'pausa-render-materials.jpg', src:'/images/pausa-render-materials.jpg' },
+    { file:'pausa-bocetos.jpg', src:'/images/pausa-bocetos.jpg' },
+
+    { file:'core-render-concept.jpg', src:'/images/core-render-concept.jpg' },
+    { file:'core-render-identity.jpg', src:'/images/core-render-identity.jpg' },
     { file:'core-render-production.jpg', src:'/images/core-render-production.jpg' },
-    { file:'promix-render-solution.jpg', src:'/images/promix-render-solution.jpg' }
+    { file:'core-bocetos.jpg', src:'/images/core-bocetos.jpg' },
+    { file:'core-iteration.jpg', src:'/images/core-iteration.jpg' },
+
+    { file:'promix-render-opportunity.jpg', src:'/images/promix-render-opportunity.jpg' },
+    { file:'promix-render-solution.jpg', src:'/images/promix-render-solution.jpg' },
+    { file:'promix-iteration.jpg', src:'/images/promix-iteration.jpg' }
   ];
 
   let lastTime = 0;
   let lastX = null;
   let lastY = null;
-  let index = 0;
+  let filePool = [];
+  let lastFile = null;
 
   function aboutIsActive(){
     return aboutPage.classList.contains('active');
@@ -1925,10 +1948,21 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
     return false;
   }
 
+  function nextItem(){
+    if(!filePool.length){
+      filePool = files.slice().sort(() => Math.random() - 0.5);
+      if(filePool.length > 1 && lastFile && filePool[0].file === lastFile){
+        filePool.push(filePool.shift());
+      }
+    }
+    const item = filePool.shift();
+    lastFile = item.file;
+    return item;
+  }
+
   function createTrail(x, y){
-    const item = files[index % files.length];
+    const item = nextItem();
     const label = item.file.replace(/\.(jpg|jpeg|png|webp)$/i, '');
-    index++;
 
     const card = document.createElement('div');
     card.className = 'image-trail-item';
