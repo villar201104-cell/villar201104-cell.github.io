@@ -395,14 +395,14 @@
   .c-cross.on-dark .c-arm{background:var(--color-bg)}
   @media(max-width:900px){.c-cross{display:none}}
 
-  /* ── Occasional image trail for About / Contact (desktop only) ── */
-  .image-trail-layer{position:fixed;inset:0;pointer-events:none;z-index:500;overflow:hidden}
-  .image-trail-card{position:fixed;width:158px;background:rgba(251,251,249,.97);border:1px solid var(--color-border);box-shadow:0 18px 44px rgba(10,10,10,.10);overflow:hidden;transform:translate(-50%,-50%) rotate(var(--trail-rot,0deg)) scale(.96);opacity:0;animation:imageTrailCard 2.05s var(--ease) forwards}
-  .image-trail-card img{width:100%;height:172px;object-fit:cover;display:block;background:var(--color-bg-alt)}
-  .image-trail-card .trail-copy{padding:9px 11px 10px;background:rgba(251,251,249,.98);border-top:1px solid rgba(10,10,10,.05)}
-  .image-trail-card .trail-file{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text);line-height:1.25;word-break:break-word}
-  .image-trail-card .trail-project{margin-top:4px;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--color-muted)}
-  @keyframes imageTrailCard{0%{opacity:0;transform:translate(-50%,-50%) rotate(var(--trail-rot,0deg)) scale(.96)}12%{opacity:1;transform:translate(-50%,-50%) rotate(var(--trail-rot,0deg)) scale(1)}72%{opacity:1;transform:translate(calc(-50% + var(--trail-dx,0px)),calc(-50% + var(--trail-dy,0px))) rotate(calc(var(--trail-rot,0deg) * .35)) scale(1)}100%{opacity:0;transform:translate(calc(-50% + var(--trail-dx,0px)),calc(-50% + var(--trail-dy,0px))) rotate(calc(var(--trail-rot,0deg) * .35)) scale(.98)}}
+  /* ── Sparse image trail for About / Contact (desktop only) ── */
+  .image-trail-layer{position:fixed;inset:0;pointer-events:none;z-index:260;overflow:hidden}
+  .image-trail-card{position:fixed;width:124px;background:rgba(251,251,249,.96);border:1px solid var(--color-border);box-shadow:0 14px 34px rgba(10,10,10,.10);overflow:hidden;transform:translate(-50%,-50%) rotate(var(--trail-rot,0deg)) scale(.96);opacity:0;animation:imageTrailCard 1.9s var(--ease) forwards}
+  .image-trail-card img{width:100%;height:120px;object-fit:cover;display:block;background:var(--color-bg-alt)}
+  .image-trail-card .trail-copy{padding:7px 8px 8px;background:rgba(251,251,249,.98);border-top:1px solid rgba(10,10,10,.05)}
+  .image-trail-card .trail-file{font-size:.54rem;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text);line-height:1.2;word-break:break-word}
+  .image-trail-card .trail-project{margin-top:3px;font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--color-muted)}
+  @keyframes imageTrailCard{0%{opacity:0;transform:translate(-50%,-50%) rotate(var(--trail-rot,0deg)) scale(.92)}10%{opacity:1;transform:translate(-50%,-50%) rotate(var(--trail-rot,0deg)) scale(1)}72%{opacity:1;transform:translate(calc(-50% + var(--trail-dx,0px)),calc(-50% + var(--trail-dy,0px))) rotate(calc(var(--trail-rot,0deg) * .45)) scale(1)}100%{opacity:0;transform:translate(calc(-50% + var(--trail-dx,0px)),calc(-50% + var(--trail-dy,0px))) rotate(calc(var(--trail-rot,0deg) * .45)) scale(.98)}}
   @media(max-width:900px){.image-trail-layer{display:none}}
   /* ── Intro: binary already visible + clean center-out reveal ── */
   #intro{position:fixed;inset:0;background:transparent;z-index:99999;display:flex;align-items:center;justify-content:center;cursor:pointer}
@@ -896,7 +896,7 @@
     <div class="about-wrap">
       <div class="about-top">
         <div class="fu">
-          <div class="about-photo-stack" id="aboutPhotoStack" title="Tap to swap photo">
+          <div class="about-photo-stack" id="aboutPhotoStack" title="Tap to swap photo" data-cursor="light">
             <img class="about-photo about-photo-main" src="/images/photo.jpg" alt="Nahuel Villar">
             <img class="about-photo about-photo-alt" src="/images/about-childhood.jpg" alt="Nahuel Villar childhood photo">
           </div>
@@ -1789,7 +1789,7 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   const cross = document.getElementById('cCross');
   if(!cross) return;
 
-  const HOVER_SEL = 'a,button,[onclick],.project-card-wrap,.extra-card-wrap,.nav-back,.pnav-btn,.nav-logo,.nav-hamburger,.lb-close,.lb-arrow,.c-item';
+  const HOVER_SEL = 'a,button,[onclick],.project-card-wrap,.extra-card-wrap,.about-photo-stack,.nav-back,.pnav-btn,.nav-logo,.nav-hamburger,.lb-close,.lb-arrow,.c-item';
   let activated = false;
 
   document.addEventListener('mousemove', e=>{
@@ -1831,7 +1831,7 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   document.addEventListener('mouseenter', ()=>{ cross.style.opacity=''; });
 })();
 
-/* ── Occasional image trail: About / Contact only ── */
+/* ── Sparse image trail: About / Contact only ── */
 (function(){
   const layer = document.getElementById('imageTrailLayer');
   const aboutPage = document.getElementById('page-about');
@@ -1841,28 +1841,25 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   const items = [
     { project:'Flujo', file:'flujo-render-identity.jpg', src:'/images/flujo-render-identity.jpg' },
     { project:'Flujo', file:'flujo-render-concept.jpg', src:'/images/flujo-render-concept.jpg' },
-    { project:'Flujo', file:'flujo-render-decisions.jpg', src:'/images/flujo-render-decisions.jpg' },
     { project:'Incline', file:'incline-process-sketch.jpg', src:'/images/incline-process-sketch.jpg' },
-    { project:'Incline', file:'incline-render-concept.jpg', src:'/images/incline-render-concept.jpg' },
     { project:'Incline', file:'incline-render-system.jpg', src:'/images/incline-render-system.jpg' },
-    { project:'Incline', file:'incline-render-decisions.jpg', src:'/images/incline-render-decisions.jpg' },
     { project:'Pausa', file:'pausa-render-concept.jpg', src:'/images/pausa-render-concept.jpg' },
     { project:'Pausa', file:'pausa-render-materials.jpg', src:'/images/pausa-render-materials.jpg' },
     { project:'Core', file:'core-render-concept.jpg', src:'/images/core-render-concept.jpg' },
-    { project:'Core', file:'core-render-identity.jpg', src:'/images/core-render-identity.jpg' },
     { project:'Core', file:'core-render-production.jpg', src:'/images/core-render-production.jpg' },
     { project:'Promix', file:'promix-render-opportunity.jpg', src:'/images/promix-render-opportunity.jpg' },
     { project:'Promix', file:'promix-render-solution.jpg', src:'/images/promix-render-solution.jpg' }
   ];
 
+  let lastQualifiedX = null;
+  let lastQualifiedY = null;
   let lastSpawn = 0;
-  let lastX = null;
-  let lastY = null;
-  let index = 0;
+  let qualifiedMoves = 0;
+  let itemIndex = 0;
 
   function activeTrailPage(){
-    if(aboutPage.classList.contains('active')) return aboutPage;
-    if(contactPage.classList.contains('active')) return contactPage;
+    if(aboutPage.classList.contains('active')) return 'about';
+    if(contactPage.classList.contains('active')) return 'contact';
     return null;
   }
 
@@ -1874,43 +1871,54 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   }
 
   function blockedTarget(target){
-    return !!target.closest('.nav-mobile, .lightbox, .lb, .about-photo-stack');
+    return !!target.closest('.nav-mobile, .lightbox, .lb, .about-photo-stack, a, button, input, textarea, .contact-links');
   }
 
-  function spawn(x,y){
-    const item = items[index % items.length];
-    index++;
+  function spawn(x, y){
+    const item = items[itemIndex % items.length];
+    itemIndex++;
 
     const card = document.createElement('div');
     card.className = 'image-trail-card';
-    card.style.left = Math.min(window.innerWidth - 92, Math.max(92, x + 38)) + 'px';
-    card.style.top = Math.min(window.innerHeight - 124, Math.max(124, y + 24)) + 'px';
-    card.style.setProperty('--trail-rot', (Math.random() * 6 - 3).toFixed(2) + 'deg');
-    card.style.setProperty('--trail-dx', (Math.random() * 16 - 8).toFixed(1) + 'px');
-    card.style.setProperty('--trail-dy', (-12 - Math.random() * 16).toFixed(1) + 'px');
+    const ox = (Math.random() * 90 - 45);
+    const oy = (Math.random() * 70 - 35);
+    card.style.left = Math.min(window.innerWidth - 90, Math.max(90, x + ox)) + 'px';
+    card.style.top = Math.min(window.innerHeight - 96, Math.max(96, y + oy)) + 'px';
+    card.style.setProperty('--trail-rot', (Math.random() * 10 - 5).toFixed(2) + 'deg');
+    card.style.setProperty('--trail-dx', (Math.random() * 10 - 5).toFixed(1) + 'px');
+    card.style.setProperty('--trail-dy', (-10 - Math.random() * 18).toFixed(1) + 'px');
     card.innerHTML = `<img src="${item.src}" alt="${item.file}"><div class="trail-copy"><div class="trail-file">${item.file}</div><div class="trail-project">${item.project}</div></div>`;
     layer.appendChild(card);
-    setTimeout(()=>card.remove(), 2150);
+    setTimeout(() => card.remove(), 1950);
   }
 
-  document.addEventListener('mousemove', e=>{
+  document.addEventListener('mousemove', e => {
     if(!canRun() || blockedTarget(e.target)) return;
 
     const now = Date.now();
-    if(now - lastSpawn < 850) return;
-
-    if(lastX !== null){
-      const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
-      if(dist < 120) return;
+    if(lastQualifiedX !== null){
+      const dist = Math.hypot(e.clientX - lastQualifiedX, e.clientY - lastQualifiedY);
+      if(dist < 55) return;
     }
 
-    lastSpawn = now;
-    lastX = e.clientX;
-    lastY = e.clientY;
-    spawn(e.clientX,e.clientY);
-  }, {passive:true});
+    lastQualifiedX = e.clientX;
+    lastQualifiedY = e.clientY;
+    qualifiedMoves += 1;
 
-  function clearTrail(){ layer.innerHTML = ''; }
+    if(qualifiedMoves % 3 !== 0) return;
+    if(now - lastSpawn < 180) return;
+
+    lastSpawn = now;
+    spawn(e.clientX, e.clientY);
+  }, { passive:true });
+
+  function clearTrail(){
+    layer.innerHTML = '';
+    qualifiedMoves = 0;
+    lastQualifiedX = null;
+    lastQualifiedY = null;
+  }
+
   aboutPage.addEventListener('mouseleave', clearTrail);
   contactPage.addEventListener('mouseleave', clearTrail);
   window.addEventListener('resize', clearTrail);
