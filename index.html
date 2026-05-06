@@ -169,14 +169,6 @@
   .about-wrap { max-width:var(--max-width); margin:0 auto; padding:clamp(56px,7vw,96px) clamp(20px,4vw,56px) clamp(64px,8vw,100px); }
   .about-top { display:grid; grid-template-columns:1fr 1.1fr; gap:clamp(40px,6vw,80px); margin-bottom:clamp(56px,7vw,96px); }
   .about-photo { aspect-ratio:3/4; object-fit:cover; object-position:center top; border-radius:3px; width:100%; }
-  .about-photo-stack { position:relative; aspect-ratio:3/4; width:100%; cursor:pointer; }
-  .about-photo-stack .about-photo { position:absolute; inset:0; height:100%; transition:transform .55s var(--ease), opacity .45s var(--ease), filter .45s var(--ease); }
-  .about-photo-main { z-index:2; box-shadow:0 0 0 0 rgba(0,0,0,0); }
-  .about-photo-alt { z-index:1; transform:translate(14px,14px) rotate(1.2deg) scale(.985); opacity:.58; filter:saturate(.9) contrast(.96); }
-  .about-photo-stack:hover .about-photo-alt { transform:translate(32px,-16px) rotate(2deg) scale(.985); opacity:.86; }
-  .about-photo-stack.is-swapped .about-photo-main { z-index:1; transform:translate(14px,14px) rotate(-1.2deg) scale(.985); opacity:.58; filter:saturate(.9) contrast(.96); }
-  .about-photo-stack.is-swapped .about-photo-alt { z-index:2; transform:translate(0,0) rotate(0) scale(1); opacity:1; filter:none; }
-  .about-photo-stack.is-swapped:hover .about-photo-main { transform:translate(32px,-16px) rotate(-2deg) scale(.985); opacity:.86; }
   .about-lead { font-family:var(--font-display); font-size:clamp(1.4rem,2.2vw,2rem); font-weight:600; line-height:1.3; letter-spacing:-.02em; margin-bottom:28px; }
   .about-bio p { font-size:1rem; color:var(--color-soft); line-height:1.75; margin-bottom:16px; text-align:justify; }
   .about-cv { display:grid; grid-template-columns:1fr 1fr 1fr; gap:clamp(24px,4vw,48px); border-top:1px solid var(--color-border); padding-top:40px; }
@@ -394,6 +386,62 @@
   /* on dark zones: white */
   .c-cross.on-dark .c-arm{background:var(--color-bg)}
   @media(max-width:900px){.c-cross{display:none}}
+
+  /* ── Occasional image trail on home/menu area (desktop only) ── */
+  .home-trail-layer{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:210;
+    overflow:hidden;
+  }
+  .home-trail-card{
+    position:fixed;
+    width:150px;
+    background:rgba(251,251,249,.98);
+    border:1px solid var(--color-border);
+    box-shadow:0 18px 44px rgba(10,10,10,.08);
+    overflow:hidden;
+    opacity:0;
+    transform:translate(-50%,-50%) rotate(var(--trail-rot,0deg)) scale(.96);
+    animation:homeTrailCard 2.15s var(--ease) forwards;
+  }
+  .home-trail-card img{
+    width:100%;
+    height:146px;
+    object-fit:cover;
+    display:block;
+    filter:saturate(.92) contrast(.98);
+  }
+  .home-trail-card .trail-copy{
+    padding:9px 10px 10px;
+    background:rgba(251,251,249,.98);
+    border-top:1px solid rgba(10,10,10,.055);
+  }
+  .home-trail-card .trail-title{
+    font-family:var(--font-display);
+    font-size:.82rem;
+    line-height:1.05;
+    font-weight:600;
+    letter-spacing:-.015em;
+    color:var(--color-text);
+  }
+  .home-trail-card .trail-file{
+    margin-top:4px;
+    font-size:.55rem;
+    line-height:1.2;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--color-muted);
+    word-break:break-word;
+  }
+  @keyframes homeTrailCard{
+    0%{opacity:0;transform:translate(-50%,-50%) rotate(var(--trail-rot,0deg)) scale(.96)}
+    12%{opacity:1;transform:translate(-50%,-50%) rotate(var(--trail-rot,0deg)) scale(1)}
+    72%{opacity:1;transform:translate(calc(-50% + var(--trail-dx,0px)),calc(-50% + var(--trail-dy,0px))) rotate(calc(var(--trail-rot,0deg) * .35)) scale(1)}
+    100%{opacity:0;transform:translate(calc(-50% + var(--trail-dx,0px)),calc(-50% + var(--trail-dy,0px))) rotate(calc(var(--trail-rot,0deg) * .35)) scale(.98)}
+  }
+  @media(max-width:900px){.home-trail-layer{display:none}}
   /* ── Intro: binary already visible + clean center-out reveal ── */
   #intro{position:fixed;inset:0;background:transparent;z-index:99999;display:flex;align-items:center;justify-content:center;cursor:pointer}
   #intro.hidden{visibility:hidden;pointer-events:none}
@@ -533,10 +581,6 @@
 
     .about-wrap{padding:34px 18px 60px;}
     .about-top{gap:28px;margin-bottom:44px;}
-    .about-photo-alt{transform:translate(10px,10px) rotate(1deg) scale(.985);}
-    .about-photo-stack:hover .about-photo-alt{transform:translate(10px,10px) rotate(1deg) scale(.985);}
-    .about-photo-stack.is-swapped .about-photo-main{transform:translate(10px,10px) rotate(-1deg) scale(.985);}
-    .about-photo-stack.is-swapped:hover .about-photo-main{transform:translate(10px,10px) rotate(-1deg) scale(.985);}
     .about-bio p{text-align:left;font-size:.94rem;line-height:1.68;}
     .about-cv{border-top:0;gap:28px;padding-top:0;}
     .cv-block{border-top:1px solid var(--color-border);padding-top:24px;}
@@ -719,6 +763,7 @@
   <div class="c-arm c-arm-l"></div>
   <div class="c-arm c-arm-r"></div>
 </div>
+<div class="home-trail-layer" id="homeTrailLayer" aria-hidden="true"></div>
 
 <nav class="nav" id="nav">
   <div class="nav-logo" onclick="go('home')">
@@ -885,10 +930,7 @@
     <div class="about-wrap">
       <div class="about-top">
         <div class="fu">
-          <div class="about-photo-stack" id="aboutPhotoStack" title="Tap to swap photo">
-            <img class="about-photo about-photo-main" src="/images/photo.jpg" alt="Nahuel Villar">
-            <img class="about-photo about-photo-alt" src="/images/about-childhood.jpg" alt="Nahuel Villar childhood photo">
-          </div>
+          <img class="about-photo" src="/images/photo.jpg" alt="Nahuel Villar">
         </div>
         <div class="fu d2">
           <div class="about-bio">
@@ -1778,14 +1820,13 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   const cross = document.getElementById('cCross');
   if(!cross) return;
 
-  const HOVER_SEL = 'a,button,[onclick],.project-card-wrap,.extra-card-wrap,.about-photo-stack,.nav-back,.pnav-btn,.nav-logo,.nav-hamburger,.lb-close,.lb-arrow,.c-item';
+  const HOVER_SEL = 'a,button,[onclick],.project-card-wrap,.extra-card-wrap,.nav-back,.pnav-btn,.nav-logo,.nav-hamburger,.lb-close,.lb-arrow,.c-item';
   let activated = false;
 
   document.addEventListener('mousemove', e=>{
-    // Hide the custom cursor near native scrollbars.
-    // Browser scrollbars live outside the page, so the default cursor can appear there;
-    // hiding the cross prevents it from looking frozen while dragging the scrollbar.
-    const scrollbarZone = e.clientX >= window.innerWidth - 18 || e.clientY >= window.innerHeight - 18;
+    // Hide only when the pointer is over the native vertical scrollbar zone.
+    // Everywhere else, the custom cursor remains visible.
+    const scrollbarZone = e.clientX >= window.innerWidth - 18;
     if(scrollbarZone){
       cross.classList.remove('active');
       return;
@@ -1818,6 +1859,95 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
 
   document.addEventListener('mouseleave', ()=>{ cross.style.opacity='0'; });
   document.addEventListener('mouseenter', ()=>{ cross.style.opacity=''; });
+})();
+
+/* ── Occasional image trail: section sketches/renders only ── */
+(function(){
+  const layer = document.getElementById('homeTrailLayer');
+  const aboutPage = document.getElementById('page-about');
+  const contactPage = document.getElementById('page-contact');
+  if(!layer || !aboutPage || !contactPage) return;
+
+  const items = [
+    { title:'Flujo', file:'flujo-render-identity.jpg', src:'/images/flujo-render-identity.jpg' },
+    { title:'Flujo', file:'flujo-render-concept.jpg', src:'/images/flujo-render-concept.jpg' },
+    { title:'Flujo', file:'flujo-render-decisions.jpg', src:'/images/flujo-render-decisions.jpg' },
+    { title:'Incline', file:'incline-process-sketch.jpg', src:'/images/incline-process-sketch.jpg' },
+    { title:'Incline', file:'incline-render-concept.jpg', src:'/images/incline-render-concept.jpg' },
+    { title:'Incline', file:'incline-render-system.jpg', src:'/images/incline-render-system.jpg' },
+    { title:'Incline', file:'incline-render-decisions.jpg', src:'/images/incline-render-decisions.jpg' },
+    { title:'Pausa', file:'pausa-render-concept.jpg', src:'/images/pausa-render-concept.jpg' },
+    { title:'Pausa', file:'pausa-render-materials.jpg', src:'/images/pausa-render-materials.jpg' },
+    { title:'Core', file:'core-render-concept.jpg', src:'/images/core-render-concept.jpg' },
+    { title:'Core', file:'core-render-identity.jpg', src:'/images/core-render-identity.jpg' },
+    { title:'Core', file:'core-render-production.jpg', src:'/images/core-render-production.jpg' },
+    { title:'Promix', file:'promix-render-opportunity.jpg', src:'/images/promix-render-opportunity.jpg' },
+    { title:'Promix', file:'promix-render-solution.jpg', src:'/images/promix-render-solution.jpg' }
+  ];
+
+  let lastSpawn = 0;
+  let lastX = null;
+  let lastY = null;
+  let index = 0;
+
+  function activeTrailPage(){
+    if(aboutPage.classList.contains('active')) return aboutPage;
+    if(contactPage.classList.contains('active')) return contactPage;
+    return null;
+  }
+
+  function canRun(){
+    if(window.innerWidth <= 900) return false;
+    if(!activeTrailPage()) return false;
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
+    return true;
+  }
+
+  function blockedTarget(target){
+    return !!target.closest('.nav, .nav-mobile, .nav-back, .nav-logo, .nav-hamburger, .c-item, .socials, .lightbox, .lb, .about-photo');
+  }
+
+  function spawn(x,y){
+    const item = items[index % items.length];
+    index++;
+
+    const card = document.createElement('div');
+    card.className = 'home-trail-card';
+    card.style.left = Math.min(window.innerWidth - 92, Math.max(92, x + 34)) + 'px';
+    card.style.top = Math.min(window.innerHeight - 118, Math.max(118, y + 22)) + 'px';
+    card.style.setProperty('--trail-rot', (Math.random() * 6 - 3).toFixed(2) + 'deg');
+    card.style.setProperty('--trail-dx', (Math.random() * 16 - 8).toFixed(1) + 'px');
+    card.style.setProperty('--trail-dy', (-12 - Math.random() * 16).toFixed(1) + 'px');
+
+    card.innerHTML = `<img src="${item.src}" alt="${item.file}"><div class="trail-copy"><div class="trail-title">${item.title}</div><div class="trail-file">${item.file}</div></div>`;
+    layer.appendChild(card);
+    setTimeout(()=>card.remove(), 2200);
+  }
+
+  document.addEventListener('mousemove', e=>{
+    if(!canRun() || blockedTarget(e.target)) return;
+
+    const now = Date.now();
+    if(now - lastSpawn < 1300) return;
+
+    if(lastX !== null){
+      const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
+      if(dist < 200) return;
+    }
+
+    if(Math.random() < 0.45) return;
+
+    lastSpawn = now;
+    lastX = e.clientX;
+    lastY = e.clientY;
+    spawn(e.clientX,e.clientY);
+  }, {passive:true});
+
+  function clearTrail(){ layer.innerHTML = ''; }
+  aboutPage.addEventListener('mouseleave', clearTrail);
+  contactPage.addEventListener('mouseleave', clearTrail);
+  window.addEventListener('resize', clearTrail);
+  window.addEventListener('popstate', clearTrail);
 })();
 
 /* ── Typewriter flip for hero text ── */
@@ -1915,16 +2045,6 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   };
 })();
 
-
-
-// ── About photo: peek + tap to swap ──
-(function(){
-  const stack = document.getElementById('aboutPhotoStack');
-  if(!stack) return;
-  stack.addEventListener('click', function(){
-    stack.classList.toggle('is-swapped');
-  });
-})();
 </script>
 </body>
 </html>
