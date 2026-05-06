@@ -396,7 +396,7 @@
   @media(max-width:900px){.c-cross{display:none}}
 
   /* ── Sparse image trail for About / Contact (desktop only) ── */
-  .image-trail-layer{position:fixed;inset:0;pointer-events:none;z-index:260;overflow:hidden}
+  .image-trail-layer{position:fixed;inset:0;pointer-events:none;z-index:9000;overflow:hidden}
   .image-trail-card{position:fixed;width:124px;background:rgba(251,251,249,.96);border:1px solid var(--color-border);box-shadow:0 14px 34px rgba(10,10,10,.10);overflow:hidden;transform:translate(-50%,-50%) rotate(var(--trail-rot,0deg)) scale(.96);opacity:0;animation:imageTrailCard 1.9s var(--ease) forwards}
   .image-trail-card img{width:100%;height:120px;object-fit:cover;display:block;background:var(--color-bg-alt)}
   .image-trail-card .trail-copy{padding:7px 8px 8px;background:rgba(251,251,249,.98);border-top:1px solid rgba(10,10,10,.05)}
@@ -1796,7 +1796,7 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
     // Hide the custom cursor near native scrollbars.
     // Browser scrollbars live outside the page, so the default cursor can appear there;
     // hiding the cross prevents it from looking frozen while dragging the scrollbar.
-    const scrollbarZone = e.clientX >= window.innerWidth - 18 || e.clientY >= window.innerHeight - 18;
+    const scrollbarZone = e.clientX >= window.innerWidth - 18;
     if(scrollbarZone){
       cross.classList.remove('active');
       return;
@@ -1858,8 +1858,8 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   let itemIndex = 0;
 
   function activeTrailPage(){
-    if(aboutPage.classList.contains('active')) return 'about';
-    if(contactPage.classList.contains('active')) return 'contact';
+    if(aboutPage.classList.contains('active')) return aboutPage;
+    if(contactPage.classList.contains('active')) return contactPage;
     return null;
   }
 
@@ -1871,7 +1871,7 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   }
 
   function blockedTarget(target){
-    return !!target.closest('.nav-mobile, .lightbox, .lb, .about-photo-stack, a, button, input, textarea, .contact-links');
+    return !!target.closest('.nav, .nav-mobile, .lightbox, .lb, a, button, input, textarea');
   }
 
   function spawn(x, y){
@@ -1880,37 +1880,40 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
 
     const card = document.createElement('div');
     card.className = 'image-trail-card';
-    const ox = (Math.random() * 90 - 45);
-    const oy = (Math.random() * 70 - 35);
-    card.style.left = Math.min(window.innerWidth - 90, Math.max(90, x + ox)) + 'px';
-    card.style.top = Math.min(window.innerHeight - 96, Math.max(96, y + oy)) + 'px';
+    const ox = Math.random() * 110 - 55;
+    const oy = Math.random() * 86 - 43;
+    card.style.left = Math.min(window.innerWidth - 82, Math.max(82, x + ox)) + 'px';
+    card.style.top = Math.min(window.innerHeight - 98, Math.max(98, y + oy)) + 'px';
     card.style.setProperty('--trail-rot', (Math.random() * 10 - 5).toFixed(2) + 'deg');
-    card.style.setProperty('--trail-dx', (Math.random() * 10 - 5).toFixed(1) + 'px');
-    card.style.setProperty('--trail-dy', (-10 - Math.random() * 18).toFixed(1) + 'px');
+    card.style.setProperty('--trail-dx', (Math.random() * 12 - 6).toFixed(1) + 'px');
+    card.style.setProperty('--trail-dy', (-8 - Math.random() * 20).toFixed(1) + 'px');
     card.innerHTML = `<img src="${item.src}" alt="${item.file}"><div class="trail-copy"><div class="trail-file">${item.file}</div><div class="trail-project">${item.project}</div></div>`;
     layer.appendChild(card);
     setTimeout(() => card.remove(), 1950);
   }
 
-  document.addEventListener('mousemove', e => {
+  function handleMove(e){
     if(!canRun() || blockedTarget(e.target)) return;
 
     const now = Date.now();
     if(lastQualifiedX !== null){
       const dist = Math.hypot(e.clientX - lastQualifiedX, e.clientY - lastQualifiedY);
-      if(dist < 55) return;
+      if(dist < 34) return;
     }
 
     lastQualifiedX = e.clientX;
     lastQualifiedY = e.clientY;
     qualifiedMoves += 1;
 
+    // One card every 3 qualified movements, with a light time guard.
     if(qualifiedMoves % 3 !== 0) return;
-    if(now - lastSpawn < 180) return;
+    if(now - lastSpawn < 140) return;
 
     lastSpawn = now;
     spawn(e.clientX, e.clientY);
-  }, { passive:true });
+  }
+
+  document.addEventListener('pointermove', handleMove, { passive:true });
 
   function clearTrail(){
     layer.innerHTML = '';
