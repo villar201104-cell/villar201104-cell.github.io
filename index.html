@@ -395,12 +395,14 @@
   .c-cross.on-dark .c-arm{background:var(--color-bg)}
   @media(max-width:900px){.c-cross{display:none}}
 
-
-  /* ── Cursor image trail for About / Contact (desktop only) ── */
-  .image-trail-layer{position:fixed;inset:0;pointer-events:none;z-index:9998;overflow:visible}
-  .image-trail-img{position:fixed;width:150px;height:168px;object-fit:cover;pointer-events:none;border:1px solid var(--color-border);background:var(--color-bg-alt);box-shadow:0 18px 44px rgba(10,10,10,.12);transform:translate(-50%,-50%) rotate(var(--r,0deg)) scale(0);opacity:0;will-change:transform,opacity;transition:transform .55s cubic-bezier(.22,1,.36,1), opacity .3s ease}
-  .image-trail-img.is-visible{opacity:1;transform:translate(-50%,-50%) rotate(var(--r,0deg)) scale(1)}
-  .image-trail-img.is-hiding{opacity:0;transform:translate(calc(-50% + var(--dx,0px)),calc(-50% + var(--dy,0px))) rotate(calc(var(--r,0deg) + 8deg)) scale(.92);transition:transform .75s cubic-bezier(.22,1,.36,1), opacity .55s ease}
+  /* ── About image trail (desktop only) ── */
+  .image-trail-layer{position:fixed;inset:0;pointer-events:none;z-index:9997;overflow:hidden}
+  .image-trail-item{position:fixed;left:0;top:0;width:170px;pointer-events:none;z-index:9997;transform:translate(-50%,-50%) scale(.92) rotate(var(--rot,0deg));opacity:0;transition:opacity .18s ease, transform .45s cubic-bezier(.22,1,.36,1)}
+  .image-trail-item.is-visible{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(var(--rot,0deg))}
+  .image-trail-item.is-hiding{opacity:0;transform:translate(calc(-50% + var(--dx,0px)), calc(-50% + var(--dy,0px))) scale(.98) rotate(calc(var(--rot,0deg) + 3deg));transition:opacity .7s ease, transform 1.1s cubic-bezier(.22,1,.36,1)}
+  .image-trail-file{margin-bottom:6px;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--color-text);line-height:1.2;white-space:nowrap;text-shadow:0 1px 0 rgba(251,251,249,.8)}
+  .image-trail-visual{width:170px;height:126px;display:block;object-fit:cover;object-position:center center;background:var(--color-bg-alt);box-shadow:0 18px 34px rgba(10,10,10,.08)}
+  .image-trail-visual.is-fallback{background:linear-gradient(135deg, rgba(10,10,10,.08), transparent 45%),linear-gradient(rgba(10,10,10,.06) 1px, transparent 1px),linear-gradient(90deg, rgba(10,10,10,.06) 1px, transparent 1px), #fff;background-size:auto, 18px 18px, 18px 18px}
   @media(max-width:900px){.image-trail-layer{display:none}}
 
   /* ── Intro: binary already visible + clean center-out reveal ── */
@@ -1830,136 +1832,104 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   document.addEventListener('mouseenter', ()=>{ cross.style.opacity=''; });
 })();
 
-/* ── Cursor image trail: About / Contact only — rebuilt from zero ── */
+/* ── About image trail only ── */
 (function(){
-  const isDesktop = () => window.innerWidth > 900;
+  const layer = document.getElementById('imageTrailLayer');
+  const aboutPage = document.getElementById('page-about');
+  if(!layer || !aboutPage) return;
 
-  const trailImages = [
-    { src:'/images/flujo-render-identity.jpg', file:'flujo-render-identity.jpg' },
-    { src:'/images/flujo-render-concept.jpg', file:'flujo-render-concept.jpg' },
-    { src:'/images/flujo-render-decisions.jpg', file:'flujo-render-decisions.jpg' },
-    { src:'/images/incline-process-sketch.jpg', file:'incline-process-sketch.jpg' },
-    { src:'/images/incline-render-concept.jpg', file:'incline-render-concept.jpg' },
-    { src:'/images/incline-render-system.jpg', file:'incline-render-system.jpg' },
-    { src:'/images/pausa-render-concept.jpg', file:'pausa-render-concept.jpg' },
-    { src:'/images/pausa-render-materials.jpg', file:'pausa-render-materials.jpg' },
-    { src:'/images/core-render-concept.jpg', file:'core-render-concept.jpg' },
-    { src:'/images/core-render-identity.jpg', file:'core-render-identity.jpg' },
-    { src:'/images/core-render-production.jpg', file:'core-render-production.jpg' },
-    { src:'/images/promix-render-opportunity.jpg', file:'promix-render-opportunity.jpg' },
-    { src:'/images/promix-render-solution.jpg', file:'promix-render-solution.jpg' }
+  const items = [
+    { file:'flujo-render-identity.jpg', src:'/images/flujo-render-identity.jpg' },
+    { file:'incline-process-sketch.jpg', src:'/images/incline-process-sketch.jpg' },
+    { file:'pausa-render-materials.jpg', src:'/images/pausa-render-materials.jpg' },
+    { file:'core-render-production.jpg', src:'/images/core-render-production.jpg' },
+    { file:'promix-render-solution.jpg', src:'/images/promix-render-solution.jpg' }
   ];
 
-  let index = 0;
   let lastTime = 0;
   let lastX = null;
   let lastY = null;
+  let index = 0;
 
-  function activePageId(){
-    const active = document.querySelector('.page.active');
-    return active ? active.id : '';
+  const blockedSelectors = '.about-photo-stack, .about-bio, .about-cv, .nav, .nav-mobile, a, button';
+  const blockedElements = () => Array.from(aboutPage.querySelectorAll('.about-photo-stack, .about-bio, .about-cv'));
+
+  function isActive(){
+    return window.innerWidth > 900 && aboutPage.classList.contains('active') && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   }
 
-  function trailAllowed(e){
-    if(!isDesktop()) return false;
-    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
+  function pointInsideRect(x, y, rect){
+    return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
+  }
+
+  function isAllowedZone(e){
     if(e.clientX >= window.innerWidth - 18) return false;
+    if(e.target.closest(blockedSelectors)) return false;
 
-    const id = activePageId();
-    return id === 'page-about' || id === 'page-contact';
+    const pageRect = aboutPage.getBoundingClientRect();
+    if(!pointInsideRect(e.clientX, e.clientY, pageRect)) return false;
+
+    for(const el of blockedElements()){
+      const rect = el.getBoundingClientRect();
+      if(pointInsideRect(e.clientX, e.clientY, rect)) return false;
+    }
+    return true;
   }
 
-  function makeTrail(x, y){
-    const item = trailImages[index % trailImages.length];
+  function createTrail(x, y){
+    const item = items[index % items.length];
     index++;
 
     const card = document.createElement('div');
-    const img = document.createElement('img');
-    const cap = document.createElement('div');
+    card.className = 'image-trail-item';
+    card.style.left = x + 'px';
+    card.style.top = y + 'px';
+    card.style.setProperty('--rot', (Math.random() * 10 - 5).toFixed(2) + 'deg');
+    card.style.setProperty('--dx', (Math.random() * 40 - 20).toFixed(1) + 'px');
+    card.style.setProperty('--dy', (-30 - Math.random() * 30).toFixed(1) + 'px');
 
-    card.className = 'cursor-trail-card-live';
-    img.src = item.src;
-    img.alt = '';
-    cap.textContent = item.file;
+    const visual = document.createElement('img');
+    visual.className = 'image-trail-visual';
+    visual.src = item.src;
+    visual.alt = item.file;
+    visual.onerror = function(){ this.onerror = null; this.classList.add('is-fallback'); };
 
-    Object.assign(card.style, {
-      position:'fixed',
-      left: Math.max(86, Math.min(window.innerWidth - 86, x + (Math.random() * 70 - 35))) + 'px',
-      top: Math.max(96, Math.min(window.innerHeight - 96, y + (Math.random() * 64 - 32))) + 'px',
-      width:'132px',
-      background:'rgba(251,251,249,.97)',
-      border:'1px solid rgba(10,10,10,.12)',
-      boxShadow:'0 16px 38px rgba(10,10,10,.12)',
-      pointerEvents:'none',
-      zIndex:'9997',
-      overflow:'hidden',
-      opacity:'0',
-      transform:`translate(-50%, -50%) rotate(${(Math.random()*10-5).toFixed(2)}deg) scale(.88)`,
-      transition:'opacity .22s ease, transform .55s cubic-bezier(.22,1,.36,1)'
-    });
+    card.innerHTML = '<div class="image-trail-file">' + item.file + '</div>';
+    card.appendChild(visual);
+    layer.appendChild(card);
 
-    Object.assign(img.style, {
-      display:'block',
-      width:'100%',
-      height:'132px',
-      objectFit:'cover',
-      background:'#f5f5f5'
-    });
-
-    Object.assign(cap.style, {
-      padding:'7px 8px 8px',
-      fontSize:'.52rem',
-      lineHeight:'1.15',
-      letterSpacing:'.08em',
-      textTransform:'uppercase',
-      color:'#777',
-      background:'rgba(251,251,249,.98)',
-      borderTop:'1px solid rgba(10,10,10,.06)',
-      wordBreak:'break-word'
-    });
-
-    card.appendChild(img);
-    card.appendChild(cap);
-    document.body.appendChild(card);
-
-    requestAnimationFrame(() => {
-      card.style.opacity = '1';
-      card.style.transform = card.style.transform.replace('scale(.88)', 'scale(1)');
-    });
-
-    setTimeout(() => {
-      card.style.opacity = '0';
-      card.style.transform += ' translateY(-12px) scale(.96)';
-    }, 700);
-
-    setTimeout(() => card.remove(), 1350);
+    requestAnimationFrame(() => card.classList.add('is-visible'));
+    setTimeout(() => card.classList.add('is-hiding'), 950);
+    setTimeout(() => card.remove(), 2200);
   }
 
-  window.addEventListener('pointermove', function(e){
-    if(!trailAllowed(e)) return;
+  aboutPage.addEventListener('mousemove', function(e){
+    if(!isActive()) return;
+    if(!isAllowedZone(e)) return;
 
     const now = performance.now();
-    if(now - lastTime < 230) return;
-
     if(lastX !== null){
       const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
-      if(dist < 34) return;
+      if(dist < 45) return;
     }
+    if(now - lastTime < 420) return;
 
     lastTime = now;
     lastX = e.clientX;
     lastY = e.clientY;
-    makeTrail(e.clientX, e.clientY);
-  }, { passive:true, capture:true });
+    createTrail(e.clientX, e.clientY);
+  }, { passive:true });
 
-  function clearLiveTrail(){
-    document.querySelectorAll('.cursor-trail-card-live').forEach(el => el.remove());
+  function clearTrail(){
+    layer.innerHTML = '';
+    lastTime = 0;
     lastX = null;
     lastY = null;
-    lastTime = 0;
   }
 
-  window.addEventListener('resize', clearLiveTrail);
+  aboutPage.addEventListener('mouseleave', clearTrail);
+  window.addEventListener('resize', clearTrail);
+  window.addEventListener('popstate', clearTrail);
 })();
 
 // ── About photo: peek + tap to swap ──
