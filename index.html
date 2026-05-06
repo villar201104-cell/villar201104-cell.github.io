@@ -395,15 +395,18 @@
   .c-cross.on-dark .c-arm{background:var(--color-bg)}
   @media(max-width:900px){.c-cross{display:none}}
 
-  /* ── Sparse image trail for About / Contact (desktop only) ── */
-  .image-trail-layer{position:fixed;inset:0;pointer-events:none;z-index:9000;overflow:hidden}
-  .image-trail-card{position:fixed;width:124px;background:rgba(251,251,249,.96);border:1px solid var(--color-border);box-shadow:0 14px 34px rgba(10,10,10,.10);overflow:hidden;transform:translate(-50%,-50%) rotate(var(--trail-rot,0deg)) scale(.96);opacity:0;animation:imageTrailCard 1.9s var(--ease) forwards}
+
+  /* ── Sparse cursor image trail for About / Contact (desktop only) ── */
+  .image-trail-layer{position:fixed;inset:0;pointer-events:none;z-index:9000;overflow:visible}
+  .image-trail-card{position:fixed;width:124px;background:rgba(251,251,249,.96);border:1px solid var(--color-border);box-shadow:0 14px 34px rgba(10,10,10,.10);overflow:hidden;pointer-events:none;will-change:transform,opacity;transform:translate(-50%,-50%) rotate(var(--trail-rot,0deg)) scale(.72);opacity:0;transition:transform .42s cubic-bezier(.07,.5,.5,1),opacity .28s ease}
+  .image-trail-card.is-in{opacity:1;transform:translate(-50%,-50%) rotate(var(--trail-rot,0deg)) scale(1)}
+  .image-trail-card.is-out{opacity:0;transform:translate(calc(-50% + var(--trail-dx,0px)),calc(-50% + var(--trail-dy,0px))) rotate(calc(var(--trail-rot,0deg) + 8deg)) scale(.82);transition:transform .72s cubic-bezier(.87,0,.13,1),opacity .62s ease}
   .image-trail-card img{width:100%;height:120px;object-fit:cover;display:block;background:var(--color-bg-alt)}
   .image-trail-card .trail-copy{padding:7px 8px 8px;background:rgba(251,251,249,.98);border-top:1px solid rgba(10,10,10,.05)}
   .image-trail-card .trail-file{font-size:.54rem;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text);line-height:1.2;word-break:break-word}
   .image-trail-card .trail-project{margin-top:3px;font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--color-muted)}
-  @keyframes imageTrailCard{0%{opacity:0;transform:translate(-50%,-50%) rotate(var(--trail-rot,0deg)) scale(.92)}10%{opacity:1;transform:translate(-50%,-50%) rotate(var(--trail-rot,0deg)) scale(1)}72%{opacity:1;transform:translate(calc(-50% + var(--trail-dx,0px)),calc(-50% + var(--trail-dy,0px))) rotate(calc(var(--trail-rot,0deg) * .45)) scale(1)}100%{opacity:0;transform:translate(calc(-50% + var(--trail-dx,0px)),calc(-50% + var(--trail-dy,0px))) rotate(calc(var(--trail-rot,0deg) * .45)) scale(.98)}}
   @media(max-width:900px){.image-trail-layer{display:none}}
+
   /* ── Intro: binary already visible + clean center-out reveal ── */
   #intro{position:fixed;inset:0;background:transparent;z-index:99999;display:flex;align-items:center;justify-content:center;cursor:pointer}
   #intro.hidden{visibility:hidden;pointer-events:none}
@@ -1831,31 +1834,44 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   document.addEventListener('mouseenter', ()=>{ cross.style.opacity=''; });
 })();
 
-/* ── Sparse image trail: About / Contact only ── */
+/* ── Sparse cursor image trail: About / Contact only ── */
 (function(){
   const layer = document.getElementById('imageTrailLayer');
   const aboutPage = document.getElementById('page-about');
   const contactPage = document.getElementById('page-contact');
   if(!layer || !aboutPage || !contactPage) return;
 
-  const items = [
+  // Renders / sketches from project sections only. No hero images, no horizontal panels, no prototypes.
+  const images = [
     { project:'Flujo', file:'flujo-render-identity.jpg', src:'/images/flujo-render-identity.jpg' },
     { project:'Flujo', file:'flujo-render-concept.jpg', src:'/images/flujo-render-concept.jpg' },
+    { project:'Flujo', file:'flujo-render-decisions.jpg', src:'/images/flujo-render-decisions.jpg' },
     { project:'Incline', file:'incline-process-sketch.jpg', src:'/images/incline-process-sketch.jpg' },
+    { project:'Incline', file:'incline-render-concept.jpg', src:'/images/incline-render-concept.jpg' },
     { project:'Incline', file:'incline-render-system.jpg', src:'/images/incline-render-system.jpg' },
+    { project:'Incline', file:'incline-render-decisions.jpg', src:'/images/incline-render-decisions.jpg' },
     { project:'Pausa', file:'pausa-render-concept.jpg', src:'/images/pausa-render-concept.jpg' },
     { project:'Pausa', file:'pausa-render-materials.jpg', src:'/images/pausa-render-materials.jpg' },
     { project:'Core', file:'core-render-concept.jpg', src:'/images/core-render-concept.jpg' },
+    { project:'Core', file:'core-render-identity.jpg', src:'/images/core-render-identity.jpg' },
     { project:'Core', file:'core-render-production.jpg', src:'/images/core-render-production.jpg' },
     { project:'Promix', file:'promix-render-opportunity.jpg', src:'/images/promix-render-opportunity.jpg' },
     { project:'Promix', file:'promix-render-solution.jpg', src:'/images/promix-render-solution.jpg' }
   ];
 
-  let lastQualifiedX = null;
-  let lastQualifiedY = null;
+  let imageIndex = 0;
+  let lastX = null;
+  let lastY = null;
+  let validSteps = 0;
   let lastSpawn = 0;
-  let qualifiedMoves = 0;
-  let itemIndex = 0;
+
+  const config = {
+    distance: 54,
+    every: 3,
+    minDelay: 140,
+    lifespan: 760,
+    removeAfter: 740
+  };
 
   function activeTrailPage(){
     if(aboutPage.classList.contains('active')) return aboutPage;
@@ -1870,56 +1886,61 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
     return true;
   }
 
-  function blockedTarget(target){
-    return !!target.closest('.nav, .nav-mobile, .lightbox, .lb, a, button, input, textarea');
+  function nearNativeScrollbar(e){
+    return e.clientX >= window.innerWidth - 18;
   }
 
   function spawn(x, y){
-    const item = items[itemIndex % items.length];
-    itemIndex++;
+    const item = images[imageIndex % images.length];
+    imageIndex++;
 
     const card = document.createElement('div');
     card.className = 'image-trail-card';
-    const ox = Math.random() * 110 - 55;
-    const oy = Math.random() * 86 - 43;
-    card.style.left = Math.min(window.innerWidth - 82, Math.max(82, x + ox)) + 'px';
-    card.style.top = Math.min(window.innerHeight - 98, Math.max(98, y + oy)) + 'px';
+
+    const ox = Math.random() * 76 - 38;
+    const oy = Math.random() * 58 - 29;
+    const left = Math.min(window.innerWidth - 84, Math.max(84, x + ox));
+    const top = Math.min(window.innerHeight - 92, Math.max(92, y + oy));
+
+    card.style.left = left + 'px';
+    card.style.top = top + 'px';
     card.style.setProperty('--trail-rot', (Math.random() * 10 - 5).toFixed(2) + 'deg');
-    card.style.setProperty('--trail-dx', (Math.random() * 12 - 6).toFixed(1) + 'px');
-    card.style.setProperty('--trail-dy', (-8 - Math.random() * 20).toFixed(1) + 'px');
+    card.style.setProperty('--trail-dx', (Math.random() * 16 - 8).toFixed(1) + 'px');
+    card.style.setProperty('--trail-dy', (-18 - Math.random() * 18).toFixed(1) + 'px');
     card.innerHTML = `<img src="${item.src}" alt="${item.file}"><div class="trail-copy"><div class="trail-file">${item.file}</div><div class="trail-project">${item.project}</div></div>`;
+
     layer.appendChild(card);
-    setTimeout(() => card.remove(), 1950);
+    requestAnimationFrame(() => card.classList.add('is-in'));
+    setTimeout(() => card.classList.add('is-out'), config.lifespan);
+    setTimeout(() => card.remove(), config.lifespan + config.removeAfter);
   }
 
-  function handleMove(e){
-    if(!canRun() || blockedTarget(e.target)) return;
+  document.addEventListener('pointermove', e => {
+    if(e.pointerType && e.pointerType !== 'mouse') return;
+    if(!canRun() || nearNativeScrollbar(e)) return;
 
-    const now = Date.now();
-    if(lastQualifiedX !== null){
-      const dist = Math.hypot(e.clientX - lastQualifiedX, e.clientY - lastQualifiedY);
-      if(dist < 34) return;
+    if(lastX !== null){
+      const distance = Math.hypot(e.clientX - lastX, e.clientY - lastY);
+      if(distance < config.distance) return;
     }
 
-    lastQualifiedX = e.clientX;
-    lastQualifiedY = e.clientY;
-    qualifiedMoves += 1;
+    lastX = e.clientX;
+    lastY = e.clientY;
+    validSteps++;
 
-    // One card every 3 qualified movements, with a light time guard.
-    if(qualifiedMoves % 3 !== 0) return;
-    if(now - lastSpawn < 140) return;
+    if(validSteps % config.every !== 0) return;
+    const now = Date.now();
+    if(now - lastSpawn < config.minDelay) return;
 
     lastSpawn = now;
     spawn(e.clientX, e.clientY);
-  }
-
-  document.addEventListener('pointermove', handleMove, { passive:true });
+  }, { passive:true });
 
   function clearTrail(){
     layer.innerHTML = '';
-    qualifiedMoves = 0;
-    lastQualifiedX = null;
-    lastQualifiedY = null;
+    lastX = null;
+    lastY = null;
+    validSteps = 0;
   }
 
   aboutPage.addEventListener('mouseleave', clearTrail);
