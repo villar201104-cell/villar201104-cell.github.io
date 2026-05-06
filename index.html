@@ -77,6 +77,19 @@
   .extra-card-title { font-family:var(--font-display); font-size:1.3rem; font-weight:600; color:#fff; letter-spacing:-.02em; margin-bottom:4px; }
   .extra-card-desc { font-size:.82rem; color:rgba(255,255,255,.7); line-height:1.5; }
   .extra-card-mobile-label { display:none; padding:10px 0 4px; }
+  .addon-placeholder-wrap { cursor:default; }
+  .addon-placeholder { position:relative; overflow:hidden; aspect-ratio:7/10; background:var(--color-bg); border:1px solid var(--color-border); }
+  .addon-placeholder::before { content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,10,10,.015), transparent 28%), var(--color-bg); pointer-events:none; }
+  .addon-placeholder-top { position:absolute; left:18px; top:16px; font-size:.62rem; letter-spacing:.16em; text-transform:uppercase; color:var(--color-muted); }
+  .addon-placeholder-title { position:absolute; left:18px; right:18px; top:46px; font-family:var(--font-display); font-size:1.6rem; line-height:.94; letter-spacing:-.04em; font-weight:600; color:var(--color-text); }
+  .addon-placeholder-title span { display:block; color:var(--color-muted); font-weight:400; }
+  .addon-placeholder-center { position:absolute; left:18px; right:18px; top:50%; transform:translateY(-46%); display:flex; flex-direction:column; align-items:center; gap:18px; }
+  .addon-placeholder-meta { font-size:.62rem; letter-spacing:.16em; text-transform:uppercase; color:var(--color-muted); }
+  .addon-placeholder-bar { width:72%; height:4px; background:rgba(10,10,10,.08); overflow:hidden; }
+  .addon-placeholder-bar::before { content:''; display:block; width:36%; height:100%; background:var(--color-text); animation:addonProgress 2.5s cubic-bezier(.22,1,.36,1) infinite; }
+  .addon-placeholder-small { font-size:.8rem; color:var(--color-muted); }
+  .addon-placeholder-footer { position:absolute; left:18px; right:18px; bottom:18px; display:flex; justify-content:space-between; align-items:center; font-size:.64rem; letter-spacing:.16em; text-transform:uppercase; color:var(--color-muted); }
+  .addon-placeholder-mobile-label { display:none; padding:10px 0 4px; }
   .extra-cml-title { font-family:var(--font-display); font-size:.95rem; font-weight:600; display:block; }
   .extra-cml-cat { font-size:.75rem; color:var(--color-muted); display:block; margin-top:2px; }
   .project-card-wrap { cursor:pointer; }
@@ -205,7 +218,9 @@
   .nav-mobile.open { display:flex; }
   .nav-mobile a { font-size:2rem; font-family:var(--font-display); font-weight:600; letter-spacing:-.02em; color:var(--color-text); cursor:pointer; }
 
-  @media(max-width:900px){
+    @keyframes addonProgress { 0% { transform:translateX(-120%); } 45%,65% { transform:translateX(0); } 100% { transform:translateX(220%); } }
+
+@media(max-width:900px){
     .home-hero,.proj-header,.about-top { grid-template-columns:1fr; }
     .hero-text-col { margin-left:0; }
     .projects-grid { grid-template-columns:1fr 1fr; padding:0 24px 0; }
@@ -216,6 +231,7 @@
     .extra-card { aspect-ratio:7/10; }
     .extra-card-overlay { display:none; }
     .extra-card-mobile-label { display:block; }
+    .addon-placeholder-mobile-label { display:block; }
     .proj-desc { grid-template-columns:1fr; gap:16px; padding:0 24px clamp(40px,6vw,64px); }
     .about-cv { grid-template-columns:1fr 1fr; }
     .contact-grid { grid-template-columns:1fr; }
@@ -533,7 +549,7 @@
 (function(){
   // Binary intro: starts already filled with 0/1, then reveals the site from the center outward.
   var DPR = Math.min(window.devicePixelRatio || 1, 2);
-  var BCELL = 10;
+  var BCELL = 12;
   var cells = [];
   var cachedW = -1, cachedH = -1;
   var done = false;
@@ -628,7 +644,7 @@
     });
 
     // Then draw 0/1 over the still-covered cells only.
-    ctx.font = 'bold ' + Math.max(6, Math.round(BCELL * 0.72)) + 'px "Courier New", monospace';
+    ctx.font = 'bold ' + Math.max(8, Math.round(BCELL * 0.82)) + 'px "Courier New", monospace';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillStyle = INK;
@@ -799,6 +815,19 @@
             </div>
           </div>
           <div class="extra-card-mobile-label"><span class="extra-cml-title">Promix</span><span class="extra-cml-cat">Product Redesign · 2025</span></div>
+        </div>
+        <div class="addon-placeholder-wrap">
+          <div class="addon-placeholder" aria-label="More work coming soon">
+            <div class="addon-placeholder-top">Add-on slot</div>
+            <div class="addon-placeholder-title">Currently<span>assembling.</span></div>
+            <div class="addon-placeholder-center">
+              <div class="addon-placeholder-meta">In progress</div>
+              <div class="addon-placeholder-bar"></div>
+              <div class="addon-placeholder-small">More work is on the way.</div>
+            </div>
+            <div class="addon-placeholder-footer"><span>Future add-ons</span><span>Coming soon</span></div>
+          </div>
+          <div class="addon-placeholder-mobile-label"><span class="extra-cml-title">Coming Soon</span><span class="extra-cml-cat">Future Add-ons</span></div>
         </div>
       </div>
     </div>
