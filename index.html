@@ -79,16 +79,13 @@
   .extra-card-mobile-label { display:none; padding:10px 0 4px; }
   .addon-placeholder-wrap { cursor:default; }
   .addon-placeholder { position:relative; overflow:hidden; aspect-ratio:7/10; background:var(--color-bg); border:1px solid var(--color-border); }
-  .addon-placeholder::before { content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,10,10,.015), transparent 28%), var(--color-bg); pointer-events:none; }
   .addon-placeholder-top { position:absolute; left:18px; top:16px; font-size:.62rem; letter-spacing:.16em; text-transform:uppercase; color:var(--color-muted); }
-  .addon-placeholder-title { position:absolute; left:20px; right:20px; top:22px; max-width:72%; font-family:var(--font-display); font-size:1.36rem; line-height:.94; letter-spacing:-.04em; font-weight:600; color:var(--color-text); }
-  .addon-placeholder-title span { display:block; color:var(--color-muted); font-weight:400; }
-  .addon-placeholder-center { position:absolute; left:50%; top:54%; width:72%; max-width:260px; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; gap:18px; text-align:center; }
+  .addon-placeholder-center { position:absolute; left:50%; top:51%; width:62%; max-width:260px; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; gap:16px; text-align:center; }
   .addon-placeholder-meta { font-size:.62rem; letter-spacing:.16em; text-transform:uppercase; color:var(--color-muted); }
   .addon-placeholder-bar { width:100%; height:4px; background:rgba(10,10,10,.08); overflow:hidden; }
   .addon-placeholder-bar::before { content:''; display:block; width:36%; height:100%; background:var(--color-text); animation:addonProgress 4.2s cubic-bezier(.22,1,.36,1) infinite; }
   .addon-placeholder-small { font-size:.8rem; color:var(--color-muted); }
-  .addon-placeholder-footer { position:absolute; left:18px; right:18px; bottom:18px; display:flex; justify-content:space-between; align-items:center; font-size:.64rem; letter-spacing:.16em; text-transform:uppercase; color:var(--color-muted); }
+  .addon-placeholder-footer { position:absolute; right:18px; bottom:18px; font-size:.64rem; letter-spacing:.16em; text-transform:uppercase; color:var(--color-muted); text-align:right; }
   .addon-placeholder-mobile-label { display:none; padding:10px 0 4px; }
   .extra-cml-title { font-family:var(--font-display); font-size:.95rem; font-weight:600; display:block; }
   .extra-cml-cat { font-size:.75rem; color:var(--color-muted); display:block; margin-top:2px; }
@@ -896,13 +893,11 @@
         </div>
         <div class="addon-placeholder-wrap">
           <div class="addon-placeholder" aria-label="More work coming soon">
-            <div class="addon-placeholder-title">Currently<span>assembling.</span></div>
             <div class="addon-placeholder-center">
               <div class="addon-placeholder-meta">In progress</div>
               <div class="addon-placeholder-bar"></div>
               <div class="addon-placeholder-small">More work is on the way.</div>
             </div>
-            <div class="addon-placeholder-footer"><span>Future add-ons</span><span>Coming soon</span></div>
           </div>
           <div class="addon-placeholder-mobile-label"><span class="extra-cml-title">Coming Soon</span><span class="extra-cml-cat">Future Add-ons</span></div>
         </div>
@@ -958,7 +953,7 @@
         </div>
         <div class="fu d2">
           <div class="about-bio">
-            <p>Passionate about creating functional and innovative solutions that connect concept, material and experience.</p>
+            <p>Hi, I’m Nahuel, an Argentine industrial designer who moved to the United States and is currently in the final semesters of my degree. I’m focused on building a path into the real world of design, with work that connects concept, material, and experience.</p>
             <p>When I start a project, something usually bugs me first, a product that doesn't hold up, a solution that solved the wrong problem, a form that exists for attention rather than reason. That friction is where I begin.</p>
             <p>I design with conviction. When I commit to a project I go deep, into the material logic, the use scenario, the thing it needs to communicate without saying it. I see design as a structured system where identity, material, production, and intention must align. And I think it should contribute clarity, not noise.</p>
             <p>What frustrates me most about design today is how often the market comes first and the problem second. Form is not decoration, but consequence. Design is not a reaction to trends, it is a position.</p>
@@ -1900,7 +1895,6 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
     { file:'incline-render-concept.jpg', src:'/images/incline-render-concept.jpg' },
     { file:'incline-render-decisions.jpg', src:'/images/incline-render-decisions.jpg' },
     { file:'incline-render-system.jpg', src:'/images/incline-render-system.jpg' },
-    { file:'incline-process-sketch.jpg', src:'/images/incline-process-sketch.jpg' },
 
     { file:'pausa-render-concept.jpg', src:'/images/pausa-render-concept.jpg' },
     { file:'pausa-render-materials.jpg', src:'/images/pausa-render-materials.jpg' },
