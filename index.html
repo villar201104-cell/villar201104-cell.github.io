@@ -1830,111 +1830,136 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   document.addEventListener('mouseenter', ()=>{ cross.style.opacity=''; });
 })();
 
-/* ── Cursor image trail: About / Contact only ── */
+/* ── Cursor image trail: About / Contact only — rebuilt from zero ── */
 (function(){
-  const layer = document.getElementById('imageTrailLayer');
-  const aboutPage = document.getElementById('page-about');
-  const contactPage = document.getElementById('page-contact');
-  if(!layer || !aboutPage || !contactPage) return;
+  const isDesktop = () => window.innerWidth > 900;
 
-  const images = [
-    '/images/flujo-render-identity.jpg',
-    '/images/flujo-render-concept.jpg',
-    '/images/flujo-render-decisions.jpg',
-    '/images/incline-process-sketch.jpg',
-    '/images/incline-render-concept.jpg',
-    '/images/incline-render-system.jpg',
-    '/images/pausa-render-concept.jpg',
-    '/images/pausa-render-materials.jpg',
-    '/images/core-render-concept.jpg',
-    '/images/core-render-identity.jpg',
-    '/images/core-render-production.jpg',
-    '/images/promix-render-opportunity.jpg',
-    '/images/promix-render-solution.jpg'
+  const trailImages = [
+    { src:'/images/flujo-render-identity.jpg', file:'flujo-render-identity.jpg' },
+    { src:'/images/flujo-render-concept.jpg', file:'flujo-render-concept.jpg' },
+    { src:'/images/flujo-render-decisions.jpg', file:'flujo-render-decisions.jpg' },
+    { src:'/images/incline-process-sketch.jpg', file:'incline-process-sketch.jpg' },
+    { src:'/images/incline-render-concept.jpg', file:'incline-render-concept.jpg' },
+    { src:'/images/incline-render-system.jpg', file:'incline-render-system.jpg' },
+    { src:'/images/pausa-render-concept.jpg', file:'pausa-render-concept.jpg' },
+    { src:'/images/pausa-render-materials.jpg', file:'pausa-render-materials.jpg' },
+    { src:'/images/core-render-concept.jpg', file:'core-render-concept.jpg' },
+    { src:'/images/core-render-identity.jpg', file:'core-render-identity.jpg' },
+    { src:'/images/core-render-production.jpg', file:'core-render-production.jpg' },
+    { src:'/images/promix-render-opportunity.jpg', file:'promix-render-opportunity.jpg' },
+    { src:'/images/promix-render-solution.jpg', file:'promix-render-solution.jpg' }
   ];
 
-  let imageIndex = 0;
-  let lastX = 0;
-  let lastY = 0;
-  let started = false;
-  let lastSpawn = 0;
+  let index = 0;
+  let lastTime = 0;
+  let lastX = null;
+  let lastY = null;
 
-  function activeTrailPage(){
-    if(aboutPage.classList.contains('active')) return aboutPage;
-    if(contactPage.classList.contains('active')) return contactPage;
-    return null;
+  function activePageId(){
+    const active = document.querySelector('.page.active');
+    return active ? active.id : '';
   }
 
-  function canRun(e){
-    if(window.innerWidth <= 900) return false;
+  function trailAllowed(e){
+    if(!isDesktop()) return false;
     if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
     if(e.clientX >= window.innerWidth - 18) return false;
-    return !!activeTrailPage();
+
+    const id = activePageId();
+    return id === 'page-about' || id === 'page-contact';
   }
 
-  function createTrailImage(x, y){
-    const src = images[imageIndex % images.length];
-    imageIndex++;
+  function makeTrail(x, y){
+    const item = trailImages[index % trailImages.length];
+    index++;
 
+    const card = document.createElement('div');
     const img = document.createElement('img');
-    img.className = 'image-trail-img';
-    img.src = src;
+    const cap = document.createElement('div');
+
+    card.className = 'cursor-trail-card-live';
+    img.src = item.src;
     img.alt = '';
+    cap.textContent = item.file;
 
-    const offsetX = Math.random() * 86 - 43;
-    const offsetY = Math.random() * 70 - 35;
-    const left = Math.max(88, Math.min(window.innerWidth - 88, x + offsetX));
-    const top = Math.max(100, Math.min(window.innerHeight - 100, y + offsetY));
+    Object.assign(card.style, {
+      position:'fixed',
+      left: Math.max(86, Math.min(window.innerWidth - 86, x + (Math.random() * 70 - 35))) + 'px',
+      top: Math.max(96, Math.min(window.innerHeight - 96, y + (Math.random() * 64 - 32))) + 'px',
+      width:'132px',
+      background:'rgba(251,251,249,.97)',
+      border:'1px solid rgba(10,10,10,.12)',
+      boxShadow:'0 16px 38px rgba(10,10,10,.12)',
+      pointerEvents:'none',
+      zIndex:'9997',
+      overflow:'hidden',
+      opacity:'0',
+      transform:`translate(-50%, -50%) rotate(${(Math.random()*10-5).toFixed(2)}deg) scale(.88)`,
+      transition:'opacity .22s ease, transform .55s cubic-bezier(.22,1,.36,1)'
+    });
 
-    img.style.left = left + 'px';
-    img.style.top = top + 'px';
-    img.style.setProperty('--r', (Math.random() * 10 - 5).toFixed(2) + 'deg');
-    img.style.setProperty('--dx', (Math.random() * 22 - 11).toFixed(1) + 'px');
-    img.style.setProperty('--dy', (-14 - Math.random() * 22).toFixed(1) + 'px');
+    Object.assign(img.style, {
+      display:'block',
+      width:'100%',
+      height:'132px',
+      objectFit:'cover',
+      background:'#f5f5f5'
+    });
 
-    layer.appendChild(img);
-    requestAnimationFrame(() => img.classList.add('is-visible'));
-    setTimeout(() => img.classList.add('is-hiding'), 650);
-    setTimeout(() => img.remove(), 1450);
+    Object.assign(cap.style, {
+      padding:'7px 8px 8px',
+      fontSize:'.52rem',
+      lineHeight:'1.15',
+      letterSpacing:'.08em',
+      textTransform:'uppercase',
+      color:'#777',
+      background:'rgba(251,251,249,.98)',
+      borderTop:'1px solid rgba(10,10,10,.06)',
+      wordBreak:'break-word'
+    });
+
+    card.appendChild(img);
+    card.appendChild(cap);
+    document.body.appendChild(card);
+
+    requestAnimationFrame(() => {
+      card.style.opacity = '1';
+      card.style.transform = card.style.transform.replace('scale(.88)', 'scale(1)');
+    });
+
+    setTimeout(() => {
+      card.style.opacity = '0';
+      card.style.transform += ' translateY(-12px) scale(.96)';
+    }, 700);
+
+    setTimeout(() => card.remove(), 1350);
   }
 
-  document.addEventListener('mousemove', function(e){
-    if(!canRun(e)) return;
+  window.addEventListener('pointermove', function(e){
+    if(!trailAllowed(e)) return;
 
-    const page = activeTrailPage();
-    const pageRect = page.getBoundingClientRect();
-    const insidePage = e.clientX >= pageRect.left && e.clientX <= pageRect.right && e.clientY >= pageRect.top && e.clientY <= pageRect.bottom;
-    if(!insidePage) return;
+    const now = performance.now();
+    if(now - lastTime < 230) return;
 
-    if(!started){
-      started = true;
-      lastX = e.clientX;
-      lastY = e.clientY;
-      return;
+    if(lastX !== null){
+      const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
+      if(dist < 34) return;
     }
 
-    const distance = Math.hypot(e.clientX - lastX, e.clientY - lastY);
-    if(distance < 48) return;
-
+    lastTime = now;
     lastX = e.clientX;
     lastY = e.clientY;
+    makeTrail(e.clientX, e.clientY);
+  }, { passive:true, capture:true });
 
-    const now = Date.now();
-    if(now - lastSpawn < 250) return;
-    lastSpawn = now;
-
-    createTrailImage(e.clientX, e.clientY);
-  }, {passive:true});
-
-  function clearTrail(){
-    layer.innerHTML = '';
-    started = false;
-    lastSpawn = 0;
+  function clearLiveTrail(){
+    document.querySelectorAll('.cursor-trail-card-live').forEach(el => el.remove());
+    lastX = null;
+    lastY = null;
+    lastTime = 0;
   }
 
-  aboutPage.addEventListener('mouseleave', clearTrail);
-  contactPage.addEventListener('mouseleave', clearTrail);
-  window.addEventListener('resize', clearTrail);
+  window.addEventListener('resize', clearLiveTrail);
 })();
 
 // ── About photo: peek + tap to swap ──
