@@ -396,13 +396,13 @@
   @media(max-width:900px){.c-cross{display:none}}
 
 
-  /* ── Sparse cursor image trail for About / Contact (desktop only) ── */
-  .image-trail-layer{position:fixed;inset:0;pointer-events:none;z-index:9000;overflow:visible}
-  .image-trail-card{position:fixed;width:124px;background:rgba(251,251,249,.96);border:1px solid var(--color-border);box-shadow:0 14px 34px rgba(10,10,10,.10);overflow:hidden;pointer-events:none;will-change:transform,opacity;transform:translate(-50%,-50%) rotate(var(--trail-rot,0deg)) scale(.72);opacity:0;transition:transform .42s cubic-bezier(.07,.5,.5,1),opacity .28s ease}
-  .image-trail-card.is-in{opacity:1;transform:translate(-50%,-50%) rotate(var(--trail-rot,0deg)) scale(1)}
-  .image-trail-card.is-out{opacity:0;transform:translate(calc(-50% + var(--trail-dx,0px)),calc(-50% + var(--trail-dy,0px))) rotate(calc(var(--trail-rot,0deg) + 8deg)) scale(.82);transition:transform .72s cubic-bezier(.87,0,.13,1),opacity .62s ease}
-  .image-trail-card img{width:100%;height:120px;object-fit:cover;display:block;background:var(--color-bg-alt)}
-  .image-trail-card .trail-copy{padding:7px 8px 8px;background:rgba(251,251,249,.98);border-top:1px solid rgba(10,10,10,.05)}
+  /* ── Cursor image trail for About / Contact (desktop only) ── */
+  .image-trail-layer{position:fixed;inset:0;pointer-events:none;z-index:9998;overflow:visible}
+  .image-trail-card{position:fixed;width:136px;pointer-events:none;background:rgba(251,251,249,.98);border:1px solid var(--color-border);box-shadow:0 18px 42px rgba(10,10,10,.12);overflow:hidden;opacity:0;transform:translate(-50%,-50%) scale(.86) rotate(var(--trail-rot,0deg));will-change:transform,opacity;transition:opacity .28s ease, transform .45s cubic-bezier(.22,1,.36,1)}
+  .image-trail-card.show{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(var(--trail-rot,0deg))}
+  .image-trail-card.hide{opacity:0;transform:translate(calc(-50% + var(--trail-dx,0px)),calc(-50% + var(--trail-dy,0px))) scale(.92) rotate(calc(var(--trail-rot,0deg) + 5deg));transition:opacity .55s ease, transform .65s cubic-bezier(.22,1,.36,1)}
+  .image-trail-card img{width:100%;height:132px;object-fit:cover;display:block;background:var(--color-bg-alt)}
+  .image-trail-card .trail-copy{padding:7px 8px 8px;background:rgba(251,251,249,.99);border-top:1px solid rgba(10,10,10,.06)}
   .image-trail-card .trail-file{font-size:.54rem;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text);line-height:1.2;word-break:break-word}
   .image-trail-card .trail-project{margin-top:3px;font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--color-muted)}
   @media(max-width:900px){.image-trail-layer{display:none}}
@@ -1834,119 +1834,103 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   document.addEventListener('mouseenter', ()=>{ cross.style.opacity=''; });
 })();
 
-/* ── Sparse cursor image trail: About / Contact only ── */
+/* ── Cursor image trail: About / Contact only ── */
 (function(){
   const layer = document.getElementById('imageTrailLayer');
   const aboutPage = document.getElementById('page-about');
   const contactPage = document.getElementById('page-contact');
   if(!layer || !aboutPage || !contactPage) return;
 
-  // Renders / sketches from project sections only. No hero images, no horizontal panels, no prototypes.
   const images = [
-    { project:'Flujo', file:'flujo-render-identity.jpg', src:'/images/flujo-render-identity.jpg' },
-    { project:'Flujo', file:'flujo-render-concept.jpg', src:'/images/flujo-render-concept.jpg' },
-    { project:'Flujo', file:'flujo-render-decisions.jpg', src:'/images/flujo-render-decisions.jpg' },
-    { project:'Incline', file:'incline-process-sketch.jpg', src:'/images/incline-process-sketch.jpg' },
-    { project:'Incline', file:'incline-render-concept.jpg', src:'/images/incline-render-concept.jpg' },
-    { project:'Incline', file:'incline-render-system.jpg', src:'/images/incline-render-system.jpg' },
-    { project:'Incline', file:'incline-render-decisions.jpg', src:'/images/incline-render-decisions.jpg' },
-    { project:'Pausa', file:'pausa-render-concept.jpg', src:'/images/pausa-render-concept.jpg' },
-    { project:'Pausa', file:'pausa-render-materials.jpg', src:'/images/pausa-render-materials.jpg' },
-    { project:'Core', file:'core-render-concept.jpg', src:'/images/core-render-concept.jpg' },
-    { project:'Core', file:'core-render-identity.jpg', src:'/images/core-render-identity.jpg' },
-    { project:'Core', file:'core-render-production.jpg', src:'/images/core-render-production.jpg' },
-    { project:'Promix', file:'promix-render-opportunity.jpg', src:'/images/promix-render-opportunity.jpg' },
-    { project:'Promix', file:'promix-render-solution.jpg', src:'/images/promix-render-solution.jpg' }
+    { project:'Flujo', file:'flujo-render-identity.jpg', src:'/images/flujo-render-identity.jpg', pos:'center center' },
+    { project:'Flujo', file:'flujo-render-concept.jpg', src:'/images/flujo-render-concept.jpg', pos:'center center' },
+    { project:'Flujo', file:'flujo-render-decisions.jpg', src:'/images/flujo-render-decisions.jpg', pos:'center center' },
+    { project:'Incline', file:'incline-process-sketch.jpg', src:'/images/incline-process-sketch.jpg', pos:'center center' },
+    { project:'Incline', file:'incline-render-concept.jpg', src:'/images/incline-render-concept.jpg', pos:'center center' },
+    { project:'Incline', file:'incline-render-system.jpg', src:'/images/incline-render-system.jpg', pos:'center center' },
+    { project:'Pausa', file:'pausa-render-concept.jpg', src:'/images/pausa-render-concept.jpg', pos:'center center' },
+    { project:'Pausa', file:'pausa-render-materials.jpg', src:'/images/pausa-render-materials.jpg', pos:'center center' },
+    { project:'Core', file:'core-render-concept.jpg', src:'/images/core-render-concept.jpg', pos:'center center' },
+    { project:'Core', file:'core-render-identity.jpg', src:'/images/core-render-identity.jpg', pos:'center center' },
+    { project:'Core', file:'core-render-production.jpg', src:'/images/core-render-production.jpg', pos:'center center' },
+    { project:'Promix', file:'promix-render-opportunity.jpg', src:'/images/promix-render-opportunity.jpg', pos:'center center' },
+    { project:'Promix', file:'promix-render-solution.jpg', src:'/images/promix-render-solution.jpg', pos:'center center' }
   ];
 
   let imageIndex = 0;
   let lastX = null;
   let lastY = null;
-  let validSteps = 0;
+  let step = 0;
   let lastSpawn = 0;
 
-  const config = {
-    distance: 54,
-    every: 3,
-    minDelay: 140,
-    lifespan: 760,
-    removeAfter: 740
-  };
-
-  function activeTrailPage(){
-    if(aboutPage.classList.contains('active')) return aboutPage;
-    if(contactPage.classList.contains('active')) return contactPage;
-    return null;
+  function isDesktop(){
+    return window.innerWidth > 900 && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   }
 
-  function canRun(){
-    if(window.innerWidth <= 900) return false;
-    if(!activeTrailPage()) return false;
-    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
-    return true;
-  }
-
-  function nearNativeScrollbar(e){
+  function nearScrollbar(e){
     return e.clientX >= window.innerWidth - 18;
   }
 
-  function spawn(x, y){
+  function makeCard(x, y){
     const item = images[imageIndex % images.length];
     imageIndex++;
 
     const card = document.createElement('div');
     card.className = 'image-trail-card';
 
-    const ox = Math.random() * 76 - 38;
-    const oy = Math.random() * 58 - 29;
-    const left = Math.min(window.innerWidth - 84, Math.max(84, x + ox));
-    const top = Math.min(window.innerHeight - 92, Math.max(92, y + oy));
+    const offsetX = Math.random() * 80 - 40;
+    const offsetY = Math.random() * 62 - 31;
+    const left = Math.max(88, Math.min(window.innerWidth - 88, x + offsetX));
+    const top = Math.max(100, Math.min(window.innerHeight - 100, y + offsetY));
 
     card.style.left = left + 'px';
     card.style.top = top + 'px';
-    card.style.setProperty('--trail-rot', (Math.random() * 10 - 5).toFixed(2) + 'deg');
-    card.style.setProperty('--trail-dx', (Math.random() * 16 - 8).toFixed(1) + 'px');
-    card.style.setProperty('--trail-dy', (-18 - Math.random() * 18).toFixed(1) + 'px');
-    card.innerHTML = `<img src="${item.src}" alt="${item.file}"><div class="trail-copy"><div class="trail-file">${item.file}</div><div class="trail-project">${item.project}</div></div>`;
+    card.style.setProperty('--trail-rot', (Math.random() * 9 - 4.5).toFixed(2) + 'deg');
+    card.style.setProperty('--trail-dx', (Math.random() * 18 - 9).toFixed(1) + 'px');
+    card.style.setProperty('--trail-dy', (-16 - Math.random() * 22).toFixed(1) + 'px');
 
+    card.innerHTML = `<img src="${item.src}" alt="${item.file}" style="object-position:${item.pos}"><div class="trail-copy"><div class="trail-file">${item.file}</div><div class="trail-project">${item.project}</div></div>`;
     layer.appendChild(card);
-    requestAnimationFrame(() => card.classList.add('is-in'));
-    setTimeout(() => card.classList.add('is-out'), config.lifespan);
-    setTimeout(() => card.remove(), config.lifespan + config.removeAfter);
+
+    requestAnimationFrame(() => card.classList.add('show'));
+    setTimeout(() => card.classList.add('hide'), 650);
+    setTimeout(() => card.remove(), 1250);
   }
 
-  document.addEventListener('pointermove', e => {
-    if(e.pointerType && e.pointerType !== 'mouse') return;
-    if(!canRun() || nearNativeScrollbar(e)) return;
+  function handleMove(e){
+    if(!isDesktop() || nearScrollbar(e)) return;
 
     if(lastX !== null){
-      const distance = Math.hypot(e.clientX - lastX, e.clientY - lastY);
-      if(distance < config.distance) return;
+      const d = Math.hypot(e.clientX - lastX, e.clientY - lastY);
+      if(d < 42) return;
     }
 
     lastX = e.clientX;
     lastY = e.clientY;
-    validSteps++;
+    step++;
 
-    if(validSteps % config.every !== 0) return;
+    if(step % 3 !== 0) return;
+
     const now = Date.now();
-    if(now - lastSpawn < config.minDelay) return;
-
+    if(now - lastSpawn < 90) return;
     lastSpawn = now;
-    spawn(e.clientX, e.clientY);
-  }, { passive:true });
 
-  function clearTrail(){
+    makeCard(e.clientX, e.clientY);
+  }
+
+  aboutPage.addEventListener('mousemove', handleMove, { passive:true });
+  contactPage.addEventListener('mousemove', handleMove, { passive:true });
+
+  function resetTrail(){
     layer.innerHTML = '';
     lastX = null;
     lastY = null;
-    validSteps = 0;
+    step = 0;
   }
 
-  aboutPage.addEventListener('mouseleave', clearTrail);
-  contactPage.addEventListener('mouseleave', clearTrail);
-  window.addEventListener('resize', clearTrail);
-  window.addEventListener('popstate', clearTrail);
+  aboutPage.addEventListener('mouseleave', resetTrail);
+  contactPage.addEventListener('mouseleave', resetTrail);
+  window.addEventListener('resize', resetTrail);
 })();
 
 // ── About photo: peek + tap to swap ──
