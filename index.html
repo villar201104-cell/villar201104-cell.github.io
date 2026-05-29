@@ -787,7 +787,7 @@
 
 <nav class="nav" id="nav">
   <div class="nav-logo" onclick="go('home')">
-    <img src="/images/logo.png" alt="NV">
+    <img loading="lazy" src="/images/logo.png" alt="NV">
   </div>
   <ul class="nav-links" id="navLinks">
     <li><a onclick="go('home')" id="nl-work" class="active">Work</a></li>
@@ -882,7 +882,7 @@
       <div class="extras-grid" data-cursor="light">
         <div class="extra-card-wrap" onclick="go('project','promix')">
           <div class="extra-card">
-            <img class="extra-card-img" src="/images/promix-hero.jpg" alt="Promix" style="object-position:center center;">
+            <img loading="lazy" class="extra-card-img" src="/images/promix-hero.jpg" alt="Promix" style="object-position:center center;">
             <div class="extra-card-overlay">
               <div class="extra-card-meta">
                 <span class="extra-card-num">+ Product Redesign · 2025</span>
@@ -935,7 +935,7 @@
   <div class="lb-arrow lb-prev" id="lbPrev" onclick="lbNav(-1)">
     <svg viewBox="0 0 20 20"><path d="M13 4L7 10l6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </div>
-  <img id="lbImg" src="" alt="">
+  <img loading="lazy" id="lbImg" src="" alt="">
   <video id="lbVideo" controls playsinline style="display:none;max-height:92vh;max-width:92vw;border-radius:2px;background:#000;"></video>
   <div class="lb-arrow lb-next" id="lbNext" onclick="lbNav(1)">
     <svg viewBox="0 0 20 20"><path d="M7 4l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -949,8 +949,8 @@
       <div class="about-top">
         <div class="fu">
           <div class="about-photo-stack" id="aboutPhotoStack" title="Tap to swap photo" data-cursor="light">
-            <img class="about-photo about-photo-main" src="/images/photo.jpg" alt="Nahuel Villar">
-            <img class="about-photo about-photo-alt" src="/images/about-childhood.jpg" alt="Nahuel Villar childhood photo">
+            <img loading="lazy" class="about-photo about-photo-main" src="/images/photo.jpg" alt="Nahuel Villar">
+            <img loading="lazy" class="about-photo about-photo-alt" src="/images/about-childhood.jpg" alt="Nahuel Villar childhood photo">
           </div>
         </div>
         <div class="fu d2">
@@ -967,7 +967,7 @@
         <div class="cv-block">
           <h4>Experience</h4>
           <div class="cv-item">
-            <p class="cv-item-title">Independent Product Design Practice <span style="font-weight:400;color:var(--color-muted)">Ongoing</span></p>
+            <p class="cv-item-title">Independent Product Design Practice <span style="font-weight:400;color:var(--color-muted)"> · Ongoing</span></p>
             <p class="cv-item-sub">Design and redesign of functional components with a focus on usability and manufacturability. Work spans concept ideation through rapid prototyping and iterative testing using 3D printing and fabrication tools.</p>
           </div>
           <h4 style="margin-top:28px">Education</h4>
@@ -1217,7 +1217,7 @@ function buildProject(id) {
   const panels = p.panels.map((src,i)=>{
     const isH = (p.hPanels||[]).includes(i);
     if(src.endsWith('.mp4')) return `<div class="panel-item panel-video${isH?' panel-landscape':''}" onclick="if(window.matchMedia('(max-width:900px)').matches&&!_dragged)openVideoLightbox('${src}',${i})" ondblclick="openVideoLightbox('${src}',${i})"><video src="${src}" autoplay muted loop playsinline></video></div>`;
-    return `<div class="panel-item${isH?' panel-landscape':''}" onclick="if(window.matchMedia('(max-width:900px)').matches&&!_dragged)openLightbox('${src}',${i})" ondblclick="if(!_dragged)openLightbox('${src}',${i})"><img src="${src}" draggable="false"></div>`;
+    return `<div class="panel-item${isH?' panel-landscape':''}" onclick="if(window.matchMedia('(max-width:900px)').matches&&!_dragged)openLightbox('${src}',${i})" ondblclick="if(!_dragged)openLightbox('${src}',${i})"><img loading="lazy" src="${src}" draggable="false"></div>`;
   }).join('');
   const specs  = p.specs.map(s=>`<div><p class="spec-label">${s.l}</p><p class="spec-value">${s.v}</p></div>`).join('');
   const desc   = p.desc.map(d=>`<p>${d}</p>`).join('');
@@ -1245,12 +1245,12 @@ function buildProject(id) {
     </div>
     <div class="origins-grid">
       <div class="origins-col">
-        <img src="/images/flujo-process-1.png" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/flujo-process-1.png" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">+</div>
         <div class="origins-stat">A zen object doesn't decorate, it <strong>accompanies</strong>. The intent was to go beyond the lamp concept: create something sculptural that makes people question what it is and how it's made.</div>
       </div>
       <div class="origins-col">
-        <img src="/images/flujo-process-2.png" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/flujo-process-2.png" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">+</div>
         <div class="origins-stat">3D printing wasn't just the process, it was the <strong>opportunity</strong>. Embedding a three-dimensional internal pattern inside the screen: something impossible to manufacture as a single piece through any other method.</div>
       </div>
@@ -1269,12 +1269,12 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
-        <img src="/images/flujo-render-identity.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/flujo-render-identity.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
     </div>
     <div class="split-block">
       <div class="split-right flip" style="background:var(--color-bg);overflow:hidden;">
-        <img src="/images/flujo-render-concept.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/flujo-render-concept.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
       <div class="split-left">
         <span class="split-tag">Concept</span>
@@ -1305,12 +1305,11 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
-        <img src="/images/flujo-render-decisions.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/flujo-render-decisions.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
     </div>
-    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)">
-      <img src="/images/flujo-ambient.png" style="width:100%;height:100%;object-fit:cover;display:block;">
-    </div>
+    
+    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)"><img loading="lazy" src="/images/flujo-ambient.png" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
     <div class="evo-wrap">
       <div class="evo-header">
         <div class="evo-title">Design Evolution</div>
@@ -1328,10 +1327,10 @@ function buildProject(id) {
           <div class="evo-desc">PETG over PLA for translucency and thermal resistance. 0.4mm nozzle for definition of the internal pattern. Wall thickness between 0.8mm and 1mm, where the difference in how much light passes through becomes visible, and where the screen either holds its form or flexes.</div>
         </div>
         <div style="background:var(--color-bg);padding:16px 2%;">
-          <img src="/images/flujo-evo-ideation.png" style="width:100%;display:block;">
+          <img loading="lazy" src="/images/flujo-evo-ideation.png" style="width:100%;display:block;">
         </div>
         <div style="background:var(--color-bg);padding:16px 2%;">
-          <img src="/images/flujo-evo-iteration.png" style="width:100%;display:block;">
+          <img loading="lazy" src="/images/flujo-evo-iteration.png" style="width:100%;display:block;">
         </div>
       </div>
     </div>
@@ -1357,7 +1356,7 @@ function buildProject(id) {
       <div class="proto-imgs">
         <div style="background:var(--color-bg);padding:16px;">
           <div style="aspect-ratio:4/5;overflow:hidden;background:var(--color-bg);">
-            <img src="/images/flujo-proto-takeouts.png" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <img loading="lazy" src="/images/flujo-proto-takeouts.png" style="width:100%;height:100%;object-fit:cover;display:block;">
           </div>
         </div>
         <div style="background:var(--color-bg);padding:16px;">
@@ -1385,12 +1384,12 @@ function buildProject(id) {
     </div>
     <div class="origins-grid">
       <div class="origins-col">
-        <img src="/images/incline-process-branches.jpg" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/incline-process-branches.jpg" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">+</div>
         <div class="origins-stat">Tree branches don't grow from a planner's grid. They emerge from a <strong>node</strong> and radiate outward, always inclined. That organic logic became the structural principle of the system.</div>
       </div>
       <div class="origins-col">
-        <img src="/images/incline-process-sketch.jpg" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/incline-process-sketch.jpg" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">+</div>
         <div class="origins-stat">Buenos Aires terraces are small. Most planters are designed for space that compact city balconies simply don't have, wasting the <strong>vertical dimension entirely</strong>.</div>
       </div>
@@ -1413,12 +1412,12 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
-        <img src="/images/incline-render-concept.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/incline-render-concept.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
     </div>
     <div class="split-block">
       <div class="split-right flip" style="background:var(--color-bg);overflow:hidden;">
-        <img src="/images/incline-render-system.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/incline-render-system.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
       <div class="split-left">
         <span class="split-tag">System Logic</span>
@@ -1448,12 +1447,11 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
-        <img src="/images/incline-render-decisions.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/incline-render-decisions.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
     </div>
-    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)">
-      <img src="/images/incline-ambient.png" style="width:100%;height:100%;object-fit:cover;display:block;">
-    </div>
+    
+    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)"><img loading="lazy" src="/images/incline-ambient.png" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
     <div class="proto-wrap" style="border-bottom:1px solid var(--color-border);">
       <div style="margin-bottom:40px;">
         <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:8px;">Prototyping</div>
@@ -1465,21 +1463,21 @@ function buildProject(id) {
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Sketches <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ system exploration</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">Hand sketches exploring the branching logic, working out the two module variants, the connection geometry, and how the configuration can grow in any direction before moving into 3D.</div>
           </div>
-          <div class="proto-item-img"><img src="/images/incline-proto-bocetos.jpg" style="width:100%;display:block;"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/incline-proto-bocetos.jpg" style="width:100%;display:block;"></div>
         </div>
         <div class="proto-item">
           <div class="proto-item-text">
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Paper model <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ scale model</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">A scale model built to validate the morphology of the module, how the form reads in three dimensions, how the volumes relate to each other, and whether the proportions hold before committing to print.</div>
           </div>
-          <div class="proto-item-img"><img src="/images/incline-proto-papel.jpg" style="width:100%;display:block;"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/incline-proto-papel.jpg" style="width:100%;display:block;"></div>
         </div>
         <div class="proto-item">
           <div class="proto-item-text">
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Final prototype <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ planted &amp; assembled</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">The printed system assembled with soil and plants, verifying the structural behavior of the connection under load and the water drainage between modules in use.</div>
           </div>
-          <div class="proto-item-img"><img src="/images/incline-proto-impreso.jpg" style="width:100%;display:block;"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/incline-proto-impreso.jpg" style="width:100%;display:block;"></div>
         </div>
       </div>
     </div>
@@ -1496,12 +1494,12 @@ function buildProject(id) {
     </div>
     <div class="origins-grid">
       <div class="origins-col">
-        <img src="/images/pausa-brief.png" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/pausa-brief.png" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">The brief</div>
         <div class="origins-stat">Myke Outdoors partnered with the faculty to explore a new catalog direction: furniture that carried the brand's robustness and durability, but was easier to move, viable for smaller spaces, and built exclusively from <strong>aluminum profiles, nautical fabric, and Dekton.</strong> The material vocabulary was fixed. Everything else was open.</div>
       </div>
       <div class="origins-col">
-        <img src="/images/pausa-insight.png" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/pausa-insight.png" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">The insight</div>
         <div class="origins-stat">Myke's existing pieces were built for permanence: large formats, complex structures, heavy footprints. The problem was not the material. It was the structural complexity. <strong>More parts meant more material, more weight, and less adaptability.</strong> Welded and ground aluminum profiles already deliver inherent robustness. The excess had been in the structure, not the steel.</div>
       </div>
@@ -1524,12 +1522,12 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="overflow:hidden;">
-        <img src="/images/pausa-render-concept.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/pausa-render-concept.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
     </div>
     <div class="split-block">
       <div class="split-right flip" style="overflow:hidden;">
-        <img src="/images/pausa-render-materials.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/pausa-render-materials.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
       <div class="split-left">
         <span class="split-tag">Material &amp; Construction</span>
@@ -1545,9 +1543,8 @@ function buildProject(id) {
         </div>
       </div>
     </div>
-    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)">
-      <img src="/images/pausa-ambient.png" style="width:100%;height:100%;object-fit:cover;display:block;">
-    </div>
+    
+    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)"><img loading="lazy" src="/images/pausa-ambient.png" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
     <div class="proto-wrap" style="border-bottom:1px solid var(--color-border);">
       <div style="margin-bottom:40px;">
         <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:8px;">Prototyping</div>
@@ -1559,14 +1556,14 @@ function buildProject(id) {
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Sketches <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ form exploration</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">Hand sketches exploring the form language of each piece, the relationship between the aluminum structure and the soft surfaces, and the visual coherence of the collection before moving to 3D.</div>
           </div>
-          <div class="proto-item-img"><img src="/images/pausa-bocetos.jpg" style="width:100%;display:block;"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/pausa-bocetos.jpg" style="width:100%;display:block;"></div>
         </div>
         <div class="proto-item">
           <div class="proto-item-text">
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Scale model <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ proportions verified</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">A scale model built to validate the proportions of each piece and the visual weight of the collection as a set, confirming the balance between structural presence and lightness before the final renders.</div>
           </div>
-          <div class="proto-item-img"><img src="/images/pausa-maqueta.jpg" style="width:100%;display:block;"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/pausa-maqueta.jpg" style="width:100%;display:block;"></div>
         </div>
       </div>
     </div>
@@ -1583,12 +1580,12 @@ function buildProject(id) {
     </div>
     <div class="origins-grid">
       <div class="origins-col">
-        <img src="/images/core-brief.jpg" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/core-brief.jpg" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">The brief</div>
         <div class="origins-stat">Under Armour's catalog is built for visibility at scale: footwear, apparel, large-format gear. The brief asked for something the brand had never operated at this size: a roll-on deodorant that could carry the same performance identity <strong>in the palm of a hand.</strong></div>
       </div>
       <div class="origins-col">
-        <img src="/images/core-insight.jpg" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/core-insight.jpg" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">The insight</div>
         <div class="origins-stat">The challenge wasn't adding UA features to a standard roll-on. It was finding which elements of the brand's visual language could survive the compression, and which had to be <strong>reinvented for the constraints of personal care manufacturing.</strong></div>
       </div>
@@ -1612,12 +1609,12 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
-        <img src="/images/core-render-concept.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/core-render-concept.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
     </div>
     <div class="split-block">
       <div class="split-right flip" style="background:var(--color-bg);overflow:hidden;">
-        <img src="/images/core-render-identity.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/core-render-identity.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
       <div class="split-left">
         <span class="split-tag">Identity &amp; Finish</span>
@@ -1649,12 +1646,11 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
-        <img src="/images/core-render-production.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/core-render-production.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
     </div>
-    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)">
-      <img src="/images/core-ambient.png" style="width:100%;height:100%;object-fit:cover;display:block;">
-    </div>
+    
+    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)"><img loading="lazy" src="/images/core-ambient.png" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
     <div class="proto-wrap" style="border-bottom:1px solid var(--color-border);">
       <div style="margin-bottom:40px;">
         <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:8px;">Prototyping</div>
@@ -1666,21 +1662,21 @@ function buildProject(id) {
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Sketches <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ form exploration</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">Hand sketches exploring the form language, the relationship between the cylindrical body and the hexagonal texture, and the balance between fluid and robust before moving into 3D modeling.</div>
           </div>
-          <div class="proto-item-img"><img src="/images/core-bocetos.jpg" style="width:100%;display:block;"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/core-bocetos.jpg" style="width:100%;display:block;"></div>
         </div>
         <div class="proto-item">
           <div class="proto-item-text">
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Iteration <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ scale validation</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">A 3D printed model placed next to an existing roll-on to validate scale, grip proportions, and ergonomic logic before committing to the final design. The comparison made clear what the numbers alone could not.</div>
           </div>
-          <div class="proto-item-img"><img src="/images/core-iteration.jpg" style="width:100%;display:block;"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/core-iteration.jpg" style="width:100%;display:block;"></div>
         </div>
         <div class="proto-item">
           <div class="proto-item-text">
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Physical prototype <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ assembled &amp; verified</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">The assembled prototype validating the grip geometry, the presence of the hexagonal texture in hand, and the visual weight of the product before final finish decisions.</div>
           </div>
-          <div class="proto-item-img"><img src="/images/core-proto-physical.jpg" style="width:100%;display:block;"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/core-proto-physical.jpg" style="width:100%;display:block;"></div>
         </div>
       </div>
     </div>
@@ -1697,12 +1693,12 @@ function buildProject(id) {
     </div>
     <div class="origins-grid">
       <div class="origins-col">
-        <img src="/images/promix-survey.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/promix-survey.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;">
         <div class="origins-cross">The survey</div>
         <div class="origins-stat">The starting point was not a problem statement but a complete product analysis: mapping every component of the ProMix hand blender, its function, its relationship to the rest of the system, and <strong>where the product left value on the table.</strong></div>
       </div>
       <div class="origins-col">
-        <img src="/images/promix-finding.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/promix-finding.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;">
         <div class="origins-cross">The finding</div>
         <div class="origins-stat">After analyzing the full assembly, one component stood out: the cap. Every other part performed a structural or functional role. The cap did not. It protected the blender shaft and nothing more. <strong>That absence of purpose was the opportunity.</strong></div>
       </div>
@@ -1725,12 +1721,12 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="overflow:hidden;">
-        <img src="/images/promix-render-opportunity.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/promix-render-opportunity.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
     </div>
     <div class="split-block">
       <div class="split-right flip" style="overflow:hidden;">
-        <img src="/images/promix-render-solution.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/promix-render-solution.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
       <div class="split-left">
         <span class="split-tag">The Solution</span>
@@ -1758,14 +1754,14 @@ function buildProject(id) {
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Iteration <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ snap fit / cable fit</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">Testing the critical connection points: the lateral fin snap-fit against the rear casing and the cable channel clearance. Physical testing at this stage confirmed the geometry before moving to a full assembly print.</div>
           </div>
-          <div class="proto-item-img"><img src="/images/promix-iteration.jpg" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block;"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/promix-iteration.jpg" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block;"></div>
         </div>
         <div class="proto-item">
           <div class="proto-item-text">
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Fit test <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ printed + assembled</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">The redesigned cap 3D printed and assembled onto the original ProMix casing. The snap-fit locked correctly, the plug housing seated flush, and the cable routed clean through the channel. The prototype was then post-processed — sanded and painted — to match the finish of the original product and read as a production-ready piece.</div>
           </div>
-          <div class="proto-item-img"><img src="/images/promix-fittest.jpg" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block;"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/promix-fittest.jpg" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block;"></div>
         </div>
       </div>
     </div>
