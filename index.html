@@ -457,10 +457,6 @@
 
   @media(max-width:900px){.image-trail-layer{display:none}}
 
-  /* ── Intro: binary already visible + clean center-out reveal ── */
-  #intro{position:fixed;inset:0;background:transparent;z-index:99999;display:flex;align-items:center;justify-content:center;cursor:pointer}
-  #intro.hidden{visibility:hidden;pointer-events:none}
-  #intro-cv{position:absolute;inset:0;width:100%;height:100%;display:block}
 
   /* ── Scroll reveal ── */
   body.js-loaded .split-block,
@@ -621,159 +617,8 @@
   </script>
 </head>
 <body>
-<script>
-(function(){
-  // Binary intro: starts already filled with 0/1, then reveals the site from the center outward.
-  var DPR = Math.min(window.devicePixelRatio || 1, 2);
-  var BCELL = 12;
-  var cells = [];
-  var cachedW = -1, cachedH = -1;
-  var done = false;
-  var startTime = null;
+<script>window.dispatchEvent(new CustomEvent('intro-done'));</script>
 
-  // Tweak here if you want it faster/slower.
-  var HOLD_TIME = 1.25;      // how long the binary screen stays before revealing
-  var REVEAL_TIME = 1.35;    // how long the center-out reveal takes
-  var FEATHER = 0.18;        // softness of the reveal edge
-  var MAX_DURATION = HOLD_TIME + REVEAL_TIME + 0.05;
-
-  function ez(t){
-    t = Math.max(0, Math.min(1, t));
-    return 1 - Math.pow(1 - t, 3);
-  }
-
-  function buildCells(W, H){
-    cachedW = W; cachedH = H;
-    var mx = W / 2, my = H / 2;
-    var maxD = Math.sqrt(mx * mx + my * my);
-    cells = [];
-
-    var cols = Math.ceil(W / BCELL) + 2;
-    var rows = Math.ceil(H / BCELL) + 2;
-
-    for(var r = -1; r < rows; r++){
-      for(var c = -1; c < cols; c++){
-        var px = c * BCELL + BCELL / 2;
-        var py = r * BCELL + BCELL / 2;
-        var dist = Math.sqrt((px - mx) * (px - mx) + (py - my) * (py - my)) / maxD;
-        cells.push({
-          x: c * BCELL,
-          y: r * BCELL,
-          bit: Math.random() > 0.5 ? '1' : '0',
-          // Mostly radial, with a very small random offset so it feels organic but doesn't leave late remnants.
-          order: Math.max(0, Math.min(1, dist * 0.92 + Math.random() * 0.08))
-        });
-      }
-    }
-  }
-
-  function finish(){
-    if(done) return;
-    done = true;
-    var cv = document.getElementById('intro-cv');
-    if(cv){
-      var ctx = cv.getContext('2d');
-      ctx.setTransform(1,0,0,1,0,0);
-      ctx.clearRect(0,0,cv.width,cv.height);
-    }
-    var intro = document.getElementById('intro');
-    if(intro) intro.classList.add('hidden');
-    window.dispatchEvent(new CustomEvent('intro-done'));
-  }
-
-  function draw(ts, cv){
-    if(done) return;
-    if(startTime === null) startTime = ts;
-
-    var dt = (ts - startTime) / 1000;
-    var W = window.innerWidth, H = window.innerHeight;
-
-    if(W !== cachedW || H !== cachedH){
-      cv.width = W * DPR;
-      cv.height = H * DPR;
-      cv.style.width = W + 'px';
-      cv.style.height = H + 'px';
-      buildCells(W, H);
-    }
-
-    var ctx = cv.getContext('2d');
-    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    ctx.clearRect(0, 0, W, H);
-
-    var BG  = getComputedStyle(document.body).getPropertyValue('--color-bg').trim() || '#FBFBF9';
-    var INK = getComputedStyle(document.body).getPropertyValue('--color-text').trim() || '#0A0A0A';
-
-    // Reveal clock starts after the initial hold.
-    // It goes slightly beyond the max cell order so the outer edges fully disappear,
-    // avoiding frozen-looking 0/1 remnants at the sides.
-    var revealClock = ez((dt - HOLD_TIME) / REVEAL_TIME) * (1 + FEATHER);
-
-    // First draw the white cover per cell. Cells disappear from the center outward.
-    cells.forEach(function(cell){
-      var reveal = ez((revealClock - cell.order) / FEATHER);
-      var alpha = 1 - reveal;
-      if(alpha <= 0.005) return;
-      ctx.globalAlpha = alpha;
-      ctx.fillStyle = BG;
-      // Slight overlap avoids thin white/transparent seams between cells.
-      ctx.fillRect(cell.x - 0.5, cell.y - 0.5, BCELL + 1.5, BCELL + 1.5);
-    });
-
-    // Then draw 0/1 over the still-covered cells only.
-    ctx.font = 'bold ' + Math.max(8, Math.round(BCELL * 0.82)) + 'px "Courier New", monospace';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillStyle = INK;
-
-    cells.forEach(function(cell){
-      var reveal = ez((revealClock - cell.order) / FEATHER);
-      var alpha = (1 - reveal) * 0.72;
-      if(alpha <= 0.01) return;
-
-      // Tiny flicker only during the hold, not during the reveal. This avoids remnant-looking edges.
-      if(dt < HOLD_TIME - 0.1 && Math.random() < 0.01){
-        cell.bit = cell.bit === '1' ? '0' : '1';
-      }
-
-      ctx.globalAlpha = alpha;
-      ctx.fillText(cell.bit, cell.x + BCELL / 2, cell.y + BCELL / 2);
-    });
-
-    ctx.globalAlpha = 1;
-
-    if(dt < MAX_DURATION){
-      requestAnimationFrame(function(nextTs){ draw(nextTs, cv); });
-    } else {
-      finish();
-    }
-  }
-
-  // Make sure the binary is already there as soon as possible, not after a separate appear animation.
-  document.addEventListener('DOMContentLoaded', function(){
-    var intro = document.getElementById('intro');
-    var cv = document.getElementById('intro-cv');
-    if(!cv) return;
-
-    var W = window.innerWidth, H = window.innerHeight;
-    cv.width = W * DPR;
-    cv.height = H * DPR;
-    cv.style.width = W + 'px';
-    cv.style.height = H + 'px';
-    buildCells(W, H);
-
-    if(intro){
-      intro.addEventListener('click', finish);
-    }
-
-    requestAnimationFrame(function(ts){ draw(ts, cv); });
-  });
-})();
-</script>
-
-<!-- Intro: binary already visible + clean center-out reveal -->
-<div id="intro">
-  <canvas id="intro-cv"></canvas>
-</div>
 
 <!-- NAV -->
 <!-- Custom cursor: crosshair -->
@@ -1217,7 +1062,7 @@ function buildProject(id) {
   const panels = p.panels.map((src,i)=>{
     const isH = (p.hPanels||[]).includes(i);
     if(src.endsWith('.mp4')) return `<div class="panel-item panel-video${isH?' panel-landscape':''}" onclick="if(window.matchMedia('(max-width:900px)').matches&&!_dragged)openVideoLightbox('${src}',${i})" ondblclick="openVideoLightbox('${src}',${i})"><video src="${src}" autoplay muted loop playsinline></video></div>`;
-    return `<div class="panel-item${isH?' panel-landscape':''}" onclick="if(window.matchMedia('(max-width:900px)').matches&&!_dragged)openLightbox('${src}',${i})" ondblclick="if(!_dragged)openLightbox('${src}',${i})"><img loading="lazy" src="${src}" draggable="false"></div>`;
+    return `<div class="panel-item${isH?' panel-landscape':''}" onclick="if(window.matchMedia('(max-width:900px)').matches&&!_dragged)openLightbox('${src}',${i})" ondblclick="if(!_dragged)openLightbox('${src}',${i})"><img src="${src}" draggable="false"></div>`;
   }).join('');
   const specs  = p.specs.map(s=>`<div><p class="spec-label">${s.l}</p><p class="spec-value">${s.v}</p></div>`).join('');
   const desc   = p.desc.map(d=>`<p>${d}</p>`).join('');
