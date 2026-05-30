@@ -617,7 +617,7 @@
   </script>
 </head>
 <body>
-<script>window.dispatchEvent(new CustomEvent('intro-done'));</script>
+<script>document.addEventListener('DOMContentLoaded',function(){ window.dispatchEvent(new CustomEvent('intro-done')); });</script>
 
 
 <!-- NAV -->
