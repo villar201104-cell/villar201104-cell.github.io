@@ -615,6 +615,10 @@
 
     gtag('config', 'G-JNFJGQKXNL');
   </script>
+  <link rel="preload" as="image" href="/images/flujo-hero.png">
+  <link rel="preload" as="image" href="/images/incline-hero.png">
+  <link rel="preload" as="image" href="/images/pausa-hero.jpg">
+  <link rel="preload" as="image" href="/images/core-hero.jpg">
 </head>
 <body>
 <script>document.addEventListener('DOMContentLoaded',function(){ window.dispatchEvent(new CustomEvent('intro-done')); });</script>
@@ -812,8 +816,18 @@
         <div class="cv-block">
           <h4>Experience</h4>
           <div class="cv-item">
-            <p class="cv-item-title">Independent Product Design Practice <span style="font-weight:400;color:var(--color-muted)"> · Ongoing</span></p>
+            <p class="cv-item-title">Freelance Product Design <span style="font-weight:400;color:var(--color-muted)"> · Ongoing</span></p>
             <p class="cv-item-sub">Design and redesign of functional components with a focus on usability and manufacturability. Work spans concept ideation through rapid prototyping and iterative testing using 3D printing and fabrication tools.</p>
+          </div>
+          <div class="cv-item">
+            <p class="cv-item-title">Taragüi <span style="font-weight:400;color:var(--color-muted)"> · Spring 2026</span></p>
+            <p style="font-size:.82rem;font-weight:500;color:var(--color-soft);margin-bottom:4px;">Design Intern</p>
+            <p class="cv-item-sub">Redesign of the Mate Listo product line. Focused on form refinement and CMF direction, translating the brand's identity into a sharper, more premium kit.</p>
+          </div>
+          <div class="cv-item">
+            <p class="cv-item-title">Myke Outdoors <span style="font-weight:400;color:var(--color-muted)"> · Spring 2025</span></p>
+            <p style="font-size:.82rem;font-weight:500;color:var(--color-soft);margin-bottom:4px;">Design Intern</p>
+            <p class="cv-item-sub">Development of an outdoor furniture collection. Work spanned concept ideation, material research, and production-oriented design across seating and modular pieces.</p>
           </div>
           <h4 style="margin-top:28px">Education</h4>
           <div class="cv-item">
@@ -1068,7 +1082,8 @@ function buildProject(id) {
   const desc   = p.desc.map(d=>`<p>${d}</p>`).join('');
   const prev   = p.prev ? `<div class="pnav-btn" onclick="go('project','${p.prev}')"><span class="pnav-lbl">← Previous</span><span class="pnav-title">${PROJECTS[p.prev].title}</span></div>` : '<div style="flex:1"></div>';
   const next   = p.next ? `<div class="pnav-btn right" onclick="go('project','${p.next}')"><span class="pnav-lbl">Next →</span><span class="pnav-title">${PROJECTS[p.next].title}</span></div>` : '<div style="flex:1"></div>';
-  document.getElementById('projContent').innerHTML = `
+  const _projEl = document.getElementById('projContent');
+  _projEl.innerHTML = `
     <header class="proj-header">
       <div><p class="proj-eyebrow fu">${p.eyebrow}</p><h1 class="proj-title fu d1">${p.title}</h1></div>
       <div class="proj-header-right fu d2"><p class="proj-tagline">${p.tagline}</p><div class="proj-specs">${specs}</div></div>
@@ -1617,6 +1632,10 @@ function buildProject(id) {
     ` : ''}
     <nav class="proj-footer-nav">${prev}${next}</nav>
     <footer class="footer"><p>© 2026 Nahuel Villar</p><p>USA</p></footer>`;
+  // Force-load all lazy images in this project immediately
+  _projEl.querySelectorAll('img[loading="lazy"]').forEach(img => {
+    img.removeAttribute('loading');
+  });
   initDrag(document.getElementById('pt'));
 }
 
