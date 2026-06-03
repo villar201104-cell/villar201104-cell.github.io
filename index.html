@@ -615,10 +615,10 @@
 
     gtag('config', 'G-JNFJGQKXNL');
   </script>
-  <link rel="preload" as="image" href="/images/flujo-hero.png">
-  <link rel="preload" as="image" href="/images/incline-hero.png">
-  <link rel="preload" as="image" href="/images/pausa-hero.jpg">
-  <link rel="preload" as="image" href="/images/core-hero.jpg">
+  <link rel="preload" as="image" href="/images/flujo-hero.webp">
+  <link rel="preload" as="image" href="/images/incline-hero.webp">
+  <link rel="preload" as="image" href="/images/pausa-hero.webp">
+  <link rel="preload" as="image" href="/images/core-hero.webp">
 </head>
 <body>
 <script>document.addEventListener('DOMContentLoaded',function(){ window.dispatchEvent(new CustomEvent('intro-done')); });</script>
@@ -671,7 +671,7 @@
     <main class="projects-grid" data-cursor="light">
       <div class="project-card-wrap fu d1" onclick="go('project','flujo')">
         <div class="project-card">
-          <img class="project-card-img" src="/images/flujo-hero.png" alt="Flujo" style="object-position:center 20%">
+          <img class="project-card-img" src="/images/flujo-hero.webp" alt="Flujo" style="object-position:center 20%">
           <div class="project-card-overlay">
             <span class="card-num">01</span>
             <div class="project-card-meta">
@@ -685,7 +685,7 @@
       </div>
       <div class="project-card-wrap fu d2" onclick="go('project','incline')">
         <div class="project-card">
-          <img class="project-card-img" src="/images/incline-hero.png" alt="Incline" style="object-position:center 30%">
+          <img class="project-card-img" src="/images/incline-hero.webp" alt="Incline" style="object-position:center 30%">
           <div class="project-card-overlay">
             <span class="card-num">02</span>
             <div class="project-card-meta">
@@ -699,7 +699,7 @@
       </div>
       <div class="project-card-wrap fu d3" onclick="go('project','pausa')">
         <div class="project-card">
-          <img class="project-card-img" src="/images/pausa-hero.jpg" alt="Pausa" style="object-position:center 25%">
+          <img class="project-card-img" src="/images/pausa-hero.webp" alt="Pausa" style="object-position:center 25%">
           <div class="project-card-overlay">
             <span class="card-num">03</span>
             <div class="project-card-meta">
@@ -713,7 +713,7 @@
       </div>
       <div class="project-card-wrap fu d4" onclick="go('project','core')">
         <div class="project-card">
-          <img class="project-card-img" src="/images/core-hero.jpg" alt="Core" style="object-position:right 15%">
+          <img class="project-card-img" src="/images/core-hero.webp" alt="Core" style="object-position:right 15%">
           <div class="project-card-overlay">
             <span class="card-num">04</span>
             <div class="project-card-meta">
@@ -731,7 +731,7 @@
       <div class="extras-grid" data-cursor="light">
         <div class="extra-card-wrap" onclick="go('project','promix')">
           <div class="extra-card">
-            <img loading="lazy" class="extra-card-img" src="/images/promix-hero.jpg" alt="Promix" style="object-position:center center;">
+            <img loading="lazy" class="extra-card-img" src="/images/promix-hero.webp" alt="Promix" style="object-position:center center;">
             <div class="extra-card-overlay">
               <div class="extra-card-meta">
                 <span class="extra-card-num">+ Product Redesign · 2025</span>
@@ -798,8 +798,8 @@
       <div class="about-top">
         <div class="fu">
           <div class="about-photo-stack" id="aboutPhotoStack" title="Tap to swap photo" data-cursor="light">
-            <img loading="lazy" class="about-photo about-photo-main" src="/images/photo.jpg" alt="Nahuel Villar">
-            <img loading="lazy" class="about-photo about-photo-alt" src="/images/about-childhood.jpg" alt="Nahuel Villar childhood photo">
+            <img class="about-photo about-photo-main" src="/images/photo.webp" alt="Nahuel Villar">
+            <img class="about-photo about-photo-alt" src="/images/about-childhood.webp" alt="Nahuel Villar childhood photo">
           </div>
         </div>
         <div class="fu d2">
@@ -917,7 +917,7 @@ const PROJECTS = {
     tagline:'A wall lamp built on the logic of breath, printed, minimal, meditative.',
     specs:[{l:'Category',v:'Lighting Design'},{l:'Year',v:'2025'},{l:'Materials',v:'PETG, Standard Components'},{l:'Process',v:'FDM 3D Print'}],
     desc:['FLUJO began with two constraints: fewer parts, and a geometry that could only exist through 3D printing. Not a form that happens to be printed, one that demands it. Every surface, curve, and transition was designed to exploit what additive manufacturing makes possible and no other process allows. The result is a wall lamp that feels simultaneously resolved and alive.','The conceptual anchor is breath: movement that is internal, rhythmic, and continuous. That abstraction found its form in a morphology with no hard breaks and no decorative gestures, just geometry responding to light. Printed in PETG, the object earns its shape entirely through structural logic.'],
-    panels:['/images/flujo_cover.jpg','/images/flujo2.jpg','/images/flujo4.jpg','/videos/flujo-reel.mp4','/images/flujo5.jpg','/images/flujo6.jpg'],
+    panels:['/images/flujo_cover.webp','/images/flujo2.webp','/images/flujo4.webp','/videos/flujo-reel.mp4','/images/flujo5.webp','/images/flujo6.webp'],
     prev:null, next:'incline'
   },
   incline: {
@@ -926,7 +926,7 @@ const PROJECTS = {
     tagline:'A modular planter system that adapts to the geometry of small-city living.',
     specs:[{l:'Category',v:'Product Design'},{l:'Year',v:'2024'},{l:'Materials',v:'Polypropylene'},{l:'Process',v:'Rotational Molding'}],
     desc:['INCLINE was born from a specific frustration: most outdoor planters are designed for space that compact city terraces simply do not have. The project responds with a system built around adaptability, configurable in height, length, and width without sacrificing visual coherence.','Two complementary modules form the core of the system. Their relationship is combinatorial, not fixed. Users assemble what they need, expand when they want, and maintain structural stability throughout. Rotational molding in polypropylene reinforces that flexibility with material consistency and manufacturing efficiency.','The morphology was kept deliberately quiet. INCLINE does not compete with the plants, the furniture, or the architecture around it. It integrates. That restraint is not a stylistic choice, it is the design.'],
-    panels:['/images/incline1.jpg','/images/incline3.jpg','/images/incline4.jpg','/images/incline5.jpg'],
+    panels:['/images/incline1.webp','/images/incline3.webp','/images/incline4.webp','/images/incline5.webp'],
     prev:'flujo', next:'pausa'
   },
   core: {
@@ -935,7 +935,7 @@ const PROJECTS = {
     tagline:'Under Armour\'s performance identity, compressed into a roll-on.',
     specs:[{l:'Category',v:'Product Redesign'},{l:'Year',v:'2024'},{l:'Client',v:'Under Armour (academic)'},{l:'Process',v:'Injection, Blow Molding & Ultrasonic Welding'}],
     desc:['CORE asks a single question: what would it look like if Under Armour designed a deodorant? The answer lives in the details, the grip geometry, the surface texture, the weight of the cap in hand. Every decision was calibrated to communicate precision and physical confidence at a scale the brand rarely operates in.','The real design challenge was technical: translating a brand language built for large-format products into a form compatible with injection molding, blow molding, and ultrasonic welding. Every radius and rib had to earn its place. Decorative complexity was not an option.','The outcome is a compact, performance-coded object that holds its own next to an Under Armour sneaker. Small in scale, dense in intent.'],
-    panels:['/images/core1.jpg','/images/core2.jpg','/images/core4.jpg'],
+    panels:['/images/core1.webp','/images/core2.webp','/images/core4.webp'],
     prev:'pausa', next:null
   },
   promix: {
@@ -944,7 +944,7 @@ const PROJECTS = {
     tagline:'A cap redesign that integrates cable and plug storage into the Philips ProMix hand blender.',
     specs:[{l:'Category',v:'Product Redesign'},{l:'Year',v:'2025'},{l:'Client',v:'Philips (academic)'},{l:'Material',v:'PP'},{l:'Process',v:'Injection Molding'}],
     desc:['The project began with a full product survey of the Philips ProMix hand blender: mapping each component, its function, its relationship to the rest of the system, and the gaps left unaddressed. The goal was not to fix a predefined problem but to find where the product had something left to give.','After analyzing the entire assembly, the cap stood out as the only component without a structural or functional role beyond basic protection. Every other part earned its place. The cap did not. That gap became the opportunity: a single component that could be redesigned to add a real convenience without touching anything else in the product.','The redesign integrates cable and plug storage directly into the cap body. A recessed channel guides the cable from a dedicated plug housing to the storage wrap. The piece connects to the existing rear casing via a snap-fit using lateral fins, with no modifications to the product architecture. Injection-molded in PP. Dimensions: 22 x 33 x 65 mm.'],
-    panels:['/images/promix-panel.jpg','/images/promix-plano-tapa.jpg','/images/promix-plano-explotada.jpg','/images/promix-plano-conjunto.jpg'],
+    panels:['/images/promix-panel.webp','/images/promix-plano-tapa.webp','/images/promix-plano-explotada.webp','/images/promix-plano-conjunto.webp'],
     prev:null, next:null
   },
   pausa: {
@@ -953,7 +953,7 @@ const PROJECTS = {
     tagline:'Outdoor furniture that gives permission to stop.',
     specs:[{l:'Category',v:'Furniture Design'},{l:'Year',v:'2024'},{l:'Client',v:'Myke Outdoors'},{l:'Materials',v:'Aluminum, Nautical Fabric, Dekton'}],
     desc:['PAUSA started as a brief from Myke Outdoors: expand the catalog, reach a younger audience, challenge the visual heaviness of traditional exterior furniture. What emerged was less a collection of objects and more a proposition about time, the kind of furniture that makes stopping feel earned.','The concept of pause shaped every decision. These are pieces designed for coffee, for reading, for sitting in stillness. Their proportions are controlled, their weight reduced, their presence understated, not as a stylistic choice, but because lightness is what makes a pause feel possible.','Three materials governed the entire collection: aluminum profiles, nautical fabric, and Dekton surfaces. Working within that constraint became generative. It forced structural honesty and gave the collection a coherence that feels both rigorous and effortless.'],
-    panels:['/images/pausa1.jpg','/images/pausa2.jpg','/images/pausa4.jpg','/videos/pausa-reel.mp4'],
+    panels:['/images/pausa1.webp','/images/pausa2.webp','/images/pausa4.webp','/videos/pausa-reel.mp4'],
     prev:'incline', next:'core'
   }
 };
@@ -1105,12 +1105,12 @@ function buildProject(id) {
     </div>
     <div class="origins-grid">
       <div class="origins-col">
-        <img loading="lazy" src="/images/flujo-process-1.png" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/flujo-process-1.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">+</div>
         <div class="origins-stat">A zen object doesn't decorate, it <strong>accompanies</strong>. The intent was to go beyond the lamp concept: create something sculptural that makes people question what it is and how it's made.</div>
       </div>
       <div class="origins-col">
-        <img loading="lazy" src="/images/flujo-process-2.png" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/flujo-process-2.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">+</div>
         <div class="origins-stat">3D printing wasn't just the process, it was the <strong>opportunity</strong>. Embedding a three-dimensional internal pattern inside the screen: something impossible to manufacture as a single piece through any other method.</div>
       </div>
@@ -1129,12 +1129,12 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
-        <img loading="lazy" src="/images/flujo-render-identity.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/flujo-render-identity.webp" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
     </div>
     <div class="split-block">
       <div class="split-right flip" style="background:var(--color-bg);overflow:hidden;">
-        <img loading="lazy" src="/images/flujo-render-concept.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/flujo-render-concept.webp" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
       <div class="split-left">
         <span class="split-tag">Concept</span>
@@ -1165,11 +1165,11 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
-        <img loading="lazy" src="/images/flujo-render-decisions.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/flujo-render-decisions.webp" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
     </div>
     
-    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)"><img loading="lazy" src="/images/flujo-ambient.png" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)"><img loading="lazy" src="/images/flujo-ambient.webp" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
     <div class="evo-wrap">
       <div class="evo-header">
         <div class="evo-title">Design Evolution</div>
@@ -1187,10 +1187,10 @@ function buildProject(id) {
           <div class="evo-desc">PETG over PLA for translucency and thermal resistance. 0.4mm nozzle for definition of the internal pattern. Wall thickness between 0.8mm and 1mm, where the difference in how much light passes through becomes visible, and where the screen either holds its form or flexes.</div>
         </div>
         <div style="background:var(--color-bg);padding:16px 2%;">
-          <img loading="lazy" src="/images/flujo-evo-ideation.png" style="width:100%;display:block;">
+          <img loading="lazy" src="/images/flujo-evo-ideation.webp" style="width:100%;display:block;">
         </div>
         <div style="background:var(--color-bg);padding:16px 2%;">
-          <img loading="lazy" src="/images/flujo-evo-iteration.png" style="width:100%;display:block;">
+          <img loading="lazy" src="/images/flujo-evo-iteration.webp" style="width:100%;display:block;">
         </div>
       </div>
     </div>
@@ -1216,7 +1216,7 @@ function buildProject(id) {
       <div class="proto-imgs">
         <div style="background:var(--color-bg);padding:16px;">
           <div style="aspect-ratio:4/5;overflow:hidden;background:var(--color-bg);">
-            <img loading="lazy" src="/images/flujo-proto-takeouts.png" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <img loading="lazy" src="/images/flujo-proto-takeouts.webp" style="width:100%;height:100%;object-fit:cover;display:block;">
           </div>
         </div>
         <div style="background:var(--color-bg);padding:16px;">
@@ -1244,12 +1244,12 @@ function buildProject(id) {
     </div>
     <div class="origins-grid">
       <div class="origins-col">
-        <img loading="lazy" src="/images/incline-process-branches.jpg" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/incline-process-branches.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">+</div>
         <div class="origins-stat">Tree branches don't grow from a planner's grid. They emerge from a <strong>node</strong> and radiate outward, always inclined. That organic logic became the structural principle of the system.</div>
       </div>
       <div class="origins-col">
-        <img loading="lazy" src="/images/incline-process-sketch.jpg" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/incline-process-sketch.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">+</div>
         <div class="origins-stat">Buenos Aires terraces are small. Most planters are designed for space that compact city balconies simply don't have, wasting the <strong>vertical dimension entirely</strong>.</div>
       </div>
@@ -1272,12 +1272,12 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
-        <img loading="lazy" src="/images/incline-render-concept.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/incline-render-concept.webp" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
     </div>
     <div class="split-block">
       <div class="split-right flip" style="background:var(--color-bg);overflow:hidden;">
-        <img loading="lazy" src="/images/incline-render-system.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/incline-render-system.webp" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
       <div class="split-left">
         <span class="split-tag">System Logic</span>
@@ -1307,11 +1307,11 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
-        <img loading="lazy" src="/images/incline-render-decisions.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/incline-render-decisions.webp" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
     </div>
     
-    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)"><img loading="lazy" src="/images/incline-ambient.png" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)"><img loading="lazy" src="/images/incline-ambient.webp" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
     <div class="proto-wrap" style="border-bottom:1px solid var(--color-border);">
       <div style="margin-bottom:40px;">
         <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:8px;">Prototyping</div>
@@ -1323,21 +1323,21 @@ function buildProject(id) {
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Sketches <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ system exploration</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">Hand sketches exploring the branching logic, working out the two module variants, the connection geometry, and how the configuration can grow in any direction before moving into 3D.</div>
           </div>
-          <div class="proto-item-img"><img loading="lazy" src="/images/incline-proto-bocetos.jpg" style="width:100%;display:block;"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/incline-proto-bocetos.webp" style="width:100%;display:block;"></div>
         </div>
         <div class="proto-item">
           <div class="proto-item-text">
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Paper model <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ scale model</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">A scale model built to validate the morphology of the module, how the form reads in three dimensions, how the volumes relate to each other, and whether the proportions hold before committing to print.</div>
           </div>
-          <div class="proto-item-img"><img loading="lazy" src="/images/incline-proto-papel.jpg" style="width:100%;display:block;"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/incline-proto-papel.webp" style="width:100%;display:block;"></div>
         </div>
         <div class="proto-item">
           <div class="proto-item-text">
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Final prototype <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ planted &amp; assembled</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">The printed system assembled with soil and plants, verifying the structural behavior of the connection under load and the water drainage between modules in use.</div>
           </div>
-          <div class="proto-item-img"><img loading="lazy" src="/images/incline-proto-impreso.jpg" style="width:100%;display:block;"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/incline-proto-impreso.webp" style="width:100%;display:block;"></div>
         </div>
       </div>
     </div>
@@ -1354,12 +1354,12 @@ function buildProject(id) {
     </div>
     <div class="origins-grid">
       <div class="origins-col">
-        <img loading="lazy" src="/images/pausa-brief.png" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/pausa-brief.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">The brief</div>
         <div class="origins-stat">Myke Outdoors partnered with the faculty to explore a new catalog direction: furniture that carried the brand's robustness and durability, but was easier to move, viable for smaller spaces, and built exclusively from <strong>aluminum profiles, nautical fabric, and Dekton.</strong> The material vocabulary was fixed. Everything else was open.</div>
       </div>
       <div class="origins-col">
-        <img loading="lazy" src="/images/pausa-insight.png" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/pausa-insight.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">The insight</div>
         <div class="origins-stat">Myke's existing pieces were built for permanence: large formats, complex structures, heavy footprints. The problem was not the material. It was the structural complexity. <strong>More parts meant more material, more weight, and less adaptability.</strong> Welded and ground aluminum profiles already deliver inherent robustness. The excess had been in the structure, not the steel.</div>
       </div>
@@ -1382,12 +1382,12 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="overflow:hidden;">
-        <img loading="lazy" src="/images/pausa-render-concept.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/pausa-render-concept.webp" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
     </div>
     <div class="split-block">
       <div class="split-right flip" style="overflow:hidden;">
-        <img loading="lazy" src="/images/pausa-render-materials.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/pausa-render-materials.webp" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
       <div class="split-left">
         <span class="split-tag">Material &amp; Construction</span>
@@ -1404,7 +1404,7 @@ function buildProject(id) {
       </div>
     </div>
     
-    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)"><img loading="lazy" src="/images/pausa-ambient.png" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)"><img loading="lazy" src="/images/pausa-ambient.webp" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
     <div class="proto-wrap" style="border-bottom:1px solid var(--color-border);">
       <div style="margin-bottom:40px;">
         <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:8px;">Prototyping</div>
@@ -1416,14 +1416,14 @@ function buildProject(id) {
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Sketches <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ form exploration</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">Hand sketches exploring the form language of each piece, the relationship between the aluminum structure and the soft surfaces, and the visual coherence of the collection before moving to 3D.</div>
           </div>
-          <div class="proto-item-img"><img loading="lazy" src="/images/pausa-bocetos.jpg" style="width:100%;display:block;"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/pausa-bocetos.webp" style="width:100%;display:block;"></div>
         </div>
         <div class="proto-item">
           <div class="proto-item-text">
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Scale model <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ proportions verified</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">A scale model built to validate the proportions of each piece and the visual weight of the collection as a set, confirming the balance between structural presence and lightness before the final renders.</div>
           </div>
-          <div class="proto-item-img"><img loading="lazy" src="/images/pausa-maqueta.jpg" style="width:100%;display:block;"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/pausa-maqueta.webp" style="width:100%;display:block;"></div>
         </div>
       </div>
     </div>
@@ -1440,12 +1440,12 @@ function buildProject(id) {
     </div>
     <div class="origins-grid">
       <div class="origins-col">
-        <img loading="lazy" src="/images/core-brief.jpg" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/core-brief.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">The brief</div>
         <div class="origins-stat">Under Armour's catalog is built for visibility at scale: footwear, apparel, large-format gear. The brief asked for something the brand had never operated at this size: a roll-on deodorant that could carry the same performance identity <strong>in the palm of a hand.</strong></div>
       </div>
       <div class="origins-col">
-        <img loading="lazy" src="/images/core-insight.jpg" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/core-insight.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">The insight</div>
         <div class="origins-stat">The challenge wasn't adding UA features to a standard roll-on. It was finding which elements of the brand's visual language could survive the compression, and which had to be <strong>reinvented for the constraints of personal care manufacturing.</strong></div>
       </div>
@@ -1469,12 +1469,12 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
-        <img loading="lazy" src="/images/core-render-concept.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/core-render-concept.webp" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
     </div>
     <div class="split-block">
       <div class="split-right flip" style="background:var(--color-bg);overflow:hidden;">
-        <img loading="lazy" src="/images/core-render-identity.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/core-render-identity.webp" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
       <div class="split-left">
         <span class="split-tag">Identity &amp; Finish</span>
@@ -1506,11 +1506,11 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
-        <img loading="lazy" src="/images/core-render-production.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/core-render-production.webp" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
     </div>
     
-    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)"><img loading="lazy" src="/images/core-ambient.png" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)"><img loading="lazy" src="/images/core-ambient.webp" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
     <div class="proto-wrap" style="border-bottom:1px solid var(--color-border);">
       <div style="margin-bottom:40px;">
         <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:8px;">Prototyping</div>
@@ -1522,21 +1522,21 @@ function buildProject(id) {
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Sketches <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ form exploration</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">Hand sketches exploring the form language, the relationship between the cylindrical body and the hexagonal texture, and the balance between fluid and robust before moving into 3D modeling.</div>
           </div>
-          <div class="proto-item-img"><img loading="lazy" src="/images/core-bocetos.jpg" style="width:100%;display:block;"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/core-bocetos.webp" style="width:100%;display:block;"></div>
         </div>
         <div class="proto-item">
           <div class="proto-item-text">
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Iteration <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ scale validation</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">A 3D printed model placed next to an existing roll-on to validate scale, grip proportions, and ergonomic logic before committing to the final design. The comparison made clear what the numbers alone could not.</div>
           </div>
-          <div class="proto-item-img"><img loading="lazy" src="/images/core-iteration.jpg" style="width:100%;display:block;"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/core-iteration.webp" style="width:100%;display:block;"></div>
         </div>
         <div class="proto-item">
           <div class="proto-item-text">
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Physical prototype <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ assembled &amp; verified</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">The assembled prototype validating the grip geometry, the presence of the hexagonal texture in hand, and the visual weight of the product before final finish decisions.</div>
           </div>
-          <div class="proto-item-img"><img loading="lazy" src="/images/core-proto-physical.jpg" style="width:100%;display:block;"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/core-proto-physical.webp" style="width:100%;display:block;"></div>
         </div>
       </div>
     </div>
@@ -1553,12 +1553,12 @@ function buildProject(id) {
     </div>
     <div class="origins-grid">
       <div class="origins-col">
-        <img loading="lazy" src="/images/promix-survey.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/promix-survey.webp" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;">
         <div class="origins-cross">The survey</div>
         <div class="origins-stat">The starting point was not a problem statement but a complete product analysis: mapping every component of the ProMix hand blender, its function, its relationship to the rest of the system, and <strong>where the product left value on the table.</strong></div>
       </div>
       <div class="origins-col">
-        <img loading="lazy" src="/images/promix-finding.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/promix-finding.webp" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;">
         <div class="origins-cross">The finding</div>
         <div class="origins-stat">After analyzing the full assembly, one component stood out: the cap. Every other part performed a structural or functional role. The cap did not. It protected the blender shaft and nothing more. <strong>That absence of purpose was the opportunity.</strong></div>
       </div>
@@ -1581,12 +1581,12 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="overflow:hidden;">
-        <img loading="lazy" src="/images/promix-render-opportunity.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/promix-render-opportunity.webp" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
     </div>
     <div class="split-block">
       <div class="split-right flip" style="overflow:hidden;">
-        <img loading="lazy" src="/images/promix-render-solution.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/promix-render-solution.webp" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
       <div class="split-left">
         <span class="split-tag">The Solution</span>
@@ -1614,14 +1614,14 @@ function buildProject(id) {
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Iteration <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ snap fit / cable fit</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">Testing the critical connection points: the lateral fin snap-fit against the rear casing and the cable channel clearance. Physical testing at this stage confirmed the geometry before moving to a full assembly print.</div>
           </div>
-          <div class="proto-item-img"><img loading="lazy" src="/images/promix-iteration.jpg" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block;"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/promix-iteration.webp" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block;"></div>
         </div>
         <div class="proto-item">
           <div class="proto-item-text">
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Fit test <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ printed + assembled</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">The redesigned cap 3D printed and assembled onto the original ProMix casing. The snap-fit locked correctly, the plug housing seated flush, and the cable routed clean through the channel. The prototype was then post-processed — sanded and painted — to match the finish of the original product and read as a production-ready piece.</div>
           </div>
-          <div class="proto-item-img"><img loading="lazy" src="/images/promix-fittest.jpg" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block;"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/promix-fittest.webp" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block;"></div>
         </div>
       </div>
     </div>
@@ -1763,26 +1763,41 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   if(!layer || !aboutPage) return;
 
   const files = [
-    { file:'flujo-render-concept.jpg', src:'/images/flujo-render-concept.jpg' },
-    { file:'flujo-render-decisions.jpg', src:'/images/flujo-render-decisions.jpg' },
-    { file:'flujo-render-identity.jpg', src:'/images/flujo-render-identity.jpg' },
+    { file:'flujo-render-concept.jpg', src:'/images/flujo-render-concept.webp' },
+    { file:'flujo-render-decisions.jpg', src:'/images/flujo-render-decisions.webp' },
+    { file:'flujo-render-identity.jpg', src:'/images/flujo-render-identity.webp' },
 
-    { file:'incline-render-concept.jpg', src:'/images/incline-render-concept.jpg' },
-    { file:'incline-render-decisions.jpg', src:'/images/incline-render-decisions.jpg' },
-    { file:'incline-render-system.jpg', src:'/images/incline-render-system.jpg' },
+    { file:'incline-render-concept.jpg', src:'/images/incline-render-concept.webp' },
+    { file:'incline-render-decisions.jpg', src:'/images/incline-render-decisions.webp' },
+    { file:'incline-render-system.jpg', src:'/images/incline-render-system.webp' },
 
-    { file:'pausa-render-concept.jpg', src:'/images/pausa-render-concept.jpg' },
-    { file:'pausa-render-materials.jpg', src:'/images/pausa-render-materials.jpg' },
-    { file:'pausa-bocetos.jpg', src:'/images/pausa-bocetos.jpg' },
+    { file:'pausa-render-concept.jpg', src:'/images/pausa-render-concept.webp' },
+    { file:'pausa-render-materials.jpg', src:'/images/pausa-render-materials.webp' },
+    { file:'pausa-bocetos.jpg', src:'/images/pausa-bocetos.webp' },
 
-    { file:'core-render-concept.jpg', src:'/images/core-render-concept.jpg' },
-    { file:'core-render-identity.jpg', src:'/images/core-render-identity.jpg' },
-    { file:'core-render-production.jpg', src:'/images/core-render-production.jpg' },
-    { file:'core-bocetos.jpg', src:'/images/core-bocetos.jpg' },
+    { file:'core-render-concept.jpg', src:'/images/core-render-concept.webp' },
+    { file:'core-render-identity.jpg', src:'/images/core-render-identity.webp' },
+    { file:'core-render-production.jpg', src:'/images/core-render-production.webp' },
+    { file:'core-bocetos.jpg', src:'/images/core-bocetos.webp' },
 
-    { file:'promix-render-opportunity.jpg', src:'/images/promix-render-opportunity.jpg' },
-    { file:'promix-render-solution.jpg', src:'/images/promix-render-solution.jpg' }
+    { file:'promix-render-opportunity.jpg', src:'/images/promix-render-opportunity.webp' },
+    { file:'promix-render-solution.jpg', src:'/images/promix-render-solution.webp' }
   ];
+
+  // Preload all trail images as soon as About page becomes active
+  let _trailPreloaded = false;
+  function preloadTrailImages(){
+    if(_trailPreloaded) return;
+    _trailPreloaded = true;
+    files.forEach(function(f){
+      var img = new Image();
+      img.src = f.src;
+    });
+  }
+  var _aboutObserver = new MutationObserver(function(){
+    if(aboutPage.classList.contains('active')) preloadTrailImages();
+  });
+  _aboutObserver.observe(aboutPage, { attributes:true, attributeFilter:['class'] });
 
   let lastTime = 0;
   let lastX = null;
