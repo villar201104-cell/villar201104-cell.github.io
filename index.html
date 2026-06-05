@@ -1119,6 +1119,7 @@ function buildProject(id) {
       With only 2 bodies and an additive process,<br>
       how do you make a lamp that <em>could only exist this way</em>?
     </div>
+    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(40px,5vw,72px)"><img loading="lazy" src="/images/flujo-sketches.webp" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
     <div class="split-block">
       <div class="split-left">
         <span class="split-tag">Name &amp; Identity</span>
@@ -1169,28 +1170,27 @@ function buildProject(id) {
       </div>
     </div>
     
-    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)"><img loading="lazy" src="/images/flujo-ambient.webp" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
     <div class="evo-wrap">
       <div class="evo-header">
         <div class="evo-title">Design Evolution</div>
         <div class="evo-subtitle">2 phases</div>
       </div>
-      <div class="evo-cols" style="grid-template-columns:1088fr 1617fr;column-gap:1px;row-gap:1px;background:var(--color-border);border:1px solid var(--color-border);">
-        <div class="evo-col">
-          <div class="evo-phase-name">Ideation</div>
-          <div class="evo-phase-sub">Form exploration</div>
-          <div class="evo-desc">Exploring the screen as a sculptural object. Defining the internal three-dimensional pattern and the branching extensions at both edges that modulate light output.</div>
-        </div>
+      <div class="evo-cols" style="grid-template-columns:1617fr 1088fr;column-gap:1px;row-gap:1px;background:var(--color-border);border:1px solid var(--color-border);">
         <div class="evo-col">
           <div class="evo-phase-name">Iteration</div>
           <div class="evo-phase-sub">Physical testing</div>
           <div class="evo-desc">PETG over PLA for translucency and thermal resistance. 0.4mm nozzle for definition of the internal pattern. Wall thickness between 0.8mm and 1mm, where the difference in how much light passes through becomes visible, and where the screen either holds its form or flexes.</div>
         </div>
-        <div style="background:var(--color-bg);padding:16px 2%;">
-          <img loading="lazy" src="/images/flujo-evo-ideation.webp" style="width:100%;display:block;">
+        <div class="evo-col">
+          <div class="evo-phase-name">Takeouts</div>
+          <div class="evo-phase-sub">Key learnings</div>
+          <div class="evo-desc">Screen wall thickness calibrated to balance translucency and rigidity. Bayonet geometry adjusted for precise rotation with no play.</div>
         </div>
         <div style="background:var(--color-bg);padding:16px 2%;">
           <img loading="lazy" src="/images/flujo-evo-iteration.webp" style="width:100%;display:block;">
+        </div>
+        <div style="background:var(--color-bg);padding:16px 2%;">
+          <img loading="lazy" src="/images/flujo-proto-takeouts.webp" style="width:100%;display:block;">
         </div>
       </div>
     </div>
@@ -1201,12 +1201,12 @@ function buildProject(id) {
       </div>
       <div class="proto-cols">
         <div class="proto-col">
-          <div class="proto-col-h">Takeouts <span class="proto-col-arrow">→</span></div>
-          <div class="proto-col-body">Screen wall thickness calibrated to balance translucency and rigidity. Bayonet geometry adjusted for precise rotation with no play.</div>
-        </div>
-        <div class="proto-col">
           <div class="proto-col-h">Building <span class="proto-col-arrow">→</span></div>
           <div class="proto-col-body">FDM prints in PETG at 1:1 scale to evaluate how the internal pattern interacts with the light source and what it projects onto the wall and surrounding space.</div>
+        </div>
+        <div class="proto-col">
+          <div class="proto-col-h">Parts <span class="proto-col-arrow">→</span></div>
+          <div class="proto-col-body">Two bodies, one system. Screen and support printed separately, assembled through the bayonet joint. Each piece functional and independent before becoming a whole.</div>
         </div>
         <div class="proto-col">
           <div class="proto-col-h">Testing <span class="proto-col-arrow">→</span></div>
@@ -1215,13 +1215,13 @@ function buildProject(id) {
       </div>
       <div class="proto-imgs">
         <div style="background:var(--color-bg);padding:16px;">
-          <div style="aspect-ratio:4/5;overflow:hidden;background:var(--color-bg);">
-            <img loading="lazy" src="/images/flujo-proto-takeouts.webp" style="width:100%;height:100%;object-fit:cover;display:block;">
+          <div style="aspect-ratio:4/5;overflow:hidden;background:#0A0A0A;">
+            <video src="/videos/flujo-proto-building-web.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video>
           </div>
         </div>
         <div style="background:var(--color-bg);padding:16px;">
-          <div style="aspect-ratio:4/5;overflow:hidden;background:#0A0A0A;">
-            <video src="/videos/flujo-proto-building-web.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video>
+          <div style="aspect-ratio:4/5;overflow:hidden;background:var(--color-bg);">
+            <img loading="lazy" src="/images/flujo-parts.webp" style="width:100%;height:100%;object-fit:cover;display:block;">
           </div>
         </div>
         <div style="background:var(--color-bg);padding:16px;">
