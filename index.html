@@ -755,6 +755,19 @@
           </div>
           <div class="extra-card-mobile-label"><span class="extra-cml-title">Intervalo</span><span class="extra-cml-cat">Industrial Design · 2026</span></div>
         </div>
+        <div class="extra-card-wrap" onclick="go('project','mantablast')">
+          <div class="extra-card">
+            <img loading="lazy" class="extra-card-img" src="/images/manta-hero.webp" alt="Manta Blast" style="object-position:center center;">
+            <div class="extra-card-overlay">
+              <div class="extra-card-meta">
+                <span class="extra-card-num">+ Product Design · 2024</span>
+                <div class="extra-card-title">Manta Blast</div>
+                <div class="extra-card-desc">A water gun shaped by the manta ray — flowing, minimal, 3D printed.</div>
+              </div>
+            </div>
+          </div>
+          <div class="extra-card-mobile-label"><span class="extra-cml-title">Manta Blast</span><span class="extra-cml-cat">Product Design · 2024</span></div>
+        </div>
         <div class="addon-placeholder-wrap">
           <div class="addon-placeholder" aria-label="More work coming soon">
             <div class="addon-placeholder-center">
@@ -958,6 +971,15 @@ const PROJECTS = {
     specs:[{l:'Category',v:'Product Redesign'},{l:'Year',v:'2025'},{l:'Client',v:'Philips (academic)'},{l:'Material',v:'PP'},{l:'Process',v:'Injection Molding'}],
     desc:['The project began with a full product survey of the Philips ProMix hand blender: mapping each component, its function, its relationship to the rest of the system, and the gaps left unaddressed. The goal was not to fix a predefined problem but to find where the product had something left to give.','After analyzing the entire assembly, the cap stood out as the only component without a structural or functional role beyond basic protection. Every other part earned its place. The cap did not. That gap became the opportunity: a single component that could be redesigned to add a real convenience without touching anything else in the product.','The redesign integrates cable and plug storage directly into the cap body. A recessed channel guides the cable from a dedicated plug housing to the storage wrap. The piece connects to the existing rear casing via a snap-fit using lateral fins, with no modifications to the product architecture. Injection-molded in PP. Dimensions: 22 x 33 x 65 mm.'],
     panels:['/images/promix-panel.webp','/images/promix-plano-tapa.webp','/images/promix-plano-explotada.webp','/images/promix-plano-conjunto.webp'],
+    prev:null, next:null
+  },
+  mantablast: {
+    hPanels:[0,1,2,3],
+    title:'Manta Blast', eyebrow:'+ Product Design',
+    tagline:'A water gun shaped by the manta ray — flowing, minimal, 3D printed.',
+    specs:[{l:'Category',v:'Product Design'},{l:'Year',v:'2024'},{l:'Materials',v:'PLA'},{l:'Process',v:'FDM 3D Print'}],
+    desc:['Manta Blast began with a form study on the manta ray — not its silhouette, but its qualities: the way it glides, the continuous curves of its body, the absence of sharp transitions. Translating those qualities into a handheld object meant designing a form that felt resolved in the hand before it felt like anything else.','The geometry was developed entirely around grip and ergonomics. The handle falls naturally into the palm, the trigger is positioned for intuitive use, and the reload gesture follows a single linear motion. Every surface decision traces back to how the object is held, operated, and returned to.','Printed in PLA via FDM, the design exploits additive manufacturing to achieve organic transitions that injection molding would require multiple parts to approximate. The result is a single fluid form split into only the components that the mechanism demands: body, plunger, nozzle, and cap.'],
+    panels:['/images/manta-1.webp','/videos/manta-2.mp4','/images/manta-3.webp','/images/manta-4.webp'],
     prev:null, next:null
   },
   intervalo: {
