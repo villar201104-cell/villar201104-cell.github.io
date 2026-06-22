@@ -345,7 +345,8 @@
   .origins-question{margin:0 clamp(80px,10vw,160px);padding:36px 0 clamp(64px,8vw,100px);border-bottom:1px solid var(--color-border);font-family:var(--font-display);font-size:clamp(1rem,1.6vw,1.35rem);font-style:italic;font-weight:400;color:var(--color-muted);line-height:1.55}
   .origins-question em{color:var(--color-text);font-style:italic;font-weight:500}
   .split-block{display:flex;border-bottom:1px solid var(--color-border);height:calc(100vh - var(--nav-height));min-height:560px}
-  .split-left{flex:1;min-width:320px;padding:clamp(48px,6vw,80px) clamp(80px,10vw,160px);display:flex;flex-direction:column;justify-content:center;overflow-y:auto}
+  .split-left{flex:1;min-width:320px;padding:clamp(48px,6vw,80px) clamp(80px,10vw,160px);display:flex;flex-direction:column;justify-content:center;overflow-y:auto;scrollbar-width:none;-ms-overflow-style:none}
+  .split-left::-webkit-scrollbar{display:none}
   .split-right{flex-shrink:0;overflow:hidden}
   .split-right img{height:100%;width:auto;display:block}
   .split-right.flip{order:-1}
@@ -374,6 +375,7 @@
   .proto-col-arrow{color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body)}
   .proto-col-body{font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);margin-top:10px}
   .proto-imgs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--color-border);border:1px solid var(--color-border)}
+  .proto-imgs video{width:100%;height:100%;object-fit:cover;display:block}
   .process-closing{padding:clamp(56px,7vw,80px) clamp(80px,10vw,160px);border-top:1px solid var(--color-border);font-family:var(--font-display);font-size:clamp(1.05rem,1.7vw,1.4rem);font-style:italic;font-weight:400;color:var(--color-muted);line-height:1.55}
   .process-closing em{color:var(--color-text);font-style:italic}
   .proto-3col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--color-border);border:1px solid var(--color-border)}
@@ -1030,7 +1032,7 @@ const PROJECTS = {
     specs:[{l:'Category',v:'Lighting Design'},{l:'Year',v:'2025'},{l:'Materials',v:'PETG, Standard Components'},{l:'Process',v:'FDM 3D Print'}],
     desc:['FLUJO began with two constraints: as few parts as possible, and a geometry that could only exist through 3D printing. Not a form that happens to be printed, but one where the process and the shape are inseparable. Every surface, curve, and transition was designed to exploit what additive manufacturing makes possible and no other process allows. The result is a wall lamp that feels resolved and alive at the same time.','The conceptual anchor is breath: movement that is internal, rhythmic, and continuous. That abstraction found its form in a geometry with no hard breaks and no decorative gestures, just surfaces responding to light. Printed in PETG, the object justifies its shape entirely through structural logic.'],
     panels:['/images/flujo_cover.webp','/images/flujo2.webp','/images/flujo4.webp','/videos/flujo-reel.mp4','/images/flujo5.webp','/images/flujo6.webp'],
-    prev:null, next:'incline'
+    prev:null, next:'incline'          // flujo is first
   },
   incline: {
     hPanels:[2,3],
@@ -1057,7 +1059,7 @@ const PROJECTS = {
     specs:[{l:'Category',v:'Product Redesign'},{l:'Year',v:'2025'},{l:'Client',v:'Philips (academic)'},{l:'Material',v:'PP'},{l:'Process',v:'Injection Molding'}],
     desc:['The project began with a close read of the Philips ProMix hand blender: mapping each component against its function and looking for what the product still had left to solve. The goal was not to fix a predefined problem, but to find where it had something more to give.','The cap stood out as the only component with no structural or functional role beyond basic protection. Every other part had a reason to exist. The cap did not. That gap became the opportunity: a single component that could be redesigned to add real convenience without touching anything else in the product.','The redesign integrates cable and plug storage directly into the cap body. A recessed channel guides the cable from a dedicated plug housing to the storage wrap. The piece connects to the existing rear casing via a snap-fit with lateral fins, with no modifications to the product architecture.'],
     panels:['/images/promix-panel.webp','/images/promix-plano-tapa.webp','/images/promix-plano-explotada.webp','/images/promix-plano-conjunto.webp'],
-    prev:null, next:null
+    prev:'core', next:'mantablast'
   },
   mantablast: {
     hPanels:[0,1,2,3],
@@ -1066,7 +1068,7 @@ const PROJECTS = {
     specs:[{l:'Category',v:'Product Design'},{l:'Year',v:'2024'},{l:'Materials',v:'PLA'},{l:'Process',v:'FDM 3D Print'}],
     desc:['Manta Blast started with a form study on the manta ray. Not its silhouette, but the qualities it moves with: the way it glides, the continuous curves of its body, the absence of sharp transitions. Translating those into a handheld object meant designing a form that felt resolved in the hand before it felt like anything else.','The geometry was developed entirely around grip and ergonomics. The handle falls naturally into the palm, the trigger is positioned for intuitive use, and the reload gesture follows a single linear motion. Every surface decision traces back to how the object is held, operated, and returned to.','Printed in PLA via FDM, the design exploits additive manufacturing to achieve organic transitions that injection molding would require multiple parts to approximate. The result is a single fluid form split into only the components that the mechanism demands: body, plunger, nozzle, and cap.'],
     panels:['/images/manta-1.webp','/videos/manta-2.mp4','/images/manta-3.webp','/images/manta-4.webp'],
-    prev:null, next:null
+    prev:'promix', next:'intervalo'
   },
   intervalo: {
     hPanels:[0,1,2],
@@ -1075,7 +1077,7 @@ const PROJECTS = {
     specs:[{l:'Category',v:'Industrial Design'},{l:'Year',v:'2026'},{l:'Client',v:'YPF (academic)'},{l:'Materials',v:'Steel, Sheet Metal, PVC'},{l:'Process',v:'Welding & Assembly'}],
     desc:['The project starts from a behavioral observation: drivers already wait at the pump. That downtime, usually dead, became the design opportunity. Intervalo is a self-service kiosk positioned at the fuel dispenser, allowing purchases directly from the car window: no detour, no separate transaction, no friction added to a routine that already has none to spare.','The product identity, "full," is embedded in the physical structure through LED lettering and PVC-clad wood slat paneling. A single cabinet integrates a coffee machine, refrigerated display, payment terminal, and removable bins, all accessible and restockable from the rear without disrupting the forecourt.','The manufacturing process runs through six stages: welded steel profiles, sheet metal cladding, surface treatment, cabinetry assembly, PVC cladding with LED signage, and equipment installation. The result is a deployable unit built for the operational realities of a fuel station.'],
     panels:['/images/ypf-1.webp','/images/ypf-2.webp','/images/ypf-3.webp'],
-    prev:null, next:null
+    prev:'mantablast', next:null
   },
   pausa: {
     hPanels:[],
@@ -1571,14 +1573,14 @@ function buildProject(id) {
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Sketches <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ form exploration</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">Hand sketches exploring the form language of each piece, the relationship between the aluminum structure and the soft surfaces, and the visual coherence of the collection before moving to 3D.</div>
           </div>
-          <div class="proto-item-img"><img loading="lazy" src="/images/pausa-bocetos.webp" style="width:100%;display:block;"></div>
+          <div class="proto-item-img" style="overflow:hidden"><img loading="lazy" src="/images/pausa-bocetos.webp" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;"></div>
         </div>
         <div class="proto-item">
           <div class="proto-item-text">
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Scale model <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ proportions verified</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">A scale model built to validate the proportions of each piece and the visual weight of the collection as a set, confirming the balance between structural presence and lightness before the final renders.</div>
           </div>
-          <div class="proto-item-img"><img loading="lazy" src="/images/pausa-maqueta.webp" style="width:100%;display:block;"></div>
+          <div class="proto-item-img" style="overflow:hidden"><img loading="lazy" src="/images/pausa-maqueta.webp" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center bottom;display:block;"></div>
         </div>
       </div>
     </div>
