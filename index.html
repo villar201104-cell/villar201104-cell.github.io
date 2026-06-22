@@ -6,36 +6,43 @@
   <title>Nahuel Villar. Industrial Designer</title>
   <link rel="icon" type="image/png" href="/images/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
   /* ================================================================
      EDIT HERE, change these values to customize the site
   ================================================================ */
   :root {
-    --color-bg:        #FBFBF9;
-    --color-bg-alt:    #F5F5F5;
-    --color-text:      #0A0A0A;
-    --color-soft:      #3A3A3A;
-    --color-muted:     #777777;
-    --color-border:    #E8E8E8;
-    --font-body:       'Inter', -apple-system, sans-serif;
+    /* OKLCH color system — perceptually uniform, hue 85–90 (warm olive) */
+    --color-bg:        oklch(98.5% 0.003 90);
+    --color-bg-alt:    oklch(96.5% 0.004 87);
+    --color-text:      oklch(8.5%  0.005 90);
+    --color-soft:      oklch(28%   0.007 75);
+    --color-muted:     oklch(53%   0.009 75);
+    --color-border:    oklch(91%   0.005 87);
+    --font-body:       'Instrument Sans', -apple-system, sans-serif;
     --font-display:    'Space Grotesk', -apple-system, sans-serif;
     --nav-height:      64px;
     --max-width:       1280px;
     --ease:            cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-out-quint:  cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
   }
   /* ================================================================ */
 
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior: smooth; }
-  body { font-family: var(--font-body); background: var(--color-bg); color: var(--color-text); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  body { font-family: var(--font-body); font-weight:400; background: var(--color-bg); color: var(--color-text); overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-optical-sizing: auto; }
+  h1,h2,h3,h4 { text-wrap: balance; }
+  p { text-wrap: pretty; }
   ::selection { background: var(--color-text); color: var(--color-bg); }
   img { display:block; max-width:100%; }
   a { color:inherit; text-decoration:none; }
 
   /* NAV */
-  .nav { position:fixed; top:0; left:0; right:0; height:var(--nav-height); z-index:200; display:flex; align-items:center; justify-content:space-between; padding:0 clamp(20px,4vw,56px); background:var(--color-bg); border-bottom:1px solid var(--color-border); }
-  .nav.scrolled { border-color:var(--color-border); }
+  .nav { position:fixed; top:0; left:0; right:0; height:var(--nav-height); z-index:200; display:flex; align-items:center; justify-content:space-between; padding:0 clamp(20px,4vw,56px); background:var(--color-bg); border-bottom:1px solid transparent; transition:background .4s var(--ease), border-color .4s var(--ease), backdrop-filter .4s; }
+  .nav.scrolled { border-color:var(--color-border); background:color-mix(in oklch, var(--color-bg) 82%, transparent); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); }
   .nav-logo { cursor:pointer; }
   .nav-logo img { height:52px; width:auto; }
   .nav-links { display:flex; gap:36px; list-style:none; }
@@ -68,11 +75,11 @@
   .extras-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:12px; }
   .extra-card-wrap { cursor:pointer; }
   .extra-card { position:relative; overflow:hidden; aspect-ratio:7/10; background:var(--color-bg-alt); }
-  .extra-card-img { width:100%; height:100%; object-fit:cover; transition:transform .8s var(--ease); }
+  .extra-card-img { width:100%; height:100%; object-fit:cover; transition:transform .45s var(--ease); }
   .extra-card-wrap:hover .extra-card-img { transform:scale(1.04); }
-  .extra-card-overlay { position:absolute; inset:0; background:rgba(10,10,10,0); transition:background .5s; display:flex; flex-direction:column; justify-content:flex-end; padding:28px; }
+  .extra-card-overlay { position:absolute; inset:0; background:rgba(10,10,10,0); transition:background .3s; display:flex; flex-direction:column; justify-content:flex-end; padding:28px; }
   .extra-card-wrap:hover .extra-card-overlay { background:rgba(10,10,10,.58); }
-  .extra-card-meta { transform:translateY(14px); opacity:0; transition:transform .5s var(--ease), opacity .4s; }
+  .extra-card-meta { transform:translateY(10px); opacity:0; transition:transform .3s var(--ease), opacity .25s; }
   .extra-card-wrap:hover .extra-card-meta { transform:translateY(0); opacity:1; }
   .extra-card-num { font-size:.72rem; font-weight:600; letter-spacing:.12em; color:rgba(255,255,255,.35); margin-bottom:8px; display:block; }
   .extra-card-title { font-family:var(--font-display); font-size:1.3rem; font-weight:600; color:#fff; letter-spacing:-.02em; margin-bottom:4px; }
@@ -96,16 +103,16 @@
   .cml-num { font-size:.65rem; color:var(--color-muted); margin-right:8px; }
   .cml-title { font-family:var(--font-display); font-size:.95rem; font-weight:600; margin-right:6px; }
   .cml-cat { font-size:.7rem; color:var(--color-muted); }
-  .project-card-img { width:100%; height:100%; object-fit:cover; transition:transform .8s var(--ease); }
+  .project-card-img { width:100%; height:100%; object-fit:cover; transition:transform .45s var(--ease); }
   .project-card:hover .project-card-img { transform:scale(1.04); }
-  .project-card-overlay { position:absolute; inset:0; background:rgba(10,10,10,0); transition:background .5s; display:flex; flex-direction:column; justify-content:flex-end; padding:32px; }
+  .project-card-overlay { position:absolute; inset:0; background:rgba(10,10,10,0); transition:background .3s; display:flex; flex-direction:column; justify-content:flex-end; padding:32px; }
   .project-card:hover .project-card-overlay { background:rgba(10,10,10,.58); }
-  .project-card-meta { transform:translateY(14px); opacity:0; transition:transform .5s var(--ease), opacity .4s; }
+  .project-card-meta { transform:translateY(10px); opacity:0; transition:transform .3s var(--ease), opacity .25s; }
   .project-card:hover .project-card-meta { transform:translateY(0); opacity:1; }
   .card-label { font-size:.68rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.55); margin-bottom:8px; }
   .card-title { font-family:var(--font-display); font-size:clamp(1.6rem,2.5vw,2.2rem); font-weight:400; color:#fff; line-height:1.1; margin-bottom:10px; }
   .card-desc { font-size:.82rem; color:rgba(255,255,255,.7); line-height:1.6; max-width:280px; }
-  .card-num { position:absolute; top:24px; right:24px; font-size:.72rem; font-weight:500; letter-spacing:.1em; color:rgba(255,255,255,0); transition:color .4s; }
+  .card-num { position:absolute; top:24px; right:24px; font-size:.72rem; font-weight:500; letter-spacing:.1em; color:rgba(255,255,255,0); transition:color .4s; font-variant-numeric: tabular-nums; }
   .project-card:hover .card-num { color:rgba(255,255,255,.35); }
 
   /* PROJECT PAGE */
@@ -124,15 +131,18 @@
   .panels-wrap { margin-bottom:clamp(64px,8vw,100px); }
   .panels-bar { padding:0 clamp(80px,10vw,160px) 18px; display:flex; justify-content:space-between; align-items:center; }
   .panels-bar span { font-size:.72rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--color-muted); }
-  .scroll-hint { display:flex; align-items:center; gap:6px; }
-  .scroll-hint svg { width:18px; height:18px; animation:sh 2s ease-in-out infinite; }
-  @keyframes sh { 0%,100%{transform:translateX(0);opacity:.4} 50%{transform:translateX(5px);opacity:1} }
+  .scroll-hint { display:flex; align-items:center; gap:6px; transition:opacity .5s var(--ease); }
+  .scroll-hint.hint-hidden { opacity:0; pointer-events:none; }
+  .scroll-hint svg { width:18px; height:18px; animation:sh 2.2s ease-in-out 3; }
+  @keyframes sh { 0%,100%{transform:translateX(0);opacity:.4} 50%{transform:translateX(6px);opacity:1} }
   .panels-track { display:flex; gap:14px; padding:0 clamp(20px,4vw,56px) 24px; overflow-x:auto; cursor:grab; user-select:none; -webkit-overflow-scrolling:touch; }
   .panels-track:active { cursor:grabbing; }
   .panels-track::-webkit-scrollbar { height:2px; }
   .panels-track::-webkit-scrollbar-thumb { background:var(--color-border); }
   .panel-item { flex-shrink:0; height:clamp(460px,72vh,800px); border-radius:3px; overflow:hidden; background:var(--color-bg-alt); cursor:zoom-in; }
   .panel-item img { height:100%; width:auto; object-fit:contain; pointer-events:none; display:block; }
+  .panel-landscape { background:#0D0D0B; }
+  .panel-landscape img { background:#0D0D0B; }
   .panel-video { cursor:default; position:relative; }
   .panel-video video { height:100%; width:auto; display:block; object-fit:contain; background:#000; }
   .panel-video::after { content:'▶  Double-click for sound'; position:absolute; top:14px; left:14px; font-size:.62rem; font-weight:600; letter-spacing:.1em; color:rgba(255,255,255,.7); background:rgba(0,0,0,.35); padding:4px 10px; border-radius:2px; pointer-events:none; }
@@ -152,15 +162,17 @@
   /* PROJECT DESCRIPTION */
   .proj-desc { padding:0 clamp(80px,10vw,160px) clamp(64px,8vw,100px); display:grid; grid-template-columns:200px 1fr; gap:clamp(32px,5vw,64px); }
   .desc-label { font-size:.9rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--color-muted); padding-top:4px; }
-  .desc-body p { font-size:clamp(1.05rem,1.35vw,1.25rem); color:var(--color-soft); line-height:1.78; margin-bottom:18px; text-align:justify; }
+  .desc-body p { font-size:clamp(1.05rem,1.35vw,1.25rem); color:var(--color-soft); line-height:1.78; margin-bottom:18px; text-align:left; max-width:68ch; }
   .desc-body p:last-child { margin-bottom:0; }
 
   /* PROJ NAV FOOTER */
   .proj-footer-nav { max-width:var(--max-width); margin:0 auto; padding:clamp(40px,5vw,64px) clamp(20px,4vw,56px); border-top:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center; }
-  .pnav-btn { display:flex; flex-direction:column; gap:4px; cursor:pointer; transition:opacity .2s; }
-  .pnav-btn:hover { opacity:.5; }
+  .pnav-btn { display:flex; flex-direction:column; gap:4px; cursor:pointer; transition:transform .3s var(--ease); }
+  .pnav-btn:hover { transform:translateX(-4px); }
+  .pnav-btn.right:hover { transform:translateX(4px); }
   .pnav-btn.right { text-align:right; }
-  .pnav-lbl { font-size:.88rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--color-muted); }
+  .pnav-lbl { font-size:.78rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--color-muted); transition:color .2s; }
+  .pnav-btn:hover .pnav-lbl { color:var(--color-text); }
   .pnav-title { font-family:var(--font-display); font-size:1.6rem; font-weight:600; letter-spacing:-.02em; }
 
   /* ABOUT */
@@ -176,7 +188,7 @@
   .about-photo-stack.is-swapped .about-photo-alt { z-index:2; transform:translate(0,0) rotate(0) scale(1); opacity:1; filter:none; }
   .about-photo-stack.is-swapped:hover .about-photo-main { transform:translate(32px,-16px) rotate(-2deg) scale(.985); opacity:.86; }
   .about-lead { font-family:var(--font-display); font-size:clamp(1.4rem,2.2vw,2rem); font-weight:600; line-height:1.3; letter-spacing:-.02em; margin-bottom:28px; }
-  .about-bio p { font-size:1rem; color:var(--color-soft); line-height:1.75; margin-bottom:16px; text-align:justify; }
+  .about-bio p { font-size:1rem; color:var(--color-soft); line-height:1.75; margin-bottom:16px; text-align:left; }
   .about-cv { display:grid; grid-template-columns:1fr 1fr 1fr; gap:clamp(24px,4vw,48px); border-top:1px solid var(--color-border); padding-top:40px; }
   .cv-block h4 { font-size:.68rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--color-muted); margin-bottom:20px; padding-bottom:10px; border-bottom:1px solid var(--color-border); }
   .cv-item { margin-bottom:18px; }
@@ -190,9 +202,9 @@
   .contact-wrap h2 { font-family:var(--font-display); font-size:clamp(2.5rem,5vw,4.5rem); font-weight:700; letter-spacing:-.03em; line-height:1.05; margin-bottom:clamp(40px,6vw,72px); }
   .contact-wrap h2 em { font-style:normal; font-weight:300; color:var(--color-muted); }
   .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; }
-  .c-item { display:flex; flex-direction:column; justify-content:space-between; padding:36px; border:1px solid var(--color-border); min-height:150px; text-decoration:none; color:inherit; transition:background .3s, border-color .3s; }
-  .c-item:hover { background:var(--color-text); border-color:var(--color-text); }
-  .c-item:hover .c-lbl, .c-item:hover .c-val, .c-item:hover .c-arrow { color:#fff; }
+  .c-item { display:flex; flex-direction:column; justify-content:space-between; padding:36px; border:1px solid var(--color-border); min-height:150px; text-decoration:none; color:inherit; transition:background .35s var(--ease), border-color .35s var(--ease), transform .35s var(--ease); }
+  .c-item:hover { background:var(--color-text); border-color:var(--color-text); transform:translateY(-2px); }
+  .c-item:hover .c-lbl, .c-item:hover .c-val, .c-item:hover .c-arrow { color:rgba(251,251,249,.9); }
   .c-lbl { font-size:.68rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--color-muted); transition:color .3s; }
   .c-val { font-family:var(--font-display); font-size:clamp(1rem,1.6vw,1.4rem); font-weight:400; color:var(--color-text); transition:color .3s; margin-top:14px; }
   .c-arrow { font-size:1.1rem; color:var(--color-muted); transition:color .3s, transform .3s; align-self:flex-end; }
@@ -205,7 +217,7 @@
   /* HOME FOOTER */
   .home-footer { padding:clamp(16px,2vw,24px) clamp(16px,1.5vw,24px) clamp(20px,2vw,28px); }
   .home-footer-top { display:flex; justify-content:space-between; align-items:center; padding-top:20px; border-top:1px solid var(--color-border); margin-top:20px; }
-  .rights { font-size:.72rem; color:#C0C0C0; letter-spacing:.06em; }
+  .rights { font-size:.72rem; color:var(--color-muted); letter-spacing:.06em; }
   .socials { display:flex; gap:20px; }
   .socials a { color:var(--color-text); opacity:.35; transition:opacity .2s; display:flex; }
   .socials a:hover { opacity:1; }
@@ -216,6 +228,36 @@
   .fu.in { opacity:1; transform:translateY(0); }
   .d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s} .d4{transition-delay:.32s}
 
+  /* ACCESSIBILITY: focus-visible ring */
+  :focus-visible {
+    outline: 2px solid var(--color-text);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .nav-links a:focus-visible,
+  .pnav-btn:focus-visible,
+  .c-item:focus-visible,
+  .project-card-wrap:focus-visible,
+  .extra-card-wrap:focus-visible { outline-offset:4px; }
+
+  /* REDUCED MOTION: respect OS setting */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .fu { opacity:1; transform:none; }
+    body.js-loaded .split-block,
+    body.js-loaded .proto-wrap,
+    body.js-loaded .process-closing,
+    body.js-loaded .evo-wrap,
+    body.js-loaded .origins-grid,
+    body.js-loaded .origins-question { opacity:1; transform:none; transition:none; }
+    .image-trail-layer { display:none; }
+    .type-cursor { animation:none; opacity:1; }
+  }
+
   /* RESPONSIVE */
   /* hamburger */
   .nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; }
@@ -223,6 +265,27 @@
   .nav-mobile { display:none; position:fixed; inset:0; top:var(--nav-height); background:var(--color-bg); z-index:190; flex-direction:column; align-items:center; justify-content:center; gap:40px; }
   .nav-mobile.open { display:flex; }
   .nav-mobile a { font-size:2rem; font-family:var(--font-display); font-weight:600; letter-spacing:-.02em; color:var(--color-text); cursor:pointer; }
+  /* Nav right group */
+  .nav-right { display:flex; align-items:center; gap:28px; }
+  /* Globe language switcher */
+  .lang-globe { position:relative; }
+  .lang-globe-btn { width:30px; height:30px; border-radius:50%; border:1px solid var(--color-border); background:none; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--color-muted); transition:color .2s var(--ease), border-color .2s var(--ease); }
+  .lang-globe-btn:hover { color:var(--color-text); border-color:var(--color-text); }
+  .lang-globe-btn svg { width:13px; height:13px; }
+  .lang-dropdown { position:absolute; top:calc(100% + 8px); right:0; background:var(--color-bg); border:1px solid var(--color-border); border-radius:10px; padding:4px; min-width:148px; box-shadow:0 8px 24px oklch(0% 0 0 / 8%); opacity:0; pointer-events:none; transform:translateY(-6px); transition:opacity .18s var(--ease), transform .18s var(--ease); z-index:300; }
+  .lang-dropdown.open { opacity:1; pointer-events:all; transform:translateY(0); }
+  .ld-btn { display:flex; align-items:center; gap:8px; width:100%; text-align:left; background:none; border:none; cursor:pointer; font-family:var(--font-body); font-size:.78rem; font-weight:500; letter-spacing:.06em; color:var(--color-muted); padding:8px 12px; border-radius:7px; transition:background .15s, color .15s; }
+  .ld-btn:hover { background:var(--color-bg-alt); color:var(--color-text); }
+  .ld-btn.active { color:var(--color-text); }
+  .ld-btn .ld-code { font-weight:600; min-width:20px; }
+  .ld-btn .ld-name { opacity:.6; font-size:.72rem; }
+  .ld-btn.active .ld-name { opacity:1; }
+  @media(max-width:900px) { .lang-globe { display:none; } }
+  /* Mobile lang switcher */
+  .nav-mobile .lang-sw { display:flex; align-items:center; gap:6px; margin-top:8px; }
+  .nav-mobile .ls-btn { font-size:.85rem; font-weight:500; letter-spacing:.1em; color:var(--color-muted); background:none; border:none; cursor:pointer; padding:4px 8px; transition:color .2s; font-family:var(--font-body); }
+  .nav-mobile .ls-btn.active, .nav-mobile .ls-btn:hover { color:var(--color-text); }
+  .nav-mobile .ls-sep { font-size:.7rem; color:var(--color-border); pointer-events:none; }
 
     @keyframes addonProgress { 0% { transform:translateX(-120%); } 40%,68% { transform:translateX(0); } 100% { transform:translateX(220%); } }
 
@@ -281,13 +344,13 @@
   .origins-stat strong{color:var(--color-text);font-weight:600}
   .origins-question{margin:0 clamp(80px,10vw,160px);padding:36px 0 clamp(64px,8vw,100px);border-bottom:1px solid var(--color-border);font-family:var(--font-display);font-size:clamp(1rem,1.6vw,1.35rem);font-style:italic;font-weight:400;color:var(--color-muted);line-height:1.55}
   .origins-question em{color:var(--color-text);font-style:italic;font-weight:500}
-  .split-block{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--color-border)}
-  .split-left{padding:clamp(48px,6vw,80px) clamp(80px,10vw,160px);display:flex;flex-direction:column;justify-content:center}
-  .split-right{min-height:400px}
+  .split-block{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--color-border);height:calc(100vh - var(--nav-height));min-height:560px}
+  .split-left{padding:clamp(48px,6vw,80px) clamp(80px,10vw,160px);display:flex;flex-direction:column;justify-content:center;overflow-y:auto}
+  .split-right{overflow:hidden}
   .split-right.flip{order:-1}
   .split-tag{font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--color-muted);margin-bottom:16px;display:block}
   .split-h{font-family:var(--font-display);font-size:clamp(1.4rem,2.2vw,1.9rem);font-weight:600;letter-spacing:-.02em;line-height:1.15;margin-bottom:24px}
-  .split-body{font-size:clamp(.9rem,1.1vw,1rem);line-height:1.78;color:var(--color-soft);max-width:420px}
+  .split-body{font-size:clamp(.9rem,1.1vw,1rem);line-height:1.78;color:var(--color-soft);max-width:420px;text-align:left}
   .split-body p{margin-bottom:14px}
   .split-body p:last-child{margin-bottom:0}
   .split-specs{margin-top:28px;padding-top:24px;border-top:1px solid var(--color-border);display:flex;gap:28px;flex-wrap:wrap}
@@ -322,10 +385,10 @@
     .process-header{padding:40px 24px 28px}
     .origins-grid{grid-template-columns:1fr;margin:0 24px}
     .origins-question{margin:0 24px;padding:28px 0 48px}
-    .split-block{grid-template-columns:1fr}
-    .split-right{aspect-ratio:4/3;min-height:unset}
+    .split-block{grid-template-columns:1fr;height:auto;min-height:unset}
+    .split-right{aspect-ratio:4/3;overflow:hidden}
     .split-right.flip{order:0}
-    .split-left{padding:40px 24px}
+    .split-left{padding:40px 24px;overflow-y:visible}
     .proto-wrap{padding:40px 24px}
     .proto-cols{grid-template-columns:1fr}
     .proto-imgs{grid-template-columns:1fr}
@@ -369,7 +432,7 @@
     z-index:9999;
     transform:translate(-50%,-50%);
     opacity:0;
-    transition:opacity .3s;
+    transition:opacity .12s;
   }
   .c-cross.active{opacity:1}
   .c-arm{
@@ -523,10 +586,10 @@
     .origins-col{border:1px solid var(--color-border);padding:18px 18px 22px;gap:14px;}
     .origins-stat{font-size:.92rem;line-height:1.62;}
     .origins-question{margin:0 20px;padding:30px 0 50px;font-size:1.05rem;line-height:1.5;}
-    .split-block{grid-template-columns:1fr;border-bottom:1px solid var(--color-border);}
+    .split-block{grid-template-columns:1fr;border-bottom:1px solid var(--color-border);height:auto;min-height:unset;}
     /* Keep process sections alternating text / render on mobile */
-    .split-left{padding:42px 20px;order:1;}
-    .split-right,.split-right.flip{order:2;min-height:unset;aspect-ratio:4/3;}
+    .split-left{padding:42px 20px;order:1;overflow-y:visible;}
+    .split-right,.split-right.flip{order:2;overflow:hidden;aspect-ratio:4/3;}
     .split-h{font-size:clamp(1.55rem,8vw,2.25rem);line-height:1.08;margin-bottom:18px;}
     .split-body{font-size:.96rem;line-height:1.68;max-width:none;}
     .split-body p{margin-bottom:13px;}
@@ -638,24 +701,44 @@
   <div class="nav-logo" onclick="go('home')">
     <img loading="lazy" src="/images/logo.png" alt="NV">
   </div>
-  <ul class="nav-links" id="navLinks">
-    <li><a onclick="go('home')" id="nl-work" class="active">Work</a></li>
-    <li><a onclick="go('about')" id="nl-about">About</a></li>
-    <li><a onclick="go('contact')" id="nl-contact">Contact</a></li>
-  </ul>
-  <div class="nav-back" id="navBack" onclick="go('home')">
-    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8l5 5"/></svg>
-    All work
-  </div>
-  <div class="nav-hamburger" id="navHamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
+  <div class="nav-right">
+    <ul class="nav-links" id="navLinks">
+      <li><a onclick="go('home')" id="nl-work" class="active" data-i18n="nav_work">Work</a></li>
+      <li><a onclick="go('about')" id="nl-about" data-i18n="nav_about">About</a></li>
+      <li><a onclick="go('contact')" id="nl-contact" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <div class="nav-back" id="navBack" onclick="go('home')">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8l5 5"/></svg>
+      <span data-i18n="nav_back">All work</span>
+    </div>
+    <div class="lang-globe" id="langGlobe">
+      <button class="lang-globe-btn" id="langGlobeBtn" onclick="toggleLangMenu(event)" aria-label="Language">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><ellipse cx="8" cy="8" rx="2.8" ry="6"/><line x1="2.2" y1="6" x2="13.8" y2="6"/><line x1="2.2" y1="10" x2="13.8" y2="10"/></svg>
+      </button>
+      <div class="lang-dropdown" id="langDropdown">
+        <button class="ld-btn active" data-lang="en" onclick="setLang('en');closeLangMenu()"><span class="ld-code">EN</span><span class="ld-name">English</span></button>
+        <button class="ld-btn" data-lang="es" onclick="setLang('es');closeLangMenu()"><span class="ld-code">ES</span><span class="ld-name">Español</span></button>
+        <button class="ld-btn" data-lang="de" onclick="setLang('de');closeLangMenu()"><span class="ld-code">DE</span><span class="ld-name">Deutsch</span></button>
+      </div>
+    </div>
+    <div class="nav-hamburger" id="navHamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
   </div>
 </nav>
 <div class="nav-mobile" id="navMobile">
-  <a onclick="go('home');toggleMenu()">Work</a>
-  <a onclick="go('about');toggleMenu()">About</a>
-  <a onclick="go('contact');toggleMenu()">Contact</a>
+  <a onclick="go('home');toggleMenu()" data-i18n="nav_work">Work</a>
+  <a onclick="go('about');toggleMenu()" data-i18n="nav_about">About</a>
+  <a onclick="go('contact');toggleMenu()" data-i18n="nav_contact">Contact</a>
+  <div class="lang-sw">
+    <button class="ls-btn active" data-lang="en" onclick="setLang('en');toggleMenu()">EN</button>
+    <span class="ls-sep">·</span>
+    <button class="ls-btn" data-lang="es" onclick="setLang('es');toggleMenu()">ES</button>
+    <span class="ls-sep">·</span>
+    <button class="ls-btn" data-lang="de" onclick="setLang('de');toggleMenu()">DE</button>
+  </div>
 </div>
+
 
 <!-- HOME -->
 <div class="page active" id="page-home">
@@ -667,7 +750,7 @@
         <p class="hero-quote"><span class="flip-text" data-alt="Obsessed with the craft, every detail is a decision.">Form follows function. Identity follows conviction.</span></p>
       </div>
     </header>
-    <span class="work-section-label fu d2">Selected work</span>
+    <span class="work-section-label fu d2" data-i18n="work_label">Selected work</span>
     <main class="projects-grid" data-cursor="light">
       <div class="project-card-wrap fu d1" onclick="go('project','flujo')">
         <div class="project-card">
@@ -677,7 +760,7 @@
             <div class="project-card-meta">
               <p class="card-label">Lighting · 2025</p>
               <h2 class="card-title">Flujo</h2>
-              <p class="card-desc">A wall lamp built on the logic of breath, printed, minimal, meditative.</p>
+              <p class="card-desc" data-i18n-project="flujo">A wall lamp built on the logic of breath, printed, minimal, meditative.</p>
             </div>
           </div>
         </div>
@@ -691,7 +774,7 @@
             <div class="project-card-meta">
               <p class="card-label">Product · 2024</p>
               <h2 class="card-title">Incline</h2>
-              <p class="card-desc">A modular planter system that adapts to the geometry of small-city living.</p>
+              <p class="card-desc" data-i18n-project="incline">A modular planter system that adapts to the geometry of small-city living.</p>
             </div>
           </div>
         </div>
@@ -705,7 +788,7 @@
             <div class="project-card-meta">
               <p class="card-label">Furniture · 2024</p>
               <h2 class="card-title">Pausa</h2>
-              <p class="card-desc">Outdoor furniture that gives permission to stop.</p>
+              <p class="card-desc" data-i18n-project="pausa">Outdoor furniture that gives permission to stop.</p>
             </div>
           </div>
         </div>
@@ -719,7 +802,7 @@
             <div class="project-card-meta">
               <p class="card-label">Product Redesign · 2024</p>
               <h2 class="card-title">Core</h2>
-              <p class="card-desc">Under Armour's performance identity, compressed into a roll-on.</p>
+              <p class="card-desc" data-i18n-project="core">Under Armour's performance identity, compressed into a roll-on.</p>
             </div>
           </div>
         </div>
@@ -727,7 +810,7 @@
       </div>
     </main>
     <div class="extras-section">
-      <span class="work-section-label" style="padding:0;">Add-ons</span>
+      <span class="work-section-label" style="padding:0;" data-i18n="addons_label">Add-ons</span>
       <div class="extras-grid" data-cursor="light">
         <div class="extra-card-wrap" onclick="go('project','promix')">
           <div class="extra-card">
@@ -736,7 +819,7 @@
               <div class="extra-card-meta">
                 <span class="extra-card-num">+ Product Redesign · 2025</span>
                 <div class="extra-card-title">Promix</div>
-                <div class="extra-card-desc">A cap redesign that integrates cable storage into the Philips ProMix hand blender.</div>
+                <div class="extra-card-desc" data-i18n-project="promix">A cap redesign that integrates cable and plug storage into the Philips ProMix hand blender.</div>
               </div>
             </div>
           </div>
@@ -749,7 +832,7 @@
               <div class="extra-card-meta">
                 <span class="extra-card-num">+ Industrial Design · 2026</span>
                 <div class="extra-card-title">Intervalo</div>
-                <div class="extra-card-desc">A self-service retail kiosk that brings the store to the pump.</div>
+                <div class="extra-card-desc" data-i18n-project="intervalo">A self-service retail kiosk that brings the store to the pump.</div>
               </div>
             </div>
           </div>
@@ -762,7 +845,7 @@
               <div class="extra-card-meta">
                 <span class="extra-card-num">+ Product Design · 2024</span>
                 <div class="extra-card-title">Manta Blast</div>
-                <div class="extra-card-desc">A water gun shaped by the manta ray — flowing, minimal, 3D printed.</div>
+                <div class="extra-card-desc" data-i18n-project="mantablast">A water gun shaped by the manta ray: flowing, minimal, 3D printed.</div>
               </div>
             </div>
           </div>
@@ -771,9 +854,9 @@
         <div class="addon-placeholder-wrap">
           <div class="addon-placeholder" aria-label="More work coming soon">
             <div class="addon-placeholder-center">
-              <div class="addon-placeholder-meta">In progress</div>
+              <div class="addon-placeholder-meta" data-i18n="in_progress">In progress</div>
               <div class="addon-placeholder-bar"></div>
-              <div class="addon-placeholder-small">More work is on the way.</div>
+              <div class="addon-placeholder-small" data-i18n="more_coming">More work is on the way.</div>
             </div>
           </div>
           <div class="addon-placeholder-mobile-label"><span class="extra-cml-title">Coming Soon</span><span class="extra-cml-cat">Future Add-ons</span></div>
@@ -782,7 +865,7 @@
     </div>
     <div class="home-footer">
       <div class="home-footer-top">
-        <p class="rights">© 2026 Nahuel Villar. All Rights Reserved</p>
+        <p class="rights" data-i18n="rights">© 2026 Nahuel Villar. All Rights Reserved</p>
         <div class="socials">
           <a href="https://linkedin.com/in/" target="_blank" aria-label="LinkedIn">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -806,7 +889,7 @@
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" data-cursor="light">
-  <span class="lb-close" id="lbClose">✕ close</span>
+  <span class="lb-close" id="lbClose" data-i18n="lb_close">✕ close</span>
   <div class="lb-arrow lb-prev" id="lbPrev" onclick="lbNav(-1)">
     <svg viewBox="0 0 20 20"><path d="M13 4L7 10l6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </div>
@@ -829,9 +912,9 @@
           </div>
         </div>
         <div class="fu d2">
-          <div class="about-bio">
+          <div class="about-bio" id="aboutBio">
             <p>Hi, I’m Nahuel, an Argentine industrial designer currently based in the United States and finishing the final semesters of my degree.</p>
-            <p>When I start a project, something usually bugs me first, a product that doesn't hold up, a solution that solved the wrong problem, a form that exists for attention rather than reason. That friction is where I begin.</p>
+            <p>When I start a project, something usually bugs me first, a product that doesn’t hold up, a solution that solved the wrong problem, a form that exists for attention rather than reason. That friction is where I begin.</p>
             <p>I design with conviction. When I commit to a project I go deep, into the material logic, the use scenario, the thing it needs to communicate without saying it. I see design as a structured system where identity, material, production, and intention must align. And I think it should contribute clarity, not noise.</p>
             <p>What frustrates me most about design today is how often the market comes first and the problem second. Form is not decoration, but consequence. Design is not a reaction to trends, it is a position.</p>
             <p>Beyond design: ocean, movement, art, music, and videogames.</p>
@@ -840,22 +923,22 @@
       </div>
       <div class="about-cv fu d2">
         <div class="cv-block">
-          <h4>Experience</h4>
+          <h4 data-i18n="cv_exp">Experience</h4>
           <div class="cv-item">
-            <p class="cv-item-title">Freelance Product Design <span style="font-weight:400;color:var(--color-muted)"> · Ongoing</span></p>
-            <p class="cv-item-sub">Design and redesign of functional components with a focus on usability and manufacturability. Work spans concept ideation through rapid prototyping and iterative testing using 3D printing and fabrication tools.</p>
+            <p class="cv-item-title"><span data-i18n="freelance_title">Freelance Product Design</span> <span style="font-weight:400;color:var(--color-muted)"> · <span data-i18n="cv_ongoing">Ongoing</span></span></p>
+            <p class="cv-item-sub" data-i18n="freelance_sub">Design and redesign of functional components with a focus on usability and manufacturability. Work spans concept ideation through rapid prototyping and iterative testing using 3D printing and fabrication tools.</p>
           </div>
           <div class="cv-item">
             <p class="cv-item-title">Taragüi <span style="font-weight:400;color:var(--color-muted)"> · Spring 2026</span></p>
-            <p style="font-size:.82rem;font-weight:500;color:var(--color-soft);margin-bottom:4px;">Design Intern</p>
-            <p class="cv-item-sub">Redesign of the Mate Listo product line. Focused on form refinement and CMF direction, translating the brand's identity into a sharper, more premium kit.</p>
+            <p style="font-size:.82rem;font-weight:500;color:var(--color-soft);margin-bottom:4px;" data-i18n="design_intern">Design Intern</p>
+            <p class="cv-item-sub" data-i18n="taragui_sub">Redesign of the Mate Listo product line. Focused on form refinement and CMF direction, translating the brand's identity into a sharper, more premium kit.</p>
           </div>
           <div class="cv-item">
             <p class="cv-item-title">Myke Outdoors <span style="font-weight:400;color:var(--color-muted)"> · Spring 2025</span></p>
-            <p style="font-size:.82rem;font-weight:500;color:var(--color-soft);margin-bottom:4px;">Design Intern</p>
-            <p class="cv-item-sub">Development of an outdoor furniture collection. Work spanned concept ideation, material research, and production-oriented design across seating and modular pieces.</p>
+            <p style="font-size:.82rem;font-weight:500;color:var(--color-soft);margin-bottom:4px;" data-i18n="design_intern">Design Intern</p>
+            <p class="cv-item-sub" data-i18n="myke_sub">Development of an outdoor furniture collection. Work spanned concept ideation, material research, and production-oriented design across seating and modular pieces.</p>
           </div>
-          <h4 style="margin-top:28px">Education</h4>
+          <h4 style="margin-top:28px" data-i18n="cv_edu">Education</h4>
           <div class="cv-item">
             <p class="cv-item-title">Universidad de Palermo <span style="font-weight:400;color:var(--color-muted)">Expected Spring 2027</span></p>
             <p class="cv-item-sub">Buenos Aires, Argentina<br>Bachelor's Degree in Industrial Design · 3.4 GPA</p>
@@ -870,11 +953,11 @@
           </div>
         </div>
         <div class="cv-block">
-          <h4>Core Competencies</h4>
+          <h4 data-i18n="cv_skills">Core Competencies</h4>
           <div class="cv-item">
             <p class="cv-item-sub">Product Design · Concept Development · CMF · Human Factors · Design Research · User-Centered Design · Constraint-Based Design · Rapid Prototyping · Design Thinking · Rendering & Visualization · Storytelling & Presentation</p>
           </div>
-          <h4 style="margin-top:36px">Software</h4>
+          <h4 style="margin-top:36px" data-i18n="cv_software">Software</h4>
           <div class="cv-item">
             <p class="cv-item-sub">Fusion 360 · KeyShot · Figma · Rhino</p>
           </div>
@@ -884,17 +967,17 @@
           </div>
         </div>
         <div class="cv-block">
-          <h4>AI Design Tools</h4>
+          <h4 data-i18n="cv_ai">AI Design Tools</h4>
           <div class="cv-item">
             <p class="cv-item-sub">Vizcom · Midjourney · Adobe Firefly</p>
           </div>
-          <h4 style="margin-top:36px">Fabrication</h4>
+          <h4 style="margin-top:36px" data-i18n="cv_fab">Fabrication</h4>
           <div class="cv-item">
             <p class="cv-item-sub">3D Printing · Laser Cutting · Wood Lathe · Milling · Paint Spraying · Belt & Disc Sanding</p>
           </div>
-          <h4 style="margin-top:36px">Languages</h4>
+          <h4 style="margin-top:36px" data-i18n="cv_lang_h">Languages</h4>
           <div class="cv-item">
-            <p class="cv-item-sub">Spanish. Native<br>English. Fluent · IB Certificate</p>
+            <p class="cv-item-sub" id="cvLangSub">Spanish. Native<br>English. Fluent · IB Certificate</p>
           </div>
         </div>
       </div>
@@ -907,7 +990,7 @@
 <div class="page" id="page-contact">
   <div class="page-content">
     <div class="contact-wrap">
-      <h2 class="fu">Let's work<br><em>together.</em></h2>
+      <h2 class="fu" id="contactTitle">Let's work<br><em>together.</em></h2>
       <div class="contact-grid">
         <a href="mailto:nahue201104@hotmail.com" class="c-item fu d1" data-cursor="light">
           <span class="c-lbl">Email</span>
@@ -942,7 +1025,7 @@ const PROJECTS = {
     title:'Flujo', eyebrow:'01. Lighting',
     tagline:'A wall lamp built on the logic of breath, printed, minimal, meditative.',
     specs:[{l:'Category',v:'Lighting Design'},{l:'Year',v:'2025'},{l:'Materials',v:'PETG, Standard Components'},{l:'Process',v:'FDM 3D Print'}],
-    desc:['FLUJO began with two constraints: fewer parts, and a geometry that could only exist through 3D printing. Not a form that happens to be printed, one that demands it. Every surface, curve, and transition was designed to exploit what additive manufacturing makes possible and no other process allows. The result is a wall lamp that feels simultaneously resolved and alive.','The conceptual anchor is breath: movement that is internal, rhythmic, and continuous. That abstraction found its form in a morphology with no hard breaks and no decorative gestures, just geometry responding to light. Printed in PETG, the object earns its shape entirely through structural logic.'],
+    desc:['FLUJO began with two constraints: as few parts as possible, and a geometry that could only exist through 3D printing. Not a form that happens to be printed, but one where the process and the shape are inseparable. Every surface, curve, and transition was designed to exploit what additive manufacturing makes possible and no other process allows. The result is a wall lamp that feels resolved and alive at the same time.','The conceptual anchor is breath: movement that is internal, rhythmic, and continuous. That abstraction found its form in a geometry with no hard breaks and no decorative gestures, just surfaces responding to light. Printed in PETG, the object justifies its shape entirely through structural logic.'],
     panels:['/images/flujo_cover.webp','/images/flujo2.webp','/images/flujo4.webp','/videos/flujo-reel.mp4','/images/flujo5.webp','/images/flujo6.webp'],
     prev:null, next:'incline'
   },
@@ -951,7 +1034,7 @@ const PROJECTS = {
     title:'Incline', eyebrow:'02. Product Design',
     tagline:'A modular planter system that adapts to the geometry of small-city living.',
     specs:[{l:'Category',v:'Product Design'},{l:'Year',v:'2024'},{l:'Materials',v:'Polypropylene'},{l:'Process',v:'Rotational Molding'}],
-    desc:['INCLINE was born from a specific frustration: most outdoor planters are designed for space that compact city terraces simply do not have. The project responds with a system built around adaptability, configurable in height, length, and width without sacrificing visual coherence.','Two complementary modules form the core of the system. Their relationship is combinatorial, not fixed. Users assemble what they need, expand when they want, and maintain structural stability throughout. Rotational molding in polypropylene reinforces that flexibility with material consistency and manufacturing efficiency.','The morphology was kept deliberately quiet. INCLINE does not compete with the plants, the furniture, or the architecture around it. It integrates. That restraint is not a stylistic choice, it is the design.'],
+    desc:['INCLINE was born from a specific frustration: most outdoor planters are designed for space that compact city terraces simply do not have. The project responds with a system built around adaptability, configurable in height, length, and width without sacrificing visual coherence.','Two complementary modules form the core of the system. Their relationship is combinatorial, not fixed. Users assemble what they need, expand when they want, and maintain structural stability throughout. Rotational molding in polypropylene reinforces that flexibility with material consistency and manufacturing efficiency.','The form was kept deliberately quiet. INCLINE does not compete with the plants, the furniture, or the architecture around it. It integrates. That restraint is not a stylistic choice, it is the design.'],
     panels:['/images/incline1.webp','/images/incline3.webp','/images/incline4.webp','/images/incline5.webp'],
     prev:'flujo', next:'pausa'
   },
@@ -960,7 +1043,7 @@ const PROJECTS = {
     title:'Core', eyebrow:'04. Product Redesign',
     tagline:'Under Armour\'s performance identity, compressed into a roll-on.',
     specs:[{l:'Category',v:'Product Redesign'},{l:'Year',v:'2024'},{l:'Client',v:'Under Armour (academic)'},{l:'Process',v:'Injection, Blow Molding & Ultrasonic Welding'}],
-    desc:['CORE asks a single question: what would it look like if Under Armour designed a deodorant? The answer lives in the details, the grip geometry, the surface texture, the weight of the cap in hand. Every decision was calibrated to communicate precision and physical confidence at a scale the brand rarely operates in.','The real design challenge was technical: translating a brand language built for large-format products into a form compatible with injection molding, blow molding, and ultrasonic welding. Every radius and rib had to earn its place. Decorative complexity was not an option.','The outcome is a compact, performance-coded object that holds its own next to an Under Armour sneaker. Small in scale, dense in intent.'],
+    desc:['CORE asks a single question: what would it look like if Under Armour designed a deodorant? The answer lives in the details, the grip geometry, the surface texture, the weight of the cap in hand. Every decision was calibrated to communicate precision and physical confidence at a scale the brand rarely operates in.','The real design challenge was technical: translating a brand language built for large-format products into a form compatible with injection molding, blow molding, and ultrasonic welding. Every radius and rib had to carry its weight. Decorative complexity was not an option.','The outcome is a compact, performance-coded object that holds its own next to an Under Armour sneaker. Small in scale, dense in intent.'],
     panels:['/images/core1.webp','/images/core2.webp','/images/core4.webp'],
     prev:'pausa', next:null
   },
@@ -969,25 +1052,25 @@ const PROJECTS = {
     title:'Promix', eyebrow:'+ Product Redesign',
     tagline:'A cap redesign that integrates cable and plug storage into the Philips ProMix hand blender.',
     specs:[{l:'Category',v:'Product Redesign'},{l:'Year',v:'2025'},{l:'Client',v:'Philips (academic)'},{l:'Material',v:'PP'},{l:'Process',v:'Injection Molding'}],
-    desc:['The project began with a full product survey of the Philips ProMix hand blender: mapping each component, its function, its relationship to the rest of the system, and the gaps left unaddressed. The goal was not to fix a predefined problem but to find where the product had something left to give.','After analyzing the entire assembly, the cap stood out as the only component without a structural or functional role beyond basic protection. Every other part earned its place. The cap did not. That gap became the opportunity: a single component that could be redesigned to add a real convenience without touching anything else in the product.','The redesign integrates cable and plug storage directly into the cap body. A recessed channel guides the cable from a dedicated plug housing to the storage wrap. The piece connects to the existing rear casing via a snap-fit using lateral fins, with no modifications to the product architecture. Injection-molded in PP. Dimensions: 22 x 33 x 65 mm.'],
+    desc:['The project began with a close read of the Philips ProMix hand blender: mapping each component against its function and looking for what the product still had left to solve. The goal was not to fix a predefined problem, but to find where it had something more to give.','The cap stood out as the only component with no structural or functional role beyond basic protection. Every other part had a reason to exist. The cap did not. That gap became the opportunity: a single component that could be redesigned to add real convenience without touching anything else in the product.','The redesign integrates cable and plug storage directly into the cap body. A recessed channel guides the cable from a dedicated plug housing to the storage wrap. The piece connects to the existing rear casing via a snap-fit with lateral fins, with no modifications to the product architecture.'],
     panels:['/images/promix-panel.webp','/images/promix-plano-tapa.webp','/images/promix-plano-explotada.webp','/images/promix-plano-conjunto.webp'],
     prev:null, next:null
   },
   mantablast: {
     hPanels:[0,1,2,3],
     title:'Manta Blast', eyebrow:'+ Product Design',
-    tagline:'A water gun shaped by the manta ray — flowing, minimal, 3D printed.',
+    tagline:'A water gun shaped by the manta ray: flowing, minimal, 3D printed.',
     specs:[{l:'Category',v:'Product Design'},{l:'Year',v:'2024'},{l:'Materials',v:'PLA'},{l:'Process',v:'FDM 3D Print'}],
-    desc:['Manta Blast began with a form study on the manta ray — not its silhouette, but its qualities: the way it glides, the continuous curves of its body, the absence of sharp transitions. Translating those qualities into a handheld object meant designing a form that felt resolved in the hand before it felt like anything else.','The geometry was developed entirely around grip and ergonomics. The handle falls naturally into the palm, the trigger is positioned for intuitive use, and the reload gesture follows a single linear motion. Every surface decision traces back to how the object is held, operated, and returned to.','Printed in PLA via FDM, the design exploits additive manufacturing to achieve organic transitions that injection molding would require multiple parts to approximate. The result is a single fluid form split into only the components that the mechanism demands: body, plunger, nozzle, and cap.'],
+    desc:['Manta Blast started with a form study on the manta ray. Not its silhouette, but the qualities it moves with: the way it glides, the continuous curves of its body, the absence of sharp transitions. Translating those into a handheld object meant designing a form that felt resolved in the hand before it felt like anything else.','The geometry was developed entirely around grip and ergonomics. The handle falls naturally into the palm, the trigger is positioned for intuitive use, and the reload gesture follows a single linear motion. Every surface decision traces back to how the object is held, operated, and returned to.','Printed in PLA via FDM, the design exploits additive manufacturing to achieve organic transitions that injection molding would require multiple parts to approximate. The result is a single fluid form split into only the components that the mechanism demands: body, plunger, nozzle, and cap.'],
     panels:['/images/manta-1.webp','/videos/manta-2.mp4','/images/manta-3.webp','/images/manta-4.webp'],
     prev:null, next:null
   },
   intervalo: {
     hPanels:[0,1,2],
     title:'Intervalo', eyebrow:'+ Industrial Design',
-    tagline:'A self-service retail kiosk that brings the store to the pump — selling within the driver\'s existing gesture.',
+    tagline:'A self-service retail kiosk that brings the store to the pump, selling within the driver\'s existing gesture.',
     specs:[{l:'Category',v:'Industrial Design'},{l:'Year',v:'2026'},{l:'Client',v:'YPF (academic)'},{l:'Materials',v:'Steel, Sheet Metal, PVC'},{l:'Process',v:'Welding & Assembly'}],
-    desc:['The project starts from a behavioral observation: drivers already wait at the pump. That downtime, usually dead, became the design opportunity. Intervalo is a self-service kiosk positioned at the fuel dispenser, allowing purchases to happen directly from the car window — no detour, no separate transaction, no friction added to a routine that already has none to spare.','The product identity, "full," is embedded in the physical structure through LED lettering and PVC-clad wood slat paneling. A single cabinet integrates a coffee machine, refrigerated display, payment terminal, and removable bins — all accessible and restockable from the rear without disrupting the forecourt.','The manufacturing process was resolved in six sequential stages: welded steel profiles, sheet metal cladding, surface treatment, cabinetry assembly, PVC cladding with LED signage, and equipment installation. The result is a deployable, service-ready unit built for the operational realities of a fuel station.'],
+    desc:['The project starts from a behavioral observation: drivers already wait at the pump. That downtime, usually dead, became the design opportunity. Intervalo is a self-service kiosk positioned at the fuel dispenser, allowing purchases directly from the car window: no detour, no separate transaction, no friction added to a routine that already has none to spare.','The product identity, "full," is embedded in the physical structure through LED lettering and PVC-clad wood slat paneling. A single cabinet integrates a coffee machine, refrigerated display, payment terminal, and removable bins, all accessible and restockable from the rear without disrupting the forecourt.','The manufacturing process runs through six stages: welded steel profiles, sheet metal cladding, surface treatment, cabinetry assembly, PVC cladding with LED signage, and equipment installation. The result is a deployable unit built for the operational realities of a fuel station.'],
     panels:['/images/ypf-1.webp','/images/ypf-2.webp','/images/ypf-3.webp'],
     prev:null, next:null
   },
@@ -996,18 +1079,32 @@ const PROJECTS = {
     title:'Pausa', eyebrow:'03. Furniture',
     tagline:'Outdoor furniture that gives permission to stop.',
     specs:[{l:'Category',v:'Furniture Design'},{l:'Year',v:'2024'},{l:'Client',v:'Myke Outdoors'},{l:'Materials',v:'Aluminum, Nautical Fabric, Dekton'}],
-    desc:['PAUSA started as a brief from Myke Outdoors: expand the catalog, reach a younger audience, challenge the visual heaviness of traditional exterior furniture. What emerged was less a collection of objects and more a proposition about time, the kind of furniture that makes stopping feel earned.','The concept of pause shaped every decision. These are pieces designed for coffee, for reading, for sitting in stillness. Their proportions are controlled, their weight reduced, their presence understated, not as a stylistic choice, but because lightness is what makes a pause feel possible.','Three materials governed the entire collection: aluminum profiles, nautical fabric, and Dekton surfaces. Working within that constraint became generative. It forced structural honesty and gave the collection a coherence that feels both rigorous and effortless.'],
+    desc:['PAUSA started as a brief from Myke Outdoors: expand the catalog, reach a younger audience, challenge the visual heaviness of traditional exterior furniture. What emerged was less a collection of objects and more a proposition about time, the kind of furniture that makes stopping feel earned.','The concept of pause shaped every decision. These are pieces designed for coffee, for reading, for sitting in stillness. Their proportions are controlled, their weight reduced, their presence understated, not as a stylistic choice, but because lightness is what makes a pause feel possible.','Three materials governed the entire collection: aluminum profiles, nautical fabric, and Dekton surfaces. Working within those limits turned out to be productive. It forced structural honesty and gave the collection a coherence that feels rigorous and natural at once.'],
     panels:['/images/pausa1.webp','/images/pausa2.webp','/images/pausa4.webp','/videos/pausa-reel.mp4'],
     prev:'incline', next:'core'
   }
 };
+window.PROJECTS = PROJECTS;
 
 let cur = 'home';
 
 function toggleMenu() {
   const m = document.getElementById('navMobile');
   m.classList.toggle('open');
+  closeLangMenu();
 }
+
+function toggleLangMenu(e) {
+  e.stopPropagation();
+  document.getElementById('langDropdown').classList.toggle('open');
+}
+function closeLangMenu() {
+  const d = document.getElementById('langDropdown');
+  if(d) d.classList.remove('open');
+}
+document.addEventListener('click', function(e) {
+  if(!e.target.closest('#langGlobe')) closeLangMenu();
+});
 
 function go(page, id, pushState=true) {
   const active = document.querySelector('.page.active');
@@ -1116,6 +1213,8 @@ document.addEventListener('keydown', e=>{
 
 function buildProject(id) {
   const p = PROJECTS[id];
+  const tr = (window.TRANS && window.currentLang && window.currentLang!=='en') ? (window.TRANS[window.currentLang]?.projects?.[id]||{}) : {};
+  const ui = (window.TRANS && window.currentLang && window.currentLang!=='en') ? (window.TRANS[window.currentLang]?.ui||{}) : {};
   _curPanels = p.panels;
   const panels = p.panels.map((src,i)=>{
     const isH = (p.hPanels||[]).includes(i);
@@ -1123,20 +1222,27 @@ function buildProject(id) {
     return `<div class="panel-item${isH?' panel-landscape':''}" onclick="if(window.matchMedia('(max-width:900px)').matches&&!_dragged)openLightbox('${src}',${i})" ondblclick="if(!_dragged)openLightbox('${src}',${i})"><img src="${src}" draggable="false"></div>`;
   }).join('');
   const specs  = p.specs.map(s=>`<div><p class="spec-label">${s.l}</p><p class="spec-value">${s.v}</p></div>`).join('');
-  const desc   = p.desc.map(d=>`<p>${d}</p>`).join('');
-  const prev   = p.prev ? `<div class="pnav-btn" onclick="go('project','${p.prev}')"><span class="pnav-lbl">← Previous</span><span class="pnav-title">${PROJECTS[p.prev].title}</span></div>` : '<div style="flex:1"></div>';
-  const next   = p.next ? `<div class="pnav-btn right" onclick="go('project','${p.next}')"><span class="pnav-lbl">Next →</span><span class="pnav-title">${PROJECTS[p.next].title}</span></div>` : '<div style="flex:1"></div>';
+  const descArr = tr.desc || p.desc;
+  const desc   = descArr.map(d=>`<p>${d}</p>`).join('');
+  const tagline = tr.tagline || p.tagline;
+  const prevLbl = ui.prev_lbl || '← Previous';
+  const nextLbl = ui.next_lbl || 'Next →';
+  const aboutLbl = ui.proj_about || 'About';
+  const hintExpand = ui.hint_expand || 'Click to expand';
+  const hintDrag = ui.hint_drag || 'Drag to explore';
+  const prev   = p.prev ? `<div class="pnav-btn" onclick="go('project','${p.prev}')"><span class="pnav-lbl">${prevLbl}</span><span class="pnav-title">${PROJECTS[p.prev].title}</span></div>` : '<div style="flex:1"></div>';
+  const next   = p.next ? `<div class="pnav-btn right" onclick="go('project','${p.next}')"><span class="pnav-lbl">${nextLbl}</span><span class="pnav-title">${PROJECTS[p.next].title}</span></div>` : '<div style="flex:1"></div>';
   const _projEl = document.getElementById('projContent');
   _projEl.innerHTML = `
     <header class="proj-header">
       <div><p class="proj-eyebrow fu">${p.eyebrow}</p><h1 class="proj-title fu d1">${p.title}</h1></div>
-      <div class="proj-header-right fu d2"><p class="proj-tagline">${p.tagline}</p><div class="proj-specs">${specs}</div></div>
+      <div class="proj-header-right fu d2"><p class="proj-tagline">${tagline}</p><div class="proj-specs">${specs}</div></div>
     </header>
-    <section class="proj-desc fu"><p class="desc-label">About</p><div class="desc-body">${desc}</div></section>
+    <section class="proj-desc fu"><p class="desc-label">${aboutLbl}</p><div class="desc-body">${desc}</div></section>
     <section class="panels-wrap" data-cursor="light">
       <div class="panels-bar">
-        <span class="scroll-hint"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" style="animation:none;margin-right:2px"><circle cx="9" cy="9" r="6"/><path d="M9 6v3l2 2"/></svg> Tap / double click to expand</span>
-        <span class="scroll-hint">Drag to explore <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 9h10M9 4l5 5-5 5"/></svg></span>
+        <span class="scroll-hint"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" style="animation:none;margin-right:2px"><circle cx="9" cy="9" r="6"/><path d="M9 6v3l2 2"/></svg> <span class="hint-click-label">${hintExpand}</span></span>
+        <span class="scroll-hint">${hintDrag} <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 9h10M9 4l5 5-5 5"/></svg></span>
       </div>
       <div class="panels-track" id="pt">${panels}</div>
     </section>
@@ -1665,7 +1771,7 @@ function buildProject(id) {
         <div class="proto-item">
           <div class="proto-item-text">
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Fit test <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ printed + assembled</span></div>
-            <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">The redesigned cap 3D printed and assembled onto the original ProMix casing. The snap-fit locked correctly, the plug housing seated flush, and the cable routed clean through the channel. The prototype was then post-processed — sanded and painted — to match the finish of the original product and read as a production-ready piece.</div>
+            <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">The redesigned cap 3D printed and assembled onto the original ProMix casing. The snap-fit locked correctly, the plug housing seated flush, and the cable routed clean through the channel. The prototype was then post-processed: sanded and painted to match the finish of the original product and read as a production-ready piece.</div>
           </div>
           <div class="proto-item-img"><img loading="lazy" src="/images/promix-fittest.webp" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block;"></div>
         </div>
@@ -1683,6 +1789,12 @@ function buildProject(id) {
     img.removeAttribute('loading');
   });
   initDrag(document.getElementById('pt'));
+  // Contextual hint label: touch devices say "Tap", pointer devices say "Click"
+  const hintLabel = _projEl.querySelector('.hint-click-label');
+  if(hintLabel) {
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    hintLabel.textContent = isTouch ? 'Tap to expand' : 'Click to expand';
+  }
 }
 
 function initDrag(el) {
@@ -1699,6 +1811,8 @@ function initDrag(el) {
   el.addEventListener('mousedown', e => {
     down=true; dragged=false; _dragged=false;
     startX=e.pageX; startSL=el.scrollLeft;
+    // hide scroll hint after first interaction
+    el.closest('.panels-wrap')?.querySelectorAll('.scroll-hint').forEach(h=>h.classList.add('hint-hidden'));
     velX=0; lastX=e.pageX; lastT=Date.now();
     cancelAnimationFrame(rafId);
     el.style.cursor='grabbing';
@@ -1735,6 +1849,7 @@ function initDrag(el) {
     ty=e.touches[0].pageY;
     _dragged=false;
     cancelAnimationFrame(rafId);
+    el.closest('.panels-wrap')?.querySelectorAll('.scroll-hint').forEach(h=>h.classList.add('hint-hidden'));
   },{passive:true});
   el.addEventListener('touchmove', e=>{
     const dx=e.touches[0].pageX-tx;
@@ -1978,6 +2093,8 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
     el,
     orig: el.textContent,
     alt:  el.dataset.alt,
+    origEn: el.textContent,
+    altEn: el.dataset.alt,
     timer: null,
     busy: false
   }));
@@ -1986,6 +2103,7 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   items.forEach(it => { it.el.textContent = ''; });
 
   let isAlt = false;
+  window._flipCtx = { items, setIsAlt: v => { isAlt = v; }, getIsAlt: () => isAlt };
 
   function runAll(toAlt){
     if(items.some(it=>it.busy)) return;
@@ -2050,6 +2168,313 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
     setTimeout(observe, 150);
   };
 })();
+
+/* ── i18n: Language switcher ── */
+window.currentLang = 'en';
+
+window.TRANS = {
+  es: {
+    ui: {
+      nav_work:    'Trabajo',
+      nav_about:   'Sobre mí',
+      nav_contact: 'Contacto',
+      nav_back:    'Todo el trabajo',
+      work_label:  'Proyectos seleccionados',
+      addons_label:'Complementos',
+      in_progress: 'En proceso',
+      more_coming: 'Más trabajo en camino.',
+      lb_close:    '✕ cerrar',
+      prev_lbl:    '← Anterior',
+      next_lbl:    'Siguiente →',
+      proj_about:  'Sobre el proyecto',
+      hint_expand: 'Click para expandir',
+      hint_drag:   'Arrastrá para explorar',
+      rights:      '© 2026 Nahuel Villar. Todos los derechos reservados',
+      contact_line1:'Trabajemos',
+      contact_line2:'juntos.',
+      cv_exp:      'Experiencia',
+      cv_edu:      'Formación',
+      cv_skills:   'Competencias',
+      cv_software: 'Software',
+      cv_ai:       'Herramientas de IA',
+      cv_fab:      'Fabricación',
+      cv_lang_h:   'Idiomas',
+      cv_ongoing:  'Activo',
+      design_intern:'Diseñador Intern',
+      freelance_title:'Diseño de Producto Freelance',
+      freelance_sub:'Diseño y rediseño de componentes funcionales con foco en usabilidad y fabricabilidad. Desde la ideación conceptual hasta el prototipado rápido y testing iterativo con impresión 3D y herramientas de fabricación.',
+      taragui_sub: 'Rediseño de la línea Mate Listo. Foco en refinamiento formal y dirección CMF, traduciendo la identidad de marca en un kit más nítido y premium.',
+      myke_sub:    'Desarrollo de una colección de mobiliario exterior. Abarcó ideación conceptual, investigación de materiales y diseño orientado a producción.',
+      cv_lang_sub: 'Español. Nativo<br>Inglés. Fluido · Certificado IB',
+      bio: [
+        'Hola, soy Nahuel, un diseñador industrial argentino actualmente viviendo en Estados Unidos, en los últimos semestres de mi carrera.',
+        'Cuando empiezo un proyecto, algo me incomoda primero: un producto que no aguanta el uso, una solución que resolvió el problema equivocado, una forma que existe para llamar la atención más que por una razón. Ese punto de fricción es donde empiezo.',
+        'Diseño con convicción. Cuando me comprometo con un proyecto, voy a fondo: la lógica del material, el escenario de uso, lo que tiene que comunicar sin decirlo. Veo el diseño como un sistema estructurado donde identidad, material, producción e intención deben alinearse. Y creo que debería aportar claridad, no ruido.',
+        'Lo que más me frustra del diseño hoy es con qué frecuencia el mercado llega primero y el problema después. La forma no es decoración, es consecuencia. El diseño no es una reacción a las tendencias, es una postura.',
+        'Más allá del diseño: el océano, el movimiento, el arte, la música y los videojuegos.'
+      ]
+    },
+    projects: {
+      flujo: {
+        tagline: 'Una lámpara de pared construida sobre la lógica de la respiración. Impresa, minimal, meditativa.',
+        desc: [
+          'FLUJO comenzó con dos restricciones: la menor cantidad posible de partes y una geometría que solo la impresión 3D podría producir. No una forma que por casualidad se imprime, sino una donde el proceso y la forma son inseparables. Cada superficie, curva y transición fue diseñada para aprovechar lo que la manufactura aditiva hace posible y ningún otro proceso permite. El resultado es una lámpara de pared que se siente resuelta y viva al mismo tiempo.',
+          'El ancla conceptual es la respiración: movimiento interno, rítmico y continuo. Esa abstracción encontró su forma en una geometría sin rupturas abruptas ni gestos decorativos, solo superficies que responden a la luz. Impresa en PETG, el objeto justifica su forma enteramente a través de la lógica estructural.'
+        ]
+      },
+      incline: {
+        tagline: 'Un sistema de maceteros modular que se adapta a la geometría de los espacios urbanos compactos.',
+        desc: [
+          'INCLINE nació de una frustración concreta: la mayoría de los maceteros exteriores están diseñados para espacios que las terrazas urbanas compactas simplemente no tienen. El proyecto responde con un sistema construido en torno a la adaptabilidad, configurable en altura, largo y ancho sin perder coherencia visual.',
+          'Dos módulos complementarios forman el núcleo del sistema. Su relación es combinatoria, no fija. Los usuarios ensamblan lo que necesitan, expanden cuando quieren y mantienen la estabilidad estructural en todo momento. El moldeado rotacional en polipropileno refuerza esa flexibilidad con consistencia material y eficiencia de producción.',
+          'La forma fue mantenida deliberadamente austera. INCLINE no compite con las plantas, el mobiliario ni la arquitectura que lo rodea. Se integra. Esa contención no es una elección estilística, es el diseño.'
+        ]
+      },
+      core: {
+        tagline: 'La identidad de rendimiento de Under Armour, comprimida en un roll-on.',
+        desc: [
+          'CORE plantea una sola pregunta: ¿cómo sería un desodorante diseñado por Under Armour? La respuesta vive en los detalles: la geometría del agarre, la textura de la superficie, el peso de la tapa en la mano. Cada decisión fue calibrada para comunicar precisión y confianza física en una escala en la que la marca raramente opera.',
+          'El verdadero desafío fue técnico: traducir un lenguaje de marca construido para productos de gran formato en una forma compatible con moldeo por inyección, moldeo por soplado y soldadura ultrasónica. Cada radio y nervio tuvo que justificar su lugar. La complejidad decorativa no era una opción.',
+          'El resultado es un objeto compacto y orientado al rendimiento que se sostiene junto a una zapatilla de Under Armour. Pequeño en escala, denso en intención.'
+        ]
+      },
+      promix: {
+        tagline: 'Un rediseño de tapa que integra almacenamiento de cable y enchufe en la licuadora de mano Philips ProMix.',
+        desc: [
+          'El proyecto comenzó con una lectura detallada de la licuadora de mano Philips ProMix: mapeo de cada componente contra su función y búsqueda de lo que el producto todavía tenía por resolver. El objetivo no era corregir un problema predefinido, sino encontrar dónde tenía algo más para dar.',
+          'La tapa se destacó como el único componente sin un rol estructural o funcional más allá de la protección básica. Cada otra parte tenía una razón de ser. La tapa no. Ese vacío se convirtió en la oportunidad: un único componente que podía rediseñarse para agregar comodidad real sin tocar nada más del producto.',
+          'El rediseño integra almacenamiento de cable y enchufe directamente en el cuerpo de la tapa. Un canal rebajado guía el cable desde un alojamiento dedicado hasta el enrollador. La pieza se conecta a la carcasa trasera existente mediante un ajuste a presión con aletas laterales, sin modificaciones en la arquitectura del producto.'
+        ]
+      },
+      mantablast: {
+        tagline: 'Una pistola de agua moldeada por la manta raya: fluida, minimal, impresa en 3D.',
+        desc: [
+          'Manta Blast comenzó con un estudio de forma sobre la manta raya. No su silueta, sino las cualidades con las que se mueve: la manera en que se desliza, las curvas continuas de su cuerpo, la ausencia de transiciones abruptas. Traducir esas cualidades en un objeto de mano significó diseñar una forma que se sintiera resuelta en la palma antes que cualquier otra cosa.',
+          'La geometría fue desarrollada íntegramente en torno al agarre y la ergonomía. El mango cae naturalmente en la palma, el gatillo está posicionado para un uso intuitivo y el gesto de recarga sigue un único movimiento lineal. Cada decisión de superficie responde a cómo el objeto se sostiene, se opera y se devuelve.',
+          'Impresa en PLA mediante FDM, el diseño aprovecha la manufactura aditiva para lograr transiciones orgánicas que el moldeo por inyección requeriría múltiples partes para aproximar. El resultado es una forma fluida única dividida solo en los componentes que el mecanismo exige: cuerpo, émbolo, boquilla y tapa.'
+        ]
+      },
+      intervalo: {
+        tagline: 'Un kiosco de autoservicio que lleva la tienda a la bomba, dentro del gesto ya existente del conductor.',
+        desc: [
+          'El proyecto parte de una observación conductual: los conductores ya esperan en la bomba. Ese tiempo muerto, generalmente desperdiciado, se convirtió en la oportunidad de diseño. Intervalo es un kiosco de autoservicio posicionado junto al surtidor que permite compras directamente desde la ventanilla del auto: sin desvíos, sin transacciones separadas, sin fricción añadida a una rutina que ya no tiene ninguna de sobra.',
+          'La identidad del producto, "full", está integrada en la estructura física mediante letrería LED y paneles de listones de madera revestidos en PVC. Un único gabinete integra máquina de café, exhibidor refrigerado, terminal de pago y contenedores removibles, todo accesible y reabastecible desde la parte trasera sin interrumpir el forecourt.',
+          'El proceso de fabricación corre por seis etapas: perfiles de acero soldado, revestimiento de chapa, tratamiento superficial, ensamble de carpintería, revestimiento PVC con señalética LED e instalación de equipos. El resultado es una unidad desplegable construida para las realidades operativas de una estación de servicio.'
+        ]
+      },
+      pausa: {
+        tagline: 'Mobiliario exterior que da permiso para detenerse.',
+        desc: [
+          'PAUSA comenzó como un encargo de Myke Outdoors: ampliar el catálogo, llegar a un público más joven, desafiar el peso visual del mobiliario exterior tradicional. Lo que surgió fue menos una colección de objetos y más una proposición sobre el tiempo: el tipo de mobiliario que hace que detenerse se sienta como algo ganado.',
+          'El concepto de pausa moldeó cada decisión. Estas son piezas para el café, la lectura, para sentarse en quietud. Sus proporciones son controladas, su peso reducido, su presencia discreta, no como una elección estilística, sino porque la ligereza es lo que hace que una pausa sea posible.',
+          'Tres materiales gobernaron toda la colección: perfiles de aluminio, tela náutica y superficies Dekton. Trabajar dentro de esos límites resultó productivo. Forzó la honestidad estructural y le dio a la colección una coherencia que se siente rigurosa y natural al mismo tiempo.'
+        ]
+      }
+    }
+  },
+  de: {
+    ui: {
+      nav_work:    'Projekte',
+      nav_about:   'Über mich',
+      nav_contact: 'Kontakt',
+      nav_back:    'Alle Projekte',
+      work_label:  'Ausgewählte Projekte',
+      addons_label:'Weitere Projekte',
+      in_progress: 'In Bearbeitung',
+      more_coming: 'Weitere Arbeiten folgen.',
+      lb_close:    '✕ schließen',
+      prev_lbl:    '← Zurück',
+      next_lbl:    'Weiter →',
+      proj_about:  'Über das Projekt',
+      hint_expand: 'Klicken zum Vergrößern',
+      hint_drag:   'Ziehen zum Entdecken',
+      rights:      '© 2026 Nahuel Villar. Alle Rechte vorbehalten',
+      contact_line1:'Lass uns',
+      contact_line2:'zusammenarbeiten.',
+      cv_exp:      'Erfahrung',
+      cv_edu:      'Ausbildung',
+      cv_skills:   'Kompetenzen',
+      cv_software: 'Software',
+      cv_ai:       'KI-Design-Tools',
+      cv_fab:      'Fertigung',
+      cv_lang_h:   'Sprachen',
+      cv_ongoing:  'Laufend',
+      design_intern:'Design Intern',
+      freelance_title:'Freiberufliches Produktdesign',
+      freelance_sub:'Design und Redesign funktionaler Komponenten mit Fokus auf Benutzerfreundlichkeit und Herstellbarkeit. Von der Konzeptentwicklung bis zum schnellen Prototyping und iterativem Testing.',
+      taragui_sub: 'Redesign der Mate Listo Produktlinie. Fokus auf Formverfeinerung und CMF-Richtung, um die Markenidentität in ein schärferes, hochwertigeres Produkt zu übersetzen.',
+      myke_sub:    'Entwicklung einer Außenmöbelkollektion. Umfasste Konzeptentwicklung, Materialrecherche und produktionsorientiertes Design.',
+      cv_lang_sub: 'Spanisch. Muttersprache<br>Englisch. Fließend · IB-Zertifikat',
+      bio: [
+        'Hallo, ich bin Nahuel, ein argentinischer Industriedesigner, der derzeit in den USA lebt und seine letzten Semester absolviert.',
+        'Wenn ich ein Projekt beginne, stört mich meistens erst einmal etwas: ein Produkt, das dem Gebrauch nicht standhält, eine Lösung für das falsche Problem, eine Form, die der Aufmerksamkeit wegen existiert. Diese Reibung ist mein Ausgangspunkt.',
+        'Ich entwerfe mit Überzeugung. Wenn ich mich einem Projekt widme, gehe ich in die Tiefe: die Logik des Materials, das Nutzungsszenario, das, was es ohne Worte kommunizieren muss. Ich sehe Design als ein strukturiertes System, in dem Identität, Material, Produktion und Intention übereinstimmen müssen. Und es sollte Klarheit schaffen, keinen Lärm.',
+        'Was mich am heutigen Design am meisten frustriert, ist wie oft der Markt zuerst kommt und das Problem danach. Form ist keine Dekoration, sondern Konsequenz. Design ist keine Reaktion auf Trends, es ist eine Haltung.',
+        'Jenseits des Designs: Ozean, Bewegung, Kunst, Musik und Videospiele.'
+      ]
+    },
+    projects: {
+      flujo: {
+        tagline: 'Eine Wandleuchte gebaut auf der Logik des Atems. Gedruckt, minimal, meditativ.',
+        desc: [
+          'FLUJO begann mit zwei Einschränkungen: so wenige Teile wie möglich und eine Geometrie, die nur der 3D-Druck erzeugen konnte. Keine Form, die zufällig gedruckt wird, sondern eine, bei der Prozess und Form untrennbar sind. Jede Oberfläche, Kurve und Transition wurde entworfen, um das auszuschöpfen, was additive Fertigung ermöglicht und kein anderer Prozess zulässt. Das Ergebnis ist eine Wandleuchte, die sich gelöst und lebendig zugleich anfühlt.',
+          'Der konzeptuelle Anker ist der Atem: eine Bewegung, die innerlich, rhythmisch und kontinuierlich ist. Diese Abstraktion fand ihre Form in einer Geometrie ohne harte Brüche und ohne dekorative Gesten, nur Oberflächen, die auf Licht antworten. In PETG gedruckt, rechtfertigt das Objekt seine Form vollständig durch strukturelle Logik.'
+        ]
+      },
+      incline: {
+        tagline: 'Ein modulares Pflanzgefäßsystem, das sich der Geometrie kompakter Stadtterrassen anpasst.',
+        desc: [
+          'INCLINE entstand aus einer konkreten Frustration: Die meisten Außenpflanzgefäße sind für Platzverhältnisse konzipiert, die kompakte Stadtterrassen schlicht nicht haben. Das Projekt antwortet mit einem System, das auf Anpassungsfähigkeit aufgebaut ist, konfigurierbar in Höhe, Länge und Breite, ohne visuelle Kohärenz zu opfern.',
+          'Zwei komplementäre Module bilden den Kern des Systems. Ihre Beziehung ist kombinatorisch, nicht festgelegt. Nutzer montieren, was sie brauchen, erweitern nach Bedarf und erhalten durchgehend strukturelle Stabilität. Das Rotationsformen in Polypropylen verstärkt diese Flexibilität mit Materialkonsistenz und Fertigungseffizienz.',
+          'Die Form wurde bewusst ruhig gehalten. INCLINE konkurriert nicht mit den Pflanzen, dem Mobiliar oder der Architektur drumherum. Es integriert sich. Diese Zurückhaltung ist keine stilistische Entscheidung, sie ist das Design.'
+        ]
+      },
+      core: {
+        tagline: 'Under Armours Performance-Identität, verdichtet in einen Roll-on.',
+        desc: [
+          'CORE stellt eine einzige Frage: Wie würde ein Deodorant aussehen, wenn Under Armour ihn entworfen hätte? Die Antwort lebt in den Details: die Griffgeometrie, die Oberflächentextur, das Gewicht der Kappe in der Hand. Jede Entscheidung wurde darauf kalibriert, Präzision und körperliches Selbstvertrauen in einem Maßstab zu kommunizieren, in dem die Marke selten operiert.',
+          'Die eigentliche Herausforderung war technischer Natur: eine Markensprache für großformatige Produkte in eine Form zu übersetzen, die mit Spritzguss, Blasformen und Ultraschallschweißen kompatibel ist. Jeder Radius und jede Rippe musste seinen Platz rechtfertigen. Dekorative Komplexität war keine Option.',
+          'Das Ergebnis ist ein kompaktes, leistungsorientiertes Objekt, das sich neben einem Under Armour-Sneaker behauptet. Klein in der Dimension, dicht in der Aussage.'
+        ]
+      },
+      promix: {
+        tagline: 'Ein Kappenredesign, das Kabel- und Steckeraufbewahrung in den Philips ProMix Stabmixer integriert.',
+        desc: [
+          'Das Projekt begann mit einer genauen Lektüre des Philips ProMix Stabmixers: Kartierung jedes Bauteils gegen seine Funktion und Suche nach dem, was das Produkt noch zu lösen hatte. Das Ziel war nicht, ein vordefiniertes Problem zu beheben, sondern zu finden, wo es noch etwas zu geben hatte.',
+          'Die Kappe fiel als einziges Bauteil ohne strukturelle oder funktionale Rolle jenseits des Grundschutzes auf. Jedes andere Teil hatte einen Daseinszweck. Die Kappe nicht. Diese Lücke wurde zur Chance: eine einzelne Komponente, die neu gestaltet werden konnte, um echten Komfort hinzuzufügen, ohne irgendetwas anderes zu verändern.',
+          'Das Redesign integriert Kabel- und Steckeraufbewahrung direkt in den Kappenkörper. Ein eingelassener Kanal führt das Kabel von einem dedizierten Steckergehäuse zur Aufwicklung. Das Teil verbindet sich mit dem bestehenden Heckgehäuse über eine Schnappverbindung mit seitlichen Flossen, ohne Modifikationen an der Produktarchitektur.'
+        ]
+      },
+      mantablast: {
+        tagline: 'Eine Wasserpistole geformt vom Mantarochen: fließend, minimal, 3D-gedruckt.',
+        desc: [
+          'Manta Blast begann mit einer Formstudie über den Mantarochen. Nicht seine Silhouette, sondern die Qualitäten seiner Bewegung: die Art, wie er gleitet, die kontinuierlichen Kurven seines Körpers, das Fehlen scharfer Übergänge. Diese in ein Handobjekt zu übersetzen bedeutete, eine Form zu entwerfen, die sich in der Hand gelöst anfühlt, bevor sie irgendetwas anderes ist.',
+          'Die Geometrie wurde vollständig um Griff und Ergonomie entwickelt. Der Griff fällt natürlich in die Handfläche, der Abzug ist für intuitiven Gebrauch positioniert, und die Nachladegeste folgt einer einzigen linearen Bewegung. Jede Oberflächenentscheidung lässt sich darauf zurückführen, wie das Objekt gehalten, bedient und zurückgelegt wird.',
+          'In PLA per FDM gedruckt, nutzt das Design additive Fertigung, um organische Übergänge zu erzielen, die Spritzguss durch mehrere Teile annähern müsste. Das Ergebnis ist eine einzige fließende Form, aufgeteilt nur in die Komponenten, die der Mechanismus verlangt: Körper, Kolben, Düse und Kappe.'
+        ]
+      },
+      intervalo: {
+        tagline: 'Ein Selbstbedienungskiosk, der den Laden zur Zapfsäule bringt, innerhalb der bestehenden Geste des Fahrers.',
+        desc: [
+          'Das Projekt geht von einer Verhaltensbeobachtung aus: Fahrer warten bereits an der Zapfsäule. Diese Ausfallzeit, normalerweise tot, wurde zur Designgelegenheit. Intervalo ist ein Selbstbedienungskiosk an der Zapfsäule, der Einkäufe direkt vom Autofenster aus ermöglicht: kein Umweg, keine separate Transaktion, keine Reibung in einer Routine, die ohnehin keine zu verlieren hat.',
+          'Die Produktidentität "full" ist in die physische Struktur durch LED-Schriftzüge und PVC-verkleidete Holzlamellenpaneele eingebettet. Ein einzelner Schrank integriert Kaffeemaschine, Kühlvitrine, Bezahlterminal und herausnehmbare Behälter, alles zugänglich und auffüllbar von hinten, ohne den Vorplatz zu stören.',
+          'Der Fertigungsprozess läuft durch sechs Schritte: geschweißte Stahlprofile, Blechverkleidung, Oberflächenbehandlung, Schreinermontage, PVC-Verkleidung mit LED-Beschilderung und Geräteinstallation. Das Ergebnis ist eine einsatzbereite Einheit für die betrieblichen Anforderungen einer Tankstelle.'
+        ]
+      },
+      pausa: {
+        tagline: 'Außenmöbel, die die Erlaubnis geben innezuhalten.',
+        desc: [
+          'PAUSA begann als Auftrag von Myke Outdoors: den Katalog erweitern, ein jüngeres Publikum ansprechen, die visuelle Schwere traditioneller Außenmöbel herausfordern. Was entstand, war weniger eine Objektkollektion als eine Aussage über Zeit: die Art von Möbeln, die das Innehalten als etwas Verdienstes erscheinen lässt.',
+          'Das Konzept der Pause formte jede Entscheidung. Das sind Möbel für den Kaffee, zum Lesen, zum stillen Sitzen. Ihre Proportionen sind kontrolliert, ihr Gewicht reduziert, ihre Präsenz dezent, nicht als stilistische Wahl, sondern weil Leichtigkeit das ist, was eine Pause möglich macht.',
+          'Drei Materialien bestimmten die gesamte Kollektion: Aluminiumprofile, Bootsstoff und Dekton-Oberflächen. Innerhalb dieser Grenzen zu arbeiten erwies sich als produktiv. Es erzwang strukturelle Ehrlichkeit und gab der Kollektion eine Kohärenz, die sich rigoros und natürlich zugleich anfühlt.'
+        ]
+      }
+    }
+  }
+};
+
+window.setLang = function(lang) {
+  if(lang === window.currentLang) return;
+  window.currentLang = lang;
+  document.documentElement.lang = lang;
+
+  // Update lang button active states (mobile ls-btn + desktop ld-btn)
+  document.querySelectorAll('.ls-btn, .ld-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+
+  const t = (lang !== 'en' && window.TRANS[lang]) ? window.TRANS[lang].ui : {};
+
+  // Update all data-i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if(t[key] !== undefined) el.textContent = t[key];
+    else {
+      // Fallback to English hardcoded values
+      const en = {
+        nav_work:'Work', nav_about:'About', nav_contact:'Contact', nav_back:'All work',
+        work_label:'Selected work', addons_label:'Add-ons', in_progress:'In progress',
+        more_coming:'More work is on the way.', lb_close:'✕ close', rights:'© 2026 Nahuel Villar. All Rights Reserved',
+        cv_exp:'Experience', cv_edu:'Education', cv_skills:'Core Competencies', cv_software:'Software',
+        cv_ai:'AI Design Tools', cv_fab:'Fabrication', cv_lang_h:'Languages', cv_ongoing:'Ongoing',
+        design_intern:'Design Intern', freelance_title:'Freelance Product Design',
+        freelance_sub:'Design and redesign of functional components with a focus on usability and manufacturability. Work spans concept ideation through rapid prototyping and iterative testing using 3D printing and fabrication tools.',
+        taragui_sub:'Redesign of the Mate Listo product line. Focused on form refinement and CMF direction, translating the brand\'s identity into a sharper, more premium kit.',
+        myke_sub:'Development of an outdoor furniture collection. Work spanned concept ideation, material research, and production-oriented design across seating and modular pieces.'
+      };
+      if(en[key] !== undefined) el.textContent = en[key];
+    }
+  });
+
+  // Contact title (has HTML markup)
+  const ct = document.getElementById('contactTitle');
+  if(ct) {
+    const l1 = t.contact_line1 || "Let's work";
+    const l2 = t.contact_line2 || 'together.';
+    ct.innerHTML = `${l1}<br><em>${l2}</em>`;
+  }
+
+  // About bio
+  const bio = document.getElementById('aboutBio');
+  if(bio) {
+    const lines = (t.bio) ? t.bio : [
+      'Hi, I\'m Nahuel, an Argentine industrial designer currently based in the United States and finishing the final semesters of my degree.',
+      'When I start a project, something usually bugs me first, a product that doesn\'t hold up, a solution that solved the wrong problem, a form that exists for attention rather than reason. That friction is where I begin.',
+      'I design with conviction. When I commit to a project I go deep, into the material logic, the use scenario, the thing it needs to communicate without saying it. I see design as a structured system where identity, material, production, and intention must align. And I think it should contribute clarity, not noise.',
+      'What frustrates me most about design today is how often the market comes first and the problem second. Form is not decoration, but consequence. Design is not a reaction to trends, it is a position.',
+      'Beyond design: ocean, movement, art, music, and videogames.'
+    ];
+    bio.innerHTML = lines.map(l=>`<p>${l}</p>`).join('');
+  }
+
+  // CV languages sub (has <br>)
+  const cvLang = document.getElementById('cvLangSub');
+  if(cvLang) {
+    cvLang.innerHTML = t.cv_lang_sub || 'Spanish. Native<br>English. Fluent · IB Certificate';
+  }
+
+  // Card descriptions on the grid (taglines)
+  document.querySelectorAll('[data-i18n-project]').forEach(el => {
+    const pid = el.dataset.i18nProject;
+    const projTr = (lang !== 'en' && window.TRANS[lang]?.projects?.[pid]);
+    if(projTr && projTr.tagline) {
+      el.textContent = projTr.tagline;
+    } else if(window.PROJECTS && window.PROJECTS[pid]) {
+      el.textContent = window.PROJECTS[pid].tagline;
+    }
+  });
+
+  // Flip texts
+  if(window._flipCtx) {
+    const ctx = window._flipCtx;
+    const flipKeys = [['hero_desc','hero_desc_alt'],['hero_quote','hero_quote_alt']];
+    const enFlip = {
+      hero_desc:'Industrial Designer based in the United States.', hero_desc_alt:'Born and Raised in Argentina.',
+      hero_quote:'Form follows function. Identity follows conviction.', hero_quote_alt:'Obsessed with the craft, every detail is a decision.'
+    };
+    // ES/DE flip translations
+    const flipTrans = {
+      es: { hero_desc:'Diseñador industrial con base en Estados Unidos.', hero_desc_alt:'Nacido y criado en Argentina.',
+            hero_quote:'La forma sigue la función. La identidad sigue la convicción.', hero_quote_alt:'Obsesionado con el oficio, cada detalle es una decisión.' },
+      de: { hero_desc:'Industriedesigner mit Wohnsitz in den USA.', hero_desc_alt:'In Argentinien geboren und aufgewachsen.',
+            hero_quote:'Die Form folgt der Funktion. Identität folgt Überzeugung.', hero_quote_alt:'Besessen vom Handwerk, jedes Detail ist eine Entscheidung.' }
+    };
+    const ft = (lang !== 'en' && flipTrans[lang]) ? flipTrans[lang] : enFlip;
+    ctx.items.forEach((it, i) => {
+      const [ok, ak] = flipKeys[i] || [];
+      if(ok) { it.orig = ft[ok] || it.origEn; it.alt = ft[ak] || it.altEn; }
+      if(!ctx.getIsAlt()) it.el.textContent = it.orig;
+    });
+    if(ctx.getIsAlt()) ctx.setIsAlt(false);
+  }
+
+  // Re-render project page if currently active
+  const activePage = document.querySelector('.page.active');
+  if(activePage && activePage.id === 'page-project') {
+    const state = history.state;
+    if(state && state.id) buildProject(state.id);
+  }
+};
 
 </script>
 </body>
