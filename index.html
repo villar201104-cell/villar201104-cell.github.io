@@ -28,6 +28,7 @@
     --ease:            cubic-bezier(0.22, 1, 0.36, 1);
     --ease-out-quint:  cubic-bezier(0.22, 1, 0.36, 1);
     --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+      --ph: clamp(20px, 6vw, 80px);
   }
   /* ================================================================ */
 
@@ -334,7 +335,7 @@
   }
 
   /* ── Flujo Process Section ── */
-  .process-header{padding:clamp(56px,7vw,96px) clamp(80px,10vw,160px) clamp(40px,5vw,56px);display:flex;align-items:baseline;justify-content:space-between;border-top:1px solid var(--color-border)}
+  .process-header{padding:clamp(10px,1.5vw,18px) clamp(80px,10vw,160px) clamp(40px,5vw,56px);display:flex;align-items:baseline;justify-content:space-between;border-top:1px solid var(--color-border)}
   .process-kicker{font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--color-muted);font-family:var(--font-display)}
   .process-title{font-family:var(--font-display);font-size:clamp(2rem,3.5vw,3rem);font-weight:600;letter-spacing:-.02em;line-height:1.1;margin-top:10px}
   .origins-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--color-border);margin:0 clamp(80px,10vw,160px)}
@@ -757,11 +758,25 @@
     </header>
     <span class="work-section-label fu d2" data-i18n="work_label">Selected work</span>
     <main class="projects-grid" data-cursor="light">
-      <div class="project-card-wrap fu d1" onclick="go('project','flujo')">
+      <div class="project-card-wrap fu d1" onclick="go('project','campana')">
+        <div class="project-card">
+          <img class="project-card-img" src="/images/campana-hero.webp" alt="Intent" style="object-position:center center">
+          <div class="project-card-overlay">
+            <span class="card-num">01</span>
+            <div class="project-card-meta">
+              <p class="card-label">Research + ID · 2026</p>
+              <h2 class="card-title">Intent</h2>
+              <p class="card-desc" data-i18n-project="campana">A bicycle bell redesigned to distinguish courtesy from danger.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-mobile-label"><span class="cml-num">01</span><span class="cml-title">Intent</span><span class="cml-cat">Research + ID · 2026</span></div>
+      </div>
+      <div class="project-card-wrap fu d2" onclick="go('project','flujo')">
         <div class="project-card">
           <img class="project-card-img" src="/images/flujo-hero.webp" alt="Flujo" style="object-position:center 20%">
           <div class="project-card-overlay">
-            <span class="card-num">01</span>
+            <span class="card-num">02</span>
             <div class="project-card-meta">
               <p class="card-label">Lighting · 2025</p>
               <h2 class="card-title">Flujo</h2>
@@ -769,13 +784,13 @@
             </div>
           </div>
         </div>
-        <div class="card-mobile-label"><span class="cml-num">01</span><span class="cml-title">Flujo</span><span class="cml-cat">Lighting · 2025</span></div>
+        <div class="card-mobile-label"><span class="cml-num">02</span><span class="cml-title">Flujo</span><span class="cml-cat">Lighting · 2025</span></div>
       </div>
-      <div class="project-card-wrap fu d2" onclick="go('project','incline')">
+      <div class="project-card-wrap fu d3" onclick="go('project','incline')">
         <div class="project-card">
           <img class="project-card-img" src="/images/incline-hero.webp" alt="Incline" style="object-position:center 30%">
           <div class="project-card-overlay">
-            <span class="card-num">02</span>
+            <span class="card-num">03</span>
             <div class="project-card-meta">
               <p class="card-label">Product · 2024</p>
               <h2 class="card-title">Incline</h2>
@@ -783,21 +798,7 @@
             </div>
           </div>
         </div>
-        <div class="card-mobile-label"><span class="cml-num">02</span><span class="cml-title">Incline</span><span class="cml-cat">Product · 2024</span></div>
-      </div>
-      <div class="project-card-wrap fu d3" onclick="go('project','pausa')">
-        <div class="project-card">
-          <img class="project-card-img" src="/images/pausa-hero.webp" alt="Pausa" style="object-position:center 25%">
-          <div class="project-card-overlay">
-            <span class="card-num">03</span>
-            <div class="project-card-meta">
-              <p class="card-label">Furniture · 2024</p>
-              <h2 class="card-title">Pausa</h2>
-              <p class="card-desc" data-i18n-project="pausa">Outdoor furniture that gives permission to stop.</p>
-            </div>
-          </div>
-        </div>
-        <div class="card-mobile-label"><span class="cml-num">03</span><span class="cml-title">Pausa</span><span class="cml-cat">Furniture · 2024</span></div>
+        <div class="card-mobile-label"><span class="cml-num">03</span><span class="cml-title">Incline</span><span class="cml-cat">Product · 2024</span></div>
       </div>
       <div class="project-card-wrap fu d4" onclick="go('project','core')">
         <div class="project-card">
@@ -817,6 +818,19 @@
     <div class="extras-section">
       <span class="work-section-label" style="padding:0;" data-i18n="addons_label">Add-ons</span>
       <div class="extras-grid" data-cursor="light">
+        <div class="extra-card-wrap" onclick="go('project','pausa')">
+          <div class="extra-card">
+            <img loading="lazy" class="extra-card-img" src="/images/pausa-hero.webp" alt="Pausa" style="object-position:center 25%;">
+            <div class="extra-card-overlay">
+              <div class="extra-card-meta">
+                <span class="extra-card-num">+ Furniture · 2024</span>
+                <div class="extra-card-title">Pausa</div>
+                <div class="extra-card-desc" data-i18n-project="pausa">Outdoor furniture that gives permission to stop.</div>
+              </div>
+            </div>
+          </div>
+          <div class="extra-card-mobile-label"><span class="extra-cml-title">Pausa</span><span class="extra-cml-cat">Furniture · 2024</span></div>
+        </div>
         <div class="extra-card-wrap" onclick="go('project','promix')">
           <div class="extra-card">
             <img loading="lazy" class="extra-card-img" src="/images/promix-hero.webp" alt="Promix" style="object-position:center center;">
@@ -856,18 +870,7 @@
           </div>
           <div class="extra-card-mobile-label"><span class="extra-cml-title">Manta Blast</span><span class="extra-cml-cat">Product Design · 2024</span></div>
         </div>
-        <div class="addon-placeholder-wrap">
-          <div class="addon-placeholder" aria-label="More work coming soon">
-            <div class="addon-placeholder-center">
-              <div class="addon-placeholder-meta" data-i18n="in_progress">In progress</div>
-              <div class="addon-placeholder-bar"></div>
-              <div class="addon-placeholder-small" data-i18n="more_coming">More work is on the way.</div>
-            </div>
-          </div>
-          <div class="addon-placeholder-mobile-label"><span class="extra-cml-title">Coming Soon</span><span class="extra-cml-cat">Future Add-ons</span></div>
-        </div>
-      </div>
-    </div>
+      </div>    </div>
     <div class="home-footer">
       <div class="home-footer-top">
         <p class="rights" data-i18n="rights">© 2026 Nahuel Villar. All Rights Reserved</p>
@@ -1025,23 +1028,32 @@
 
 <script>
 const PROJECTS = {
+  campana: {
+    hPanels:[],
+    title:'Intent', eyebrow:'UX Research + ID',
+    tagline:'A bicycle bell redesigned to distinguish courtesy from danger.',
+    specs:[{l:'Category',v:'UX Research · Industrial Design'},{l:'Year',v:'2026'},{l:'Materials',v:'Aluminum · Anodized Brass · ABS · Polycarbonate'},{l:'Status',v:'Concept · 2026'}],
+    desc:['Campana started with a behavioral observation: the bicycle bell, required by law in most countries, cannot distinguish between a polite request to pass and an urgent danger alert. The research question was not how to make it look different, but how to make it express the rider\'s intent.','The process mapped the full design space: historical analysis, typology, field observation, user persona, stakeholder mapping, journey analysis, and UX evaluation across seven dimensions. Every method pointed to the same root problem — the bell communicates one signal, and that signal carries no information about urgency, intention, or severity.','The response is mechanical, not digital. A ratchet mechanism that accumulates pressure across consecutive taps, advancing a cam that increases the hammer\'s stroke with each press. Three taps, three levels, three distinct things to say. Four components. No battery, no learning curve.'],
+    panels:['/images/campana-render-1.webp','/images/campana-render-2.webp','/images/campana-render-3.webp'],
+    prev:null, next:'flujo'
+  },
   flujo: {
     hPanels:[],
-    title:'Flujo', eyebrow:'01. Lighting',
+    title:'Flujo', eyebrow:'02. Lighting',
     tagline:'A wall lamp built on the logic of breath, printed, minimal, meditative.',
     specs:[{l:'Category',v:'Lighting Design'},{l:'Year',v:'2025'},{l:'Materials',v:'PETG, Standard Components'},{l:'Process',v:'FDM 3D Print'}],
     desc:['FLUJO began with two constraints: as few parts as possible, and a geometry that could only exist through 3D printing. Not a form that happens to be printed, but one where the process and the shape are inseparable. Every surface, curve, and transition was designed to exploit what additive manufacturing makes possible and no other process allows. The result is a wall lamp that feels resolved and alive at the same time.','The conceptual anchor is breath: movement that is internal, rhythmic, and continuous. That abstraction found its form in a geometry with no hard breaks and no decorative gestures, just surfaces responding to light. Printed in PETG, the object justifies its shape entirely through structural logic.'],
     panels:['/images/flujo_cover.webp','/images/flujo2.webp','/images/flujo4.webp','/videos/flujo-reel.mp4','/images/flujo5.webp','/images/flujo6.webp'],
-    prev:null, next:'incline'          // flujo is first
+    prev:'campana', next:'incline'
   },
   incline: {
     hPanels:[2,3],
-    title:'Incline', eyebrow:'02. Product Design',
+    title:'Incline', eyebrow:'03. Product Design',
     tagline:'A modular planter system that adapts to the geometry of small-city living.',
     specs:[{l:'Category',v:'Product Design'},{l:'Year',v:'2024'},{l:'Materials',v:'Polypropylene'},{l:'Process',v:'Rotational Molding'}],
     desc:['INCLINE was born from a specific frustration: most outdoor planters are designed for space that compact city terraces simply do not have. The project responds with a system built around adaptability, configurable in height, length, and width without sacrificing visual coherence.','Two complementary modules form the core of the system. Their relationship is combinatorial, not fixed. Users assemble what they need, expand when they want, and maintain structural stability throughout. Rotational molding in polypropylene reinforces that flexibility with material consistency and manufacturing efficiency.','The form was kept deliberately quiet. INCLINE does not compete with the plants, the furniture, or the architecture around it. It integrates. That restraint is not a stylistic choice, it is the design.'],
     panels:['/images/incline1.webp','/images/incline3.webp','/images/incline4.webp','/images/incline5.webp'],
-    prev:'flujo', next:'pausa'
+    prev:'flujo', next:'core'
   },
   core: {
     hPanels:[],
@@ -1050,7 +1062,7 @@ const PROJECTS = {
     specs:[{l:'Category',v:'Product Redesign'},{l:'Year',v:'2024'},{l:'Client',v:'Under Armour (academic)'},{l:'Process',v:'Injection, Blow Molding & Ultrasonic Welding'}],
     desc:['CORE asks a single question: what would it look like if Under Armour designed a deodorant? The answer lives in the details, the grip geometry, the surface texture, the weight of the cap in hand. Every decision was calibrated to communicate precision and physical confidence at a scale the brand rarely operates in.','The real design challenge was technical: translating a brand language built for large-format products into a form compatible with injection molding, blow molding, and ultrasonic welding. Every radius and rib had to carry its weight. Decorative complexity was not an option.','The outcome is a compact, performance-coded object that holds its own next to an Under Armour sneaker. Small in scale, dense in intent.'],
     panels:['/images/core1.webp','/images/core2.webp','/images/core4.webp'],
-    prev:'pausa', next:null
+    prev:'incline', next:'pausa'
   },
   promix: {
     hPanels:[],
@@ -1059,7 +1071,7 @@ const PROJECTS = {
     specs:[{l:'Category',v:'Product Redesign'},{l:'Year',v:'2025'},{l:'Client',v:'Philips (academic)'},{l:'Material',v:'PP'},{l:'Process',v:'Injection Molding'}],
     desc:['The project began with a close read of the Philips ProMix hand blender: mapping each component against its function and looking for what the product still had left to solve. The goal was not to fix a predefined problem, but to find where it had something more to give.','The cap stood out as the only component with no structural or functional role beyond basic protection. Every other part had a reason to exist. The cap did not. That gap became the opportunity: a single component that could be redesigned to add real convenience without touching anything else in the product.','The redesign integrates cable and plug storage directly into the cap body. A recessed channel guides the cable from a dedicated plug housing to the storage wrap. The piece connects to the existing rear casing via a snap-fit with lateral fins, with no modifications to the product architecture.'],
     panels:['/images/promix-panel.webp','/images/promix-plano-tapa.webp','/images/promix-plano-explotada.webp','/images/promix-plano-conjunto.webp'],
-    prev:'core', next:'mantablast'
+    prev:'pausa', next:'mantablast'
   },
   mantablast: {
     hPanels:[0,1,2,3],
@@ -1081,12 +1093,12 @@ const PROJECTS = {
   },
   pausa: {
     hPanels:[],
-    title:'Pausa', eyebrow:'03. Furniture',
+    title:'Pausa', eyebrow:'+ Furniture',
     tagline:'Outdoor furniture that gives permission to stop.',
     specs:[{l:'Category',v:'Furniture Design'},{l:'Year',v:'2024'},{l:'Client',v:'Myke Outdoors'},{l:'Materials',v:'Aluminum, Nautical Fabric, Dekton'}],
     desc:['PAUSA started as a brief from Myke Outdoors: expand the catalog, reach a younger audience, challenge the visual heaviness of traditional exterior furniture. What emerged was less a collection of objects and more a proposition about time, the kind of furniture that makes stopping feel earned.','The concept of pause shaped every decision. These are pieces designed for coffee, for reading, for sitting in stillness. Their proportions are controlled, their weight reduced, their presence understated, not as a stylistic choice, but because lightness is what makes a pause feel possible.','Three materials governed the entire collection: aluminum profiles, nautical fabric, and Dekton surfaces. Working within those limits turned out to be productive. It forced structural honesty and gave the collection a coherence that feels rigorous and natural at once.'],
     panels:['/images/pausa1.webp','/images/pausa2.webp','/images/pausa4.webp','/videos/pausa-reel.mp4'],
-    prev:'incline', next:'core'
+    prev:'core', next:'promix'
   }
 };
 window.PROJECTS = PROJECTS;
@@ -1216,10 +1228,689 @@ document.addEventListener('keydown', e=>{
   if(e.key==='ArrowRight') lbNav(1);
 });
 
+/* ── Campana: synthetic bell tones via Web Audio API ── */
+function cmpPlayBell(btn, freq, decay, vol) {
+  var vScale = (vol != null) ? (vol / 0.45) : 1;
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const now = ctx.currentTime;
+    // Fundamental
+    const o1 = ctx.createOscillator(), g1 = ctx.createGain();
+    o1.type = 'sine'; o1.frequency.value = freq;
+    o1.connect(g1); g1.connect(ctx.destination);
+    g1.gain.setValueAtTime(Math.min(1, 0.45 * vScale), now);
+    g1.gain.exponentialRampToValueAtTime(0.001, now + decay);
+    // 2nd harmonic (characteristic bell ratio ~2.76)
+    const o2 = ctx.createOscillator(), g2 = ctx.createGain();
+    o2.type = 'sine'; o2.frequency.value = freq * 2.756;
+    o2.connect(g2); g2.connect(ctx.destination);
+    g2.gain.setValueAtTime(Math.min(1, 0.25 * vScale), now);
+    g2.gain.exponentialRampToValueAtTime(0.001, now + decay * 0.55);
+    // Attack transient
+    const o3 = ctx.createOscillator(), g3 = ctx.createGain();
+    o3.type = 'triangle'; o3.frequency.value = freq * 5.4;
+    o3.connect(g3); g3.connect(ctx.destination);
+    g3.gain.setValueAtTime(Math.min(1, 0.18 * vScale), now);
+    g3.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+    o1.start(now); o2.start(now); o3.start(now);
+    o1.stop(now + decay); o2.stop(now + decay * 0.6); o3.stop(now + 0.1);
+    btn.classList.add('is-playing');
+    setTimeout(() => btn.classList.remove('is-playing'), decay * 1000);
+  } catch(e) { console.warn('Audio not available', e); }
+}
+/* ── GRADO interactive bell widget ── */
+var _cmpGrado = {level:0, canEscalate:false, timer:null};
+function cmpGradoPress() {
+  clearTimeout(_cmpGrado.timer);
+  // Escalation logic: consecutive presses within 3s advance the level
+  if (_cmpGrado.canEscalate && _cmpGrado.level > 0 && _cmpGrado.level < 3) {
+    _cmpGrado.level++;           // escalate: N1→N2→N3
+  } else {
+    _cmpGrado.level = 1;         // start fresh at N1
+  }
+  var lv = _cmpGrado.level;
+  var cfgs = [null,
+    {freq:1380,decay:1.4,vol:0.28},
+    {freq:1380,decay:1.8,vol:0.45},
+    {freq:1380,decay:2.2,vol:0.72}
+  ];
+  var cf = cfgs[lv];
+  var btn = document.getElementById('cmp-grado-btn');
+  cmpPlayBell(btn, cf.freq, cf.decay, cf.vol);
+  _cmpGradoUI(false);
+  if (lv < 3) {
+    // Show escalation hint and open 3s window
+    var hintEl = document.getElementById('cmp-grado-hint');
+    if (hintEl) hintEl.style.opacity = '1';
+    _cmpGrado.canEscalate = true;
+    _cmpGrado.timer = setTimeout(function(){
+      _cmpGrado.canEscalate = false;
+      // Level display stays — just dim the hint
+      var hint = document.getElementById('cmp-grado-hint');
+      if (hint) hint.style.opacity = '0';
+    }, 3000);
+  } else {
+    // At N3 — close escalation window, keep showing N3
+    _cmpGrado.canEscalate = false;
+  }
+}
+function _cmpGradoUI(reset) {
+  var tag  = document.getElementById('cmp-grado-level-tag');
+  var db   = document.getElementById('cmp-grado-db');
+  var bar  = document.getElementById('cmp-grado-bar');
+  var hint = document.getElementById('cmp-grado-hint');
+  var btn  = document.getElementById('cmp-grado-btn');
+  if (!tag) return;
+  var labels=['—','N1','N2','N3'], dbs=['—','~70 dB','~76 dB','~82 dB'], widths=['0%','58%','78%','95%'];
+  var lv = _cmpGrado.level;
+  if (reset) {
+    tag.textContent='—'; tag.style.color='var(--color-border)';
+    db.textContent='— dB'; db.style.color='var(--color-muted)';
+    bar.style.width='0%'; hint.style.opacity='0';
+    [1,2,3].forEach(function(i){
+      var c=document.getElementById('cmp-grado-card-'+i);
+      if(c){c.style.background='';c.querySelectorAll('.cgn,.cgt').forEach(function(el){el.style.opacity='.3';});}
+    });
+    return;
+  }
+  tag.textContent=labels[lv]; tag.style.color=lv>0?'#d24a1f':'var(--color-border)';
+  db.textContent=dbs[lv]; db.style.color=lv>0?'var(--color-text)':'var(--color-muted)';
+  bar.style.width=widths[lv]; hint.style.opacity='1';
+  // Ripple on button
+  if (btn) { btn.classList.remove('cmp-grado-ring'); void btn.offsetWidth; btn.classList.add('cmp-grado-ring'); }
+  [1,2,3].forEach(function(i){
+    var c=document.getElementById('cmp-grado-card-'+i);
+    if(!c) return;
+    var active=(i===lv);
+    c.style.background=active?'color-mix(in srgb,#d24a1f 6%,var(--color-bg))':'';
+    c.querySelectorAll('.cgn,.cgt').forEach(function(el){el.style.opacity=active?'1':'.3';});
+  });
+}
+
 function buildProject(id) {
   const p = PROJECTS[id];
   const tr = (window.TRANS && window.currentLang && window.currentLang!=='en') ? (window.TRANS[window.currentLang]?.projects?.[id]||{}) : {};
   const ui = (window.TRANS && window.currentLang && window.currentLang!=='en') ? (window.TRANS[window.currentLang]?.ui||{}) : {};
+  /* ── CAMPANA I18N ── */
+  const _cl = window.currentLang||'en';
+  const _cmpDict = {
+    en:{
+      rph_kicker:'Research Phase',
+      rph_title:'One ring.<br>Two different intents.',
+      tl_1877:'Dome bell patent — 6-8 parts, single rotating striker',
+      tl_1950:'Mass industrial production and global standardization',
+      tl_1970:'Thumb bell reaches 70%+ global market share',
+      tl_2000:'Electronic signals introduced — marginal adoption',
+      tl_2020:'Mandatory in 40+ countries. Mechanism unchanged',
+      tl_2026:'First ratchet-graduated bell proposal — this project',
+      typo_label:'Market Survey · Typology',
+      typo_title:'What exists today?',
+      typo_intro:'Six types on the market. Every one solves acoustic output. None addresses signal graduation.',
+      typo_share_tb:'+70% market share', typo_share_lv:'~15% market share',
+      typo_share_dd:'Mid adoption · Europe / Asia', typo_share_int:'Low adoption · high cost',
+      typo_share_el:'E-bike · 80–110 dB', typo_share_hr:'Niche use · retro',
+      typo_desc_tb:'Rotating thumb lever. Dominant design since 1877. Single sound level, no signal graduation.',
+      typo_desc_lv:'Direct-press side lever. More compact and consistent. Same single output level.',
+      typo_desc_dd:'Bi-tonal oscillator alternating two strike points. More musical. Still no urgency graduation.',
+      typo_desc_int:'Integrated to handlebar (Knog Oi, Spurcycle). Formal innovation, not functional. Long sustain, CNC titanium or aluminium.',
+      typo_desc_el:'Battery + digital synthesis. Configurable volume but requires charging. Tech dependency. Growing in e-bikes.',
+      typo_desc_hr:'Rubber horn or manual whistle. Higher volume and sound differentiation. High actuation effort. Ornamental.',
+      typo_stat1:'types in market', typo_stat2:'sound level — all of them',
+      typo_stat3:'without a functional rethink', typo_stat4:'countries — mandatory by law',
+      persona_label:'User Persona · Primary Research',
+      persona_title:'Urban cyclist — primary profile',
+      persona_tag:'Urban commuter', persona_age:'29 · Hallandale Beach, FL · Graphic designer',
+      persona_qt:'"I ring the bell and I don\'t know if they hear me. Half the time I end up yelling \'excuse me\' anyway."',
+      pb_use:'Use context', pb_use_t:'Daily commute home–office, 6 km mixed: protected bike lane + open street. 4–5 days/week, 25–30 min per trip. City bike with flat handlebar.',
+      pb_freq:'Frequency', pb_freq_t:'Activates the bell 4–8 times per trip: crossings with distracted pedestrians, overtaking on bike lane, blind corners, arrival.',
+      pb_traffic:'Relationship with traffic', pb_traffic_t:'Medium confidence. Knows the rules but negotiates with cars and pedestrians. Considers traffic hostile but "manageable" with constant attention.',
+      pb_actors:'Other road actors', pb_actors_t:'Pedestrians with earphones (recurring irritant), phone-watchers, double-parked cars, cyclists ignoring lane direction.',
+      pb_pain:'Pain points', pb_pain_1:'Ringing without getting any confirmation',
+      pb_pain_2:'Releasing grip to activate while braking',
+      pb_pain_3:'Single sound — unable to graduate urgency',
+      pb_pain_4:'Signal generates negative reactions in pedestrians',
+      pb_motiv:'Motivations', pb_motiv_1:'Arrive safely without conflict with pedestrians',
+      pb_motiv_2:'Be perceived as cordial, not aggressive',
+      pb_motiv_3:'Maintain trip flow without interruptions',
+      pb_motiv_4:'Not having to shout over traffic noise',
+      sec_personas:'Secondary personas',
+      sp1_name:'Recreational cyclist', sp1_desc:'35–60yo, weekend rides. Open to premium accessories. Lower speed reduces urgency.',
+      sp1_prio:'Priority: aesthetics + comfort',
+      sp2_name:'Delivery rider', sp2_desc:'High-frequency use. Needs actuation speed more than acoustic power.',
+      sp2_prio:'Priority: response speed',
+      sp3_name:'Reduced mobility', sp3_desc:'Cyclist with limited grip. Requires actuation with minimal pressing force.',
+      sp3_prio:'Priority: accessibility',
+      obs_label:'Field Study · Behavioral observation',
+      obs_title:'The bell in real use',
+      obs_sub:'A 20-min observation session following an urban cyclist on a mixed route (bike lane + open street + crossings). Objective: document real activation patterns, substitution behaviors, and signal reception rate.',
+      obs_synth_lbl:'Session synthesis',
+      obs_synth:'<strong>Preliminary synthesis:</strong> the real-world usage pattern differs significantly from what the design assumes. The cyclist uses the bell as one tool among voice, gesture, and evasive maneuver — not as the primary channel. Estimated "successful reception" rate on this route: <strong>57%</strong> (4 of 7 activations).',
+      ante_label:'Design DNA · Indirect antecedents',
+      ante_title:'Objects with shared DNA',
+      ante_intro:'Products that are not bicycle bells but share one characteristic with the bell. Each group isolates one attribute: how it is actuated, how it attaches, how it communicates, or how it sounds.',
+      ante_a:'Thumb-actuated', ante_b:'Tube mounting',
+      ante_c:'Sound as signal', ante_d:'Resonant dome',
+      stk_label:'Stakeholder Map · Signal network',
+      stk_title:'Who activates and who receives the signal?',
+      ux_label:'UX Evaluation · 7 dimensions (1–10)',
+      ux_title:'Where exactly does it fail?',
+      ux_dim1:'Ease of use', ux_dim1_sub:'Ease of actuation',
+      ux_dim2:'Communicative intent', ux_dim2_sub:'Clarity of message',
+      ux_dim3:'Traffic efficacy', ux_dim3_sub:'Real-world audibility',
+      ux_dim4:'Formal integration', ux_dim4_sub:'Cohesion with the bicycle',
+      ux_dim5:'Haptic feedback', ux_dim5_sub:'Tactile confirmation on press',
+      ux_dim6:'Social perception', ux_dim6_sub:'Courtesy vs. perceived aggression',
+      ux_dim7:'Durability', ux_dim7_sub:'Resistance to use',
+      ux_finding_lbl:'Central finding',
+      ux_finding:'The three dimensions most critical for road safety — accessibility, communication, and audibility — have the lowest scores. The object fails exactly where it matters most.',
+      km_label:'Key moments in use',
+      km1_title:'Sudden emergency — critical time',
+      km1_body:'The rider needs to alert in 0.8–1.2 s, but must reposition thumb before activating. The process takes longer than the situation allows.',
+      km2_title:'Overtaking on shared lane',
+      km2_body:'Most frequent use. Bell emits a single tone with no way to modulate urgency, speed, or intention for the receiver.',
+      km3_title:'Quiet bike lane — optimal context',
+      km3_body:'Ambient noise 40–50 dB. Bell works well for passing alerts. Pedestrian identifies the source and reacts.',
+      km4_title:'Dense traffic — uncertainty',
+      km4_body:'Rider rings but pedestrian doesn\'t hear it. No feedback of successful reception. Rider left in uncertainty.',
+      jp_label:'Journey Map · 5-phase experience',
+      jp_title:'The cyclist\'s journey',
+      jp_row_action:'Action', jp_row_emotion:'Emotional state',
+      jp_row_sensory:'Sensory feedback', jp_row_pain:'Pain point',
+      jp_row_actors:'Actors',
+      jp_p1_name:'Departure', jp_p2_name:'Riding', jp_p3_name:'Alert',
+      jp_p4_name:'Resolution', jp_p5_name:'Arrival',
+      jp_p1_action:'Leaves home, grabs bike, adjusts helmet and bag, mounts and starts.',
+      jp_p1_emotion:'Neutral / slight rush. Anticipates the traffic ahead.',
+      jp_p1_sensory:'Tactile on handlebar and pedals. No sound stimuli yet.',
+      jp_p1_pain:'Doesn\'t verify the bell works before leaving.',
+      jp_p1_actors:'Cyclist alone · domestic environment.',
+      jp_p2_action:'Pedals on bike lane or open street. Hands on handlebar, thumb away from bell.',
+      jp_p2_emotion:'Satisfaction / flow. Easy attention to surroundings.',
+      jp_p2_sensory:'Urban background noise, wind, asphalt vibration.',
+      jp_p2_pain:'Thumb position doesn\'t allow instant access if situation changes fast.',
+      jp_p2_actors:'Cyclist · other cyclists · vehicle traffic · infrastructure.',
+      jp_p3_action:'Pedestrian on phone invades bike lane. Rider brakes slightly and rings bell.',
+      jp_p3_emotion:'Alert / tension / anticipatory frustration at possible communication failure.',
+      jp_p3_sensory:'Bell sound, competing ambient noise, body weight shift from braking.',
+      jp_p3_pain:'Single sound · no graduation · no confirmation. Must decide: insist, shout, or swerve.',
+      jp_p3_actors:'Cyclist · distracted pedestrian · urban noise · traffic rules.',
+      jp_p4_action:'Waits for response. If no reaction, switches to voice ("excuse me") or swerves.',
+      jp_p4_emotion:'Relief if received · annoyance if not · guilt if had to shout.',
+      jp_p4_sensory:'Visual: pedestrian turns (or not). Auditory: silence. Tactile: full grip restored.',
+      jp_p4_pain:'No return channel. Rider never confirms the receiver "got it."',
+      jp_p4_actors:'Cyclist · pedestrian · occasional witnesses.',
+      jp_p5_action:'Arrives at destination, dismounts, secures bike. End of trip.',
+      jp_p5_emotion:'Satisfaction / mild tiredness / sometimes residual annoyance.',
+      jp_p5_sensory:'Relative quiet, heart rate slowing, normal grip restored.',
+      jp_p5_pain:'No record of how many times "the bell failed" — failure stays invisible.',
+      jp_p5_actors:'Cyclist · destination environment.',
+      jp_emo_depart:'DEPARTURE', jp_emo_riding:'RIDING', jp_emo_alert:'ALERT',
+      jp_emo_resol:'RESOLUTION', jp_emo_arrive:'ARRIVAL',
+      ctx_label:'Use contexts · Effectiveness by scenario',
+      ctx_title:'Where does it reach — and where doesn\'t it?',
+      ctx1_name:'Protected bike lane', ctx1_eff:'High effectiveness',
+      ctx1_desc:'Low ambient noise, shared context understood. Bell effective at ~70 dB.',
+      ctx2_name:'Urban avenue', ctx2_eff:'Low effectiveness',
+      ctx2_desc:'Noise floor 78–85 dB. Bell at 70 dB is acoustically invisible. Verbal signal required.',
+      find_label:'Key findings · Research synthesis',
+      find_title:'Five problems. One root cause.',
+      find_sub:'',
+      h1_title:'One volume, no graduation',
+      h1_body:'Every tap produces the same sound regardless of context, speed, distance, or intent. The device has no dynamic range by design.',
+      h2_title:'Doesn\'t reach where it matters most',
+      h2_body:'Bell peak output: ~72 dB. Urban avenue noise floor: 78–85 dB. The signal is inaudible exactly where urgency is highest.',
+      h2_stat:'72 dB vs 85 dB',
+      h3_title:'Signal carries no intention',
+      h3_body:'The bell cannot distinguish between a polite "excuse me" and an urgent "danger, stop." One sound means everything — so it communicates nothing clearly.',
+      h4_title:'No confirmation of reception',
+      h4_body:'The rider has no feedback whether the signal was heard. 43% of observed interactions required an immediate verbal backup signal.',
+      h4_stat:'57% reception rate',
+      h5_title:'Activation cost at speed',
+      h5_body:'At 25 km/h the rider covers 9.7 m in 1.4 seconds. Current bell geometry requires grip repositioning — time the situation doesn\'t allow.',
+      h5_stat:'1.4 s = 9.7 m',
+      stmt_label:'Problem · Problem Statement',
+      stmt_title:'The urban cyclist needs to <em style="color:#d24a1f;font-style:normal;">graduate the type of alert</em>',
+      stmt_body:'because the bell cannot distinguish between a polite <em style="color:#d24a1f;font-style:normal;">excuse me</em> and an urgent <em style="color:#d24a1f;font-style:normal;">danger alert</em>.',
+      dph_kicker:'Design Phase',
+      dph_title:'A mechanical answer<br>to a behavioral problem.',
+      cmf_label:'Design Phase · Material exploration',
+      cmf_title:'CMF · sound · material · body',
+      cmf_intro:'Each material produces a different timbre when struck. The body selection is not just aesthetics: it defines the sustain, frequency, and perceived "quality" of the alert. Four materials were analyzed on equivalent bell prototypes.',
+      cmf_m1:'Brass', cmf_m1_tone:'Warm · rich in harmonics',
+      cmf_m2:'Stainless steel', cmf_m2_tone:'Bright · higher pitch',
+      cmf_m3:'Aluminium 6061', cmf_m3_tone:'Dry · short decay',
+      cmf_m4:'Titanium (Ti-6Al-4V)', cmf_m4_tone:'Crystalline · maximum sustain',
+      cmf_res:'Resonance', cmf_dec:'Decay', cmf_wt:'Weight', cmf_std:'Standard material',
+      cmf_corr:'Corrosion', cmf_cost:'Cost',
+      cmf_high:'High', cmf_med:'Medium', cmf_low:'Low', cmf_vhigh:'Very high',
+      cmf_none:'None', cmf_vlow:'Very low',
+      cmf_dir_lbl:'Selected direction',
+      cmf_dir:'<strong>Anodised brass</strong> body for optimal resonance and warm tone inherent to the material. Ratchet mechanism in <strong>stainless steel</strong> for durability and visual contrast. Anodised finish for a unified aesthetic without hiding the metal.',
+      prop_label:'Design Phase · Proposal',
+      prop_title:'Intent · <em style="font-style:normal;color:#d24a1f;">design proposal</em>',
+      stat_levels:'signal levels', stat_weight:'estimated weight', stat_mech:'mechanical · no battery',
+      how_label:'How it works',
+      how_1:'Each consecutive press advances a ratchet that increases the hammer swing radius',
+      how_2:'More swing = higher impact speed = higher dB output — physics, no electronics',
+      how_3:'Maximum at third press — level holds until next press',
+      how_4:'Compatible with standard 22.2 mm handlebars — tool-free clamp',
+      how_5:'The return spring resets the ratchet to N1 — ready for the next ride',
+      parts_label:'Materials & parts',
+      ante_band:'The bicycle bell inherits attributes from four distinct families — thumb gesture, tube mount, warning function, and resonant geometry — but excels at none. Each group points to a redesign direction.',
+      ctx2_name:'Quiet street', ctx2_eff:'Medium effectiveness',
+      ctx2_desc:'Mixed traffic. Bell competes with ambient noise. Inconsistent reception.',
+      ctx3_name:'Urban avenue', ctx3_eff:'Low effectiveness',
+      ctx3_desc:'Noise floor 78–85 dB. Bell at 70 dB acoustically invisible. Verbal signal required.',
+      ctx4_name:'Mountain trail (MTB)', ctx4_eff:'Variable',
+      ctx4_desc:'Natural acoustics help, but speed and terrain significantly reduce the reaction window.',
+      part1_name:'Dome + hammer', part1_desc:'Brass + steel — resonance, decay and volume determined by geometry.',
+      part2_name:'Clamp', part2_desc:'Aluminum + rubber — 22.2 mm standard, no tube marking.',
+      sig_label:'Signal levels · N1 · N2 · N3',
+      sig_title:'N1 · N2 · N3',
+      detail_label:'Product details',
+      mech_label:'Ratchet mechanism — progressive cam engagement',
+      
+      ante_gh_a:'Thumb-actuated', ante_gh_b:'Tube mounting',
+      ante_gh_c:'Sound as warning', ante_gh_d:'Resonant dome',
+      ante_a1:'Clicker / counter', ante_a1t:'Spring-loaded button. Same thumb gesture and haptic feedback.',
+      ante_a2:'Camera shutter', ante_a2t:'Top button activated without distracting the gaze.',
+      ante_a3:'Motorcycle throttle', ante_a3t:'Horn on handlebar. Thumb under continuous pressure.',
+      ante_b1:'Front light', ante_b1t:'Same collar. Shares the 22.2mm ecosystem.',
+      ante_b2:'Phone mount', ante_b2t:'Rubber clamp. Critical: no marks on the tube.',
+      ante_b3:'Rear-view mirror', ante_b3t:'Coexists with the bell on the same side of the bar.',
+      ante_c1:'Car horn', ante_c1t:'Same role at another scale. ~110 dB. Bike is the weakest case.',
+      ante_c2:'Whistle', ante_c2t:'Piercing high pitch. Requires the mouth — rules out occupied hands.',
+      ante_c3:'Doorbell', ante_c3t:'Alert between two people. Recipient expects it. Solves the opposite.',
+      ante_d1:'Church bell', ante_d1t:'Same physical principle at 1000× the mass. Low pitch from sheer size.',
+      ante_d2:'Triangle / agogô', ante_d2t:'Idiophones. Extended decay from open geometry.',
+      ante_d3:'Cowbell', ante_d3t:'Dome with internal clapper activated by motion. Alert without intervention.',
+      closing:'Sound was solved in 1877. <em>Intent</em> took 149 more years.',
+    },
+    es:{
+      rph_kicker:'Fase de Investigación',
+      rph_title:'Un timbre.<br>Dos intenciones muy distintas.',
+      tl_1877:'Patente de campana de cúpula — 6-8 partes, percutor rotatorio',
+      tl_1950:'Producción industrial masiva y estandarización global',
+      tl_1970:'El thumb bell alcanza +70% de cuota de mercado global',
+      tl_2000:'Señales electrónicas introducidas — adopción marginal',
+      tl_2020:'Obligatoria en 40+ países. Mecanismo sin cambios',
+      tl_2026:'Primera propuesta de campana graduada — este proyecto',
+      typo_label:'Análisis de mercado · Tipología',
+      typo_title:'¿Qué existe hoy?',
+      typo_intro:'Seis tipos en el mercado. Cada uno resuelve la salida acústica. Ninguno aborda la graduación de señal.',
+      typo_share_tb:'+70% cuota de mercado', typo_share_lv:'~15% cuota de mercado',
+      typo_share_dd:'Adopción media · Europa / Asia', typo_share_int:'Adopción baja · alto costo',
+      typo_share_el:'E-bike · 80–110 dB', typo_share_hr:'Uso nicho · retro',
+      typo_desc_tb:'Palanca rotatoria con pulgar. Diseño dominante desde 1877. Un solo nivel sonoro, sin graduación de señal.',
+      typo_desc_lv:'Palanca lateral de presión directa. Más compacta y consistente. Mismo nivel único de salida sonora.',
+      typo_desc_dd:'Oscilador bi-tonal que alterna dos puntos de impacto. Sonido más musical. Sigue sin graduar urgencia.',
+      typo_desc_int:'Integrada al manillar (Knog Oi, Spurcycle). Innovación formal, no funcional. Sustain largo, titanio o aluminio CNC.',
+      typo_desc_el:'Batería + síntesis digital. Volumen configurable pero requiere carga. Dependencia tecnológica. Creciente en e-bikes.',
+      typo_desc_hr:'Bocina de goma o silbato manual. Mayor volumen y diferenciación sonora. Esfuerzo de accionamiento alto. Ornamental.',
+      typo_stat1:'tipos en el mercado', typo_stat2:'nivel de sonido — todos',
+      typo_stat3:'sin replanteamiento funcional', typo_stat4:'países — obligatorio por ley',
+      persona_label:'User Persona · Investigación primaria',
+      persona_title:'Ciclista urbano — perfil primario',
+      persona_tag:'Ciclista urbana', persona_age:'29 · Hallandale Beach, FL · Diseñadora gráfica',
+      persona_qt:'"Toco el timbre y no sé si me escuchan. La mitad de las veces termino gritando \'permiso\' igual."',
+      pb_use:'Contexto de uso', pb_use_t:'Traslado diario hogar–trabajo, 6 km mixtos: carril bici protegido + calle abierta. 4–5 días/semana, 25–30 min por trayecto. Bicicleta urbana con manillar plano.',
+      pb_freq:'Frecuencia de uso', pb_freq_t:'Activa el timbre 4–8 veces por trayecto: cruces con peatones distraídos, adelantamientos en carril, esquinas sin visibilidad, llegada al destino.',
+      pb_traffic:'Relación con el tráfico', pb_traffic_t:'Confianza media. Conoce las normas pero negocia con autos y peatones. Considera el tráfico hostil pero "manejable" con atención constante.',
+      pb_actors:'Otros actores en ruta', pb_actors_t:'Peatones con auriculares (irritante recurrente), personas mirando el teléfono, autos en doble fila, ciclistas que ignoran el sentido del carril.',
+      pb_pain:'Puntos de dolor', pb_pain_1:'Tocar el timbre sin recibir ninguna confirmación',
+      pb_pain_2:'Soltar el agarre para activar mientras frena',
+      pb_pain_3:'Sonido único — sin posibilidad de graduar urgencia',
+      pb_pain_4:'La señal genera reacciones negativas en peatones',
+      pb_motiv:'Motivaciones', pb_motiv_1:'Llegar a destino sin conflictos con peatones',
+      pb_motiv_2:'Ser percibida como cortés, no agresiva',
+      pb_motiv_3:'Mantener el ritmo del trayecto sin interrupciones',
+      pb_motiv_4:'No tener que gritar por encima del ruido del tráfico',
+      sec_personas:'Personas secundarias',
+      sp1_name:'Ciclista recreativo', sp1_desc:'35–60 años, salidas de fin de semana. Abierto a accesorios premium. Velocidad menor reduce la urgencia.',
+      sp1_prio:'Prioridad: estética + confort',
+      sp2_name:'Ciclista de reparto', sp2_desc:'Uso de alta frecuencia. Necesita rapidez de accionamiento más que potencia acústica.',
+      sp2_prio:'Prioridad: velocidad de respuesta',
+      sp3_name:'Movilidad reducida', sp3_desc:'Ciclista con agarre limitado. Requiere accionamiento con mínima fuerza de presión.',
+      sp3_prio:'Prioridad: accesibilidad de uso',
+      obs_label:'Estudio de campo · Observación conductual',
+      obs_title:'El timbre en uso real',
+      obs_sub:'Sesión de observación de 20 min siguiendo a un ciclista urbano en ruta mixta (carril bici + calle abierta + cruces). Objetivo: documentar patrones reales de activación, conductas de sustitución y tasa de recepción de señal.',
+      obs_synth_lbl:'Síntesis de la sesión',
+      obs_synth:'<strong>Síntesis preliminar:</strong> el patrón de uso real difiere significativamente de lo que asume el diseño. El ciclista usa el timbre como una herramienta entre la voz, el gesto y la maniobra evasiva — no como canal principal. Tasa estimada de "recepción exitosa" en esta ruta: <strong>57%</strong> (4 de 7 activaciones).',
+      ante_label:'ADN de diseño · Antecedentes indirectos',
+      ante_title:'Objetos con ADN compartido',
+      ante_intro:'Productos que no son timbres de bicicleta pero comparten una característica con la campana. Cada grupo aísla un atributo: cómo se acciona, cómo se fija, cómo comunica o cómo suena.',
+      ante_a:'Accionados con pulgar', ante_b:'Fijación a tubo',
+      ante_c:'Sonido como aviso', ante_d:'Cúpula resonante',
+      stk_label:'Mapa de stakeholders · Red de señal',
+      stk_title:'¿Quién activa y quién recibe la señal?',
+      ux_label:'Evaluación UX · 7 dimensiones (1–10)',
+      ux_title:'¿Dónde falla exactamente?',
+      ux_dim1:'Accesibilidad de uso', ux_dim1_sub:'Facilidad de accionamiento',
+      ux_dim2:'Intención comunicativa', ux_dim2_sub:'Claridad del mensaje',
+      ux_dim3:'Eficacia en tráfico', ux_dim3_sub:'Audibilidad real',
+      ux_dim4:'Integración formal', ux_dim4_sub:'Cohesión con la bicicleta',
+      ux_dim5:'Feedback háptico', ux_dim5_sub:'Confirmación táctil al activar',
+      ux_dim6:'Percepción social', ux_dim6_sub:'Cortesía vs. agresividad percibida',
+      ux_dim7:'Durabilidad', ux_dim7_sub:'Resistencia al uso',
+      ux_finding_lbl:'Hallazgo central',
+      ux_finding:'Las tres dimensiones más críticas para la seguridad vial — accesibilidad, comunicación y audibilidad — tienen las puntuaciones más bajas. El objeto falla exactamente donde más importa.',
+      km_label:'Momentos clave de uso',
+      km1_title:'Emergencia repentina — tiempo crítico',
+      km1_body:'El ciclista necesita alertar en 0.8–1.2 s, pero debe reposicionar el pulgar antes de activar. El proceso tarda más de lo que la situación permite.',
+      km2_title:'Adelantar en senda compartida',
+      km2_body:'Uso más frecuente. El timbre emite un único tono sin posibilidad de modular urgencia, velocidad o intención para quien recibe.',
+      km3_title:'Ciclovía tranquila — contexto óptimo',
+      km3_body:'Ruido ambiental 40–50 dB. El timbre funciona bien para avisos de adelantamiento. El peatón identifica la fuente y reacciona.',
+      km4_title:'Tráfico denso — incertidumbre',
+      km4_body:'El ciclista toca el timbre pero el peatón no lo escucha. Sin feedback de recepción exitosa. El ciclista queda en la incertidumbre.',
+      jp_label:'Journey Map · Experiencia en 5 fases',
+      jp_title:'El viaje del ciclista',
+      jp_row_action:'Acción', jp_row_emotion:'Estado emocional',
+      jp_row_sensory:'Feedback sensorial', jp_row_pain:'Punto de dolor',
+      jp_row_actors:'Actores',
+      jp_p1_name:'Salida', jp_p2_name:'Trayecto', jp_p3_name:'Alerta',
+      jp_p4_name:'Resolución', jp_p5_name:'Llegada',
+      jp_p1_action:'Sale de casa, toma la bicicleta, ajusta casco y bolso, sube y arranca.',
+      jp_p1_emotion:'Neutro / leve urgencia. Anticipa el tráfico que viene.',
+      jp_p1_sensory:'Táctil en manillar y pedales. Sin estímulos sonoros todavía.',
+      jp_p1_pain:'No verifica que el timbre funcione antes de salir.',
+      jp_p1_actors:'Ciclista sola · entorno doméstico.',
+      jp_p2_action:'Pedalea en carril bici o calle abierta. Manos en el manillar, pulgar alejado del timbre.',
+      jp_p2_emotion:'Satisfacción / flow. Atención fácil al entorno.',
+      jp_p2_sensory:'Ruido de fondo urbano, viento, vibración del asfalto.',
+      jp_p2_pain:'La posición del pulgar no permite acceso instantáneo si la situación cambia rápido.',
+      jp_p2_actors:'Ciclista · otros ciclistas · tráfico vehicular · infraestructura.',
+      jp_p3_action:'Un peatón con el teléfono invade el carril bici. La ciclista frena ligeramente y toca el timbre.',
+      jp_p3_emotion:'Alerta / tensión / frustración anticipatoria ante posible fallo de comunicación.',
+      jp_p3_sensory:'Sonido del timbre, ruido ambiental competidor, desplazamiento de peso al frenar.',
+      jp_p3_pain:'Sonido único · sin graduación · sin confirmación. Debe decidir: insistir, gritar o esquivar.',
+      jp_p3_actors:'Ciclista · peatón distraído · ruido urbano · normas de tráfico.',
+      jp_p4_action:'Espera la respuesta del peatón. Sin reacción, recurre a la voz ("permiso") o esquiva.',
+      jp_p4_emotion:'Alivio si fue recibido · molestia si no · culpa si tuvo que gritar.',
+      jp_p4_sensory:'Visual: el peatón gira (o no). Auditivo: silencio. Táctil: agarre completo restaurado.',
+      jp_p4_pain:'Sin canal de retorno. La ciclista nunca confirma que el receptor "lo escuchó".',
+      jp_p4_actors:'Ciclista · peatón · testigos ocasionales.',
+      jp_p5_action:'Llega al destino, desmonta, asegura la bicicleta. Fin del trayecto.',
+      jp_p5_emotion:'Satisfacción / leve cansancio / a veces molestia residual del episodio de alerta.',
+      jp_p5_sensory:'Relativo silencio, frecuencia cardíaca bajando, agarre normal restaurado.',
+      jp_p5_pain:'Sin registro de cuántas veces "el timbre falló" — el fallo permanece invisible.',
+      jp_p5_actors:'Ciclista · entorno de destino.',
+      jp_emo_depart:'SALIDA', jp_emo_riding:'TRAYECTO', jp_emo_alert:'ALERTA',
+      jp_emo_resol:'RESOLUCIÓN', jp_emo_arrive:'LLEGADA',
+      ctx_label:'Contextos de uso · Efectividad por escenario',
+      ctx_title:'¿Dónde llega la señal y dónde no?',
+      ctx1_name:'Carril bici protegido', ctx1_eff:'Alta efectividad',
+      ctx1_desc:'Bajo ruido ambiental, contexto compartido comprendido. El timbre funciona bien a ~70 dB.',
+      ctx2_name:'Avenida urbana', ctx2_eff:'Baja efectividad',
+      ctx2_desc:'Piso de ruido 78–85 dB. El timbre a 70 dB es acústicamente invisible. Se requiere señal verbal.',
+      find_label:'Hallazgos clave · Síntesis de investigación',
+      find_title:'Cinco problemas. Una sola raíz.',
+      find_sub:'',
+      h1_title:'Un solo volumen, sin graduación',
+      h1_body:'Cada toque produce el mismo sonido sin importar el contexto, la velocidad, la distancia o la intención. El dispositivo no tiene rango dinámico por diseño.',
+      h2_title:'No llega donde más importa',
+      h2_body:'Salida máxima del timbre: ~72 dB. Piso de ruido en avenida urbana: 78–85 dB. La señal es inaudible exactamente donde la urgencia es mayor.',
+      h2_stat:'72 dB vs 85 dB',
+      h3_title:'La señal no comunica intención',
+      h3_body:'El timbre no puede distinguir entre un "permiso" amable y un "peligro, detenerse". Un sonido lo significa todo — y por eso no comunica nada con claridad.',
+      h4_title:'Sin confirmación de recepción',
+      h4_body:'El ciclista no tiene feedback de si la señal fue escuchada. El 43% de las interacciones observadas requirieron respaldo vocal inmediato.',
+      h4_stat:'57% tasa de recepción',
+      h5_title:'Costo de activación a alta velocidad',
+      h5_body:'A 25 km/h el ciclista recorre 9.7 m en 1.4 segundos. La geometría actual del timbre requiere reposicionar el agarre — tiempo que la situación no permite.',
+      h5_stat:'1.4 s = 9.7 m',
+      stmt_label:'Problema · Problem Statement',
+      stmt_title:'El ciclista urbano necesita <em style="color:#d24a1f;font-style:normal;">graduar el tipo de aviso</em>',
+      stmt_body:'porque la campana no distingue entre un amable <em style="color:#d24a1f;font-style:normal;">permiso</em> y una urgente <em style="color:#d24a1f;font-style:normal;">alerta de peligro</em>.',
+      dph_kicker:'Design Phase',
+      dph_title:'Una respuesta mecánica<br>a un problema de comportamiento.',
+      cmf_label:'Design Phase · Exploración de materiales',
+      cmf_title:'CMF · sonido · material · cuerpo',
+      cmf_intro:'Cada material genera un timbre diferente al percutirse. La selección del cuerpo no es solo estética: define el sustain, la frecuencia y la percepción de "calidad" del aviso. Se analizaron cuatro materiales en prototipos de campana equivalente.',
+      cmf_m1:'Latón (Brass)', cmf_m1_tone:'Cálido · rico en armónicos',
+      cmf_m2:'Acero inoxidable', cmf_m2_tone:'Brillante · tono más agudo',
+      cmf_m3:'Aluminio 6061', cmf_m3_tone:'Seco · decay corto',
+      cmf_m4:'Titanio (Ti-6Al-4V)', cmf_m4_tone:'Cristalino · sustain máximo',
+      cmf_res:'Resonancia', cmf_dec:'Decay', cmf_wt:'Peso', cmf_std:'Material estándar',
+      cmf_corr:'Corrosión', cmf_cost:'Costo',
+      cmf_high:'Alta', cmf_med:'Media', cmf_low:'Baja', cmf_vhigh:'Muy alta',
+      cmf_none:'Nula', cmf_vlow:'Muy bajo',
+      cmf_dir_lbl:'Dirección seleccionada',
+      cmf_dir:'Cuerpo de <strong>latón anodizado</strong> por resonancia óptima y tono cálido inherente al material. Mecanismo de trinquete en <strong>acero inoxidable</strong> para durabilidad y contraste visual. Acabado anodizado que unifica el conjunto sin ocultar el metal.',
+      prop_label:'Design Phase · Propuesta',
+      prop_title:'Intent · <em style="font-style:normal;color:#d24a1f;">propuesta de diseño</em>',
+      stat_levels:'niveles de señal', stat_weight:'peso estimado', stat_mech:'mecánico · sin batería',
+      how_label:'Cómo funciona',
+      how_1:'Cada pulsación consecutiva avanza un trinquete que aumenta el radio de swing del martillo',
+      how_2:'Mayor swing = mayor velocidad de impacto = mayor salida en dB — física, sin electrónica',
+      how_3:'La tercera pulsación resetea a N1 — ciclo continuo, sin cambio de modo',
+      how_4:'Compatible con manillares estándar 22.2 mm — abrazadera sin herramientas',
+      how_5:'El resorte de retención devuelve el trinquete a N1 — listo para el próximo uso',
+      parts_label:'Materiales y partes',
+      ante_band:'La campana de bici hereda atributos de cuatro familias distintas — gesto del pulgar, abrazadera al tubo, función de aviso y geometría resonante — pero no destaca en ninguna. Cada grupo apunta a una pista de rediseño.',
+      ctx2_name:'Calle tranquila', ctx2_eff:'Efectividad media',
+      ctx2_desc:'Tráfico mixto. El timbre compite con el ruido ambiental. Recepción inconsistente.',
+      ctx3_name:'Avenida urbana', ctx3_eff:'Baja efectividad',
+      ctx3_desc:'Piso de ruido 78–85 dB. El timbre a 70 dB es acústicamente invisible. Se requiere señal verbal.',
+      ctx4_name:'Sendero de montaña (MTB)', ctx4_eff:'Variable',
+      ctx4_desc:'La acústica natural ayuda, pero la velocidad y el terreno reducen significativamente la ventana de reacción.',
+      part1_name:'Cúpula + martillo', part1_desc:'Latón + acero — resonancia, decay y volumen por geometría.',
+      part2_name:'Abrazadera', part2_desc:'Aluminio + goma — estándar 22.2 mm, sin marcar el tubo.',
+      sig_label:'Niveles de señal · N1 · N2 · N3',
+      sig_title:'N1 · N2 · N3',
+      detail_label:'Produktdetails',
+      mech_label:'Mecanismo de trinquete — enganche progresivo de la leva',
+      
+      ante_gh_a:'Accionados con pulgar', ante_gh_b:'Fijación a tubo',
+      ante_gh_c:'Sonido como aviso', ante_gh_d:'Cúpula resonante',
+      ante_a1:'Clicker / contador', ante_a1t:'Pulsador con resorte. Mismo gesto de pulgar y feedback háptico.',
+      ante_a2:'Disparador de cámara', ante_a2t:'Botón superior accionado sin distraer la vista.',
+      ante_a3:'Gatillo de moto', ante_a3t:'Bocina sobre manillar. Pulgar bajo presión continua.',
+      ante_b1:'Linterna delantera', ante_b1t:'Mismo collarín. Comparte ecosistema de medidas.',
+      ante_b2:'Soporte de celular', ante_b2t:'Abrazadera con goma. Crítico el ajuste sin marcar el tubo.',
+      ante_b3:'Espejo retrovisor', ante_b3t:'Convive con la campana en el mismo lado del manillar.',
+      ante_c1:'Bocina de automóvil', ante_c1t:'Mismo rol a otra escala. ~110 dB. La bici es el caso más débil.',
+      ante_c2:'Silbato', ante_c2t:'Tono agudo penetrante. Requiere la boca — descarta manos ocupadas.',
+      ante_c3:'Timbre de puerta', ante_c3t:'Aviso entre dos personas. Receptor lo espera. Resuelve lo opuesto.',
+      ante_d1:'Campana de iglesia', ante_d1t:'Mismo principio físico a 1000× la masa. Tono grave por dimensión.',
+      ante_d2:'Triángulo / agogô', ante_d2t:'Idiófonos de percusión. Decay extendido por geometría abierta.',
+      ante_d3:'Cencerro', ante_d3t:'Cúpula con martinete interno por movimiento. Aviso sin intervención.',
+      closing:'El sonido se resolvió en 1877. <em>La intención</em> tardó 149 años más.',
+    },
+    de:{
+      rph_kicker:'Forschungsphase',
+      rph_title:'Ein Klingeln.<br>Zwei sehr unterschiedliche Absichten.',
+      tl_1877:'Kuppelklingel-Patent — 6-8 Teile, einzelner Drehhammer',
+      tl_1950:'Massenindustrielle Produktion und globale Standardisierung',
+      tl_1970:'Daumentaste erreicht +70% globalen Marktanteil',
+      tl_2000:'Elektronische Signale eingeführt — marginale Adoption',
+      tl_2020:'Pflicht in 40+ Ländern. Mechanismus unverändert',
+      tl_2026:'Erster Ratschen-Klingel-Entwurf — dieses Projekt',
+      typo_label:'Marktanalyse · Typologie',
+      typo_title:'Was gibt es heute?',
+      typo_intro:'Sechs Typen auf dem Markt. Jeder löst die akustische Ausgabe. Keiner adressiert die Signalabstufung.',
+      typo_share_tb:'+70% Marktanteil', typo_share_lv:'~15% Marktanteil',
+      typo_share_dd:'Mittlere Adoption · Europa / Asien', typo_share_int:'Geringe Adoption · hoher Preis',
+      typo_share_el:'E-Bike · 80–110 dB', typo_share_hr:'Nischennutzung · Retro',
+      typo_desc_tb:'Drehhebel mit Daumen. Dominantes Design seit 1877. Einzelner Lautstärkepegel, keine Signalabstufung.',
+      typo_desc_lv:'Seitlicher Druckhebel. Kompakter und konsistenter. Gleicher Ausgangspegel.',
+      typo_desc_dd:'Bitonaler Oszillator mit zwei Auftreffpunkten. Musikalischer Klang. Noch keine Dringlichkeitsabstufung.',
+      typo_desc_int:'In Lenker integriert (Knog Oi, Spurcycle). Formale, keine funktionale Innovation. Langer Sustain, CNC-Titan oder Aluminium.',
+      typo_desc_el:'Batterie + digitale Synthese. Konfigurierbares Volumen, benötigt Aufladung. Technologieabhängigkeit. Wächst bei E-Bikes.',
+      typo_desc_hr:'Gummihorn oder manuelles Pfeifsignal. Höheres Volumen. Hoher Betätigungsaufwand. Ornamental.',
+      typo_stat1:'Typen auf dem Markt', typo_stat2:'Lautstärkepegel — alle',
+      typo_stat3:'ohne funktionale Neugestaltung', typo_stat4:'Länder — gesetzlich vorgeschrieben',
+      persona_label:'User Persona · Primärforschung',
+      persona_title:'Stadtradler — Primärprofil',
+      persona_tag:'Stadtpendlerin', persona_age:'29 · Hallandale Beach, FL · Grafikdesignerin',
+      persona_qt:'"Ich klingle und weiß nicht ob sie mich hören. Meistens rufe ich sowieso \'Entschuldigung\'."',
+      pb_use:'Nutzungskontext', pb_use_t:'Täglicher Weg Zuhause–Büro, 6 km gemischt: geschützter Radweg + offene Straße. 4–5 Tage/Woche, 25–30 Min pro Weg. Stadtrad mit flachem Lenker.',
+      pb_freq:'Nutzungshäufigkeit', pb_freq_t:'Betätigt die Klingel 4–8 Mal pro Fahrt: Kreuzungen mit abgelenkten Fußgängern, Überholen auf dem Radweg, blinde Ecken, Ankunft.',
+      pb_traffic:'Verhältnis zum Verkehr', pb_traffic_t:'Mittleres Vertrauen. Kennt die Regeln, verhandelt aber mit Autos und Fußgängern. Hält Verkehr für feindlich aber "handhabbar".',
+      pb_actors:'Andere Verkehrsteilnehmer', pb_actors_t:'Fußgänger mit Kopfhörern (wiederkehrender Ärger), Handy-Schauer, Falschparker, Radfahrer gegen die Fahrtrichtung.',
+      pb_pain:'Schmerzpunkte', pb_pain_1:'Klingeln ohne Bestätigung zu erhalten',
+      pb_pain_2:'Griff loslassen zum Aktivieren während des Bremsens',
+      pb_pain_3:'Einzelton — keine Dringlichkeitsabstufung möglich',
+      pb_pain_4:'Signal erzeugt negative Reaktionen bei Fußgängern',
+      pb_motiv:'Motivationen', pb_motiv_1:'Sicher ankommen ohne Konflikte mit Fußgängern',
+      pb_motiv_2:'Als höflich, nicht aggressiv wahrgenommen werden',
+      pb_motiv_3:'Fahrtrhythmus ohne Unterbrechungen halten',
+      pb_motiv_4:'Nicht über Verkehrslärm schreien müssen',
+      sec_personas:'Sekundärpersonas',
+      sp1_name:'Freizeitradler', sp1_desc:'35–60 Jahre, Wochenendausfahrten. Offen für Premiumzubehör. Geringere Geschwindigkeit reduziert Dringlichkeit.',
+      sp1_prio:'Priorität: Ästhetik + Komfort',
+      sp2_name:'Lieferradler', sp2_desc:'Hochfrequente Nutzung. Benötigt Betätigungsgeschwindigkeit mehr als akustische Leistung.',
+      sp2_prio:'Priorität: Reaktionsgeschwindigkeit',
+      sp3_name:'Eingeschränkte Mobilität', sp3_desc:'Radfahrer mit eingeschränktem Griff. Erfordert Betätigung mit minimalem Druck.',
+      sp3_prio:'Priorität: Barrierefreiheit',
+      obs_label:'Feldstudie · Verhaltensbeobachtung',
+      obs_title:'Die Klingel in der Praxis',
+      obs_sub:'20-minütige Beobachtungssitzung, einem Stadtradler auf gemischter Route folgend (Radweg + offene Straße + Kreuzungen). Ziel: Dokumentation realer Aktivierungsmuster, Ersatzverhaltensweisen und Signalempfangsrate.',
+      obs_synth_lbl:'Sitzungszusammenfassung',
+      obs_synth:'<strong>Vorläufige Synthese:</strong> Das reale Nutzungsmuster weicht erheblich von dem ab, was das Design annimmt. Der Radfahrer nutzt die Klingel als eines von mehreren Werkzeugen — neben Stimme, Geste und Ausweichmanöver. Geschätzte Empfangsrate auf dieser Route: <strong>57%</strong> (4 von 7 Aktivierungen).',
+      ante_label:'Design-DNA · Indirekte Vorläufer',
+      ante_title:'Objekte mit gemeinsamer DNA',
+      ante_intro:'Produkte, die keine Fahrradklingeln sind, aber ein Merkmal mit der Klingel teilen. Jede Gruppe isoliert ein Attribut: Betätigung, Befestigung, Kommunikation oder Klang.',
+      ante_a:'Daumenbetätigt', ante_b:'Rohrbefestigung',
+      ante_c:'Ton als Signal', ante_d:'Resonanzkuppel',
+      stk_label:'Stakeholder-Map · Signalnetzwerk',
+      stk_title:'Wer aktiviert und wer empfängt das Signal?',
+      ux_label:'UX-Evaluation · 7 Dimensionen (1–10)',
+      ux_title:'Wo genau versagt es?',
+      ux_dim1:'Bedienbarkeit', ux_dim1_sub:'Leichtigkeit der Betätigung',
+      ux_dim2:'Kommunikationsabsicht', ux_dim2_sub:'Klarheit der Botschaft',
+      ux_dim3:'Wirksamkeit im Verkehr', ux_dim3_sub:'Reale Hörbarkeit',
+      ux_dim4:'Formale Integration', ux_dim4_sub:'Kohäsion mit dem Fahrrad',
+      ux_dim5:'Haptisches Feedback', ux_dim5_sub:'Taktile Bestätigung beim Drücken',
+      ux_dim6:'Soziale Wahrnehmung', ux_dim6_sub:'Höflichkeit vs. wahrgenommene Aggression',
+      ux_dim7:'Langlebigkeit', ux_dim7_sub:'Widerstandsfähigkeit im Gebrauch',
+      ux_finding_lbl:'Zentrale Erkenntnis',
+      ux_finding:'Die drei Dimensionen, die für die Verkehrssicherheit am kritischsten sind — Zugänglichkeit, Kommunikation und Hörbarkeit — haben die niedrigsten Werte. Das Objekt versagt genau dort, wo es am meisten zählt.',
+      km_label:'Schlüsselmomente der Nutzung',
+      km1_title:'Plötzlicher Notfall — kritische Zeit',
+      km1_body:'Der Radfahrer muss in 0.8–1.2 s warnen, muss aber zuerst den Daumen neu positionieren. Der Vorgang dauert länger als die Situation erlaubt.',
+      km2_title:'Überholen auf gemeinsamem Weg',
+      km2_body:'Häufigste Nutzung. Die Klingel gibt einen einzelnen Ton ohne Möglichkeit, Dringlichkeit, Geschwindigkeit oder Absicht zu modulieren.',
+      km3_title:'Ruhiger Radweg — optimaler Kontext',
+      km3_body:'Umgebungslärm 40–50 dB. Klingel funktioniert gut für Überholwarnungen. Fußgänger identifiziert die Quelle und reagiert.',
+      km4_title:'Dichter Verkehr — Unsicherheit',
+      km4_body:'Radfahrer klingelt, aber Fußgänger hört es nicht. Kein Feedback über erfolgreichen Empfang. Radfahrer bleibt in Ungewissheit.',
+      jp_label:'Journey Map · 5-Phasen-Erfahrung',
+      jp_title:'Die Reise des Radfahrers',
+      jp_row_action:'Aktion', jp_row_emotion:'Emotionaler Zustand',
+      jp_row_sensory:'Sensorisches Feedback', jp_row_pain:'Schmerzpunkt',
+      jp_row_actors:'Akteure',
+      jp_p1_name:'Abfahrt', jp_p2_name:'Fahrt', jp_p3_name:'Alarm',
+      jp_p4_name:'Auflösung', jp_p5_name:'Ankunft',
+      jp_p1_action:'Verlässt Zuhause, nimmt das Fahrrad, stellt Helm und Tasche ein, steigt auf und startet.',
+      jp_p1_emotion:'Neutral / leichte Eile. Antizipiert den bevorstehenden Verkehr.',
+      jp_p1_sensory:'Taktil an Lenker und Pedalen. Noch keine Geräuschreize.',
+      jp_p1_pain:'Überprüft nicht, ob die Klingel funktioniert, bevor er fährt.',
+      jp_p1_actors:'Radfahrer allein · häusliche Umgebung.',
+      jp_p2_action:'Pedaliert auf Radweg oder offener Straße. Hände am Lenker, Daumen von der Klingel entfernt.',
+      jp_p2_emotion:'Zufriedenheit / Flow. Leichte Aufmerksamkeit für die Umgebung.',
+      jp_p2_sensory:'Städtisches Hintergrundrauschen, Wind, Asphaltvibrationen.',
+      jp_p2_pain:'Daumenposition erlaubt keinen sofortigen Zugriff bei schnellen Lageänderungen.',
+      jp_p2_actors:'Radfahrer · andere Radfahrer · Fahrzeugverkehr · Infrastruktur.',
+      jp_p3_action:'Fußgänger mit Handy betritt Radweg. Radfahrer bremst leicht und klingelt.',
+      jp_p3_emotion:'Alarm / Spannung / vorweggenommene Frustration über möglichen Kommunikationsausfall.',
+      jp_p3_sensory:'Klingelton, konkurrierender Umgebungslärm, Gewichtsverlagerung beim Bremsen.',
+      jp_p3_pain:'Einzelton · keine Abstufung · keine Bestätigung. Muss entscheiden: beharren, rufen oder ausweichen.',
+      jp_p3_actors:'Radfahrer · abgelenkter Fußgänger · Stadtlärm · Verkehrsregeln.',
+      jp_p4_action:'Wartet auf Antwort des Fußgängers. Keine Reaktion → wechselt zu Stimme ("Entschuldigung") oder weicht aus.',
+      jp_p4_emotion:'Erleichterung wenn empfangen · Ärger wenn nicht · Schuldgefühl wenn gerufen.',
+      jp_p4_sensory:'Visuell: Fußgänger dreht sich (oder nicht). Auditiv: Stille. Taktil: voller Griff wiederhergestellt.',
+      jp_p4_pain:'Kein Rückkanal. Radfahrer bestätigt nie, dass der Empfänger es "gehört hat".',
+      jp_p4_actors:'Radfahrer · Fußgänger · gelegentliche Zeugen.',
+      jp_p5_action:'Kommt am Ziel an, steigt ab, sichert Fahrrad. Ende der Fahrt.',
+      jp_p5_emotion:'Zufriedenheit / leichte Müdigkeit / manchmal restliche Verärgerung.',
+      jp_p5_sensory:'Relative Stille, Herzfrequenz sinkt, normaler Griff wiederhergestellt.',
+      jp_p5_pain:'Keine Aufzeichnung über "Klingel-Versager" — das Versagen bleibt unsichtbar.',
+      jp_p5_actors:'Radfahrer · Zielumgebung.',
+      jp_emo_depart:'ABFAHRT', jp_emo_riding:'FAHRT', jp_emo_alert:'ALARM',
+      jp_emo_resol:'AUFLÖSUNG', jp_emo_arrive:'ANKUNFT',
+      ctx_label:'Nutzungskontexte · Wirksamkeit je Szenario',
+      ctx_title:'Wo erreicht das Signal — und wo nicht?',
+      ctx1_name:'Geschützter Radweg', ctx1_eff:'Hohe Wirksamkeit',
+      ctx1_desc:'Niedriger Umgebungslärm, gemeinsamer Kontext verstanden. Klingel wirksam bei ~70 dB.',
+      ctx2_name:'Stadtstraße', ctx2_eff:'Geringe Wirksamkeit',
+      ctx2_desc:'Lärmpegel 78–85 dB. Klingel bei 70 dB akustisch unsichtbar. Verbales Signal erforderlich.',
+      find_label:'Wichtige Erkenntnisse · Forschungssynthese',
+      find_title:'Fünf Probleme. Eine Wurzel.',
+      find_sub:'',
+      h1_title:'Ein Lautstärkepegel, keine Abstufung',
+      h1_body:'Jeder Druck erzeugt denselben Ton, unabhängig von Kontext, Geschwindigkeit, Abstand oder Absicht. Das Gerät hat konstruktionsbedingt keinen Dynamikbereich.',
+      h2_title:'Erreicht nicht, wo es am meisten zählt',
+      h2_body:'Maximale Klingellautstärke: ~72 dB. Lärmteppich Stadtstraße: 78–85 dB. Das Signal ist unhörbar genau dort, wo Dringlichkeit am größten ist.',
+      h2_stat:'72 dB vs 85 dB',
+      h3_title:'Signal trägt keine Absicht',
+      h3_body:'Die Klingel kann nicht zwischen einem höflichen "Entschuldigung" und einem dringenden "Gefahr, stopp" unterscheiden. Ein Ton bedeutet alles — kommuniziert also nichts klar.',
+      h4_title:'Keine Empfangsbestätigung',
+      h4_body:'Der Radfahrer hat kein Feedback, ob das Signal gehört wurde. 43% der beobachteten Interaktionen erforderten sofortige verbale Ergänzung.',
+      h4_stat:'57% Empfangsrate',
+      h5_title:'Aktivierungsaufwand bei Geschwindigkeit',
+      h5_body:'Bei 25 km/h legt der Radfahrer in 1,4 Sekunden 9,7 m zurück. Die aktuelle Klingelgeometrie erfordert Griffneupositionierung — Zeit, die die Situation nicht erlaubt.',
+      h5_stat:'1.4 s = 9.7 m',
+      stmt_label:'Problem · Problem Statement',
+      stmt_title:'Der Stadtradler braucht die Möglichkeit, <em style="color:#d24a1f;font-style:normal;">die Art des Signals abzustufen</em>',
+      stmt_body:'weil die Klingel nicht zwischen einem höflichen <em style="color:#d24a1f;font-style:normal;">Entschuldigung</em> und einer dringenden <em style="color:#d24a1f;font-style:normal;">Gefahrenwarnung</em> unterscheiden kann.',
+      dph_kicker:'Design Phase',
+      dph_title:'Eine mechanische Antwort<br>auf ein Verhaltensproblem.',
+      cmf_label:'Design Phase · Materialerkundung',
+      cmf_title:'CMF · Klang · Material · Körper',
+      cmf_intro:'Jedes Material erzeugt beim Anschlag einen anderen Klang. Die Auswahl des Korpus ist nicht nur Ästhetik: sie definiert Sustain, Frequenz und wahrgenommene "Qualität" des Signals. Vier Materialien wurden an gleichwertigen Klingelprototypen analysiert.',
+      cmf_m1:'Messing (Brass)', cmf_m1_tone:'Warm · reich an Obertönen',
+      cmf_m2:'Edelstahl', cmf_m2_tone:'Hell · höhere Tonlage',
+      cmf_m3:'Aluminium 6061', cmf_m3_tone:'Trocken · kurzer Decay',
+      cmf_m4:'Titan (Ti-6Al-4V)', cmf_m4_tone:'Kristallin · maximaler Sustain',
+      cmf_res:'Resonanz', cmf_dec:'Decay', cmf_wt:'Gewicht', cmf_std:'Standardmaterial',
+      cmf_corr:'Korrosion', cmf_cost:'Kosten',
+      cmf_high:'Hoch', cmf_med:'Mittel', cmf_low:'Niedrig', cmf_vhigh:'Sehr hoch',
+      cmf_none:'Keine', cmf_vlow:'Sehr niedrig',
+      cmf_dir_lbl:'Gewählte Richtung',
+      cmf_dir:'<strong>Eloxiertes Messing</strong>-Korpus für optimale Resonanz und warmen Ton. Ratschenmechanismus aus <strong>Edelstahl</strong> für Haltbarkeit und visuellen Kontrast. Eloxierte Oberfläche für eine einheitliche Ästhetik, ohne das Metall zu verbergen.',
+      prop_label:'Design Phase · Vorschlag',
+      prop_title:'Intent · <em style="font-style:normal;color:#d24a1f;">Designvorschlag</em>',
+      stat_levels:'Signalpegel', stat_weight:'geschätztes Gewicht', stat_mech:'mechanisch · keine Batterie',
+      how_label:'So funktioniert es',
+      how_1:'Jeder aufeinanderfolgende Druck rückt eine Ratsche vor, die den Hammerschwungradius vergrößert',
+      how_2:'Mehr Schwung = höhere Aufprallgeschwindigkeit = höhere dB-Ausgabe — Physik, keine Elektronik',
+      how_3:'Dritter Druck setzt auf N1 zurück — kontinuierlicher Zyklus, kein Moduswechsel',
+      how_4:'Kompatibel mit Standard-22,2-mm-Lenker — werkzeuglose Schelle',
+      how_5:'Die Rückstellfeder setzt die Ratsche auf N1 zurück — bereit für die nächste Fahrt',
+      parts_label:'Materialien & Teile',
+      ante_band:'Die Fahrradklingel erbt Attribute von vier verschiedenen Familien — Daumengest, Rohrbefestigung, Warnfunktion und resonante Geometrie — übertrifft aber keine davon. Jede Gruppe zeigt eine Richtung für das Redesign.',
+      ctx2_name:'Ruhige Straße', ctx2_eff:'Mittlere Wirksamkeit',
+      ctx2_desc:'Gemischter Verkehr. Klingel konkurriert mit Umgebungslärm. Inkonsistenter Empfang.',
+      ctx3_name:'Stadtstraße', ctx3_eff:'Geringe Wirksamkeit',
+      ctx3_desc:'Lärmpegel 78–85 dB. Klingel bei 70 dB akustisch unsichtbar. Verbales Signal erforderlich.',
+      ctx4_name:'Bergweg (MTB)', ctx4_eff:'Variabel',
+      ctx4_desc:'Natürliche Akustik hilft, aber Geschwindigkeit und Gelände reduzieren das Reaktionsfenster erheblich.',
+      part1_name:'Kuppel + Hammer', part1_desc:'Messing + Stahl — Resonanz, Decay und Lautstärke durch Geometrie bestimmt.',
+      part2_name:'Klemme', part2_desc:'Aluminium + Gummi — Standard 22,2 mm, ohne Rohrabdrücke.',
+      sig_label:'Signalpegel · N1 · N2 · N3',
+      sig_title:'N1 · N2 · N3',
+      mech_label:'Ratschenmechanismus — progressiver Nockeneingriff',
+      
+      ante_gh_a:'Daumengesteuert', ante_gh_b:'Rohrbefestigung',
+      ante_gh_c:'Klang als Warnung', ante_gh_d:'Resonanzkuppel',
+      ante_a1:'Klicker / Zähler', ante_a1t:'Federtaste. Gleiche Daumenbewegung und haptisches Feedback.',
+      ante_a2:'Kameraauslöser', ante_a2t:'Obere Taste ohne Ablenkung des Blicks.',
+      ante_a3:'Motorrad-Gasgriff', ante_a3t:'Hupe am Lenker. Daumen unter Dauerdruck.',
+      ante_b1:'Frontlicht', ante_b1t:'Gleiche Schelle. Teilt das 22,2-mm-Ökosystem.',
+      ante_b2:'Handyhalter', ante_b2t:'Gummiklemme. Wichtig: keine Abdrücke am Rohr.',
+      ante_b3:'Rückspiegel', ante_b3t:'Koexistiert mit der Klingel auf derselben Lenkerseite.',
+      ante_c1:'Autohupen', ante_c1t:'Gleiche Rolle in anderem Maßstab. ~110 dB. Fahrrad ist der schwächste Fall.',
+      ante_c2:'Pfeife', ante_c2t:'Durchdringend hoher Ton. Erfordert den Mund — schließt besetzte Hände aus.',
+      ante_c3:'Türklingel', ante_c3t:'Warnung zwischen zwei Personen. Empfänger erwartet sie. Löst das Gegenteil.',
+      ante_d1:'Kirchenglocke', ante_d1t:'Gleiches Prinzip bei 1000-facher Masse. Tiefer Ton durch Größe.',
+      ante_d2:'Triangel / Agogô', ante_d2t:'Idiophone. Verlängerter Decay durch offene Geometrie.',
+      ante_d3:'Kuhglocke', ante_d3t:'Kuppel mit innerem Klöppel durch Bewegung. Alarm ohne Eingriff.',
+      closing:'Der Klang war gelöst seit 1877. <em>Die Absicht</em> brauchte 149 Jahre mehr.',
+    }
+  };
+  const c = _cmpDict[_cl]||_cmpDict.en;
   _curPanels = p.panels;
   const panels = p.panels.map((src,i)=>{
     const isH = (p.hPanels||[]).includes(i);
@@ -1251,7 +1942,1227 @@ function buildProject(id) {
       </div>
       <div class="panels-track" id="pt">${panels}</div>
     </section>
-    ${id==='flujo' ? `
+    ${id==='campana' ? `
+    <style>
+    /* ── HIDE EMPTY PANELS RAIL ── */
+    .panels-wrap{display:none!important;}
+    /* ── ALIGN PHASE HEADERS WITH CAMPANA CONTENT ── */
+    .process-header{padding-left:var(--ph,6%)!important;padding-right:var(--ph,6%)!important;}
+    /* ── RENDER HERO ── */
+    .cmp-render-hero{margin:0 var(--ph,6%) clamp(24px,3.5vw,44px);aspect-ratio:16/9;background:#e8e3da;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#b0a898;border:1px solid var(--color-border);}
+    .cmp-render-sub{font-size:.58rem;opacity:.6;font-weight:400;letter-spacing:.06em;margin-top:2px;}
+    /* ── TIMELINE ── */
+    .cmp-ph{padding:clamp(40px,5vw,68px) var(--ph,6%);border-bottom:1px solid var(--color-border);}
+    .cmp-ph-kicker{font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--color-muted);margin-bottom:10px;}
+    .cmp-ph-title{font-size:clamp(26px,4vw,50px);font-weight:700;line-height:1.1;letter-spacing:-.02em;color:var(--color-text);}
+    .cmp-timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--color-border);border:1px solid var(--color-border);margin:clamp(24px,3.5vw,44px) var(--ph,6%);}
+    .cmp-tl-item{background:var(--color-bg);padding:clamp(14px,2vw,22px) clamp(10px,1.5vw,16px);}
+    .cmp-tl-year{display:block;font-size:clamp(16px,2vw,26px);font-weight:800;letter-spacing:-.03em;color:var(--color-text);line-height:1.1;}
+    .cmp-tl-evt{display:block;font-size:.7rem;color:var(--color-muted);margin-top:5px;line-height:1.4;}
+    .cmp-tl-item.accent{background:#d24a1f;}.cmp-tl-item.accent .cmp-tl-year,.cmp-tl-item.accent .cmp-tl-evt{color:#fff;}
+    /* ── SECTION RHYTHM ── */
+    .cmp-section{padding:clamp(24px,3.5vw,44px) var(--ph,6%);}
+    /* Section kicker — small label above heading */
+    .cmp-section-label{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--color-muted);margin-bottom:clamp(6px,1vw,10px);display:block;}
+    /* Section heading — the actual BIG visible title */
+    .cmp-section-title{font-size:clamp(22px,3.2vw,38px);font-weight:800;letter-spacing:-.04em;line-height:1.1;color:var(--color-text);margin-bottom:clamp(18px,2.5vw,30px);}
+    /* Section rule under heading */
+    .cmp-section-rule{display:block;height:1px;background:var(--color-border);margin-bottom:clamp(18px,2.5vw,30px);}
+    /* Combined kicker+title block */
+    .cmp-section-hd{margin-bottom:clamp(18px,2.5vw,30px);}
+    .cmp-section-hd .cmp-section-label{margin-bottom:6px;}
+    .cmp-section-hd .cmp-section-title{margin-bottom:0;}
+    /* ── TYPOLOGY (grid defined in ANTECEDENTES block below) ── */
+    @media(max-width:640px){.cmp-context-grid{grid-template-columns:1fr 1fr !important;}.cmp-levels{grid-template-columns:1fr !important;}}
+    .cmp-typo-item{background:var(--color-bg);}
+    .cmp-typo-img{aspect-ratio:4/5;background:var(--color-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#b0a898;}
+    .cmp-typo-body{padding:clamp(12px,1.5vw,18px);}
+    .cmp-typo-name{font-size:.85rem;font-weight:700;color:var(--color-text);}
+    .cmp-typo-share{font-size:.72rem;color:#d24a1f;font-weight:600;letter-spacing:.04em;margin-top:3px;}
+    .cmp-typo-desc{font-size:.88rem;color:var(--color-muted);margin-top:6px;line-height:1.55;}
+    .cmp-obs-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--color-border);border:1px solid var(--color-border);}
+    @media(max-width:560px){.cmp-obs-grid{grid-template-columns:1fr;}}
+    /* ── OBSERVATION ── */
+    .cmp-obs-item{background:var(--color-bg);padding:clamp(14px,2vw,22px);}
+    .cmp-obs-time{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-muted);margin-bottom:5px;}
+    .cmp-obs-text{font-size:.95rem;color:var(--color-text);line-height:1.65;}
+    .cmp-obs-tag{display:inline-block;font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border:1px solid currentColor;margin-top:9px;}
+    .cmp-obs-tag.ok{color:var(--color-text);}.cmp-obs-tag.fail{color:#d24a1f;}
+    .cmp-obs-stat{background:color-mix(in srgb,var(--color-border) 50%,var(--color-bg));padding:clamp(14px,2vw,22px);display:flex;align-items:center;gap:16px;grid-column:span 2;}
+    @media(max-width:560px){.cmp-obs-stat{grid-column:span 1;}}
+    .cmp-obs-stat-num{font-size:clamp(36px,5vw,60px);font-weight:800;letter-spacing:-.04em;color:var(--color-text);line-height:1;flex-shrink:0;}
+    .cmp-obs-stat-label{font-size:.9rem;color:var(--color-muted);line-height:1.6;max-width:240px;}
+    /* ── PERSONA (legacy) ── */
+    .cmp-persona{border:1px solid var(--color-border);overflow:hidden;}
+    .cmp-persona-top{display:grid;grid-template-columns:auto 1fr;}
+    .cmp-persona-avatar{width:clamp(72px,10vw,110px);height:clamp(72px,10vw,110px);background:#d24a1f;display:flex;align-items:center;justify-content:center;font-size:clamp(28px,4vw,48px);color:#fff;font-weight:800;flex-shrink:0;}
+    .cmp-persona-intro{padding:clamp(14px,2vw,22px);border-bottom:1px solid var(--color-border);}
+    .cmp-persona-name{font-size:clamp(15px,2vw,22px);font-weight:700;color:var(--color-text);letter-spacing:-.02em;}
+    .cmp-persona-role{font-size:.78rem;color:var(--color-muted);margin-top:4px;}
+    .cmp-persona-quote{padding:clamp(16px,2.5vw,28px);border-bottom:1px solid var(--color-border);font-style:italic;font-size:clamp(.88rem,1.2vw,1.05rem);color:var(--color-text);line-height:1.7;}
+    .cmp-persona-attrs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--color-border);}
+    @media(max-width:540px){.cmp-persona-attrs{grid-template-columns:1fr;}}
+    .cmp-persona-attr{background:var(--color-bg);padding:clamp(10px,1.5vw,16px);}
+    .cmp-attr-label{font-size:.66rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-muted);}
+    .cmp-attr-val{font-size:.92rem;color:var(--color-text);font-weight:500;margin-top:3px;line-height:1.5;}
+    /* ── CONTEXTS ── */
+    .cmp-stk-wrap{border:1px solid var(--color-border);padding:clamp(20px,3vw,44px);display:flex;flex-direction:column;align-items:center;gap:20px;background:var(--color-bg);}
+    .cmp-context-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--color-border);border:1px solid var(--color-border);}
+    @media(max-width:640px){.cmp-context-grid{grid-template-columns:1fr 1fr;}}
+    .cmp-ctx-item{background:var(--color-bg);}
+    .cmp-ctx-img{aspect-ratio:3/2;background:var(--color-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:.63rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#b0a898;}
+    .cmp-ctx-body{padding:clamp(10px,1.5vw,16px);}
+    .cmp-ctx-name{font-size:1rem;font-weight:700;color:var(--color-text);margin-bottom:4px;}
+    .cmp-ctx-eff{font-size:.67rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+    .cmp-ctx-eff.high{color:var(--color-text);}.cmp-ctx-eff.med{color:var(--color-muted);}.cmp-ctx-eff.low{color:#d24a1f;}.cmp-ctx-eff.var{color:var(--color-muted);}
+    .cmp-ctx-desc{font-size:.9rem;color:var(--color-muted);margin-top:5px;line-height:1.6;}
+    /* ── FINDINGS ── */
+    .cmp-findings-divider{display:flex;align-items:center;gap:clamp(14px,3vw,36px);padding:clamp(28px,4vw,52px) var(--ph,6%);border-top:1px solid var(--color-border);}
+    .cmp-findings-num{font-size:clamp(44px,7vw,88px);font-weight:800;letter-spacing:-.05em;color:var(--color-border);line-height:1;flex-shrink:0;}
+    .cmp-findings-title{font-size:clamp(20px,2.8vw,36px);font-weight:800;letter-spacing:-.03em;color:var(--color-text);}
+    .cmp-findings-sub{font-size:.95rem;color:var(--color-muted);margin-top:5px;}
+    .cmp-hallazgos{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--color-border);border:1px solid var(--color-border);margin:0 var(--ph,6%);margin-bottom:clamp(36px,5vw,72px);}
+    .cmp-hallazgo{background:var(--color-bg);padding:clamp(16px,2.2vw,26px);}
+    .cmp-hallazgo-n{font-size:clamp(28px,4vw,52px);font-weight:800;letter-spacing:-.05em;line-height:1;color:var(--color-border);margin-bottom:8px;}
+    .cmp-hallazgo-title{font-size:.9rem;font-weight:700;color:var(--color-text);margin-bottom:6px;line-height:1.3;}
+    .cmp-hallazgo-body{font-size:.92rem;color:var(--color-muted);line-height:1.65;}
+    .cmp-hallazgo-stat{font-size:clamp(15px,2vw,22px);font-weight:800;letter-spacing:-.03em;color:#d24a1f;margin-top:9px;}
+    /* ── PROBLEM STATEMENT ── */
+    .cmp-statement{padding:clamp(20px,3vw,40px) var(--ph,6%) clamp(40px,6vw,80px);border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border);}
+    .cmp-statement-kicker{font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-muted);margin-bottom:clamp(16px,2.2vw,28px);}
+    .cmp-statement-text{font-size:clamp(18px,2.6vw,32px);font-weight:600;line-height:1.4;color:var(--color-text);max-width:760px;letter-spacing:-.01em;}
+    .cmp-statement-text em{font-style:italic;color:#d24a1f;}
+    /* ── SIGNAL LEVELS ── */
+    .cmp-levels{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--color-border);border:1px solid var(--color-border);}
+    @media(max-width:560px){.cmp-levels{grid-template-columns:1fr;}}
+    .cmp-level{background:var(--color-bg);display:flex;flex-direction:column;}
+    .cmp-level-body{padding:clamp(16px,2.2vw,26px);flex:1;display:flex;flex-direction:column;}
+    .cmp-level-n{font-size:clamp(32px,4vw,56px);font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:6px;}
+    .cmp-level-n.n1{color:var(--color-text);opacity:.9;}
+    .cmp-level-n.n2{color:var(--color-muted);}
+    .cmp-level-n.n3{color:#d24a1f;}
+    .cmp-level-db{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-muted);margin-bottom:9px;}
+    .cmp-level-desc{font-size:.82rem;color:var(--color-text);line-height:1.65;flex:1;}
+    .cmp-audio-btn{display:flex;align-items:center;justify-content:center;gap:9px;background:transparent;border:1px solid var(--color-border);padding:10px 16px;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text);width:100%;margin-top:16px;transition:border-color .15s,color .15s,background .15s;}
+    .cmp-audio-btn:hover{background:var(--color-border);}
+    .cmp-audio-btn.is-playing{border-color:#d24a1f;color:#d24a1f;}
+    .cmp-audio-btn svg{flex-shrink:0;transition:transform .1s;}
+    /* ── CLOSING ── */
+    .cmp-closing{padding:clamp(44px,7vw,80px) var(--ph,6%);font-size:clamp(17px,2.4vw,30px);font-weight:500;color:var(--color-text);line-height:1.45;max-width:560px;letter-spacing:-.01em;}
+    .cmp-closing em{font-style:italic;color:#d24a1f;}
+    /* ── PLACEHOLDER ── */
+    .cmp-img-ph{background:#e8e3da;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#b0a898;}
+    .cmp-img-ph svg{opacity:.25;}
+    /* ── ANTECEDENTES ── */
+    .cmp-ante-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--color-border);}
+    @media(max-width:900px){.cmp-ante-grid{grid-template-columns:repeat(3,1fr);}}
+    @media(max-width:560px){.cmp-ante-grid{grid-template-columns:1fr 1fr;}}
+    .cmp-ante-group{background:var(--color-bg);}
+    .cmp-ante-gh{font-size:.65rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--color-text);padding:clamp(10px,1.5vw,16px);border-bottom:1px solid var(--color-border);}
+    .cmp-ante-gh span{color:#d24a1f;margin-right:6px;}
+    .cmp-ante-gsub{font-size:.72rem;color:var(--color-muted);line-height:1.5;padding:clamp(10px,1.5vw,14px);border-bottom:1px solid var(--color-border);font-style:italic;}
+    .cmp-ante-item{display:block;border-bottom:1px solid var(--color-border);}
+    .cmp-ante-item:last-child{border-bottom:none;}
+    .cmp-ante-img{aspect-ratio:4/3;width:100%;background:var(--color-bg);display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b8b0a6;border-bottom:1px solid var(--color-border);}
+    .cmp-ante-body{padding:clamp(8px,1.2vw,14px);}
+    .cmp-ante-name{font-size:.95rem;font-weight:700;color:var(--color-text);margin-bottom:4px;line-height:1.2;}
+    .cmp-ante-txt{font-size:.9rem;color:var(--color-muted);line-height:1.6;}
+    .cmp-ante-band{background:var(--color-text);color:var(--color-bg);padding:clamp(14px,2.5vw,24px) clamp(16px,3vw,32px);margin-top:1px;}
+    .cmp-ante-band-lbl{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.5;margin-bottom:5px;}
+    .cmp-ante-band-txt{font-size:clamp(.82rem,1.1vw,.95rem);font-weight:500;line-height:1.65;}
+    /* ── TYPO 6-col ── */
+    .cmp-typo-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--color-border);}
+    @media(max-width:900px){.cmp-typo-grid{grid-template-columns:repeat(3,1fr);}}
+    @media(max-width:540px){.cmp-typo-grid{grid-template-columns:repeat(2,1fr);}}
+    .cmp-typo-item{display:flex;flex-direction:column;background:var(--color-bg);}
+    .cmp-typo-img{flex-shrink:0;}
+    .cmp-typo-body{flex:1;padding:clamp(10px,1.5vw,16px);}
+    .cmp-typo-name{font-size:.9rem;font-weight:800;color:var(--color-text);margin-bottom:2px;}
+    .cmp-typo-share{font-size:.66rem;font-weight:600;letter-spacing:.06em;color:var(--color-muted);margin-bottom:8px;}
+    .cmp-typo-desc{font-size:.88rem;color:var(--color-text);opacity:.8;line-height:1.55;}
+    /* ── CMF ── */
+    .cmp-cmf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--color-border);}
+    @media(max-width:700px){.cmp-cmf-grid{grid-template-columns:1fr 1fr;}}
+    .cmp-cmf-card{background:var(--color-bg);display:flex;flex-direction:column;}
+    .cmp-cmf-swatch{aspect-ratio:3/2;display:flex;align-items:flex-end;padding:clamp(10px,1.5vw,16px);}
+    .cmp-cmf-mat-lbl{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.8);}
+    .cmp-cmf-body{padding:clamp(12px,1.8vw,18px);flex:1;}
+    .cmp-cmf-mat-name{font-size:.86rem;font-weight:800;letter-spacing:-.02em;color:var(--color-text);margin-bottom:3px;}
+    .cmp-cmf-mat-tone{font-size:.66rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#d24a1f;margin-bottom:clamp(10px,1.5vw,14px);}
+    .cmp-cmf-props{display:flex;flex-direction:column;gap:0;}
+    .cmp-cmf-prop{display:flex;justify-content:space-between;align-items:baseline;font-size:.86rem;padding:7px 0;border-bottom:1px solid var(--color-border);}
+    .cmp-cmf-prop:last-child{border-bottom:none;}
+    .cmp-cmf-prop-k{color:var(--color-muted);}
+    .cmp-cmf-prop-v{font-weight:700;color:var(--color-text);}
+    .cmp-cmf-finish-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--color-border);margin-top:1px;}
+    @media(max-width:700px){.cmp-cmf-finish-row{grid-template-columns:1fr 1fr;}}
+    .cmp-cmf-finish{background:var(--color-bg);padding:clamp(10px,1.5vw,16px);}
+    .cmp-cmf-finish-swatch{height:28px;margin-bottom:8px;border-radius:2px;}
+    .cmp-cmf-finish-name{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text);margin-bottom:3px;}
+    .cmp-cmf-finish-note{font-size:.84rem;color:var(--color-muted);line-height:1.5;}
+    /* ── Rich observation log ── */
+    .cmp-obs-log-meta{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--color-border);margin-bottom:0;}
+    @media(max-width:540px){.cmp-obs-log-meta{grid-template-columns:1fr;}}
+    .cmp-obs-log-cell{background:var(--color-bg);padding:clamp(10px,1.5vw,16px);}
+    .cmp-obs-log-h{font-size:.66rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-muted);margin-bottom:4px;}
+    .cmp-obs-log-v{font-size:.93rem;color:var(--color-text);line-height:1.55;}
+    .cmp-log-wrap{border:1px solid var(--color-border);border-top:none;}
+    .cmp-log-entry{display:grid;grid-template-columns:64px 1fr;border-bottom:1px solid var(--color-border);}
+    .cmp-log-entry:last-child{border-bottom:none;}
+    .cmp-log-t{padding:clamp(12px,1.6vw,16px) clamp(8px,1.2vw,12px);font-family:'Courier New',monospace;font-size:.78rem;font-weight:700;letter-spacing:.04em;color:#d24a1f;white-space:nowrap;border-right:1px solid var(--color-border);display:flex;align-items:flex-start;line-height:1.6;}
+    .cmp-log-body{padding:clamp(12px,1.6vw,16px);font-size:.95rem;color:var(--color-text);line-height:1.65;}
+    .cmp-log-entry.is-warn{background:color-mix(in srgb,#d24a1f 5%,var(--color-bg));}
+    .cmp-log-entry.is-warn .cmp-log-t{color:#a23612;}
+    .cmp-log-entry.is-ok{background:color-mix(in srgb,var(--color-border) 50%,var(--color-bg));}
+    .cmp-log-entry.is-ok .cmp-log-t{color:var(--color-text);}
+    .cmp-log-sum{padding:clamp(14px,2vw,22px);background:color-mix(in srgb,var(--color-border) 50%,var(--color-bg));font-size:.82rem;color:var(--color-text);line-height:1.65;border:1px solid var(--color-border);border-top:none;}
+    /* ── Rich persona ── */
+    .cmp-persona-wrap{display:grid;grid-template-columns:260px 1fr;background:var(--color-border);gap:1px;}
+    @media(max-width:700px){.cmp-persona-wrap{grid-template-columns:1fr;}}
+    .cmp-persona-col-a{background:var(--color-bg);display:flex;flex-direction:column;}
+    .cmp-persona-photo{aspect-ratio:3/4;background:#e8e3da;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:.63rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#b0a898;}
+    .cmp-persona-id{padding:clamp(14px,2vw,20px);border-top:1px solid var(--color-border);}
+    .cmp-persona-tag-pill{font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-muted);margin-bottom:7px;}
+    .cmp-persona-name-big{font-size:clamp(24px,4vw,40px);font-weight:800;letter-spacing:-.04em;line-height:1;color:var(--color-text);}
+    .cmp-persona-age-line{font-size:.88rem;color:var(--color-muted);margin-top:5px;line-height:1.5;}
+    .cmp-persona-qt{padding:clamp(14px,2vw,20px);border-top:1px solid var(--color-border);font-style:italic;font-size:.9rem;color:var(--color-text);line-height:1.7;border-left:3px solid #d24a1f;margin:0;}
+    .cmp-persona-col-b{background:var(--color-bg);display:flex;flex-direction:column;}
+    .cmp-persona-pg{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);gap:1px;background:var(--color-border);flex:1;align-content:stretch;}
+    .cmp-pb{background:var(--color-bg);padding:clamp(12px,1.8vw,18px);display:flex;flex-direction:column;}
+    .cmp-pb-h{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-muted);margin-bottom:6px;}
+    .cmp-pb p,.cmp-pb ul{font-size:.92rem;color:var(--color-text);line-height:1.65;margin:0;}
+    .cmp-pb ul{padding-left:15px;}.cmp-pb li{margin-bottom:3px;}
+    .cmp-pb-extra{background:var(--color-bg);padding:clamp(12px,1.8vw,18px);border-top:1px solid var(--color-border);}
+    .cmp-pb-extra .cmp-pb-h{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-muted);margin-bottom:6px;}
+    .cmp-pb-extra p{font-size:.92rem;color:var(--color-text);line-height:1.65;margin:0;}
+    /* ── Rich stakeholder ── */
+    .cmp-stk{display:grid;grid-template-columns:1.1fr 1fr;align-items:start;background:var(--color-border);gap:1px;}
+    .cmp-stk>svg{display:block;width:100%;max-height:600px;background:var(--color-bg);}
+    @media(max-width:760px){.cmp-stk{grid-template-columns:1fr;}}
+    .cmp-stk-legend{display:flex;flex-direction:column;gap:12px;background:var(--color-bg);padding:clamp(14px,2.2vw,24px);}
+    .cmp-stk-layer{overflow:hidden;border-bottom:1px solid var(--color-border);}
+    .cmp-stk-layer-h{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-muted);padding:clamp(8px,1.1vw,12px) clamp(10px,1.5vw,16px);border-bottom:1px solid var(--color-border);background:color-mix(in srgb,var(--color-border) 40%,var(--color-bg));}
+    .cmp-stk-layer-name{font-size:1rem;font-weight:700;color:var(--color-text);padding:clamp(8px,1.1vw,12px) clamp(10px,1.5vw,16px);}
+    .cmp-stk-layer-txt{font-size:.9rem;color:var(--color-muted);line-height:1.65;padding:0 clamp(10px,1.5vw,16px) clamp(10px,1.5vw,16px);}
+    .cmp-stk-actor{display:flex;gap:10px;align-items:flex-start;padding:clamp(7px,1vw,11px) clamp(10px,1.5vw,16px);border-top:1px solid var(--color-border);}
+    .cmp-stk-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:4px;background:var(--color-muted);}
+    .cmp-stk-dot.green{background:var(--color-text);}.cmp-stk-dot.orange{background:#d24a1f;}.cmp-stk-dot.red{background:#d24a1f;opacity:.55;}.cmp-stk-dot.neutral{background:#8b8270;}
+    .cmp-stk-actor-name{font-size:.8rem;font-weight:600;color:var(--color-text);}
+    .cmp-stk-actor-txt{font-size:.74rem;color:var(--color-muted);line-height:1.5;margin-top:2px;}
+    /* ── Rich UX dims ── */
+    .cmp-dim-list{border:1px solid var(--color-border);}
+    .cmp-dim{display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px;padding:clamp(12px,1.8vw,18px) clamp(14px,2vw,22px);border-bottom:1px solid var(--color-border);}
+    .cmp-dim:last-child{border-bottom:none;}
+    .cmp-dim-h{font-size:.88rem;font-weight:600;color:var(--color-text);}
+    .cmp-dim-sub{font-size:.86rem;color:var(--color-muted);margin-top:3px;}
+    .cmp-dim-track{height:4px;background:var(--color-border);border-radius:2px;margin-top:9px;overflow:hidden;}
+    .cmp-dim-fill.low{background:#d24a1f;}.cmp-dim-fill.mid{background:var(--color-muted);opacity:.6;}.cmp-dim-fill.high{background:var(--color-text);}
+    .cmp-dim-fill{height:100%;border-radius:2px;}
+    .cmp-dim-score{font-size:clamp(28px,4vw,48px);font-weight:800;letter-spacing:-.04em;line-height:1;flex-shrink:0;}
+    .cmp-dim-score.low{color:#d24a1f;}.cmp-dim-score.mid{color:var(--color-muted);}.cmp-dim-score.high{color:var(--color-text);}
+    .cmp-dim-score small{font-size:.38em;font-weight:400;opacity:.55;}
+    /* ── Journey ── */
+    .cmp-journey-phases{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--color-border);border:1px solid var(--color-border);}
+    @media(max-width:800px){.cmp-journey-phases{grid-template-columns:1fr 1fr;}}
+    @media(max-width:480px){.cmp-journey-phases{grid-template-columns:1fr;}}
+    .cmp-jp{background:var(--color-bg);}
+    .cmp-jp-head{padding:clamp(10px,1.5vw,15px);border-bottom:1px solid var(--color-border);background:color-mix(in srgb,var(--color-border) 30%,var(--color-bg));}
+    .cmp-jp-num{font-size:.64rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--color-muted);}
+    .cmp-jp-name{font-size:.86rem;font-weight:700;color:var(--color-text);margin-top:2px;}
+    .cmp-jp-row{padding:clamp(8px,1.2vw,12px) clamp(10px,1.5vw,15px);border-bottom:1px solid var(--color-border);}
+    .cmp-jp-row:last-child{border-bottom:none;}
+    .cmp-jp-row-h{font-size:.63rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--color-muted);margin-bottom:3px;}
+    .cmp-jp-row-t{font-size:.92rem;color:var(--color-text);line-height:1.6;}
+    .cmp-jp-row.is-pain{background:color-mix(in srgb,#d24a1f 5%,var(--color-bg));}
+    .cmp-jp-row.is-pain .cmp-jp-row-h{color:#d24a1f;}
+    /* ── REMOVE OUTER BORDER FROM JOURNEY ── */
+    .cmp-journey-phases{border:none;}
+    /* ── TEXT SIZE GLOBAL INCREASE ── */
+    .cmp-log-body{font-size:.88rem!important;line-height:1.68;}
+    .cmp-pb>p:not(.cmp-pb-h),.cmp-pb>ul{font-size:.84rem;line-height:1.65;}
+    .cmp-pb li{font-size:.84rem;}
+    .cmp-pb-extra>p:not(.cmp-pb-h){font-size:.95rem;line-height:1.65;}
+    .cmp-obs-log-v{font-size:.84rem!important;}
+    .cmp-jp-row-t{font-size:.8rem!important;}
+    .cmp-level-desc{font-size:.86rem!important;}
+    .cmp-log-sum{font-size:.86rem;}
+    .cmp-hallazgo-body{font-size:.86rem!important;}
+    .cmp-ctx-desc{font-size:.82rem!important;}
+    .cmp-dim-sub{font-size:.76rem!important;}
+    .cmp-stk-layer-txt{font-size:.8rem;}
+    /* ── SECTION SPACING & HIERARCHY ── */
+    .cmp-section{padding:clamp(40px,6vw,72px) var(--ph,6%)!important;}
+    .cmp-section-title{font-size:clamp(28px,4.2vw,52px)!important;margin-bottom:clamp(22px,3vw,36px)!important;}
+    .cmp-section-hd{margin-bottom:clamp(22px,3vw,40px);}
+    .cmp-section-label{font-size:.68rem!important;letter-spacing:.2em!important;margin-bottom:8px!important;}
+    /* ── HALLAZGOS — visual weight ── */
+    .cmp-hallazgo-n{color:color-mix(in srgb,var(--color-text) 20%,var(--color-bg))!important;}
+    .cmp-hallazgos{border:none!important;}
+    .cmp-hallazgo-title{font-size:1rem!important;font-weight:800!important;}
+    .cmp-hallazgo-body{font-size:.82rem!important;line-height:1.65;}
+    .cmp-hallazgo-stat{font-size:clamp(16px,2.2vw,24px)!important;}
+    /* ── ANTE items — no row separators ── */
+    .cmp-ante-item{border-bottom:none!important;}
+    /* ── RENDERS — full bleed ── */
+    .cmp-render-full{width:100vw!important;margin-left:calc(50% - 50vw)!important;margin-right:0!important;max-width:none!important;display:block;}
+    .cmp-render-hero{margin-left:0!important;margin-right:0!important;border-left:none!important;border-right:none!important;border-top:none!important;}
+    /* ── KEY MOMENTS equal height ── */
+    .cmp-km-wrap{display:flex;flex-direction:column;height:100%;}
+    .cmp-km-inner{display:flex;flex-direction:column;flex:1;}
+    .cmp-km-item{flex:1;display:flex;flex-direction:column;justify-content:center;}
+    /* ── CENTRAL FINDING — max contrast ── */
+    .cmp-central-finding{padding:clamp(16px,2.5vw,28px) clamp(16px,3vw,32px);background:var(--color-text);margin-top:1px;}
+    .cmp-central-finding-lbl{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-bg);opacity:.5;display:block;margin-bottom:8px;}
+    .cmp-central-finding-txt{font-size:.94rem;font-weight:500;color:var(--color-bg);line-height:1.65;}
+    /* stakeholder SVG — font-size set per element in SVG */
+    </style>
+
+    <!-- RESEARCH PHASE HEADER -->
+    <div class="process-header">
+      <div>
+        <div class="process-kicker">${c.rph_kicker}</div>
+        <div class="process-title">${c.rph_title}</div>
+      </div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="cmp-timeline">
+      <div class="cmp-tl-item">
+        <span class="cmp-tl-year">1877</span>
+        <span class="cmp-tl-evt">${c.tl_1877}</span>
+      </div>
+      <div class="cmp-tl-item">
+        <span class="cmp-tl-year">1950s</span>
+        <span class="cmp-tl-evt">${c.tl_1950}</span>
+      </div>
+      <div class="cmp-tl-item">
+        <span class="cmp-tl-year">1970s</span>
+        <span class="cmp-tl-evt">${c.tl_1970}</span>
+      </div>
+      <div class="cmp-tl-item">
+        <span class="cmp-tl-year">2000s</span>
+        <span class="cmp-tl-evt">${c.tl_2000}</span>
+      </div>
+      <div class="cmp-tl-item">
+        <span class="cmp-tl-year">2020s</span>
+        <span class="cmp-tl-evt">${c.tl_2020}</span>
+      </div>
+      <div class="cmp-tl-item accent">
+        <span class="cmp-tl-year">2026</span>
+        <span class="cmp-tl-evt">${c.tl_2026}</span>
+      </div>
+    </div>
+
+    <!-- TYPOLOGY -->
+    <div class="cmp-section" style="border-top:1px solid var(--color-border);">
+      <div class="cmp-section-hd">
+        <div class="cmp-section-label">${c.typo_label}</div>
+        <div class="cmp-section-title">${c.typo_title}</div>
+      </div>
+      <p style="font-size:.85rem;color:var(--color-muted);line-height:1.65;margin-bottom:clamp(16px,2.5vw,28px);max-width:640px;">${c.typo_intro}</p>
+      <div class="cmp-typo-grid">
+        <div class="cmp-typo-item">
+          <div class="cmp-typo-img" style="aspect-ratio:3/2;background:var(--color-bg);"><img src="../campana/webp/typo-thumb-bell.webp" alt="Thumb Bell" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="cmp-typo-body">
+            <div class="cmp-typo-name">Thumb Bell</div>
+            <div class="cmp-typo-share">${c.typo_share_tb}</div>
+            <div class="cmp-typo-desc">${c.typo_desc_tb}</div>
+          </div>
+        </div>
+        <div class="cmp-typo-item">
+          <div class="cmp-typo-img" style="aspect-ratio:3/2;background:var(--color-bg);"><img src="../campana/webp/typo-lever-bell.webp" alt="Lever Bell" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="cmp-typo-body">
+            <div class="cmp-typo-name">Lever Bell</div>
+            <div class="cmp-typo-share">${c.typo_share_lv}</div>
+            <div class="cmp-typo-desc">${c.typo_desc_lv}</div>
+          </div>
+        </div>
+        <div class="cmp-typo-item">
+          <div class="cmp-typo-img" style="aspect-ratio:3/2;background:var(--color-bg);"><img src="../campana/webp/typo-ding-dong.webp" alt="Ding-dong" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="cmp-typo-body">
+            <div class="cmp-typo-name">Ding-dong</div>
+            <div class="cmp-typo-share">${c.typo_share_dd}</div>
+            <div class="cmp-typo-desc">${c.typo_desc_dd}</div>
+          </div>
+        </div>
+        <div class="cmp-typo-item">
+          <div class="cmp-typo-img" style="aspect-ratio:3/2;background:var(--color-bg);"><img src="../campana/webp/typo-integrada.webp" alt="Integrada" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="cmp-typo-body">
+            <div class="cmp-typo-name">Integrada</div>
+            <div class="cmp-typo-share">${c.typo_share_int}</div>
+            <div class="cmp-typo-desc">${c.typo_desc_int}</div>
+          </div>
+        </div>
+        <div class="cmp-typo-item">
+          <div class="cmp-typo-img" style="aspect-ratio:3/2;background:var(--color-bg);"><img src="../campana/webp/typo-electronica.webp" alt="Electrónica" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="cmp-typo-body">
+            <div class="cmp-typo-name">Electrónica</div>
+            <div class="cmp-typo-share">${c.typo_share_el}</div>
+            <div class="cmp-typo-desc">${c.typo_desc_el}</div>
+          </div>
+        </div>
+        <div class="cmp-typo-item">
+          <div class="cmp-typo-img" style="aspect-ratio:3/2;background:var(--color-bg);"><img src="../campana/webp/typo-cuerno.webp" alt="Cuerno / Bocina" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="cmp-typo-body">
+            <div class="cmp-typo-name">Cuerno / Bocina</div>
+            <div class="cmp-typo-share">${c.typo_share_hr}</div>
+            <div class="cmp-typo-desc">${c.typo_desc_hr}</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;gap:clamp(20px,4vw,56px);flex-wrap:wrap;padding:clamp(16px,2vw,24px) 0;border-top:1px solid var(--color-border);margin-top:clamp(16px,2.5vw,28px);">
+        <div><div style="font-size:clamp(24px,3.5vw,40px);font-weight:800;letter-spacing:-.04em;color:var(--color-text);">6</div><div style="font-size:.75rem;color:var(--color-muted);margin-top:2px;">${c.typo_stat1}</div></div>
+        <div><div style="font-size:clamp(24px,3.5vw,40px);font-weight:800;letter-spacing:-.04em;color:var(--color-text);">1</div><div style="font-size:.75rem;color:var(--color-muted);margin-top:2px;">${c.typo_stat2}</div></div>
+        <div><div style="font-size:clamp(24px,3.5vw,40px);font-weight:800;letter-spacing:-.04em;color:var(--color-text);">150y</div><div style="font-size:.75rem;color:var(--color-muted);margin-top:2px;">${c.typo_stat3}</div></div>
+        <div><div style="font-size:clamp(24px,3.5vw,40px);font-weight:800;letter-spacing:-.04em;color:var(--color-text);">40+</div><div style="font-size:.75rem;color:var(--color-muted);margin-top:2px;">${c.typo_stat4}</div></div>
+      </div>
+    </div>
+
+    <!-- ANTECEDENTES -->
+    <div class="cmp-section" style="border-top:1px solid var(--color-border);">
+      <div class="cmp-section-hd">
+        <div class="cmp-section-label">${c.ante_label}</div>
+        <div class="cmp-section-title">${c.ante_title}</div>
+      </div>
+      <p style="font-size:.85rem;color:var(--color-muted);line-height:1.65;margin-bottom:clamp(18px,2.5vw,30px);max-width:620px;">${c.ante_intro}</p>
+      <div class="cmp-ante-grid">
+        <!-- Row 1: Group headers A + B (3 cols each) -->
+        <div class="cmp-ante-gh" style="grid-column:span 3;"><span>A</span>${c.ante_gh_a}</div>
+        <div class="cmp-ante-gh" style="grid-column:span 3;"><span>B</span>${c.ante_gh_b}</div>
+        <!-- Row 2: A items × 3, B items × 3 -->
+        <div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="../campana/webp/ante-clicker.webp" alt="Clicker / contador" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_a1}</div><div class="cmp-ante-txt">${c.ante_a1t}</div></div>
+        </div>
+        <div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="../campana/webp/ante-disparador.webp" alt="Disparador de cámara" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_a2}</div><div class="cmp-ante-txt">${c.ante_a2t}</div></div>
+        </div>
+        <div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="../campana/webp/ante-gatillo-moto.webp" alt="Gatillo de moto" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_a3}</div><div class="cmp-ante-txt">${c.ante_a3t}</div></div>
+        </div>
+        <div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="../campana/webp/ante-linterna.webp" alt="Linterna delantera" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_b1}</div><div class="cmp-ante-txt">${c.ante_b1t}</div></div>
+        </div>
+        <div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="../campana/webp/ante-soporte-celular.webp" alt="Soporte de celular" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_b2}</div><div class="cmp-ante-txt">${c.ante_b2t}</div></div>
+        </div>
+        <div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="../campana/webp/ante-espejo.webp" alt="Espejo retrovisor" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_b3}</div><div class="cmp-ante-txt">${c.ante_b3t}</div></div>
+        </div>
+        <!-- Row 3: Group headers C + D -->
+        <div class="cmp-ante-gh" style="grid-column:span 3;border-top:1px solid var(--color-border);"><span>C</span>${c.ante_gh_c}</div>
+        <div class="cmp-ante-gh" style="grid-column:span 3;border-top:1px solid var(--color-border);"><span>D</span>${c.ante_gh_d}</div>
+        <!-- Row 4: C items × 3, D items × 3 -->
+        <div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="../campana/webp/ante-bocina-auto.webp" alt="Bocina de automóvil" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_c1}</div><div class="cmp-ante-txt">${c.ante_c1t}</div></div>
+        </div>
+        <div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="../campana/webp/ante-silbato.webp" alt="Silbato" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_c2}</div><div class="cmp-ante-txt">${c.ante_c2t}</div></div>
+        </div>
+        <div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="../campana/webp/ante-timbre-puerta.webp" alt="Timbre de puerta" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_c3}</div><div class="cmp-ante-txt">${c.ante_c3t}</div></div>
+        </div>
+        <div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="../campana/webp/ante-campana-iglesia.webp" alt="Campana de iglesia" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_d1}</div><div class="cmp-ante-txt">${c.ante_d1t}</div></div>
+        </div>
+        <div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="../campana/webp/ante-triangulo.webp" alt="Triángulo / agogô" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_d2}</div><div class="cmp-ante-txt">${c.ante_d2t}</div></div>
+        </div>
+        <div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="../campana/webp/ante-cencerro.webp" alt="Cencerro" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_d3}</div><div class="cmp-ante-txt">${c.ante_d3t}</div></div>
+        </div>
+      </div>
+      <div class="cmp-ante-band">
+        <div class="cmp-ante-band-lbl">${_cl==='es'?'Lectura cruzada':_cl==='de'?'Querbezug':'Cross-reading'}</div>
+        <div class="cmp-ante-band-txt">${c.ante_band}</div>
+      </div>
+    </div>
+
+    <!-- USER PERSONA -->
+    <div class="cmp-section" style="border-top:1px solid var(--color-border);">
+      <div class="cmp-section-hd">
+        <div class="cmp-section-label">${c.persona_label}</div>
+        <div class="cmp-section-title">${c.persona_title}</div>
+      </div>
+      <div class="cmp-persona-wrap">
+        <!-- Left col: photo + ID + quote -->
+        <div class="cmp-persona-col-a">
+          <div class="cmp-persona-photo"><img src="../campana/webp/user-persona-lucia.webp" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:2px;"></div>
+          <div class="cmp-persona-id">
+            <div class="cmp-persona-tag-pill">${c.persona_tag}</div>
+            <div class="cmp-persona-name-big">Lucía R.</div>
+            <div class="cmp-persona-age-line">${c.persona_age}</div>
+          </div>
+          <blockquote class="cmp-persona-qt">${c.persona_qt}</blockquote>
+        </div>
+        <!-- Right col: 6-block grid + secondary personas -->
+        <div class="cmp-persona-col-b">
+          <div class="cmp-persona-pg">
+            <div class="cmp-pb">
+              <p class="cmp-pb-h">${c.pb_use}</p>
+              <p>${c.pb_use_t}</p>
+            </div>
+            <div class="cmp-pb">
+              <p class="cmp-pb-h">${c.pb_freq}</p>
+              <p>${c.pb_freq_t}</p>
+            </div>
+            <div class="cmp-pb">
+              <p class="cmp-pb-h">${c.pb_traffic}</p>
+              <p>${c.pb_traffic_t}</p>
+            </div>
+            <div class="cmp-pb">
+              <p class="cmp-pb-h">${c.pb_actors}</p>
+              <p>${c.pb_actors_t}</p>
+            </div>
+            <div class="cmp-pb">
+              <p class="cmp-pb-h">${c.pb_pain}</p>
+              <ul>
+                <li>${c.pb_pain_1}</li>
+                <li>${c.pb_pain_2}</li>
+                <li>${c.pb_pain_3}</li>
+                <li>${c.pb_pain_4}</li>
+              </ul>
+            </div>
+            <div class="cmp-pb">
+              <p class="cmp-pb-h">${c.pb_motiv}</p>
+              <ul>
+                <li>${c.pb_motiv_1}</li>
+                <li>${c.pb_motiv_2}</li>
+                <li>${c.pb_motiv_3}</li>
+                <li>${c.pb_motiv_4}</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTEXTS -->
+    <div class="cmp-section" style="border-top:1px solid var(--color-border);">
+      <div class="cmp-section-hd">
+        <div class="cmp-section-label">${c.ctx_label}</div>
+        <div class="cmp-section-title">${c.ctx_title}</div>
+      </div>
+      <div class="cmp-context-grid">
+        <div class="cmp-ctx-item">
+          <div class="cmp-ctx-img" style="overflow:hidden;"><img src="../campana/webp/ctx-carril-bici.webp" alt="${c.ctx1_name}" style="width:100%;height:100%;object-fit:cover;"></div>
+          <div class="cmp-ctx-body">
+            <div class="cmp-ctx-name">${c.ctx1_name}</div>
+            <div class="cmp-ctx-eff high">${c.ctx1_eff}</div>
+            <div class="cmp-ctx-desc">${c.ctx1_desc}</div>
+          </div>
+        </div>
+        <div class="cmp-ctx-item">
+          <div class="cmp-ctx-img" style="overflow:hidden;"><img src="../campana/webp/ctx-calle-tranquila.webp" alt="${c.ctx2_name}" style="width:100%;height:100%;object-fit:cover;"></div>
+          <div class="cmp-ctx-body">
+            <div class="cmp-ctx-name">${c.ctx2_name}</div>
+            <div class="cmp-ctx-eff med">${c.ctx2_eff}</div>
+            <div class="cmp-ctx-desc">${c.ctx2_desc}</div>
+          </div>
+        </div>
+        <div class="cmp-ctx-item">
+          <div class="cmp-ctx-img" style="overflow:hidden;"><img src="../campana/webp/ctx-avenida.webp" alt="${c.ctx3_name}" style="width:100%;height:100%;object-fit:cover;"></div>
+          <div class="cmp-ctx-body">
+            <div class="cmp-ctx-name">${c.ctx3_name}</div>
+            <div class="cmp-ctx-eff low">${c.ctx3_eff}</div>
+            <div class="cmp-ctx-desc">${c.ctx3_desc}</div>
+          </div>
+        </div>
+        <div class="cmp-ctx-item">
+          <div class="cmp-ctx-img" style="overflow:hidden;"><img src="../campana/webp/ctx-mtb.webp" alt="${c.ctx4_name}" style="width:100%;height:100%;object-fit:cover;"></div>
+          <div class="cmp-ctx-body">
+            <div class="cmp-ctx-name">${c.ctx4_name}</div>
+            <div class="cmp-ctx-eff var">${c.ctx4_eff}</div>
+            <div class="cmp-ctx-desc">${c.ctx4_desc}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIELD OBSERVATION -->
+    <div class="cmp-section" style="border-top:1px solid var(--color-border);">
+      <div class="cmp-section-hd">
+        <div class="cmp-section-label">${c.obs_label}</div>
+        <div class="cmp-section-title">${c.obs_title}</div>
+      </div>
+      <div class="cmp-obs-log-meta">
+        <div class="cmp-obs-log-cell"><div class="cmp-obs-log-h">Subject</div><div class="cmp-obs-log-v">Urban commuter · 30s · city bike · standard thumb bell</div></div>
+        <div class="cmp-obs-log-cell"><div class="cmp-obs-log-h">Route</div><div class="cmp-obs-log-v">Three Islands Blvd → Hallandale Beach Blvd → A1A · 11 min · 3.4 km · mixed</div></div>
+      </div>
+      <img src="../campana/webp/field-observation.webp" loading="lazy" style="aspect-ratio:21/9;width:100%;object-fit:cover;display:block;margin-bottom:1px;border:1px solid var(--color-border);">
+      <div class="cmp-log-wrap">
+        <div class="cmp-log-entry">
+          <span class="cmp-log-t">00:42</span>
+          <div class="cmp-log-body"><strong>Bike lane — Three Islands Blvd.</strong> Bell activated passing pedestrian with earphones. No visible reaction. Rider glances over shoulder and continues without waiting for response.</div>
+        </div>
+        <div class="cmp-log-entry">
+          <span class="cmp-log-t">01:28</span>
+          <div class="cmp-log-body"><strong>Crossing SE 14th Ave.</strong> Cyclist coming in opposite direction. Two consecutive bell taps. Clean crossing, both nod slightly — bilateral recognition of a shared code.</div>
+        </div>
+        <div class="cmp-log-entry is-warn">
+          <span class="cmp-log-t">02:11</span>
+          <div class="cmp-log-body"><strong>Unexpected behavior.</strong> Pedestrian crosses diagonally without looking. Rider <em>doesn't ring the bell</em>: says "excuse me" aloud and swerves. Voice faster than bell in this scenario.</div>
+        </div>
+        <div class="cmp-log-entry">
+          <span class="cmp-log-t">03:34</span>
+          <div class="cmp-log-body"><strong>Hallandale Beach Blvd, medium traffic.</strong> Bell activated overtaking delivery rider on bike. Recipient responds with slight shoulder turn. Signal received.</div>
+        </div>
+        <div class="cmp-log-entry is-warn">
+          <span class="cmp-log-t">04:50</span>
+          <div class="cmp-log-body"><strong>S Federal Hwy, dense traffic.</strong> Bell 3× consecutive to pedestrian at curb. No apparent reception. Ends up shouting "bike!" Visible frustration.</div>
+        </div>
+        <div class="cmp-log-entry">
+          <span class="cmp-log-t">05:27</span>
+          <div class="cmp-log-body"><strong>Bell without checking reception.</strong> Rider signals while looking straight ahead — never verifies if it was received. Confirms the "ritual alert" hypothesis: the bell is sent, not communicated.</div>
+        </div>
+        <div class="cmp-log-entry is-ok">
+          <span class="cmp-log-t">06:18</span>
+          <div class="cmp-log-body"><strong>Bluesten Park, low speed.</strong> Child with parent. Rider almost stops and rings gently. Parent reacts, pulls child close. Ideal case: low speed + low ambient noise.</div>
+        </div>
+        <div class="cmp-log-entry">
+          <span class="cmp-log-t">07:45</span>
+          <div class="cmp-log-body"><strong>Combined reinforcement.</strong> Rings + says "passing on your left." Pattern repeats consistently whenever reception is uncertain. Bell alone is not enough for the rider.</div>
+        </div>
+        <div class="cmp-log-entry is-warn">
+          <span class="cmp-log-t">09:02</span>
+          <div class="cmp-log-body"><strong>Thumb reset time.</strong> After activating, ~1.4 s to return thumb to brake position. During that interval the hand is incomplete on the handlebar — risk in emergency braking.</div>
+        </div>
+        <div class="cmp-log-entry">
+          <span class="cmp-log-t">10:33</span>
+          <div class="cmp-log-body"><strong>Arrival (A1A coastline).</strong> Total: 7 bell activations, 2 voice substitutions, 1 silent swerve, 3 combined reinforcements (bell + voice). Only 4/7 generated visible reception.</div>
+        </div>
+      </div>
+      <div class="cmp-log-sum">${c.obs_synth}</div>
+    </div>
+
+    <!-- STAKEHOLDER MAP -->
+    <div class="cmp-section" style="border-top:1px solid var(--color-border);">
+      <div class="cmp-section-hd">
+        <div class="cmp-section-label">${c.stk_label}</div>
+        <div class="cmp-section-title">${c.stk_title}</div>
+      </div>
+      <!-- Stakeholder diagram: SVG left, legend right -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--color-border);">
+        <!-- LEFT: visual map -->
+        <div style="background:var(--color-bg);padding:clamp(14px,2vw,24px) clamp(10px,1.5vw,16px);">
+          <svg viewBox="20 40 520 520" xmlns="http://www.w3.org/2000/svg" overflow="visible" style="display:block;width:100%;max-height:620px;" role="img" aria-label="Stakeholder map">
+            <!-- Background -->
+            <rect width="560" height="620" fill="var(--color-bg)"/>
+
+            <!-- ── RINGS ──────────────────────────────────────────────── -->
+            <!-- Outer ring — environmental zone -->
+            <circle cx="280" cy="310" r="262" fill="color-mix(in srgb,var(--color-border) 20%,var(--color-bg))" stroke="var(--color-border)" stroke-width="1"/>
+            <!-- Middle ring — receptor zone -->
+            <circle cx="280" cy="310" r="196" fill="color-mix(in srgb,var(--color-border) 10%,var(--color-bg))" stroke="var(--color-border)" stroke-width="1"/>
+            <!-- Inner circle — emitter -->
+            <circle cx="280" cy="310" r="76" fill="#d24a1f" stroke="#b03a12" stroke-width="2"/>
+
+            <!-- ─�� ZONE LABELS ─────────────────────────────────────────── -->
+            <text x="280" y="30" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="var(--color-muted)" letter-spacing="3" opacity=".6">${_cl==='es'?'FACTORES DEL ENTORNO':_cl==='de'?'UMGEBUNGSFAKTOREN':'ENVIRONMENTAL FACTORS'}</text>
+            <line x1="138" y1="38" x2="422" y2="38" stroke="var(--color-border)" stroke-width=".5" opacity=".5"/>
+            <text x="280" y="610" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="var(--color-muted)" letter-spacing="2" opacity=".5">${_cl==='es'?'CALIDAD DEL CANAL DE COMUNICACIÓN':_cl==='de'?'QUALITÄT DES KOMMUNIKATIONSKANALS':'SIGNAL CHANNEL QUALITY'}</text>
+
+            <!-- ── CENTER: CYCLIST + BELL ─────────────────────────────── -->
+            <text x="280" y="304" text-anchor="middle" font-family="inherit" font-size="16" font-weight="700" fill="#fff" letter-spacing=".02em">${_cl==='es'?'CICLISTA':_cl==='de'?'RADFAHRER':'CYCLIST'}</text>
+            <text x="280" y="322" text-anchor="middle" font-family="'Courier New',monospace" font-size="11" fill="#fff" opacity=".85" letter-spacing="2">+ ${_cl==='es'?'CAMPANA':_cl==='de'?'KLINGEL':'BELL'}</text>
+
+            <!-- ── CONNECTOR LINES ────────────────────────────────────── -->
+            <!-- TOP — Pedestrian (solid, text color = effective) -->
+            <line x1="280" y1="234" x2="280" y2="206" stroke="var(--color-text)" stroke-width="2.5" opacity=".7"/>
+            <!-- NE — Pedestrian w/phone (dashed orange = attenuated) -->
+            <line x1="346" y1="272" x2="370" y2="258" stroke="#d24a1f" stroke-width="2" stroke-dasharray="7 4"/>
+            <!-- SE — Other cyclist (dashed muted = shared code) -->
+            <line x1="346" y1="348" x2="370" y2="362" stroke="var(--color-muted)" stroke-width="2" stroke-dasharray="5 3"/>
+            <!-- BOTTOM — Vulnerable pedestrian (dashed orange = attenuated) -->
+            <line x1="280" y1="386" x2="280" y2="414" stroke="#d24a1f" stroke-width="2" stroke-dasharray="7 4"/>
+            <!-- SW — Driver (dotted, dim = no signal) -->
+            <line x1="214" y1="348" x2="190" y2="362" stroke="var(--color-border)" stroke-width="2" stroke-dasharray="2 5"/>
+            <!-- NW — Pedestrian w/headphones (dotted, dim = no signal) -->
+            <line x1="214" y1="272" x2="190" y2="258" stroke="var(--color-border)" stroke-width="2" stroke-dasharray="2 5"/>
+
+            <!-- ── 6 RECEPTOR CIRCLES ─────────────────────────────────── -->
+            <!-- 1. TOP (-90°) cx=280 cy=162 — Pedestrian (effective) -->
+            <circle cx="280" cy="162" r="44" fill="var(--color-bg)" stroke="var(--color-text)" stroke-width="2"/>
+            <text x="280" y="155" text-anchor="middle" font-family="inherit" font-size="10" font-weight="700" fill="var(--color-text)">${_cl==='es'?'Peatón':_cl==='de'?'Fußgänger':'Pedestrian'}</text>
+            <text x="280" y="168" text-anchor="middle" font-family="inherit" font-size="8.5" fill="var(--color-muted)">${_cl==='es'?'sin auriculares':_cl==='de'?'ohne Kopfhörer':'no headphones'}</text>
+            <text x="280" y="182" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" font-weight="700" letter-spacing="1" fill="var(--color-text)">${_cl==='es'?'RECIBE':_cl==='de'?'EMPFÄNGT':'RECEIVES'}</text>
+
+            <!-- 2. NE (-30°) cx=408 cy=236 �� Pedestrian w/phone (partial) -->
+            <circle cx="408" cy="236" r="44" fill="var(--color-bg)" stroke="#d24a1f" stroke-width="2"/>
+            <text x="408" y="229" text-anchor="middle" font-family="inherit" font-size="10" font-weight="700" fill="var(--color-text)">${_cl==='es'?'Peatón':_cl==='de'?'Fußgänger':'Pedestrian'}</text>
+            <text x="408" y="242" text-anchor="middle" font-family="inherit" font-size="8.5" fill="var(--color-muted)">${_cl==='es'?'con celular':_cl==='de'?'mit Handy':'w/ phone'}</text>
+            <text x="408" y="256" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" font-weight="700" letter-spacing=".5" fill="#d24a1f">${_cl==='es'?'PARCIAL':_cl==='de'?'TEILWEISE':'PARTIAL'}</text>
+
+            <!-- 3. SE (+30°) cx=408 cy=384 — Other cyclist (shared code) -->
+            <circle cx="408" cy="384" r="44" fill="var(--color-bg)" stroke="var(--color-muted)" stroke-width="1.5"/>
+            <text x="408" y="377" text-anchor="middle" font-family="inherit" font-size="10" font-weight="700" fill="var(--color-text)">${_cl==='es'?'Otro':_cl==='de'?'Anderer':'Other'}</text>
+            <text x="408" y="390" text-anchor="middle" font-family="inherit" font-size="8.5" fill="var(--color-muted)">${_cl==='es'?'ciclista':_cl==='de'?'Radfahrer':'cyclist'}</text>
+            <text x="408" y="404" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" font-weight="700" letter-spacing=".5" fill="var(--color-muted)">${_cl==='es'?'CÓD. COMPART.':_cl==='de'?'GEMEINS. CODE':'SHARED CODE'}</text>
+
+            <!-- 4. BOTTOM (+90°) cx=280 cy=458 ��� Vulnerable pedestrian (partial) -->
+            <circle cx="280" cy="458" r="44" fill="var(--color-bg)" stroke="#d24a1f" stroke-width="2"/>
+            <text x="280" y="449" text-anchor="middle" font-family="inherit" font-size="9.5" font-weight="700" fill="var(--color-text)">${_cl==='es'?'Peatón':_cl==='de'?'Fußgänger':'Pedestrian'}</text>
+            <text x="280" y="462" text-anchor="middle" font-family="inherit" font-size="8" fill="var(--color-muted)">${_cl==='es'?'niño·3ª ed.·audíf.':_cl==='de'?'Kind · Senioren':'child · elderly'}</text>
+            <text x="280" y="476" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" font-weight="700" letter-spacing=".5" fill="#d24a1f">${_cl==='es'?'PARCIAL':_cl==='de'?'TEILWEISE':'PARTIAL'}</text>
+
+            <!-- 5. SW (+150°) cx=152 cy=384 — Driver (no signal) -->
+            <circle cx="152" cy="384" r="44" fill="var(--color-bg)" stroke="var(--color-border)" stroke-width="1.5"/>
+            <text x="152" y="377" text-anchor="middle" font-family="inherit" font-size="10" font-weight="700" fill="var(--color-muted)">${_cl==='es'?'Conductor':_cl==='de'?'Fahrer':'Driver'}</text>
+            <text x="152" y="390" text-anchor="middle" font-family="inherit" font-size="8.5" fill="var(--color-muted)">${_cl==='es'?'de auto':_cl==='de'?'KFZ':'car'}</text>
+            <text x="152" y="404" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" font-weight="700" letter-spacing=".5" fill="var(--color-muted)">${_cl==='es'?'NO RECIBE':_cl==='de'?'KEIN EMPFANG':'NO SIGNAL'}</text>
+
+            <!-- 6. NW (-150°) cx=152 cy=236 — Pedestrian w/headphones (no signal) -->
+            <circle cx="152" cy="236" r="44" fill="var(--color-bg)" stroke="var(--color-border)" stroke-width="1.5"/>
+            <text x="152" y="226" text-anchor="middle" font-family="inherit" font-size="10" font-weight="700" fill="var(--color-muted)">${_cl==='es'?'Peatón':_cl==='de'?'Fußgänger':'Pedestrian'}</text>
+            <text x="152" y="239" text-anchor="middle" font-family="inherit" font-size="8.5" fill="var(--color-muted)">${_cl==='es'?'con auriculares':_cl==='de'?'mit Kopfhörern':'w/ headphones'}</text>
+            <text x="152" y="253" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" font-weight="700" letter-spacing=".5" fill="var(--color-muted)">${_cl==='es'?'NO RECIBE':_cl==='de'?'KEIN EMPFANG':'NO SIGNAL'}</text>
+
+            <!-- ── ENVIRONMENTAL FACTORS (at r≈232 in outer ring) ───── -->
+            <!-- ENE (-60°): cx≈396, cy���109 — Cycling culture -->
+            <text x="396" y="107" text-anchor="middle" font-family="inherit" font-size="10" font-weight="600" fill="var(--color-text)">${_cl==='es'?'Cultura ciclística':_cl==='de'?'Radfahrkultur':'Cycling culture'}</text>
+            <text x="396" y="120" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="var(--color-muted)" letter-spacing="1">${_cl==='es'?'CÓDIGO COMPARTIDO':_cl==='de'?'GETEILTER CODE':'SHARED CODE'}</text>
+
+            <!-- E (0°): x=508, y=310 — Motor vehicles -->
+            <text x="508" y="307" text-anchor="end" font-family="inherit" font-size="10" font-weight="600" fill="var(--color-text)">${_cl==='es'?'Vehículos motorizados':_cl==='de'?'Kraftfahrzeuge':'Motor vehicles'}</text>
+            <text x="508" y="320" text-anchor="end" font-family="'Courier New',monospace" font-size="8" fill="var(--color-muted)" letter-spacing="1">${_cl==='es'?'FUENTE DE RUIDO':_cl==='de'?'LÄRMQUELLE':'NOISE SOURCE'}</text>
+
+            <!-- SE (+60°): cx≈396, cy≈511 — Urban infrastructure -->
+            <text x="396" y="508" text-anchor="middle" font-family="inherit" font-size="10" font-weight="600" fill="var(--color-text)">${_cl==='es'?'Infraestructura urbana':_cl==='de'?'Stadtinfrastruktur':'Urban infrastructure'}</text>
+            <text x="396" y="521" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="var(--color-muted)" letter-spacing="1">${_cl==='es'?'BICISENDAS · CRUCES':_cl==='de'?'WEGE · KREUZUNGEN':'BIKE LANES · CROSSINGS'}</text>
+
+            <!-- SW (+120°): cx≈164, cy≈511 — Nature / weather -->
+            <text x="164" y="508" text-anchor="middle" font-family="inherit" font-size="10" font-weight="600" fill="var(--color-text)">${_cl==='es'?'Naturaleza / clima':_cl==='de'?'Natur / Wetter':'Nature / weather'}</text>
+            <text x="164" y="521" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="var(--color-muted)" letter-spacing="1">${_cl==='es'?'VIENTO · LLUVIA':_cl==='de'?'WIND · REGEN':'WIND · RAIN'}</text>
+
+            <!-- W (+180°): x=52, y=310 — Local regulation -->
+            <text x="52" y="307" text-anchor="start" font-family="inherit" font-size="10" font-weight="600" fill="var(--color-text)">${_cl==='es'?'Normativa local':_cl==='de'?'Lokale Normen':'Local regulation'}</text>
+            <text x="52" y="320" text-anchor="start" font-family="'Courier New',monospace" font-size="8" fill="var(--color-muted)" letter-spacing="1">${_cl==='es'?'OBLIGATORIEDAD LEGAL':_cl==='de'?'RECHTSPFLICHT':'LEGAL REQUIREMENT'}</text>
+
+            <!-- WNW (-120°): cx≈164, cy≈109 — Urban background noise -->
+            <text x="164" y="107" text-anchor="middle" font-family="inherit" font-size="10" font-weight="600" fill="var(--color-text)">${_cl==='es'?'Ruido urbano':_cl==='de'?'Stadtlärm':'Urban noise'}</text>
+            <text x="164" y="120" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="var(--color-muted)" letter-spacing="1">70–85 dB</text>
+
+                    </svg>
+        </div>
+
+        <!-- RIGHT: actor legend -->
+        <div style="background:var(--color-bg);display:flex;flex-direction:column;justify-content:space-between;">
+          <!-- Signal receptors -->
+          <div style="padding:clamp(10px,1.4vw,16px);border-bottom:1px solid var(--color-border);">
+            <div style="font-size:.58rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#d24a1f;margin-bottom:8px;">${_cl==='es'?'Receptores de señal':_cl==='de'?'Signalempfänger':'Signal receptors'}</div>
+            <div style="display:flex;flex-direction:column;gap:7px;">
+              <div style="display:flex;align-items:center;gap:8px;"><div style="width:8px;height:8px;border-radius:50%;border:1.5px solid var(--color-text);background:var(--color-bg);flex-shrink:0;"></div><div><div style="font-size:.8rem;font-weight:600;color:var(--color-text);">${_cl==='es'?'Peatón sin auriculares':_cl==='de'?'Fußgänger ohne Kopfhörer':'Pedestrian (no headphones)'}</div><div style="font-size:.72rem;color:var(--color-text);font-weight:700;letter-spacing:.06em;">${_cl==='es'?'RECIBE':_cl==='de'?'EMPFÄNGT':'RECEIVES'}</div></div></div>
+              <div style="display:flex;align-items:center;gap:8px;"><div style="width:8px;height:8px;border-radius:50%;border:1.5px solid #d24a1f;background:var(--color-bg);flex-shrink:0;"></div><div><div style="font-size:.8rem;font-weight:600;color:var(--color-text);">${_cl==='es'?'Peatón con celular':_cl==='de'?'Fußgänger mit Handy':'Pedestrian w/ phone'}</div><div style="font-size:.72rem;color:#d24a1f;font-weight:700;letter-spacing:.06em;">${_cl==='es'?'RECIBE PARCIAL':_cl==='de'?'TEILWEISE':'PARTIAL'}</div></div></div>
+              <div style="display:flex;align-items:center;gap:8px;"><div style="width:8px;height:8px;border-radius:50%;border:1.5px solid var(--color-muted);background:var(--color-bg);flex-shrink:0;"></div><div><div style="font-size:.8rem;font-weight:600;color:var(--color-text);">${_cl==='es'?'Otro ciclista':_cl==='de'?'Anderer Radfahrer':'Fellow cyclist'}</div><div style="font-size:.72rem;color:var(--color-muted);font-weight:700;letter-spacing:.06em;">${_cl==='es'?'CÓD. COMPARTIDO':_cl==='de'?'GETEILTER CODE':'SHARED CODE'}</div></div></div>
+              <div style="display:flex;align-items:center;gap:8px;"><div style="width:8px;height:8px;border-radius:50%;border:1.5px solid #d24a1f;background:var(--color-bg);flex-shrink:0;"></div><div><div style="font-size:.8rem;font-weight:600;color:var(--color-text);">${_cl==='es'?'Peatón vulnerable':_cl==='de'?'Schutzbedürftiger Fußgänger':'Vulnerable pedestrian'}</div><div style="font-size:.72rem;color:#d24a1f;font-weight:700;letter-spacing:.06em;">${_cl==='es'?'RECIBE PARCIAL':_cl==='de'?'TEILWEISE':'PARTIAL'}</div></div></div>
+              <div style="display:flex;align-items:center;gap:8px;"><div style="width:8px;height:8px;border-radius:50%;border:1.5px solid var(--color-border);background:var(--color-bg);flex-shrink:0;"></div><div><div style="font-size:.8rem;font-weight:600;color:var(--color-muted);">${_cl==='es'?'Conductor de auto':_cl==='de'?'KFZ-Fahrer':'Car driver'}</div><div style="font-size:.72rem;color:var(--color-muted);font-weight:700;letter-spacing:.06em;">${_cl==='es'?'NO RECIBE':_cl==='de'?'KEIN EMPFANG':'NO SIGNAL'}</div></div></div>
+              <div style="display:flex;align-items:center;gap:8px;"><div style="width:8px;height:8px;border-radius:50%;border:1.5px solid var(--color-border);background:var(--color-bg);flex-shrink:0;"></div><div><div style="font-size:.8rem;font-weight:600;color:var(--color-muted);">${_cl==='es'?'Peatón con auriculares':_cl==='de'?'Fußgänger mit Kopfhörern':'Pedestrian w/ headphones'}</div><div style="font-size:.72rem;color:var(--color-muted);font-weight:700;letter-spacing:.06em;">${_cl==='es'?'NO RECIBE':_cl==='de'?'KEIN EMPFANG':'NO SIGNAL'}</div></div></div>
+            </div>
+          </div>
+          <!-- Environmental factors -->
+          <div style="padding:clamp(10px,1.4vw,16px);border-bottom:1px solid var(--color-border);">
+            <div style="font-size:.58rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-muted);margin-bottom:8px;">${_cl==='es'?'Factores del entorno':_cl==='de'?'Umgebungsfaktoren':'Environmental factors'}</div>
+            <div style="display:flex;flex-direction:column;gap:5px;">
+              <div><div style="font-size:.8rem;font-weight:600;color:var(--color-text);margin-bottom:1px;">${_cl==='es'?'Cultura ciclística':_cl==='de'?'Radfahrkultur':'Cycling culture'}</div><div style="font-size:.72rem;color:var(--color-muted);line-height:1.4;">${_cl==='es'?'Código señal compartido entre ciclistas':_cl==='de'?'Gemeinsamer Signalcode unter Radfahrern':'Shared signal code among cyclists'}</div></div>
+              <div><div style="font-size:.8rem;font-weight:600;color:var(--color-text);margin-bottom:1px;">${_cl==='es'?'Vehículos motorizados':_cl==='de'?'Kraftfahrzeuge':'Motor vehicles'}</div><div style="font-size:.72rem;color:var(--color-muted);line-height:1.4;">${_cl==='es'?'Principal fuente de ruido 78–85 dB':_cl==='de'?'Hauptlärmquelle 78–85 dB':'Main noise source 78–85 dB'}</div></div>
+              <div><div style="font-size:.8rem;font-weight:600;color:var(--color-text);margin-bottom:1px;">${_cl==='es'?'Infraestructura urbana':_cl==='de'?'Stadtinfrastruktur':'Urban infrastructure'}</div><div style="font-size:.72rem;color:var(--color-muted);line-height:1.4;">${_cl==='es'?'Bicisendas, cruces, velocidades':_cl==='de'?'Radwege, Kreuzungen':'Bike lanes, crossings'}</div></div>
+              <div><div style="font-size:.8rem;font-weight:600;color:var(--color-text);margin-bottom:1px;">${_cl==='es'?'Normativa local':_cl==='de'?'Lokale Normen':'Local regulation'}</div><div style="font-size:.72rem;color:var(--color-muted);line-height:1.4;">${_cl==='es'?'Obligatoriedad legal del timbre':_cl==='de'?'Rechtspflicht Fahrradklingel':'Legal requirement for bicycle bell'}</div></div>
+            </div>
+          </div>
+          <!-- Signal quality legend -->
+          <div style="padding:clamp(10px,1.4vw,16px);">
+            <div style="font-size:.58rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-muted);margin-bottom:8px;">${_cl==='es'?'Calidad de señal':_cl==='de'?'Signalqualität':'Signal quality'}</div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div style="display:flex;align-items:center;gap:9px;"><div style="width:24px;height:0;border-top:2.5px solid var(--color-text);flex-shrink:0;"></div><span style="font-size:.76rem;color:var(--color-muted);">${_cl==='es'?'Efectiva — recibe':_cl==='de'?'Effektiv — empfängt':'Effective — receives'}</span></div>
+              <div style="display:flex;align-items:center;gap:9px;"><div style="width:24px;height:0;border-top:2px dashed #d24a1f;flex-shrink:0;"></div><span style="font-size:.76rem;color:var(--color-muted);">${_cl==='es'?'Atenuada — parcial':_cl==='de'?'Gedämpft — teilweise':'Attenuated — partial'}</span></div>
+              <div style="display:flex;align-items:center;gap:9px;"><div style="width:24px;height:0;border-top:2px dotted var(--color-muted);flex-shrink:0;opacity:.6;"></div><span style="font-size:.76rem;color:var(--color-muted);">${_cl==='es'?'No llega':_cl==='de'?'Kein Empfang':'Does not reach'}</span></div>
+              <div style="display:flex;align-items:center;gap:9px;"><div style="width:24px;height:0;border-top:2px dashed var(--color-muted);flex-shrink:0;"></div><span style="font-size:.76rem;color:var(--color-muted);">${_cl==='es'?'Código compartido':_cl==='de'?'Gemeinsamer Code':'Shared code'}</span></div>
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+
+        <!-- JOURNEY MAP -->
+    <div class="cmp-section" style="border-top:1px solid var(--color-border);">
+      <div class="cmp-section-hd">
+        <div class="cmp-section-label">${c.jp_label}</div>
+        <div class="cmp-section-title">${c.jp_title}</div>
+      </div>
+      <!-- Emotional curve SVG -->
+      <div style="margin-bottom:clamp(16px,2.5vw,28px);">
+        <svg viewBox="0 0 1100 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:100%;font-family:inherit;" aria-label="Emotional journey curve">
+          <line x1="60" y1="30" x2="60" y2="200" stroke="#c8c1b3" stroke-width="1"/>
+          <line x1="60" y1="115" x2="1080" y2="115" stroke="#c8c1b3" stroke-width="1" stroke-dasharray="4 4"/>
+          <text x="50" y="42" text-anchor="end" font-family="'Courier New',monospace" font-size="14" fill="#7a7468">+</text>
+          <text x="50" y="120" text-anchor="end" font-family="'Courier New',monospace" font-size="14" fill="#7a7468">0</text>
+          <text x="50" y="200" text-anchor="end" font-family="'Courier New',monospace" font-size="14" fill="#7a7468">−</text>
+          <polyline points="170,100 360,55 550,185 740,115 970,40" fill="none" stroke="#d24a1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+          <circle cx="170" cy="100" r="8" fill="#d24a1f"/>
+          <circle cx="360" cy="55" r="8" fill="#1a1a1a"/>
+          <circle cx="550" cy="185" r="8" fill="#d24a1f"/>
+          <circle cx="740" cy="115" r="8" fill="#8b8270"/>
+          <circle cx="970" cy="40" r="8" fill="#1a1a1a"/>
+          <text x="170" y="240" text-anchor="middle" font-family="'Courier New',monospace" font-size="14" font-weight="600" letter-spacing="1" fill="currentColor" opacity=".7">${c.jp_emo_depart}</text>
+          <text x="360" y="240" text-anchor="middle" font-family="'Courier New',monospace" font-size="14" font-weight="600" letter-spacing="1" fill="currentColor" opacity=".7">${c.jp_emo_riding}</text>
+          <text x="550" y="240" text-anchor="middle" font-family="'Courier New',monospace" font-size="14" font-weight="600" letter-spacing="1" fill="#d24a1f">${c.jp_emo_alert}</text>
+          <text x="740" y="240" text-anchor="middle" font-family="'Courier New',monospace" font-size="14" font-weight="600" letter-spacing="1" fill="currentColor" opacity=".7">${c.jp_emo_resol}</text>
+          <text x="970" y="240" text-anchor="middle" font-family="'Courier New',monospace" font-size="14" font-weight="600" letter-spacing="1" fill="currentColor" opacity=".7">${c.jp_emo_arrive}</text>
+        </svg>
+      </div>
+      <!-- 5-phase grid -->
+      <div class="cmp-journey-phases">
+        <div class="cmp-jp">
+          <div class="cmp-jp-head"><div class="cmp-jp-num">${_cl==='es'?'Fase':'Phase'} 01</div><div class="cmp-jp-name">${c.jp_p1_name}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Acción':_cl==='de'?'Aktion':'Action'}</div><div class="cmp-jp-row-t">${c.jp_p1_action}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Estado emocional':_cl==='de'?'Emotionaler Zustand':'Emotional state'}</div><div class="cmp-jp-row-t">${c.jp_p1_emotion}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Feedback sensorial':_cl==='de'?'Sensorisches Feedback':'Sensory feedback'}</div><div class="cmp-jp-row-t">${c.jp_p1_sensory}</div></div>
+          <div class="cmp-jp-row is-pain"><div class="cmp-jp-row-h">${_cl==='es'?'Punto de dolor':_cl==='de'?'Schmerzpunkt':'Pain point'}</div><div class="cmp-jp-row-t">${c.jp_p1_pain}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Actores':_cl==='de'?'Akteure':'Actors'}</div><div class="cmp-jp-row-t">${c.jp_p1_actors}</div></div>
+        </div>
+        <div class="cmp-jp">
+          <div class="cmp-jp-head"><div class="cmp-jp-num">${_cl==='es'?'Fase':'Phase'} 02</div><div class="cmp-jp-name">${c.jp_p2_name}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Acción':_cl==='de'?'Aktion':'Action'}</div><div class="cmp-jp-row-t">${c.jp_p2_action}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Estado emocional':_cl==='de'?'Emotionaler Zustand':'Emotional state'}</div><div class="cmp-jp-row-t">${c.jp_p2_emotion}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Feedback sensorial':_cl==='de'?'Sensorisches Feedback':'Sensory feedback'}</div><div class="cmp-jp-row-t">${c.jp_p2_sensory}</div></div>
+          <div class="cmp-jp-row is-pain"><div class="cmp-jp-row-h">${_cl==='es'?'Punto de dolor':_cl==='de'?'Schmerzpunkt':'Pain point'}</div><div class="cmp-jp-row-t">${c.jp_p2_pain}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Actores':_cl==='de'?'Akteure':'Actors'}</div><div class="cmp-jp-row-t">${c.jp_p2_actors}</div></div>
+        </div>
+        <div class="cmp-jp">
+          <div class="cmp-jp-head"><div class="cmp-jp-num">${_cl==='es'?'Fase':'Phase'} 03</div><div class="cmp-jp-name">${c.jp_p3_name}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Acción':_cl==='de'?'Aktion':'Action'}</div><div class="cmp-jp-row-t">${c.jp_p3_action}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Estado emocional':_cl==='de'?'Emotionaler Zustand':'Emotional state'}</div><div class="cmp-jp-row-t">${c.jp_p3_emotion}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Feedback sensorial':_cl==='de'?'Sensorisches Feedback':'Sensory feedback'}</div><div class="cmp-jp-row-t">${c.jp_p3_sensory}</div></div>
+          <div class="cmp-jp-row is-pain"><div class="cmp-jp-row-h">${_cl==='es'?'Punto de dolor':_cl==='de'?'Schmerzpunkt':'Pain point'}</div><div class="cmp-jp-row-t">${c.jp_p3_pain}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Actores':_cl==='de'?'Akteure':'Actors'}</div><div class="cmp-jp-row-t">${c.jp_p3_actors}</div></div>
+        </div>
+        <div class="cmp-jp">
+          <div class="cmp-jp-head"><div class="cmp-jp-num">${_cl==='es'?'Fase':'Phase'} 04</div><div class="cmp-jp-name">${c.jp_p4_name}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Acción':_cl==='de'?'Aktion':'Action'}</div><div class="cmp-jp-row-t">${c.jp_p4_action}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Estado emocional':_cl==='de'?'Emotionaler Zustand':'Emotional state'}</div><div class="cmp-jp-row-t">${c.jp_p4_emotion}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Feedback sensorial':_cl==='de'?'Sensorisches Feedback':'Sensory feedback'}</div><div class="cmp-jp-row-t">${c.jp_p4_sensory}</div></div>
+          <div class="cmp-jp-row is-pain"><div class="cmp-jp-row-h">${_cl==='es'?'Punto de dolor':_cl==='de'?'Schmerzpunkt':'Pain point'}</div><div class="cmp-jp-row-t">${c.jp_p4_pain}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Actores':_cl==='de'?'Akteure':'Actors'}</div><div class="cmp-jp-row-t">${c.jp_p4_actors}</div></div>
+        </div>
+        <div class="cmp-jp">
+          <div class="cmp-jp-head"><div class="cmp-jp-num">${_cl==='es'?'Fase':'Phase'} 05</div><div class="cmp-jp-name">${c.jp_p5_name}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Acción':_cl==='de'?'Aktion':'Action'}</div><div class="cmp-jp-row-t">${c.jp_p5_action}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Estado emocional':_cl==='de'?'Emotionaler Zustand':'Emotional state'}</div><div class="cmp-jp-row-t">${c.jp_p5_emotion}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Feedback sensorial':_cl==='de'?'Sensorisches Feedback':'Sensory feedback'}</div><div class="cmp-jp-row-t">${c.jp_p5_sensory}</div></div>
+          <div class="cmp-jp-row is-pain"><div class="cmp-jp-row-h">${_cl==='es'?'Punto de dolor':_cl==='de'?'Schmerzpunkt':'Pain point'}</div><div class="cmp-jp-row-t">${c.jp_p5_pain}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Actores':_cl==='de'?'Akteure':'Actors'}</div><div class="cmp-jp-row-t">${c.jp_p5_actors}</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UX EVALUATION -->
+    <div class="cmp-section" style="border-top:1px solid var(--color-border);">
+      <div class="cmp-section-hd">
+        <div class="cmp-section-label">${c.ux_label}</div>
+        <div class="cmp-section-title">${c.ux_title}</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--color-border);">
+        <!-- Left: dimensions with large score numbers -->
+        <div class="cmp-dim-list" style="border:none;">
+          <div class="cmp-dim">
+            <div><div class="cmp-dim-h">${c.ux_dim1}</div><div class="cmp-dim-sub">${c.ux_dim1_sub}</div><div class="cmp-dim-track"><div class="cmp-dim-fill low" style="width:40%"></div></div></div>
+            <div class="cmp-dim-score low">4<small>/10</small></div>
+          </div>
+          <div class="cmp-dim">
+            <div><div class="cmp-dim-h">${c.ux_dim2}</div><div class="cmp-dim-sub">${c.ux_dim2_sub}</div><div class="cmp-dim-track"><div class="cmp-dim-fill low" style="width:30%"></div></div></div>
+            <div class="cmp-dim-score low">3<small>/10</small></div>
+          </div>
+          <div class="cmp-dim">
+            <div><div class="cmp-dim-h">${c.ux_dim3}</div><div class="cmp-dim-sub">${c.ux_dim3_sub}</div><div class="cmp-dim-track"><div class="cmp-dim-fill low" style="width:20%"></div></div></div>
+            <div class="cmp-dim-score low">2<small>/10</small></div>
+          </div>
+          <div class="cmp-dim">
+            <div><div class="cmp-dim-h">${c.ux_dim4}</div><div class="cmp-dim-sub">${c.ux_dim4_sub}</div><div class="cmp-dim-track"><div class="cmp-dim-fill mid" style="width:50%"></div></div></div>
+            <div class="cmp-dim-score mid">5<small>/10</small></div>
+          </div>
+          <div class="cmp-dim">
+            <div><div class="cmp-dim-h">${c.ux_dim5}</div><div class="cmp-dim-sub">${c.ux_dim5_sub}</div><div class="cmp-dim-track"><div class="cmp-dim-fill mid" style="width:60%"></div></div></div>
+            <div class="cmp-dim-score mid">6<small>/10</small></div>
+          </div>
+          <div class="cmp-dim">
+            <div><div class="cmp-dim-h">${c.ux_dim6}</div><div class="cmp-dim-sub">${c.ux_dim6_sub}</div><div class="cmp-dim-track"><div class="cmp-dim-fill high" style="width:70%"></div></div></div>
+            <div class="cmp-dim-score high">7<small>/10</small></div>
+          </div>
+          <div class="cmp-dim">
+            <div><div class="cmp-dim-h">${c.ux_dim7}</div><div class="cmp-dim-sub">${c.ux_dim7_sub}</div><div class="cmp-dim-track"><div class="cmp-dim-fill high" style="width:75%"></div></div></div>
+            <div class="cmp-dim-score high">7.5<small>/10</small></div>
+          </div>
+        </div>
+        <!-- Right: 4 key moments — equal height -->
+        <div class="cmp-km-wrap" style="background:var(--color-bg);padding:clamp(16px,2.5vw,28px);">
+          <div style="font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-muted);margin-bottom:12px;">${c.km_label}</div>
+          <div class="cmp-km-inner">
+            <div class="cmp-km-item" style="border-bottom:1px solid var(--color-border);padding:clamp(10px,1.5vw,16px);">
+              <div style="display:flex;gap:12px;align-items:flex-start;">
+                <div style="width:24px;height:24px;background:#d24a1f;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:#fff;flex-shrink:0;">!</div>
+                <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);margin-bottom:3px;">${c.km1_title}</div><div style="font-size:.76rem;color:var(--color-muted);line-height:1.5;">${c.km1_body}</div></div>
+              </div>
+            </div>
+            <div class="cmp-km-item" style="border-bottom:1px solid var(--color-border);padding:clamp(10px,1.5vw,16px);">
+              <div style="display:flex;gap:12px;align-items:flex-start;">
+                <div style="width:24px;height:24px;background:var(--color-muted);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:var(--color-bg);flex-shrink:0;">△</div>
+                <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);margin-bottom:3px;">${c.km2_title}</div><div style="font-size:.76rem;color:var(--color-muted);line-height:1.5;">${c.km2_body}</div></div>
+              </div>
+            </div>
+            <div class="cmp-km-item" style="border-bottom:1px solid var(--color-border);padding:clamp(10px,1.5vw,16px);">
+              <div style="display:flex;gap:12px;align-items:flex-start;">
+                <div style="width:24px;height:24px;background:var(--color-text);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:var(--color-bg);flex-shrink:0;">✓</div>
+                <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);margin-bottom:3px;">${c.km3_title}</div><div style="font-size:.76rem;color:var(--color-muted);line-height:1.5;">${c.km3_body}</div></div>
+              </div>
+            </div>
+            <div class="cmp-km-item" style="padding:clamp(10px,1.5vw,16px);">
+              <div style="display:flex;gap:12px;align-items:flex-start;">
+                <div style="width:24px;height:24px;background:#d24a1f;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:#fff;flex-shrink:0;opacity:.55;">?</div>
+                <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);margin-bottom:3px;">${c.km4_title}</div><div style="font-size:.76rem;color:var(--color-muted);line-height:1.5;">${c.km4_body}</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cmp-central-finding">
+        <span class="cmp-central-finding-lbl">${c.ux_finding_lbl}</span>
+        <span class="cmp-central-finding-txt">${c.ux_finding}</span>
+      </div>
+    </div>
+
+    <!-- FINDINGS -->
+    <div class="cmp-findings-divider">
+      <div>
+        <div class="cmp-section-label" style="margin-bottom:5px;">${c.find_label}</div>
+        <div class="cmp-findings-title">${c.find_title}</div>
+      </div>
+    </div>
+    <div class="cmp-hallazgos">
+      <div class="cmp-hallazgo">
+        <div class="cmp-hallazgo-n">01</div>
+        <div class="cmp-hallazgo-title">${c.h1_title}</div>
+        <div class="cmp-hallazgo-body">${c.h1_body}</div>
+      </div>
+      <div class="cmp-hallazgo">
+        <div class="cmp-hallazgo-n">02</div>
+        <div class="cmp-hallazgo-title">${c.h2_title}</div>
+        <div class="cmp-hallazgo-body">${c.h2_body}</div>
+        <div class="cmp-hallazgo-stat">${c.h2_stat}</div>
+      </div>
+      <div class="cmp-hallazgo">
+        <div class="cmp-hallazgo-n">03</div>
+        <div class="cmp-hallazgo-title">${c.h3_title}</div>
+        <div class="cmp-hallazgo-body">${c.h3_body}</div>
+      </div>
+      <div class="cmp-hallazgo">
+        <div class="cmp-hallazgo-n">04</div>
+        <div class="cmp-hallazgo-title">${c.h4_title}</div>
+        <div class="cmp-hallazgo-body">${c.h4_body}</div>
+        <div class="cmp-hallazgo-stat">${c.h4_stat}</div>
+      </div>
+      <div class="cmp-hallazgo">
+        <div class="cmp-hallazgo-n">05</div>
+        <div class="cmp-hallazgo-title">${c.h5_title}</div>
+        <div class="cmp-hallazgo-body">${c.h5_body}</div>
+        <div class="cmp-hallazgo-stat">${c.h5_stat}</div>
+      </div>
+    </div>
+
+    <!-- DESIGN PHASE / STATEMENT — merged -->
+    <div class="process-header">
+      <div>
+        <div class="process-kicker">${c.dph_kicker}</div>
+        <div class="process-title">${c.dph_title}</div>
+      </div>
+    </div>
+    <div class="cmp-statement" style="border-top:none;">
+      <div class="cmp-section-label" style="margin-bottom:12px;">${c.stmt_label}</div>
+      <div style="font-size:clamp(17px,2.1vw,26px);font-weight:700;letter-spacing:-.02em;line-height:1.3;color:var(--color-text);margin-bottom:0.35em;">${c.stmt_title}</div>
+      <div style="font-size:clamp(17px,2.1vw,26px);font-weight:700;letter-spacing:-.02em;line-height:1.3;color:var(--color-text);">${c.stmt_body}</div>
+    </div>
+
+    <!-- MOODBOARD -->
+    <div class="cmp-section" style="border-top:1px solid var(--color-border);padding-bottom:0;">
+      <div class="cmp-section-hd">
+        <div class="cmp-section-label">${_cl==='es'?'Fase de Diseño · Inspiración':_cl==='de'?'Designphase · Inspiration':'Design Phase · Inspiration'}</div>
+        <div class="cmp-section-title">${_cl==='es'?'Moodboard':_cl==='de'?'Moodboard':'Moodboard'}</div>
+      </div>
+      <p style="font-size:.85rem;color:var(--color-muted);line-height:1.65;margin-bottom:clamp(18px,2.5vw,30px);max-width:640px;">${_cl==='es'?'Referentes visuales que guiaron las decisiones de morfología, material y acabado. La campana debía hablar el mismo lenguaje formal que los componentes de calidad de la bicicleta: volúmenes limpios, metal visible, sin ornamento.':_cl==='de'?'Visuelle Referenzen, die Morphologie, Material und Oberfläche leiteten. Die Klingel soll dieselbe formale Sprache sprechen wie hochwertige Fahrradkomponenten: klare Volumina, sichtbares Metall, kein Ornament.':'Visual references that guided morphology, material and finish decisions. The bell needed to speak the same formal language as quality bicycle components: clean volumes, visible metal, no ornament.'}</p>
+      <!-- Moodboard image placeholder — full bleed, 1080px-image proportion -->
+      <img src="../campana/webp/render-moodboard.webp" loading="lazy" class="cmp-render-full" style="aspect-ratio:1920/902;display:block;width:100%;border-top:1px solid var(--color-border);">
+    </div>
+
+    <!-- IDEATION SKETCHES -->
+    <div class="cmp-section" style="border-top:1px solid var(--color-border);padding-bottom:0;">
+      <div class="cmp-section-hd">
+        <div class="cmp-section-label">${_cl==='es'?'Fase de Diseño · Exploración':_cl==='de'?'Designphase · Exploration':'Design Phase · Exploration'}</div>
+        <div class="cmp-section-title">${_cl==='es'?'Bocetos de ideación':_cl==='de'?'Ideationsskizzen':'Ideation sketches'}</div>
+      </div>
+      <img loading="lazy" src="../campana/webp/render-sketches.webp" class="cmp-render-full" style="aspect-ratio:16/9;object-fit:cover;display:block;border-top:1px solid var(--color-border);">
+    </div>
+
+    <!-- CMF -->
+    <div class="cmp-section" style="border-top:1px solid var(--color-border);">
+      <div class="cmp-section-hd">
+        <div class="cmp-section-label">${c.cmf_label}</div>
+        <div class="cmp-section-title">${c.cmf_title}</div>
+      </div>
+      <p style="font-size:.85rem;color:var(--color-muted);line-height:1.65;margin-bottom:clamp(18px,2.5vw,30px);max-width:640px;">${c.cmf_intro}</p>
+      <div class="cmp-cmf-grid">
+        <div class="cmp-cmf-card">
+          <img src="../campana/webp/cmf-brass.webp" loading="lazy" style="aspect-ratio:3/2;width:100%;object-fit:cover;display:block;border-bottom:1px solid var(--color-border);">
+          <div class="cmp-cmf-body">
+            <div class="cmp-cmf-mat-name">${c.cmf_m1}</div>
+            <div class="cmp-cmf-mat-tone">${c.cmf_m1_tone}</div>
+            <div class="cmp-cmf-props">
+              <div class="cmp-cmf-prop"><span class="cmp-cmf-prop-k">${c.cmf_res}</span><span class="cmp-cmf-prop-v">${c.cmf_high}</span></div>
+              <div class="cmp-cmf-prop"><span class="cmp-cmf-prop-k">${c.cmf_dec}</span><span class="cmp-cmf-prop-v">1.2–1.8 s</span></div>
+              <div class="cmp-cmf-prop"><span class="cmp-cmf-prop-k">${c.cmf_wt}</span><span class="cmp-cmf-prop-v">42–55 g</span></div>
+              <div class="cmp-cmf-prop"><span class="cmp-cmf-prop-k">${c.cmf_std}</span><span class="cmp-cmf-prop-v">${_cl==='es'?'Sí':_cl==='de'?'Ja':'Yes'}</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="cmp-cmf-card">
+          <img src="../campana/webp/cmf-stainless.webp" loading="lazy" style="aspect-ratio:3/2;width:100%;object-fit:cover;display:block;border-bottom:1px solid var(--color-border);">
+          <div class="cmp-cmf-body">
+            <div class="cmp-cmf-mat-name">${c.cmf_m2}</div>
+            <div class="cmp-cmf-mat-tone">${c.cmf_m2_tone}</div>
+            <div class="cmp-cmf-props">
+              <div class="cmp-cmf-prop"><span class="cmp-cmf-prop-k">${c.cmf_res}</span><span class="cmp-cmf-prop-v">${c.cmf_med}</span></div>
+              <div class="cmp-cmf-prop"><span class="cmp-cmf-prop-k">${c.cmf_dec}</span><span class="cmp-cmf-prop-v">0.8–1.2 s</span></div>
+              <div class="cmp-cmf-prop"><span class="cmp-cmf-prop-k">${c.cmf_wt}</span><span class="cmp-cmf-prop-v">48–60 g</span></div>
+              <div class="cmp-cmf-prop"><span class="cmp-cmf-prop-k">${c.cmf_corr}</span><span class="cmp-cmf-prop-v">${c.cmf_none}</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="cmp-cmf-card">
+          <img src="../campana/webp/cmf-aluminum.webp" loading="lazy" style="aspect-ratio:3/2;width:100%;object-fit:cover;display:block;border-bottom:1px solid var(--color-border);">
+          <div class="cmp-cmf-body">
+            <div class="cmp-cmf-mat-name">${c.cmf_m3}</div>
+            <div class="cmp-cmf-mat-tone">${c.cmf_m3_tone}</div>
+            <div class="cmp-cmf-props">
+              <div class="cmp-cmf-prop"><span class="cmp-cmf-prop-k">${c.cmf_res}</span><span class="cmp-cmf-prop-v">${c.cmf_low}</span></div>
+              <div class="cmp-cmf-prop"><span class="cmp-cmf-prop-k">${c.cmf_dec}</span><span class="cmp-cmf-prop-v">0.4–0.8 s</span></div>
+              <div class="cmp-cmf-prop"><span class="cmp-cmf-prop-k">${c.cmf_wt}</span><span class="cmp-cmf-prop-v">18–28 g</span></div>
+              <div class="cmp-cmf-prop"><span class="cmp-cmf-prop-k">${c.cmf_cost}</span><span class="cmp-cmf-prop-v">${c.cmf_vlow}</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="cmp-cmf-card">
+          <img src="../campana/webp/cmf-titanium.webp" loading="lazy" style="aspect-ratio:3/2;width:100%;object-fit:cover;display:block;border-bottom:1px solid var(--color-border);">
+          <div class="cmp-cmf-body">
+            <div class="cmp-cmf-mat-name">${c.cmf_m4}</div>
+            <div class="cmp-cmf-mat-tone">${c.cmf_m4_tone}</div>
+            <div class="cmp-cmf-props">
+              <div class="cmp-cmf-prop"><span class="cmp-cmf-prop-k">${c.cmf_res}</span><span class="cmp-cmf-prop-v">${c.cmf_vhigh}</span></div>
+              <div class="cmp-cmf-prop"><span class="cmp-cmf-prop-k">${c.cmf_dec}</span><span class="cmp-cmf-prop-v">2.0–3.0 s</span></div>
+              <div class="cmp-cmf-prop"><span class="cmp-cmf-prop-k">${c.cmf_wt}</span><span class="cmp-cmf-prop-v">22–30 g</span></div>
+              <div class="cmp-cmf-prop"><span class="cmp-cmf-prop-k">${c.cmf_cost}</span><span class="cmp-cmf-prop-v">Alto</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="padding:clamp(14px,2vw,22px);background:color-mix(in srgb,var(--color-border) 40%,var(--color-bg));border-top:1px solid var(--color-border);margin-top:1px;">
+        <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-muted);display:block;margin-bottom:6px;">${c.cmf_dir_lbl}</span>
+        <span style="font-size:.86rem;color:var(--color-text);line-height:1.65;">${c.cmf_dir}</span>
+      </div>
+    </div>
+
+    <!-- PROPOSAL -->
+    <div class="cmp-section" style="border-top:1px solid var(--color-border);padding-bottom:0;">
+      <div class="cmp-section-hd">
+        <div class="cmp-section-label">${c.prop_label}</div>
+        <div class="cmp-section-title">${c.prop_title}</div>
+      </div>
+      <!-- render 16:9 — full bleed -->
+      <img src="../campana/webp/render-hero-iso-2.webp" class="cmp-render-full" style="aspect-ratio:16/9;object-fit:cover;object-position:center 30%;display:block;border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border);">
+
+      <!-- how it works -->
+      <div style="padding:clamp(32px,5vw,64px) 0 clamp(32px,5vw,64px) 0;border-top:1px solid var(--color-border);">
+        <div style="font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-muted);margin-bottom:clamp(24px,3.5vw,44px);">${c.how_label}</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px) clamp(24px,4vw,56px);">
+          <div>
+            <div style="font-size:clamp(36px,5vw,72px);font-weight:900;color:#d24a1f;opacity:.85;line-height:1;margin-bottom:10px;letter-spacing:-.04em;">01</div>
+            <div style="font-size:clamp(15px,1.4vw,18px);color:var(--color-text);line-height:1.55;font-weight:500;">${c.how_1}</div>
+          </div>
+          <div>
+            <div style="font-size:clamp(36px,5vw,72px);font-weight:900;color:#d24a1f;opacity:.85;line-height:1;margin-bottom:10px;letter-spacing:-.04em;">02</div>
+            <div style="font-size:clamp(15px,1.4vw,18px);color:var(--color-text);line-height:1.55;font-weight:500;">${c.how_2}</div>
+          </div>
+          <div style="padding-top:clamp(8px,1.5vw,16px);border-top:1px solid var(--color-border);">
+            <div style="font-size:clamp(36px,5vw,72px);font-weight:900;color:#d24a1f;opacity:.85;line-height:1;margin-bottom:10px;letter-spacing:-.04em;">03</div>
+            <div style="font-size:clamp(15px,1.4vw,18px);color:var(--color-text);line-height:1.55;font-weight:500;">${c.how_3}</div>
+          </div>
+          <div style="padding-top:clamp(8px,1.5vw,16px);border-top:1px solid var(--color-border);">
+            <div style="font-size:clamp(36px,5vw,72px);font-weight:900;color:#d24a1f;opacity:.85;line-height:1;margin-bottom:10px;letter-spacing:-.04em;">04</div>
+            <div style="font-size:clamp(15px,1.4vw,18px);color:var(--color-text);line-height:1.55;font-weight:500;">${c.how_4}</div>
+          </div>
+          <div style="grid-column:1/-1;padding-top:clamp(8px,1.5vw,16px);border-top:1px solid var(--color-border);">
+            <div style="font-size:clamp(36px,5vw,72px);font-weight:900;color:#d24a1f;opacity:.85;line-height:1;margin-bottom:10px;letter-spacing:-.04em;">05</div>
+            <div style="font-size:clamp(15px,1.4vw,18px);color:var(--color-text);line-height:1.55;font-weight:500;">${c.how_5}</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CONTEXTO — with title -->
+    <div class="cmp-section" style="border-top:1px solid var(--color-border);padding-bottom:0;">
+      <div class="cmp-section-hd">
+        <div class="cmp-section-label">${_cl==='es'?'Investigación · Contexto de uso':_cl==='de'?'Forschung · Nutzungskontext':'Research · Use context'}</div>
+        <div class="cmp-section-title">${_cl==='es'?'Escala urbana real':_cl==='de'?'Realer Einsatzbereich':'Urban scale'}</div>
+      </div>
+      <img loading="lazy" src="../campana/webp/render-contexto.webp" class="cmp-render-full" style="aspect-ratio:16/9;object-fit:cover;display:block;border-top:1px solid var(--color-border);">
+    </div>
+
+    <!-- 3 SIGNAL LEVELS -->
+    <div class="cmp-section" style="border-top:1px solid var(--color-border);">
+      <div class="cmp-section-hd">
+        <div class="cmp-section-label">${c.sig_label}</div>
+        <div class="cmp-section-title">${c.sig_title}</div>
+      </div>
+      <!-- Shared render — full bleed -->
+      <img loading="lazy" src="../campana/webp/render-signal-levels.webp" class="cmp-render-full" style="aspect-ratio:16/9;object-fit:cover;display:block;border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border);margin-bottom:clamp(24px,3.5vw,40px);">
+      <!-- GRADO — interactive bell widget -->
+      <div style="display:flex;flex-direction:column;gap:1px;background:var(--color-border);margin-top:clamp(20px,3vw,36px);">
+        <!-- Row 1: compact tap zone -->
+        <div style="background:var(--color-bg);padding:clamp(14px,2vw,22px) clamp(16px,3vw,32px);display:flex;align-items:center;gap:clamp(20px,3vw,36px);flex-wrap:wrap;">
+          <div style="flex:1;min-width:0;"></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;">
+            <div style="font-size:.52rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--color-muted);">${_cl==='es'?'Pulsá para sonar':_cl==='de'?'Drücken zum Klingen':'Ring it'}</div>
+            <button id="cmp-grado-btn" class="cmp-grado-btn" onclick="cmpGradoPress()" style="width:clamp(48px,7vw,72px);height:clamp(48px,7vw,72px);border-radius:50%;background:#d24a1f;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 0 0 0 rgba(210,74,31,.35);flex-shrink:0;">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            </button>
+          </div>
+          <div style="display:flex;align-items:center;gap:clamp(12px,2vw,24px);flex:1;min-width:140px;">
+            <div id="cmp-grado-level-tag" style="font-size:clamp(20px,3vw,36px);font-weight:800;letter-spacing:-.05em;color:var(--color-border);line-height:1;transition:color .25s ease;flex-shrink:0;">—</div>
+            <div style="display:flex;flex-direction:column;gap:4px;flex:1;">
+              <div id="cmp-grado-db" style="font-size:.68rem;font-weight:600;letter-spacing:.08em;color:var(--color-muted);transition:color .25s ease;">— dB</div>
+              <div style="height:2px;background:var(--color-border);border-radius:2px;overflow:hidden;max-width:160px;">
+                <div id="cmp-grado-bar" style="height:100%;width:0%;background:#d24a1f;border-radius:2px;transition:width .35s ease;"></div>
+              </div>
+              <div id="cmp-grado-hint" style="font-size:.6rem;color:var(--color-muted);opacity:0;transition:opacity .5s ease;line-height:1.4;">${_cl==='es'?'Escalación consecutiva en 3 s':_cl==='de'?'Aufeinanderfolgendes Drücken eskaliert':'Press again within 3 s to escalate'}</div>
+            </div>
+          </div>
+        </div>
+        <!-- Row 2: 3 level cards side by side -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--color-border);">
+          <div id="cmp-grado-card-1" style="background:var(--color-bg);padding:clamp(12px,2vw,20px);transition:background .25s ease;">
+            <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:6px;">
+              <span class="cgn" style="font-size:clamp(18px,2.5vw,28px);font-weight:800;letter-spacing:-.04em;color:#d24a1f;opacity:.3;transition:opacity .25s;">N1</span>
+              <span style="font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-muted);">1 press · ~70 dB</span>
+            </div>
+            <div class="cgt" style="font-size:.56rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#d24a1f;opacity:.3;margin-bottom:4px;transition:opacity .25s;">${_cl==='es'?'Cortesía':_cl==='de'?'Höflichkeit':'Courtesy'}</div>
+            <div style="font-size:.84rem;color:var(--color-muted);line-height:1.5;">${_cl==='es'?'Aviso suave. Carril tranquilo, baja densidad peatonal.':_cl==='de'?'Sanfter Hinweis. Ruhiger Weg, geringe Dichte.':'Gentle alert. Quiet lane, low pedestrian density.'}</div>
+          </div>
+          <div id="cmp-grado-card-2" style="background:var(--color-bg);padding:clamp(12px,2vw,20px);border-left:none;transition:background .25s ease;">
+            <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:6px;">
+              <span class="cgn" style="font-size:clamp(18px,2.5vw,28px);font-weight:800;letter-spacing:-.04em;color:#d24a1f;opacity:.3;transition:opacity .25s;">N2</span>
+              <span style="font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-muted);">2 presses · ~76 dB</span>
+            </div>
+            <div class="cgt" style="font-size:.56rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#d24a1f;opacity:.3;margin-bottom:4px;transition:opacity .25s;">${_cl==='es'?'Advertencia':_cl==='de'?'Warnung':'Warning'}</div>
+            <div style="font-size:.84rem;color:var(--color-muted);line-height:1.5;">${_cl==='es'?'Alerta moderada. Avenida urbana, tránsito mixto.':_cl==='de'?'Moderate Warnung. Städtische Straße, Mischverkehr.':'Moderate alert. Urban avenue, mixed traffic.'}</div>
+          </div>
+          <div id="cmp-grado-card-3" style="background:var(--color-bg);padding:clamp(12px,2vw,20px);transition:background .25s ease;">
+            <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:6px;">
+              <span class="cgn" style="font-size:clamp(18px,2.5vw,28px);font-weight:800;letter-spacing:-.04em;color:#d24a1f;opacity:.3;transition:opacity .25s;">N3</span>
+              <span style="font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-muted);">3 presses · ~82 dB</span>
+            </div>
+            <div class="cgt" style="font-size:.56rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#d24a1f;opacity:.3;margin-bottom:4px;transition:opacity .25s;">${_cl==='es'?'Urgencia':_cl==='de'?'Dringlichkeit':'Urgent'}</div>
+            <div style="font-size:.84rem;color:var(--color-muted);line-height:1.5;">${_cl==='es'?'Señal máxima. Peligro inmediato, cruce caótico.':_cl==='de'?'Maximales Signal. Unmittelbare Gefahr, chaotische Kreuzung.':'Maximum signal. Immediate danger, chaotic crossing.'}</div>
+          </div>
+        </div>
+      </div>
+    <!-- Bell legend strip -->
+    <div style="padding:clamp(12px,1.5vw,18px) var(--ph,6vw);border-top:1px solid var(--color-border);display:flex;flex-wrap:wrap;gap:clamp(12px,2vw,20px);align-items:center;">
+      <div style="font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-muted);">${_cl==='es'?'Cómo escalar':_cl==='de'?'Eskalation':'How to escalate'}</div>
+      <div style="display:flex;gap:clamp(8px,1.5vw,16px);flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--color-text);"><span style="color:#d24a1f;font-weight:700;">1×</span> N1</div>
+        <div style="display:flex;align-items:center;gap:4px;font-size:.72rem;color:var(--color-muted);">→</div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--color-text);"><span style="color:#d24a1f;font-weight:700;">+1×</span> N2 <span style="font-size:.64rem;color:var(--color-muted);">${_cl==='es'?'en 3 s':'within 3 s'}</span></div>
+        <div style="display:flex;align-items:center;gap:4px;font-size:.72rem;color:var(--color-muted);">→</div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--color-text);"><span style="color:#d24a1f;font-weight:700;">+1×</span> N3 <span style="font-size:.64rem;color:var(--color-muted);">${_cl==='es'?'en 3 s':'within 3 s'}</span></div>
+      </div>
+      <div style="font-size:.68rem;color:var(--color-muted);margin-left:auto;">${_cl==='es'?'El nivel se mantiene al vencer el tiempo. Siguiente toque reinicia en N1.':_cl==='de'?'Stufe bleibt nach Ablauf. Nächste Eingabe startet bei N1.':'Level holds after timeout. Next press restarts at N1.'}</div>
+    </div>
+
+    </div>
+
+    <!-- EXPLOTADA — with title -->
+    <div class="cmp-section" style="border-top:1px solid var(--color-border);padding-bottom:0;">
+      <div class="cmp-section-hd">
+        <div class="cmp-section-label">${_cl==='es'?'Diseño de producto · Componentes':_cl==='de'?'Produktdesign · Bauteile':'Product design · Components'}</div>
+        <div class="cmp-section-title">${_cl==='es'?'Vista explotada':_cl==='de'?'Explosionsansicht':'Exploded view'}</div>
+      </div>
+      <img loading="lazy" src="../campana/webp/render-explotada.webp" class="cmp-render-full" style="aspect-ratio:16/9;object-fit:contain;display:block;border-top:1px solid var(--color-border);background:var(--color-bg);">
+    </div>
+
+
+    <!-- MATERIAL AND PARTS — standalone, below explotada -->
+    <div class="cmp-section" style="border-top:1px solid var(--color-border);">
+      <div class="cmp-section-hd" style="margin-bottom:clamp(20px,2.5vw,28px);">
+        <div class="cmp-section-label">${_cl==='es'?'Diseño · Componentes':_cl==='de'?'Design · Bauteile':'Design · Components'}</div>
+        <div class="cmp-section-title">${c.parts_label}</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;">
+            <div style="display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--color-border);padding-bottom:10px;">
+              <div style="flex-shrink:0;width:28px;height:28px;background:#d24a1f;border-radius:2px;"></div>
+              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Pulsador':_cl==='de'?'Drücker':'Pusher'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Aluminio anodizado · gesto de pulgar, resistencia calibrada':_cl==='de'?'Eloxiertes Aluminium · Daumentastung, kalibrierter Widerstand':'Anodized aluminum · thumb gesture, calibrated resistance'}</div></div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--color-border);padding-bottom:10px;">
+              <div style="flex-shrink:0;width:28px;height:28px;background:var(--color-text);border-radius:2px;"></div>
+              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Trinquete + leva':_cl==='de'?'Ratsche + Nocken':'Ratchet + cam'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Acero templado · 3 posiciones de cam, retorno de resorte':_cl==='de'?'Gehärteter Stahl · 3 Nockenstellungen, Federrückzug':'Hardened steel · 3 cam positions, spring return'}</div></div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--color-border);padding-bottom:10px;">
+              <div style="flex-shrink:0;width:28px;height:28px;background:#a8b4bc;border-radius:2px;"></div>
+              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Cuerpo de campana':_cl==='de'?'Klangkörper':'Bell shell'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Latón · la geometría define la resonancia, decay y volumen':_cl==='de'?'Messing · Geometrie bestimmt Resonanz, Decay und Lautstärke':'Brass · geometry determines resonance, decay and volume'}</div></div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--color-border);padding-bottom:10px;">
+              <div style="flex-shrink:0;width:28px;height:28px;background:#d6e4ec;border-radius:2px;"></div>
+              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Domo':_cl==='de'?'Dom':'Dome'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Plástico translúcido · protege el mecanismo, difunde la luz':_cl==='de'?'Transluzenter Kunststoff · schützt Mechanismus, streut Licht':'Translucent plastic · protects mechanism, diffuses light'}</div></div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--color-border);padding-bottom:10px;">
+              <div style="flex-shrink:0;width:28px;height:28px;background:var(--color-text);border-radius:2px;"></div>
+              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Martillo':_cl==='de'?'Hammer':'Hammer'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Acero · velocidad de impacto calibrada por el radio de swing':_cl==='de'?'Stahl · Aufprallgeschwindigkeit durch Schwingradius kalibriert':'Steel · impact velocity calibrated by swing radius'}</div></div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--color-border);padding-bottom:10px;">
+              <div style="flex-shrink:0;width:28px;height:28px;background:var(--color-text);border-radius:2px;"></div>
+              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Clamp':_cl==='de'?'Klemme':'Clamp'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Aluminio · estándar 22.2 mm, sin marcar el tubo':_cl==='de'?'Aluminium · Standard 22,2 mm, ohne Rohrmarkierung':'Aluminum · 22.2 mm standard, no tube marking'}</div></div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <div style="flex-shrink:0;width:28px;height:28px;background:var(--color-text);border-radius:2px;"></div>
+              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Resortes de retención':_cl==='de'?'Rückhaltefedern':'Retention springs'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Acero de resorte · devuelven el trinquete a N1 tras cada secuencia':_cl==='de'?'Federstahl · Ratsche nach jeder Druckfolge auf N1 zurückgesetzt':'Spring steel · reset ratchet to N1 after each press sequence'}</div></div>
+            </div>
+      </div>
+
+    </div>
+
+    <!-- PRODUCT DETAILS -->
+    <div class="cmp-section" style="border-top:1px solid var(--color-border);">
+      <div class="cmp-section-hd">
+        <div class="cmp-section-label">${_cl==='es'?'Diseño de producto':_cl==='de'?'Produktdesign':'Product design'}</div>
+        <div class="cmp-section-title">${c.detail_label}</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--color-border);width:100vw;margin-left:calc(50% - 50vw);">
+        <img loading="lazy" src="../campana/webp/render-detalle-1.webp" style="aspect-ratio:3/4;object-fit:cover;display:block;width:100%;">
+        <img loading="lazy" src="../campana/webp/render-detalle-2.webp" style="aspect-ratio:3/4;object-fit:cover;display:block;width:100%;">
+      </div>
+    </div>
+
+    <!-- CLOSING -->
+    <div class="cmp-closing">${c.closing}</div>    ` : id==='flujo' ? `
     <div class="process-header">
       <div>
         <div class="process-kicker">Design Process</div>
@@ -2220,6 +4131,14 @@ window.TRANS = {
       ]
     },
     projects: {
+      campana: {
+        tagline: 'Una campana de bicicleta rediseñada para distinguir la cortésía del peligro.',
+        desc: [
+          'Campana comenzó con una observación conductual: la campana de bicicleta, obligatoria por ley en la mayoría de los países, no puede distinguir entre una petición amable de paso y una alerta de peligro urgente. La pregunta de investigación no fue cómo hacerla ver diferente, sino cómo hacer que exprese la intención del ciclista.',
+          'El proceso mapeó el espacio completo de diseño: análisis histórico, tipología, observación de campo, user persona, mapa de stakeholders, análisis de journey y evaluación UX en siete dimensiones. Cada método señalaba el mismo problema raíz: la campana comunica una sola señal, y esa señal no lleva información sobre urgencia, intención ni gravedad.',
+          'La respuesta es mecánica, no digital. Un mecanismo de trinquete que acumula presión con pulsaciones consecutivas, avanzando una leva que aumenta el radio de giro del martillo en cada toque. Tres toques, tres niveles, tres cosas distintas que decir. Cuatro componentes. Sin batería, sin curva de aprendizaje.'
+        ]
+      },
       flujo: {
         tagline: 'Una lámpara de pared construida sobre la lógica de la respiración. Impresa, minimal, meditativa.',
         desc: [
@@ -2319,6 +4238,14 @@ window.TRANS = {
       ]
     },
     projects: {
+      campana: {
+        tagline: 'Eine Fahrradklingel, neu gestaltet um Höflichkeit von Gefahr zu unterscheiden.',
+        desc: [
+          'Campana begann mit einer Verhaltensbeobachtung: die Fahrradklingel, in den meisten Ländern gesetzlich vorgeschrieben, kann nicht zwischen einer höflichen Bitte zum Überholen und einer dringenden Gefahrenwarnung unterscheiden. Die Frage war nicht, wie man sie anders aussehen lässt, sondern wie man sie dazu bringt, die Absicht des Fahrers auszudrücken.',
+          'Der Prozess kartierte den gesamten Designraum: Historische Analyse, Typologie, Feldbeobachtung, User Persona, Stakeholder-Mapping, Journey-Analyse und UX-Evaluation entlang sieben Dimensionen. Jede Methode zeigte dasselbe Grundproblem: Die Klingel sendet ein einziges Signal, und dieses Signal trägt keine Information über Dringlichkeit, Absicht oder Schweregrad.',
+          'Die Antwort ist mechanisch, nicht digital. Ein Ratschenmechanismus, der bei aufeinanderfolgenden Drücken Druck aufbaut, eine Nocke vorschiebt und den Schwingradius des Hammers bei jedem Tipp vergrößert. Drei Drücke, drei Ebenen, drei verschiedene Dinge, die gesagt werden können. Vier Bauteile. Keine Batterie, keine Lernkurve.'
+        ]
+      },
       flujo: {
         tagline: 'Eine Wandleuchte gebaut auf der Logik des Atems. Gedruckt, minimal, meditativ.',
         desc: [
