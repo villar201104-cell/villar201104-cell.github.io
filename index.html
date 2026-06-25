@@ -766,7 +766,7 @@
             <div class="project-card-meta">
               <p class="card-label">Research + ID · 2026</p>
               <h2 class="card-title">Intent</h2>
-              <p class="card-desc" data-i18n-project="campana">A bicycle bell redesigned to distinguish courtesy from danger.</p>
+              <p class="card-desc" data-i18n-project="intent">A bicycle bell redesigned to distinguish courtesy from danger.</p>
             </div>
           </div>
         </div>
@@ -1044,7 +1044,7 @@ const PROJECTS = {
     specs:[{l:'Category',v:'Lighting Design'},{l:'Year',v:'2025'},{l:'Materials',v:'PETG, Standard Components'},{l:'Process',v:'FDM 3D Print'}],
     desc:['FLUJO began with two constraints: as few parts as possible, and a geometry that could only exist through 3D printing. Not a form that happens to be printed, but one where the process and the shape are inseparable. Every surface, curve, and transition was designed to exploit what additive manufacturing makes possible and no other process allows. The result is a wall lamp that feels resolved and alive at the same time.','The conceptual anchor is breath: movement that is internal, rhythmic, and continuous. That abstraction found its form in a geometry with no hard breaks and no decorative gestures, just surfaces responding to light. Printed in PETG, the object justifies its shape entirely through structural logic.'],
     panels:['/images/flujo_cover.webp','/images/flujo2.webp','/images/flujo4.webp','/videos/flujo-reel.mp4','/images/flujo5.webp','/images/flujo6.webp'],
-    prev:'campana', next:'incline'
+    prev:'intent', next:'incline'
   },
   incline: {
     hPanels:[2,3],
@@ -1942,7 +1942,7 @@ function buildProject(id) {
       </div>
       <div class="panels-track" id="pt">${panels}</div>
     </section>
-    ${id==='campana' ? `
+    ${id==='intent' ? `
     <style>
     /* ── HIDE EMPTY PANELS RAIL ── */
     .panels-wrap{display:none!important;}
@@ -3016,6 +3016,15 @@ function buildProject(id) {
         </div>
       </div>
 
+    </div>
+
+    <!-- CONCEPT VIEW -->
+    <div class="cmp-section" style="border-top:1px solid var(--color-border);padding-bottom:0;">
+      <div class="cmp-section-hd">
+        <div class="cmp-section-label">${_cl==='es'?'Diseño · Vistas':'Design · Views'}</div>
+        <div class="cmp-section-title">${_cl==='es'?'Vista de concepto':_cl==='de'?'Konzeptansicht':'Concept view'}</div>
+      </div>
+      <img loading="lazy" src="/images/render-hero-concept.webp" class="cmp-render-full" style="aspect-ratio:16/9;object-fit:cover;display:block;border-top:1px solid var(--color-border);">
     </div>
 
     <!-- CONTEXTO — with title -->
