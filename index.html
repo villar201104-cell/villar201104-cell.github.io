@@ -61,8 +61,8 @@
   .page-content { padding-top:var(--nav-height); }
 
   /* HOME HERO */
-  .home-hero { padding:clamp(20px,2vw,32px) clamp(80px,10vw,160px) clamp(20px,2vw,28px); display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:end; }
-  .home-hero h1 { font-family:var(--font-display); font-size:clamp(3rem,5.5vw,5rem); font-weight:700; line-height:1.0; letter-spacing:-.03em; }
+  .home-hero { padding:clamp(14px,1.5vw,22px) clamp(80px,10vw,160px) clamp(14px,1.5vw,20px); display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:end; }
+  .home-hero h1 { font-family:var(--font-display); font-size:clamp(2.6rem,4.2vw,4rem); font-weight:700; line-height:1.0; letter-spacing:-.03em; }
   .home-hero h1 em { font-style:normal; font-weight:300; color:var(--color-muted); }
   .hero-text-col { margin-left:auto; max-width:520px; padding-bottom:8px; text-align:right; }
   .hero-desc, .hero-quote { white-space:nowrap; }
@@ -70,7 +70,7 @@
   .hero-quote { margin-top:14px; font-family:var(--font-display); font-size:clamp(.95rem,1.15vw,1.05rem); font-weight:600; letter-spacing:-.01em; color:var(--color-text); line-height:1.5; }
 
   /* PROJECT GRID */
-  .work-section-label { font-size:.68rem; font-weight:500; letter-spacing:.16em; text-transform:uppercase; color:var(--color-muted); padding:0 clamp(80px,10vw,160px); margin-bottom:12px; display:block; }
+  .work-section-label { font-size:.68rem; font-weight:500; letter-spacing:.16em; text-transform:uppercase; color:var(--color-muted); padding:0 clamp(80px,10vw,160px); margin-bottom:8px; display:block; }
   .projects-grid { width:100%; padding:0 clamp(80px,10vw,160px) 0; display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
   .extras-section { padding:clamp(32px,4vw,56px) clamp(80px,10vw,160px) 0; border-top:1px solid var(--color-border); margin-top:clamp(24px,3vw,40px); }
   .extras-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:12px; }
@@ -760,7 +760,7 @@
     <main class="projects-grid" data-cursor="light">
       <div class="project-card-wrap fu d1" onclick="go('project','campana')">
         <div class="project-card">
-          <img class="project-card-img" src="/images/campana-hero.webp" alt="Intent" style="object-position:center center">
+          <img class="project-card-img" src="/images/hero-home.webp" alt="Intent" style="object-position:center center">
           <div class="project-card-overlay">
             <span class="card-num">01</span>
             <div class="project-card-meta">
@@ -4095,19 +4095,19 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
 window.TRANS = {
   es: {
     ui: {
-      nav_work:    'Trabajo',
+      nav_work:    'Proyectos',
       nav_about:   'Sobre mí',
       nav_contact: 'Contacto',
-      nav_back:    'Todo el trabajo',
+      nav_back:    'Todos los proyectos',
       work_label:  'Proyectos seleccionados',
       addons_label:'Complementos',
       in_progress: 'En proceso',
-      more_coming: 'Más trabajo en camino.',
+      more_coming: '',
       lb_close:    '✕ cerrar',
       prev_lbl:    '← Anterior',
       next_lbl:    'Siguiente →',
       proj_about:  'Sobre el proyecto',
-      hint_expand: 'Click para expandir',
+      hint_expand: 'Tocá para ampliar',
       hint_drag:   'Arrastrá para explorar',
       rights:      '© 2026 Nahuel Villar. Todos los derechos reservados',
       contact_line1:'Trabajemos',
@@ -4120,7 +4120,7 @@ window.TRANS = {
       cv_fab:      'Fabricación',
       cv_lang_h:   'Idiomas',
       cv_ongoing:  'Activo',
-      design_intern:'Diseñador Intern',
+      design_intern:'Diseñador Pasante',
       freelance_title:'Diseño de Producto Freelance',
       freelance_sub:'Diseño y rediseño de componentes funcionales con foco en usabilidad y fabricabilidad. Desde la ideación conceptual hasta el prototipado rápido y testing iterativo con impresión 3D y herramientas de fabricación.',
       taragui_sub: 'Rediseño de la línea Mate Listo. Foco en refinamiento formal y dirección CMF, traduciendo la identidad de marca en un kit más nítido y premium.',
@@ -4136,7 +4136,7 @@ window.TRANS = {
     },
     projects: {
       campana: {
-        tagline: 'Una campana de bicicleta rediseñada para distinguir la cortésía del peligro.',
+        tagline: 'Una campana de bicicleta rediseñada para distinguir la cortesía del peligro.',
         desc: [
           'Campana comenzó con una observación conductual: la campana de bicicleta, obligatoria por ley en la mayoría de los países, no puede distinguir entre una petición amable de paso y una alerta de peligro urgente. La pregunta de investigación no fue cómo hacerla ver diferente, sino cómo hacer que exprese la intención del ciclista.',
           'El proceso mapeó el espacio completo de diseño: análisis histórico, tipología, observación de campo, user persona, mapa de stakeholders, análisis de journey y evaluación UX en siete dimensiones. Cada método señalaba el mismo problema raíz: la campana comunica una sola señal, y esa señal no lleva información sobre urgencia, intención ni gravedad.',
@@ -4209,12 +4209,12 @@ window.TRANS = {
       work_label:  'Ausgewählte Projekte',
       addons_label:'Weitere Projekte',
       in_progress: 'In Bearbeitung',
-      more_coming: 'Weitere Arbeiten folgen.',
+      more_coming: '',
       lb_close:    '✕ schließen',
       prev_lbl:    '← Zurück',
       next_lbl:    'Weiter →',
       proj_about:  'Über das Projekt',
-      hint_expand: 'Klicken zum Vergrößern',
+      hint_expand: 'Zum Vergrößern tippen',
       hint_drag:   'Ziehen zum Entdecken',
       rights:      '© 2026 Nahuel Villar. Alle Rechte vorbehalten',
       contact_line1:'Lass uns',
@@ -4223,11 +4223,11 @@ window.TRANS = {
       cv_edu:      'Ausbildung',
       cv_skills:   'Kompetenzen',
       cv_software: 'Software',
-      cv_ai:       'KI-Design-Tools',
+      cv_ai:       'KI-Tools',
       cv_fab:      'Fertigung',
       cv_lang_h:   'Sprachen',
       cv_ongoing:  'Laufend',
-      design_intern:'Design Intern',
+      design_intern:'Praktikant Design',
       freelance_title:'Freiberufliches Produktdesign',
       freelance_sub:'Design und Redesign funktionaler Komponenten mit Fokus auf Benutzerfreundlichkeit und Herstellbarkeit. Von der Konzeptentwicklung bis zum schnellen Prototyping und iterativem Testing.',
       taragui_sub: 'Redesign der Mate Listo Produktlinie. Fokus auf Formverfeinerung und CMF-Richtung, um die Markenidentität in ein schärferes, hochwertigeres Produkt zu übersetzen.',
