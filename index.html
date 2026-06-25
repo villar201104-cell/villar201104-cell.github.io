@@ -758,7 +758,7 @@
     </header>
     <span class="work-section-label fu d2" data-i18n="work_label">Selected work</span>
     <main class="projects-grid" data-cursor="light">
-      <div class="project-card-wrap fu d1" onclick="go('project','campana')">
+      <div class="project-card-wrap fu d1" onclick="go('project','intent')">
         <div class="project-card">
           <img class="project-card-img" src="/images/hero-home.webp" alt="Intent" style="object-position:center center">
           <div class="project-card-overlay">
@@ -1028,7 +1028,7 @@
 
 <script>
 const PROJECTS = {
-  campana: {
+  intent: {
     hPanels:[],
     title:'Intent', eyebrow:'UX Research + ID',
     tagline:'A bicycle bell redesigned to distinguish courtesy from danger.',
@@ -4086,11 +4086,7 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
 })();
 
 /* ── i18n: Language switcher ── */
-(function(){
-  var l = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-  window.currentLang = l.startsWith('de') ? 'de' : l.startsWith('es') ? 'es' : 'en';
-})();
-// (overridden below if user switches manually)
+window.currentLang = 'en';
 
 window.TRANS = {
   es: {
@@ -4135,7 +4131,7 @@ window.TRANS = {
       ]
     },
     projects: {
-      campana: {
+      intent: {
         tagline: 'Una campana de bicicleta rediseñada para distinguir la cortesía del peligro.',
         desc: [
           'Campana comenzó con una observación conductual: la campana de bicicleta, obligatoria por ley en la mayoría de los países, no puede distinguir entre una petición amable de paso y una alerta de peligro urgente. La pregunta de investigación no fue cómo hacerla ver diferente, sino cómo hacer que exprese la intención del ciclista.',
@@ -4242,7 +4238,7 @@ window.TRANS = {
       ]
     },
     projects: {
-      campana: {
+      intent: {
         tagline: 'Eine Fahrradklingel, neu gestaltet um Höflichkeit von Gefahr zu unterscheiden.',
         desc: [
           'Campana begann mit einer Verhaltensbeobachtung: die Fahrradklingel, in den meisten Ländern gesetzlich vorgeschrieben, kann nicht zwischen einer höflichen Bitte zum Überholen und einer dringenden Gefahrenwarnung unterscheiden. Die Frage war nicht, wie man sie anders aussehen lässt, sondern wie man sie dazu bringt, die Absicht des Fahrers auszudrücken.',
