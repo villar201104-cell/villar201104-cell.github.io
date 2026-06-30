@@ -1033,7 +1033,7 @@ const PROJECTS = {
     title:'Intent', eyebrow:'UX Research + ID',
     tagline:'A bicycle bell redesigned to distinguish courtesy from danger.',
     specs:[{l:'Category',v:'UX Research · Industrial Design'},{l:'Year',v:'2026'},{l:'Materials',v:'Aluminum · Anodized Brass · ABS · Polycarbonate'},{l:'Status',v:'Concept · 2026'}],
-    desc:['Campana started with a behavioral observation: the bicycle bell, required by law in most countries, cannot distinguish between a polite request to pass and an urgent danger alert. The research question was not how to make it look different, but how to make it express the rider\'s intent.','The process mapped the full design space: historical analysis, typology, field observation, user persona, stakeholder mapping, journey analysis, and UX evaluation across seven dimensions. Every method pointed to the same root problem — the bell communicates one signal, and that signal carries no information about urgency, intention, or severity.','The response is mechanical, not digital. A ratchet mechanism that accumulates pressure across consecutive taps, advancing a cam that increases the hammer\'s stroke with each press. Three taps, three levels, three distinct things to say. Four components. No battery, no learning curve.'],
+    desc:['Intent started with a behavioral observation: the bicycle bell, required by law in most countries, cannot distinguish between a polite request to pass and an urgent danger alert. The research question was not how to make it look different, but how to make it express the rider\'s intent.','The process mapped the full design space: historical analysis, typology, field observation, user persona, stakeholder mapping, journey analysis, and UX evaluation across seven dimensions. Every method pointed to the same root problem: the bell communicates one signal, and that signal carries no information about urgency, intention, or severity.','The response is mechanical, not digital. A ratchet mechanism that accumulates pressure across consecutive taps, advancing a cam that increases the hammer\'s stroke with each press. Three taps, three levels, three distinct things to say. Four components. No battery, no learning curve.'],
     panels:['/images/campana-render-1.webp','/images/campana-render-2.webp','/images/campana-render-3.webp'],
     prev:null, next:'flujo'
   },
@@ -1328,6 +1328,7 @@ function _cmpGradoUI(reset) {
 }
 
 function buildProject(id) {
+  window._currentProjectId = id;
   const p = PROJECTS[id];
   const tr = (window.TRANS && window.currentLang && window.currentLang!=='en') ? (window.TRANS[window.currentLang]?.projects?.[id]||{}) : {};
   const ui = (window.TRANS && window.currentLang && window.currentLang!=='en') ? (window.TRANS[window.currentLang]?.ui||{}) : {};
@@ -1337,12 +1338,12 @@ function buildProject(id) {
     en:{
       rph_kicker:'Research Phase',
       rph_title:'One ring.<br>Two different intents.',
-      tl_1877:'Dome bell patent — 6-8 parts, single rotating striker',
+      tl_1877:'Dome bell patent: 6-8 parts, single rotating striker',
       tl_1950:'Mass industrial production and global standardization',
       tl_1970:'Thumb bell reaches 70%+ global market share',
-      tl_2000:'Electronic signals introduced — marginal adoption',
+      tl_2000:'Electronic signals introduced: marginal adoption',
       tl_2020:'Mandatory in 40+ countries. Mechanism unchanged',
-      tl_2026:'First ratchet-graduated bell proposal — this project',
+      tl_2026:'First ratchet-graduated bell proposal: this project',
       typo_label:'Market Survey · Typology',
       typo_title:'What exists today?',
       typo_intro:'Six types on the market. Every one solves acoustic output. None addresses signal graduation.',
@@ -1355,10 +1356,10 @@ function buildProject(id) {
       typo_desc_int:'Integrated to handlebar (Knog Oi, Spurcycle). Formal innovation, not functional. Long sustain, CNC titanium or aluminium.',
       typo_desc_el:'Battery + digital synthesis. Configurable volume but requires charging. Tech dependency. Growing in e-bikes.',
       typo_desc_hr:'Rubber horn or manual whistle. Higher volume and sound differentiation. High actuation effort. Ornamental.',
-      typo_stat1:'types in market', typo_stat2:'sound level — all of them',
-      typo_stat3:'without a functional rethink', typo_stat4:'countries — mandatory by law',
+      typo_stat1:'types in market', typo_stat2:'sound level, all identical',
+      typo_stat3:'without a functional rethink', typo_stat4:'countries, mandatory by law',
       persona_label:'User Persona · Primary Research',
-      persona_title:'Urban cyclist — primary profile',
+      persona_title:'Urban cyclist, primary profile',
       persona_tag:'Urban commuter', persona_age:'29 · Hallandale Beach, FL · Graphic designer',
       persona_qt:'"I ring the bell and I don\'t know if they hear me. Half the time I end up yelling \'excuse me\' anyway."',
       pb_use:'Use context', pb_use_t:'Daily commute home–office, 6 km mixed: protected bike lane + open street. 4–5 days/week, 25–30 min per trip. City bike with flat handlebar.',
@@ -1367,7 +1368,7 @@ function buildProject(id) {
       pb_actors:'Other road actors', pb_actors_t:'Pedestrians with earphones (recurring irritant), phone-watchers, double-parked cars, cyclists ignoring lane direction.',
       pb_pain:'Pain points', pb_pain_1:'Ringing without getting any confirmation',
       pb_pain_2:'Releasing grip to activate while braking',
-      pb_pain_3:'Single sound — unable to graduate urgency',
+      pb_pain_3:'Single output level, no way to signal urgency',
       pb_pain_4:'Signal generates negative reactions in pedestrians',
       pb_motiv:'Motivations', pb_motiv_1:'Arrive safely without conflict with pedestrians',
       pb_motiv_2:'Be perceived as cordial, not aggressive',
@@ -1384,7 +1385,7 @@ function buildProject(id) {
       obs_title:'The bell in real use',
       obs_sub:'A 20-min observation session following an urban cyclist on a mixed route (bike lane + open street + crossings). Objective: document real activation patterns, substitution behaviors, and signal reception rate.',
       obs_synth_lbl:'Session synthesis',
-      obs_synth:'<strong>Preliminary synthesis:</strong> the real-world usage pattern differs significantly from what the design assumes. The cyclist uses the bell as one tool among voice, gesture, and evasive maneuver — not as the primary channel. Estimated "successful reception" rate on this route: <strong>57%</strong> (4 of 7 activations).',
+      obs_synth:'<strong>Preliminary synthesis:</strong> the real-world usage pattern differs significantly from what the design assumes. The cyclist uses the bell as one tool among voice, gesture, and evasive maneuver, not as the primary channel. Estimated "successful reception" rate on this route: <strong>57%</strong> (4 of 7 activations).',
       ante_label:'Design DNA · Indirect antecedents',
       ante_title:'Objects with shared DNA',
       ante_intro:'Products that are not bicycle bells but share one characteristic with the bell. Each group isolates one attribute: how it is actuated, how it attaches, how it communicates, or how it sounds.',
@@ -1402,15 +1403,15 @@ function buildProject(id) {
       ux_dim6:'Social perception', ux_dim6_sub:'Courtesy vs. perceived aggression',
       ux_dim7:'Durability', ux_dim7_sub:'Resistance to use',
       ux_finding_lbl:'Central finding',
-      ux_finding:'The three dimensions most critical for road safety — accessibility, communication, and audibility — have the lowest scores. The object fails exactly where it matters most.',
+      ux_finding:'The three dimensions most critical for road safety (accessibility, communication, and audibility) have the lowest scores. The object fails exactly where it matters most.',
       km_label:'Key moments in use',
-      km1_title:'Sudden emergency — critical time',
+      km1_title:'Sudden emergency: critical time',
       km1_body:'The rider needs to alert in 0.8–1.2 s, but must reposition thumb before activating. The process takes longer than the situation allows.',
       km2_title:'Overtaking on shared lane',
       km2_body:'Most frequent use. Bell emits a single tone with no way to modulate urgency, speed, or intention for the receiver.',
-      km3_title:'Quiet bike lane — optimal context',
+      km3_title:'Quiet bike lane: optimal context',
       km3_body:'Ambient noise 40–50 dB. Bell works well for passing alerts. Pedestrian identifies the source and reacts.',
-      km4_title:'Dense traffic — uncertainty',
+      km4_title:'Dense traffic: uncertainty',
       km4_body:'Rider rings but pedestrian doesn\'t hear it. No feedback of successful reception. Rider left in uncertainty.',
       jp_label:'Journey Map · 5-phase experience',
       jp_title:'The cyclist\'s journey',
@@ -1442,12 +1443,12 @@ function buildProject(id) {
       jp_p5_action:'Arrives at destination, dismounts, secures bike. End of trip.',
       jp_p5_emotion:'Satisfaction / mild tiredness / sometimes residual annoyance.',
       jp_p5_sensory:'Relative quiet, heart rate slowing, normal grip restored.',
-      jp_p5_pain:'No record of how many times "the bell failed" — failure stays invisible.',
+      jp_p5_pain:'No record of "bell failures." The failure is invisible.',
       jp_p5_actors:'Cyclist · destination environment.',
       jp_emo_depart:'DEPARTURE', jp_emo_riding:'RIDING', jp_emo_alert:'ALERT',
       jp_emo_resol:'RESOLUTION', jp_emo_arrive:'ARRIVAL',
       ctx_label:'Use contexts · Effectiveness by scenario',
-      ctx_title:'Where does it reach — and where doesn\'t it?',
+      ctx_title:'Where does it reach, and where doesn\'t it?',
       ctx1_name:'Protected bike lane', ctx1_eff:'High effectiveness',
       ctx1_desc:'Low ambient noise, shared context understood. Bell effective at ~70 dB.',
       ctx2_name:'Urban avenue', ctx2_eff:'Low effectiveness',
@@ -1461,12 +1462,12 @@ function buildProject(id) {
       h2_body:'Bell peak output: ~72 dB. Urban avenue noise floor: 78–85 dB. The signal is inaudible exactly where urgency is highest.',
       h2_stat:'72 dB vs 85 dB',
       h3_title:'Signal carries no intention',
-      h3_body:'The bell cannot distinguish between a polite "excuse me" and an urgent "danger, stop." One sound means everything — so it communicates nothing clearly.',
+      h3_body:'The bell cannot distinguish between a polite "excuse me" and an urgent "danger, stop." One sound means everything, so it communicates nothing clearly.',
       h4_title:'No confirmation of reception',
       h4_body:'The rider has no feedback whether the signal was heard. 43% of observed interactions required an immediate verbal backup signal.',
       h4_stat:'57% reception rate',
       h5_title:'Activation cost at speed',
-      h5_body:'At 25 km/h the rider covers 9.7 m in 1.4 seconds. Current bell geometry requires grip repositioning — time the situation doesn\'t allow.',
+      h5_body:'At 25 km/h the rider covers 9.7 m in 1.4 seconds. Current bell geometry requires grip repositioning. Time the situation doesn\'t allow.',
       h5_stat:'1.4 s = 9.7 m',
       stmt_label:'Problem · Problem Statement',
       stmt_title:'The urban cyclist needs to <em style="color:#d24a1f;font-style:normal;">graduate the type of alert</em>',
@@ -1491,24 +1492,24 @@ function buildProject(id) {
       stat_levels:'signal levels', stat_weight:'estimated weight', stat_mech:'mechanical · no battery',
       how_label:'How it works',
       how_1:'Each consecutive press advances a ratchet that increases the hammer swing radius',
-      how_2:'More swing = higher impact speed = higher dB output — physics, no electronics',
-      how_3:'Maximum at third press — level holds until next press',
-      how_4:'Compatible with standard 22.2 mm handlebars — tool-free clamp',
-      how_5:'The return spring resets the ratchet to N1 — ready for the next ride',
+      how_2:'More swing = higher impact speed = higher dB output. Physics, not electronics.',
+      how_3:'Maximum output at third press. Level holds until the next press.',
+      how_4:'Fits standard 22.2 mm handlebars, tool-free.',
+      how_5:'The return spring resets the ratchet to N1 after each ride.',
       parts_label:'Materials & parts',
-      ante_band:'The bicycle bell inherits attributes from four distinct families — thumb gesture, tube mount, warning function, and resonant geometry — but excels at none. Each group points to a redesign direction.',
+      ante_band:'The bicycle bell inherits attributes from four distinct families (thumb gesture, tube mount, warning function, and resonant geometry) but excels at none. Each group points to a redesign direction.',
       ctx2_name:'Quiet street', ctx2_eff:'Medium effectiveness',
       ctx2_desc:'Mixed traffic. Bell competes with ambient noise. Inconsistent reception.',
       ctx3_name:'Urban avenue', ctx3_eff:'Low effectiveness',
       ctx3_desc:'Noise floor 78–85 dB. Bell at 70 dB acoustically invisible. Verbal signal required.',
       ctx4_name:'Mountain trail (MTB)', ctx4_eff:'Variable',
       ctx4_desc:'Natural acoustics help, but speed and terrain significantly reduce the reaction window.',
-      part1_name:'Dome + hammer', part1_desc:'Brass + steel — resonance, decay and volume determined by geometry.',
-      part2_name:'Clamp', part2_desc:'Aluminum + rubber — 22.2 mm standard, no tube marking.',
+      part1_name:'Dome + hammer', part1_desc:'Brass + steel. Geometry sets the resonance, decay, and volume.',
+      part2_name:'Clamp', part2_desc:'Anodized aluminum. 22.2 mm standard. Plastisol-dipped screw heads.',
       sig_label:'Signal levels · N1 · N2 · N3',
       sig_title:'N1 · N2 · N3',
       detail_label:'Product details',
-      mech_label:'Ratchet mechanism — progressive cam engagement',
+      mech_label:'Ratchet mechanism · progressive cam engagement',
       
       ante_gh_a:'Thumb-actuated', ante_gh_b:'Tube mounting',
       ante_gh_c:'Sound as warning', ante_gh_d:'Resonant dome',
@@ -1519,7 +1520,7 @@ function buildProject(id) {
       ante_b2:'Phone mount', ante_b2t:'Rubber clamp. Critical: no marks on the tube.',
       ante_b3:'Rear-view mirror', ante_b3t:'Coexists with the bell on the same side of the bar.',
       ante_c1:'Car horn', ante_c1t:'Same role at another scale. ~110 dB. Bike is the weakest case.',
-      ante_c2:'Whistle', ante_c2t:'Piercing high pitch. Requires the mouth — rules out occupied hands.',
+      ante_c2:'Whistle', ante_c2t:'Piercing high pitch. Requires the mouth, so occupied hands rule it out.',
       ante_c3:'Doorbell', ante_c3t:'Alert between two people. Recipient expects it. Solves the opposite.',
       ante_d1:'Church bell', ante_d1t:'Same physical principle at 1000× the mass. Low pitch from sheer size.',
       ante_d2:'Triangle / agogô', ante_d2t:'Idiophones. Extended decay from open geometry.',
@@ -1529,12 +1530,12 @@ function buildProject(id) {
     es:{
       rph_kicker:'Fase de Investigación',
       rph_title:'Un timbre.<br>Dos intenciones muy distintas.',
-      tl_1877:'Patente de campana de cúpula — 6-8 partes, percutor rotatorio',
+      tl_1877:'Patente de campana de cúpula: 6-8 partes, percutor rotatorio',
       tl_1950:'Producción industrial masiva y estandarización global',
       tl_1970:'El thumb bell alcanza +70% de cuota de mercado global',
-      tl_2000:'Señales electrónicas introducidas — adopción marginal',
+      tl_2000:'Señales electrónicas introducidas: adopción marginal',
       tl_2020:'Obligatoria en 40+ países. Mecanismo sin cambios',
-      tl_2026:'Primera propuesta de campana graduada — este proyecto',
+      tl_2026:'Primera propuesta de campana graduada: este proyecto',
       typo_label:'Análisis de mercado · Tipología',
       typo_title:'¿Qué existe hoy?',
       typo_intro:'Seis tipos en el mercado. Cada uno resuelve la salida acústica. Ninguno aborda la graduación de señal.',
@@ -1547,10 +1548,10 @@ function buildProject(id) {
       typo_desc_int:'Integrada al manillar (Knog Oi, Spurcycle). Innovación formal, no funcional. Sustain largo, titanio o aluminio CNC.',
       typo_desc_el:'Batería + síntesis digital. Volumen configurable pero requiere carga. Dependencia tecnológica. Creciente en e-bikes.',
       typo_desc_hr:'Bocina de goma o silbato manual. Mayor volumen y diferenciación sonora. Esfuerzo de accionamiento alto. Ornamental.',
-      typo_stat1:'tipos en el mercado', typo_stat2:'nivel de sonido — todos',
-      typo_stat3:'sin replanteamiento funcional', typo_stat4:'países — obligatorio por ley',
+      typo_stat1:'tipos en el mercado', typo_stat2:'nivel de sonido, todos iguales',
+      typo_stat3:'sin replanteamiento funcional', typo_stat4:'países, obligatorio por ley',
       persona_label:'User Persona · Investigación primaria',
-      persona_title:'Ciclista urbano — perfil primario',
+      persona_title:'Ciclista urbano, perfil primario',
       persona_tag:'Ciclista urbana', persona_age:'29 · Hallandale Beach, FL · Diseñadora gráfica',
       persona_qt:'"Toco el timbre y no sé si me escuchan. La mitad de las veces termino gritando \'permiso\' igual."',
       pb_use:'Contexto de uso', pb_use_t:'Traslado diario hogar–trabajo, 6 km mixtos: carril bici protegido + calle abierta. 4–5 días/semana, 25–30 min por trayecto. Bicicleta urbana con manillar plano.',
@@ -1559,7 +1560,7 @@ function buildProject(id) {
       pb_actors:'Otros actores en ruta', pb_actors_t:'Peatones con auriculares (irritante recurrente), personas mirando el teléfono, autos en doble fila, ciclistas que ignoran el sentido del carril.',
       pb_pain:'Puntos de dolor', pb_pain_1:'Tocar el timbre sin recibir ninguna confirmación',
       pb_pain_2:'Soltar el agarre para activar mientras frena',
-      pb_pain_3:'Sonido único — sin posibilidad de graduar urgencia',
+      pb_pain_3:'Sonido único, sin posibilidad de graduar la urgencia',
       pb_pain_4:'La señal genera reacciones negativas en peatones',
       pb_motiv:'Motivaciones', pb_motiv_1:'Llegar a destino sin conflictos con peatones',
       pb_motiv_2:'Ser percibida como cortés, no agresiva',
@@ -1576,7 +1577,7 @@ function buildProject(id) {
       obs_title:'El timbre en uso real',
       obs_sub:'Sesión de observación de 20 min siguiendo a un ciclista urbano en ruta mixta (carril bici + calle abierta + cruces). Objetivo: documentar patrones reales de activación, conductas de sustitución y tasa de recepción de señal.',
       obs_synth_lbl:'Síntesis de la sesión',
-      obs_synth:'<strong>Síntesis preliminar:</strong> el patrón de uso real difiere significativamente de lo que asume el diseño. El ciclista usa el timbre como una herramienta entre la voz, el gesto y la maniobra evasiva — no como canal principal. Tasa estimada de "recepción exitosa" en esta ruta: <strong>57%</strong> (4 de 7 activaciones).',
+      obs_synth:'<strong>Síntesis preliminar:</strong> el patrón de uso real difiere significativamente de lo que asume el diseño. El ciclista usa el timbre como una herramienta entre la voz, el gesto y la maniobra evasiva, no como canal principal. Tasa estimada de "recepción exitosa" en esta ruta: <strong>57%</strong> (4 de 7 activaciones).',
       ante_label:'ADN de diseño · Antecedentes indirectos',
       ante_title:'Objetos con ADN compartido',
       ante_intro:'Productos que no son timbres de bicicleta pero comparten una característica con la campana. Cada grupo aísla un atributo: cómo se acciona, cómo se fija, cómo comunica o cómo suena.',
@@ -1594,15 +1595,15 @@ function buildProject(id) {
       ux_dim6:'Percepción social', ux_dim6_sub:'Cortesía vs. agresividad percibida',
       ux_dim7:'Durabilidad', ux_dim7_sub:'Resistencia al uso',
       ux_finding_lbl:'Hallazgo central',
-      ux_finding:'Las tres dimensiones más críticas para la seguridad vial — accesibilidad, comunicación y audibilidad — tienen las puntuaciones más bajas. El objeto falla exactamente donde más importa.',
+      ux_finding:'Las tres dimensiones más críticas para la seguridad vial (accesibilidad, comunicación y audibilidad) tienen las puntuaciones más bajas. El objeto falla exactamente donde más importa.',
       km_label:'Momentos clave de uso',
-      km1_title:'Emergencia repentina — tiempo crítico',
+      km1_title:'Emergencia repentina: tiempo crítico',
       km1_body:'El ciclista necesita alertar en 0.8–1.2 s, pero debe reposicionar el pulgar antes de activar. El proceso tarda más de lo que la situación permite.',
       km2_title:'Adelantar en senda compartida',
       km2_body:'Uso más frecuente. El timbre emite un único tono sin posibilidad de modular urgencia, velocidad o intención para quien recibe.',
-      km3_title:'Ciclovía tranquila — contexto óptimo',
+      km3_title:'Ciclovía tranquila: contexto óptimo',
       km3_body:'Ruido ambiental 40–50 dB. El timbre funciona bien para avisos de adelantamiento. El peatón identifica la fuente y reacciona.',
-      km4_title:'Tráfico denso — incertidumbre',
+      km4_title:'Tráfico denso: incertidumbre',
       km4_body:'El ciclista toca el timbre pero el peatón no lo escucha. Sin feedback de recepción exitosa. El ciclista queda en la incertidumbre.',
       jp_label:'Journey Map · Experiencia en 5 fases',
       jp_title:'El viaje del ciclista',
@@ -1634,7 +1635,7 @@ function buildProject(id) {
       jp_p5_action:'Llega al destino, desmonta, asegura la bicicleta. Fin del trayecto.',
       jp_p5_emotion:'Satisfacción / leve cansancio / a veces molestia residual del episodio de alerta.',
       jp_p5_sensory:'Relativo silencio, frecuencia cardíaca bajando, agarre normal restaurado.',
-      jp_p5_pain:'Sin registro de cuántas veces "el timbre falló" — el fallo permanece invisible.',
+      jp_p5_pain:'Sin registro de cuántas veces "el timbre falló". El fallo permanece invisible.',
       jp_p5_actors:'Ciclista · entorno de destino.',
       jp_emo_depart:'SALIDA', jp_emo_riding:'TRAYECTO', jp_emo_alert:'ALERTA',
       jp_emo_resol:'RESOLUCIÓN', jp_emo_arrive:'LLEGADA',
@@ -1653,12 +1654,12 @@ function buildProject(id) {
       h2_body:'Salida máxima del timbre: ~72 dB. Piso de ruido en avenida urbana: 78–85 dB. La señal es inaudible exactamente donde la urgencia es mayor.',
       h2_stat:'72 dB vs 85 dB',
       h3_title:'La señal no comunica intención',
-      h3_body:'El timbre no puede distinguir entre un "permiso" amable y un "peligro, detenerse". Un sonido lo significa todo — y por eso no comunica nada con claridad.',
+      h3_body:'El timbre no puede distinguir entre un "permiso" amable y un "peligro, detenerse". Un sonido lo significa todo, y por eso no comunica nada con claridad.',
       h4_title:'Sin confirmación de recepción',
       h4_body:'El ciclista no tiene feedback de si la señal fue escuchada. El 43% de las interacciones observadas requirieron respaldo vocal inmediato.',
       h4_stat:'57% tasa de recepción',
       h5_title:'Costo de activación a alta velocidad',
-      h5_body:'A 25 km/h el ciclista recorre 9.7 m en 1.4 segundos. La geometría actual del timbre requiere reposicionar el agarre — tiempo que la situación no permite.',
+      h5_body:'A 25 km/h el ciclista recorre 9.7 m en 1.4 segundos. La geometría actual del timbre requiere reposicionar el agarre. Tiempo que la situación no permite.',
       h5_stat:'1.4 s = 9.7 m',
       stmt_label:'Problema · Problem Statement',
       stmt_title:'El ciclista urbano necesita <em style="color:#d24a1f;font-style:normal;">graduar el tipo de aviso</em>',
@@ -1683,24 +1684,24 @@ function buildProject(id) {
       stat_levels:'niveles de señal', stat_weight:'peso estimado', stat_mech:'mecánico · sin batería',
       how_label:'Cómo funciona',
       how_1:'Cada pulsación consecutiva avanza un trinquete que aumenta el radio de swing del martillo',
-      how_2:'Mayor swing = mayor velocidad de impacto = mayor salida en dB — física, sin electrónica',
-      how_3:'La tercera pulsación resetea a N1 — ciclo continuo, sin cambio de modo',
-      how_4:'Compatible con manillares estándar 22.2 mm — abrazadera sin herramientas',
-      how_5:'El resorte de retención devuelve el trinquete a N1 — listo para el próximo uso',
+      how_2:'Mayor swing = mayor velocidad de impacto = mayor salida en dB. Física, sin electrónica.',
+      how_3:'La tercera pulsación resetea a N1. Ciclo continuo, sin cambio de modo.',
+      how_4:'Compatible con manillares estándar 22.2 mm, sin herramientas.',
+      how_5:'El resorte de retención devuelve el trinquete a N1 al soltar el pulsador.',
       parts_label:'Materiales y partes',
-      ante_band:'La campana de bici hereda atributos de cuatro familias distintas — gesto del pulgar, abrazadera al tubo, función de aviso y geometría resonante — pero no destaca en ninguna. Cada grupo apunta a una pista de rediseño.',
+      ante_band:'La campana de bici hereda atributos de cuatro familias distintas (gesto del pulgar, abrazadera al tubo, función de aviso y geometría resonante) pero no destaca en ninguna. Cada grupo apunta a una pista de rediseño.',
       ctx2_name:'Calle tranquila', ctx2_eff:'Efectividad media',
       ctx2_desc:'Tráfico mixto. El timbre compite con el ruido ambiental. Recepción inconsistente.',
       ctx3_name:'Avenida urbana', ctx3_eff:'Baja efectividad',
       ctx3_desc:'Piso de ruido 78–85 dB. El timbre a 70 dB es acústicamente invisible. Se requiere señal verbal.',
       ctx4_name:'Sendero de montaña (MTB)', ctx4_eff:'Variable',
       ctx4_desc:'La acústica natural ayuda, pero la velocidad y el terreno reducen significativamente la ventana de reacción.',
-      part1_name:'Cúpula + martillo', part1_desc:'Latón + acero — resonancia, decay y volumen por geometría.',
-      part2_name:'Abrazadera', part2_desc:'Aluminio + goma — estándar 22.2 mm, sin marcar el tubo.',
+      part1_name:'Cúpula + martillo', part1_desc:'Latón + acero. La geometría define la resonancia, el decay y el volumen.',
+      part2_name:'Abrazadera', part2_desc:'Aluminio anodizado. Estándar 22.2 mm. Cabezas de tornillo con recubrimiento de plastisol.',
       sig_label:'Niveles de señal · N1 · N2 · N3',
       sig_title:'N1 · N2 · N3',
       detail_label:'Produktdetails',
-      mech_label:'Mecanismo de trinquete — enganche progresivo de la leva',
+      mech_label:'Mecanismo de trinquete · enganche progresivo de la leva',
       
       ante_gh_a:'Accionados con pulgar', ante_gh_b:'Fijación a tubo',
       ante_gh_c:'Sonido como aviso', ante_gh_d:'Cúpula resonante',
@@ -1711,7 +1712,7 @@ function buildProject(id) {
       ante_b2:'Soporte de celular', ante_b2t:'Abrazadera con goma. Crítico el ajuste sin marcar el tubo.',
       ante_b3:'Espejo retrovisor', ante_b3t:'Convive con la campana en el mismo lado del manillar.',
       ante_c1:'Bocina de automóvil', ante_c1t:'Mismo rol a otra escala. ~110 dB. La bici es el caso más débil.',
-      ante_c2:'Silbato', ante_c2t:'Tono agudo penetrante. Requiere la boca — descarta manos ocupadas.',
+      ante_c2:'Silbato', ante_c2t:'Tono agudo penetrante. Requiere la boca, lo que descarta manos ocupadas.',
       ante_c3:'Timbre de puerta', ante_c3t:'Aviso entre dos personas. Receptor lo espera. Resuelve lo opuesto.',
       ante_d1:'Campana de iglesia', ante_d1t:'Mismo principio físico a 1000× la masa. Tono grave por dimensión.',
       ante_d2:'Triángulo / agogô', ante_d2t:'Idiófonos de percusión. Decay extendido por geometría abierta.',
@@ -1721,12 +1722,12 @@ function buildProject(id) {
     de:{
       rph_kicker:'Forschungsphase',
       rph_title:'Ein Klingeln.<br>Zwei sehr unterschiedliche Absichten.',
-      tl_1877:'Kuppelklingel-Patent — 6-8 Teile, einzelner Drehhammer',
+      tl_1877:'Kuppelklingel-Patent: 6-8 Teile, einzelner Drehhammer',
       tl_1950:'Massenindustrielle Produktion und globale Standardisierung',
       tl_1970:'Daumentaste erreicht +70% globalen Marktanteil',
-      tl_2000:'Elektronische Signale eingeführt — marginale Adoption',
+      tl_2000:'Elektronische Signale eingeführt: marginale Adoption',
       tl_2020:'Pflicht in 40+ Ländern. Mechanismus unverändert',
-      tl_2026:'Erster Ratschen-Klingel-Entwurf — dieses Projekt',
+      tl_2026:'Erster Ratschen-Klingel-Entwurf: dieses Projekt',
       typo_label:'Marktanalyse · Typologie',
       typo_title:'Was gibt es heute?',
       typo_intro:'Sechs Typen auf dem Markt. Jeder löst die akustische Ausgabe. Keiner adressiert die Signalabstufung.',
@@ -1739,10 +1740,10 @@ function buildProject(id) {
       typo_desc_int:'In Lenker integriert (Knog Oi, Spurcycle). Formale, keine funktionale Innovation. Langer Sustain, CNC-Titan oder Aluminium.',
       typo_desc_el:'Batterie + digitale Synthese. Konfigurierbares Volumen, benötigt Aufladung. Technologieabhängigkeit. Wächst bei E-Bikes.',
       typo_desc_hr:'Gummihorn oder manuelles Pfeifsignal. Höheres Volumen. Hoher Betätigungsaufwand. Ornamental.',
-      typo_stat1:'Typen auf dem Markt', typo_stat2:'Lautstärkepegel — alle',
-      typo_stat3:'ohne funktionale Neugestaltung', typo_stat4:'Länder — gesetzlich vorgeschrieben',
+      typo_stat1:'Typen auf dem Markt', typo_stat2:'Lautstärkepegel, alle gleich',
+      typo_stat3:'ohne funktionale Neugestaltung', typo_stat4:'Länder, gesetzlich vorgeschrieben',
       persona_label:'User Persona · Primärforschung',
-      persona_title:'Stadtradler — Primärprofil',
+      persona_title:'Stadtradler, Primärprofil',
       persona_tag:'Stadtpendlerin', persona_age:'29 · Hallandale Beach, FL · Grafikdesignerin',
       persona_qt:'"Ich klingle und weiß nicht ob sie mich hören. Meistens rufe ich sowieso \'Entschuldigung\'."',
       pb_use:'Nutzungskontext', pb_use_t:'Täglicher Weg Zuhause–Büro, 6 km gemischt: geschützter Radweg + offene Straße. 4–5 Tage/Woche, 25–30 Min pro Weg. Stadtrad mit flachem Lenker.',
@@ -1751,7 +1752,7 @@ function buildProject(id) {
       pb_actors:'Andere Verkehrsteilnehmer', pb_actors_t:'Fußgänger mit Kopfhörern (wiederkehrender Ärger), Handy-Schauer, Falschparker, Radfahrer gegen die Fahrtrichtung.',
       pb_pain:'Schmerzpunkte', pb_pain_1:'Klingeln ohne Bestätigung zu erhalten',
       pb_pain_2:'Griff loslassen zum Aktivieren während des Bremsens',
-      pb_pain_3:'Einzelton — keine Dringlichkeitsabstufung möglich',
+      pb_pain_3:'Einzelton, keine Abstufung der Dringlichkeit möglich',
       pb_pain_4:'Signal erzeugt negative Reaktionen bei Fußgängern',
       pb_motiv:'Motivationen', pb_motiv_1:'Sicher ankommen ohne Konflikte mit Fußgängern',
       pb_motiv_2:'Als höflich, nicht aggressiv wahrgenommen werden',
@@ -1768,7 +1769,7 @@ function buildProject(id) {
       obs_title:'Die Klingel in der Praxis',
       obs_sub:'20-minütige Beobachtungssitzung, einem Stadtradler auf gemischter Route folgend (Radweg + offene Straße + Kreuzungen). Ziel: Dokumentation realer Aktivierungsmuster, Ersatzverhaltensweisen und Signalempfangsrate.',
       obs_synth_lbl:'Sitzungszusammenfassung',
-      obs_synth:'<strong>Vorläufige Synthese:</strong> Das reale Nutzungsmuster weicht erheblich von dem ab, was das Design annimmt. Der Radfahrer nutzt die Klingel als eines von mehreren Werkzeugen — neben Stimme, Geste und Ausweichmanöver. Geschätzte Empfangsrate auf dieser Route: <strong>57%</strong> (4 von 7 Aktivierungen).',
+      obs_synth:'<strong>Vorläufige Synthese:</strong> Das reale Nutzungsmuster weicht erheblich von dem ab, was das Design annimmt. Der Radfahrer nutzt die Klingel als eines von mehreren Werkzeugen, neben Stimme, Geste und Ausweichmanöver. Geschätzte Empfangsrate auf dieser Route: <strong>57%</strong> (4 von 7 Aktivierungen).',
       ante_label:'Design-DNA · Indirekte Vorläufer',
       ante_title:'Objekte mit gemeinsamer DNA',
       ante_intro:'Produkte, die keine Fahrradklingeln sind, aber ein Merkmal mit der Klingel teilen. Jede Gruppe isoliert ein Attribut: Betätigung, Befestigung, Kommunikation oder Klang.',
@@ -1786,15 +1787,15 @@ function buildProject(id) {
       ux_dim6:'Soziale Wahrnehmung', ux_dim6_sub:'Höflichkeit vs. wahrgenommene Aggression',
       ux_dim7:'Langlebigkeit', ux_dim7_sub:'Widerstandsfähigkeit im Gebrauch',
       ux_finding_lbl:'Zentrale Erkenntnis',
-      ux_finding:'Die drei Dimensionen, die für die Verkehrssicherheit am kritischsten sind — Zugänglichkeit, Kommunikation und Hörbarkeit — haben die niedrigsten Werte. Das Objekt versagt genau dort, wo es am meisten zählt.',
+      ux_finding:'Die drei Dimensionen, die für die Verkehrssicherheit am kritischsten sind (Zugänglichkeit, Kommunikation und Hörbarkeit), haben die niedrigsten Werte. Das Objekt versagt genau dort, wo es am meisten zählt.',
       km_label:'Schlüsselmomente der Nutzung',
-      km1_title:'Plötzlicher Notfall — kritische Zeit',
+      km1_title:'Plötzlicher Notfall: kritische Zeit',
       km1_body:'Der Radfahrer muss in 0.8–1.2 s warnen, muss aber zuerst den Daumen neu positionieren. Der Vorgang dauert länger als die Situation erlaubt.',
       km2_title:'Überholen auf gemeinsamem Weg',
       km2_body:'Häufigste Nutzung. Die Klingel gibt einen einzelnen Ton ohne Möglichkeit, Dringlichkeit, Geschwindigkeit oder Absicht zu modulieren.',
-      km3_title:'Ruhiger Radweg — optimaler Kontext',
+      km3_title:'Ruhiger Radweg: optimaler Kontext',
       km3_body:'Umgebungslärm 40–50 dB. Klingel funktioniert gut für Überholwarnungen. Fußgänger identifiziert die Quelle und reagiert.',
-      km4_title:'Dichter Verkehr — Unsicherheit',
+      km4_title:'Dichter Verkehr: Unsicherheit',
       km4_body:'Radfahrer klingelt, aber Fußgänger hört es nicht. Kein Feedback über erfolgreichen Empfang. Radfahrer bleibt in Ungewissheit.',
       jp_label:'Journey Map · 5-Phasen-Erfahrung',
       jp_title:'Die Reise des Radfahrers',
@@ -1826,12 +1827,12 @@ function buildProject(id) {
       jp_p5_action:'Kommt am Ziel an, steigt ab, sichert Fahrrad. Ende der Fahrt.',
       jp_p5_emotion:'Zufriedenheit / leichte Müdigkeit / manchmal restliche Verärgerung.',
       jp_p5_sensory:'Relative Stille, Herzfrequenz sinkt, normaler Griff wiederhergestellt.',
-      jp_p5_pain:'Keine Aufzeichnung über "Klingel-Versager" — das Versagen bleibt unsichtbar.',
+      jp_p5_pain:'Keine Aufzeichnung über "Klingel-Versager". Das Versagen bleibt unsichtbar.',
       jp_p5_actors:'Radfahrer · Zielumgebung.',
       jp_emo_depart:'ABFAHRT', jp_emo_riding:'FAHRT', jp_emo_alert:'ALARM',
       jp_emo_resol:'AUFLÖSUNG', jp_emo_arrive:'ANKUNFT',
       ctx_label:'Nutzungskontexte · Wirksamkeit je Szenario',
-      ctx_title:'Wo erreicht das Signal — und wo nicht?',
+      ctx_title:'Wo erreicht das Signal, und wo nicht?',
       ctx1_name:'Geschützter Radweg', ctx1_eff:'Hohe Wirksamkeit',
       ctx1_desc:'Niedriger Umgebungslärm, gemeinsamer Kontext verstanden. Klingel wirksam bei ~70 dB.',
       ctx2_name:'Stadtstraße', ctx2_eff:'Geringe Wirksamkeit',
@@ -1845,12 +1846,12 @@ function buildProject(id) {
       h2_body:'Maximale Klingellautstärke: ~72 dB. Lärmteppich Stadtstraße: 78–85 dB. Das Signal ist unhörbar genau dort, wo Dringlichkeit am größten ist.',
       h2_stat:'72 dB vs 85 dB',
       h3_title:'Signal trägt keine Absicht',
-      h3_body:'Die Klingel kann nicht zwischen einem höflichen "Entschuldigung" und einem dringenden "Gefahr, stopp" unterscheiden. Ein Ton bedeutet alles — kommuniziert also nichts klar.',
+      h3_body:'Die Klingel kann nicht zwischen einem höflichen "Entschuldigung" und einem dringenden "Gefahr, stopp" unterscheiden. Ein Ton bedeutet alles, kommuniziert also nichts klar.',
       h4_title:'Keine Empfangsbestätigung',
       h4_body:'Der Radfahrer hat kein Feedback, ob das Signal gehört wurde. 43% der beobachteten Interaktionen erforderten sofortige verbale Ergänzung.',
       h4_stat:'57% Empfangsrate',
       h5_title:'Aktivierungsaufwand bei Geschwindigkeit',
-      h5_body:'Bei 25 km/h legt der Radfahrer in 1,4 Sekunden 9,7 m zurück. Die aktuelle Klingelgeometrie erfordert Griffneupositionierung — Zeit, die die Situation nicht erlaubt.',
+      h5_body:'Bei 25 km/h legt der Radfahrer in 1,4 Sekunden 9,7 m zurück. Die aktuelle Klingelgeometrie erfordert Griffneupositionierung. Zeit, die die Situation nicht erlaubt.',
       h5_stat:'1.4 s = 9.7 m',
       stmt_label:'Problem · Problem Statement',
       stmt_title:'Der Stadtradler braucht die Möglichkeit, <em style="color:#d24a1f;font-style:normal;">die Art des Signals abzustufen</em>',
@@ -1875,23 +1876,23 @@ function buildProject(id) {
       stat_levels:'Signalpegel', stat_weight:'geschätztes Gewicht', stat_mech:'mechanisch · keine Batterie',
       how_label:'So funktioniert es',
       how_1:'Jeder aufeinanderfolgende Druck rückt eine Ratsche vor, die den Hammerschwungradius vergrößert',
-      how_2:'Mehr Schwung = höhere Aufprallgeschwindigkeit = höhere dB-Ausgabe — Physik, keine Elektronik',
-      how_3:'Dritter Druck setzt auf N1 zurück — kontinuierlicher Zyklus, kein Moduswechsel',
-      how_4:'Kompatibel mit Standard-22,2-mm-Lenker — werkzeuglose Schelle',
-      how_5:'Die Rückstellfeder setzt die Ratsche auf N1 zurück — bereit für die nächste Fahrt',
+      how_2:'Mehr Schwung = höhere Aufprallgeschwindigkeit = höhere dB-Ausgabe. Physik, keine Elektronik.',
+      how_3:'Dritter Druck setzt auf N1 zurück. Kontinuierlicher Zyklus, kein Moduswechsel.',
+      how_4:'Passt auf Standard-22,2-mm-Lenker, werkzeuglos montierbar.',
+      how_5:'Die Rückstellfeder setzt die Ratsche nach jeder Fahrt auf N1 zurück.',
       parts_label:'Materialien & Teile',
-      ante_band:'Die Fahrradklingel erbt Attribute von vier verschiedenen Familien — Daumengest, Rohrbefestigung, Warnfunktion und resonante Geometrie — übertrifft aber keine davon. Jede Gruppe zeigt eine Richtung für das Redesign.',
+      ante_band:'Die Fahrradklingel erbt Attribute von vier verschiedenen Familien (Daumengeste, Rohrbefestigung, Warnfunktion und resonante Geometrie), übertrifft aber keine davon. Jede Gruppe zeigt eine Richtung für das Redesign.',
       ctx2_name:'Ruhige Straße', ctx2_eff:'Mittlere Wirksamkeit',
       ctx2_desc:'Gemischter Verkehr. Klingel konkurriert mit Umgebungslärm. Inkonsistenter Empfang.',
       ctx3_name:'Stadtstraße', ctx3_eff:'Geringe Wirksamkeit',
       ctx3_desc:'Lärmpegel 78–85 dB. Klingel bei 70 dB akustisch unsichtbar. Verbales Signal erforderlich.',
       ctx4_name:'Bergweg (MTB)', ctx4_eff:'Variabel',
       ctx4_desc:'Natürliche Akustik hilft, aber Geschwindigkeit und Gelände reduzieren das Reaktionsfenster erheblich.',
-      part1_name:'Kuppel + Hammer', part1_desc:'Messing + Stahl — Resonanz, Decay und Lautstärke durch Geometrie bestimmt.',
-      part2_name:'Klemme', part2_desc:'Aluminium + Gummi — Standard 22,2 mm, ohne Rohrabdrücke.',
+      part1_name:'Kuppel + Hammer', part1_desc:'Messing + Stahl. Geometrie bestimmt Resonanz, Decay und Lautstärke.',
+      part2_name:'Klemme', part2_desc:'Eloxiertes Aluminium. Standard 22,2 mm. Schraubenköpfe mit Plastisol-Beschichtung.',
       sig_label:'Signalpegel · N1 · N2 · N3',
       sig_title:'N1 · N2 · N3',
-      mech_label:'Ratschenmechanismus — progressiver Nockeneingriff',
+      mech_label:'Ratschenmechanismus · progressiver Nockeneingriff',
       
       ante_gh_a:'Daumengesteuert', ante_gh_b:'Rohrbefestigung',
       ante_gh_c:'Klang als Warnung', ante_gh_d:'Resonanzkuppel',
@@ -1902,7 +1903,7 @@ function buildProject(id) {
       ante_b2:'Handyhalter', ante_b2t:'Gummiklemme. Wichtig: keine Abdrücke am Rohr.',
       ante_b3:'Rückspiegel', ante_b3t:'Koexistiert mit der Klingel auf derselben Lenkerseite.',
       ante_c1:'Autohupen', ante_c1t:'Gleiche Rolle in anderem Maßstab. ~110 dB. Fahrrad ist der schwächste Fall.',
-      ante_c2:'Pfeife', ante_c2t:'Durchdringend hoher Ton. Erfordert den Mund — schließt besetzte Hände aus.',
+      ante_c2:'Pfeife', ante_c2t:'Durchdringend hoher Ton. Erfordert den Mund, besetzte Hände scheiden aus.',
       ante_c3:'Türklingel', ante_c3t:'Warnung zwischen zwei Personen. Empfänger erwartet sie. Löst das Gegenteil.',
       ante_d1:'Kirchenglocke', ante_d1t:'Gleiches Prinzip bei 1000-facher Masse. Tiefer Ton durch Größe.',
       ante_d2:'Triangel / Agogô', ante_d2t:'Idiophone. Verlängerter Decay durch offene Geometrie.',
@@ -1965,7 +1966,7 @@ function buildProject(id) {
     /* Section kicker — small label above heading */
     .cmp-section-label{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--color-muted);margin-bottom:clamp(6px,1vw,10px);display:block;}
     /* Section heading — the actual BIG visible title */
-    .cmp-section-title{font-size:clamp(22px,3.2vw,38px);font-weight:800;letter-spacing:-.04em;line-height:1.1;color:var(--color-text);margin-bottom:clamp(18px,2.5vw,30px);}
+    .cmp-section-title{font-size:clamp(22px,3.2vw,38px);font-weight:800;letter-spacing:-.04em;word-spacing:0.18em;line-height:1.1;color:var(--color-text);margin-bottom:clamp(18px,2.5vw,30px);}
     /* Section rule under heading */
     .cmp-section-rule{display:block;height:1px;background:var(--color-border);margin-bottom:clamp(18px,2.5vw,30px);}
     /* Combined kicker+title block */
@@ -2498,18 +2499,18 @@ function buildProject(id) {
         <div class="cmp-section-title">${c.obs_title}</div>
       </div>
       <div class="cmp-obs-log-meta">
-        <div class="cmp-obs-log-cell"><div class="cmp-obs-log-h">Subject</div><div class="cmp-obs-log-v">Urban commuter · 30s · city bike · standard thumb bell</div></div>
+        <div class="cmp-obs-log-cell"><div class="cmp-obs-log-h">Subject</div><div class="cmp-obs-log-v">Urban commuter · mid-30s · city bike · standard thumb bell</div></div>
         <div class="cmp-obs-log-cell"><div class="cmp-obs-log-h">Route</div><div class="cmp-obs-log-v">Three Islands Blvd → Hallandale Beach Blvd → A1A · 11 min · 3.4 km · mixed</div></div>
       </div>
       <img src="/images/field-observation.webp" loading="lazy" style="aspect-ratio:21/9;width:100%;object-fit:cover;display:block;margin-bottom:1px;border:1px solid var(--color-border);">
       <div class="cmp-log-wrap">
         <div class="cmp-log-entry">
           <span class="cmp-log-t">00:42</span>
-          <div class="cmp-log-body"><strong>Bike lane — Three Islands Blvd.</strong> Bell activated passing pedestrian with earphones. No visible reaction. Rider glances over shoulder and continues without waiting for response.</div>
+          <div class="cmp-log-body"><strong>Bike lane, Three Islands Blvd.</strong> Bell activated passing pedestrian with earphones. No visible reaction. Rider glances over shoulder and continues without waiting for response.</div>
         </div>
         <div class="cmp-log-entry">
           <span class="cmp-log-t">01:28</span>
-          <div class="cmp-log-body"><strong>Crossing SE 14th Ave.</strong> Cyclist coming in opposite direction. Two consecutive bell taps. Clean crossing, both nod slightly — bilateral recognition of a shared code.</div>
+          <div class="cmp-log-body"><strong>Crossing SE 14th Ave.</strong> Cyclist coming in opposite direction. Two consecutive bell taps. Clean crossing, both nod slightly. Bilateral recognition of a shared code.</div>
         </div>
         <div class="cmp-log-entry is-warn">
           <span class="cmp-log-t">02:11</span>
@@ -2525,7 +2526,7 @@ function buildProject(id) {
         </div>
         <div class="cmp-log-entry">
           <span class="cmp-log-t">05:27</span>
-          <div class="cmp-log-body"><strong>Bell without checking reception.</strong> Rider signals while looking straight ahead — never verifies if it was received. Confirms the "ritual alert" hypothesis: the bell is sent, not communicated.</div>
+          <div class="cmp-log-body"><strong>Bell without checking reception.</strong> Rider signals while looking straight ahead, never verifying reception. Confirms the "ritual alert" hypothesis: the bell is sent, not communicated.</div>
         </div>
         <div class="cmp-log-entry is-ok">
           <span class="cmp-log-t">06:18</span>
@@ -2537,7 +2538,7 @@ function buildProject(id) {
         </div>
         <div class="cmp-log-entry is-warn">
           <span class="cmp-log-t">09:02</span>
-          <div class="cmp-log-body"><strong>Thumb reset time.</strong> After activating, ~1.4 s to return thumb to brake position. During that interval the hand is incomplete on the handlebar — risk in emergency braking.</div>
+          <div class="cmp-log-body"><strong>Thumb reset time.</strong> After activating, ~1.4 s to return thumb to brake position. During that interval the hand is incomplete on the handlebar. Risk in emergency braking.</div>
         </div>
         <div class="cmp-log-entry">
           <span class="cmp-log-t">10:33</span>
@@ -2614,7 +2615,7 @@ function buildProject(id) {
             <!-- 4. BOTTOM (+90°) cx=280 cy=458 ��� Vulnerable pedestrian (partial) -->
             <circle cx="280" cy="458" r="44" fill="var(--color-bg)" stroke="#d24a1f" stroke-width="2"/>
             <text x="280" y="449" text-anchor="middle" font-family="inherit" font-size="9.5" font-weight="700" fill="var(--color-text)">${_cl==='es'?'Peatón':_cl==='de'?'Fußgänger':'Pedestrian'}</text>
-            <text x="280" y="462" text-anchor="middle" font-family="inherit" font-size="8" fill="var(--color-muted)">${_cl==='es'?'niño·3ª ed.·audíf.':_cl==='de'?'Kind · Senioren':'child · elderly'}</text>
+            <text x="280" y="462" text-anchor="middle" font-family="inherit" font-size="8" fill="var(--color-muted)">${_cl==='es'?'niño · 3ª ed. · audíf.':_cl==='de'?'Kind · Senioren':'child · elderly'}</text>
             <text x="280" y="476" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" font-weight="700" letter-spacing=".5" fill="#d24a1f">${_cl==='es'?'PARCIAL':_cl==='de'?'TEILWEISE':'PARTIAL'}</text>
 
             <!-- 5. SW (+150°) cx=152 cy=384 — Driver (no signal) -->
@@ -2685,8 +2686,8 @@ function buildProject(id) {
           <div style="padding:clamp(10px,1.4vw,16px);">
             <div style="font-size:.58rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-muted);margin-bottom:8px;">${_cl==='es'?'Calidad de señal':_cl==='de'?'Signalqualität':'Signal quality'}</div>
             <div style="display:flex;flex-direction:column;gap:6px;">
-              <div style="display:flex;align-items:center;gap:9px;"><div style="width:24px;height:0;border-top:2.5px solid var(--color-text);flex-shrink:0;"></div><span style="font-size:.76rem;color:var(--color-muted);">${_cl==='es'?'Efectiva — recibe':_cl==='de'?'Effektiv — empfängt':'Effective — receives'}</span></div>
-              <div style="display:flex;align-items:center;gap:9px;"><div style="width:24px;height:0;border-top:2px dashed #d24a1f;flex-shrink:0;"></div><span style="font-size:.76rem;color:var(--color-muted);">${_cl==='es'?'Atenuada — parcial':_cl==='de'?'Gedämpft — teilweise':'Attenuated — partial'}</span></div>
+              <div style="display:flex;align-items:center;gap:9px;"><div style="width:24px;height:0;border-top:2.5px solid var(--color-text);flex-shrink:0;"></div><span style="font-size:.76rem;color:var(--color-muted);">${_cl==='es'?'Efectiva: recibe':_cl==='de'?'Effektiv: empfängt':'Effective: receives'}</span></div>
+              <div style="display:flex;align-items:center;gap:9px;"><div style="width:24px;height:0;border-top:2px dashed #d24a1f;flex-shrink:0;"></div><span style="font-size:.76rem;color:var(--color-muted);">${_cl==='es'?'Atenuada: parcial':_cl==='de'?'Gedämpft: teilweise':'Attenuated: partial'}</span></div>
               <div style="display:flex;align-items:center;gap:9px;"><div style="width:24px;height:0;border-top:2px dotted var(--color-muted);flex-shrink:0;opacity:.6;"></div><span style="font-size:.76rem;color:var(--color-muted);">${_cl==='es'?'No llega':_cl==='de'?'Kein Empfang':'Does not reach'}</span></div>
               <div style="display:flex;align-items:center;gap:9px;"><div style="width:24px;height:0;border-top:2px dashed var(--color-muted);flex-shrink:0;"></div><span style="font-size:.76rem;color:var(--color-muted);">${_cl==='es'?'Código compartido':_cl==='de'?'Gemeinsamer Code':'Shared code'}</span></div>
             </div>
@@ -2969,7 +2970,7 @@ function buildProject(id) {
               <div class="cmp-cmf-prop"><span class="cmp-cmf-prop-k">${c.cmf_res}</span><span class="cmp-cmf-prop-v">${c.cmf_vhigh}</span></div>
               <div class="cmp-cmf-prop"><span class="cmp-cmf-prop-k">${c.cmf_dec}</span><span class="cmp-cmf-prop-v">2.0–3.0 s</span></div>
               <div class="cmp-cmf-prop"><span class="cmp-cmf-prop-k">${c.cmf_wt}</span><span class="cmp-cmf-prop-v">22–30 g</span></div>
-              <div class="cmp-cmf-prop"><span class="cmp-cmf-prop-k">${c.cmf_cost}</span><span class="cmp-cmf-prop-v">Alto</span></div>
+              <div class="cmp-cmf-prop"><span class="cmp-cmf-prop-k">${c.cmf_cost}</span><span class="cmp-cmf-prop-v">${c.cmf_high}</span></div>
             </div>
           </div>
         </div>
@@ -3128,11 +3129,11 @@ function buildProject(id) {
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;">
             <div style="display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--color-border);padding-bottom:10px;">
               <div style="flex-shrink:0;width:28px;height:28px;background:#d24a1f;border-radius:2px;"></div>
-              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Pulsador':_cl==='de'?'Drücker':'Pusher'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Aluminio anodizado · gesto de pulgar, resistencia calibrada':_cl==='de'?'Eloxiertes Aluminium · Daumentastung, kalibrierter Widerstand':'Anodized aluminum · thumb gesture, calibrated resistance'}</div></div>
+              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Pulsador':_cl==='de'?'Drücker':'Pusher'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Aluminio · óxido anodizado · gesto de pulgar, resistencia calibrada':_cl==='de'?'Aluminium · eloxiert (Al₂O₃) · Daumentastung, kalibrierter Widerstand':'Aluminium · anodised oxide (Al₂O₃) · thumb gesture, calibrated resistance'}</div></div>
             </div>
             <div style="display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--color-border);padding-bottom:10px;">
               <div style="flex-shrink:0;width:28px;height:28px;background:var(--color-text);border-radius:2px;"></div>
-              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Trinquete + leva':_cl==='de'?'Ratsche + Nocken':'Ratchet + cam'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Acero templado · 3 posiciones de cam, retorno de resorte':_cl==='de'?'Gehärteter Stahl · 3 Nockenstellungen, Federrückzug':'Hardened steel · 3 cam positions, spring return'}</div></div>
+              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Trinquete + leva':_cl==='de'?'Ratsche + Nocken':'Ratchet + cam'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Acero templado · 3 posiciones de leva, retorno por resorte':_cl==='de'?'Gehärteter Stahl · 3 Nockenpositionen, Federrückstellung':'Hardened steel · 3 cam positions, spring-loaded return'}</div></div>
             </div>
             <div style="display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--color-border);padding-bottom:10px;">
               <div style="flex-shrink:0;width:28px;height:28px;background:#a8b4bc;border-radius:2px;"></div>
@@ -3144,15 +3145,15 @@ function buildProject(id) {
             </div>
             <div style="display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--color-border);padding-bottom:10px;">
               <div style="flex-shrink:0;width:28px;height:28px;background:var(--color-text);border-radius:2px;"></div>
-              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Martillo':_cl==='de'?'Hammer':'Hammer'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Acero · velocidad de impacto calibrada por el radio de swing':_cl==='de'?'Stahl · Aufprallgeschwindigkeit durch Schwingradius kalibriert':'Steel · impact velocity calibrated by swing radius'}</div></div>
+              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Martillo':_cl==='de'?'Hammer':'Hammer'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Acero templado · velocidad de impacto calibrada por el radio de oscilación':_cl==='de'?'Gehärteter Stahl · Aufprallgeschwindigkeit durch Schwingradius kalibriert':'Hardened steel · impact velocity calibrated by swing radius'}</div></div>
             </div>
             <div style="display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--color-border);padding-bottom:10px;">
               <div style="flex-shrink:0;width:28px;height:28px;background:var(--color-text);border-radius:2px;"></div>
-              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Clamp':_cl==='de'?'Klemme':'Clamp'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Aluminio · estándar 22.2 mm, sin marcar el tubo':_cl==='de'?'Aluminium · Standard 22,2 mm, ohne Rohrmarkierung':'Aluminum · 22.2 mm standard, no tube marking'}</div></div>
+              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Abrazadera':_cl==='de'?'Klemme':'Clamp'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Aluminio · óxido anodizado · estándar 22.2 mm, tornillos con plastisol':_cl==='de'?'Aluminium · eloxiert (Al₂O₃) · Standard 22,2 mm, Schrauben mit Plastisol':'Aluminium · anodised oxide (Al₂O₃) · 22.2 mm standard, plastisol-dipped screws'}</div></div>
             </div>
             <div style="display:flex;gap:12px;align-items:flex-start;">
               <div style="flex-shrink:0;width:28px;height:28px;background:var(--color-text);border-radius:2px;"></div>
-              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Resortes de retención':_cl==='de'?'Rückhaltefedern':'Retention springs'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Acero de resorte · devuelven el trinquete a N1 tras cada secuencia':_cl==='de'?'Federstahl · Ratsche nach jeder Druckfolge auf N1 zurückgesetzt':'Spring steel · reset ratchet to N1 after each press sequence'}</div></div>
+              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Resortes de retención':_cl==='de'?'Rückhaltefedern':'Retention springs'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Acero de resorte templado · restituyen a N1 tras cada pulsación':_cl==='de'?'Vergüteter Federstahl · stellen nach jedem Druck auf N1 zurück':'Tempered spring steel · return ratchet to N1 after each press'}</div></div>
             </div>
       </div>
 
@@ -4143,7 +4144,7 @@ window.TRANS = {
       intent: {
         tagline: 'Una campana de bicicleta rediseñada para distinguir la cortesía del peligro.',
         desc: [
-          'Campana comenzó con una observación conductual: la campana de bicicleta, obligatoria por ley en la mayoría de los países, no puede distinguir entre una petición amable de paso y una alerta de peligro urgente. La pregunta de investigación no fue cómo hacerla ver diferente, sino cómo hacer que exprese la intención del ciclista.',
+          'Intent comenzó con una observación conductual: la campana de bicicleta, obligatoria por ley en la mayoría de los países, no puede distinguir entre una petición amable de paso y una alerta de peligro urgente. La pregunta de investigación no fue cómo hacerla ver diferente, sino cómo hacer que exprese la intención del ciclista.',
           'El proceso mapeó el espacio completo de diseño: análisis histórico, tipología, observación de campo, user persona, mapa de stakeholders, análisis de journey y evaluación UX en siete dimensiones. Cada método señalaba el mismo problema raíz: la campana comunica una sola señal, y esa señal no lleva información sobre urgencia, intención ni gravedad.',
           'La respuesta es mecánica, no digital. Un mecanismo de trinquete que acumula presión con pulsaciones consecutivas, avanzando una leva que aumenta el radio de giro del martillo en cada toque. Tres toques, tres niveles, tres cosas distintas que decir. Cuatro componentes. Sin batería, sin curva de aprendizaje.'
         ]
@@ -4250,7 +4251,7 @@ window.TRANS = {
       intent: {
         tagline: 'Eine Fahrradklingel, neu gestaltet um Höflichkeit von Gefahr zu unterscheiden.',
         desc: [
-          'Campana begann mit einer Verhaltensbeobachtung: die Fahrradklingel, in den meisten Ländern gesetzlich vorgeschrieben, kann nicht zwischen einer höflichen Bitte zum Überholen und einer dringenden Gefahrenwarnung unterscheiden. Die Frage war nicht, wie man sie anders aussehen lässt, sondern wie man sie dazu bringt, die Absicht des Fahrers auszudrücken.',
+          'Intent begann mit einer Verhaltensbeobachtung: die Fahrradklingel, in den meisten Ländern gesetzlich vorgeschrieben, kann nicht zwischen einer höflichen Bitte zum Überholen und einer dringenden Gefahrenwarnung unterscheiden. Die Frage war nicht, wie man sie anders aussehen lässt, sondern wie man sie dazu bringt, die Absicht des Fahrers auszudrücken.',
           'Der Prozess kartierte den gesamten Designraum: Historische Analyse, Typologie, Feldbeobachtung, User Persona, Stakeholder-Mapping, Journey-Analyse und UX-Evaluation entlang sieben Dimensionen. Jede Methode zeigte dasselbe Grundproblem: Die Klingel sendet ein einziges Signal, und dieses Signal trägt keine Information über Dringlichkeit, Absicht oder Schweregrad.',
           'Die Antwort ist mechanisch, nicht digital. Ein Ratschenmechanismus, der bei aufeinanderfolgenden Drücken Druck aufbaut, eine Nocke vorschiebt und den Schwingradius des Hammers bei jedem Tipp vergrößert. Drei Drücke, drei Ebenen, drei verschiedene Dinge, die gesagt werden können. Vier Bauteile. Keine Batterie, keine Lernkurve.'
         ]
@@ -4412,8 +4413,8 @@ window.setLang = function(lang) {
   // Re-render project page if currently active
   const activePage = document.querySelector('.page.active');
   if(activePage && activePage.id === 'page-project') {
-    const state = history.state;
-    if(state && state.id) buildProject(state.id);
+    const pid = window._currentProjectId || (history.state && history.state.id);
+    if(pid) buildProject(pid);
   }
 };
 
