@@ -332,6 +332,11 @@
     .proj-title { font-size:clamp(2.2rem,10vw,3.5rem); }
     .pnav-title { font-size:1.2rem; }
     .rights { font-size:.65rem; }
+    /* Prevent spec values from overflowing narrow cells */
+    .spec-value { word-break:break-word; }
+    /* Project nav: stack buttons vertically on small phones */
+    .proj-footer-nav { flex-direction:column; gap:12px; }
+    .pnav-btn.right { align-self:flex-end; text-align:right; }
   }
 
   /* ── Flujo Process Section ── */
@@ -2217,6 +2222,25 @@ function buildProject(id) {
     .cmp-central-finding-lbl{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-bg);opacity:.5;display:block;margin-bottom:8px;}
     .cmp-central-finding-txt{font-size:.94rem;font-weight:500;color:var(--color-bg);line-height:1.65;}
     /* stakeholder SVG — font-size set per element in SVG */
+    /* ── MOBILE: Intent small-screen fixes ── */
+    @media(max-width:560px){
+      /* Signal level cards: stack to 1 column */
+      .cmp-grado-cards{grid-template-columns:1fr!important;}
+      /* "How it works": stack to 1 column */
+      .cmp-how-grid{grid-template-columns:1fr!important;gap:clamp(16px,2.5vw,24px) 0!important;}
+      /* Parts list: stack to 1 column */
+      .cmp-parts-grid{grid-template-columns:1fr!important;gap:14px 0!important;}
+      /* Product detail image pair: stack to 1 column */
+      .cmp-detail-grid{grid-template-columns:1fr!important;}
+      /* Legend note: full-width own row, no auto margin */
+      .cmp-legend-note{margin-left:0!important;flex-basis:100%;padding-top:10px;border-top:1px solid var(--color-border);}
+      /* Timeline: explicit 2-column control */
+      .cmp-timeline{grid-template-columns:repeat(2,1fr)!important;}
+      /* Remove border-top dividers on stacked how-grid items */
+      .cmp-how-grid > div[style*="border-top"]{padding-top:clamp(8px,1.5vw,16px);}
+      /* Grado widget button row: center everything */
+      .cmp-grado-cards .cgn{font-size:clamp(22px,6vw,32px)!important;}
+    }
     </style>
 
     <!-- RESEARCH PHASE HEADER -->
@@ -2994,7 +3018,7 @@ function buildProject(id) {
       <!-- how it works -->
       <div style="padding:clamp(32px,5vw,64px) 0 clamp(32px,5vw,64px) 0;border-top:1px solid var(--color-border);">
         <div style="font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-muted);margin-bottom:clamp(24px,3.5vw,44px);">${c.how_label}</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px) clamp(24px,4vw,56px);">
+        <div class="cmp-how-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px) clamp(24px,4vw,56px);">
           <div>
             <div style="font-size:clamp(36px,5vw,72px);font-weight:900;color:#d24a1f;opacity:.85;line-height:1;margin-bottom:10px;letter-spacing:-.04em;">01</div>
             <div style="font-size:clamp(15px,1.4vw,18px);color:var(--color-text);line-height:1.55;font-weight:500;">${c.how_1}</div>
@@ -3069,7 +3093,7 @@ function buildProject(id) {
           </div>
         </div>
         <!-- Row 2: 3 level cards side by side -->
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--color-border);">
+        <div class="cmp-grado-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--color-border);">
           <div id="cmp-grado-card-1" style="background:var(--color-bg);padding:clamp(12px,2vw,20px);transition:background .25s ease;">
             <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:6px;">
               <span class="cgn" style="font-size:clamp(18px,2.5vw,28px);font-weight:800;letter-spacing:-.04em;color:#d24a1f;opacity:.3;transition:opacity .25s;">N1</span>
@@ -3106,7 +3130,7 @@ function buildProject(id) {
         <div style="display:flex;align-items:center;gap:4px;font-size:.72rem;color:var(--color-muted);">→</div>
         <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--color-text);"><span style="color:#d24a1f;font-weight:700;">+1×</span> N3 <span style="font-size:.64rem;color:var(--color-muted);">${_cl==='es'?'en 3 s':'within 3 s'}</span></div>
       </div>
-      <div style="font-size:.68rem;color:var(--color-muted);margin-left:auto;">${_cl==='es'?'El nivel se mantiene al vencer el tiempo. Siguiente toque reinicia en N1.':_cl==='de'?'Stufe bleibt nach Ablauf. Nächste Eingabe startet bei N1.':'Level holds after timeout. Next press restarts at N1.'}</div>
+      <div class="cmp-legend-note" style="font-size:.68rem;color:var(--color-muted);margin-left:auto;">${_cl==='es'?'El nivel se mantiene al vencer el tiempo. Siguiente toque reinicia en N1.':_cl==='de'?'Stufe bleibt nach Ablauf. Nächste Eingabe startet bei N1.':'Level holds after timeout. Next press restarts at N1.'}</div>
     </div>
 
     </div>
@@ -3127,7 +3151,7 @@ function buildProject(id) {
         <div class="cmp-section-label">${_cl==='es'?'Diseño · Componentes':_cl==='de'?'Design · Bauteile':'Design · Components'}</div>
         <div class="cmp-section-title">${c.parts_label}</div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;">
+      <div class="cmp-parts-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;">
             <div style="display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--color-border);padding-bottom:10px;">
               <div style="flex-shrink:0;width:28px;height:28px;background:#d24a1f;border-radius:2px;"></div>
               <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Pulsador':_cl==='de'?'Drücker':'Pusher'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Aluminio · óxido anodizado · gesto de pulgar, resistencia calibrada':_cl==='de'?'Aluminium · eloxiert (Al₂O₃) · Daumentastung, kalibrierter Widerstand':'Aluminium · anodised oxide (Al₂O₃) · thumb gesture, calibrated resistance'}</div></div>
@@ -3166,7 +3190,7 @@ function buildProject(id) {
         <div class="cmp-section-label">${_cl==='es'?'Diseño de producto':_cl==='de'?'Produktdesign':'Product design'}</div>
         <div class="cmp-section-title">${c.detail_label}</div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--color-border);width:100vw;margin-left:calc(50% - 50vw);">
+      <div class="cmp-detail-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--color-border);width:100vw;margin-left:calc(50% - 50vw);">
         <img loading="lazy" src="/images/render-detalle-1.webp" style="aspect-ratio:3/4;object-fit:cover;display:block;width:100%;">
         <img loading="lazy" src="/images/render-detalle-2.webp" style="aspect-ratio:3/4;object-fit:cover;display:block;width:100%;">
       </div>
