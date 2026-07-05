@@ -1533,6 +1533,51 @@ function _cmpGradoUI(reset) {
   });
 }
 
+// The image is the priority and is never touched: it always keeps its fixed share of the
+// row's width (see .split-right in CSS), so its size never shrinks, stretches, crops, or
+// gets letterboxed. The row's height is therefore always exactly the image's own height.
+// Text is the side that adapts: if a paragraph would need more vertical room than the image
+// provides at the current viewport width, this nudges the text's font-size and line-height
+// down (within a sane floor) until it fits, instead of growing the row or scrolling.
+function fitSplitBlocks(scope) {
+  const root = scope || document;
+  const blocks = root.querySelectorAll('.split-block');
+  blocks.forEach(block => {
+    const left = block.querySelector('.split-left');
+    const right = block.querySelector('.split-right');
+    const img = right ? right.querySelector('img') : null;
+    const body = block.querySelector('.split-body');
+    if (!left || !right || !img || !body) return;
+    const fit = () => {
+      // Reset to the CSS defaults before measuring, so repeated calls (e.g. on resize)
+      // don't compound previous shrinking.
+      body.style.fontSize = '';
+      body.style.lineHeight = '';
+      const targetH = right.getBoundingClientRect().height;
+      if (!targetH) return;
+      let scale = 1;
+      // Shrink in small steps until the text fits the image's height, down to 80% size.
+      while (left.scrollHeight > targetH && scale > 0.8) {
+        scale -= 0.04;
+        body.style.fontSize = (scale * 100) + '%';
+        body.style.lineHeight = (1.78 * (0.94 + 0.06 * scale)).toFixed(2);
+      }
+    };
+    if (img.complete && img.naturalWidth > 0) fit();
+    else img.addEventListener('load', fit, { once: true });
+  });
+}
+(function() {
+  let t;
+  window.addEventListener('resize', () => {
+    clearTimeout(t);
+    t = setTimeout(() => {
+      const el = document.getElementById('projContent');
+      if (el) fitSplitBlocks(el);
+    }, 150);
+  });
+})();
+
 function buildProject(id) {
   window._currentProjectId = id;
   const p = PROJECTS[id];
@@ -3943,6 +3988,7 @@ function buildProject(id) {
     const isTouch = window.matchMedia('(pointer: coarse)').matches;
     hintLabel.textContent = isTouch ? 'Tap to expand' : 'Click to expand';
   }
+  fitSplitBlocks(_projEl);
 }
 
 function initDrag(el) {
