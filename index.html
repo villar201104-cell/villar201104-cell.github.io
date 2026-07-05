@@ -3,8 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nahuel Villar. Industrial Designer</title>
+  <title>Nahuel Villar · Industrial Designer</title>
+  <meta name="description" content="Portfolio of Nahuel Villar, an industrial designer based in the United States. Product design, CMF, and rapid prototyping work spanning bicycle accessories, lighting, furniture, and consumer product redesigns.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Nahuel Villar">
+  <link rel="canonical" href="https://nahuelvillar.com/">
+  <meta name="theme-color" content="#faf9f5">
   <link rel="icon" type="image/png" href="/images/logo.png">
+  <link rel="apple-touch-icon" href="/images/logo.png">
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nahuel Villar">
+  <meta property="og:title" content="Nahuel Villar · Industrial Designer">
+  <meta property="og:description" content="Portfolio of Nahuel Villar, an industrial designer based in the United States. Product design, CMF, and rapid prototyping work spanning bicycle accessories, lighting, furniture, and consumer product redesigns.">
+  <meta property="og:url" content="https://nahuelvillar.com/">
+  <meta property="og:image" content="https://nahuelvillar.com/images/hero-home.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="1500">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nahuel Villar · Industrial Designer">
+  <meta name="twitter:description" content="Portfolio of Nahuel Villar, an industrial designer based in the United States. Product design, CMF, and rapid prototyping work spanning bicycle accessories, lighting, furniture, and consumer product redesigns.">
+  <meta name="twitter:image" content="https://nahuelvillar.com/images/hero-home.webp">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Nahuel Villar",
+    "jobTitle": "Industrial Designer",
+    "url": "https://nahuelvillar.com/",
+    "image": "https://nahuelvillar.com/images/photo.webp",
+    "email": "mailto:nahue201104@hotmail.com",
+    "sameAs": [
+      "https://www.linkedin.com/in/nahuelvillar/",
+      "https://www.instagram.com/portfolio.villar/"
+    ],
+    "address": { "@type": "PostalAddress", "addressCountry": "US" },
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Universidad de Palermo" }
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap">
@@ -211,6 +254,26 @@
   .c-arrow { font-size:1.1rem; color:var(--color-muted); transition:color .3s, transform .3s; align-self:flex-end; }
   .c-item:hover .c-arrow { transform:translate(4px,-4px); }
 
+  /* CONTACT FORM */
+  .cf-kicker { display:block; margin-top:clamp(32px,4vw,48px); margin-bottom:20px; font-size:.68rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--color-muted); }
+  .contact-form { max-width:640px; }
+  .cf-row { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .cf-field { display:flex; flex-direction:column; margin-bottom:22px; }
+  .cf-field label { font-size:.68rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--color-muted); margin-bottom:8px; }
+  .cf-field input, .cf-field textarea { font-family:var(--font-body); font-size:1rem; color:var(--color-text); background:none; border:none; border-bottom:1px solid var(--color-border); border-radius:0; padding:8px 2px; transition:border-color .25s var(--ease); resize:vertical; }
+  .cf-field input:focus, .cf-field textarea:focus { outline:none; border-color:var(--color-text); }
+  .cf-hp { position:absolute; left:-9999px; width:1px; height:1px; opacity:0; }
+  .cf-submit { display:inline-flex; align-items:center; gap:8px; margin-top:4px; padding:14px 28px; border:1px solid var(--color-text); border-radius:2px; background:none; color:var(--color-text); font-family:var(--font-body); font-size:.85rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase; cursor:pointer; transition:background .3s var(--ease), color .3s var(--ease), transform 160ms cubic-bezier(0.23,1,0.32,1); }
+  .cf-submit:hover, .cf-submit:focus-visible { background:var(--color-text); color:var(--color-bg); }
+  .cf-submit:active:not(:disabled) { transform:scale(.97); }
+  .cf-submit:disabled { opacity:.6; cursor:default; }
+  .cf-arrow { display:inline-block; transition:transform .3s var(--ease); }
+  .cf-submit:hover .cf-arrow { transform:translate(3px,-3px); }
+  .cf-status { margin-top:14px; font-size:.85rem; color:var(--color-muted); min-height:1.2em; }
+  .cf-status-ok { color:var(--color-text); }
+  .cf-status-err { color:oklch(48% 0.14 35); }
+  @media(max-width:600px) { .cf-row { grid-template-columns:1fr; } }
+
   /* FOOTER */
   .footer { padding:12px clamp(20px,4vw,56px); border-top:1px solid var(--color-border); display:flex; justify-content:space-between; }
   .footer p { font-size:.75rem; color:var(--color-muted); }
@@ -228,6 +291,28 @@
   .fu { opacity:0; transform:translateY(28px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
   .fu.in { opacity:1; transform:translateY(0); }
   .d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s} .d4{transition-delay:.32s}
+
+  /* ACCESSIBILITY: skip link */
+  .skip-link {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 10000;
+    background: var(--color-text);
+    color: var(--color-bg);
+    padding: 10px 18px;
+    font-size: .82rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    border-radius: 4px;
+    transform: translateY(-80px);
+    opacity: 0;
+    transition: transform .2s cubic-bezier(0.23,1,0.32,1), opacity .2s var(--ease);
+  }
+  .skip-link:focus {
+    transform: translateY(0);
+    opacity: 1;
+  }
 
   /* ACCESSIBILITY: focus-visible ring */
   :focus-visible {
@@ -695,6 +780,7 @@
   <link rel="preload" as="image" href="/images/core-hero.webp">
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to content</a>
 <script>document.addEventListener('DOMContentLoaded',function(){ window.dispatchEvent(new CustomEvent('intro-done')); });</script>
 
 
@@ -750,6 +836,7 @@
   </div>
 </div>
 
+<div id="main-content" tabindex="-1"></div>
 
 <!-- HOME -->
 <div class="page active" id="page-home">
@@ -880,13 +967,13 @@
       <div class="home-footer-top">
         <p class="rights" data-i18n="rights">© 2026 Nahuel Villar. All Rights Reserved</p>
         <div class="socials">
-          <a href="https://linkedin.com/in/" target="_blank" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/nahuelvillar/" target="_blank" rel="noopener" aria-label="LinkedIn">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           </a>
           <a href="mailto:nahue201104@hotmail.com" aria-label="Email">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
           </a>
-          <a href="https://instagram.com/" target="_blank" aria-label="Instagram">
+          <a href="https://www.instagram.com/portfolio.villar/" target="_blank" rel="noopener" aria-label="Instagram">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
           </a>
         </div>
@@ -1010,12 +1097,12 @@
           <span class="c-val">nahue201104@hotmail.com</span>
           <span class="c-arrow">↗</span>
         </a>
-        <a href="https://instagram.com/" target="_blank" class="c-item fu d2" data-cursor="light">
+        <a href="https://www.instagram.com/portfolio.villar/" target="_blank" rel="noopener" class="c-item fu d2" data-cursor="light">
           <span class="c-lbl">Instagram</span>
-          <span class="c-val">@nahuelvillar</span>
+          <span class="c-val">@portfolio.villar</span>
           <span class="c-arrow">↗</span>
         </a>
-        <a href="https://linkedin.com/in/" target="_blank" class="c-item fu d3" data-cursor="light">
+        <a href="https://www.linkedin.com/in/nahuelvillar/" target="_blank" rel="noopener" class="c-item fu d3" data-cursor="light">
           <span class="c-lbl">LinkedIn</span>
           <span class="c-val">Nahuel Villar</span>
           <span class="c-arrow">↗</span>
@@ -1026,6 +1113,30 @@
           <span class="c-arrow">↗</span>
         </a>
       </div>
+
+      <span class="cf-kicker fu d1">Or send a message</span>
+      <form class="contact-form fu d2" id="contactForm" onsubmit="return submitContactForm(event)">
+        <div class="cf-row">
+          <div class="cf-field">
+            <label for="cfName">Name</label>
+            <input type="text" id="cfName" name="name" required autocomplete="name">
+          </div>
+          <div class="cf-field">
+            <label for="cfEmail">Email</label>
+            <input type="email" id="cfEmail" name="email" required autocomplete="email">
+          </div>
+        </div>
+        <div class="cf-field">
+          <label for="cfMessage">Message</label>
+          <textarea id="cfMessage" name="message" rows="4" required></textarea>
+        </div>
+        <input type="text" name="_gotcha" class="cf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit" class="cf-submit">
+          <span>Send message</span>
+          <span class="cf-arrow" aria-hidden="true">↗</span>
+        </button>
+        <p class="cf-status" id="cfStatus" role="status" aria-live="polite"></p>
+      </form>
     </div>
     <footer class="footer"><p>© 2026 Nahuel Villar</p><p>USA</p></footer>
   </div>
@@ -1108,6 +1219,26 @@ const PROJECTS = {
 };
 window.PROJECTS = PROJECTS;
 
+/* ---- Per-page <title> / meta description / OG / Twitter updates ---- */
+const SITE_TITLE = 'Nahuel Villar \u00b7 Industrial Designer';
+const SITE_DESC = 'Portfolio of Nahuel Villar, an industrial designer based in the United States. Product design, CMF, and rapid prototyping work spanning bicycle accessories, lighting, furniture, and consumer product redesigns.';
+
+function setMeta(title, description) {
+  document.title = title;
+  const set = (sel, attr, val) => { const el = document.querySelector(sel); if(el) el.setAttribute(attr, val); };
+  set('meta[name="description"]', 'content', description);
+  set('meta[property="og:title"]', 'content', title);
+  set('meta[property="og:description"]', 'content', description);
+  set('meta[name="twitter:title"]', 'content', title);
+  set('meta[name="twitter:description"]', 'content', description);
+}
+
+function setPageMeta(page) {
+  if(page === 'about') setMeta('About \u00b7 ' + SITE_TITLE, SITE_DESC);
+  else if(page === 'contact') setMeta('Contact \u00b7 ' + SITE_TITLE, SITE_DESC);
+  else if(page === 'home') setMeta(SITE_TITLE, SITE_DESC);
+}
+
 let cur = 'home';
 
 function toggleMenu() {
@@ -1128,6 +1259,67 @@ document.addEventListener('click', function(e) {
   if(!e.target.closest('#langGlobe')) closeLangMenu();
 });
 
+/* ---- Contact form: submits to Formspree (no backend needed for a static GitHub Pages site) ---- */
+/* TODO: sign up free at https://formspree.io, create a form, then replace YOUR_FORM_ID below with your real endpoint. */
+const CONTACT_FORM_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+const CONTACT_FALLBACK_EMAIL = 'nahue201104@hotmail.com';
+
+function submitContactForm(e) {
+  e.preventDefault();
+  const form = e.target;
+  const status = document.getElementById('cfStatus');
+  const btn = form.querySelector('.cf-submit');
+
+  // Honeypot: real users never fill this field in. If it's filled, silently drop it.
+  if(form._gotcha.value) {
+    status.textContent = "Thanks \u2014 I'll get back to you soon.";
+    status.className = 'cf-status cf-status-ok';
+    form.reset();
+    return false;
+  }
+
+  const name = form.name.value.trim();
+  const email = form.email.value.trim();
+  const message = form.message.value.trim();
+  if(!name || !email || !message) return false;
+
+  if(CONTACT_FORM_ENDPOINT.indexOf('YOUR_FORM_ID') !== -1) {
+    // No form service configured yet: fall back to opening the visitor's email client.
+    const subject = encodeURIComponent('Message from ' + name + ' via nahuelvillar.com');
+    const body = encodeURIComponent(message + '\n\n\u2014 ' + name + ' (' + email + ')');
+    window.location.href = 'mailto:' + CONTACT_FALLBACK_EMAIL + '?subject=' + subject + '&body=' + body;
+    status.textContent = 'Opening your email client\u2026';
+    status.className = 'cf-status';
+    return false;
+  }
+
+  btn.disabled = true;
+  status.textContent = 'Sending\u2026';
+  status.className = 'cf-status';
+
+  fetch(CONTACT_FORM_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Accept': 'application/json' },
+    body: new FormData(form)
+  }).then(res => {
+    if(res.ok) {
+      status.textContent = "Thanks \u2014 I'll get back to you soon.";
+      status.className = 'cf-status cf-status-ok';
+      form.reset();
+    } else {
+      status.textContent = 'Something went wrong. Try emailing me directly instead.';
+      status.className = 'cf-status cf-status-err';
+    }
+  }).catch(() => {
+    status.textContent = 'Something went wrong. Try emailing me directly instead.';
+    status.className = 'cf-status cf-status-err';
+  }).finally(() => {
+    btn.disabled = false;
+  });
+
+  return false;
+}
+
 function go(page, id, pushState=true) {
   const active = document.querySelector('.page.active');
   if(active) { active.classList.add('exit'); active.classList.remove('active'); setTimeout(()=>active.classList.remove('exit'),300); }
@@ -1136,6 +1328,7 @@ function go(page, id, pushState=true) {
     const next = document.getElementById('page-'+page);
     next.classList.add('active'); next.scrollTop=0; cur=page;
     updateNav(page);
+    if(page !== 'project') setPageMeta(page);
     requestAnimationFrame(()=>next.querySelectorAll('.fu').forEach(el=>{el.classList.remove('in');requestAnimationFrame(()=>el.classList.add('in'))}));
   },100);
   if(pushState) {
@@ -1174,6 +1367,7 @@ window.addEventListener('popstate', e => {
       go('contact', null, false);
     } else {
       updateNav('home');
+      setPageMeta('home');
       try { history.replaceState({page:'home', id:null}, '', location.href); } catch(e) {}
     }
   } catch(e) {}
@@ -1306,11 +1500,11 @@ function _cmpGradoUI(reset) {
   var hint = document.getElementById('cmp-grado-hint');
   var btn  = document.getElementById('cmp-grado-btn');
   if (!tag) return;
-  var labels=['—','N1','N2','N3'], dbs=['—','~70 dB','~76 dB','~82 dB'], widths=['0%','58%','78%','95%'];
+  var labels=['-','N1','N2','N3'], dbs=['-','~70 dB','~76 dB','~82 dB'], widths=['0%','58%','78%','95%'];
   var lv = _cmpGrado.level;
   if (reset) {
-    tag.textContent='—'; tag.style.color='var(--color-border)';
-    db.textContent='— dB'; db.style.color='var(--color-muted)';
+    tag.textContent='-'; tag.style.color='var(--color-border)';
+    db.textContent='- dB'; db.style.color='var(--color-muted)';
     bar.style.width='0%'; hint.style.opacity='0';
     [1,2,3].forEach(function(i){
       var c=document.getElementById('cmp-grado-card-'+i);
@@ -1928,6 +2122,7 @@ function buildProject(id) {
   const descArr = tr.desc || p.desc;
   const desc   = descArr.map(d=>`<p>${d}</p>`).join('');
   const tagline = tr.tagline || p.tagline;
+  setMeta(p.title + ' \u00b7 ' + SITE_TITLE, tagline);
   const prevLbl = ui.prev_lbl || '← Previous';
   const nextLbl = ui.next_lbl || 'Next →';
   const aboutLbl = ui.proj_about || 'About';
@@ -2211,7 +2406,7 @@ function buildProject(id) {
     /* ── ANTE items — no row separators ── */
     .cmp-ante-item{border-bottom:none!important;}
     /* ── RENDERS — full bleed ── */
-    .cmp-render-full{width:100vw!important;margin-left:calc(50% - 50vw)!important;margin-right:0!important;max-width:none!important;display:block;}
+    .cmp-render-full{width:calc(100% + 2*var(--ph,6%))!important;margin-left:calc(-1*var(--ph,6%))!important;margin-right:calc(-1*var(--ph,6%))!important;max-width:none!important;display:block;}
     .cmp-render-hero{margin-left:0!important;margin-right:0!important;border-left:none!important;border-right:none!important;border-top:none!important;}
     /* ── KEY MOMENTS equal height ── */
     .cmp-km-wrap{display:flex;flex-direction:column;height:100%;}
@@ -3082,9 +3277,9 @@ function buildProject(id) {
             </button>
           </div>
           <div style="display:flex;align-items:center;gap:clamp(12px,2vw,24px);flex:1;min-width:140px;">
-            <div id="cmp-grado-level-tag" style="font-size:clamp(20px,3vw,36px);font-weight:800;letter-spacing:-.05em;color:var(--color-border);line-height:1;transition:color .25s ease;flex-shrink:0;">—</div>
+            <div id="cmp-grado-level-tag" style="font-size:clamp(20px,3vw,36px);font-weight:800;letter-spacing:-.05em;color:var(--color-border);line-height:1;transition:color .25s ease;flex-shrink:0;">-</div>
             <div style="display:flex;flex-direction:column;gap:4px;flex:1;">
-              <div id="cmp-grado-db" style="font-size:.68rem;font-weight:600;letter-spacing:.08em;color:var(--color-muted);transition:color .25s ease;">— dB</div>
+              <div id="cmp-grado-db" style="font-size:.68rem;font-weight:600;letter-spacing:.08em;color:var(--color-muted);transition:color .25s ease;">- dB</div>
               <div style="height:2px;background:var(--color-border);border-radius:2px;overflow:hidden;max-width:160px;">
                 <div id="cmp-grado-bar" style="height:100%;width:0%;background:#d24a1f;border-radius:2px;transition:width .35s ease;"></div>
               </div>
@@ -3190,7 +3385,7 @@ function buildProject(id) {
         <div class="cmp-section-label">${_cl==='es'?'Diseño de producto':_cl==='de'?'Produktdesign':'Product design'}</div>
         <div class="cmp-section-title">${c.detail_label}</div>
       </div>
-      <div class="cmp-detail-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--color-border);width:100vw;margin-left:calc(50% - 50vw);">
+      <div class="cmp-detail-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--color-border);width:calc(100% + 2*var(--ph,6%));margin-left:calc(-1*var(--ph,6%));">
         <img loading="lazy" src="/images/render-detalle-1.webp" style="aspect-ratio:3/4;object-fit:cover;display:block;width:100%;">
         <img loading="lazy" src="/images/render-detalle-2.webp" style="aspect-ratio:3/4;object-fit:cover;display:block;width:100%;">
       </div>
@@ -4438,6 +4633,34 @@ window.setLang = function(lang) {
   }
 };
 
+</script>
+
+<script>
+/* ---- Keyboard accessibility: make onclick-driven elements operable without a mouse ---- */
+(function() {
+  function enhance() {
+    document.querySelectorAll('[onclick]').forEach(function(el) {
+      var tag = el.tagName.toLowerCase();
+      var isNativelyFocusable = (tag === 'button') || (tag === 'a' && el.hasAttribute('href')) || (tag === 'input') || (tag === 'textarea') || (tag === 'select');
+      if(isNativelyFocusable) return;
+      if(!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+      if(!el.hasAttribute('role')) el.setAttribute('role', tag === 'a' ? 'link' : 'button');
+    });
+  }
+  enhance();
+  // Re-run after dynamic content (project pages, language switches) is injected
+  var projEl = document.getElementById('projContent');
+  if(projEl && window.MutationObserver) {
+    new MutationObserver(enhance).observe(projEl, {childList:true, subtree:true});
+  }
+  document.addEventListener('keydown', function(e) {
+    if(e.key !== 'Enter' && e.key !== ' ' && e.key !== 'Spacebar') return;
+    var el = e.target.closest('[onclick][tabindex]');
+    if(!el) return;
+    if(e.key !== 'Enter') e.preventDefault(); // stop page scroll on Space
+    el.click();
+  });
+})();
 </script>
 </body>
 </html>
