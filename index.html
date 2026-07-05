@@ -77,7 +77,9 @@
 
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior: smooth; }
-  body { font-family: var(--font-body); font-weight:400; background: var(--color-bg); color: var(--color-text); overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-optical-sizing: auto; }
+  body { font-family: var(--font-body); font-weight:400; background: var(--color-bg); color: var(--color-text); overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-optical-sizing: auto; -webkit-user-select:none; user-select:none; }
+  /* Keep selection working where it's actually useful: the contact form and copyable contact details */
+  input, textarea, .c-val { -webkit-user-select:text; user-select:text; }
   h1,h2,h3,h4 { text-wrap: balance; }
   p { text-wrap: pretty; }
   ::selection { background: var(--color-text); color: var(--color-bg); }
@@ -437,15 +439,19 @@
   .origins-question em{color:var(--color-text);font-style:italic;font-weight:500}
   /* Text side drives the row's height now (min-height keeps the one-screen feel on short copy);
      the render side is pinned via position:sticky so it never gets clipped or forces a scrollbar
-     regardless of viewport height (1920x1080, 1920x1200, 1366x768, etc). */
+     regardless of viewport height (1920x1080, 1920x1200, 1366x768, etc).
+     IMPORTANT: split-right's width is a fixed share of the row (clamp), NOT derived from the
+     image's own aspect ratio — a landscape image forced to 100% row-height used to demand
+     whatever width its aspect ratio required, which could exceed the viewport and cause a
+     horizontal scrollbar. object-fit:cover now crops instead of overflowing. */
   .split-block{display:flex;align-items:flex-start;border-bottom:1px solid var(--color-border);min-height:calc(100vh - var(--nav-height))}
   .split-left{flex:1;min-width:320px;padding:clamp(48px,6vw,80px) clamp(80px,10vw,160px);display:flex;flex-direction:column;justify-content:center}
-  .split-right{flex-shrink:0;overflow:hidden;position:sticky;top:var(--nav-height);height:calc(100vh - var(--nav-height))}
-  .split-right img{height:100%;width:auto;display:block}
+  .split-right{flex:0 0 clamp(320px,42vw,640px);overflow:hidden;position:sticky;top:var(--nav-height);height:calc(100vh - var(--nav-height))}
+  .split-right img{height:100%;width:100%;object-fit:cover;display:block}
   .split-right.flip{order:-1}
   .split-tag{font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--color-muted);margin-bottom:16px;display:block}
   .split-h{font-family:var(--font-display);font-size:clamp(1.4rem,2.2vw,1.9rem);font-weight:600;letter-spacing:-.02em;line-height:1.15;margin-bottom:24px}
-  .split-body{font-size:clamp(.9rem,1.1vw,1rem);line-height:1.78;color:var(--color-soft);max-width:420px;text-align:left}
+  .split-body{font-size:clamp(.9rem,1.1vw,1rem);line-height:1.78;color:var(--color-soft);max-width:560px;text-align:left}
   .split-body p{margin-bottom:14px}
   .split-body p:last-child{margin-bottom:0}
   .split-specs{margin-top:28px;padding-top:24px;border-top:1px solid var(--color-border);display:flex;gap:28px;flex-wrap:wrap}
@@ -482,7 +488,7 @@
     .origins-grid{grid-template-columns:1fr;margin:0 24px}
     .origins-question{margin:0 24px;padding:28px 0 48px}
     .split-block{flex-direction:column;height:auto;min-height:unset}
-    .split-right{position:static;flex-shrink:1;aspect-ratio:4/3;width:100%;height:auto;overflow:hidden}
+    .split-right{position:static;flex:0 1 auto;aspect-ratio:4/3;width:100%;height:auto;overflow:hidden}
     .split-right img{width:100%;height:100%;object-fit:cover}
     .split-right.flip{order:0}
     .split-left{padding:40px 24px;overflow-y:visible;min-width:0}
@@ -686,7 +692,7 @@
     .split-block{flex-direction:column;border-bottom:1px solid var(--color-border);height:auto;min-height:unset;}
     /* Keep process sections alternating text / render on mobile */
     .split-left{padding:42px 20px;order:1;overflow-y:visible;min-width:0;}
-    .split-right,.split-right.flip{position:static;order:2;flex-shrink:1;width:100%;height:auto;aspect-ratio:4/3;}
+    .split-right,.split-right.flip{position:static;order:2;flex:0 1 auto;width:100%;height:auto;aspect-ratio:4/3;}
     .split-right img{width:100%;height:100%;object-fit:cover;}
     .split-h{font-size:clamp(1.55rem,8vw,2.25rem);line-height:1.08;margin-bottom:18px;}
     .split-body{font-size:.96rem;line-height:1.68;max-width:none;}
