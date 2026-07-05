@@ -454,6 +454,23 @@
   .split-body p{margin-bottom:14px}
   .split-body p:last-child{margin-bottom:0}
   .split-specs{margin-top:28px;padding-top:24px;border-top:1px solid var(--color-border);display:flex;gap:28px;flex-wrap:wrap}
+  /* Common 1920x1200 laptops run at 125% OS scaling, which means the browser's actual usable
+     width is ~1536px, not 1920px — well within "desktop" media-query terms but with markedly
+     less room than a real 1920px-wide screen. The image (a fixed % of that narrower width) is
+     shorter, and the text column loses width fast enough that it needs more lines than the now-
+     shorter image can hold, showing up as white space around the image. This range gives the
+     image a smaller share and tightens the type so text keeps pace with it, matching the image's
+     height instead of overflowing it — without touching anything at full 1920px width. */
+  @media(max-width:1700px) and (min-width:901px){
+    .split-block{min-height:unset}
+    .split-right{flex:0 0 44%}
+    .split-left{padding:clamp(32px,4vw,56px) clamp(28px,4vw,56px)}
+    .split-tag{margin-bottom:10px}
+    .split-h{font-size:clamp(1.1rem,1.7vw,1.4rem);margin-bottom:14px}
+    .split-body{font-size:clamp(.78rem,.92vw,.86rem);line-height:1.52;max-width:none}
+    .split-body p{margin-bottom:9px}
+    .split-specs{margin-top:14px;padding-top:12px;gap:18px}
+  }
   .evo-wrap{padding:clamp(56px,7vw,96px) clamp(80px,10vw,160px);border-bottom:1px solid var(--color-border)}
   .evo-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:40px}
   .evo-title{font-family:var(--font-display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em}
