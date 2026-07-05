@@ -437,30 +437,20 @@
   .origins-stat strong{color:var(--color-text);font-weight:600}
   .origins-question{margin:0 clamp(80px,10vw,160px);padding:36px 0 clamp(64px,8vw,100px);border-bottom:1px solid var(--color-border);font-family:var(--font-display);font-size:clamp(1rem,1.6vw,1.35rem);font-style:italic;font-weight:400;color:var(--color-muted);line-height:1.55}
   .origins-question em{color:var(--color-text);font-style:italic;font-weight:500}
-  /* Text side drives the row's height now (min-height keeps the one-screen feel on short copy);
-     the render side is pinned via position:sticky so it never gets clipped or forces a scrollbar
-     regardless of viewport height (1920x1080, 1920x1200, 1366x768, etc).
-     IMPORTANT: split-right's width is a fixed share of the row (46%), not derived from the
-     image's own aspect ratio. Locking the row to one full screen height and letting the image
-     fill that height (height:100%;width:auto) made the image's rendered WIDTH grow with
-     viewport height, eating an unpredictable amount of the row and starving split-left down to
-     as little as ~90px of usable text width on tall screens (measured on 1920x1200). Fixing
-     split-right's width instead makes the image's size depend only on viewport WIDTH, so
-     split-left always keeps a large, predictable column. The image still never crops or
-     deforms: width:100% + height:auto preserves its exact aspect ratio. */
-  /* Row height is no longer forced to one screen: it's auto, sized to whichever column (text or
-     image) is naturally taller, with a sensible floor via min-height. This is what actually
-     removes the scrollbar for good — a fixed viewport-height row and an unbounded text column
-     can't both be guaranteed to fit at the same time, but an auto-height row always fits its
-     own content. */
+  /* Row height is auto (floor via min-height only) — it always sizes to whichever column is
+     naturally taller, so overflow/scrollbars are structurally impossible, not just tuned away.
+     split-right is a bigger fixed share of the row (56%, up from the 46% of the last pass) so
+     the image reads noticeably larger/closer to its original presence, at the cost of a
+     narrower (but still comfortable) text column. Image sizing is width:100%;height:auto:
+     never cropped, never deformed, whatever height results from that width is its true size. */
   .split-block{display:flex;border-bottom:1px solid var(--color-border);min-height:560px}
-  .split-left{flex:1;min-width:320px;padding:clamp(48px,6vw,80px) clamp(80px,10vw,160px);display:flex;flex-direction:column;justify-content:center}
-  .split-right{flex:0 0 46%;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .split-left{flex:1;min-width:280px;padding:clamp(48px,6vw,80px) clamp(56px,7vw,120px);display:flex;flex-direction:column;justify-content:center}
+  .split-right{flex:0 0 56%;display:flex;align-items:center;justify-content:center;overflow:hidden}
   .split-right img{width:100%;height:auto;display:block}
   .split-right.flip{order:-1}
   .split-tag{font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--color-muted);margin-bottom:16px;display:block}
   .split-h{font-family:var(--font-display);font-size:clamp(1.4rem,2.2vw,1.9rem);font-weight:600;letter-spacing:-.02em;line-height:1.15;margin-bottom:24px}
-  .split-body{font-size:clamp(.9rem,1.1vw,1rem);line-height:1.72;color:var(--color-soft);max-width:680px;text-align:left}
+  .split-body{font-size:clamp(.9rem,1.1vw,1rem);line-height:1.78;color:var(--color-soft);max-width:560px;text-align:left}
   .split-body p{margin-bottom:14px}
   .split-body p:last-child{margin-bottom:0}
   .split-specs{margin-top:28px;padding-top:24px;border-top:1px solid var(--color-border);display:flex;gap:28px;flex-wrap:wrap}
@@ -3470,8 +3460,8 @@ function buildProject(id) {
         <span class="split-tag">Key Decisions</span>
         <div class="split-h">Screen + support:<br>two roles, one system</div>
         <div class="split-body">
-          <p>The screen carries all formal complexity: a three-dimensional internal pattern and branching extensions that modulate how light distributes across the wall. PETG was chosen for two reasons: thermal resistance protects it from the light source's heat, and translucency keeps the pattern invisible until the lamp is on. Both properties are required.</p>
-          <p>The wall support integrates the bipin base and follows the screen's morphological language, mounting onto standard Argentine recessed boxes with 2 screws. The two bodies join through a bayonet joint: the screen slides over an extruded ring, locks with a quarter-turn, and allows multiple angle configurations without tools. No adhesives, no screws between bodies.</p>
+          <p>The screen carries all formal complexity: a three-dimensional internal pattern and branching extensions at its top and bottom edges that modulate how light distributes across the wall. PETG was chosen for two simultaneous reasons: its thermal resistance protects the material from the heat of the light source, and its translucency keeps the internal pattern invisible until the lamp is on. Both properties are required. Neither alone is enough.</p>
+          <p>The wall support integrates the bipin base and follows the same morphological language as the screen. It mounts onto standard Argentine recessed electrical boxes with 2 screws. The connection between the two bodies is a bayonet joint: the screen slides over an extruded ring with a central channel, locks with a quarter-turn rotation, and allows multiple angle configurations without tools. No adhesives, no screws between bodies.</p>
         </div>
         <div class="split-specs">
           <div class="split-spec"><div class="spec-label">Light source</div><div class="spec-value">Bipin</div></div>
@@ -3615,8 +3605,8 @@ function buildProject(id) {
         <span class="split-tag">Key Decisions</span>
         <div class="split-h">Snap fit + water flow:<br>function drives form</div>
         <div class="split-body">
-          <p>The 3-point snap fit does more than connect modules: the three contact points double as the structural feet of each unit. The first module rests directly on the ground through them, and every subsequent module rests on the one below through the same joint. Connection and support are one and the same component.</p>
-          <p>Water management was integrated from the start: perforated points at the base of each module drain water downward from one to the next, so the entire stack can be irrigated from the top without moving anything. The neutral gray was chosen to recede into any terrace context, letting the plants and configuration take the focus.</p>
+          <p>The 3-point snap fit does more than connect modules: the three contact points double as the structural feet of each unit. The first module rests directly on the ground through them. Every subsequent module rests on the one below through the same joint. The connection and the support are one and the same component.</p>
+          <p>Water management was integrated from the start. Perforated points at the base of each module allow water to drain downward from one module to the next, so the entire stack can be irrigated from the top without moving anything. The color, a neutral gray, was chosen to recede into any terrace context, letting the plants and the configuration take the focus.</p>
         </div>
         <div class="split-specs">
           <div class="split-spec"><div class="spec-label">Drainage</div><div class="spec-value">Module to module</div></div>
@@ -3703,8 +3693,8 @@ function buildProject(id) {
         <span class="split-tag">Material &amp; Construction</span>
         <div class="split-h">Three materials.<br>No exceptions.</div>
         <div class="split-body">
-          <p>Working within Myke's material vocabulary was the brief, not a limitation. Aluminum profiles at 40x20mm form the structural skeleton of every piece: welded at the joints, ground, and powder-coated for weather resistance. The connections disappear into the profile, so the result reads as continuous rather than assembled, keeping the pieces resolved at a smaller scale.</p>
-          <p>Nautical fabric provides the seating and storage surfaces for EASE and LINGER: UV-resistant, weather-tolerant, and deliberately warm against the aluminum's precision. Dekton covers DWELL's table surface: dense, heat-resistant, and visually consistent with the brand's catalog. Three materials. No substitutions.</p>
+          <p>Working within Myke's material vocabulary was not a limitation, it was the brief. Aluminum profiles at 40x20mm form the structural skeleton of every piece: welded at the joints, finished by grinding, and powder-coated for weather resistance. The connections disappear into the profile. The result reads as a continuous element rather than an assembly, which is what keeps the pieces feeling resolved at a smaller scale.</p>
+          <p>Nautical fabric provides the seating and storage surfaces for EASE and LINGER: UV-resistant, weather-tolerant, and deliberately warm against the precision of the aluminum. Dekton covers the table surface of DWELL: dense, heat-resistant, and visually consistent with the brand's existing catalog. Three materials. No substitutions.</p>
         </div>
         <div class="split-specs">
           <div class="split-spec"><div class="spec-label">Structure</div><div class="spec-value">Aluminum profiles 40x20mm</div></div>
@@ -3768,8 +3758,9 @@ function buildProject(id) {
         <span class="split-tag">Name &amp; Concept</span>
         <div class="split-h">Core: the first layer<br>of protection</div>
         <div class="split-body">
-          <p>Before the jersey, before the gear. Core applies the protection closest to the body, positioning the product not as athletic gear but as the foundation beneath it, the essential layer of the routine.</p>
-          <p>The form balances two forces: a smooth, tapered upper body communicating fluidity, and a lower section in hexagonal bas-relief communicating grip and structural density. The translucent cap exposes the sphere even when closed, because the sphere is the core, the functional heart of the object, and revealing it was never optional.</p>
+          <p>Before the jersey, before the gear. Core applies the protection closest to the body. The name positions the product not as athletic gear but as the foundation beneath it, the essential layer of the routine.</p>
+          <p>The form balances two forces: the upper body is smooth and tapered, communicating fluidity and lightness; the lower section is covered in hexagonal bas-relief, communicating grip, protection, and structural density. Neither cancels the other. Together they read as dynamic and controlled.</p>
+          <p>The cap is translucent by decision: it exposes the sphere even when the product is closed, because the sphere is the core, the functional heart of the object. The name and the form reinforce each other. Revealing it was not optional.</p>
         </div>
         <div class="split-specs">
           <div class="split-spec"><div class="spec-label">Name</div><div class="spec-value">Core</div></div>
@@ -3789,8 +3780,8 @@ function buildProject(id) {
         <span class="split-tag">Identity &amp; Finish</span>
         <div class="split-h">Armor language<br>in bas-relief</div>
         <div class="split-body">
-          <p>The hexagonal texture on the lower body serves a double function: visual identity marker and ergonomic grip zone. The faceted relief is sized so fingers lock naturally into the surface, referencing sports protective plating translated into a form the hand can feel.</p>
-          <p>The palette was benchmarked against UA's most recent launches. Dark steel gray is the base: dense, performance-coded, consistent with the brand's material language. Teal is the accent, placed deliberately on the sphere, not the body, so the most eye-catching color marks the product's functional core. The body recedes; the sphere commands attention.</p>
+          <p>The hexagonal texture on the lower body serves a double function: it is the visual identity marker and the ergonomic grip zone. The faceted relief is sized so fingers lock naturally into the surface, making the hold instinctive. The reference is sports protective plating, translated into a form the hand can feel without being told.</p>
+          <p>The palette was benchmarked against UA's most recent product launches. Dark steel gray is the base: dense, performance-coded, consistent with the brand's material language. Teal is the accent, but its placement was a deliberate choice: it lives on the sphere, not on the body. The most eye-catching color marks the functional core of the product, not the container. The body recedes; the sphere commands attention.</p>
         </div>
         <div class="split-specs">
           <div class="split-spec"><div class="spec-label">Base</div><div class="spec-value">Steel gray (PP)</div></div>
@@ -3804,8 +3795,8 @@ function buildProject(id) {
         <span class="split-tag">Production</span>
         <div class="split-h">Every radius<br>justified by process</div>
         <div class="split-body">
-          <p>The body is blow-molded in PP, the only process that achieves this dimensional complexity, including the transition from smooth upper to textured relief, without adding unnecessary wall thickness. Cap, sphere, sphere housing, and label are all PP too, keeping the system within one material family.</p>
-          <p>The cap uses a bayonet closure: internal pins engage an L-shaped channel on the body's neck, locking with a quarter-turn, deliberate and tactile, distinct from a standard screw cap. The applicator ball is press-fitted into its housing by interference fit, and permanent joins use ultrasonic welding, no adhesives needed.</p>
+          <p>The body is blow-molded in PP: the only process that can achieve the form's dimensional complexity, including the transition from smooth upper section to textured relief, without adding unnecessary wall thickness. The cap, sphere, sphere housing, and label are all PP, keeping the entire system within one material family for visual consistency and end-of-life simplicity.</p>
+          <p>The cap operates on a bayonet closure: internal pins on the cap engage an L-shaped channel on the neck of the body, locking with a quarter-turn. The action is deliberate and tactile, distinct from a standard screw cap. The applicator ball is press-fitted into its housing, retained by interference fit without additional fasteners. Permanent structural joins are made with ultrasonic welding, avoiding adhesives and keeping the entire system within one material family.</p>
         </div>
         <div class="split-specs">
           <div class="split-spec"><div class="spec-label">Body</div><div class="spec-value">Blow molding (PP)</div></div>
