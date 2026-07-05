@@ -440,19 +440,23 @@
   /* Text side drives the row's height now (min-height keeps the one-screen feel on short copy);
      the render side is pinned via position:sticky so it never gets clipped or forces a scrollbar
      regardless of viewport height (1920x1080, 1920x1200, 1366x768, etc).
-     IMPORTANT: split-right's width is a fixed share of the row (clamp), NOT derived from the
-     image's own aspect ratio — a landscape image forced to 100% row-height used to demand
-     whatever width its aspect ratio required, which could exceed the viewport and cause a
-     horizontal scrollbar. object-fit:cover now crops instead of overflowing. */
-  /* Row height is fixed to one screen (image's natural, intended size) — both columns stretch
-     to match it exactly. Text never grows the row past the image: paragraphs are tuned to fit,
-     and split-left keeps a silent overflow-y:auto as a safety net (no visible scrollbar, ever)
-     for the rare case content still runs long at unusual viewport sizes. */
-  .split-block{display:flex;border-bottom:1px solid var(--color-border);height:calc(100vh - var(--nav-height));min-height:560px}
-  .split-left{flex:1;min-width:320px;padding:clamp(48px,6vw,80px) clamp(80px,10vw,160px);display:flex;flex-direction:column;justify-content:center;overflow-y:auto;scrollbar-width:none;-ms-overflow-style:none}
-  .split-left::-webkit-scrollbar{display:none}
-  .split-right{flex-shrink:0;overflow:hidden}
-  .split-right img{height:100%;width:auto;display:block}
+     IMPORTANT: split-right's width is a fixed share of the row (46%), not derived from the
+     image's own aspect ratio. Locking the row to one full screen height and letting the image
+     fill that height (height:100%;width:auto) made the image's rendered WIDTH grow with
+     viewport height, eating an unpredictable amount of the row and starving split-left down to
+     as little as ~90px of usable text width on tall screens (measured on 1920x1200). Fixing
+     split-right's width instead makes the image's size depend only on viewport WIDTH, so
+     split-left always keeps a large, predictable column. The image still never crops or
+     deforms: width:100% + height:auto preserves its exact aspect ratio. */
+  /* Row height is no longer forced to one screen: it's auto, sized to whichever column (text or
+     image) is naturally taller, with a sensible floor via min-height. This is what actually
+     removes the scrollbar for good — a fixed viewport-height row and an unbounded text column
+     can't both be guaranteed to fit at the same time, but an auto-height row always fits its
+     own content. */
+  .split-block{display:flex;border-bottom:1px solid var(--color-border);min-height:560px}
+  .split-left{flex:1;min-width:320px;padding:clamp(48px,6vw,80px) clamp(80px,10vw,160px);display:flex;flex-direction:column;justify-content:center}
+  .split-right{flex:0 0 46%;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .split-right img{width:100%;height:auto;display:block}
   .split-right.flip{order:-1}
   .split-tag{font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--color-muted);margin-bottom:16px;display:block}
   .split-h{font-family:var(--font-display);font-size:clamp(1.4rem,2.2vw,1.9rem);font-weight:600;letter-spacing:-.02em;line-height:1.15;margin-bottom:24px}
