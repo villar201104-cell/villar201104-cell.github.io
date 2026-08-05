@@ -3,51 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nahuel Villar · Industrial Designer</title>
-  <meta name="description" content="Portfolio of Nahuel Villar, an industrial designer based in the United States. Product design, CMF, and rapid prototyping work spanning bicycle accessories, lighting, furniture, and consumer product redesigns.">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="Nahuel Villar">
-  <link rel="canonical" href="https://nahuelvillar.com/">
-  <meta name="theme-color" content="#faf9f5">
-  <link rel="icon" type="image/png" href="/images/favicon.png">
-  <link rel="apple-touch-icon" href="/images/favicon.png">
-  <link rel="manifest" href="/manifest.json">
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Nahuel Villar">
-  <meta property="og:title" content="Nahuel Villar · Industrial Designer">
-  <meta property="og:description" content="Portfolio of Nahuel Villar, an industrial designer based in the United States. Product design, CMF, and rapid prototyping work spanning bicycle accessories, lighting, furniture, and consumer product redesigns.">
-  <meta property="og:url" content="https://nahuelvillar.com/">
-  <meta property="og:image" content="https://nahuelvillar.com/images/hero-home.webp">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="1500">
-  <meta property="og:locale" content="en_US">
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Nahuel Villar · Industrial Designer">
-  <meta name="twitter:description" content="Portfolio of Nahuel Villar, an industrial designer based in the United States. Product design, CMF, and rapid prototyping work spanning bicycle accessories, lighting, furniture, and consumer product redesigns.">
-  <meta name="twitter:image" content="https://nahuelvillar.com/images/hero-home.webp">
-
-  <!-- Structured data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Nahuel Villar",
-    "jobTitle": "Industrial Designer",
-    "url": "https://nahuelvillar.com/",
-    "image": "https://nahuelvillar.com/images/photo.webp",
-    "email": "mailto:nahue201104@hotmail.com",
-    "sameAs": [
-      "https://www.linkedin.com/in/nahuelvillar/",
-      "https://www.instagram.com/portfolio.villar/"
-    ],
-    "address": { "@type": "PostalAddress", "addressCountry": "US" },
-    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Universidad de Palermo" }
-  }
-  </script>
+  <title>Nahuel Villar. Industrial Designer</title>
+  <link rel="icon" type="image/png" href="/images/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap">
@@ -62,7 +19,7 @@
     --color-bg-alt:    oklch(96.5% 0.004 87);
     --color-text:      oklch(8.5%  0.005 90);
     --color-soft:      oklch(28%   0.007 75);
-    --color-muted:     oklch(45%   0.009 75);
+    --color-muted:     oklch(53%   0.009 75);
     --color-border:    oklch(91%   0.005 87);
     --font-body:       'Instrument Sans', -apple-system, sans-serif;
     --font-display:    'Space Grotesk', -apple-system, sans-serif;
@@ -78,14 +35,10 @@
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior: smooth; }
   body { font-family: var(--font-body); font-weight:400; background: var(--color-bg); color: var(--color-text); overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-optical-sizing: auto; }
-  /* Keep selection working where it's actually useful: the contact form and copyable contact details */
-  input, textarea, .c-val { -webkit-user-select:text; user-select:text; }
   h1,h2,h3,h4 { text-wrap: balance; }
   p { text-wrap: pretty; }
   ::selection { background: var(--color-text); color: var(--color-bg); }
   img { display:block; max-width:100%; }
-  .page img[loading="lazy"] { background: var(--color-bg-alt); }
-  .nav-logo img { background: none; }
   a { color:inherit; text-decoration:none; }
 
   /* NAV */
@@ -258,26 +211,6 @@
   .c-arrow { font-size:1.1rem; color:var(--color-muted); transition:color .3s, transform .3s; align-self:flex-end; }
   .c-item:hover .c-arrow { transform:translate(4px,-4px); }
 
-  /* CONTACT FORM */
-  .cf-kicker { display:block; margin-top:clamp(32px,4vw,48px); margin-bottom:20px; font-size:.68rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--color-muted); }
-  .contact-form { max-width:640px; }
-  .cf-row { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
-  .cf-field { display:flex; flex-direction:column; margin-bottom:22px; }
-  .cf-field label { font-size:.68rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--color-muted); margin-bottom:8px; }
-  .cf-field input, .cf-field textarea { font-family:var(--font-body); font-size:1rem; color:var(--color-text); background:none; border:none; border-bottom:1px solid var(--color-border); border-radius:0; padding:8px 2px; transition:border-color .25s var(--ease); resize:vertical; }
-  .cf-field input:focus, .cf-field textarea:focus { outline:none; border-color:var(--color-text); }
-  .cf-hp { position:absolute; left:-9999px; width:1px; height:1px; opacity:0; }
-  .cf-submit { display:inline-flex; align-items:center; gap:8px; margin-top:4px; padding:14px 28px; border:1px solid var(--color-text); border-radius:2px; background:none; color:var(--color-text); font-family:var(--font-body); font-size:.85rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase; cursor:pointer; transition:background .3s var(--ease), color .3s var(--ease), transform 160ms cubic-bezier(0.23,1,0.32,1); }
-  .cf-submit:hover, .cf-submit:focus-visible { background:var(--color-text); color:var(--color-bg); }
-  .cf-submit:active:not(:disabled) { transform:scale(.97); }
-  .cf-submit:disabled { opacity:.6; cursor:default; }
-  .cf-arrow { display:inline-block; transition:transform .3s var(--ease); }
-  .cf-submit:hover .cf-arrow { transform:translate(3px,-3px); }
-  .cf-status { margin-top:14px; font-size:.85rem; color:var(--color-muted); min-height:1.2em; }
-  .cf-status-ok { color:var(--color-text); }
-  .cf-status-err { color:oklch(48% 0.14 35); }
-  @media(max-width:600px) { .cf-row { grid-template-columns:1fr; } }
-
   /* FOOTER */
   .footer { padding:12px clamp(20px,4vw,56px); border-top:1px solid var(--color-border); display:flex; justify-content:space-between; }
   .footer p { font-size:.75rem; color:var(--color-muted); }
@@ -295,28 +228,6 @@
   .fu { opacity:0; transform:translateY(28px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
   .fu.in { opacity:1; transform:translateY(0); }
   .d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s} .d4{transition-delay:.32s}
-
-  /* ACCESSIBILITY: skip link */
-  .skip-link {
-    position: fixed;
-    top: 12px;
-    left: 12px;
-    z-index: 10000;
-    background: var(--color-text);
-    color: var(--color-bg);
-    padding: 10px 18px;
-    font-size: .82rem;
-    font-weight: 600;
-    letter-spacing: .04em;
-    border-radius: 4px;
-    transform: translateY(-80px);
-    opacity: 0;
-    transition: transform .2s cubic-bezier(0.23,1,0.32,1), opacity .2s var(--ease);
-  }
-  .skip-link:focus {
-    transform: translateY(0);
-    opacity: 1;
-  }
 
   /* ACCESSIBILITY: focus-visible ring */
   :focus-visible {
@@ -439,40 +350,18 @@
   .origins-stat strong{color:var(--color-text);font-weight:600}
   .origins-question{margin:0 clamp(80px,10vw,160px);padding:36px 0 clamp(64px,8vw,100px);border-bottom:1px solid var(--color-border);font-family:var(--font-display);font-size:clamp(1rem,1.6vw,1.35rem);font-style:italic;font-weight:400;color:var(--color-muted);line-height:1.55}
   .origins-question em{color:var(--color-text);font-style:italic;font-weight:500}
-  /* Row height is auto (floor via min-height only) — it always sizes to whichever column is
-     naturally taller, so overflow/scrollbars are structurally impossible, not just tuned away.
-     split-right is a bigger fixed share of the row (56%, up from the 46% of the last pass) so
-     the image reads noticeably larger/closer to its original presence, at the cost of a
-     narrower (but still comfortable) text column. Image sizing is width:100%;height:auto:
-     never cropped, never deformed, whatever height results from that width is its true size. */
-  .split-block{display:flex;border-bottom:1px solid var(--color-border);min-height:560px}
-  .split-left{flex:1;min-width:280px;padding:clamp(48px,6vw,80px) clamp(56px,7vw,120px);display:flex;flex-direction:column;justify-content:center}
-  .split-right{flex:0 0 56%;display:flex;align-items:center;justify-content:center;overflow:hidden}
-  .split-right img{width:100%;height:auto;display:block}
+  .split-block{display:flex;border-bottom:1px solid var(--color-border);height:calc(100vh - var(--nav-height));min-height:560px}
+  .split-left{flex:1;min-width:320px;padding:clamp(48px,6vw,80px) clamp(80px,10vw,160px);display:flex;flex-direction:column;justify-content:center;overflow-y:auto;scrollbar-width:none;-ms-overflow-style:none}
+  .split-left::-webkit-scrollbar{display:none}
+  .split-right{flex-shrink:0;overflow:hidden}
+  .split-right img{height:100%;width:auto;display:block}
   .split-right.flip{order:-1}
   .split-tag{font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--color-muted);margin-bottom:16px;display:block}
   .split-h{font-family:var(--font-display);font-size:clamp(1.4rem,2.2vw,1.9rem);font-weight:600;letter-spacing:-.02em;line-height:1.15;margin-bottom:24px}
-  .split-body{font-size:clamp(.9rem,1.1vw,1rem);line-height:1.78;color:var(--color-soft);max-width:560px;text-align:left}
+  .split-body{font-size:clamp(.9rem,1.1vw,1rem);line-height:1.78;color:var(--color-soft);max-width:420px;text-align:left}
   .split-body p{margin-bottom:14px}
   .split-body p:last-child{margin-bottom:0}
   .split-specs{margin-top:28px;padding-top:24px;border-top:1px solid var(--color-border);display:flex;gap:28px;flex-wrap:wrap}
-  /* Common 1920x1200 laptops run at 125% OS scaling, which means the browser's actual usable
-     width is ~1536px, not 1920px — well within "desktop" media-query terms but with markedly
-     less room than a real 1920px-wide screen. The image (a fixed % of that narrower width) is
-     shorter, and the text column loses width fast enough that it needs more lines than the now-
-     shorter image can hold, showing up as white space around the image. This range gives the
-     image a smaller share and tightens the type so text keeps pace with it, matching the image's
-     height instead of overflowing it — without touching anything at full 1920px width. */
-  @media(max-width:1700px) and (min-width:901px){
-    .split-block{min-height:unset}
-    .split-right{flex:0 0 44%}
-    .split-left{padding:clamp(32px,4vw,56px) clamp(28px,4vw,56px)}
-    .split-tag{margin-bottom:10px}
-    .split-h{font-size:clamp(1.1rem,1.7vw,1.4rem);margin-bottom:14px}
-    .split-body{font-size:clamp(.78rem,.92vw,.86rem);line-height:1.52;max-width:none}
-    .split-body p{margin-bottom:9px}
-    .split-specs{margin-top:14px;padding-top:12px;gap:18px}
-  }
   .evo-wrap{padding:clamp(56px,7vw,96px) clamp(80px,10vw,160px);border-bottom:1px solid var(--color-border)}
   .evo-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:40px}
   .evo-title{font-family:var(--font-display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em}
@@ -506,7 +395,7 @@
     .origins-grid{grid-template-columns:1fr;margin:0 24px}
     .origins-question{margin:0 24px;padding:28px 0 48px}
     .split-block{flex-direction:column;height:auto;min-height:unset}
-    .split-right{flex-shrink:1;aspect-ratio:4/3;width:100%;height:auto;overflow:hidden}
+    .split-right{flex-shrink:1;aspect-ratio:4/3;width:100%;overflow:hidden}
     .split-right img{width:100%;height:100%;object-fit:cover}
     .split-right.flip{order:0}
     .split-left{padding:40px 24px;overflow-y:visible;min-width:0}
@@ -710,7 +599,7 @@
     .split-block{flex-direction:column;border-bottom:1px solid var(--color-border);height:auto;min-height:unset;}
     /* Keep process sections alternating text / render on mobile */
     .split-left{padding:42px 20px;order:1;overflow-y:visible;min-width:0;}
-    .split-right,.split-right.flip{order:2;flex-shrink:1;width:100%;height:auto;aspect-ratio:4/3;}
+    .split-right,.split-right.flip{order:2;flex-shrink:1;width:100%;aspect-ratio:4/3;}
     .split-right img{width:100%;height:100%;object-fit:cover;}
     .split-h{font-size:clamp(1.55rem,8vw,2.25rem);line-height:1.08;margin-bottom:18px;}
     .split-body{font-size:.96rem;line-height:1.68;max-width:none;}
@@ -802,11 +691,10 @@
   </script>
   <link rel="preload" as="image" href="/images/flujo-hero.webp">
   <link rel="preload" as="image" href="/images/incline-hero.webp">
-  <link rel="preload" as="image" href="/images/hero-home.webp">
+  <link rel="preload" as="image" href="/images/pausa-hero.webp">
   <link rel="preload" as="image" href="/images/core-hero.webp">
 </head>
 <body>
-<a href="#main-content" class="skip-link">Skip to content</a>
 <script>document.addEventListener('DOMContentLoaded',function(){ window.dispatchEvent(new CustomEvent('intro-done')); });</script>
 
 
@@ -862,7 +750,6 @@
   </div>
 </div>
 
-<div id="main-content" tabindex="-1"></div>
 
 <!-- HOME -->
 <div class="page active" id="page-home">
@@ -934,9 +821,9 @@
       </div>
     </main>
     <div class="extras-section">
-      <span class="work-section-label fu" style="padding:0;" data-i18n="addons_label">Add-ons</span>
+      <span class="work-section-label" style="padding:0;" data-i18n="addons_label">Add-ons</span>
       <div class="extras-grid" data-cursor="light">
-        <div class="extra-card-wrap fu d1" onclick="go('project','pausa')">
+        <div class="extra-card-wrap" onclick="go('project','pausa')">
           <div class="extra-card">
             <img loading="lazy" class="extra-card-img" src="/images/pausa-hero.webp" alt="Pausa" style="object-position:center 25%;">
             <div class="extra-card-overlay">
@@ -949,7 +836,7 @@
           </div>
           <div class="extra-card-mobile-label"><span class="extra-cml-title">Pausa</span><span class="extra-cml-cat">Furniture · 2024</span></div>
         </div>
-        <div class="extra-card-wrap fu d2" onclick="go('project','promix')">
+        <div class="extra-card-wrap" onclick="go('project','promix')">
           <div class="extra-card">
             <img loading="lazy" class="extra-card-img" src="/images/promix-hero.webp" alt="Promix" style="object-position:center center;">
             <div class="extra-card-overlay">
@@ -962,7 +849,7 @@
           </div>
           <div class="extra-card-mobile-label"><span class="extra-cml-title">Promix</span><span class="extra-cml-cat">Product Redesign · 2025</span></div>
         </div>
-        <div class="extra-card-wrap fu d3" onclick="go('project','intervalo')">
+        <div class="extra-card-wrap" onclick="go('project','intervalo')">
           <div class="extra-card">
             <img loading="lazy" class="extra-card-img" src="/images/ypf-hero.webp" alt="Intervalo" style="object-position:center center;">
             <div class="extra-card-overlay">
@@ -975,7 +862,7 @@
           </div>
           <div class="extra-card-mobile-label"><span class="extra-cml-title">Intervalo</span><span class="extra-cml-cat">Industrial Design · 2026</span></div>
         </div>
-        <div class="extra-card-wrap fu d4" onclick="go('project','mantablast')">
+        <div class="extra-card-wrap" onclick="go('project','mantablast')">
           <div class="extra-card">
             <img loading="lazy" class="extra-card-img" src="/images/manta-hero.webp" alt="Manta Blast" style="object-position:center center;">
             <div class="extra-card-overlay">
@@ -993,13 +880,13 @@
       <div class="home-footer-top">
         <p class="rights" data-i18n="rights">© 2026 Nahuel Villar. All Rights Reserved</p>
         <div class="socials">
-          <a href="https://www.linkedin.com/in/nahuelvillar/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <a href="https://linkedin.com/in/" target="_blank" aria-label="LinkedIn">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           </a>
           <a href="mailto:nahue201104@hotmail.com" aria-label="Email">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
           </a>
-          <a href="https://www.instagram.com/portfolio.villar/" target="_blank" rel="noopener" aria-label="Instagram">
+          <a href="https://instagram.com/" target="_blank" aria-label="Instagram">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
           </a>
         </div>
@@ -1123,12 +1010,12 @@
           <span class="c-val">nahue201104@hotmail.com</span>
           <span class="c-arrow">↗</span>
         </a>
-        <a href="https://www.instagram.com/portfolio.villar/" target="_blank" rel="noopener" class="c-item fu d2" data-cursor="light">
+        <a href="https://instagram.com/" target="_blank" class="c-item fu d2" data-cursor="light">
           <span class="c-lbl">Instagram</span>
-          <span class="c-val">@portfolio.villar</span>
+          <span class="c-val">@nahuelvillar</span>
           <span class="c-arrow">↗</span>
         </a>
-        <a href="https://www.linkedin.com/in/nahuelvillar/" target="_blank" rel="noopener" class="c-item fu d3" data-cursor="light">
+        <a href="https://linkedin.com/in/" target="_blank" class="c-item fu d3" data-cursor="light">
           <span class="c-lbl">LinkedIn</span>
           <span class="c-val">Nahuel Villar</span>
           <span class="c-arrow">↗</span>
@@ -1139,30 +1026,6 @@
           <span class="c-arrow">↗</span>
         </a>
       </div>
-
-      <span class="cf-kicker fu d1">Or send a message</span>
-      <form class="contact-form fu d2" id="contactForm" onsubmit="return submitContactForm(event)">
-        <div class="cf-row">
-          <div class="cf-field">
-            <label for="cfName">Name</label>
-            <input type="text" id="cfName" name="name" required autocomplete="name">
-          </div>
-          <div class="cf-field">
-            <label for="cfEmail">Email</label>
-            <input type="email" id="cfEmail" name="email" required autocomplete="email">
-          </div>
-        </div>
-        <div class="cf-field">
-          <label for="cfMessage">Message</label>
-          <textarea id="cfMessage" name="message" rows="4" required></textarea>
-        </div>
-        <input type="text" name="_gotcha" class="cf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <button type="submit" class="cf-submit">
-          <span>Send message</span>
-          <span class="cf-arrow" aria-hidden="true">↗</span>
-        </button>
-        <p class="cf-status" id="cfStatus" role="status" aria-live="polite"></p>
-      </form>
     </div>
     <footer class="footer"><p>© 2026 Nahuel Villar</p><p>USA</p></footer>
   </div>
@@ -1245,26 +1108,6 @@ const PROJECTS = {
 };
 window.PROJECTS = PROJECTS;
 
-/* ---- Per-page <title> / meta description / OG / Twitter updates ---- */
-const SITE_TITLE = 'Nahuel Villar \u00b7 Industrial Designer';
-const SITE_DESC = 'Portfolio of Nahuel Villar, an industrial designer based in the United States. Product design, CMF, and rapid prototyping work spanning bicycle accessories, lighting, furniture, and consumer product redesigns.';
-
-function setMeta(title, description) {
-  document.title = title;
-  const set = (sel, attr, val) => { const el = document.querySelector(sel); if(el) el.setAttribute(attr, val); };
-  set('meta[name="description"]', 'content', description);
-  set('meta[property="og:title"]', 'content', title);
-  set('meta[property="og:description"]', 'content', description);
-  set('meta[name="twitter:title"]', 'content', title);
-  set('meta[name="twitter:description"]', 'content', description);
-}
-
-function setPageMeta(page) {
-  if(page === 'about') setMeta('About \u00b7 ' + SITE_TITLE, SITE_DESC);
-  else if(page === 'contact') setMeta('Contact \u00b7 ' + SITE_TITLE, SITE_DESC);
-  else if(page === 'home') setMeta(SITE_TITLE, SITE_DESC);
-}
-
 let cur = 'home';
 
 function toggleMenu() {
@@ -1285,67 +1128,6 @@ document.addEventListener('click', function(e) {
   if(!e.target.closest('#langGlobe')) closeLangMenu();
 });
 
-/* ---- Contact form: submits to Formspree (no backend needed for a static GitHub Pages site) ---- */
-/* TODO: sign up free at https://formspree.io, create a form, then replace YOUR_FORM_ID below with your real endpoint. */
-const CONTACT_FORM_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
-const CONTACT_FALLBACK_EMAIL = 'nahue201104@hotmail.com';
-
-function submitContactForm(e) {
-  e.preventDefault();
-  const form = e.target;
-  const status = document.getElementById('cfStatus');
-  const btn = form.querySelector('.cf-submit');
-
-  // Honeypot: real users never fill this field in. If it's filled, silently drop it.
-  if(form._gotcha.value) {
-    status.textContent = "Thanks \u2014 I'll get back to you soon.";
-    status.className = 'cf-status cf-status-ok';
-    form.reset();
-    return false;
-  }
-
-  const name = form.name.value.trim();
-  const email = form.email.value.trim();
-  const message = form.message.value.trim();
-  if(!name || !email || !message) return false;
-
-  if(CONTACT_FORM_ENDPOINT.indexOf('YOUR_FORM_ID') !== -1) {
-    // No form service configured yet: fall back to opening the visitor's email client.
-    const subject = encodeURIComponent('Message from ' + name + ' via nahuelvillar.com');
-    const body = encodeURIComponent(message + '\n\n\u2014 ' + name + ' (' + email + ')');
-    window.location.href = 'mailto:' + CONTACT_FALLBACK_EMAIL + '?subject=' + subject + '&body=' + body;
-    status.textContent = 'Opening your email client\u2026';
-    status.className = 'cf-status';
-    return false;
-  }
-
-  btn.disabled = true;
-  status.textContent = 'Sending\u2026';
-  status.className = 'cf-status';
-
-  fetch(CONTACT_FORM_ENDPOINT, {
-    method: 'POST',
-    headers: { 'Accept': 'application/json' },
-    body: new FormData(form)
-  }).then(res => {
-    if(res.ok) {
-      status.textContent = "Thanks \u2014 I'll get back to you soon.";
-      status.className = 'cf-status cf-status-ok';
-      form.reset();
-    } else {
-      status.textContent = 'Something went wrong. Try emailing me directly instead.';
-      status.className = 'cf-status cf-status-err';
-    }
-  }).catch(() => {
-    status.textContent = 'Something went wrong. Try emailing me directly instead.';
-    status.className = 'cf-status cf-status-err';
-  }).finally(() => {
-    btn.disabled = false;
-  });
-
-  return false;
-}
-
 function go(page, id, pushState=true) {
   const active = document.querySelector('.page.active');
   if(active) { active.classList.add('exit'); active.classList.remove('active'); setTimeout(()=>active.classList.remove('exit'),300); }
@@ -1354,7 +1136,6 @@ function go(page, id, pushState=true) {
     const next = document.getElementById('page-'+page);
     next.classList.add('active'); next.scrollTop=0; cur=page;
     updateNav(page);
-    if(page !== 'project') setPageMeta(page);
     requestAnimationFrame(()=>next.querySelectorAll('.fu').forEach(el=>{el.classList.remove('in');requestAnimationFrame(()=>el.classList.add('in'))}));
   },100);
   if(pushState) {
@@ -1393,7 +1174,6 @@ window.addEventListener('popstate', e => {
       go('contact', null, false);
     } else {
       updateNav('home');
-      setPageMeta('home');
       try { history.replaceState({page:'home', id:null}, '', location.href); } catch(e) {}
     }
   } catch(e) {}
@@ -1526,11 +1306,11 @@ function _cmpGradoUI(reset) {
   var hint = document.getElementById('cmp-grado-hint');
   var btn  = document.getElementById('cmp-grado-btn');
   if (!tag) return;
-  var labels=['-','N1','N2','N3'], dbs=['-','~70 dB','~76 dB','~82 dB'], widths=['0%','58%','78%','95%'];
+  var labels=['—','N1','N2','N3'], dbs=['—','~70 dB','~76 dB','~82 dB'], widths=['0%','58%','78%','95%'];
   var lv = _cmpGrado.level;
   if (reset) {
-    tag.textContent='-'; tag.style.color='var(--color-border)';
-    db.textContent='- dB'; db.style.color='var(--color-muted)';
+    tag.textContent='—'; tag.style.color='var(--color-border)';
+    db.textContent='— dB'; db.style.color='var(--color-muted)';
     bar.style.width='0%'; hint.style.opacity='0';
     [1,2,3].forEach(function(i){
       var c=document.getElementById('cmp-grado-card-'+i);
@@ -2142,13 +1922,12 @@ function buildProject(id) {
   const panels = p.panels.map((src,i)=>{
     const isH = (p.hPanels||[]).includes(i);
     if(src.endsWith('.mp4')) return `<div class="panel-item panel-video${isH?' panel-landscape':''}" onclick="if(window.matchMedia('(max-width:900px)').matches&&!_dragged)openVideoLightbox('${src}',${i})" ondblclick="openVideoLightbox('${src}',${i})"><video src="${src}" autoplay muted loop playsinline></video></div>`;
-    return `<div class="panel-item${isH?' panel-landscape':''}" onclick="if(window.matchMedia('(max-width:900px)').matches&&!_dragged)openLightbox('${src}',${i})" ondblclick="if(!_dragged)openLightbox('${src}',${i})"><img src="${src}" draggable="false" alt="${p.title} project image ${i+1}"></div>`;
+    return `<div class="panel-item${isH?' panel-landscape':''}" onclick="if(window.matchMedia('(max-width:900px)').matches&&!_dragged)openLightbox('${src}',${i})" ondblclick="if(!_dragged)openLightbox('${src}',${i})"><img src="${src}" draggable="false"></div>`;
   }).join('');
   const specs  = p.specs.map(s=>`<div><p class="spec-label">${s.l}</p><p class="spec-value">${s.v}</p></div>`).join('');
   const descArr = tr.desc || p.desc;
   const desc   = descArr.map(d=>`<p>${d}</p>`).join('');
   const tagline = tr.tagline || p.tagline;
-  setMeta(p.title + ' \u00b7 ' + SITE_TITLE, tagline);
   const prevLbl = ui.prev_lbl || '← Previous';
   const nextLbl = ui.next_lbl || 'Next →';
   const aboutLbl = ui.proj_about || 'About';
@@ -2432,7 +2211,7 @@ function buildProject(id) {
     /* ── ANTE items — no row separators ── */
     .cmp-ante-item{border-bottom:none!important;}
     /* ── RENDERS — full bleed ── */
-    .cmp-render-full{width:calc(100% + 2*var(--ph,6%))!important;margin-left:calc(-1*var(--ph,6%))!important;margin-right:calc(-1*var(--ph,6%))!important;max-width:none!important;display:block;}
+    .cmp-render-full{width:100vw!important;margin-left:calc(50% - 50vw)!important;margin-right:0!important;max-width:none!important;display:block;}
     .cmp-render-hero{margin-left:0!important;margin-right:0!important;border-left:none!important;border-right:none!important;border-top:none!important;}
     /* ── KEY MOMENTS equal height ── */
     .cmp-km-wrap{display:flex;flex-direction:column;height:100%;}
@@ -2645,7 +2424,7 @@ function buildProject(id) {
       <div class="cmp-persona-wrap">
         <!-- Left col: photo + ID + quote -->
         <div class="cmp-persona-col-a">
-          <div class="cmp-persona-photo"><img src="/images/user-persona-lucia.webp" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:2px;" alt="User persona: Lucia, an urban commuter cyclist"></div>
+          <div class="cmp-persona-photo"><img src="/images/user-persona-lucia.webp" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:2px;"></div>
           <div class="cmp-persona-id">
             <div class="cmp-persona-tag-pill">${c.persona_tag}</div>
             <div class="cmp-persona-name-big">Lucía R.</div>
@@ -2748,7 +2527,7 @@ function buildProject(id) {
         <div class="cmp-obs-log-cell"><div class="cmp-obs-log-h">Subject</div><div class="cmp-obs-log-v">Urban commuter · mid-30s · city bike · standard thumb bell</div></div>
         <div class="cmp-obs-log-cell"><div class="cmp-obs-log-h">Route</div><div class="cmp-obs-log-v">Three Islands Blvd → Hallandale Beach Blvd → A1A · 11 min · 3.4 km · mixed</div></div>
       </div>
-      <img src="/images/field-observation.webp" loading="lazy" style="aspect-ratio:21/9;width:100%;object-fit:cover;display:block;margin-bottom:1px;border:1px solid var(--color-border);" alt="Field observation of cyclists signaling in urban traffic">
+      <img src="/images/field-observation.webp" loading="lazy" style="aspect-ratio:21/9;width:100%;object-fit:cover;display:block;margin-bottom:1px;border:1px solid var(--color-border);">
       <div class="cmp-log-wrap">
         <div class="cmp-log-entry">
           <span class="cmp-log-t">00:42</span>
@@ -3148,7 +2927,7 @@ function buildProject(id) {
       </div>
       <p style="font-size:.85rem;color:var(--color-muted);line-height:1.65;margin-bottom:clamp(18px,2.5vw,30px);max-width:640px;">${_cl==='es'?'Referentes visuales de objetos de precisión donde la forma es consecuencia del mecanismo, no decoración aplicada sobre él. Objetos que transmiten su principio de funcionamiento a través de su geometría. La campana necesitaba ganar esa legibilidad.':_cl==='de'?'Visuelle Referenzen aus Präzisionsobjekten, bei denen Form Konsequenz des Mechanismus ist, keine aufgesetzte Dekoration. Objekte, die ihr Funktionsprinzip durch ihre Geometrie vermitteln. Die Klingel musste sich diese Lesbarkeit verdienen.':'Visual references from precision objects where form is a consequence of mechanism, not decoration applied to one. Objects that make their working principle legible through geometry alone. The bell needed to earn that legibility.'}</p>
       <!-- Moodboard image placeholder — full bleed, 1080px-image proportion -->
-      <img src="/images/render-moodboard.webp" loading="lazy" class="cmp-render-full" style="aspect-ratio:1920/902;display:block;width:100%;border-top:1px solid var(--color-border);" alt="Moodboard for the Intent bicycle bell">
+      <img src="/images/render-moodboard.webp" loading="lazy" class="cmp-render-full" style="aspect-ratio:1920/991;display:block;width:100%;border-top:1px solid var(--color-border);">
     </div>
 
     <!-- IDEATION SKETCHES -->
@@ -3157,7 +2936,7 @@ function buildProject(id) {
         <div class="cmp-section-label">${_cl==='es'?'Fase de Diseño · Exploración':_cl==='de'?'Designphase · Exploration':'Design Phase · Exploration'}</div>
         <div class="cmp-section-title">${_cl==='es'?'Bocetos de ideación':_cl==='de'?'Ideationsskizzen':'Ideation sketches'}</div>
       </div>
-      <img loading="lazy" src="/images/render-sketches.webp" class="cmp-render-full" style="aspect-ratio:16/9;object-fit:cover;display:block;border-top:1px solid var(--color-border);" alt="Concept sketches for the Intent bicycle bell">
+      <img loading="lazy" src="/images/render-sketches.webp" class="cmp-render-full" style="aspect-ratio:16/9;object-fit:cover;display:block;border-top:1px solid var(--color-border);">
     </div>
 
     <!-- CMF -->
@@ -3169,7 +2948,7 @@ function buildProject(id) {
       <p style="font-size:.85rem;color:var(--color-muted);line-height:1.65;margin-bottom:clamp(18px,2.5vw,30px);max-width:640px;">${c.cmf_intro}</p>
       <div class="cmp-cmf-grid">
         <div class="cmp-cmf-card">
-          <img src="/images/cmf-brass.webp" loading="lazy" style="aspect-ratio:3/2;width:100%;object-fit:cover;display:block;border-bottom:1px solid var(--color-border);" alt="CMF study of the Intent bell in brass">
+          <img src="/images/cmf-brass.webp" loading="lazy" style="aspect-ratio:3/2;width:100%;object-fit:cover;display:block;border-bottom:1px solid var(--color-border);">
           <div class="cmp-cmf-body">
             <div class="cmp-cmf-mat-name">${c.cmf_m1}</div>
             <div class="cmp-cmf-mat-tone">${c.cmf_m1_tone}</div>
@@ -3182,7 +2961,7 @@ function buildProject(id) {
           </div>
         </div>
         <div class="cmp-cmf-card">
-          <img src="/images/cmf-stainless.webp" loading="lazy" style="aspect-ratio:3/2;width:100%;object-fit:cover;display:block;border-bottom:1px solid var(--color-border);" alt="CMF study of the Intent bell in stainless steel">
+          <img src="/images/cmf-stainless.webp" loading="lazy" style="aspect-ratio:3/2;width:100%;object-fit:cover;display:block;border-bottom:1px solid var(--color-border);">
           <div class="cmp-cmf-body">
             <div class="cmp-cmf-mat-name">${c.cmf_m2}</div>
             <div class="cmp-cmf-mat-tone">${c.cmf_m2_tone}</div>
@@ -3195,7 +2974,7 @@ function buildProject(id) {
           </div>
         </div>
         <div class="cmp-cmf-card">
-          <img src="/images/cmf-aluminum.webp" loading="lazy" style="aspect-ratio:3/2;width:100%;object-fit:cover;display:block;border-bottom:1px solid var(--color-border);" alt="CMF study of the Intent bell in aluminum">
+          <img src="/images/cmf-aluminum.webp" loading="lazy" style="aspect-ratio:3/2;width:100%;object-fit:cover;display:block;border-bottom:1px solid var(--color-border);">
           <div class="cmp-cmf-body">
             <div class="cmp-cmf-mat-name">${c.cmf_m3}</div>
             <div class="cmp-cmf-mat-tone">${c.cmf_m3_tone}</div>
@@ -3208,7 +2987,7 @@ function buildProject(id) {
           </div>
         </div>
         <div class="cmp-cmf-card">
-          <img src="/images/cmf-titanium.webp" loading="lazy" style="aspect-ratio:3/2;width:100%;object-fit:cover;display:block;border-bottom:1px solid var(--color-border);" alt="CMF study of the Intent bell in titanium">
+          <img src="/images/cmf-titanium.webp" loading="lazy" style="aspect-ratio:3/2;width:100%;object-fit:cover;display:block;border-bottom:1px solid var(--color-border);">
           <div class="cmp-cmf-body">
             <div class="cmp-cmf-mat-name">${c.cmf_m4}</div>
             <div class="cmp-cmf-mat-tone">${c.cmf_m4_tone}</div>
@@ -3234,7 +3013,7 @@ function buildProject(id) {
         <div class="cmp-section-title">${c.prop_title}</div>
       </div>
       <!-- render 16:9 — full bleed -->
-      <img src="/images/render-hero-iso-2.webp" class="cmp-render-full" style="aspect-ratio:16/9;object-fit:cover;object-position:center 30%;display:block;border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border);" alt="Isometric render of the Intent bicycle bell">
+      <img src="/images/render-hero-iso-2.webp" class="cmp-render-full" style="aspect-ratio:16/9;object-fit:cover;object-position:center 30%;display:block;border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border);">
 
       <!-- how it works -->
       <div style="padding:clamp(32px,5vw,64px) 0 clamp(32px,5vw,64px) 0;border-top:1px solid var(--color-border);">
@@ -3271,7 +3050,7 @@ function buildProject(id) {
         <div class="cmp-section-label">${_cl==='es'?'Vista de concepto':_cl==='de'?'Konzeptansicht':'Concept view'}</div>
         <div class="cmp-section-title">${_cl==='es'?'Diseño · Vistas':_cl==='de'?'Design · Ansichten':'Design · Views'}</div>
       </div>
-      <img loading="lazy" src="/images/render-hero-concept.webp" class="cmp-render-full" style="aspect-ratio:16/9;object-fit:cover;display:block;border-top:1px solid var(--color-border);" alt="Concept render of the Intent bicycle bell">
+      <img loading="lazy" src="/images/render-hero-concept.webp" class="cmp-render-full" style="aspect-ratio:16/9;object-fit:cover;display:block;border-top:1px solid var(--color-border);">
     </div>
 
     <!-- CONTEXTO — with title -->
@@ -3280,7 +3059,7 @@ function buildProject(id) {
         <div class="cmp-section-label">${_cl==='es'?'Investigación · Contexto de uso':_cl==='de'?'Forschung · Nutzungskontext':'Research · Use context'}</div>
         <div class="cmp-section-title">${_cl==='es'?'Escala urbana real':_cl==='de'?'Realer Einsatzbereich':'Urban scale'}</div>
       </div>
-      <img loading="lazy" src="/images/render-contexto.webp" class="cmp-render-full" style="aspect-ratio:16/9;object-fit:cover;display:block;border-top:1px solid var(--color-border);" alt="Intent bicycle bell mounted on handlebars in riding context">
+      <img loading="lazy" src="/images/render-contexto.webp" class="cmp-render-full" style="aspect-ratio:16/9;object-fit:cover;display:block;border-top:1px solid var(--color-border);">
     </div>
 
     <!-- 3 SIGNAL LEVELS -->
@@ -3290,7 +3069,7 @@ function buildProject(id) {
         <div class="cmp-section-title">${c.sig_title}</div>
       </div>
       <!-- Shared render — full bleed -->
-      <img loading="lazy" src="/images/render-signal-levels.webp" class="cmp-render-full" style="aspect-ratio:16/9;object-fit:cover;display:block;border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border);margin-bottom:clamp(24px,3.5vw,40px);" alt="Render showing the signal levels of the Intent bell">
+      <img loading="lazy" src="/images/render-signal-levels.webp" class="cmp-render-full" style="aspect-ratio:16/9;object-fit:cover;display:block;border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border);margin-bottom:clamp(24px,3.5vw,40px);">
       <!-- GRADO — interactive bell widget -->
       <div style="display:flex;flex-direction:column;gap:1px;background:var(--color-border);margin-top:clamp(20px,3vw,36px);">
         <!-- Row 1: compact tap zone -->
@@ -3303,9 +3082,9 @@ function buildProject(id) {
             </button>
           </div>
           <div style="display:flex;align-items:center;gap:clamp(12px,2vw,24px);flex:1;min-width:140px;">
-            <div id="cmp-grado-level-tag" style="font-size:clamp(20px,3vw,36px);font-weight:800;letter-spacing:-.05em;color:var(--color-border);line-height:1;transition:color .25s ease;flex-shrink:0;">-</div>
+            <div id="cmp-grado-level-tag" style="font-size:clamp(20px,3vw,36px);font-weight:800;letter-spacing:-.05em;color:var(--color-border);line-height:1;transition:color .25s ease;flex-shrink:0;">—</div>
             <div style="display:flex;flex-direction:column;gap:4px;flex:1;">
-              <div id="cmp-grado-db" style="font-size:.68rem;font-weight:600;letter-spacing:.08em;color:var(--color-muted);transition:color .25s ease;">- dB</div>
+              <div id="cmp-grado-db" style="font-size:.68rem;font-weight:600;letter-spacing:.08em;color:var(--color-muted);transition:color .25s ease;">— dB</div>
               <div style="height:2px;background:var(--color-border);border-radius:2px;overflow:hidden;max-width:160px;">
                 <div id="cmp-grado-bar" style="height:100%;width:0%;background:#d24a1f;border-radius:2px;transition:width .35s ease;"></div>
               </div>
@@ -3362,7 +3141,7 @@ function buildProject(id) {
         <div class="cmp-section-label">${_cl==='es'?'Diseño de producto · Componentes':_cl==='de'?'Produktdesign · Bauteile':'Product design · Components'}</div>
         <div class="cmp-section-title">${_cl==='es'?'Vista explotada':_cl==='de'?'Explosionsansicht':'Exploded view'}</div>
       </div>
-      <img loading="lazy" src="/images/render-explotada.webp" class="cmp-render-full" style="aspect-ratio:16/9;object-fit:contain;display:block;border-top:1px solid var(--color-border);background:var(--color-bg);" alt="Exploded view of the Intent bicycle bell components">
+      <img loading="lazy" src="/images/render-explotada.webp" class="cmp-render-full" style="aspect-ratio:16/9;object-fit:contain;display:block;border-top:1px solid var(--color-border);background:var(--color-bg);">
     </div>
 
 
@@ -3411,9 +3190,9 @@ function buildProject(id) {
         <div class="cmp-section-label">${_cl==='es'?'Diseño de producto':_cl==='de'?'Produktdesign':'Product design'}</div>
         <div class="cmp-section-title">${c.detail_label}</div>
       </div>
-      <div class="cmp-detail-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--color-border);width:calc(100% + 2*var(--ph,6%));margin-left:calc(-1*var(--ph,6%));">
-        <img loading="lazy" src="/images/render-detalle-1.webp" style="aspect-ratio:3/4;object-fit:cover;display:block;width:100%;" alt="Detail render of the Intent bicycle bell">
-        <img loading="lazy" src="/images/render-detalle-2.webp" style="aspect-ratio:3/4;object-fit:cover;display:block;width:100%;" alt="Detail render of the Intent bell mechanism">
+      <div class="cmp-detail-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--color-border);width:100vw;margin-left:calc(50% - 50vw);">
+        <img loading="lazy" src="/images/render-detalle-1.webp" style="aspect-ratio:3/4;object-fit:cover;display:block;width:100%;">
+        <img loading="lazy" src="/images/render-detalle-2.webp" style="aspect-ratio:3/4;object-fit:cover;display:block;width:100%;">
       </div>
     </div>
 
@@ -3427,12 +3206,12 @@ function buildProject(id) {
     </div>
     <div class="origins-grid">
       <div class="origins-col">
-        <img loading="lazy" src="/images/flujo-process-1.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;" alt="Design process of the Flujo wall lamp">
+        <img loading="lazy" src="/images/flujo-process-1.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">+</div>
         <div class="origins-stat">A zen object doesn't decorate, it <strong>accompanies</strong>. The intent was to go beyond the lamp concept: create something sculptural that makes people question what it is and how it's made.</div>
       </div>
       <div class="origins-col">
-        <img loading="lazy" src="/images/flujo-process-2.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;" alt="Design process of the Flujo wall lamp, iteration work">
+        <img loading="lazy" src="/images/flujo-process-2.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">+</div>
         <div class="origins-stat">3D printing wasn't just the process, it was the <strong>opportunity</strong>. Embedding a three-dimensional internal pattern inside the screen: something impossible to manufacture as a single piece through any other method.</div>
       </div>
@@ -3441,7 +3220,7 @@ function buildProject(id) {
       With only 2 bodies and an additive process,<br>
       how do you make a lamp that <em>could only exist this way</em>?
     </div>
-    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(40px,5vw,72px)"><img loading="lazy" src="/images/flujo-sketches-new.webp" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Blueprint-style sketches for the Flujo wall lamp"></div>
+    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(40px,5vw,72px)"><img loading="lazy" src="/images/flujo-sketches-new.webp" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
     <div style="border-top:1px solid var(--color-border);margin-top:clamp(56px,7vw,96px)"></div>
     <div class="split-block">
       <div class="split-left">
@@ -3453,12 +3232,12 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
-        <img loading="lazy" src="/images/flujo-render-identity.webp" style="display:block;" alt="Identity render of the Flujo wall lamp">
+        <img loading="lazy" src="/images/flujo-render-identity.webp" style="display:block;">
       </div>
     </div>
     <div class="split-block">
       <div class="split-right flip" style="background:var(--color-bg);overflow:hidden;">
-        <img loading="lazy" src="/images/flujo-render-concept.webp" style="display:block;" alt="Concept render of the Flujo wall lamp">
+        <img loading="lazy" src="/images/flujo-render-concept.webp" style="display:block;">
       </div>
       <div class="split-left">
         <span class="split-tag">Concept</span>
@@ -3489,11 +3268,11 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
-        <img loading="lazy" src="/images/flujo-render-decisions.webp" style="display:block;" alt="Render highlighting design decisions of Flujo">
+        <img loading="lazy" src="/images/flujo-render-decisions.webp" style="display:block;">
       </div>
     </div>
     
-    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px)"><img loading="lazy" src="/images/flujo-ambient.webp" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Flujo wall lamp lit in an ambient setting"></div>
+    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px)"><img loading="lazy" src="/images/flujo-ambient.webp" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
     <div class="evo-wrap">
       <div class="evo-header">
         <div class="evo-title">Design Evolution</div>
@@ -3511,10 +3290,10 @@ function buildProject(id) {
           <div class="evo-desc">Screen wall thickness calibrated to balance translucency and rigidity. Bayonet geometry adjusted for precise rotation with no play.</div>
         </div>
         <div style="background:var(--color-bg);padding:16px 2%;">
-          <img loading="lazy" src="/images/flujo-evo-iteration.webp" style="width:100%;display:block;" alt="Prototype iterations of the Flujo wall lamp">
+          <img loading="lazy" src="/images/flujo-evo-iteration.webp" style="width:100%;display:block;">
         </div>
         <div style="background:var(--color-bg);padding:16px 2%;">
-          <img loading="lazy" src="/images/flujo-proto-takeouts.webp" style="width:100%;display:block;" alt="Takeaways from Flujo prototyping">
+          <img loading="lazy" src="/images/flujo-proto-takeouts.webp" style="width:100%;display:block;">
         </div>
       </div>
     </div>
@@ -3545,7 +3324,7 @@ function buildProject(id) {
         </div>
         <div style="background:var(--color-bg);padding:16px;">
           <div style="aspect-ratio:4/5;overflow:hidden;background:var(--color-bg);">
-            <img loading="lazy" src="/images/flujo-parts.webp" style="width:100%;height:100%;object-fit:cover;display:block;" alt="3D-printed parts of the Flujo wall lamp">
+            <img loading="lazy" src="/images/flujo-parts.webp" style="width:100%;height:100%;object-fit:cover;display:block;">
           </div>
         </div>
         <div style="background:var(--color-bg);padding:16px;">
@@ -3568,12 +3347,12 @@ function buildProject(id) {
     </div>
     <div class="origins-grid">
       <div class="origins-col">
-        <img loading="lazy" src="/images/incline-process-branches.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;" alt="Tree branches, the structural inspiration behind the Incline planter system">
+        <img loading="lazy" src="/images/incline-process-branches.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">+</div>
         <div class="origins-stat">Tree branches don't grow from a planner's grid. They emerge from a <strong>node</strong> and radiate outward, always inclined. That organic logic became the structural principle of the system.</div>
       </div>
       <div class="origins-col">
-        <img loading="lazy" src="/images/incline-process-sketch.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;" alt="Compact balcony context that shaped the Incline planter system">
+        <img loading="lazy" src="/images/incline-process-sketch.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">+</div>
         <div class="origins-stat">Buenos Aires terraces are small. Most planters are designed for space that compact city balconies simply don't have, wasting the <strong>vertical dimension entirely</strong>.</div>
       </div>
@@ -3582,7 +3361,7 @@ function buildProject(id) {
       With a single body and a 3-point snap,<br>
       how do you build a planter that <em>grows in any direction</em>?
     </div>
-    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(40px,5vw,72px)"><img loading="lazy" src="/images/incline-sketches.webp" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Sketches for the Incline modular planter"></div>
+    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(40px,5vw,72px)"><img loading="lazy" src="/images/incline-sketches.webp" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
     <div style="border-top:1px solid var(--color-border);margin-top:clamp(56px,7vw,96px)"></div>
     <div class="split-block">
       <div class="split-left">
@@ -3598,12 +3377,12 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
-        <img loading="lazy" src="/images/incline-render-concept.webp" style="display:block;" alt="Concept render of the Incline modular planter">
+        <img loading="lazy" src="/images/incline-render-concept.webp" style="display:block;">
       </div>
     </div>
     <div class="split-block">
       <div class="split-right flip" style="background:var(--color-bg);overflow:hidden;">
-        <img loading="lazy" src="/images/incline-render-system.webp" style="display:block;" alt="Render of the Incline modular planter system">
+        <img loading="lazy" src="/images/incline-render-system.webp" style="display:block;">
       </div>
       <div class="split-left">
         <span class="split-tag">System Logic</span>
@@ -3633,11 +3412,11 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
-        <img loading="lazy" src="/images/incline-render-decisions.webp" style="display:block;" alt="Render highlighting design decisions of Incline">
+        <img loading="lazy" src="/images/incline-render-decisions.webp" style="display:block;">
       </div>
     </div>
     
-    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)"><img loading="lazy" src="/images/incline-ambient.webp" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Incline planters in a home setting"></div>
+    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)"><img loading="lazy" src="/images/incline-ambient.webp" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
     <div class="proto-wrap" style="border-bottom:1px solid var(--color-border);">
       <div style="margin-bottom:40px;">
         <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:8px;">Prototyping</div>
@@ -3649,14 +3428,14 @@ function buildProject(id) {
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Paper model <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ scale model</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">A scale model built to validate the morphology of the module, how the form reads in three dimensions, how the volumes relate to each other, and whether the proportions hold before committing to print.</div>
           </div>
-          <div class="proto-item-img"><img loading="lazy" src="/images/incline-proto-papel.webp" style="width:100%;display:block;" alt="Paper prototype of the Incline planter"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/incline-proto-papel.webp" style="width:100%;display:block;"></div>
         </div>
         <div class="proto-item">
           <div class="proto-item-text">
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Final prototype <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ planted &amp; assembled</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">The printed system assembled with soil and plants, verifying the structural behavior of the connection under load and the water drainage between modules in use.</div>
           </div>
-          <div class="proto-item-img"><img loading="lazy" src="/images/incline-proto-impreso.webp" style="width:100%;display:block;" alt="3D-printed prototype of the Incline planter"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/incline-proto-impreso.webp" style="width:100%;display:block;"></div>
         </div>
       </div>
     </div>
@@ -3673,12 +3452,12 @@ function buildProject(id) {
     </div>
     <div class="origins-grid">
       <div class="origins-col">
-        <img loading="lazy" src="/images/pausa-brief.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;" alt="Myke Outdoors brief for the Pausa outdoor furniture collection">
+        <img loading="lazy" src="/images/pausa-brief.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">The brief</div>
         <div class="origins-stat">Myke Outdoors partnered with the faculty to explore a new catalog direction: furniture that carried the brand's robustness and durability, but was easier to move, viable for smaller spaces, and built exclusively from <strong>aluminum profiles, nautical fabric, and Dekton.</strong> The material vocabulary was fixed. Everything else was open.</div>
       </div>
       <div class="origins-col">
-        <img loading="lazy" src="/images/pausa-insight.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;" alt="Research insight behind Pausa">
+        <img loading="lazy" src="/images/pausa-insight.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">The insight</div>
         <div class="origins-stat">Myke's existing pieces were built for permanence: large formats, complex structures, heavy footprints. The problem was not the material. It was the structural complexity. <strong>More parts meant more material, more weight, and less adaptability.</strong> Welded and ground aluminum profiles already deliver inherent robustness. The excess had been in the structure, not the steel.</div>
       </div>
@@ -3701,12 +3480,12 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="overflow:hidden;">
-        <img loading="lazy" src="/images/pausa-render-concept.webp" style="display:block;" alt="Concept render of the Pausa aluminum outdoor furniture">
+        <img loading="lazy" src="/images/pausa-render-concept.webp" style="display:block;">
       </div>
     </div>
     <div class="split-block">
       <div class="split-right flip" style="overflow:hidden;">
-        <img loading="lazy" src="/images/pausa-render-materials.webp" style="display:block;" alt="Materials study for Pausa: aluminum profiles, nautical fabric and Dekton">
+        <img loading="lazy" src="/images/pausa-render-materials.webp" style="display:block;">
       </div>
       <div class="split-left">
         <span class="split-tag">Material &amp; Construction</span>
@@ -3723,7 +3502,7 @@ function buildProject(id) {
       </div>
     </div>
     
-    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)"><img loading="lazy" src="/images/pausa-ambient.webp" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Pausa furniture in an outdoor setting"></div>
+    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)"><img loading="lazy" src="/images/pausa-ambient.webp" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
     <div class="proto-wrap" style="border-bottom:1px solid var(--color-border);">
       <div style="margin-bottom:40px;">
         <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:8px;">Prototyping</div>
@@ -3735,14 +3514,14 @@ function buildProject(id) {
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Sketches <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ form exploration</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">Hand sketches exploring the form language of each piece, the relationship between the aluminum structure and the soft surfaces, and the visual coherence of the collection before moving to 3D.</div>
           </div>
-          <div class="proto-item-img" style="overflow:hidden"><img loading="lazy" src="/images/pausa-bocetos.webp" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block;" alt="Sketches for Pausa"></div>
+          <div class="proto-item-img" style="overflow:hidden"><img loading="lazy" src="/images/pausa-bocetos.webp" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block;"></div>
         </div>
         <div class="proto-item">
           <div class="proto-item-text">
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Scale model <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ proportions verified</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">A scale model built to validate the proportions of each piece and the visual weight of the collection as a set, confirming the balance between structural presence and lightness before the final renders.</div>
           </div>
-          <div class="proto-item-img" style="overflow:hidden"><img loading="lazy" src="/images/pausa-maqueta.webp" style="width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center bottom;display:block;" alt="Scale model of Pausa"></div>
+          <div class="proto-item-img" style="overflow:hidden"><img loading="lazy" src="/images/pausa-maqueta.webp" style="width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center bottom;display:block;"></div>
         </div>
       </div>
     </div>
@@ -3759,12 +3538,12 @@ function buildProject(id) {
     </div>
     <div class="origins-grid">
       <div class="origins-col">
-        <img loading="lazy" src="/images/core-brief.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;" alt="Under Armour athletes training, the brief behind the Core roll-on deodorant">
+        <img loading="lazy" src="/images/core-brief.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">The brief</div>
         <div class="origins-stat">Under Armour's catalog is built for visibility at scale: footwear, apparel, large-format gear. The brief asked for something the brand had never operated at this size: a roll-on deodorant that could carry the same performance identity <strong>in the palm of a hand.</strong></div>
       </div>
       <div class="origins-col">
-        <img loading="lazy" src="/images/core-insight.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;" alt="Sketch exploring how Under Armour's visual language compresses into a roll-on deodorant">
+        <img loading="lazy" src="/images/core-insight.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">The insight</div>
         <div class="origins-stat">The challenge wasn't adding UA features to a standard roll-on. It was finding which elements of the brand's visual language could survive the compression, and which had to be <strong>reinvented for the constraints of personal care manufacturing.</strong></div>
       </div>
@@ -3788,12 +3567,12 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
-        <img loading="lazy" src="/images/core-render-concept.webp" style="display:block;" alt="Athlete applying the Core roll-on deodorant">
+        <img loading="lazy" src="/images/core-render-concept.webp" style="display:block;">
       </div>
     </div>
     <div class="split-block">
       <div class="split-right flip" style="background:var(--color-bg);overflow:hidden;">
-        <img loading="lazy" src="/images/core-render-identity.webp" style="display:block;" alt="Close-up of Core's hexagonal grip texture, teal sphere and Under Armour branding">
+        <img loading="lazy" src="/images/core-render-identity.webp" style="display:block;">
       </div>
       <div class="split-left">
         <span class="split-tag">Identity &amp; Finish</span>
@@ -3825,11 +3604,11 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="background:var(--color-bg);overflow:hidden;">
-        <img loading="lazy" src="/images/core-render-production.webp" style="display:block;" alt="Production render of the Core roll-on deodorant in dark steel gray">
+        <img loading="lazy" src="/images/core-render-production.webp" style="display:block;">
       </div>
     </div>
     
-    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)"><img loading="lazy" src="/images/core-ambient.webp" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Core roll-on deodorant in an ambient setting"></div>
+    <div style="width:100%;aspect-ratio:16/9;overflow:hidden;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--color-border)"><img loading="lazy" src="/images/core-ambient.webp" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
     <div class="proto-wrap" style="border-bottom:1px solid var(--color-border);">
       <div style="margin-bottom:40px;">
         <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:8px;">Prototyping</div>
@@ -3841,21 +3620,21 @@ function buildProject(id) {
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Sketches <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ form exploration</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">Hand sketches exploring the form language, the relationship between the cylindrical body and the hexagonal texture, and the balance between fluid and robust before moving into 3D modeling.</div>
           </div>
-          <div class="proto-item-img"><img loading="lazy" src="/images/core-bocetos.webp" style="width:100%;display:block;" alt="Sketches for the Core roll-on deodorant"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/core-bocetos.webp" style="width:100%;display:block;"></div>
         </div>
         <div class="proto-item">
           <div class="proto-item-text">
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Iteration <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ scale validation</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">A 3D printed model placed next to an existing roll-on to validate scale, grip proportions, and ergonomic logic before committing to the final design. The comparison made clear what the numbers alone could not.</div>
           </div>
-          <div class="proto-item-img"><img loading="lazy" src="/images/core-iteration.webp" style="width:100%;display:block;" alt="Design iterations of the Core roll-on deodorant"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/core-iteration.webp" style="width:100%;display:block;"></div>
         </div>
         <div class="proto-item">
           <div class="proto-item-text">
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Physical prototype <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ assembled &amp; verified</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">The assembled prototype validating the grip geometry, the presence of the hexagonal texture in hand, and the visual weight of the product before final finish decisions.</div>
           </div>
-          <div class="proto-item-img"><img loading="lazy" src="/images/core-proto-physical.webp" style="width:100%;display:block;" alt="3D-printed physical prototype of the Core roll-on deodorant"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/core-proto-physical.webp" style="width:100%;display:block;"></div>
         </div>
       </div>
     </div>
@@ -3872,12 +3651,12 @@ function buildProject(id) {
     </div>
     <div class="origins-grid">
       <div class="origins-col">
-        <img loading="lazy" src="/images/promix-survey.webp" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;" alt="User survey results for the Philips ProMix redesign">
+        <img loading="lazy" src="/images/promix-survey.webp" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;">
         <div class="origins-cross">The survey</div>
         <div class="origins-stat">The starting point was not a problem statement but a complete product analysis: mapping every component of the ProMix hand blender, its function, its relationship to the rest of the system, and <strong>where the product left value on the table.</strong></div>
       </div>
       <div class="origins-col">
-        <img loading="lazy" src="/images/promix-finding.webp" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;" alt="Key research finding for the ProMix redesign">
+        <img loading="lazy" src="/images/promix-finding.webp" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;">
         <div class="origins-cross">The finding</div>
         <div class="origins-stat">After analyzing the full assembly, one component stood out: the cap. Every other part performed a structural or functional role. The cap did not. It protected the blender shaft and nothing more. <strong>That absence of purpose was the opportunity.</strong></div>
       </div>
@@ -3900,12 +3679,12 @@ function buildProject(id) {
         </div>
       </div>
       <div class="split-right" style="overflow:hidden;">
-        <img loading="lazy" src="/images/promix-render-opportunity.webp" style="display:block;" alt="Render of the ProMix design opportunity">
+        <img loading="lazy" src="/images/promix-render-opportunity.webp" style="display:block;">
       </div>
     </div>
     <div class="split-block">
       <div class="split-right flip" style="overflow:hidden;">
-        <img loading="lazy" src="/images/promix-render-solution.webp" style="display:block;" alt="Render of the redesigned ProMix cap with cable storage">
+        <img loading="lazy" src="/images/promix-render-solution.webp" style="display:block;">
       </div>
       <div class="split-left">
         <span class="split-tag">The Solution</span>
@@ -3933,14 +3712,14 @@ function buildProject(id) {
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Iteration <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ snap fit / cable fit</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">Testing the critical connection points: the lateral fin snap-fit against the rear casing and the cable channel clearance. Physical testing at this stage confirmed the geometry before moving to a full assembly print.</div>
           </div>
-          <div class="proto-item-img"><img loading="lazy" src="/images/promix-iteration.webp" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block;" alt="Design iterations of the ProMix cap"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/promix-iteration.webp" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block;"></div>
         </div>
         <div class="proto-item">
           <div class="proto-item-text">
             <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:600;">Fit test <span style="color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);">→ printed + assembled</span></div>
             <div style="font-size:clamp(.9rem,1.1vw,1rem);line-height:1.65;color:var(--color-soft);">The redesigned cap 3D printed and assembled onto the original ProMix casing. The snap-fit locked correctly, the plug housing seated flush, and the cable routed clean through the channel. The prototype was then post-processed: sanded and painted to match the finish of the original product and read as a production-ready piece.</div>
           </div>
-          <div class="proto-item-img"><img loading="lazy" src="/images/promix-fittest.webp" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block;" alt="Fit testing of the ProMix cap prototype"></div>
+          <div class="proto-item-img"><img loading="lazy" src="/images/promix-fittest.webp" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block;"></div>
         </div>
       </div>
     </div>
@@ -4336,34 +4115,6 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   };
 })();
 
-/* ── Pause offscreen videos ── every <video autoplay loop> on the page (prototyping clips,
-   the draggable panel gallery, etc.) used to play continuously even while scrolled out of
-   view, which meant several videos could be decoding at once at all times. Browsers charge
-   real CPU/GPU cost per playing video regardless of visibility, and that's a common cause of
-   a page feeling laggy/low-fps even when nothing looks busy on screen. This pauses each video
-   the moment it leaves the viewport and resumes it the moment it's back, so at most the ones
-   actually visible are ever decoding. */
-(function(){
-  const vobs = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      const v = e.target;
-      if(e.isIntersecting) v.play().catch(()=>{});
-      else v.pause();
-    });
-  }, {threshold: 0.05});
-
-  function observeVideos(root){
-    (root||document).querySelectorAll('video[autoplay]').forEach(v=>vobs.observe(v));
-  }
-  observeVideos();
-
-  const _buildV = window.buildProject;
-  if(_buildV) window.buildProject = function(id){
-    _buildV(id);
-    requestAnimationFrame(()=>observeVideos(document.getElementById('projContent')));
-  };
-})();
-
 /* ── i18n: Language switcher ── */
 window.currentLang = 'en';
 
@@ -4687,34 +4438,6 @@ window.setLang = function(lang) {
   }
 };
 
-</script>
-
-<script>
-/* ---- Keyboard accessibility: make onclick-driven elements operable without a mouse ---- */
-(function() {
-  function enhance() {
-    document.querySelectorAll('[onclick]').forEach(function(el) {
-      var tag = el.tagName.toLowerCase();
-      var isNativelyFocusable = (tag === 'button') || (tag === 'a' && el.hasAttribute('href')) || (tag === 'input') || (tag === 'textarea') || (tag === 'select');
-      if(isNativelyFocusable) return;
-      if(!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
-      if(!el.hasAttribute('role')) el.setAttribute('role', tag === 'a' ? 'link' : 'button');
-    });
-  }
-  enhance();
-  // Re-run after dynamic content (project pages, language switches) is injected
-  var projEl = document.getElementById('projContent');
-  if(projEl && window.MutationObserver) {
-    new MutationObserver(enhance).observe(projEl, {childList:true, subtree:true});
-  }
-  document.addEventListener('keydown', function(e) {
-    if(e.key !== 'Enter' && e.key !== ' ' && e.key !== 'Spacebar') return;
-    var el = e.target.closest('[onclick][tabindex]');
-    if(!el) return;
-    if(e.key !== 'Enter') e.preventDefault(); // stop page scroll on Space
-    el.click();
-  });
-})();
 </script>
 </body>
 </html>
