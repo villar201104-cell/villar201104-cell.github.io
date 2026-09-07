@@ -679,7 +679,24 @@
     .home-footer-top{align-items:flex-start;gap:18px;flex-direction:column;}
   }
 
-  </style>
+  
+/* Consistent controls, responsive research diagrams and spacing. */
+a.project-card,a.extra-card-wrap,a.nav-logo,a.nav-back{color:inherit;text-decoration:none;}button.lb-close,button.lb-arrow{font-family:inherit;color:inherit;background:none;border:0;}button.lb-arrow:disabled{opacity:.25;cursor:default;}a:focus-visible,button:focus-visible,[tabindex="0"]:focus-visible{outline:2px solid #d24a1f;outline-offset:5px;}[inert]{pointer-events:none;}#navLinks.is-hidden{display:none;}#navBack.is-visible{display:flex;}#navHamburger{min-width:40px;min-height:40px;justify-content:center;}#navMobile[aria-hidden="true"]{visibility:hidden;}.cmp-section-title{margin-top:0;}.cmp-grado-cards button{touch-action:manipulation;}.network-layout{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(220px,1fr);gap:clamp(24px,4vw,52px);align-items:stretch;border-top:1px solid var(--color-border);padding-top:24px;}.diagram-frame{min-width:0;}.diagram-frame svg{width:100%;display:block;font-family:inherit;}.network-context{display:flex;flex-direction:column;justify-content:space-between;padding:12px 0;gap:18px;}.network-context h3{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;margin:0;}.network-context strong{font-size:.88rem;font-weight:600;}.network-context p{font-size:.8rem;line-height:1.5;color:var(--color-muted);margin:4px 0 0;}.signal-key{display:flex;align-items:center;gap:12px;font-size:.78rem;}.signal-key>span{width:32px;flex-shrink:0;}.diagram-expand{display:block;margin:14px 0 0 auto;font:inherit;font-size:.72rem;background:transparent;border:1px solid var(--color-border);padding:10px 14px;color:var(--color-text);cursor:pointer;}.network-mobile{display:none;}.diagram-scroll{overflow-x:auto;}.journey-frame{margin-bottom:28px;border-top:1px solid var(--color-border);padding-top:20px;}.diagram-dialog{background:var(--color-bg);color:var(--color-text);width:95vw;max-width:1200px;max-height:92vh;padding:20px;border:1px solid var(--color-border);}.diagram-dialog::backdrop{background:rgba(0,0,0,.65);}.diagram-dialog>button{display:block;margin-left:auto;background:transparent;color:inherit;padding:10px 16px;border:1px solid var(--color-border);font:inherit;}.diagram-dialog-body{overflow:auto;max-height:76vh;}.diagram-dialog svg{width:100%;min-width:700px;font-family:inherit;display:block;}.cmp-ux-layout{min-width:0;}.cmp-ux-layout>div{min-width:0;}.cmp-ux-bar,.cmp-cmf-bar{border-radius:0;}.cmp-jp-head{border-top:2px solid #d24a1f;}.cmp-timeline{border-top:1px solid var(--color-border);}.cmp-section [style*="grid-column:span 3"]{grid-column:1/-1!important;}.cmp-grado-cards,.cmp-how-grid,.cmp-parts-grid{min-width:0;}.spec-value{overflow-wrap:anywhere;}
+@media(max-width:900px){#navLinks{display:none!important;}#navBack.is-visible{display:flex;}.network-layout{grid-template-columns:1fr;}.network-context{display:grid;grid-template-columns:1fr 1fr;gap:20px;}.network-context h3{grid-column:1/-1;}.cmp-ux-layout{grid-template-columns:1fr!important;}.diagram-scroll svg{min-width:680px;}.network-desktop{max-width:720px;margin:auto;}}
+@media(max-width:560px){.network-desktop{display:none;}.network-mobile{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;}.network-source{grid-column:1/-1;background:#d24a1f;color:white;padding:16px;text-align:center;font-size:.9rem;font-weight:700;margin-bottom:12px;}.network-actor{display:flex;flex-direction:column;gap:5px;border-bottom:1px solid var(--color-border);padding:14px 0;min-width:0;}.network-actor strong{font-size:.84rem;line-height:1.3;}.network-actor span{font-size:.74rem;color:var(--color-muted);line-height:1.4;}.network-actor b{font-size:.7rem;font-weight:600;color:#d24a1f;}.network-context{grid-template-columns:1fr;}.cmp-how-grid>div{border-top:1px solid var(--color-border);padding-top:16px;}.cmp-how-grid>div:first-child{border-top:0;}.cmp-section-title{overflow-wrap:break-word;}.diagram-expand{min-height:44px;}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important;}}
+
+
+.cmp-persona-wrap>*{min-width:0;}.cmp-persona-pg>*{min-width:0;overflow-wrap:anywhere;}.cmp-persona-wrap{overflow-wrap:anywhere;}.cmp-typo-item{min-width:0;overflow-wrap:anywhere;}.cmp-cmf-card{min-width:0;overflow-wrap:anywhere;}#contactTitle{overflow-wrap:anywhere;hyphens:auto;}@media(max-width:540px){.cmp-persona-wrap{grid-template-columns:minmax(0,1fr)!important;}.cmp-typo-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;}.cmp-persona-pg{grid-template-columns:minmax(0,1fr)!important;}}
+
+.network-actor{overflow-wrap:anywhere;}.lang-dropdown:not(.open){visibility:hidden;}
+
+.sketches-wrap{padding:clamp(28px,5vw,64px) clamp(20px,10vw,160px) 28px;}.sketches-title{font-size:clamp(38px,6vw,76px);line-height:1.05;letter-spacing:-.045em;font-weight:700;margin:0 0 clamp(40px,6vw,80px);}.sketch-year{margin:0 0 clamp(50px,7vw,96px);}.sketch-year-title{display:flex;align-items:center;gap:24px;font-size:1rem;font-weight:500;letter-spacing:.06em;margin:0 0 clamp(24px,4vw,48px);}.sketch-year-title::before,.sketch-year-title::after{content:'';height:1px;flex:1;background:var(--color-border);}.sketch-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 32px;}.sketch-grid-single{grid-template-columns:minmax(0,1fr);max-width:1050px;margin:auto;}.sketch-item{margin:0;min-width:0;}.sketch-image-button{display:block;width:100%;padding:0;border:0;background:transparent;color:inherit;cursor:zoom-in;}.sketch-image-button img{display:block;width:100%;height:auto;object-fit:contain;}.sketch-item figcaption{margin-top:18px;font-size:.76rem;letter-spacing:.015em;color:var(--color-muted);text-align:right;}.sketches-footer{font-size:.7rem;color:var(--color-muted);padding-top:24px;border-top:1px solid var(--color-border);}.sketch-gallery #lbImg{background:var(--color-bg);}.sketch-image-button:focus-visible{outline-offset:8px;}@media(max-width:700px){.sketch-grid{grid-template-columns:minmax(0,1fr);gap:36px;}.sketches-wrap{padding-left:20px;padding-right:20px;}.sketches-title{margin-bottom:40px;}.sketch-year-title{gap:16px;}}
+
+h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none;}
+
+.process-header>div{min-width:0;}.process-title{overflow-wrap:anywhere;hyphens:auto;}
+</style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFJGQKXNL"></script>
   <script>
@@ -691,7 +708,7 @@
   </script>
   <link rel="preload" as="image" href="/images/flujo-hero.webp">
   <link rel="preload" as="image" href="/images/incline-hero.webp">
-  <link rel="preload" as="image" href="/images/pausa-hero.webp">
+  <link rel="preload" as="image" href="/images/hero-home.webp">
   <link rel="preload" as="image" href="/images/core-hero.webp">
 </head>
 <body>
@@ -715,6 +732,7 @@
   <div class="nav-right">
     <ul class="nav-links" id="navLinks">
       <li><a onclick="go('home')" id="nl-work" class="active" data-i18n="nav_work">Work</a></li>
+      <li><a onclick="go('sketches')" id="nl-sketches" data-i18n="nav_sketches">Sketches</a></li>
       <li><a onclick="go('about')" id="nl-about" data-i18n="nav_about">About</a></li>
       <li><a onclick="go('contact')" id="nl-contact" data-i18n="nav_contact">Contact</a></li>
     </ul>
@@ -738,15 +756,16 @@
   </div>
 </nav>
 <div class="nav-mobile" id="navMobile">
-  <a onclick="go('home');toggleMenu()" data-i18n="nav_work">Work</a>
-  <a onclick="go('about');toggleMenu()" data-i18n="nav_about">About</a>
-  <a onclick="go('contact');toggleMenu()" data-i18n="nav_contact">Contact</a>
+  <a onclick="go('home');toggleMenu(false)" data-i18n="nav_work">Work</a>
+  <a onclick="go('sketches');toggleMenu(false)" data-i18n="nav_sketches">Sketches</a>
+  <a onclick="go('about');toggleMenu(false)" data-i18n="nav_about">About</a>
+  <a onclick="go('contact');toggleMenu(false)" data-i18n="nav_contact">Contact</a>
   <div class="lang-sw">
-    <button class="ls-btn active" data-lang="en" onclick="setLang('en');toggleMenu()">EN</button>
+    <button class="ls-btn active" data-lang="en" onclick="setLang('en');toggleMenu(false)">EN</button>
     <span class="ls-sep">·</span>
-    <button class="ls-btn" data-lang="es" onclick="setLang('es');toggleMenu()">ES</button>
+    <button class="ls-btn" data-lang="es" onclick="setLang('es');toggleMenu(false)">ES</button>
     <span class="ls-sep">·</span>
-    <button class="ls-btn" data-lang="de" onclick="setLang('de');toggleMenu()">DE</button>
+    <button class="ls-btn" data-lang="de" onclick="setLang('de');toggleMenu(false)">DE</button>
   </div>
 </div>
 
@@ -880,13 +899,13 @@
       <div class="home-footer-top">
         <p class="rights" data-i18n="rights">© 2026 Nahuel Villar. All Rights Reserved</p>
         <div class="socials">
-          <a href="https://linkedin.com/in/" target="_blank" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/nahuelvillar/" target="_blank" aria-label="LinkedIn">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           </a>
           <a href="mailto:nahue201104@hotmail.com" aria-label="Email">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
           </a>
-          <a href="https://instagram.com/" target="_blank" aria-label="Instagram">
+          <a href="https://www.instagram.com/portfolio.villar/" target="_blank" aria-label="Instagram">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
           </a>
         </div>
@@ -901,17 +920,20 @@
 </div>
 
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" data-cursor="light">
-  <span class="lb-close" id="lbClose" data-i18n="lb_close">✕ close</span>
-  <div class="lb-arrow lb-prev" id="lbPrev" onclick="lbNav(-1)">
+<div class="lightbox" id="lightbox" data-cursor="light" role="dialog" aria-modal="true" aria-label="Image gallery" aria-hidden="true" inert>
+  <button type="button" class="lb-close" id="lbClose" data-i18n="lb_close">✕ close</button>
+  <button type="button" class="lb-arrow lb-prev" id="lbPrev" onclick="lbNav(-1)" aria-label="Previous image">
     <svg viewBox="0 0 20 20"><path d="M13 4L7 10l6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </div>
+  </button>
   <img loading="lazy" id="lbImg" src="" alt="">
   <video id="lbVideo" controls playsinline style="display:none;max-height:92vh;max-width:92vw;border-radius:2px;background:#000;"></video>
-  <div class="lb-arrow lb-next" id="lbNext" onclick="lbNav(1)">
+  <button type="button" class="lb-arrow lb-next" id="lbNext" onclick="lbNav(1)" aria-label="Next image">
     <svg viewBox="0 0 20 20"><path d="M7 4l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </div>
+  </button>
 </div>
+
+<!-- SKETCHES -->
+<div class="page" id="page-sketches" inert aria-hidden="true"><div class="page-content"><main class="sketches-wrap" id="sketchesContent"></main></div></div>
 
 <!-- ABOUT -->
 <div class="page" id="page-about">
@@ -1011,12 +1033,12 @@
           <span class="c-val">nahue201104@hotmail.com</span>
           <span class="c-arrow">↗</span>
         </a>
-        <a href="https://instagram.com/" target="_blank" class="c-item fu d2" data-cursor="light">
+        <a href="https://www.instagram.com/portfolio.villar/" target="_blank" class="c-item fu d2" data-cursor="light">
           <span class="c-lbl">Instagram</span>
-          <span class="c-val">@nahuelvillar</span>
+          <span class="c-val">@portfolio.villar</span>
           <span class="c-arrow">↗</span>
         </a>
-        <a href="https://linkedin.com/in/" target="_blank" class="c-item fu d3" data-cursor="light">
+        <a href="https://www.linkedin.com/in/nahuelvillar/" target="_blank" class="c-item fu d3" data-cursor="light">
           <span class="c-lbl">LinkedIn</span>
           <span class="c-val">Nahuel Villar</span>
           <span class="c-arrow">↗</span>
@@ -1038,9 +1060,9 @@ const PROJECTS = {
     hPanels:[],
     title:'Intent', eyebrow:'UX Research + ID',
     tagline:'A bicycle bell redesigned to distinguish courtesy from danger.',
-    specs:[{l:'Category',v:'UX Research · Industrial Design'},{l:'Year',v:'2026'},{l:'Materials',v:'Aluminum · Anodized Brass · ABS · Polycarbonate'},{l:'Status',v:'Concept · 2026'}],
-    desc:['Intent started with a behavioral observation: the bicycle bell, required by law in most countries, cannot distinguish between a polite request to pass and an urgent danger alert. The research question was not how to make it look different, but how to make it express the rider\'s intent.','The process mapped the full design space: historical analysis, typology, field observation, user persona, stakeholder mapping, journey analysis, and UX evaluation across seven dimensions. Every method pointed to the same root problem: the bell communicates one signal, and that signal carries no information about urgency, intention, or severity.','The response is mechanical, not digital. A ratchet mechanism that accumulates pressure across consecutive taps, advancing a cam that increases the hammer\'s stroke with each press. Three taps, three levels, three distinct things to say. Four components. No battery, no learning curve.'],
-    panels:['/images/campana-render-1.webp','/images/campana-render-2.webp','/images/campana-render-3.webp'],
+    specs:[{l:'Category',v:'UX Research · Industrial Design'},{l:'Year',v:'2026'},{l:'Materials',v:"Aluminium · Brass · Steel · Polycarbonate · PVC plastisol"},{l:'Status',v:'Concept · 2026'}],
+    desc:['Intent started with a behavioral observation: the bicycle bell, required by law in most countries, cannot distinguish between a polite request to pass and an urgent danger alert. The research question was not how to make it look different, but how to make it express the rider\'s intent.','The process mapped the full design space: historical analysis, typology, field observation, user persona, stakeholder mapping, journey analysis, and UX evaluation across seven dimensions. Every method pointed to the same root problem: the bell communicates one signal, and that signal carries no information about urgency, intention, or severity.','The response is mechanical, not digital. A ratchet mechanism that accumulates pressure across consecutive taps, advancing a cam that increases the hammer\'s stroke with each press. Three taps, three levels, three distinct things to say. No battery, no learning curve.'],
+    panels:[],
     prev:null, next:'flujo'
   },
   flujo: {
@@ -1077,7 +1099,7 @@ const PROJECTS = {
     specs:[{l:'Category',v:'Product Redesign'},{l:'Year',v:'2025'},{l:'Client',v:'Philips (academic)'},{l:'Material',v:'PP'},{l:'Process',v:'Injection Molding'}],
     desc:['The project began with a close read of the Philips ProMix hand blender: mapping each component against its function and looking for what the product still had left to solve. The goal was not to fix a predefined problem, but to find where it had something more to give.','The cap stood out as the only component with no structural or functional role beyond basic protection. Every other part had a reason to exist. The cap did not. That gap became the opportunity: a single component that could be redesigned to add real convenience without touching anything else in the product.','The redesign integrates cable and plug storage directly into the cap body. A recessed channel guides the cable from a dedicated plug housing to the storage wrap. The piece connects to the existing rear casing via a snap-fit with lateral fins, with no modifications to the product architecture.'],
     panels:['/images/promix-panel.webp','/images/promix-plano-tapa.webp','/images/promix-plano-explotada.webp','/images/promix-plano-conjunto.webp'],
-    prev:'pausa', next:'mantablast'
+    prev:'pausa', next:'intervalo'
   },
   mantablast: {
     hPanels:[0,1,2,3],
@@ -1086,7 +1108,7 @@ const PROJECTS = {
     specs:[{l:'Category',v:'Product Design'},{l:'Year',v:'2024'},{l:'Materials',v:'PLA'},{l:'Process',v:'FDM 3D Print'}],
     desc:['Manta Blast started with a form study on the manta ray. Not its silhouette, but the qualities it moves with: the way it glides, the continuous curves of its body, the absence of sharp transitions. Translating those into a handheld object meant designing a form that felt resolved in the hand before it felt like anything else.','The geometry was developed entirely around grip and ergonomics. The handle falls naturally into the palm, the trigger is positioned for intuitive use, and the reload gesture follows a single linear motion. Every surface decision traces back to how the object is held, operated, and returned to.','Printed in PLA via FDM, the design exploits additive manufacturing to achieve organic transitions that injection molding would require multiple parts to approximate. The result is a single fluid form split into only the components that the mechanism demands: body, plunger, nozzle, and cap.'],
     panels:['/images/manta-1.webp','/videos/manta-2.mp4','/images/manta-3.webp','/images/manta-4.webp'],
-    prev:'promix', next:'intervalo'
+    prev:'intervalo', next:null
   },
   intervalo: {
     hPanels:[0,1,2],
@@ -1095,7 +1117,7 @@ const PROJECTS = {
     specs:[{l:'Category',v:'Industrial Design'},{l:'Year',v:'2026'},{l:'Client',v:'YPF (academic)'},{l:'Materials',v:'Steel, Sheet Metal, PVC'},{l:'Process',v:'Welding & Assembly'}],
     desc:['The project starts from a behavioral observation: drivers already wait at the pump. That downtime, usually dead, became the design opportunity. Intervalo is a self-service kiosk positioned at the fuel dispenser, allowing purchases directly from the car window: no detour, no separate transaction, no friction added to a routine that already has none to spare.','The product identity, "full," is embedded in the physical structure through LED lettering and PVC-clad wood slat paneling. A single cabinet integrates a coffee machine, refrigerated display, payment terminal, and removable bins, all accessible and restockable from the rear without disrupting the forecourt.','The manufacturing process runs through six stages: welded steel profiles, sheet metal cladding, surface treatment, cabinetry assembly, PVC cladding with LED signage, and equipment installation. The result is a deployable unit built for the operational realities of a fuel station.'],
     panels:['/images/ypf-1.webp','/images/ypf-2.webp','/images/ypf-3.webp'],
-    prev:'mantablast', next:null
+    prev:'promix', next:'mantablast'
   },
   pausa: {
     hPanels:[],
@@ -1111,104 +1133,86 @@ window.PROJECTS = PROJECTS;
 
 let cur = 'home';
 
-function toggleMenu() {
-  const m = document.getElementById('navMobile');
-  m.classList.toggle('open');
-  closeLangMenu();
+function toggleMenu(force) {
+ const menu=document.getElementById('navMobile'), button=document.getElementById('navHamburger');
+ const open=typeof force==='boolean'?force:!menu.classList.contains('open');
+ menu.classList.toggle('open',open);button.classList.toggle('open',open);button.setAttribute('aria-expanded',String(open));menu.inert=!open;menu.setAttribute('aria-hidden',String(!open));
+ document.querySelector('.page.active')?.toggleAttribute('inert',open);
+ if(open)menu.querySelector('a,button')?.focus();
 }
 
 function toggleLangMenu(e) {
   e.stopPropagation();
-  document.getElementById('langDropdown').classList.toggle('open');
+  const dropdown=document.getElementById('langDropdown');const open=!dropdown.classList.contains('open');dropdown.classList.toggle('open',open);dropdown.inert=!open;document.getElementById('langGlobeBtn').setAttribute('aria-expanded',String(open));if(open)dropdown.querySelector('button.active,button').focus();
 }
 function closeLangMenu() {
   const d = document.getElementById('langDropdown');
-  if(d) d.classList.remove('open');
+  if(d){const hadFocus=d.contains(document.activeElement);d.classList.remove('open');d.inert=true;document.getElementById('langGlobeBtn').setAttribute('aria-expanded','false');if(hadFocus)document.getElementById('langGlobeBtn').focus();}
 }
 document.addEventListener('click', function(e) {
   if(!e.target.closest('#langGlobe')) closeLangMenu();
 });
 
-function go(page, id, pushState=true) {
-  const active = document.querySelector('.page.active');
-  if(active) { active.classList.add('exit'); active.classList.remove('active'); setTimeout(()=>active.classList.remove('exit'),300); }
-  setTimeout(()=>{
-    if(page==='project' && id) buildProject(id);
-    const next = document.getElementById('page-'+page);
-    next.classList.add('active'); next.scrollTop=0; cur=page;
-    updateNav(page);
-    requestAnimationFrame(()=>next.querySelectorAll('.fu').forEach(el=>{el.classList.remove('in');requestAnimationFrame(()=>el.classList.add('in'))}));
-  },100);
-  if(pushState) {
-    try {
-      const url = page==='home' ? '/' : page==='project' ? '/project/'+id : '/'+page;
-      history.pushState({page, id}, '', url);
-    } catch(e) {}
-  }
+function routeFromLocation(){
+ const pathname=location.pathname.replace(/\/index\.html$/,'/').replace(/\/$/,'')||'/';
+ if(pathname.startsWith('/project/')){const id=pathname.split('/')[2];if(PROJECTS[id])return {page:'project',id};if(id==='campana')return {page:'project',id:'intent'};return {page:'home',id:null};}
+ return {page:pathname==='/sketches'?'sketches':pathname==='/about'?'about':pathname==='/contact'?'contact':'home',id:null};
 }
-
-window.addEventListener('popstate', e => {
-  if(e.state) {
-    go(e.state.page, e.state.id, false);
-  } else {
-    go('home', null, false);
-  }
-});
-
-// Handle direct URL on load (also restores from 404.html redirect)
-(function() {
-  try {
-    // Check if we were redirected here from 404.html
-    const saved = sessionStorage.getItem('spa_redirect');
-    if(saved) {
-      sessionStorage.removeItem('spa_redirect');
-      const url = new URL(saved);
-      history.replaceState(null, null, url.pathname + url.search + url.hash);
-    }
-    const path = location.pathname;
-    if(path.startsWith('/project/')) {
-      const id = path.split('/')[2];
-      if(id && PROJECTS[id]) go('project', id, false);
-    } else if(path === '/about') {
-      go('about', null, false);
-    } else if(path === '/contact') {
-      go('contact', null, false);
-    } else {
-      updateNav('home');
-      try { history.replaceState({page:'home', id:null}, '', location.href); } catch(e) {}
-    }
-  } catch(e) {}
-})();
+function saveRoutePosition(){const page=document.querySelector('.page.active');if(!page||!history.state)return;history.replaceState({...history.state,scrollTop:page.scrollTop,panelScroll:document.getElementById('pt')?.scrollLeft||0},'',location.href);}
+function go(page,id,pushState=true){
+ if(!['home','sketches','about','contact','project'].includes(page)||(page==='project'&&!PROJECTS[id])){page='home';id=null;}
+ if(pushState)saveRoutePosition();
+ closeLightbox();closeLangMenu();toggleMenu(false);
+ document.querySelectorAll('.page').forEach(el=>{el.classList.remove('active','exit');el.inert=true;el.setAttribute('aria-hidden','true');el.querySelectorAll('video').forEach(v=>v.pause());});
+ if(page==='project')buildProject(id);
+ if(page==='sketches')renderSketches();
+ const next=document.getElementById('page-'+page);next.inert=false;next.removeAttribute('aria-hidden');next.classList.add('active');cur=page;updateNav(page);
+ const url=page==='home'?'/':page==='project'?'/project/'+id:'/'+page;
+ if(pushState)history.pushState({page,id:id||null,scrollTop:0,panelScroll:0},'',url);
+ const state=history.state||{};next.scrollTop=pushState?0:(state.scrollTop||0);
+ const track=next.querySelector('#pt');if(track)track.scrollLeft=pushState?0:(state.panelScroll||0);
+ requestAnimationFrame(()=>{if(!next.classList.contains('active'))return;next.querySelectorAll('.fu').forEach(el=>el.classList.add('in'));const target=next.querySelector('h1,h2')||next.querySelector('.page-content');if(target){target.tabIndex=-1;target.focus({preventScroll:true});}});
+ updatePageMetadata(page,id);
+}
+window.addEventListener('popstate',()=>{const route=routeFromLocation();go(route.page,route.id,false);});
+function initializeRoute(){
+ try{const saved=sessionStorage.getItem('spa_redirect');if(saved){sessionStorage.removeItem('spa_redirect');const u=new URL(saved);if(u.origin===location.origin)history.replaceState(null,'',u.pathname+u.search+u.hash);}}catch(e){}
+ const route=routeFromLocation();history.replaceState({...route,scrollTop:0,panelScroll:0},'',location.href);go(route.page,route.id,false);
+}
+window.addEventListener('pagehide',saveRoutePosition);
+document.addEventListener('DOMContentLoaded',initializeRoute,{once:true});
 
 function updateNav(page) {
-  document.getElementById('navLinks').style.display = page==='project'?'none':'flex';
-  document.getElementById('navBack').style.display  = page==='project'?'flex':'none';
-  ['work','about','contact'].forEach(k=>{const el=document.getElementById('nl-'+k);if(el)el.classList.remove('active');});
-  const map={home:'nl-work',about:'nl-about',contact:'nl-contact'};
+  document.getElementById('navLinks').classList.toggle('is-hidden',page==='project');
+  document.getElementById('navBack').classList.toggle('is-visible',page==='project');
+  ['work','sketches','about','contact'].forEach(k=>{const el=document.getElementById('nl-'+k);if(el)el.classList.remove('active');});
+  const map={home:'nl-work',sketches:'nl-sketches',about:'nl-about',contact:'nl-contact'};
   if(map[page]) {const el=document.getElementById(map[page]);if(el)el.classList.add('active');}
 }
 
-let _dragged=false, _curPanels=[], _lbIdx=0;
+let _dragged=false, _curPanels=[], _lbIdx=0, _lbReturnFocus=null;
 
 function _showInLightbox(src) {
+ document.getElementById('lightbox').classList.toggle('sketch-gallery',SKETCHES.some(item=>item.src===src));
   const img=document.getElementById('lbImg'), vid=document.getElementById('lbVideo');
   if(src.endsWith('.mp4')) {
     img.style.display='none'; img.src='';
-    vid.src=src; vid.style.display='block'; vid.load(); vid.play();
+    vid.src=src; vid.style.display='block'; vid.load(); vid.play().catch(()=>{});
   } else {
     vid.pause(); vid.src=''; vid.style.display='none';
-    img.src=src; img.style.display='block';
+    img.src=src; img.alt=imageDescription(src); img.style.display='block';
   }
 }
 function _updateLbArrows() {
   const prev=document.getElementById('lbPrev'), next=document.getElementById('lbNext');
-  prev.classList.toggle('vis', _lbIdx > 0);
-  next.classList.toggle('vis', _lbIdx < _curPanels.length-1);
+  prev.classList.toggle('vis', _lbIdx > 0);prev.disabled=_lbIdx<=0;
+  next.classList.toggle('vis', _lbIdx < _curPanels.length-1);next.disabled=_lbIdx>=_curPanels.length-1;
 }
 function openLightbox(src, idx) {
+  _lbReturnFocus=document.activeElement;
   _lbIdx = idx ?? _curPanels.indexOf(src);
   _showInLightbox(src);
-  document.getElementById('lightbox').classList.add('open');
+  const box=document.getElementById('lightbox');box.inert=false;box.removeAttribute('aria-hidden');box.classList.add('open');document.querySelector('.page.active')?.setAttribute('inert','');document.getElementById('nav').inert=true;document.getElementById('lbClose').focus();
   document.body.style.overflow='hidden';
   _updateLbArrows();
 }
@@ -1223,22 +1227,24 @@ function lbNav(dir) {
 function closeLightbox() {
   const vid=document.getElementById('lbVideo');
   vid.pause(); vid.src='';
-  document.getElementById('lightbox').classList.remove('open');
+  const box=document.getElementById('lightbox');const wasOpen=box.classList.contains('open');box.classList.remove('open');box.inert=true;box.setAttribute('aria-hidden','true');document.querySelector('.page.active')?.removeAttribute('inert');document.getElementById('nav').inert=false;if(wasOpen&&_lbReturnFocus?.isConnected)_lbReturnFocus.focus({preventScroll:true});
   document.body.style.overflow='';
 }
 document.getElementById('lightbox').addEventListener('click', e=>{ if(e.target===e.currentTarget||e.target===document.getElementById('lbImg')) closeLightbox(); });
 document.getElementById('lbClose').addEventListener('click', e=>{e.stopPropagation();closeLightbox();});
-document.addEventListener('keydown', e=>{
-  if(e.key==='Escape') closeLightbox();
-  if(e.key==='ArrowLeft') lbNav(-1);
-  if(e.key==='ArrowRight') lbNav(1);
+document.addEventListener('keydown',e=>{
+ const box=document.getElementById('lightbox');if(box.classList.contains('open')){if(e.key==='Escape'){e.preventDefault();closeLightbox();}if(e.key==='ArrowLeft'){e.preventDefault();lbNav(-1);}if(e.key==='ArrowRight'){e.preventDefault();lbNav(1);}trapFocus(e,box);return;}
+ const menu=document.getElementById('navMobile');if(menu.classList.contains('open')){if(e.key==='Escape'){toggleMenu(false);document.getElementById('navHamburger').focus();}trapFocus(e,menu);}
+ if(e.key==='Escape')closeLangMenu();
 });
 
 /* ── Campana: synthetic bell tones via Web Audio API ── */
+var _bellAudioContext=null;
 function cmpPlayBell(btn, freq, decay, vol) {
   var vScale = (vol != null) ? (vol / 0.45) : 1;
   try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const ctx = _bellAudioContext || (_bellAudioContext=new (window.AudioContext || window.webkitAudioContext)());
+    if(ctx.state==='suspended')ctx.resume().catch(()=>{});
     const now = ctx.currentTime;
     // Fundamental
     const o1 = ctx.createOscillator(), g1 = ctx.createGain();
@@ -1266,39 +1272,13 @@ function cmpPlayBell(btn, freq, decay, vol) {
 }
 /* ── GRADO interactive bell widget ── */
 var _cmpGrado = {level:0, canEscalate:false, timer:null};
-function cmpGradoPress() {
-  clearTimeout(_cmpGrado.timer);
-  // Escalation logic: consecutive presses within 3s advance the level
-  if (_cmpGrado.canEscalate && _cmpGrado.level > 0 && _cmpGrado.level < 3) {
-    _cmpGrado.level++;           // escalate: N1→N2→N3
-  } else {
-    _cmpGrado.level = 1;         // start fresh at N1
-  }
-  var lv = _cmpGrado.level;
-  var cfgs = [null,
-    {freq:1380,decay:1.4,vol:0.28},
-    {freq:1380,decay:1.8,vol:0.45},
-    {freq:1380,decay:2.2,vol:0.72}
-  ];
-  var cf = cfgs[lv];
-  var btn = document.getElementById('cmp-grado-btn');
-  cmpPlayBell(btn, cf.freq, cf.decay, cf.vol);
-  _cmpGradoUI(false);
-  if (lv < 3) {
-    // Show escalation hint and open 3s window
-    var hintEl = document.getElementById('cmp-grado-hint');
-    if (hintEl) hintEl.style.opacity = '1';
-    _cmpGrado.canEscalate = true;
-    _cmpGrado.timer = setTimeout(function(){
-      _cmpGrado.canEscalate = false;
-      // Level display stays — just dim the hint
-      var hint = document.getElementById('cmp-grado-hint');
-      if (hint) hint.style.opacity = '0';
-    }, 3000);
-  } else {
-    // At N3 — close escalation window, keep showing N3
-    _cmpGrado.canEscalate = false;
-  }
+function cmpGradoPress(){
+ clearTimeout(_cmpGrado.timer);
+ _cmpGrado.level=_cmpGrado.canEscalate?Math.min(3,_cmpGrado.level+1):1;
+ _cmpGrado.canEscalate=true;
+ const configs=[null,{freq:1380,decay:1.4,vol:.28},{freq:1380,decay:1.8,vol:.45},{freq:1380,decay:2.2,vol:.72}],cfg=configs[_cmpGrado.level];
+ cmpPlayBell(document.getElementById('cmp-grado-btn'),cfg.freq,cfg.decay,cfg.vol);_cmpGradoUI(false);
+ _cmpGrado.timer=setTimeout(()=>{_cmpGrado.level=0;_cmpGrado.canEscalate=false;_cmpGrado.timer=null;_cmpGradoUI(true);},3000);
 }
 function _cmpGradoUI(reset) {
   var tag  = document.getElementById('cmp-grado-level-tag');
@@ -1307,11 +1287,11 @@ function _cmpGradoUI(reset) {
   var hint = document.getElementById('cmp-grado-hint');
   var btn  = document.getElementById('cmp-grado-btn');
   if (!tag) return;
-  var labels=['—','N1','N2','N3'], dbs=['—','~70 dB','~76 dB','~82 dB'], widths=['0%','58%','78%','95%'];
+  var labels=['0','N1','N2','N3'], dbs=['—','~70 dB','~76 dB','~82 dB'], widths=['0%','58%','78%','95%'];
   var lv = _cmpGrado.level;
   if (reset) {
-    tag.textContent='—'; tag.style.color='var(--color-border)';
-    db.textContent='— dB'; db.style.color='var(--color-muted)';
+    tag.textContent='0'; tag.style.color='var(--color-muted)';
+    db.textContent=localText('At rest'); db.style.color='var(--color-muted)';
     bar.style.width='0%'; hint.style.opacity='0';
     [1,2,3].forEach(function(i){
       var c=document.getElementById('cmp-grado-card-'+i);
@@ -1321,7 +1301,7 @@ function _cmpGradoUI(reset) {
   }
   tag.textContent=labels[lv]; tag.style.color=lv>0?'#d24a1f':'var(--color-border)';
   db.textContent=dbs[lv]; db.style.color=lv>0?'var(--color-text)':'var(--color-muted)';
-  bar.style.width=widths[lv]; hint.style.opacity='1';
+  bar.style.width=widths[lv]; hint.style.opacity=lv<3?'1':'0';
   // Ripple on button
   if (btn) { btn.classList.remove('cmp-grado-ring'); void btn.offsetWidth; btn.classList.add('cmp-grado-ring'); }
   [1,2,3].forEach(function(i){
@@ -1343,7 +1323,7 @@ function buildProject(id) {
   const _cmpDict = {
     en:{
       rph_kicker:'Research Phase',
-      rph_title:'One ring.<br>Two different intents.',
+      rph_title:'One bell.<br>Three levels of urgency.',
       tl_1877:'Dome bell patent: 6-8 parts, single rotating striker',
       tl_1950:'Mass industrial production and global standardization',
       tl_1970:'Thumb bell reaches 70%+ global market share',
@@ -1492,16 +1472,16 @@ function buildProject(id) {
       cmf_high:'High', cmf_med:'Medium', cmf_low:'Low', cmf_vhigh:'Very high',
       cmf_none:'None', cmf_vlow:'Very low',
       cmf_dir_lbl:'Selected direction',
-      cmf_dir:'<strong>Anodised brass</strong> body for optimal resonance and warm tone inherent to the material. Ratchet mechanism in <strong>stainless steel</strong> for durability and visual contrast. Anodised finish for a unified aesthetic without hiding the metal.',
+      cmf_dir:"<strong>Brass</strong> for the resonant shell and <strong>hardened steel</strong> for the ratchet, cam and hammer. The pusher and clamp use anodised aluminium; the translucent dome uses polycarbonate. Tempered spring steel provides the return action, and PVC plastisol coats the screw heads.",
       prop_label:'Design Phase · Proposal',
       prop_title:'Intent · <em style="font-style:normal;color:#d24a1f;">design proposal</em>',
       stat_levels:'signal levels', stat_weight:'estimated weight', stat_mech:'mechanical · no battery',
       how_label:'How it works',
       how_1:'Each consecutive press advances a ratchet that increases the hammer swing radius',
       how_2:'More swing = higher impact speed = higher dB output. Physics, not electronics.',
-      how_3:'Maximum output at third press. Level holds until the next press.',
-      how_4:'Fits standard 22.2 mm handlebars, tool-free.',
-      how_5:'The return spring resets the ratchet to N1 after each ride.',
+      how_3:'The third consecutive press reaches the highest sound level.',
+      how_4:'Fits standard 22.2 mm handlebars.',
+      how_5:'When the presses stop, the return spring brings the mechanism back to its starting position.',
       parts_label:'Materials & parts',
       ante_band:'The bicycle bell inherits attributes from four distinct families (thumb gesture, tube mount, warning function, and resonant geometry) but excels at none. Each group points to a redesign direction.',
       ctx2_name:'Quiet street', ctx2_eff:'Medium effectiveness',
@@ -1510,8 +1490,6 @@ function buildProject(id) {
       ctx3_desc:'Noise floor 78–85 dB. Bell at 70 dB acoustically invisible. Verbal signal required.',
       ctx4_name:'Mountain trail (MTB)', ctx4_eff:'Variable',
       ctx4_desc:'Natural acoustics help, but speed and terrain significantly reduce the reaction window.',
-      part1_name:'Dome + hammer', part1_desc:'Brass + steel. Geometry sets the resonance, decay, and volume.',
-      part2_name:'Clamp', part2_desc:'Anodized aluminum. 22.2 mm standard. Plastisol-dipped screw heads.',
       sig_label:'Signal levels · N1 · N2 · N3',
       sig_title:'N1 · N2 · N3',
       detail_label:'Product details',
@@ -1535,10 +1513,10 @@ function buildProject(id) {
     },
     es:{
       rph_kicker:'Fase de Investigación',
-      rph_title:'Un timbre.<br>Dos intenciones muy distintas.',
+      rph_title:'Un timbre.<br>Tres niveles de urgencia.',
       tl_1877:'Patente de campana de cúpula: 6-8 partes, percutor rotatorio',
       tl_1950:'Producción industrial masiva y estandarización global',
-      tl_1970:'El thumb bell alcanza +70% de cuota de mercado global',
+      tl_1970:'El timbre de pulsador alcanza +70% de cuota de mercado global',
       tl_2000:'Señales electrónicas introducidas: adopción marginal',
       tl_2020:'Obligatoria en 40+ países. Mecanismo sin cambios',
       tl_2026:'Primera propuesta de campana graduada: este proyecto',
@@ -1551,12 +1529,12 @@ function buildProject(id) {
       typo_desc_tb:'Palanca rotatoria con pulgar. Diseño dominante desde 1877. Un solo nivel sonoro, sin graduación de señal.',
       typo_desc_lv:'Palanca lateral de presión directa. Más compacta y consistente. Mismo nivel único de salida sonora.',
       typo_desc_dd:'Oscilador bi-tonal que alterna dos puntos de impacto. Sonido más musical. Sigue sin graduar urgencia.',
-      typo_desc_int:'Integrada al manillar (Knog Oi, Spurcycle). Innovación formal, no funcional. Sustain largo, titanio o aluminio CNC.',
-      typo_desc_el:'Batería + síntesis digital. Volumen configurable pero requiere carga. Dependencia tecnológica. Creciente en e-bikes.',
+      typo_desc_int:'Integrada al manillar (Knog Oi, Spurcycle). Innovación formal, no funcional. Resonancia prolongada, titanio o aluminio CNC.',
+      typo_desc_el:'Batería + síntesis digital. Volumen configurable pero requiere carga. Dependencia tecnológica. Creciente en bicicletas eléctricas.',
       typo_desc_hr:'Bocina de goma o silbato manual. Mayor volumen y diferenciación sonora. Esfuerzo de accionamiento alto. Ornamental.',
       typo_stat1:'tipos en el mercado', typo_stat2:'nivel de sonido, todos iguales',
       typo_stat3:'sin replanteamiento funcional', typo_stat4:'países, obligatorio por ley',
-      persona_label:'User Persona · Investigación primaria',
+      persona_label:'Perfil de usuario · Investigación primaria',
       persona_title:'Ciclista urbano, perfil primario',
       persona_tag:'Ciclista urbana', persona_age:'29 · Hallandale Beach, FL · Diseñadora gráfica',
       persona_qt:'"Toco el timbre y no sé si me escuchan. La mitad de las veces termino gritando \'permiso\' igual."',
@@ -1589,7 +1567,7 @@ function buildProject(id) {
       ante_intro:'Productos que no son timbres de bicicleta pero comparten una característica con la campana. Cada grupo aísla un atributo: cómo se acciona, cómo se fija, cómo comunica o cómo suena.',
       ante_a:'Accionados con pulgar', ante_b:'Fijación a tubo',
       ante_c:'Sonido como aviso', ante_d:'Cúpula resonante',
-      stk_label:'Mapa de stakeholders · Red de señal',
+      stk_label:'Mapa de actores · Red de señal',
       stk_title:'¿Quién activa y quién recibe la señal?',
       ux_label:'Evaluación UX · 7 dimensiones (1–10)',
       ux_title:'¿Dónde falla exactamente?',
@@ -1597,7 +1575,7 @@ function buildProject(id) {
       ux_dim2:'Intención comunicativa', ux_dim2_sub:'Claridad del mensaje',
       ux_dim3:'Eficacia en tráfico', ux_dim3_sub:'Audibilidad real',
       ux_dim4:'Integración formal', ux_dim4_sub:'Cohesión con la bicicleta',
-      ux_dim5:'Feedback háptico', ux_dim5_sub:'Confirmación táctil al activar',
+      ux_dim5:'Respuesta táctil', ux_dim5_sub:'Confirmación táctil al activar',
       ux_dim6:'Percepción social', ux_dim6_sub:'Cortesía vs. agresividad percibida',
       ux_dim7:'Durabilidad', ux_dim7_sub:'Resistencia al uso',
       ux_finding_lbl:'Hallazgo central',
@@ -1610,11 +1588,11 @@ function buildProject(id) {
       km3_title:'Ciclovía tranquila: contexto óptimo',
       km3_body:'Ruido ambiental 40–50 dB. El timbre funciona bien para avisos de adelantamiento. El peatón identifica la fuente y reacciona.',
       km4_title:'Tráfico denso: incertidumbre',
-      km4_body:'El ciclista toca el timbre pero el peatón no lo escucha. Sin feedback de recepción exitosa. El ciclista queda en la incertidumbre.',
-      jp_label:'Journey Map · Experiencia en 5 fases',
+      km4_body:'El ciclista toca el timbre pero el peatón no lo escucha. Sin confirmación de recepción exitosa. El ciclista queda en la incertidumbre.',
+      jp_label:'Recorrido de uso · Experiencia en 5 fases',
       jp_title:'El viaje del ciclista',
       jp_row_action:'Acción', jp_row_emotion:'Estado emocional',
-      jp_row_sensory:'Feedback sensorial', jp_row_pain:'Punto de dolor',
+      jp_row_sensory:'Respuesta sensorial', jp_row_pain:'Punto de dolor',
       jp_row_actors:'Actores',
       jp_p1_name:'Salida', jp_p2_name:'Trayecto', jp_p3_name:'Alerta',
       jp_p4_name:'Resolución', jp_p5_name:'Llegada',
@@ -1624,7 +1602,7 @@ function buildProject(id) {
       jp_p1_pain:'No verifica que el timbre funcione antes de salir.',
       jp_p1_actors:'Ciclista sola · entorno doméstico.',
       jp_p2_action:'Pedalea en carril bici o calle abierta. Manos en el manillar, pulgar alejado del timbre.',
-      jp_p2_emotion:'Satisfacción / flow. Atención fácil al entorno.',
+      jp_p2_emotion:'Satisfacción / fluidez. Atención fácil al entorno.',
       jp_p2_sensory:'Ruido de fondo urbano, viento, vibración del asfalto.',
       jp_p2_pain:'La posición del pulgar no permite acceso instantáneo si la situación cambia rápido.',
       jp_p2_actors:'Ciclista · otros ciclistas · tráfico vehicular · infraestructura.',
@@ -1662,7 +1640,7 @@ function buildProject(id) {
       h3_title:'La señal no comunica intención',
       h3_body:'El timbre no puede distinguir entre un "permiso" amable y un "peligro, detenerse". Un sonido lo significa todo, y por eso no comunica nada con claridad.',
       h4_title:'Sin confirmación de recepción',
-      h4_body:'El ciclista no tiene feedback de si la señal fue escuchada. El 43% de las interacciones observadas requirieron respaldo vocal inmediato.',
+      h4_body:'El ciclista no recibe confirmación de que la señal fue escuchada. El 43% de las interacciones observadas requirieron respaldo vocal inmediato.',
       h4_stat:'57% tasa de recepción',
       h5_title:'Costo de activación a alta velocidad',
       h5_body:'A 25 km/h el ciclista recorre 9.7 m en 1.4 segundos. La geometría actual del timbre requiere reposicionar el agarre. Tiempo que la situación no permite.',
@@ -1674,26 +1652,26 @@ function buildProject(id) {
       dph_title:'Una respuesta mecánica<br>a un problema de comportamiento.',
       cmf_label:'Fase de Diseño · Exploración de materiales',
       cmf_title:'CMF · sonido · material · cuerpo',
-      cmf_intro:'Cada material genera un timbre diferente al percutirse. La selección del cuerpo no es solo estética: define el sustain, la frecuencia y la percepción de "calidad" del aviso. Se analizaron cuatro materiales en prototipos de campana equivalente.',
-      cmf_m1:'Latón (Brass)', cmf_m1_tone:'Cálido · rico en armónicos',
+      cmf_intro:'Cada material genera un timbre diferente al percutirse. La selección del cuerpo no es solo estética: define la duración del sonido, la frecuencia y la percepción de "calidad" del aviso. Se analizaron cuatro materiales en prototipos de campana equivalente.',
+      cmf_m1:'Latón', cmf_m1_tone:'Cálido · rico en armónicos',
       cmf_m2:'Acero inoxidable', cmf_m2_tone:'Brillante · tono más agudo',
-      cmf_m3:'Aluminio 6061', cmf_m3_tone:'Seco · decay corto',
-      cmf_m4:'Titanio (Ti-6Al-4V)', cmf_m4_tone:'Cristalino · sustain máximo',
-      cmf_res:'Resonancia', cmf_dec:'Decay', cmf_wt:'Peso', cmf_std:'Material estándar',
+      cmf_m3:'Aluminio 6061', cmf_m3_tone:'Seco · decaimiento corto',
+      cmf_m4:'Titanio (Ti-6Al-4V)', cmf_m4_tone:'Cristalino · resonancia prolongada',
+      cmf_res:'Resonancia', cmf_dec:'Decaimiento', cmf_wt:'Peso', cmf_std:'Material estándar',
       cmf_corr:'Corrosión', cmf_cost:'Costo',
       cmf_high:'Alta', cmf_med:'Media', cmf_low:'Baja', cmf_vhigh:'Muy alta',
       cmf_none:'Nula', cmf_vlow:'Muy bajo',
       cmf_dir_lbl:'Dirección seleccionada',
-      cmf_dir:'Cuerpo de <strong>latón anodizado</strong> por resonancia óptima y tono cálido inherente al material. Mecanismo de trinquete en <strong>acero inoxidable</strong> para durabilidad y contraste visual. Acabado anodizado que unifica el conjunto sin ocultar el metal.',
+      cmf_dir:"<strong>Latón</strong> para el cuerpo resonante y <strong>acero templado</strong> para el trinquete, la leva y el martillo. El pulsador y la abrazadera son de aluminio anodizado; el domo translúcido, de policarbonato. Los resortes de acero templado restituyen el mecanismo y las cabezas de los tornillos llevan plastisol de PVC.",
       prop_label:'Fase de Diseño · Propuesta',
       prop_title:'Intent · <em style="font-style:normal;color:#d24a1f;">propuesta de diseño</em>',
       stat_levels:'niveles de señal', stat_weight:'peso estimado', stat_mech:'mecánico · sin batería',
       how_label:'Cómo funciona',
-      how_1:'Cada pulsación consecutiva avanza un trinquete que aumenta el radio de swing del martillo',
-      how_2:'Mayor swing = mayor velocidad de impacto = mayor salida en dB. Física, sin electrónica.',
-      how_3:'Salida máxima en la tercera pulsación. El nivel se mantiene hasta el siguiente toque.',
-      how_4:'Compatible con manillares estándar 22.2 mm, sin herramientas.',
-      how_5:'El resorte de retención devuelve el trinquete a N1 tras cada trayecto.',
+      how_1:'Cada pulsación consecutiva avanza un trinquete que aumenta el radio de oscilación del martillo',
+      how_2:'Mayor recorrido = mayor velocidad de impacto = mayor salida en dB. Física, sin electrónica.',
+      how_3:'La tercera pulsación consecutiva alcanza el nivel de sonido más alto.',
+      how_4:'Compatible con manubrios estándar de 22,2 mm.',
+      how_5:'Al dejar de pulsar, el resorte de retención devuelve el mecanismo a su posición inicial.',
       parts_label:'Materiales y partes',
       ante_band:'La campana de bici hereda atributos de cuatro familias distintas (gesto del pulgar, abrazadera al tubo, función de aviso y geometría resonante) pero no destaca en ninguna. Cada grupo apunta a una pista de rediseño.',
       ctx2_name:'Calle tranquila', ctx2_eff:'Efectividad media',
@@ -1702,8 +1680,6 @@ function buildProject(id) {
       ctx3_desc:'Piso de ruido 78–85 dB. El timbre a 70 dB es acústicamente invisible. Se requiere señal verbal.',
       ctx4_name:'Sendero de montaña (MTB)', ctx4_eff:'Variable',
       ctx4_desc:'La acústica natural ayuda, pero la velocidad y el terreno reducen significativamente la ventana de reacción.',
-      part1_name:'Cúpula + martillo', part1_desc:'Latón + acero. La geometría define la resonancia, el decay y el volumen.',
-      part2_name:'Abrazadera', part2_desc:'Aluminio anodizado. Estándar 22.2 mm. Cabezas de tornillo con recubrimiento de plastisol.',
       sig_label:'Niveles de señal · N1 · N2 · N3',
       sig_title:'N1 · N2 · N3',
       detail_label:'Detalles del producto',
@@ -1711,7 +1687,7 @@ function buildProject(id) {
       
       ante_gh_a:'Accionados con pulgar', ante_gh_b:'Fijación a tubo',
       ante_gh_c:'Sonido como aviso', ante_gh_d:'Cúpula resonante',
-      ante_a1:'Clicker / contador', ante_a1t:'Pulsador con resorte. Mismo gesto de pulgar y feedback háptico.',
+      ante_a1:'Contador manual', ante_a1t:'Pulsador con resorte. Mismo gesto de pulgar y respuesta táctil.',
       ante_a2:'Disparador de cámara', ante_a2t:'Botón superior accionado sin distraer la vista.',
       ante_a3:'Gatillo de moto', ante_a3t:'Bocina sobre manillar. Pulgar bajo presión continua.',
       ante_b1:'Linterna delantera', ante_b1t:'Mismo collarín. Comparte ecosistema de medidas.',
@@ -1721,13 +1697,13 @@ function buildProject(id) {
       ante_c2:'Silbato', ante_c2t:'Tono agudo penetrante. Requiere la boca, lo que descarta manos ocupadas.',
       ante_c3:'Timbre de puerta', ante_c3t:'Aviso entre dos personas. Receptor lo espera. Resuelve lo opuesto.',
       ante_d1:'Campana de iglesia', ante_d1t:'Mismo principio físico a 1000× la masa. Tono grave por dimensión.',
-      ante_d2:'Triángulo / agogô', ante_d2t:'Idiófonos de percusión. Decay extendido por geometría abierta.',
+      ante_d2:'Triángulo / agogô', ante_d2t:'Idiófonos de percusión. Decaimiento prolongado por su geometría abierta.',
       ante_d3:'Cencerro', ante_d3t:'Cúpula con martinete interno por movimiento. Aviso sin intervención.',
       closing:'El sonido se resolvió en 1877. <em>La intención</em> tardó 149 años más.',
     },
     de:{
       rph_kicker:'Forschungsphase',
-      rph_title:'Ein Klingeln.<br>Zwei sehr unterschiedliche Absichten.',
+      rph_title:'Eine Klingel.<br>Drei Dringlichkeitsstufen.',
       tl_1877:'Kuppelklingel-Patent: 6-8 Teile, einzelner Drehhammer',
       tl_1950:'Massenindustrielle Produktion und globale Standardisierung',
       tl_1970:'Daumentaste erreicht +70% globalen Marktanteil',
@@ -1748,7 +1724,7 @@ function buildProject(id) {
       typo_desc_hr:'Gummihorn oder manuelles Pfeifsignal. Höheres Volumen. Hoher Betätigungsaufwand. Ornamental.',
       typo_stat1:'Typen auf dem Markt', typo_stat2:'Lautstärkepegel, alle gleich',
       typo_stat3:'ohne funktionale Neugestaltung', typo_stat4:'Länder, gesetzlich vorgeschrieben',
-      persona_label:'User Persona · Primärforschung',
+      persona_label:'Nutzerprofil · Primärforschung',
       persona_title:'Stadtradler, Primärprofil',
       persona_tag:'Stadtpendlerin', persona_age:'29 · Hallandale Beach, FL · Grafikdesignerin',
       persona_qt:'"Ich klingle und weiß nicht ob sie mich hören. Meistens rufe ich sowieso \'Entschuldigung\'."',
@@ -1781,7 +1757,7 @@ function buildProject(id) {
       ante_intro:'Produkte, die keine Fahrradklingeln sind, aber ein Merkmal mit der Klingel teilen. Jede Gruppe isoliert ein Attribut: Betätigung, Befestigung, Kommunikation oder Klang.',
       ante_a:'Daumenbetätigt', ante_b:'Rohrbefestigung',
       ante_c:'Ton als Signal', ante_d:'Resonanzkuppel',
-      stk_label:'Stakeholder-Map · Signalnetzwerk',
+      stk_label:'Akteursübersicht · Signalnetzwerk',
       stk_title:'Wer aktiviert und wer empfängt das Signal?',
       ux_label:'UX-Evaluation · 7 Dimensionen (1–10)',
       ux_title:'Wo genau versagt es?',
@@ -1789,7 +1765,7 @@ function buildProject(id) {
       ux_dim2:'Kommunikationsabsicht', ux_dim2_sub:'Klarheit der Botschaft',
       ux_dim3:'Wirksamkeit im Verkehr', ux_dim3_sub:'Reale Hörbarkeit',
       ux_dim4:'Formale Integration', ux_dim4_sub:'Kohäsion mit dem Fahrrad',
-      ux_dim5:'Haptisches Feedback', ux_dim5_sub:'Taktile Bestätigung beim Drücken',
+      ux_dim5:'Haptische Rückmeldung', ux_dim5_sub:'Taktile Bestätigung beim Drücken',
       ux_dim6:'Soziale Wahrnehmung', ux_dim6_sub:'Höflichkeit vs. wahrgenommene Aggression',
       ux_dim7:'Langlebigkeit', ux_dim7_sub:'Widerstandsfähigkeit im Gebrauch',
       ux_finding_lbl:'Zentrale Erkenntnis',
@@ -1802,11 +1778,11 @@ function buildProject(id) {
       km3_title:'Ruhiger Radweg: optimaler Kontext',
       km3_body:'Umgebungslärm 40–50 dB. Klingel funktioniert gut für Überholwarnungen. Fußgänger identifiziert die Quelle und reagiert.',
       km4_title:'Dichter Verkehr: Unsicherheit',
-      km4_body:'Radfahrer klingelt, aber Fußgänger hört es nicht. Kein Feedback über erfolgreichen Empfang. Radfahrer bleibt in Ungewissheit.',
-      jp_label:'Journey Map · 5-Phasen-Erfahrung',
+      km4_body:'Radfahrer klingelt, aber Fußgänger hört es nicht. Keine Bestätigung des erfolgreichen Empfangs. Radfahrer bleibt in Ungewissheit.',
+      jp_label:'Nutzungserlebnis · 5 Phasen',
       jp_title:'Die Reise des Radfahrers',
       jp_row_action:'Aktion', jp_row_emotion:'Emotionaler Zustand',
-      jp_row_sensory:'Sensorisches Feedback', jp_row_pain:'Schmerzpunkt',
+      jp_row_sensory:'Sensorische Rückmeldung', jp_row_pain:'Schmerzpunkt',
       jp_row_actors:'Akteure',
       jp_p1_name:'Abfahrt', jp_p2_name:'Fahrt', jp_p3_name:'Alarm',
       jp_p4_name:'Auflösung', jp_p5_name:'Ankunft',
@@ -1866,26 +1842,26 @@ function buildProject(id) {
       dph_title:'Eine mechanische Antwort<br>auf ein Verhaltensproblem.',
       cmf_label:'Designphase · Materialerkundung',
       cmf_title:'CMF · Klang · Material · Körper',
-      cmf_intro:'Jedes Material erzeugt beim Anschlag einen anderen Klang. Die Auswahl des Korpus ist nicht nur Ästhetik: sie definiert Sustain, Frequenz und wahrgenommene "Qualität" des Signals. Vier Materialien wurden an gleichwertigen Klingelprototypen analysiert.',
+      cmf_intro:'Jedes Material erzeugt beim Anschlag einen anderen Klang. Die Auswahl des Korpus ist nicht nur Ästhetik: sie bestimmt Nachklingdauer, Frequenz und wahrgenommene "Qualität" des Signals. Vier Materialien wurden an gleichwertigen Klingelprototypen analysiert.',
       cmf_m1:'Messing (Brass)', cmf_m1_tone:'Warm · reich an Obertönen',
       cmf_m2:'Edelstahl', cmf_m2_tone:'Hell · höhere Tonlage',
-      cmf_m3:'Aluminium 6061', cmf_m3_tone:'Trocken · kurzer Decay',
-      cmf_m4:'Titan (Ti-6Al-4V)', cmf_m4_tone:'Kristallin · maximaler Sustain',
-      cmf_res:'Resonanz', cmf_dec:'Decay', cmf_wt:'Gewicht', cmf_std:'Standardmaterial',
+      cmf_m3:'Aluminium 6061', cmf_m3_tone:'Trocken · kurze Abklingzeit',
+      cmf_m4:'Titan (Ti-6Al-4V)', cmf_m4_tone:'Kristallin · langes Nachklingen',
+      cmf_res:'Resonanz', cmf_dec:'Abklingzeit', cmf_wt:'Gewicht', cmf_std:'Standardmaterial',
       cmf_corr:'Korrosion', cmf_cost:'Kosten',
       cmf_high:'Hoch', cmf_med:'Mittel', cmf_low:'Niedrig', cmf_vhigh:'Sehr hoch',
       cmf_none:'Keine', cmf_vlow:'Sehr niedrig',
       cmf_dir_lbl:'Gewählte Richtung',
-      cmf_dir:'<strong>Eloxiertes Messing</strong>-Korpus für optimale Resonanz und warmen Ton. Ratschenmechanismus aus <strong>Edelstahl</strong> für Haltbarkeit und visuellen Kontrast. Eloxierte Oberfläche für eine einheitliche Ästhetik, ohne das Metall zu verbergen.',
+      cmf_dir:"<strong>Messing</strong> für den Klangkörper und <strong>gehärteter Stahl</strong> für Ratsche, Nocken und Hammer. Drücker und Klemme bestehen aus eloxiertem Aluminium, die transluzente Kuppel aus Polycarbonat. Vergüteter Federstahl übernimmt die Rückstellung; die Schraubenköpfe erhalten eine PVC-Plastisolbeschichtung.",
       prop_label:'Designphase · Vorschlag',
       prop_title:'Intent · <em style="font-style:normal;color:#d24a1f;">Designvorschlag</em>',
       stat_levels:'Signalpegel', stat_weight:'geschätztes Gewicht', stat_mech:'mechanisch · keine Batterie',
       how_label:'So funktioniert es',
       how_1:'Jeder aufeinanderfolgende Druck rückt eine Ratsche vor, die den Hammerschwungradius vergrößert',
       how_2:'Mehr Schwung = höhere Aufprallgeschwindigkeit = höhere dB-Ausgabe. Physik, keine Elektronik.',
-      how_3:'Maximale Ausgabe beim dritten Druck. Der Pegel hält bis zum nächsten Druck.',
-      how_4:'Passt auf Standard-22,2-mm-Lenker, werkzeuglos montierbar.',
-      how_5:'Die Rückstellfeder setzt die Ratsche nach jeder Fahrt auf N1 zurück.',
+      how_3:'Die dritte aufeinanderfolgende Betätigung erreicht die höchste Lautstärke.',
+      how_4:'Passend für Standardlenker mit 22,2 mm Durchmesser.',
+      how_5:'Sobald die Betätigungen aufhören, bringt die Rückstellfeder den Mechanismus in seine Ausgangsposition zurück.',
       parts_label:'Materialien & Teile',
       ante_band:'Die Fahrradklingel erbt Attribute von vier verschiedenen Familien (Daumengeste, Rohrbefestigung, Warnfunktion und resonante Geometrie), übertrifft aber keine davon. Jede Gruppe zeigt eine Richtung für das Redesign.',
       ctx2_name:'Ruhige Straße', ctx2_eff:'Mittlere Wirksamkeit',
@@ -1894,8 +1870,6 @@ function buildProject(id) {
       ctx3_desc:'Lärmpegel 78–85 dB. Klingel bei 70 dB akustisch unsichtbar. Verbales Signal erforderlich.',
       ctx4_name:'Bergweg (MTB)', ctx4_eff:'Variabel',
       ctx4_desc:'Natürliche Akustik hilft, aber Geschwindigkeit und Gelände reduzieren das Reaktionsfenster erheblich.',
-      part1_name:'Kuppel + Hammer', part1_desc:'Messing + Stahl. Geometrie bestimmt Resonanz, Decay und Lautstärke.',
-      part2_name:'Klemme', part2_desc:'Eloxiertes Aluminium. Standard 22,2 mm. Schraubenköpfe mit Plastisol-Beschichtung.',
       sig_label:'Signalpegel · N1 · N2 · N3',
       sig_title:'N1 · N2 · N3',
       detail_label:'Produktdetails',
@@ -2199,8 +2173,8 @@ function buildProject(id) {
     .cmp-dim-sub{font-size:.76rem!important;}
     .cmp-stk-layer-txt{font-size:.8rem;}
     /* ── SECTION SPACING & HIERARCHY ── */
-    .cmp-section{padding:clamp(40px,6vw,72px) var(--ph,6%)!important;}
-    .cmp-section-title{font-size:clamp(28px,4.2vw,52px)!important;margin-bottom:clamp(22px,3vw,36px)!important;}
+    .cmp-section{padding:clamp(40px,6vw,72px) var(--ph,6%);}.cmp-section.cmp-render-section{padding-bottom:0;}
+    .cmp-section-title{font-size:clamp(28px,4.2vw,52px);margin-bottom:clamp(22px,3vw,36px);}.cmp-section-hd .cmp-section-title{margin-bottom:0;}
     .cmp-section-hd{margin-bottom:clamp(22px,3vw,40px);}
     .cmp-section-label{font-size:.68rem!important;letter-spacing:.2em!important;margin-bottom:8px!important;}
     /* ── HALLAZGOS — visual weight ── */
@@ -2358,7 +2332,7 @@ function buildProject(id) {
         <div class="cmp-ante-gh" style="grid-column:span 3;"><span>B</span>${c.ante_gh_b}</div>
         <!-- Row 2: A items × 3, B items × 3 -->
         <div class="cmp-ante-item">
-          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-clicker.webp" alt="Clicker / contador" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-clicker.webp" alt="Contador manual" style="width:100%;height:100%;object-fit:contain;"></div>
           <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_a1}</div><div class="cmp-ante-txt">${c.ante_a1t}</div></div>
         </div>
         <div class="cmp-ante-item">
@@ -2575,152 +2549,7 @@ function buildProject(id) {
     </div>
 
     <!-- STAKEHOLDER MAP -->
-    <div class="cmp-section" style="border-top:1px solid var(--color-border);">
-      <div class="cmp-section-hd">
-        <div class="cmp-section-label">${c.stk_label}</div>
-        <div class="cmp-section-title">${c.stk_title}</div>
-      </div>
-      <!-- Stakeholder diagram: SVG left, legend right -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--color-border);">
-        <!-- LEFT: visual map -->
-        <div style="background:var(--color-bg);padding:clamp(14px,2vw,24px) clamp(10px,1.5vw,16px);">
-          <svg viewBox="20 40 520 520" xmlns="http://www.w3.org/2000/svg" overflow="visible" style="display:block;width:100%;max-height:620px;" role="img" aria-label="Stakeholder map">
-            <!-- Background -->
-            <rect width="560" height="620" fill="var(--color-bg)"/>
-
-            <!-- ── RINGS ──────────────────────────────────────────────── -->
-            <!-- Outer ring — environmental zone -->
-            <circle cx="280" cy="310" r="262" fill="color-mix(in srgb,var(--color-border) 20%,var(--color-bg))" stroke="var(--color-border)" stroke-width="1"/>
-            <!-- Middle ring — receptor zone -->
-            <circle cx="280" cy="310" r="196" fill="color-mix(in srgb,var(--color-border) 10%,var(--color-bg))" stroke="var(--color-border)" stroke-width="1"/>
-            <!-- Inner circle — emitter -->
-            <circle cx="280" cy="310" r="76" fill="#d24a1f" stroke="#b03a12" stroke-width="2"/>
-
-            <!-- ─�� ZONE LABELS ─────────────────────────────────────────── -->
-            <text x="280" y="30" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="var(--color-muted)" letter-spacing="3" opacity=".6">${_cl==='es'?'FACTORES DEL ENTORNO':_cl==='de'?'UMGEBUNGSFAKTOREN':'ENVIRONMENTAL FACTORS'}</text>
-            <line x1="138" y1="38" x2="422" y2="38" stroke="var(--color-border)" stroke-width=".5" opacity=".5"/>
-            <text x="280" y="610" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="var(--color-muted)" letter-spacing="2" opacity=".5">${_cl==='es'?'CALIDAD DEL CANAL DE COMUNICACIÓN':_cl==='de'?'QUALITÄT DES KOMMUNIKATIONSKANALS':'SIGNAL CHANNEL QUALITY'}</text>
-
-            <!-- ── CENTER: CYCLIST + BELL ─────────────────────────────── -->
-            <text x="280" y="304" text-anchor="middle" font-family="inherit" font-size="16" font-weight="700" fill="#fff" letter-spacing=".02em">${_cl==='es'?'CICLISTA':_cl==='de'?'RADFAHRER':'CYCLIST'}</text>
-            <text x="280" y="322" text-anchor="middle" font-family="'Courier New',monospace" font-size="11" fill="#fff" opacity=".85" letter-spacing="2">+ ${_cl==='es'?'CAMPANA':_cl==='de'?'KLINGEL':'BELL'}</text>
-
-            <!-- ── CONNECTOR LINES ────────────────────────────────────── -->
-            <!-- TOP — Pedestrian (solid, text color = effective) -->
-            <line x1="280" y1="234" x2="280" y2="206" stroke="var(--color-text)" stroke-width="2.5" opacity=".7"/>
-            <!-- NE — Pedestrian w/phone (dashed orange = attenuated) -->
-            <line x1="346" y1="272" x2="370" y2="258" stroke="#d24a1f" stroke-width="2" stroke-dasharray="7 4"/>
-            <!-- SE — Other cyclist (dashed muted = shared code) -->
-            <line x1="346" y1="348" x2="370" y2="362" stroke="var(--color-muted)" stroke-width="2" stroke-dasharray="5 3"/>
-            <!-- BOTTOM — Vulnerable pedestrian (dashed orange = attenuated) -->
-            <line x1="280" y1="386" x2="280" y2="414" stroke="#d24a1f" stroke-width="2" stroke-dasharray="7 4"/>
-            <!-- SW — Driver (dotted, dim = no signal) -->
-            <line x1="214" y1="348" x2="190" y2="362" stroke="var(--color-border)" stroke-width="2" stroke-dasharray="2 5"/>
-            <!-- NW — Pedestrian w/headphones (dotted, dim = no signal) -->
-            <line x1="214" y1="272" x2="190" y2="258" stroke="var(--color-border)" stroke-width="2" stroke-dasharray="2 5"/>
-
-            <!-- ── 6 RECEPTOR CIRCLES ─────────────────────────────────── -->
-            <!-- 1. TOP (-90°) cx=280 cy=162 — Pedestrian (effective) -->
-            <circle cx="280" cy="162" r="44" fill="var(--color-bg)" stroke="var(--color-text)" stroke-width="2"/>
-            <text x="280" y="155" text-anchor="middle" font-family="inherit" font-size="10" font-weight="700" fill="var(--color-text)">${_cl==='es'?'Peatón':_cl==='de'?'Fußgänger':'Pedestrian'}</text>
-            <text x="280" y="168" text-anchor="middle" font-family="inherit" font-size="8.5" fill="var(--color-muted)">${_cl==='es'?'sin auriculares':_cl==='de'?'ohne Kopfhörer':'no headphones'}</text>
-            <text x="280" y="182" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" font-weight="700" letter-spacing="1" fill="var(--color-text)">${_cl==='es'?'RECIBE':_cl==='de'?'EMPFÄNGT':'RECEIVES'}</text>
-
-            <!-- 2. NE (-30°) cx=408 cy=236 �� Pedestrian w/phone (partial) -->
-            <circle cx="408" cy="236" r="44" fill="var(--color-bg)" stroke="#d24a1f" stroke-width="2"/>
-            <text x="408" y="229" text-anchor="middle" font-family="inherit" font-size="10" font-weight="700" fill="var(--color-text)">${_cl==='es'?'Peatón':_cl==='de'?'Fußgänger':'Pedestrian'}</text>
-            <text x="408" y="242" text-anchor="middle" font-family="inherit" font-size="8.5" fill="var(--color-muted)">${_cl==='es'?'con celular':_cl==='de'?'mit Handy':'w/ phone'}</text>
-            <text x="408" y="256" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" font-weight="700" letter-spacing=".5" fill="#d24a1f">${_cl==='es'?'PARCIAL':_cl==='de'?'TEILWEISE':'PARTIAL'}</text>
-
-            <!-- 3. SE (+30°) cx=408 cy=384 — Other cyclist (shared code) -->
-            <circle cx="408" cy="384" r="44" fill="var(--color-bg)" stroke="var(--color-muted)" stroke-width="1.5"/>
-            <text x="408" y="377" text-anchor="middle" font-family="inherit" font-size="10" font-weight="700" fill="var(--color-text)">${_cl==='es'?'Otro':_cl==='de'?'Anderer':'Other'}</text>
-            <text x="408" y="390" text-anchor="middle" font-family="inherit" font-size="8.5" fill="var(--color-muted)">${_cl==='es'?'ciclista':_cl==='de'?'Radfahrer':'cyclist'}</text>
-            <text x="408" y="404" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" font-weight="700" letter-spacing=".5" fill="var(--color-muted)">${_cl==='es'?'CÓD. COMPART.':_cl==='de'?'GEMEINS. CODE':'SHARED CODE'}</text>
-
-            <!-- 4. BOTTOM (+90°) cx=280 cy=458 ��� Vulnerable pedestrian (partial) -->
-            <circle cx="280" cy="458" r="44" fill="var(--color-bg)" stroke="#d24a1f" stroke-width="2"/>
-            <text x="280" y="449" text-anchor="middle" font-family="inherit" font-size="9.5" font-weight="700" fill="var(--color-text)">${_cl==='es'?'Peatón':_cl==='de'?'Fußgänger':'Pedestrian'}</text>
-            <text x="280" y="462" text-anchor="middle" font-family="inherit" font-size="8" fill="var(--color-muted)">${_cl==='es'?'niño · 3ª ed. · audíf.':_cl==='de'?'Kind · Senioren':'child · elderly'}</text>
-            <text x="280" y="476" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" font-weight="700" letter-spacing=".5" fill="#d24a1f">${_cl==='es'?'PARCIAL':_cl==='de'?'TEILWEISE':'PARTIAL'}</text>
-
-            <!-- 5. SW (+150°) cx=152 cy=384 — Driver (no signal) -->
-            <circle cx="152" cy="384" r="44" fill="var(--color-bg)" stroke="var(--color-border)" stroke-width="1.5"/>
-            <text x="152" y="377" text-anchor="middle" font-family="inherit" font-size="10" font-weight="700" fill="var(--color-muted)">${_cl==='es'?'Conductor':_cl==='de'?'Fahrer':'Driver'}</text>
-            <text x="152" y="390" text-anchor="middle" font-family="inherit" font-size="8.5" fill="var(--color-muted)">${_cl==='es'?'de auto':_cl==='de'?'KFZ':'car'}</text>
-            <text x="152" y="404" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" font-weight="700" letter-spacing=".5" fill="var(--color-muted)">${_cl==='es'?'NO RECIBE':_cl==='de'?'KEIN EMPFANG':'NO SIGNAL'}</text>
-
-            <!-- 6. NW (-150°) cx=152 cy=236 — Pedestrian w/headphones (no signal) -->
-            <circle cx="152" cy="236" r="44" fill="var(--color-bg)" stroke="var(--color-border)" stroke-width="1.5"/>
-            <text x="152" y="226" text-anchor="middle" font-family="inherit" font-size="10" font-weight="700" fill="var(--color-muted)">${_cl==='es'?'Peatón':_cl==='de'?'Fußgänger':'Pedestrian'}</text>
-            <text x="152" y="239" text-anchor="middle" font-family="inherit" font-size="8.5" fill="var(--color-muted)">${_cl==='es'?'con auriculares':_cl==='de'?'mit Kopfhörern':'w/ headphones'}</text>
-            <text x="152" y="253" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" font-weight="700" letter-spacing=".5" fill="var(--color-muted)">${_cl==='es'?'NO RECIBE':_cl==='de'?'KEIN EMPFANG':'NO SIGNAL'}</text>
-
-            <!-- ── ENVIRONMENTAL FACTORS (at r≈232 in outer ring) ───── -->
-            <!-- ENE (-60°): cx≈396, cy���109 — Cycling culture -->
-            <text x="396" y="107" text-anchor="middle" font-family="inherit" font-size="10" font-weight="600" fill="var(--color-text)">${_cl==='es'?'Cultura ciclística':_cl==='de'?'Radfahrkultur':'Cycling culture'}</text>
-            <text x="396" y="120" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="var(--color-muted)" letter-spacing="1">${_cl==='es'?'CÓDIGO COMPARTIDO':_cl==='de'?'GETEILTER CODE':'SHARED CODE'}</text>
-
-            <!-- E (0°): x=508, y=310 — Motor vehicles -->
-            <text x="508" y="307" text-anchor="end" font-family="inherit" font-size="10" font-weight="600" fill="var(--color-text)">${_cl==='es'?'Vehículos motorizados':_cl==='de'?'Kraftfahrzeuge':'Motor vehicles'}</text>
-            <text x="508" y="320" text-anchor="end" font-family="'Courier New',monospace" font-size="8" fill="var(--color-muted)" letter-spacing="1">${_cl==='es'?'FUENTE DE RUIDO':_cl==='de'?'LÄRMQUELLE':'NOISE SOURCE'}</text>
-
-            <!-- SE (+60°): cx≈396, cy≈511 — Urban infrastructure -->
-            <text x="396" y="508" text-anchor="middle" font-family="inherit" font-size="10" font-weight="600" fill="var(--color-text)">${_cl==='es'?'Infraestructura urbana':_cl==='de'?'Stadtinfrastruktur':'Urban infrastructure'}</text>
-            <text x="396" y="521" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="var(--color-muted)" letter-spacing="1">${_cl==='es'?'BICISENDAS · CRUCES':_cl==='de'?'WEGE · KREUZUNGEN':'BIKE LANES · CROSSINGS'}</text>
-
-            <!-- SW (+120°): cx≈164, cy≈511 — Nature / weather -->
-            <text x="164" y="508" text-anchor="middle" font-family="inherit" font-size="10" font-weight="600" fill="var(--color-text)">${_cl==='es'?'Naturaleza / clima':_cl==='de'?'Natur / Wetter':'Nature / weather'}</text>
-            <text x="164" y="521" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="var(--color-muted)" letter-spacing="1">${_cl==='es'?'VIENTO · LLUVIA':_cl==='de'?'WIND · REGEN':'WIND · RAIN'}</text>
-
-            <!-- W (+180°): x=52, y=310 — Local regulation -->
-            <text x="52" y="307" text-anchor="start" font-family="inherit" font-size="10" font-weight="600" fill="var(--color-text)">${_cl==='es'?'Normativa local':_cl==='de'?'Lokale Normen':'Local regulation'}</text>
-            <text x="52" y="320" text-anchor="start" font-family="'Courier New',monospace" font-size="8" fill="var(--color-muted)" letter-spacing="1">${_cl==='es'?'OBLIGATORIEDAD LEGAL':_cl==='de'?'RECHTSPFLICHT':'LEGAL REQUIREMENT'}</text>
-
-            <!-- WNW (-120°): cx≈164, cy≈109 — Urban background noise -->
-            <text x="164" y="107" text-anchor="middle" font-family="inherit" font-size="10" font-weight="600" fill="var(--color-text)">${_cl==='es'?'Ruido urbano':_cl==='de'?'Stadtlärm':'Urban noise'}</text>
-            <text x="164" y="120" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="var(--color-muted)" letter-spacing="1">70–85 dB</text>
-
-                    </svg>
-        </div>
-
-        <!-- RIGHT: actor legend -->
-        <div style="background:var(--color-bg);display:flex;flex-direction:column;justify-content:space-between;">
-          <!-- Signal receptors -->
-          <div style="padding:clamp(10px,1.4vw,16px);border-bottom:1px solid var(--color-border);">
-            <div style="font-size:.58rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#d24a1f;margin-bottom:8px;">${_cl==='es'?'Receptores de señal':_cl==='de'?'Signalempfänger':'Signal receptors'}</div>
-            <div style="display:flex;flex-direction:column;gap:7px;">
-              <div style="display:flex;align-items:center;gap:8px;"><div style="width:8px;height:8px;border-radius:50%;border:1.5px solid var(--color-text);background:var(--color-bg);flex-shrink:0;"></div><div><div style="font-size:.8rem;font-weight:600;color:var(--color-text);">${_cl==='es'?'Peatón sin auriculares':_cl==='de'?'Fußgänger ohne Kopfhörer':'Pedestrian (no headphones)'}</div><div style="font-size:.72rem;color:var(--color-text);font-weight:700;letter-spacing:.06em;">${_cl==='es'?'RECIBE':_cl==='de'?'EMPFÄNGT':'RECEIVES'}</div></div></div>
-              <div style="display:flex;align-items:center;gap:8px;"><div style="width:8px;height:8px;border-radius:50%;border:1.5px solid #d24a1f;background:var(--color-bg);flex-shrink:0;"></div><div><div style="font-size:.8rem;font-weight:600;color:var(--color-text);">${_cl==='es'?'Peatón con celular':_cl==='de'?'Fußgänger mit Handy':'Pedestrian w/ phone'}</div><div style="font-size:.72rem;color:#d24a1f;font-weight:700;letter-spacing:.06em;">${_cl==='es'?'RECIBE PARCIAL':_cl==='de'?'TEILWEISE':'PARTIAL'}</div></div></div>
-              <div style="display:flex;align-items:center;gap:8px;"><div style="width:8px;height:8px;border-radius:50%;border:1.5px solid var(--color-muted);background:var(--color-bg);flex-shrink:0;"></div><div><div style="font-size:.8rem;font-weight:600;color:var(--color-text);">${_cl==='es'?'Otro ciclista':_cl==='de'?'Anderer Radfahrer':'Fellow cyclist'}</div><div style="font-size:.72rem;color:var(--color-muted);font-weight:700;letter-spacing:.06em;">${_cl==='es'?'CÓD. COMPARTIDO':_cl==='de'?'GETEILTER CODE':'SHARED CODE'}</div></div></div>
-              <div style="display:flex;align-items:center;gap:8px;"><div style="width:8px;height:8px;border-radius:50%;border:1.5px solid #d24a1f;background:var(--color-bg);flex-shrink:0;"></div><div><div style="font-size:.8rem;font-weight:600;color:var(--color-text);">${_cl==='es'?'Peatón vulnerable':_cl==='de'?'Schutzbedürftiger Fußgänger':'Vulnerable pedestrian'}</div><div style="font-size:.72rem;color:#d24a1f;font-weight:700;letter-spacing:.06em;">${_cl==='es'?'RECIBE PARCIAL':_cl==='de'?'TEILWEISE':'PARTIAL'}</div></div></div>
-              <div style="display:flex;align-items:center;gap:8px;"><div style="width:8px;height:8px;border-radius:50%;border:1.5px solid var(--color-border);background:var(--color-bg);flex-shrink:0;"></div><div><div style="font-size:.8rem;font-weight:600;color:var(--color-muted);">${_cl==='es'?'Conductor de auto':_cl==='de'?'KFZ-Fahrer':'Car driver'}</div><div style="font-size:.72rem;color:var(--color-muted);font-weight:700;letter-spacing:.06em;">${_cl==='es'?'NO RECIBE':_cl==='de'?'KEIN EMPFANG':'NO SIGNAL'}</div></div></div>
-              <div style="display:flex;align-items:center;gap:8px;"><div style="width:8px;height:8px;border-radius:50%;border:1.5px solid var(--color-border);background:var(--color-bg);flex-shrink:0;"></div><div><div style="font-size:.8rem;font-weight:600;color:var(--color-muted);">${_cl==='es'?'Peatón con auriculares':_cl==='de'?'Fußgänger mit Kopfhörern':'Pedestrian w/ headphones'}</div><div style="font-size:.72rem;color:var(--color-muted);font-weight:700;letter-spacing:.06em;">${_cl==='es'?'NO RECIBE':_cl==='de'?'KEIN EMPFANG':'NO SIGNAL'}</div></div></div>
-            </div>
-          </div>
-          <!-- Environmental factors -->
-          <div style="padding:clamp(10px,1.4vw,16px);border-bottom:1px solid var(--color-border);">
-            <div style="font-size:.58rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-muted);margin-bottom:8px;">${_cl==='es'?'Factores del entorno':_cl==='de'?'Umgebungsfaktoren':'Environmental factors'}</div>
-            <div style="display:flex;flex-direction:column;gap:5px;">
-              <div><div style="font-size:.8rem;font-weight:600;color:var(--color-text);margin-bottom:1px;">${_cl==='es'?'Cultura ciclística':_cl==='de'?'Radfahrkultur':'Cycling culture'}</div><div style="font-size:.72rem;color:var(--color-muted);line-height:1.4;">${_cl==='es'?'Código señal compartido entre ciclistas':_cl==='de'?'Gemeinsamer Signalcode unter Radfahrern':'Shared signal code among cyclists'}</div></div>
-              <div><div style="font-size:.8rem;font-weight:600;color:var(--color-text);margin-bottom:1px;">${_cl==='es'?'Vehículos motorizados':_cl==='de'?'Kraftfahrzeuge':'Motor vehicles'}</div><div style="font-size:.72rem;color:var(--color-muted);line-height:1.4;">${_cl==='es'?'Principal fuente de ruido 78–85 dB':_cl==='de'?'Hauptlärmquelle 78–85 dB':'Main noise source 78–85 dB'}</div></div>
-              <div><div style="font-size:.8rem;font-weight:600;color:var(--color-text);margin-bottom:1px;">${_cl==='es'?'Infraestructura urbana':_cl==='de'?'Stadtinfrastruktur':'Urban infrastructure'}</div><div style="font-size:.72rem;color:var(--color-muted);line-height:1.4;">${_cl==='es'?'Bicisendas, cruces, velocidades':_cl==='de'?'Radwege, Kreuzungen':'Bike lanes, crossings'}</div></div>
-              <div><div style="font-size:.8rem;font-weight:600;color:var(--color-text);margin-bottom:1px;">${_cl==='es'?'Normativa local':_cl==='de'?'Lokale Normen':'Local regulation'}</div><div style="font-size:.72rem;color:var(--color-muted);line-height:1.4;">${_cl==='es'?'Obligatoriedad legal del timbre':_cl==='de'?'Rechtspflicht Fahrradklingel':'Legal requirement for bicycle bell'}</div></div>
-            </div>
-          </div>
-          <!-- Signal quality legend -->
-          <div style="padding:clamp(10px,1.4vw,16px);">
-            <div style="font-size:.58rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-muted);margin-bottom:8px;">${_cl==='es'?'Calidad de señal':_cl==='de'?'Signalqualität':'Signal quality'}</div>
-            <div style="display:flex;flex-direction:column;gap:6px;">
-              <div style="display:flex;align-items:center;gap:9px;"><div style="width:24px;height:0;border-top:2.5px solid var(--color-text);flex-shrink:0;"></div><span style="font-size:.76rem;color:var(--color-muted);">${_cl==='es'?'Efectiva: recibe':_cl==='de'?'Effektiv: empfängt':'Effective: receives'}</span></div>
-              <div style="display:flex;align-items:center;gap:9px;"><div style="width:24px;height:0;border-top:2px dashed #d24a1f;flex-shrink:0;"></div><span style="font-size:.76rem;color:var(--color-muted);">${_cl==='es'?'Atenuada: parcial':_cl==='de'?'Gedämpft: teilweise':'Attenuated: partial'}</span></div>
-              <div style="display:flex;align-items:center;gap:9px;"><div style="width:24px;height:0;border-top:2px dotted var(--color-muted);flex-shrink:0;opacity:.6;"></div><span style="font-size:.76rem;color:var(--color-muted);">${_cl==='es'?'No llega':_cl==='de'?'Kein Empfang':'Does not reach'}</span></div>
-              <div style="display:flex;align-items:center;gap:9px;"><div style="width:24px;height:0;border-top:2px dashed var(--color-muted);flex-shrink:0;"></div><span style="font-size:.76rem;color:var(--color-muted);">${_cl==='es'?'Código compartido':_cl==='de'?'Gemeinsamer Code':'Shared code'}</span></div>
-            </div>
-          </div>
-        </div>
-    </div>
-    </div>
+    ${renderStakeholderSection(c,_cl)}
 
         <!-- JOURNEY MAP -->
     <div class="cmp-section" style="border-top:1px solid var(--color-border);">
@@ -2728,34 +2557,14 @@ function buildProject(id) {
         <div class="cmp-section-label">${c.jp_label}</div>
         <div class="cmp-section-title">${c.jp_title}</div>
       </div>
-      <!-- Emotional curve SVG -->
-      <div style="margin-bottom:clamp(16px,2.5vw,28px);">
-        <svg viewBox="0 0 1100 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:100%;font-family:inherit;" aria-label="Emotional journey curve">
-          <line x1="60" y1="30" x2="60" y2="200" stroke="#c8c1b3" stroke-width="1"/>
-          <line x1="60" y1="115" x2="1080" y2="115" stroke="#c8c1b3" stroke-width="1" stroke-dasharray="4 4"/>
-          <text x="50" y="42" text-anchor="end" font-family="'Courier New',monospace" font-size="14" fill="#7a7468">+</text>
-          <text x="50" y="120" text-anchor="end" font-family="'Courier New',monospace" font-size="14" fill="#7a7468">0</text>
-          <text x="50" y="200" text-anchor="end" font-family="'Courier New',monospace" font-size="14" fill="#7a7468">−</text>
-          <polyline points="170,100 360,55 550,185 740,115 970,40" fill="none" stroke="#d24a1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-          <circle cx="170" cy="100" r="8" fill="#d24a1f"/>
-          <circle cx="360" cy="55" r="8" fill="#1a1a1a"/>
-          <circle cx="550" cy="185" r="8" fill="#d24a1f"/>
-          <circle cx="740" cy="115" r="8" fill="#8b8270"/>
-          <circle cx="970" cy="40" r="8" fill="#1a1a1a"/>
-          <text x="170" y="240" text-anchor="middle" font-family="'Courier New',monospace" font-size="14" font-weight="600" letter-spacing="1" fill="currentColor" opacity=".7">${c.jp_emo_depart}</text>
-          <text x="360" y="240" text-anchor="middle" font-family="'Courier New',monospace" font-size="14" font-weight="600" letter-spacing="1" fill="currentColor" opacity=".7">${c.jp_emo_riding}</text>
-          <text x="550" y="240" text-anchor="middle" font-family="'Courier New',monospace" font-size="14" font-weight="600" letter-spacing="1" fill="#d24a1f">${c.jp_emo_alert}</text>
-          <text x="740" y="240" text-anchor="middle" font-family="'Courier New',monospace" font-size="14" font-weight="600" letter-spacing="1" fill="currentColor" opacity=".7">${c.jp_emo_resol}</text>
-          <text x="970" y="240" text-anchor="middle" font-family="'Courier New',monospace" font-size="14" font-weight="600" letter-spacing="1" fill="currentColor" opacity=".7">${c.jp_emo_arrive}</text>
-        </svg>
-      </div>
+      ${renderJourneyGraph(c,_cl)}
       <!-- 5-phase grid -->
       <div class="cmp-journey-phases">
         <div class="cmp-jp">
           <div class="cmp-jp-head"><div class="cmp-jp-num">${_cl==='es'?'Fase':'Phase'} 01</div><div class="cmp-jp-name">${c.jp_p1_name}</div></div>
           <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Acción':_cl==='de'?'Aktion':'Action'}</div><div class="cmp-jp-row-t">${c.jp_p1_action}</div></div>
           <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Estado emocional':_cl==='de'?'Emotionaler Zustand':'Emotional state'}</div><div class="cmp-jp-row-t">${c.jp_p1_emotion}</div></div>
-          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Feedback sensorial':_cl==='de'?'Sensorisches Feedback':'Sensory feedback'}</div><div class="cmp-jp-row-t">${c.jp_p1_sensory}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Respuesta sensorial':_cl==='de'?'Sensorische Rückmeldung':'Sensory feedback'}</div><div class="cmp-jp-row-t">${c.jp_p1_sensory}</div></div>
           <div class="cmp-jp-row is-pain"><div class="cmp-jp-row-h">${_cl==='es'?'Punto de dolor':_cl==='de'?'Schmerzpunkt':'Pain point'}</div><div class="cmp-jp-row-t">${c.jp_p1_pain}</div></div>
           <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Actores':_cl==='de'?'Akteure':'Actors'}</div><div class="cmp-jp-row-t">${c.jp_p1_actors}</div></div>
         </div>
@@ -2763,7 +2572,7 @@ function buildProject(id) {
           <div class="cmp-jp-head"><div class="cmp-jp-num">${_cl==='es'?'Fase':'Phase'} 02</div><div class="cmp-jp-name">${c.jp_p2_name}</div></div>
           <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Acción':_cl==='de'?'Aktion':'Action'}</div><div class="cmp-jp-row-t">${c.jp_p2_action}</div></div>
           <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Estado emocional':_cl==='de'?'Emotionaler Zustand':'Emotional state'}</div><div class="cmp-jp-row-t">${c.jp_p2_emotion}</div></div>
-          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Feedback sensorial':_cl==='de'?'Sensorisches Feedback':'Sensory feedback'}</div><div class="cmp-jp-row-t">${c.jp_p2_sensory}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Respuesta sensorial':_cl==='de'?'Sensorische Rückmeldung':'Sensory feedback'}</div><div class="cmp-jp-row-t">${c.jp_p2_sensory}</div></div>
           <div class="cmp-jp-row is-pain"><div class="cmp-jp-row-h">${_cl==='es'?'Punto de dolor':_cl==='de'?'Schmerzpunkt':'Pain point'}</div><div class="cmp-jp-row-t">${c.jp_p2_pain}</div></div>
           <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Actores':_cl==='de'?'Akteure':'Actors'}</div><div class="cmp-jp-row-t">${c.jp_p2_actors}</div></div>
         </div>
@@ -2771,7 +2580,7 @@ function buildProject(id) {
           <div class="cmp-jp-head"><div class="cmp-jp-num">${_cl==='es'?'Fase':'Phase'} 03</div><div class="cmp-jp-name">${c.jp_p3_name}</div></div>
           <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Acción':_cl==='de'?'Aktion':'Action'}</div><div class="cmp-jp-row-t">${c.jp_p3_action}</div></div>
           <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Estado emocional':_cl==='de'?'Emotionaler Zustand':'Emotional state'}</div><div class="cmp-jp-row-t">${c.jp_p3_emotion}</div></div>
-          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Feedback sensorial':_cl==='de'?'Sensorisches Feedback':'Sensory feedback'}</div><div class="cmp-jp-row-t">${c.jp_p3_sensory}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Respuesta sensorial':_cl==='de'?'Sensorische Rückmeldung':'Sensory feedback'}</div><div class="cmp-jp-row-t">${c.jp_p3_sensory}</div></div>
           <div class="cmp-jp-row is-pain"><div class="cmp-jp-row-h">${_cl==='es'?'Punto de dolor':_cl==='de'?'Schmerzpunkt':'Pain point'}</div><div class="cmp-jp-row-t">${c.jp_p3_pain}</div></div>
           <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Actores':_cl==='de'?'Akteure':'Actors'}</div><div class="cmp-jp-row-t">${c.jp_p3_actors}</div></div>
         </div>
@@ -2779,7 +2588,7 @@ function buildProject(id) {
           <div class="cmp-jp-head"><div class="cmp-jp-num">${_cl==='es'?'Fase':'Phase'} 04</div><div class="cmp-jp-name">${c.jp_p4_name}</div></div>
           <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Acción':_cl==='de'?'Aktion':'Action'}</div><div class="cmp-jp-row-t">${c.jp_p4_action}</div></div>
           <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Estado emocional':_cl==='de'?'Emotionaler Zustand':'Emotional state'}</div><div class="cmp-jp-row-t">${c.jp_p4_emotion}</div></div>
-          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Feedback sensorial':_cl==='de'?'Sensorisches Feedback':'Sensory feedback'}</div><div class="cmp-jp-row-t">${c.jp_p4_sensory}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Respuesta sensorial':_cl==='de'?'Sensorische Rückmeldung':'Sensory feedback'}</div><div class="cmp-jp-row-t">${c.jp_p4_sensory}</div></div>
           <div class="cmp-jp-row is-pain"><div class="cmp-jp-row-h">${_cl==='es'?'Punto de dolor':_cl==='de'?'Schmerzpunkt':'Pain point'}</div><div class="cmp-jp-row-t">${c.jp_p4_pain}</div></div>
           <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Actores':_cl==='de'?'Akteure':'Actors'}</div><div class="cmp-jp-row-t">${c.jp_p4_actors}</div></div>
         </div>
@@ -2787,7 +2596,7 @@ function buildProject(id) {
           <div class="cmp-jp-head"><div class="cmp-jp-num">${_cl==='es'?'Fase':'Phase'} 05</div><div class="cmp-jp-name">${c.jp_p5_name}</div></div>
           <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Acción':_cl==='de'?'Aktion':'Action'}</div><div class="cmp-jp-row-t">${c.jp_p5_action}</div></div>
           <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Estado emocional':_cl==='de'?'Emotionaler Zustand':'Emotional state'}</div><div class="cmp-jp-row-t">${c.jp_p5_emotion}</div></div>
-          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Feedback sensorial':_cl==='de'?'Sensorisches Feedback':'Sensory feedback'}</div><div class="cmp-jp-row-t">${c.jp_p5_sensory}</div></div>
+          <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Respuesta sensorial':_cl==='de'?'Sensorische Rückmeldung':'Sensory feedback'}</div><div class="cmp-jp-row-t">${c.jp_p5_sensory}</div></div>
           <div class="cmp-jp-row is-pain"><div class="cmp-jp-row-h">${_cl==='es'?'Punto de dolor':_cl==='de'?'Schmerzpunkt':'Pain point'}</div><div class="cmp-jp-row-t">${c.jp_p5_pain}</div></div>
           <div class="cmp-jp-row"><div class="cmp-jp-row-h">${_cl==='es'?'Actores':_cl==='de'?'Akteure':'Actors'}</div><div class="cmp-jp-row-t">${c.jp_p5_actors}</div></div>
         </div>
@@ -2800,7 +2609,7 @@ function buildProject(id) {
         <div class="cmp-section-label">${c.ux_label}</div>
         <div class="cmp-section-title">${c.ux_title}</div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--color-border);">
+      <div class="cmp-ux-layout" style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--color-border);">
         <!-- Left: dimensions with large score numbers -->
         <div class="cmp-dim-list" style="border:none;">
           <div class="cmp-dim">
@@ -2921,7 +2730,7 @@ function buildProject(id) {
     </div>
 
     <!-- MOODBOARD -->
-    <div class="cmp-section" style="border-top:1px solid var(--color-border);padding-bottom:0;">
+    <div class="cmp-section cmp-render-section" style="border-top:1px solid var(--color-border);padding-bottom:0;">
       <div class="cmp-section-hd">
         <div class="cmp-section-label">${_cl==='es'?'Fase de Diseño · Inspiración':_cl==='de'?'Designphase · Inspiration':'Design Phase · Inspiration'}</div>
         <div class="cmp-section-title">${_cl==='es'?'Moodboard':_cl==='de'?'Moodboard':'Moodboard'}</div>
@@ -2932,7 +2741,7 @@ function buildProject(id) {
     </div>
 
     <!-- IDEATION SKETCHES -->
-    <div class="cmp-section" style="border-top:1px solid var(--color-border);padding-bottom:0;">
+    <div class="cmp-section cmp-render-section" style="border-top:1px solid var(--color-border);padding-bottom:0;">
       <div class="cmp-section-hd">
         <div class="cmp-section-label">${_cl==='es'?'Fase de Diseño · Exploración':_cl==='de'?'Designphase · Exploration':'Design Phase · Exploration'}</div>
         <div class="cmp-section-title">${_cl==='es'?'Bocetos de ideación':_cl==='de'?'Ideationsskizzen':'Ideation sketches'}</div>
@@ -3008,7 +2817,7 @@ function buildProject(id) {
     </div>
 
     <!-- PROPOSAL -->
-    <div class="cmp-section" style="border-top:1px solid var(--color-border);padding-bottom:0;">
+    <div class="cmp-section cmp-render-section" style="border-top:1px solid var(--color-border);padding-bottom:0;">
       <div class="cmp-section-hd">
         <div class="cmp-section-label">${c.prop_label}</div>
         <div class="cmp-section-title">${c.prop_title}</div>
@@ -3046,7 +2855,7 @@ function buildProject(id) {
     </div>
 
     <!-- CONCEPT VIEW -->
-    <div class="cmp-section" style="border-top:1px solid var(--color-border);padding-bottom:0;">
+    <div class="cmp-section cmp-render-section" style="border-top:1px solid var(--color-border);padding-bottom:0;">
       <div class="cmp-section-hd">
         <div class="cmp-section-label">${_cl==='es'?'Vista de concepto':_cl==='de'?'Konzeptansicht':'Concept view'}</div>
         <div class="cmp-section-title">${_cl==='es'?'Diseño · Vistas':_cl==='de'?'Design · Ansichten':'Design · Views'}</div>
@@ -3055,7 +2864,7 @@ function buildProject(id) {
     </div>
 
     <!-- CONTEXTO — with title -->
-    <div class="cmp-section" style="border-top:1px solid var(--color-border);padding-bottom:0;">
+    <div class="cmp-section cmp-render-section" style="border-top:1px solid var(--color-border);padding-bottom:0;">
       <div class="cmp-section-hd">
         <div class="cmp-section-label">${_cl==='es'?'Investigación · Contexto de uso':_cl==='de'?'Forschung · Nutzungskontext':'Research · Use context'}</div>
         <div class="cmp-section-title">${_cl==='es'?'Escala urbana real':_cl==='de'?'Realer Einsatzbereich':'Urban scale'}</div>
@@ -3089,7 +2898,7 @@ function buildProject(id) {
               <div style="height:2px;background:var(--color-border);border-radius:2px;overflow:hidden;max-width:160px;">
                 <div id="cmp-grado-bar" style="height:100%;width:0%;background:#d24a1f;border-radius:2px;transition:width .35s ease;"></div>
               </div>
-              <div id="cmp-grado-hint" style="font-size:.6rem;color:var(--color-muted);opacity:0;transition:opacity .5s ease;line-height:1.4;">${_cl==='es'?'Escalación consecutiva en 3 s':_cl==='de'?'Aufeinanderfolgendes Drücken eskaliert':'Press again within 3 s to escalate'}</div>
+              <div id="cmp-grado-hint" style="font-size:.6rem;color:var(--color-muted);opacity:0;transition:opacity .5s ease;line-height:1.4;">${_cl==='es'?'Volvé a pulsar dentro de 3 s':_cl==='de'?'Aufeinanderfolgendes Drücken eskaliert':'Press again within 3 s to escalate'}</div>
             </div>
           </div>
         </div>
@@ -3127,17 +2936,17 @@ function buildProject(id) {
       <div style="display:flex;gap:clamp(8px,1.5vw,16px);flex-wrap:wrap;">
         <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--color-text);"><span style="color:#d24a1f;font-weight:700;">1×</span> N1</div>
         <div style="display:flex;align-items:center;gap:4px;font-size:.72rem;color:var(--color-muted);">→</div>
-        <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--color-text);"><span style="color:#d24a1f;font-weight:700;">+1×</span> N2 <span style="font-size:.64rem;color:var(--color-muted);">${_cl==='es'?'en 3 s':'within 3 s'}</span></div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--color-text);"><span style="color:#d24a1f;font-weight:700;">+1×</span> N2 <span style="font-size:.64rem;color:var(--color-muted);">${_cl==='es'?'en 3 s':_cl==='de'?'innerhalb von 3 s':'within 3 s'}</span></div>
         <div style="display:flex;align-items:center;gap:4px;font-size:.72rem;color:var(--color-muted);">→</div>
-        <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--color-text);"><span style="color:#d24a1f;font-weight:700;">+1×</span> N3 <span style="font-size:.64rem;color:var(--color-muted);">${_cl==='es'?'en 3 s':'within 3 s'}</span></div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--color-text);"><span style="color:#d24a1f;font-weight:700;">+1×</span> N3 <span style="font-size:.64rem;color:var(--color-muted);">${_cl==='es'?'en 3 s':_cl==='de'?'innerhalb von 3 s':'within 3 s'}</span></div>
       </div>
-      <div class="cmp-legend-note" style="font-size:.68rem;color:var(--color-muted);margin-left:auto;">${_cl==='es'?'El nivel se mantiene al vencer el tiempo. Siguiente toque reinicia en N1.':_cl==='de'?'Stufe bleibt nach Ablauf. Nächste Eingabe startet bei N1.':'Level holds after timeout. Next press restarts at N1.'}</div>
+      <div class="cmp-legend-note" style="font-size:.68rem;color:var(--color-muted);margin-left:auto;">${_cl==='es'?'Simulación: vuelve al reposo tras 3 s sin pulsar. Los niveles son ilustrativos y dependen de tu dispositivo.':_cl==='de'?'Simulation: Rückkehr zur Ruhe nach 3 s ohne Betätigung. Die Lautstärken sind beispielhaft und hängen vom Gerät ab.':'Simulation: returns to rest after 3 s without a press. Sound levels are illustrative and depend on your device.'}</div>
     </div>
 
     </div>
 
     <!-- EXPLOTADA — with title -->
-    <div class="cmp-section" style="border-top:1px solid var(--color-border);padding-bottom:0;">
+    <div class="cmp-section cmp-render-section" style="border-top:1px solid var(--color-border);padding-bottom:0;">
       <div class="cmp-section-hd">
         <div class="cmp-section-label">${_cl==='es'?'Diseño de producto · Componentes':_cl==='de'?'Produktdesign · Bauteile':'Product design · Components'}</div>
         <div class="cmp-section-title">${_cl==='es'?'Vista explotada':_cl==='de'?'Explosionsansicht':'Exploded view'}</div>
@@ -3152,36 +2961,7 @@ function buildProject(id) {
         <div class="cmp-section-label">${_cl==='es'?'Diseño · Componentes':_cl==='de'?'Design · Bauteile':'Design · Components'}</div>
         <div class="cmp-section-title">${c.parts_label}</div>
       </div>
-      <div class="cmp-parts-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;">
-            <div style="display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--color-border);padding-bottom:10px;">
-              <div style="flex-shrink:0;width:28px;height:28px;background:#d24a1f;border-radius:2px;"></div>
-              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Pulsador':_cl==='de'?'Drücker':'Pusher'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Aluminio · óxido anodizado · gesto de pulgar, resistencia calibrada':_cl==='de'?'Aluminium · eloxiert (Al₂O₃) · Daumentastung, kalibrierter Widerstand':'Aluminium · anodised oxide (Al₂O₃) · thumb gesture, calibrated resistance'}</div></div>
-            </div>
-            <div style="display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--color-border);padding-bottom:10px;">
-              <div style="flex-shrink:0;width:28px;height:28px;background:var(--color-text);border-radius:2px;"></div>
-              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Trinquete + leva':_cl==='de'?'Ratsche + Nocken':'Ratchet + cam'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Acero templado · 3 posiciones de leva, retorno por resorte':_cl==='de'?'Gehärteter Stahl · 3 Nockenpositionen, Federrückstellung':'Hardened steel · 3 cam positions, spring-loaded return'}</div></div>
-            </div>
-            <div style="display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--color-border);padding-bottom:10px;">
-              <div style="flex-shrink:0;width:28px;height:28px;background:#a8b4bc;border-radius:2px;"></div>
-              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Cuerpo de campana':_cl==='de'?'Klangkörper':'Bell shell'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Latón · la geometría define la resonancia, decay y volumen':_cl==='de'?'Messing · Geometrie bestimmt Resonanz, Decay und Lautstärke':'Brass · geometry determines resonance, decay and volume'}</div></div>
-            </div>
-            <div style="display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--color-border);padding-bottom:10px;">
-              <div style="flex-shrink:0;width:28px;height:28px;background:#d6e4ec;border-radius:2px;"></div>
-              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Domo':_cl==='de'?'Dom':'Dome'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Plástico translúcido · protege el mecanismo, difunde la luz':_cl==='de'?'Transluzenter Kunststoff · schützt Mechanismus, streut Licht':'Translucent plastic · protects mechanism, diffuses light'}</div></div>
-            </div>
-            <div style="display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--color-border);padding-bottom:10px;">
-              <div style="flex-shrink:0;width:28px;height:28px;background:var(--color-text);border-radius:2px;"></div>
-              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Martillo':_cl==='de'?'Hammer':'Hammer'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Acero templado · velocidad de impacto calibrada por el radio de oscilación':_cl==='de'?'Gehärteter Stahl · Aufprallgeschwindigkeit durch Schwingradius kalibriert':'Hardened steel · impact velocity calibrated by swing radius'}</div></div>
-            </div>
-            <div style="display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--color-border);padding-bottom:10px;">
-              <div style="flex-shrink:0;width:28px;height:28px;background:var(--color-text);border-radius:2px;"></div>
-              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Abrazadera':_cl==='de'?'Klemme':'Clamp'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Aluminio · óxido anodizado · estándar 22.2 mm, tornillos con plastisol':_cl==='de'?'Aluminium · eloxiert (Al₂O₃) · Standard 22,2 mm, Schrauben mit Plastisol':'Aluminium · anodised oxide (Al₂O₃) · 22.2 mm standard, plastisol-dipped screws'}</div></div>
-            </div>
-            <div style="display:flex;gap:12px;align-items:flex-start;">
-              <div style="flex-shrink:0;width:28px;height:28px;background:var(--color-text);border-radius:2px;"></div>
-              <div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">${_cl==='es'?'Resortes de retención':_cl==='de'?'Rückhaltefedern':'Retention springs'}</div><div style="font-size:.74rem;color:var(--color-muted);margin-top:2px;">${_cl==='es'?'Acero de resorte templado · restituyen a N1 tras cada pulsación':_cl==='de'?'Vergüteter Federstahl · stellen nach jedem Druck auf N1 zurück':'Tempered spring steel · return ratchet to N1 after each press'}</div></div>
-            </div>
-      </div>
+      ${renderIntentParts(_cl)}
 
     </div>
 
@@ -3731,17 +3511,9 @@ function buildProject(id) {
     ` : ''}
     <nav class="proj-footer-nav">${prev}${next}</nav>
     <footer class="footer"><p>© 2026 Nahuel Villar</p><p>USA</p></footer>`;
-  // Force-load all lazy images in this project immediately
-  _projEl.querySelectorAll('img[loading="lazy"]').forEach(img => {
-    img.removeAttribute('loading');
-  });
+  enhanceProject(_projEl,_cl);
   initDrag(document.getElementById('pt'));
-  // Contextual hint label: touch devices say "Tap", pointer devices say "Click"
-  const hintLabel = _projEl.querySelector('.hint-click-label');
-  if(hintLabel) {
-    const isTouch = window.matchMedia('(pointer: coarse)').matches;
-    hintLabel.textContent = isTouch ? 'Tap to expand' : 'Click to expand';
-  }
+
 }
 
 function initDrag(el) {
@@ -4166,8 +3938,8 @@ window.TRANS = {
         tagline: 'Una campana de bicicleta rediseñada para distinguir la cortesía del peligro.',
         desc: [
           'Intent comenzó con una observación conductual: la campana de bicicleta, obligatoria por ley en la mayoría de los países, no puede distinguir entre una petición amable de paso y una alerta de peligro urgente. La pregunta de investigación no fue cómo hacerla ver diferente, sino cómo hacer que exprese la intención del ciclista.',
-          'El proceso mapeó el espacio completo de diseño: análisis histórico, tipología, observación de campo, user persona, mapa de stakeholders, análisis de journey y evaluación UX en siete dimensiones. Cada método señalaba el mismo problema raíz: la campana comunica una sola señal, y esa señal no lleva información sobre urgencia, intención ni gravedad.',
-          'La respuesta es mecánica, no digital. Un mecanismo de trinquete que acumula presión con pulsaciones consecutivas, avanzando una leva que aumenta el radio de giro del martillo en cada toque. Tres toques, tres niveles, tres cosas distintas que decir. Cuatro componentes. Sin batería, sin curva de aprendizaje.'
+          'El proceso mapeó el espacio completo de diseño: análisis histórico, tipología, observación de campo, perfil de usuario, mapa de actores, análisis del recorrido de uso y evaluación UX en siete dimensiones. Cada método señalaba el mismo problema raíz: la campana comunica una sola señal, y esa señal no lleva información sobre urgencia, intención ni gravedad.',
+          'La respuesta es mecánica, no digital. Un mecanismo de trinquete que acumula presión con pulsaciones consecutivas, avanzando una leva que aumenta el radio de giro del martillo en cada toque. Tres toques, tres niveles, tres cosas distintas que decir. Sin batería, sin curva de aprendizaje.'
         ]
       },
       flujo: {
@@ -4210,10 +3982,10 @@ window.TRANS = {
         ]
       },
       intervalo: {
-        tagline: 'Un kiosco de autoservicio que lleva la tienda a la bomba, dentro del gesto ya existente del conductor.',
+        tagline: 'Un kiosco de autoservicio que lleva la tienda al surtidor, dentro del gesto ya existente del conductor.',
         desc: [
-          'El proyecto parte de una observación conductual: los conductores ya esperan en la bomba. Ese tiempo muerto, generalmente desperdiciado, se convirtió en la oportunidad de diseño. Intervalo es un kiosco de autoservicio posicionado junto al surtidor que permite compras directamente desde la ventanilla del auto: sin desvíos, sin transacciones separadas, sin fricción añadida a una rutina que ya no tiene ninguna de sobra.',
-          'La identidad del producto, "full", está integrada en la estructura física mediante letrería LED y paneles de listones de madera revestidos en PVC. Un único gabinete integra máquina de café, exhibidor refrigerado, terminal de pago y contenedores removibles, todo accesible y reabastecible desde la parte trasera sin interrumpir el forecourt.',
+          'El proyecto parte de una observación conductual: los conductores ya esperan en el surtidor. Ese tiempo muerto, generalmente desperdiciado, se convirtió en la oportunidad de diseño. Intervalo es un kiosco de autoservicio posicionado junto al surtidor que permite compras directamente desde la ventanilla del auto: sin desvíos, sin transacciones separadas, sin fricción añadida a una rutina que ya no tiene ninguna de sobra.',
+          'La identidad del producto, "full", está integrada en la estructura física mediante letras LED y paneles de listones de madera revestidos en PVC. Un único gabinete integra máquina de café, exhibidor refrigerado, terminal de pago y contenedores removibles, todo accesible y reabastecible desde la parte trasera sin interrumpir la circulación en la estación.',
           'El proceso de fabricación corre por seis etapas: perfiles de acero soldado, revestimiento de chapa, tratamiento superficial, ensamble de carpintería, revestimiento PVC con señalética LED e instalación de equipos. El resultado es una unidad desplegable construida para las realidades operativas de una estación de servicio.'
         ]
       },
@@ -4274,7 +4046,7 @@ window.TRANS = {
         desc: [
           'Intent begann mit einer Verhaltensbeobachtung: die Fahrradklingel, in den meisten Ländern gesetzlich vorgeschrieben, kann nicht zwischen einer höflichen Bitte zum Überholen und einer dringenden Gefahrenwarnung unterscheiden. Die Frage war nicht, wie man sie anders aussehen lässt, sondern wie man sie dazu bringt, die Absicht des Fahrers auszudrücken.',
           'Der Prozess kartierte den gesamten Designraum: Historische Analyse, Typologie, Feldbeobachtung, User Persona, Stakeholder-Mapping, Journey-Analyse und UX-Evaluation entlang sieben Dimensionen. Jede Methode zeigte dasselbe Grundproblem: Die Klingel sendet ein einziges Signal, und dieses Signal trägt keine Information über Dringlichkeit, Absicht oder Schweregrad.',
-          'Die Antwort ist mechanisch, nicht digital. Ein Ratschenmechanismus, der bei aufeinanderfolgenden Drücken Druck aufbaut, eine Nocke vorschiebt und den Schwingradius des Hammers bei jedem Tipp vergrößert. Drei Drücke, drei Ebenen, drei verschiedene Dinge, die gesagt werden können. Vier Bauteile. Keine Batterie, keine Lernkurve.'
+          'Die Antwort ist mechanisch, nicht digital. Ein Ratschenmechanismus, der bei aufeinanderfolgenden Drücken Druck aufbaut, eine Nocke vorschiebt und den Schwingradius des Hammers bei jedem Tipp vergrößert. Drei Drücke, drei Ebenen, drei verschiedene Dinge, die gesagt werden können. Keine Batterie, keine Lernkurve.'
         ]
       },
       flujo: {
@@ -4439,6 +4211,93 @@ window.setLang = function(lang) {
   }
 };
 
+
+/* Shared localization for process sections and accessible interaction. */
+const supplementaryCopy = {"Research + ID · 2026":["Investigación + DI · 2026","Forschung + Industriedesign · 2026"],"Lighting · 2025":["Iluminación · 2025","Lichtdesign · 2025"],"Product · 2024":["Producto · 2024","Produkt · 2024"],"Product Redesign · 2024":["Rediseño de producto · 2024","Produktüberarbeitung · 2024"],"+ Furniture · 2024":["+ Mobiliario · 2024","+ Möbeldesign · 2024"],"Furniture · 2024":["Mobiliario · 2024","Möbeldesign · 2024"],"+ Product Redesign · 2025":["+ Rediseño de producto · 2025","+ Produktüberarbeitung · 2025"],"Product Redesign · 2025":["Rediseño de producto · 2025","Produktüberarbeitung · 2025"],"+ Industrial Design · 2026":["+ Diseño industrial · 2026","+ Industriedesign · 2026"],"Industrial Design · 2026":["Diseño industrial · 2026","Industriedesign · 2026"],"+ Product Design · 2024":["+ Diseño de producto · 2024","+ Produktdesign · 2024"],"Product Design · 2024":["Diseño de producto · 2024","Produktdesign · 2024"],"· Fall 2026 – Present":["· Otoño de 2026 a la actualidad","· Herbst 2026 bis heute"],"Industrial Design Co-op":["Práctica profesional en diseño industrial","Praxissemester im Industriedesign"],"Designing for industrial equipment with a focus on operator ergonomics and usability. Work spans iterative sketching, appearance CAD, and rapid prototyping in close collaboration with Engineering and Manufacturing.":["Diseño de equipamiento industrial con foco en la ergonomía y la usabilidad del operador. El trabajo abarca bocetado iterativo, modelado CAD de apariencia y prototipado rápido en colaboración con Ingeniería y Manufactura.","Entwicklung von Industrieausrüstung mit Fokus auf Bedienergonomie und Benutzerfreundlichkeit. Die Arbeit umfasst iterative Skizzen, CAD-Modelle zur Gestaltung und schnelles Prototyping in enger Zusammenarbeit mit Konstruktion und Fertigung."],"· Spring 2026":["· Primavera de 2026","· Frühjahr 2026"],"· Spring 2025":["· Primavera de 2025","· Frühjahr 2025"],"Expected Spring 2027":["Finalización prevista: primavera de 2027","Voraussichtlicher Abschluss: Frühjahr 2027"],"Buenos Aires, Argentina<br>Bachelor's Degree in Industrial Design · 3.4 GPA":["Buenos Aires, Argentina<br>Licenciatura en Diseño Industrial · Promedio equivalente: 3,4 GPA","Buenos Aires, Argentinien<br>Bachelorabschluss in Industriedesign · Notendurchschnitt: 3,4 GPA"],"Buenos Aires, Argentina<br>Associate Degree in Industrial Design · 3.4 GPA":["Buenos Aires, Argentina<br>Título intermedio en Diseño Industrial · Promedio equivalente: 3,4 GPA","Buenos Aires, Argentinien<br>Zwischenabschluss in Industriedesign · Notendurchschnitt: 3,4 GPA"],"Buenos Aires, Argentina<br>Social Sciences &amp; Humanities · 3.4 GPA":["Buenos Aires, Argentina<br>Ciencias Sociales y Humanidades · Promedio equivalente: 3,4 GPA","Buenos Aires, Argentinien<br>Sozial- und Geisteswissenschaften · Notendurchschnitt: 3,4 GPA"],"Product Design · Concept Development · CMF · Human Factors · Design Research · User-Centered Design · Constraint-Based Design · Rapid Prototyping · Design Thinking · Rendering &amp; Visualization · Storytelling &amp; Presentation":["Diseño de producto · Desarrollo conceptual · Color, materiales y acabados · Factores humanos · Investigación de diseño · Diseño centrado en las personas · Diseño a partir de restricciones · Prototipado rápido · Pensamiento de diseño · Renderizado y visualización · Narrativa y presentación","Produktdesign · Konzeptentwicklung · Farbe, Material und Oberfläche · Ergonomie · Designforschung · Nutzerzentriertes Design · Entwerfen mit Randbedingungen · Schnelles Prototyping · Designmethodik · Rendering und Visualisierung · Erzählen und Präsentieren"],"Adobe Suite":["Herramientas de Adobe","Adobe-Anwendungen"],"3D Printing · Laser Cutting · Wood Lathe · Milling · Paint Spraying · Belt &amp; Disc Sanding":["Impresión 3D · Corte láser · Torno para madera · Fresado · Pintura por pulverización · Lijado de banda y disco","3D-Druck · Laserschneiden · Holzdrehen · Fräsen · Spritzlackieren · Band- und Tellerschleifen"],"USA":["Estados Unidos","USA"],"Email":["Correo","E-Mail"],"Phone":["Teléfono","Telefon"],"UX Research + ID":["Investigación de uso + DI","Nutzungsforschung + Industriedesign"],"Category":["Categoría","Kategorie"],"UX Research · Industrial Design":["Investigación de uso · Diseño industrial","Nutzungsforschung · Industriedesign"],"Year":["Año","Jahr"],"Materials":["Materiales","Materialien"],"Aluminum · Anodized Brass · ABS · Polycarbonate":["Aluminio · Latón · ABS · Policarbonato","Aluminium · Messing · ABS · Polycarbonat"],"Status":["Estado","Status"],"Concept · 2026":["Concepto · 2026","Konzept · 2026"],"Click to expand":["Hacé doble clic para ampliar","Zum Vergrößern doppelklicken"],"1950s":["Década de 1950","1950er"],"1970s":["Década de 1970","1970er"],"2000s":["Década de 2000","2000er"],"2020s":["Década de 2020","2020er"],"Thumb Bell":["Timbre de pulsador","Daumenklingel"],"Lever Bell":["Timbre de palanca","Hebelklingel"],"Ding-dong":["Doble tono","Zweitonklingel"],"E-bike · 80–110 dB":["Bicicleta eléctrica · 80–110 dB","Elektrofahrrad · 80–110 dB"],"150y":["150 años","150 Jahre"],"Variable":["Variable","Variabel"],"Subject":["Participante","Beobachtete Person"],"Urban commuter · mid-30s · city bike · standard thumb bell":["Ciclista urbano · unos 35 años · bicicleta urbana · timbre de pulsador","Stadtpendler · Mitte 30 · Stadtrad · herkömmliche Daumenklingel"],"Route":["Recorrido","Strecke"],"Three Islands Blvd → Hallandale Beach Blvd → A1A · 11 min · 3.4 km · mixed":["Three Islands Blvd → Hallandale Beach Blvd → A1A · 11 min · 3,4 km · recorrido mixto","Three Islands Blvd → Hallandale Beach Blvd → A1A · 11 Min. · 3,4 km · gemischte Strecke"],"<strong>Bike lane, Three Islands Blvd.</strong> Bell activated passing pedestrian with earphones. No visible reaction. Rider glances over shoulder and continues without waiting for response.":["<strong>Bicisenda, Three Islands Blvd.</strong> Activa el timbre al pasar a un peatón con auriculares. No hay reacción visible. El ciclista mira por encima del hombro y sigue sin esperar respuesta.","<strong>Radweg, Three Islands Blvd.</strong> Klingelt beim Überholen eines Fußgängers mit Kopfhörern. Keine sichtbare Reaktion. Der Radfahrer schaut über die Schulter und fährt weiter, ohne eine Antwort abzuwarten."],"<strong>Crossing SE 14th Ave.</strong> Cyclist coming in opposite direction. Two consecutive bell taps. Clean crossing, both nod slightly. Bilateral recognition of a shared code.":["<strong>Cruce de SE 14th Ave.</strong> Se aproxima un ciclista de frente. Dos pulsaciones consecutivas. Se cruzan sin dificultad y ambos asienten levemente. Reconocimiento mutuo de un código compartido.","<strong>Kreuzung SE 14th Ave.</strong> Ein Radfahrer kommt entgegen. Zwei aufeinanderfolgende Klingelimpulse. Sie passieren einander problemlos und nicken kurz. Gegenseitiges Erkennen eines gemeinsamen Signals."],"<strong>Unexpected behavior.</strong> Pedestrian crosses diagonally without looking. Rider <em>doesn't ring the bell</em>: says \"excuse me\" aloud and swerves. Voice faster than bell in this scenario.":["<strong>Conducta inesperada.</strong> Un peatón cruza en diagonal sin mirar. El ciclista <em>no toca el timbre</em>: dice “permiso” y esquiva. En esta situación recurre a la voz antes que al timbre.","<strong>Unerwartetes Verhalten.</strong> Ein Fußgänger quert diagonal, ohne zu schauen. Der Radfahrer <em>klingelt nicht</em>, sondern sagt „Entschuldigung“ und weicht aus. In dieser Situation ist die Stimme schneller verfügbar als die Klingel."],"<strong>Hallandale Beach Blvd, medium traffic.</strong> Bell activated overtaking delivery rider on bike. Recipient responds with slight shoulder turn. Signal received.":["<strong>Hallandale Beach Blvd, tránsito moderado.</strong> Activa el timbre al pasar a un repartidor en bicicleta. El destinatario gira ligeramente el hombro. Señal recibida.","<strong>Hallandale Beach Blvd, mäßiger Verkehr.</strong> Klingelt beim Überholen eines Fahrradkuriers. Dieser dreht leicht die Schulter. Das Signal wurde wahrgenommen."],"<strong>S Federal Hwy, dense traffic.</strong> Bell 3× consecutive to pedestrian at curb. No apparent reception. Ends up shouting \"bike!\" Visible frustration.":["<strong>S Federal Hwy, tránsito denso.</strong> Tres pulsaciones seguidas dirigidas a un peatón en el cordón. Sin recepción aparente. Termina gritando “¡bici!”. Frustración visible.","<strong>S Federal Hwy, dichter Verkehr.</strong> Drei Klingelimpulse an einen Fußgänger am Bordstein. Keine erkennbare Reaktion. Schließlich ruft der Radfahrer „Fahrrad!“. Sichtbare Frustration."],"<strong>Bell without checking reception.</strong> Rider signals while looking straight ahead, never verifying reception. Confirms the \"ritual alert\" hypothesis: the bell is sent, not communicated.":["<strong>Aviso sin comprobar la recepción.</strong> El ciclista señala mirando hacia adelante y no verifica la respuesta. Refuerza la hipótesis del aviso ritual: emite la señal sin confirmar la comunicación.","<strong>Klingeln ohne Rückversicherung.</strong> Der Radfahrer signalisiert mit Blick nach vorn und prüft die Reaktion nicht. Dies stützt die Hypothese des ritualisierten Warnens: Das Signal wird gesendet, ohne die Verständigung zu prüfen."],"<strong>Bluesten Park, low speed.</strong> Child with parent. Rider almost stops and rings gently. Parent reacts, pulls child close. Ideal case: low speed + low ambient noise.":["<strong>Bluesten Park, baja velocidad.</strong> Un niño con un adulto. El ciclista casi se detiene y toca suavemente. El adulto reacciona y acerca al niño. Caso favorable: baja velocidad y poco ruido ambiente.","<strong>Bluesten Park, geringe Geschwindigkeit.</strong> Ein Kind mit einem Elternteil. Der Radfahrer hält fast an und klingelt sanft. Der Erwachsene reagiert und zieht das Kind zu sich. Günstiger Fall: geringes Tempo und wenig Umgebungslärm."],"<strong>Combined reinforcement.</strong> Rings + says \"passing on your left.\" Pattern repeats consistently whenever reception is uncertain. Bell alone is not enough for the rider.":["<strong>Refuerzo combinado.</strong> Toca el timbre y dice “paso por tu izquierda”. El patrón se repite cuando la recepción es incierta. Para el ciclista, el timbre solo no alcanza.","<strong>Kombinierte Verstärkung.</strong> Klingelt und sagt „Ich fahre links vorbei“. Dieses Muster wiederholt sich bei unsicherer Wahrnehmung. Dem Radfahrer reicht die Klingel allein nicht aus."],"<strong>Thumb reset time.</strong> After activating, ~1.4 s to return thumb to brake position. During that interval the hand is incomplete on the handlebar. Risk in emergency braking.":["<strong>Tiempo de retorno del pulgar.</strong> Después de activar el timbre tarda aproximadamente 1,4 s en devolver el pulgar a la posición de frenado. Durante ese intervalo el agarre del manubrio está incompleto, con riesgo ante una frenada de emergencia.","<strong>Rückkehr des Daumens.</strong> Nach dem Klingeln benötigt der Daumen etwa 1,4 s bis zur Bremsposition. Währenddessen ist der Griff am Lenker unvollständig, was bei einer Notbremsung ein Risiko darstellt."],"<strong>Arrival (A1A coastline).</strong> Total: 7 bell activations, 2 voice substitutions, 1 silent swerve, 3 combined reinforcements (bell + voice). Only 4/7 generated visible reception.":["<strong>Llegada a la costa de A1A.</strong> Total: 7 activaciones del timbre, 2 sustituciones por voz, 1 esquive sin señal y 3 refuerzos combinados de timbre y voz. Solo 4 de 7 produjeron una respuesta visible.","<strong>Ankunft an der Küste bei A1A.</strong> Insgesamt: 7 Klingelbetätigungen, 2 Ersetzungen durch Zurufen, 1 Ausweichen ohne Signal und 3 Kombinationen aus Klingeln und Stimme. Nur 4 von 7 führten zu einer sichtbaren Reaktion."],"Phase 01":["Fase 01","Phase 01"],"Phase 02":["Fase 02","Phase 02"],"Phase 03":["Fase 03","Phase 03"],"Phase 04":["Fase 04","Phase 04"],"Phase 05":["Fase 05","Phase 05"],"72 dB vs 85 dB":["72 dB frente a 85 dB","72 dB gegenüber 85 dB"],"Decay":["Decaimiento sonoro","Abklingdauer"],"Aluminium 6061":["Aluminio 6061","Aluminium 6061"],"1 press · ~70 dB":["1 pulsación · ~70 dB","1 Betätigung · ~70 dB"],"2 presses · ~76 dB":["2 pulsaciones · ~76 dB","2 Betätigungen · ~76 dB"],"3 presses · ~82 dB":["3 pulsaciones · ~82 dB","3 Betätigungen · ~82 dB"],"within 3 s":["en 3 s","innerhalb von 3 s"],"Hammer":["Martillo","Hammer"],"02. Lighting":["02. Iluminación","02. Lichtdesign"],"Lighting Design":["Diseño de iluminación","Lichtdesign"],"PETG, Standard Components":["PETG, componentes estándar","PETG, Standardkomponenten"],"Process":["Proceso","Verfahren"],"FDM 3D Print":["Impresión 3D FDM","FDM-3D-Druck"],"Design Process":["Proceso de diseño","Designprozess"],"Beyond the lamp":["Más allá de la lámpara","Mehr als eine Leuchte"],"A zen object doesn't decorate, it <strong>accompanies</strong>. The intent was to go beyond the lamp concept: create something sculptural that makes people question what it is and how it's made.":["Un objeto zen no decora: <strong>acompaña</strong>. La intención fue ir más allá de la lámpara y crear un objeto escultórico que invite a preguntarse qué es y cómo está hecho.","Ein Zen-Objekt dekoriert nicht, es <strong>begleitet</strong>. Die Absicht war, über die Leuchte hinauszugehen und ein skulpturales Objekt zu schaffen, das Fragen nach seinem Wesen und seiner Herstellung anregt."],"3D printing wasn't just the process, it was the <strong>opportunity</strong>. Embedding a three-dimensional internal pattern inside the screen: something impossible to manufacture as a single piece through any other method.":["La impresión 3D fue tanto el proceso como la <strong>oportunidad</strong>: integrar un patrón tridimensional dentro de la pantalla, algo que no podría fabricarse como una sola pieza mediante otro método.","Der 3D-Druck war zugleich Verfahren und <strong>Chance</strong>: Ein dreidimensionales Muster wird in den Schirm integriert, das sich mit keinem anderen Verfahren als ein einziges Teil herstellen ließe."],"With only 2 bodies and an additive process,<br> how do you make a lamp that <em>could only exist this way</em>?":["Con solo dos cuerpos y un proceso aditivo,<br>¿cómo diseñar una lámpara que <em>solo pueda existir así</em>?","Mit nur zwei Körpern und einem additiven Verfahren:<br>Wie entsteht eine Leuchte, die <em>nur so existieren kann</em>?"],"Name &amp; Identity":["Nombre e identidad","Name und Identität"],"The name comes from imagining a water current, <em>flujo</em>, flow. Water as a reference not for its form but for its qualities: the way it moves, the way it feels against the skin, the sound it makes, the calm it carries.":["El nombre nace de imaginar una corriente de agua: <em>flujo</em>. El agua como referencia por sus cualidades, más que por su forma: cómo se mueve, cómo se siente en la piel, su sonido y la calma que transmite.","Der Name entstand aus der Vorstellung einer Wasserströmung: <em>flujo</em>, spanisch für Fluss. Wasser dient durch seine Eigenschaften als Referenz: seine Bewegung, das Gefühl auf der Haut, sein Klang und seine Ruhe."],"The blue is not decorative. It is a direct reading of the element, connecting the object to something the senses already recognize. The color anchors the zen intention in something immediate, something the eye understands before the mind does.":["El azul tiene una relación directa con ese elemento y conecta el objeto con algo que los sentidos ya reconocen. El color vuelve inmediata la intención zen, antes de que intervenga una interpretación consciente.","Das Blau nimmt direkt auf dieses Element Bezug und verbindet das Objekt mit etwas sinnlich Vertrautem. Die Farbe macht die Zen-Absicht unmittelbar erkennbar, noch vor der bewussten Deutung."],"Concept":["Concepto","Konzept"],"An object<br>that reveals itself":["Un objeto<br>que se revela","Ein Objekt,<br>das sich offenbart"],"Flujo is conceived as a sculptural object first, a lamp second. Switched off, it presents an apparently flat, uniform surface with no visible internal structure. Switched on, the three-dimensional pattern printed inside the screen emerges from within, transforming the object completely.":["Flujo se concibe primero como un objeto escultórico y después como una lámpara. Apagada, muestra una superficie aparentemente plana y uniforme, sin estructura interna visible. Al encenderla, emerge el patrón tridimensional impreso dentro de la pantalla y transforma el objeto.","Flujo ist zunächst als skulpturales Objekt und dann als Leuchte gedacht. Ausgeschaltet zeigt es eine scheinbar ebene, gleichmäßige Oberfläche ohne sichtbare Innenstruktur. Beim Einschalten tritt das im Schirm gedruckte dreidimensionale Muster hervor und verändert das Objekt."],"That shift between states, between rest and activation, is what places Flujo in a zen context. It doesn't impose its presence. It suggests it, and waits to be turned on.":["Ese cambio entre reposo y activación sitúa a Flujo en un contexto zen. Sugiere su presencia y espera a ser encendida.","Der Wechsel zwischen Ruhe und Aktivierung verortet Flujo im Zen-Kontext. Das Objekt deutet seine Präsenz an und wartet darauf, eingeschaltet zu werden."],"Material":["Material","Material"],"FDM 3D printing":["Impresión 3D FDM","FDM-3D-Druck"],"Bodies":["Cuerpos","Körper"],"2 main":["2 principales","2 Hauptkörper"],"Key Decisions":["Decisiones clave","Zentrale Entscheidungen"],"Screen + support:<br>two roles, one system":["Pantalla + soporte:<br>dos roles, un sistema","Schirm + Halterung:<br>zwei Aufgaben, ein System"],"The screen carries all formal complexity: a three-dimensional internal pattern and branching extensions at its top and bottom edges that modulate how light distributes across the wall. PETG was chosen for two simultaneous reasons: its thermal resistance protects the material from the heat of the light source, and its translucency keeps the internal pattern invisible until the lamp is on. Both properties are required. Neither alone is enough.":["La pantalla concentra la complejidad formal: un patrón tridimensional interno y extensiones ramificadas en los bordes superior e inferior que modulan la distribución de luz sobre la pared. Se eligió PETG por dos razones: su resistencia térmica frente al calor de la fuente y su translucidez, que mantiene oculto el patrón hasta encender la lámpara. Ambas propiedades son necesarias.","Der Schirm trägt die formale Komplexität: ein inneres dreidimensionales Muster und verzweigte Fortsätze an den oberen und unteren Rändern, die das Licht an der Wand verteilen. PETG wurde aus zwei Gründen gewählt: wegen seiner Wärmebeständigkeit gegenüber der Lichtquelle und seiner Transluzenz, die das Muster bis zum Einschalten verbirgt. Beide Eigenschaften sind erforderlich."],"The wall support integrates the bipin base and follows the same morphological language as the screen. It mounts onto standard Argentine recessed electrical boxes with 2 screws. The connection between the two bodies is a bayonet joint: the screen slides over an extruded ring with a central channel, locks with a quarter-turn rotation, and allows multiple angle configurations without tools. No adhesives, no screws between bodies.":["El soporte de pared integra el zócalo bipin y comparte el lenguaje morfológico de la pantalla. Se fija con dos tornillos a cajas eléctricas embutidas estándar de Argentina. Los cuerpos se unen por bayoneta: la pantalla se desliza sobre un anillo con canal central, se bloquea con un cuarto de vuelta y permite distintas orientaciones sin herramientas. No lleva adhesivos ni tornillos entre los cuerpos.","Die Wandhalterung integriert die Zweistiftfassung und übernimmt die Formensprache des Schirms. Sie wird mit zwei Schrauben an üblichen argentinischen Unterputzdosen befestigt. Die Körper verbindet ein Bajonettverschluss: Der Schirm gleitet über einen Ring mit zentraler Nut, verriegelt durch eine Vierteldrehung und erlaubt verschiedene Ausrichtungen ohne Werkzeug. Zwischen den Körpern sind weder Klebstoff noch Schrauben nötig."],"Light source":["Fuente de luz","Lichtquelle"],"Bipin":["Bipin","Zweistiftsockel"],"Mount":["Montaje","Befestigung"],"Standard AR box":["Caja estándar argentina","Argentinische Standarddose"],"Joint":["Unión","Verbindung"],"Rotary bayonet":["Bayoneta giratoria","Drehbajonett"],"Design Evolution":["Evolución del diseño","Entwurfsentwicklung"],"2 phases":["2 fases","2 Phasen"],"Iteration":["Iteración","Iteration"],"Physical testing":["Pruebas físicas","Physische Erprobung"],"PETG over PLA for translucency and thermal resistance. 0.4mm nozzle for definition of the internal pattern. Wall thickness between 0.8mm and 1mm, where the difference in how much light passes through becomes visible, and where the screen either holds its form or flexes.":["PETG en lugar de PLA por su translucidez y resistencia térmica. Boquilla de 0,4 mm para definir el patrón interno. Espesor de pared entre 0,8 y 1 mm: en ese rango se vuelve visible la diferencia en transmisión de luz y se define si la pantalla conserva la forma o flexiona.","PETG statt PLA wegen Transluzenz und Wärmebeständigkeit. Eine 0,4-mm-Düse definiert das innere Muster. Wandstärken zwischen 0,8 und 1 mm machen Unterschiede in der Lichtdurchlässigkeit sichtbar und bestimmen, ob der Schirm seine Form hält oder sich biegt."],"Takeouts":["Conclusiones","Erkenntnisse"],"Key learnings":["Aprendizajes principales","Wesentliche Erkenntnisse"],"Screen wall thickness calibrated to balance translucency and rigidity. Bayonet geometry adjusted for precise rotation with no play.":["Espesor de la pantalla ajustado para equilibrar translucidez y rigidez. Geometría de bayoneta corregida para una rotación precisa, sin juego.","Die Wandstärke des Schirms wurde auf das Gleichgewicht zwischen Transluzenz und Steifigkeit abgestimmt. Die Bajonettgeometrie wurde für präzises Drehen ohne Spiel angepasst."],"Prototyping":["Prototipado","Prototypenbau"],"Physical validation at every stage. The prototype as a design tool, not a presentation prop.":["Validación física en cada etapa. El prototipo como herramienta de diseño, más allá de su función de presentación.","Physische Validierung in jeder Phase. Der Prototyp als Entwurfswerkzeug, über seine Funktion als Präsentationsmodell hinaus."],"Building <span class=\"proto-col-arrow\">→</span>":["Construcción <span class=\"proto-col-arrow\">→</span>","Aufbau <span class=\"proto-col-arrow\">→</span>"],"FDM prints in PETG at 1:1 scale to evaluate how the internal pattern interacts with the light source and what it projects onto the wall and surrounding space.":["Impresiones FDM en PETG a escala 1:1 para evaluar la interacción del patrón interno con la fuente de luz y su proyección sobre la pared y el entorno.","FDM-Drucke aus PETG im Maßstab 1:1 zur Untersuchung des Zusammenspiels von Innenmuster und Lichtquelle sowie der Projektion auf Wand und Umgebung."],"Parts <span class=\"proto-col-arrow\">→</span>":["Piezas <span class=\"proto-col-arrow\">→</span>","Bauteile <span class=\"proto-col-arrow\">→</span>"],"Two bodies, one system. Screen and support printed separately, assembled through the bayonet joint. Each piece functional and independent before becoming a whole.":["Dos cuerpos, un sistema. Pantalla y soporte impresos por separado y ensamblados mediante la bayoneta. Cada pieza cumple su función antes de integrarse al conjunto.","Zwei Körper, ein System. Schirm und Halterung werden getrennt gedruckt und über das Bajonett verbunden. Jedes Teil erfüllt seine Funktion, bevor es Teil des Ganzen wird."],"Testing <span class=\"proto-col-arrow\">→</span>":["Pruebas <span class=\"proto-col-arrow\">→</span>","Erprobung <span class=\"proto-col-arrow\">→</span>"],"On/off comparison: how invisible the pattern is without light, and how present it becomes when activated. Perception of the bayonet joint as a formal element.":["Comparación apagada y encendida: cuánto se oculta el patrón sin luz y cuánto aparece al activarla. Percepción de la bayoneta como elemento formal.","Vergleich zwischen ausgeschaltetem und eingeschaltetem Zustand: Wie unsichtbar bleibt das Muster ohne Licht und wie deutlich erscheint es bei Aktivierung? Wahrnehmung des Bajonetts als Gestaltungselement."],"An object that, switched off, invites you to look at it. Switched on, <em>reveals what was always inside</em>.":["Un objeto que, apagado, invita a mirarlo.<br>Encendido, <em>revela lo que siempre estuvo adentro</em>.","Ein Objekt, das ausgeschaltet zum Betrachten einlädt.<br>Eingeschaltet <em>zeigt es, was schon immer in ihm war</em>."],"03. Product Design":["03. Diseño de producto","03. Produktdesign"],"Product Design":["Diseño de producto","Produktdesign"],"Polypropylene":["Polipropileno","Polypropylen"],"Rotational Molding":["Moldeo rotacional","Rotationsformen"],"A system that branches":["Un sistema que se ramifica","Ein System, das sich verzweigt"],"Tree branches don't grow from a planner's grid. They emerge from a <strong>node</strong> and radiate outward, always inclined. That organic logic became the structural principle of the system.":["Las ramas no crecen sobre una grilla planificada. Parten de un <strong>nodo</strong> y se extienden hacia afuera, siempre inclinadas. Esa lógica orgánica se convirtió en el principio estructural del sistema.","Äste wachsen nicht nach einem Planungsraster. Sie entstehen an einem <strong>Knoten</strong> und breiten sich geneigt nach außen aus. Diese organische Logik wurde zum Strukturprinzip des Systems."],"Buenos Aires terraces are small. Most planters are designed for space that compact city balconies simply don't have, wasting the <strong>vertical dimension entirely</strong>.":["Las terrazas de Buenos Aires son pequeñas. Muchos maceteros están pensados para un espacio que los balcones urbanos compactos no tienen y desaprovechan <strong>por completo la dimensión vertical</strong>.","Die Terrassen von Buenos Aires sind klein. Viele Pflanzgefäße sind für Flächen gedacht, die kompakte Stadtbalkone nicht bieten, und nutzen <strong>die vertikale Dimension überhaupt nicht</strong>."],"With a single body and a 3-point snap,<br> how do you build a planter that <em>grows in any direction</em>?":["Con un cuerpo y un encastre de tres puntos,<br>¿cómo crear un macetero que <em>crezca en cualquier dirección</em>?","Mit einem Körper und einer Dreipunkt-Rastverbindung:<br>Wie entsteht ein Pflanzgefäß, das <em>in jede Richtung wächst</em>?"],"Name &amp; Concept":["Nombre y concepto","Name und Konzept"],"The name comes from the defining visual quality of tree branches: they don't grow straight up, they <em>incline</em>. Every branch departs from a node at an angle, reaching toward light. That gesture, directional, structural, alive, became the guiding idea of the project.":["El nombre viene de la cualidad visual de las ramas: crecen <em>inclinadas</em>. Cada rama parte de un nodo en ángulo y busca la luz. Ese gesto direccional y estructural se convirtió en la idea que guía el proyecto.","Der Name bezieht sich auf die sichtbare Eigenschaft von Ästen: Sie wachsen <em>geneigt</em>. Jeder Ast geht schräg von einem Knoten aus und strebt zum Licht. Diese gerichtete, strukturelle Bewegung wurde zur Leitidee des Projekts."],"Incline is not just a planter. It is a system designed with the same logic as the thing it holds: something that starts from a fixed point and expands outward, adapting its shape to the space and the light available.":["Incline es un sistema diseñado con la misma lógica de aquello que contiene: parte de un punto fijo y se expande hacia afuera, adaptando su forma al espacio y a la luz disponibles.","Incline ist ein System nach der Logik dessen, was es aufnimmt: Es beginnt an einem festen Punkt, wächst nach außen und passt seine Form an den verfügbaren Raum und das Licht an."],"System Logic":["Lógica del sistema","Systemlogik"],"One body,<br>two variants":["Un cuerpo,<br>dos variantes","Ein Körper,<br>zwei Varianten"],"The system is built on a single module body, available in two configurations: one with two connection branches for linear growth, one with three for exponential branching. The user controls the density and direction of the arrangement simply by choosing which variant to connect next.":["El sistema parte de un único cuerpo modular con dos configuraciones: una de dos ramificaciones para crecimiento lineal y otra de tres para crecimiento ramificado. Al elegir qué variante conectar, la persona controla la densidad y la dirección del conjunto.","Das System basiert auf einem Modulkörper in zwei Ausführungen: mit zwei Verbindungsarmen für lineares Wachstum und mit drei Armen für weitere Verzweigungen. Durch die Wahl des nächsten Moduls bestimmt die nutzende Person Dichte und Richtung der Anordnung."],"Any combination of the two variants works together. The same 3-point snap fit geometry links every module to every other, in any direction, across all three axes. The system doesn't prescribe a configuration. It enables one.":["Las dos variantes son compatibles entre sí. El mismo encastre de tres puntos conecta los módulos en las tres direcciones del espacio. El sistema permite distintas configuraciones sin imponer una única disposición.","Beide Varianten sind miteinander kompatibel. Dieselbe Dreipunkt-Rastverbindung verbindet die Module entlang aller drei Raumachsen. Das System ermöglicht unterschiedliche Anordnungen, ohne eine feste Konfiguration vorzugeben."],"Expansion":["Expansión","Erweiterung"],"X, Y, Z axes":["Ejes X, Y, Z","X-, Y-, Z-Achsen"],"Variants":["Variantes","Varianten"],"2-branch, 3-branch":["2 y 3 ramificaciones","2 und 3 Verbindungsarme"],"Connection":["Conexión","Verbindung"],"3-point snap fit":["Encastre de 3 puntos","Dreipunkt-Rastverbindung"],"Snap fit + water flow:<br>function drives form":["Encastre + drenaje:<br>la función define la forma","Rastverbindung + Wasserfluss:<br>Funktion bestimmt Form"],"The 3-point snap fit does more than connect modules: the three contact points double as the structural feet of each unit. The first module rests directly on the ground through them. Every subsequent module rests on the one below through the same joint. The connection and the support are one and the same component.":["El encastre de tres puntos también funciona como apoyo estructural. El primer módulo se apoya en el suelo mediante esos puntos y los siguientes descansan sobre el módulo inferior a través de la misma unión. Conexión y apoyo son parte del mismo componente.","Die Dreipunkt-Rastverbindung dient zugleich als tragender Fuß. Das erste Modul steht damit auf dem Boden; weitere Module stützen sich über dieselbe Verbindung auf dem darunterliegenden ab. Verbindung und Auflager sind Teil desselben Bauteils."],"Water management was integrated from the start. Perforated points at the base of each module allow water to drain downward from one module to the next, so the entire stack can be irrigated from the top without moving anything. The color, a neutral gray, was chosen to recede into any terrace context, letting the plants and the configuration take the focus.":["La gestión del agua se integró desde el inicio. Las perforaciones de la base permiten que drene hacia el módulo inferior, de modo que el conjunto pueda regarse desde arriba sin moverlo. El gris neutro se eligió para integrarse a distintas terrazas y dejar el protagonismo a las plantas y la configuración.","Die Wasserführung wurde von Anfang an integriert. Öffnungen im Modulboden lassen Wasser nach unten abfließen, sodass sich der Stapel von oben bewässern lässt, ohne ihn zu bewegen. Das neutrale Grau tritt im Terrassenumfeld zurück und überlässt Pflanzen und Anordnung den Vordergrund."],"Drainage":["Drenaje","Entwässerung"],"Module to module":["De módulo a módulo","Von Modul zu Modul"],"Base":["Base","Basis"],"Snap fit doubles as feet":["El encastre también es apoyo","Rastverbindung dient als Fuß"],"From hand sketches to a planted system, validating the branching logic, morphology, and connection geometry before committing to the final material.":["De bocetos a un sistema con plantas: validación de la ramificación, la morfología y la geometría de conexión antes de definir el material final.","Von Skizzen zum bepflanzten System: Prüfung von Verzweigung, Form und Verbindungsgeometrie vor der Festlegung des endgültigen Materials."],"Paper model <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ scale model</span>":["Maqueta de papel <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ maqueta a escala</span>","Papiermodell <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ Maßstabsmodell</span>"],"→ scale model":["→ maqueta a escala","→ Maßstabsmodell"],"A scale model built to validate the morphology of the module, how the form reads in three dimensions, how the volumes relate to each other, and whether the proportions hold before committing to print.":["Una maqueta a escala para validar la morfología del módulo, su lectura tridimensional, la relación entre volúmenes y las proporciones antes de imprimir.","Ein Maßstabsmodell zur Prüfung der Modulform, ihrer räumlichen Wirkung, der Beziehung zwischen Volumen und der Proportionen vor dem Druck."],"Final prototype <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ planted &amp; assembled</span>":["Prototipo final <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ con plantas y ensamblado</span>","Finaler Prototyp <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ bepflanzt und montiert</span>"],"→ planted &amp; assembled":["→ con plantas y ensamblado","→ bepflanzt und montiert"],"The printed system assembled with soil and plants, verifying the structural behavior of the connection under load and the water drainage between modules in use.":["El sistema impreso se ensambló con tierra y plantas para comprobar el comportamiento de la conexión bajo carga y el drenaje entre módulos durante el uso.","Das gedruckte System wurde mit Erde und Pflanzen montiert, um das Verhalten der Verbindung unter Last und den Wasserabfluss zwischen den Modulen im Gebrauch zu prüfen."],"A single body. Two variants.<br> <em>Infinite configurations, and everything it needs to keep growing.</em>":["Un cuerpo. Dos variantes.<br><em>Configuraciones infinitas y todo lo necesario para seguir creciendo.</em>","Ein Körper. Zwei Varianten.<br><em>Unzählige Konfigurationen und alles, was weiteres Wachstum braucht.</em>"],"04. Product Redesign":["04. Rediseño de producto","04. Produktüberarbeitung"],"Product Redesign":["Rediseño de producto","Produktüberarbeitung"],"Client":["Cliente","Auftraggeber"],"Under Armour (academic)":["Under Armour (académico)","Under Armour (Studienprojekt)"],"Injection, Blow Molding &amp; Ultrasonic Welding":["Inyección, soplado y soldadura ultrasónica","Spritzgießen, Blasformen und Ultraschallschweißen"],"Protection compressed":["Protección en formato compacto","Schutz im kompakten Format"],"The brief":["La consigna","Die Aufgabenstellung"],"Under Armour's catalog is built for visibility at scale: footwear, apparel, large-format gear. The brief asked for something the brand had never operated at this size: a roll-on deodorant that could carry the same performance identity <strong>in the palm of a hand.</strong>":["El catálogo de Under Armour está pensado para visibilidad a gran escala: calzado, indumentaria y equipamiento. La consigna propuso llevar esa identidad de rendimiento a un desodorante roll-on que cupiera <strong>en la palma de la mano</strong>.","Der Katalog von Under Armour setzt auf Sichtbarkeit im großen Maßstab: Schuhe, Bekleidung und Ausrüstung. Die Aufgabe war, diese Leistungsidentität auf einen Deoroller zu übertragen, der <strong>in die Handfläche passt</strong>."],"The insight":["El hallazgo","Die Erkenntnis"],"The challenge wasn't adding UA features to a standard roll-on. It was finding which elements of the brand's visual language could survive the compression, and which had to be <strong>reinvented for the constraints of personal care manufacturing.</strong>":["El desafío fue identificar qué elementos del lenguaje visual de UA podían mantenerse en una escala menor y cuáles debían <strong>reformularse para la fabricación de productos de cuidado personal</strong>.","Die Herausforderung bestand darin, die Elemente der UA-Formensprache zu finden, die sich verkleinern lassen, und jene, die für <strong>die Fertigung von Körperpflegeprodukten neu gedacht werden mussten</strong>."],"How do you compress an identity built for armor<br>into something that <em>fits in a gym bag?</em>":["¿Cómo llevar una identidad basada en protección<br>a algo que <em>entra en un bolso deportivo</em>?","Wie lässt sich eine auf Schutz aufgebaute Identität<br>auf etwas übertragen, das <em>in eine Sporttasche passt</em>?"],"Core: the first layer<br>of protection":["Core: la primera capa<br>de protección","Core: die erste<br>Schutzschicht"],"Before the jersey, before the gear. Core applies the protection closest to the body. The name positions the product not as athletic gear but as the foundation beneath it, the essential layer of the routine.":["Antes de la camiseta y del equipamiento, Core aporta la protección más cercana al cuerpo. El nombre sitúa al producto como la base de la rutina, la capa esencial sobre la que se suma el resto.","Vor Trikot und Ausrüstung bietet Core die körpernächste Schutzschicht. Der Name positioniert das Produkt als Grundlage der Routine, als wesentliche Schicht unter allem Weiteren."],"The form balances two forces: the upper body is smooth and tapered, communicating fluidity and lightness; the lower section is covered in hexagonal bas-relief, communicating grip, protection, and structural density. Neither cancels the other. Together they read as dynamic and controlled.":["La forma equilibra dos cualidades: la parte superior lisa y afinada comunica fluidez y liviandad; el relieve hexagonal inferior comunica agarre, protección y densidad estructural. Juntas producen una lectura dinámica y controlada.","Die Form verbindet zwei Eigenschaften: Der glatte, verjüngte Oberkörper vermittelt Fluss und Leichtigkeit; das hexagonale Flachrelief unten steht für Griff, Schutz und strukturelle Dichte. Zusammen wirken sie dynamisch und kontrolliert."],"The cap is translucent by decision: it exposes the sphere even when the product is closed, because the sphere is the core, the functional heart of the object. The name and the form reinforce each other. Revealing it was not optional.":["La tapa translúcida deja ver la esfera incluso con el producto cerrado. La esfera es el núcleo funcional del objeto: hacerla visible refuerza la relación entre el nombre y la forma.","Die transluzente Kappe zeigt die Kugel auch bei geschlossenem Produkt. Sie bildet den funktionalen Kern des Objekts; ihre Sichtbarkeit stärkt die Verbindung zwischen Name und Form."],"Name":["Nombre","Name"],"Roll-on deodorant":["Desodorante roll-on","Deoroller"],"Identity &amp; Finish":["Identidad y acabado","Identität und Oberfläche"],"Armor language<br>in bas-relief":["Lenguaje de protección<br>en bajorrelieve","Schutzformensprache<br>im Flachrelief"],"The hexagonal texture on the lower body serves a double function: it is the visual identity marker and the ergonomic grip zone. The faceted relief is sized so fingers lock naturally into the surface, making the hold instinctive. The reference is sports protective plating, translated into a form the hand can feel without being told.":["La textura hexagonal inferior cumple dos funciones: identifica visualmente al producto y define la zona de agarre. El relieve permite que los dedos se apoyen naturalmente en la superficie. La referencia son las placas de protección deportiva, traducidas a una forma reconocible al tacto.","Die untere Sechsecktextur erfüllt zwei Aufgaben: visuelle Identität und ergonomische Griffzone. Das Relief bietet den Fingern einen natürlichen Halt. Sportliche Schutzplatten dienen als Referenz für eine unmittelbar ertastbare Form."],"The palette was benchmarked against UA's most recent product launches. Dark steel gray is the base: dense, performance-coded, consistent with the brand's material language. Teal is the accent, but its placement was a deliberate choice: it lives on the sphere, not on the body. The most eye-catching color marks the functional core of the product, not the container. The body recedes; the sphere commands attention.":["La paleta se comparó con lanzamientos recientes de UA. El gris acero oscuro es la base, coherente con su lenguaje material. El acento verde azulado se ubica solo en la esfera: el color más llamativo señala el núcleo funcional. El cuerpo queda en segundo plano.","Die Palette wurde mit jüngeren UA-Produkten verglichen. Dunkles Stahlgrau bildet die Basis und entspricht der Materialsprache der Marke. Der blaugrüne Akzent liegt ausschließlich auf der Kugel: Die auffälligste Farbe kennzeichnet den funktionalen Kern, während der Körper zurücktritt."],"Steel gray (PP)":["Gris acero (PP)","Stahlgrau (PP)"],"Accent":["Acento","Akzent"],"Teal (sphere only)":["Verde azulado (solo esfera)","Blaugrün (nur Kugel)"],"Texture":["Textura","Textur"],"Hexagonal bas-relief grip":["Agarre hexagonal en bajorrelieve","Hexagonaler Griff im Flachrelief"],"Production":["Producción","Fertigung"],"Every radius<br>justified by process":["Cada radio<br>responde al proceso","Jeder Radius<br>folgt dem Verfahren"],"The body is blow-molded in PP: the only process that can achieve the form's dimensional complexity, including the transition from smooth upper section to textured relief, without adding unnecessary wall thickness. The cap, sphere, sphere housing, and label are all PP, keeping the entire system within one material family for visual consistency and end-of-life simplicity.":["El cuerpo se moldea por soplado en PP para lograr su complejidad dimensional, incluida la transición entre la zona superior lisa y el relieve, sin sumar espesor innecesario. Tapa, esfera, alojamiento y etiqueta también son de PP: una misma familia de materiales para mantener coherencia visual y simplificar el fin de vida.","Der Körper wird aus PP blasgeformt, um die Geometrie einschließlich des Übergangs von der glatten Oberseite zum Relief ohne unnötige Wandstärke zu erzeugen. Kappe, Kugel, Kugelaufnahme und Etikett bestehen ebenfalls aus PP. Eine Materialfamilie unterstützt visuelle Einheitlichkeit und eine einfachere Behandlung am Lebensende."],"The cap operates on a bayonet closure: internal pins on the cap engage an L-shaped channel on the neck of the body, locking with a quarter-turn. The action is deliberate and tactile, distinct from a standard screw cap. The applicator ball is press-fitted into its housing, retained by interference fit without additional fasteners. Permanent structural joins are made with ultrasonic welding, avoiding adhesives and keeping the entire system within one material family.":["La tapa se cierra por bayoneta: sus pernos internos recorren un canal en L en el cuello y bloquean con un cuarto de vuelta. La esfera aplicadora encastra en su alojamiento por interferencia, sin fijaciones adicionales. Las uniones permanentes se realizan por soldadura ultrasónica, evitando adhesivos y conservando una sola familia de materiales.","Die Kappe schließt über ein Bajonett: Innere Stifte greifen in eine L-förmige Nut am Hals und verriegeln durch eine Vierteldrehung. Die Auftragskugel sitzt mittels Übermaßpassung ohne zusätzliche Befestigung in ihrer Aufnahme. Dauerhafte Verbindungen werden ultraschallgeschweißt, ohne Klebstoff und innerhalb derselben Materialfamilie."],"Body":["Cuerpo","Körper"],"Blow molding (PP)":["Soplado (PP)","Blasformen (PP)"],"Cap &amp; parts":["Tapa y piezas","Kappe und Bauteile"],"Injection (PP translucent)":["Inyección (PP translúcido)","Spritzgießen (transluzentes PP)"],"Closure":["Cierre","Verschluss"],"Bayonet cap + press-fit ball":["Tapa a bayoneta + esfera a presión","Bajonettkappe + eingepresste Kugel"],"Assembly":["Ensamble","Montage"],"Ultrasonic welding":["Soldadura ultrasónica","Ultraschallschweißen"],"From hand sketches to a physical prototype, working out the form language, proportions, and component relationships before committing to the final design.":["De bocetos a un prototipo físico: exploración del lenguaje formal, proporciones y relaciones entre componentes antes de definir el diseño final.","Von Skizzen zum physischen Prototyp: Untersuchung von Formensprache, Proportionen und Bauteilbeziehungen vor dem endgültigen Entwurf."],"Sketches <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ form exploration</span>":["Bocetos <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ exploración formal</span>","Skizzen <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ Formstudie</span>"],"→ form exploration":["→ exploración formal","→ Formstudie"],"Hand sketches exploring the form language, the relationship between the cylindrical body and the hexagonal texture, and the balance between fluid and robust before moving into 3D modeling.":["Bocetos para explorar el lenguaje formal, la relación entre cuerpo cilíndrico y textura hexagonal, y el equilibrio entre fluidez y robustez antes del modelado 3D.","Skizzen zur Untersuchung der Formensprache, des Verhältnisses zwischen zylindrischem Körper und Sechsecktextur sowie der Balance zwischen Fluss und Robustheit vor der 3D-Modellierung."],"Iteration <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ scale validation</span>":["Iteración <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ validación de escala</span>","Iteration <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ Maßstabsprüfung</span>"],"→ scale validation":["→ validación de escala","→ Maßstabsprüfung"],"A 3D printed model placed next to an existing roll-on to validate scale, grip proportions, and ergonomic logic before committing to the final design. The comparison made clear what the numbers alone could not.":["Un modelo impreso en 3D, comparado con un roll-on existente, para validar escala, proporciones del agarre y lógica ergonómica antes del diseño final. La comparación mostró aspectos que las medidas por sí solas no explicaban.","Ein 3D-gedrucktes Modell wurde mit einem vorhandenen Deoroller verglichen, um Maßstab, Griffproportionen und ergonomische Logik zu prüfen. Der Vergleich zeigte Aspekte, die Maße allein nicht erklären konnten."],"Physical prototype <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ assembled &amp; verified</span>":["Prototipo físico <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ ensamblado y verificado</span>","Physischer Prototyp <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ montiert und geprüft</span>"],"→ assembled &amp; verified":["→ ensamblado y verificado","→ montiert und geprüft"],"The assembled prototype validating the grip geometry, the presence of the hexagonal texture in hand, and the visual weight of the product before final finish decisions.":["El prototipo ensamblado permitió validar la geometría del agarre, cómo se percibe la textura en la mano y el peso visual del producto antes de decidir el acabado final.","Der montierte Prototyp diente zur Prüfung der Griffgeometrie, der fühlbaren Textur und des visuellen Gewichts vor der endgültigen Oberflächenentscheidung."],"A brand's armor language,<br> <em>compressed into a daily essential.</em>":["El lenguaje de protección de una marca,<br><em>concentrado en un objeto cotidiano.</em>","Die Schutzformensprache einer Marke,<br><em>verdichtet in einem Alltagsprodukt.</em>"],"+ Furniture":["+ Mobiliario","+ Möbeldesign"],"Furniture Design":["Diseño de mobiliario","Möbeldesign"],"Aluminum, Nautical Fabric, Dekton":["Aluminio, tela náutica, Dekton","Aluminium, Outdoor-Gewebe, Dekton"],"Same language.<br>New scale.":["El mismo lenguaje.<br>Una nueva escala.","Dieselbe Formensprache.<br>Ein neuer Maßstab."],"Myke Outdoors partnered with the faculty to explore a new catalog direction: furniture that carried the brand's robustness and durability, but was easier to move, viable for smaller spaces, and built exclusively from <strong>aluminum profiles, nautical fabric, and Dekton.</strong> The material vocabulary was fixed. Everything else was open.":["Myke Outdoors trabajó con la facultad para explorar una nueva dirección de catálogo: muebles con la robustez de la marca, más fáciles de mover y aptos para espacios pequeños, fabricados exclusivamente con <strong>perfiles de aluminio, tela náutica y Dekton</strong>. Los materiales estaban definidos; el resto quedaba abierto.","Myke Outdoors arbeitete mit der Hochschule an einer neuen Katalogrichtung: Möbel mit der Robustheit der Marke, leichter beweglich und für kleinere Räume geeignet, ausschließlich aus <strong>Aluminiumprofilen, Outdoor-Gewebe und Dekton</strong>. Die Materialien standen fest, alles Weitere war offen."],"Myke's existing pieces were built for permanence: large formats, complex structures, heavy footprints. The problem was not the material. It was the structural complexity. <strong>More parts meant more material, more weight, and less adaptability.</strong> Welded and ground aluminum profiles already deliver inherent robustness. The excess had been in the structure, not the steel.":["Las piezas existentes de Myke eran de gran formato y estructura compleja. El problema estaba en esa complejidad: <strong>más piezas implicaban más material, más peso y menor adaptabilidad</strong>. Los perfiles de aluminio soldados y pulidos ya aportaban robustez. El exceso estaba en la estructura.","Die vorhandenen Myke-Möbel waren großformatig und konstruktiv komplex. Diese Komplexität war das Problem: <strong>Mehr Teile bedeuteten mehr Material, mehr Gewicht und weniger Anpassungsfähigkeit</strong>. Geschweißte und geschliffene Aluminiumprofile boten bereits Robustheit. Der Überschuss lag in der Konstruktion."],"How do you keep the weight of a brand<br>without adding <em>the weight of the object?</em>":["¿Cómo mantener el peso de una marca<br>sin sumar <em>peso al objeto</em>?","Wie bleibt das Gewicht einer Marke erhalten,<br>ohne <em>das Objekt schwerer zu machen</em>?"],"Collection Concept":["Concepto de colección","Kollektionskonzept"],"Three pieces.<br>One pause.":["Tres piezas.<br>Una pausa.","Drei Stücke.<br>Eine Pause."],"A collection needs internal logic. EASE is the primary piece: a stool that invites you to sit without committing to a full chair. DWELL follows as its natural companion: a side table that holds a coffee, a book, the small things a moment needs. LINGER closes the set: a magazine rack that keeps something within reach without demanding attention. Each piece works alone. Together, they compose a pause.":["La colección tiene una lógica interna. EASE es la pieza principal: un taburete que invita a sentarse. DWELL acompaña como mesa auxiliar para un café o un libro. LINGER completa el conjunto como revistero. Cada pieza funciona sola y juntas componen una pausa.","Die Kollektion folgt einer inneren Logik. EASE ist das Hauptstück: ein Hocker, der zum Sitzen einlädt. DWELL ergänzt ihn als Beistelltisch für Kaffee oder ein Buch. LINGER vervollständigt das Set als Zeitschriftenständer. Jedes Stück funktioniert einzeln, gemeinsam bilden sie eine Pause."],"The names were chosen to resist the object. EASE, DWELL, LINGER are states, not products. That distinction matters: the furniture does not define the moment, it enables it.":["EASE, DWELL y LINGER nombran estados, no productos. El mobiliario habilita el momento sin definirlo de antemano.","EASE, DWELL und LINGER benennen Zustände statt Produkte. Die Möbel ermöglichen den Moment, ohne ihn vorzugeben."],"Collection":["Colección","Kollektion"],"3 pieces":["3 piezas","3 Stücke"],"Pieces":["Piezas","Elemente"],"Myke Outdoor Living (academic)":["Myke Outdoor Living (académico)","Myke Outdoor Living (Studienprojekt)"],"Material &amp; Construction":["Materiales y construcción","Material und Konstruktion"],"Three materials.<br>No exceptions.":["Tres materiales.<br>Sin excepciones.","Drei Materialien.<br>Ohne Ausnahmen."],"Working within Myke's material vocabulary was not a limitation, it was the brief. Aluminum profiles at 40x20mm form the structural skeleton of every piece: welded at the joints, finished by grinding, and powder-coated for weather resistance. The connections disappear into the profile. The result reads as a continuous element rather than an assembly, which is what keeps the pieces feeling resolved at a smaller scale.":["Trabajar con los materiales de Myke era parte de la consigna. Los perfiles de aluminio de 40 × 20 mm forman la estructura de cada pieza; las uniones se sueldan, se pulen y reciben pintura en polvo para resistir la intemperie. Las conexiones se integran al perfil y el conjunto se percibe como un elemento continuo.","Die Materialauswahl von Myke war Teil der Aufgabe. Aluminiumprofile von 40 × 20 mm bilden das Gerüst jedes Stücks. Die Verbindungen werden geschweißt, geschliffen und zum Wetterschutz pulverbeschichtet. Sie gehen im Profil auf, sodass das Möbel als zusammenhängendes Element wirkt."],"Nautical fabric provides the seating and storage surfaces for EASE and LINGER: UV-resistant, weather-tolerant, and deliberately warm against the precision of the aluminum. Dekton covers the table surface of DWELL: dense, heat-resistant, and visually consistent with the brand's existing catalog. Three materials. No substitutions.":["La tela náutica forma las superficies de asiento y guardado de EASE y LINGER: resistente a los rayos UV y a la intemperie, contrasta con la precisión del aluminio. Dekton cubre la mesa DWELL por su densidad, resistencia térmica y coherencia con el catálogo. Tres materiales, sin sustituciones.","Outdoor-Gewebe bildet die Sitz- und Ablageflächen von EASE und LINGER. Es ist UV- und wetterbeständig und bildet einen warmen Kontrast zum Aluminium. Dekton bildet die Oberfläche von DWELL durch Dichte, Wärmebeständigkeit und Bezug zum bestehenden Katalog. Drei Materialien ohne Austausch."],"Structure":["Estructura","Struktur"],"Aluminum profiles 40x20mm":["Perfiles de aluminio de 40 × 20 mm","Aluminiumprofile 40 × 20 mm"],"Surfaces":["Superficies","Flächen"],"Nautical fabric + Dekton":["Tela náutica + Dekton","Outdoor-Gewebe + Dekton"],"Finish":["Acabado","Oberfläche"],"Welded, ground + powder coat":["Soldadura, pulido y pintura en polvo","Geschweißt, geschliffen und pulverbeschichtet"],"From hand sketches to a scale model, working out the proportions, structural logic, and collection coherence before committing to the final renders.":["De bocetos a una maqueta a escala: definición de proporciones, estructura y coherencia de colección antes de los renders finales.","Von Skizzen zum Maßstabsmodell: Klärung von Proportionen, Konstruktion und Zusammenhalt der Kollektion vor den finalen Renderings."],"Hand sketches exploring the form language of each piece, the relationship between the aluminum structure and the soft surfaces, and the visual coherence of the collection before moving to 3D.":["Bocetos para explorar la forma de cada pieza, la relación entre estructura de aluminio y superficies blandas, y la coherencia visual del conjunto antes del modelado 3D.","Skizzen zur Formfindung der einzelnen Stücke, zum Verhältnis von Aluminiumstruktur und weichen Flächen sowie zum visuellen Zusammenhang vor der 3D-Modellierung."],"Scale model <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ proportions verified</span>":["Maqueta a escala <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ proporciones verificadas</span>","Maßstabsmodell <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ Proportionen geprüft</span>"],"→ proportions verified":["→ proporciones verificadas","→ Proportionen geprüft"],"A scale model built to validate the proportions of each piece and the visual weight of the collection as a set, confirming the balance between structural presence and lightness before the final renders.":["Una maqueta a escala para validar las proporciones de cada pieza y el peso visual del conjunto, comprobando el equilibrio entre presencia estructural y liviandad antes de los renders finales.","Ein Maßstabsmodell zur Prüfung der Proportionen jedes Stücks und des visuellen Gewichts der Kollektion. Es überprüft das Gleichgewicht zwischen struktureller Präsenz und Leichtigkeit vor den finalen Renderings."],"Three materials. Three pieces.<br> <em>One brief that asked for less, and delivered more.</em>":["Tres materiales. Tres piezas.<br><em>Una consigna que pidió menos y consiguió más.</em>","Drei Materialien. Drei Stücke.<br><em>Eine Aufgabe, die weniger verlangte und mehr erreichte.</em>"],"+ Product Redesign":["+ Rediseño de producto","+ Produktüberarbeitung"],"Philips (academic)":["Philips (académico)","Philips (Studienprojekt)"],"Injection Molding":["Moldeo por inyección","Spritzgießen"],"Survey first.<br>Redesign second.":["Primero relevar.<br>Después rediseñar.","Zuerst analysieren.<br>Dann überarbeiten."],"The survey":["El relevamiento","Die Bestandsaufnahme"],"The starting point was not a problem statement but a complete product analysis: mapping every component of the ProMix hand blender, its function, its relationship to the rest of the system, and <strong>where the product left value on the table.</strong>":["El punto de partida fue un análisis completo del producto: identificar cada componente de la minipimer ProMix, su función, su relación con el resto del sistema y <strong>dónde había oportunidades de mejora.</strong>","Ausgangspunkt war eine vollständige Produktanalyse: jedes Bauteil des ProMix-Stabmixers, seine Funktion, sein Zusammenspiel mit dem System und <strong>ungenutzte Verbesserungspotenziale erfassen.</strong>"],"The finding":["El hallazgo","Die Erkenntnis"],"After analyzing the full assembly, one component stood out: the cap. Every other part performed a structural or functional role. The cap did not. It protected the blender shaft and nothing more. <strong>That absence of purpose was the opportunity.</strong>":["Al analizar el conjunto, una pieza se destacó: la tapa. Las demás cumplían un rol estructural o funcional; la tapa solo protegía el eje. <strong>Ese margen de función se convirtió en la oportunidad.</strong>","Bei der Analyse fiel ein Bauteil auf: die Kappe. Die übrigen Teile hatten strukturelle oder funktionale Aufgaben; die Kappe schützte lediglich den Schaft. <strong>Dieser funktionale Spielraum wurde zur Chance.</strong>"],"If every other part earns its place,<br> what do you do with <em>the one that doesn't?</em>":["Si cada pieza justifica su lugar,<br>¿qué hacer con <em>la que todavía puede aportar más</em>?","Wenn jedes Bauteil seinen Platz rechtfertigt,<br>was lässt sich aus <em>dem Teil machen, das noch mehr leisten kann</em>?"],"The Opportunity":["La oportunidad","Die Chance"],"A component<br>with room to spare.":["Un componente<br>con espacio disponible.","Ein Bauteil<br>mit ungenutztem Raum."],"The cap occupied volume without using it. Its interior was hollow, its exterior passive. That unused space became the brief: redesign the cap to hold the power cable and plug during storage, eliminating the main source of cable wear without altering any other part of the product.":["El volumen interior de la tapa estaba disponible. Ese espacio definió la consigna: alojar el cable y el enchufe durante el guardado para evitar su desgaste, sin alterar otras piezas del producto.","Das Innenvolumen der Kappe bot freien Raum. Daraus entstand die Aufgabe: Kabel und Stecker beim Verstauen aufzunehmen, um Verschleiß zu vermeiden, ohne andere Produktteile zu verändern."],"The constraint was precise: one component, no changes to the existing architecture, compatible with the rear casing as found. The solution had to come entirely from within the cap itself.":["La restricción era precisa: rediseñar un componente, sin cambios en la arquitectura y manteniendo compatibilidad con la carcasa trasera existente. La solución debía surgir de la propia tapa.","Die Randbedingung war präzise: ein Bauteil überarbeiten, ohne Architekturänderungen und kompatibel mit dem vorhandenen hinteren Gehäuse. Die Lösung musste in der Kappe selbst entstehen."],"Approach":["Enfoque","Ansatz"],"Single-component redesign":["Rediseño de un componente","Überarbeitung eines Bauteils"],"Constraint":["Restricción","Randbedingung"],"No architecture changes":["Sin cambios de arquitectura","Keine Architekturänderungen"],"The Solution":["La solución","Die Lösung"],"New form.<br>Real function.":["Nueva forma.<br>Función concreta.","Neue Form.<br>Konkrete Funktion."],"A recessed channel runs along the underside of the cap, guiding the cable from the plug bay to the storage wrap. The plug seats in a dedicated housing integrated into the cap body. Nothing is added to the product; the cap is simply redesigned to do more with the space it already occupies.":["Un canal rebajado en la parte inferior guía el cable desde el alojamiento del enchufe hacia el enrollador. El enchufe se ubica en una cavidad integrada a la tapa. No se agregan piezas: se aprovecha mejor el espacio del componente existente.","Eine vertiefte Rinne an der Unterseite führt das Kabel von der Steckeraufnahme zur Wicklung. Der Stecker sitzt in einer in die Kappe integrierten Aufnahme. Es kommen keine Teile hinzu; der vorhandene Raum wird besser genutzt."],"The piece connects to the existing rear casing via a snap-fit using lateral fins. No modifications to the product architecture, no additional fasteners. Injection-molded in PP for material consistency with the original assembly.":["La pieza encastra en la carcasa trasera mediante aletas laterales, sin modificar la arquitectura ni agregar fijaciones. Se propone inyección en PP para mantener coherencia con el conjunto original.","Das Teil rastet über seitliche Laschen in das hintere Gehäuse ein, ohne Architekturänderungen oder zusätzliche Befestigungen. Spritzgießen in PP sorgt für Materialkontinuität zum ursprünglichen Aufbau."],"Lateral fin snap-fit":["Encastre con aletas laterales","Rastverbindung mit seitlichen Laschen"],"Dimensions":["Dimensiones","Abmessungen"],"Injection molding":["Moldeo por inyección","Spritzgießen"],"From the original product to a printed redesign, validating the snap-fit geometry and cable fit before committing to final tolerances.":["Del producto original al rediseño impreso: validación del encastre y el ajuste del cable antes de definir tolerancias finales.","Vom Originalprodukt zum gedruckten Entwurf: Prüfung von Rastverbindung und Kabelführung vor der Festlegung der endgültigen Toleranzen."],"Iteration <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ snap fit / cable fit</span>":["Iteración <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ encastre y ajuste del cable</span>","Iteration <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ Rastverbindung und Kabelführung</span>"],"→ snap fit / cable fit":["→ encastre y ajuste del cable","→ Rastverbindung und Kabelführung"],"Testing the critical connection points: the lateral fin snap-fit against the rear casing and the cable channel clearance. Physical testing at this stage confirmed the geometry before moving to a full assembly print.":["Pruebas de los puntos críticos: el encastre lateral contra la carcasa y la holgura del canal del cable. La prueba física permitió confirmar la geometría antes de imprimir el conjunto completo.","Prüfung der kritischen Stellen: seitliche Rastverbindung am Gehäuse und Freiraum im Kabelkanal. Die physische Erprobung bestätigte die Geometrie vor dem Druck der vollständigen Baugruppe."],"Fit test <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ printed + assembled</span>":["Prueba de ajuste <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ impreso y ensamblado</span>","Passprobe <span style=\"color:var(--color-muted);font-size:.82rem;font-weight:400;font-family:var(--font-body);\">→ gedruckt und montiert</span>"],"→ printed + assembled":["→ impreso y ensamblado","→ gedruckt und montiert"],"The redesigned cap 3D printed and assembled onto the original ProMix casing. The snap-fit locked correctly, the plug housing seated flush, and the cable routed clean through the channel. The prototype was then post-processed: sanded and painted to match the finish of the original product and read as a production-ready piece.":["La tapa rediseñada se imprimió en 3D y se montó sobre la carcasa ProMix original. El encastre cerró correctamente, el enchufe quedó al ras y el cable recorrió el canal. Después se lijó y pintó el prototipo para acercar el acabado al del producto original.","Die überarbeitete Kappe wurde 3D-gedruckt und am originalen ProMix-Gehäuse montiert. Die Rastverbindung schloss, der Stecker saß bündig und das Kabel verlief im Kanal. Anschließend wurde der Prototyp geschliffen und lackiert, um sich der Originaloberfläche anzunähern."],"One component redesigned.<br> <em>Everything else, untouched.</em>":["Un componente rediseñado.<br><em>El resto, sin cambios.</em>","Ein Bauteil überarbeitet.<br><em>Alles andere bleibt unverändert.</em>"],"+ Industrial Design":["+ Diseño industrial","+ Industriedesign"],"Industrial Design":["Diseño industrial","Industriedesign"],"YPF (academic)":["YPF (académico)","YPF (Studienprojekt)"],"Steel, Sheet Metal, PVC":["Acero, chapa metálica, PVC","Stahl, Blech, PVC"],"Welding &amp; Assembly":["Soldadura y ensamble","Schweißen und Montage"],"+ Product Design":["+ Diseño de producto","+ Produktdesign"],"Aluminum · Brass · ABS · Polycarbonate":["Aluminio · Latón · ABS · Policarbonato","Aluminium · Messing · ABS · Polycarbonat"]};
+const originalCopy=new WeakMap();
+function tri(en,es,de,lang=window.currentLang){return lang==='es'?es:lang==='de'?de:en;}
+function localText(key){const values={'At rest':['En reposo','In Ruhe'],'Expand diagram':['Ampliar gráfico','Diagramm vergrößern'],'Close':['Cerrar','Schließen'],'Previous image':['Imagen anterior','Vorheriges Bild'],'Next image':['Imagen siguiente','Nächstes Bild'],'Menu':['Menú','Menü'],'Language':['Idioma','Sprache'],'Image gallery':['Galería de imágenes','Bildergalerie']};return window.currentLang==='en'?key:values[key]?.[window.currentLang==='es'?0:1]||key;}
+function applyStaticTranslations(root,lang){
+ const visit=el=>{if(['SCRIPT','STYLE','SVG'].includes(el.tagName))return;
+ if(!el.hasAttribute('data-i18n')&&!el.hasAttribute('data-i18n-project')){
+ const old=originalCopy.get(el),key=old||el.innerHTML.trim().replace(/\s+/g,' '),pair=supplementaryCopy[key];
+ if(pair){if(!old)originalCopy.set(el,key);const html=lang==='es'?pair[0]:lang==='de'?pair[1]:key;if(el.innerHTML!==html)el.innerHTML=html;return;}
+ }for(const child of [...el.children])visit(child);
+ };visit(root);
+}
+function imageDescription(src){const sketch=SKETCHES.find(item=>item.src===src);if(sketch)return sketch.alt[window.currentLang||'en'];const name=(src||'').split('/').pop().replace(/\.(webp|png|jpg)$/i,'');const terms=[[/sketch/i,['Sketches','Bocetos','Skizzen']],[/moodboard/i,['Moodboard','Panel de referencias','Moodboard']],[/explot|explod/i,['Exploded view','Vista explotada','Explosionsansicht']],[/ambient|context/i,['Use context','Contexto de uso','Nutzungskontext']],[/prototype/i,['Prototype','Prototipo','Prototyp']],[/cmf/i,['Material sample','Muestra de material','Materialmuster']],[/hero/i,['Product overview','Vista general del producto','Produktübersicht']]];const term=terms.find(([re])=>re.test(name))?.[1]||['Product view','Vista del producto','Produktansicht'];return (PROJECTS[window._currentProjectId]?.title||'')+' · '+term[window.currentLang==='es'?1:window.currentLang==='de'?2:0];}
+function trapFocus(e,root){if(e.key!=='Tab')return;const nodes=[...root.querySelectorAll('button:not(:disabled),a[href],[tabindex="0"]')].filter(x=>x.getClientRects().length&&!x.closest('[inert]'));if(!nodes.length)return;const first=nodes[0],last=nodes.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
+function updatePageMetadata(page,id){const project=PROJECTS[id],lang=window.currentLang||'en';const title=page==='sketches'?tri('Sketches','Bocetos','Skizzen'):page==='project'?project.title:page==='about'?tri('About','Sobre mí','Über mich'):page==='contact'?tri('Contact','Contacto','Kontakt'):tri('Industrial Design','Diseño industrial','Industriedesign');document.title=title+' | Nahuel Villar';let meta=document.querySelector('meta[name="description"]');if(!meta){meta=document.createElement('meta');meta.name='description';document.head.append(meta);}meta.content=project?(window.TRANS[lang]?.projects?.[id]?.tagline||project.tagline):tri('Industrial design portfolio of Nahuel Villar. Products, research and prototyping.','Portfolio de diseño industrial de Nahuel Villar. Productos, investigación y prototipado.','Industriedesign-Portfolio von Nahuel Villar. Produkte, Recherche und Prototypen.');let canon=document.querySelector('link[rel="canonical"]');if(!canon){canon=document.createElement('link');canon.rel='canonical';document.head.append(canon);}canon.href='https://nahuelvillar.com'+(page==='home'?'/':page==='project'?'/project/'+id:'/'+page);document.querySelectorAll('#navLinks a').forEach(a=>{if(a.classList.contains('active'))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});}
+function upgradeControls(root){
+ root.querySelectorAll('[onclick]').forEach(el=>{
+ const code=el.getAttribute('onclick'),m=code.match(/^go\('([^']+)'(?:,\s*'([^']+)')?\)/);
+ if(m){const a=el.tagName==='A'?el:document.createElement('a');if(a!==el){for(const attr of el.attributes)a.setAttribute(attr.name,attr.value);a.innerHTML=el.innerHTML;el.replaceWith(a);}a.href=m[1]==='home'?'/':m[1]==='project'?'/project/'+m[2]:'/'+m[1];a.removeAttribute('onclick');a.addEventListener('click',e=>{if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||e.button!==0)return;e.preventDefault();go(m[1],m[2]);});}
+ else if(!['A','BUTTON','INPUT'].includes(el.tagName)){el.setAttribute('role','button');el.tabIndex=0;if(!el.dataset.keyReady){el.dataset.keyReady='true';el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();if(el.hasAttribute('ondblclick'))el.dispatchEvent(new MouseEvent('dblclick',{bubbles:true}));else el.click();}});}}
+ });
+ root.querySelectorAll('[ondblclick]').forEach(el=>{if(el.dataset.keyReady)return;el.tabIndex=0;el.setAttribute('role','button');el.dataset.keyReady='true';el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.dispatchEvent(new MouseEvent('dblclick',{bubbles:true}));}});});
+}
+function enhanceProject(root,lang){
+ applyStaticTranslations(root,lang);upgradeControls(root);
+ root.querySelectorAll('.cmp-section-title,.process-title').forEach(el=>{el.setAttribute('role','heading');el.setAttribute('aria-level','2');});
+ root.querySelectorAll('img').forEach((img,i)=>{img.decoding='async';if(!img.alt)img.alt=imageDescription(img.getAttribute('src'));img.loading=i===0?'eager':'lazy';if(i===0)img.fetchPriority='high';});
+ root.querySelectorAll('.diagram-expand').forEach(b=>b.addEventListener('click',()=>openDiagram(b.closest('.diagram-frame').querySelector('svg'))));
+ const status=root.querySelector('#cmp-grado-level-tag');if(status){status.setAttribute('aria-live','polite');status.setAttribute('aria-atomic','true');_cmpGradoUI(_cmpGrado.level===0);}
+ const hint=root.querySelector('.proj-hint');if(hint)hint.textContent=tri('Drag to explore · Double-click to enlarge','Arrastrá para explorar · Doble clic para ampliar','Ziehen zum Entdecken · Doppelklick zum Vergrößern');
+}
+function openDiagram(svg){if(!svg)return;const dialog=document.createElement('dialog');dialog.className='diagram-dialog';const button=document.createElement('button');button.textContent=localText('Close');button.type='button';button.onclick=()=>dialog.close();const body=document.createElement('div');body.className='diagram-dialog-body';body.append(svg.cloneNode(true));dialog.append(button,body);document.body.append(dialog);dialog.addEventListener('close',()=>dialog.remove());dialog.showModal();button.focus();}
+function renderStakeholderSection(c,lang){
+ const L=(en,es,de)=>tri(en,es,de,lang);
+ const rows=[
+ [L('Pedestrian','Peatón','Fußgänger'),L('No headphones','Sin auriculares','Ohne Kopfhörer'),0],
+ [L('Pedestrian','Peatón','Fußgänger'),L('Using phone','Con teléfono','Am Smartphone'),1],
+ [L('Fellow cyclist','Otro ciclista','Andere Radfahrer'),L('Shared signal code','Código compartido','Gemeinsamer Signalcode'),3],
+ [L('Vulnerable pedestrian','Peatón vulnerable','Schutzbedürftige Person'),L('Partial reception','Recepción parcial','Teilweiser Empfang'),1],
+ [L('Car driver','Conductor de auto','Autofahrer'),L('Inside vehicle','Dentro del vehículo','Im Fahrzeug'),2],
+ [L('Pedestrian','Peatón','Fußgänger'),L('With headphones','Con auriculares','Mit Kopfhörern'),2]];
+ const statuses=[L('Receives','Recibe','Empfängt'),L('Partial','Parcial','Teilweise'),L('No signal','No recibe','Kein Empfang'),L('Shared code','Código compartido','Gemeinsamer Code')];
+ const positions=[[360,76],[590,200],[590,420],[360,546],[130,420],[130,200]];
+ const styles=[['var(--color-text)',''],['#d24a1f','8 5'],['var(--color-muted)','2 6'],['var(--color-text)','8 5']];
+ const svg='<svg viewBox="0 0 720 620" role="img" aria-label="'+c.stk_title+'"><title>'+c.stk_title+'</title><circle cx="360" cy="310" r="215" fill="none" stroke="var(--color-border)"/>'+rows.map((r,i)=>{const [x,y]=positions[i],[color,dash]=styles[r[2]];return '<line x1="360" y1="310" x2="'+x+'" y2="'+y+'" stroke="'+color+'" stroke-width="2" stroke-dasharray="'+dash+'"/>';}).join('')+'<circle cx="360" cy="310" r="74" fill="#d24a1f"/><text x="360" y="303" text-anchor="middle" fill="white" font-size="21" font-weight="700">'+L('Cyclist','Ciclista','Radfahrer')+'</text><text x="360" y="329" text-anchor="middle" fill="white" font-size="15">'+L('Bicycle bell','Campana','Fahrradklingel')+'</text>'+rows.map((r,i)=>{const [x,y]=positions[i],[color]=styles[r[2]];return '<g><rect x="'+(x-112)+'" y="'+(y-44)+'" width="224" height="88" rx="3" fill="var(--color-bg)" stroke="var(--color-border)"/><text x="'+x+'" y="'+(y-16)+'" text-anchor="middle" font-size="16" font-weight="700" fill="var(--color-text)">'+r[0]+'</text><text x="'+x+'" y="'+(y+7)+'" text-anchor="middle" font-size="14" fill="var(--color-muted)">'+r[1]+'</text><text x="'+x+'" y="'+(y+29)+'" text-anchor="middle" font-size="13" font-weight="700" fill="'+color+'">'+statuses[r[2]]+'</text></g>';}).join('')+'</svg>';
+ const env=[[L('Cycling culture','Cultura ciclística','Radfahrkultur'),L('Shared signal code among cyclists','Código de señales compartido entre ciclistas','Gemeinsamer Signalcode unter Radfahrern')],[L('Motor vehicles','Vehículos motorizados','Kraftfahrzeuge'),L('Main noise source · 78–85 dB','Principal fuente de ruido · 78–85 dB','Hauptlärmquelle · 78–85 dB')],[L('Urban infrastructure','Infraestructura urbana','Stadtinfrastruktur'),L('Bike lanes, crossings, speed','Bicisendas, cruces, velocidad','Radwege, Kreuzungen, Geschwindigkeit')],[L('Local regulation','Normativa local','Lokale Vorschriften'),L('Requirements for bicycle bells','Requisitos para las campanas de bicicleta','Anforderungen an Fahrradklingeln')]];
+ return '<section class="cmp-section"><div class="cmp-section-hd"><div class="cmp-section-label">'+c.stk_label+'</div><h2 class="cmp-section-title">'+c.stk_title+'</h2></div><div class="network-layout"><div class="diagram-frame"><div class="network-desktop">'+svg+'</div><div class="network-mobile"><div class="network-source">'+L('Cyclist · Bicycle bell','Ciclista · Campana','Radfahrer · Fahrradklingel')+'</div>'+rows.map(r=>'<div class="network-actor"><strong>'+r[0]+'</strong><span>'+r[1]+'</span><b>'+statuses[r[2]]+'</b></div>').join('')+'</div><button type="button" class="diagram-expand">'+localText('Expand diagram')+'</button></div><aside class="network-context"><h3>'+L('Environmental factors','Factores del entorno','Umgebungsfaktoren')+'</h3>'+env.map(r=>'<div><strong>'+r[0]+'</strong><p>'+r[1]+'</p></div>').join('')+'<h3>'+L('Signal quality','Calidad de señal','Signalqualität')+'</h3>'+statuses.map((s,i)=>'<div class="signal-key"><span style="border-top:2px '+(['solid','dashed','dotted','dashed'][i])+' '+styles[i][0]+'"></span>'+s+'</div>').join('')+'</aside></div></section>';
+}
+function renderJourneyGraph(c,lang){const names=[c.jp_emo_depart,c.jp_emo_riding,c.jp_emo_alert,c.jp_emo_resol,c.jp_emo_arrive];const points=[[170,100],[360,55],[550,185],[740,115],[970,40]];return '<div class="diagram-frame journey-frame"><div class="diagram-scroll" tabindex="0" aria-label="'+c.jp_title+'"><svg viewBox="0 0 1100 270" role="img"><title>'+c.jp_title+'</title><line x1="60" y1="115" x2="1080" y2="115" stroke="var(--color-border)" stroke-dasharray="4 5"/><text x="30" y="48" fill="var(--color-muted)" font-size="22">+</text><text x="30" y="197" fill="var(--color-muted)" font-size="22">−</text><polyline points="'+points.map(p=>p.join(',')).join(' ')+'" fill="none" stroke="#d24a1f" stroke-width="3" stroke-linejoin="round"/>'+points.map(([x,y],i)=>'<line x1="'+x+'" y1="'+(y+10)+'" x2="'+x+'" y2="215" stroke="var(--color-border)"/><circle cx="'+x+'" cy="'+y+'" r="7" fill="#d24a1f"/><text x="'+x+'" y="242" text-anchor="middle" font-size="17" font-weight="600" fill="var(--color-text)">'+names[i]+'</text>').join('')+'</svg></div><button class="diagram-expand" type="button">'+localText('Expand diagram')+'</button></div>';}
+const baseSetLang=window.setLang;
+window.setLang=function(lang){if(!['en','es','de'].includes(lang)||lang===window.currentLang)return;const page=document.querySelector('.page.active'),top=page?.scrollTop||0;const focus=document.activeElement;const focusId=focus?.id;const sections=page?[...page.querySelectorAll('.cmp-section,.split-block,.process-header')]:[];const anchor=sections.filter(x=>x.getBoundingClientRect().top<innerHeight/2).at(-1);const index=sections.indexOf(anchor),offset=anchor?.getBoundingClientRect().top; window._flipCtx?.items.forEach(it=>{clearInterval(it.timer);it.busy=false;});window._flipCtx?.setIsAlt(false);baseSetLang(lang);document.querySelectorAll('#page-home,#page-about,#page-contact').forEach(el=>applyStaticTranslations(el,lang));upgradeControls(document);if(page){const match=page.querySelectorAll('.cmp-section,.split-block,.process-header')[index];page.scrollTop=match&&offset!==undefined?page.scrollTop+match.getBoundingClientRect().top-offset:top;}if(focusId)document.getElementById(focusId)?.focus({preventScroll:true});translateControls();updatePageMetadata(cur,cur==='project'?window._currentProjectId:null);};
+function translateControls(){document.getElementById('navHamburger').setAttribute('aria-label',localText('Menu'));document.getElementById('langGlobeBtn')?.setAttribute('aria-label',localText('Language'));document.getElementById('lbPrev').setAttribute('aria-label',localText('Previous image'));document.getElementById('lbNext').setAttribute('aria-label',localText('Next image'));document.getElementById('lightbox').setAttribute('aria-label',localText('Image gallery'));}
+upgradeControls(document);translateControls();document.querySelectorAll('.page:not(.active)').forEach(el=>el.inert=true);document.getElementById('navMobile').inert=true;document.getElementById('navHamburger').setAttribute('aria-controls','navMobile');document.getElementById('navHamburger').setAttribute('aria-expanded','false');
+
+
+document.getElementById('langDropdown').inert=true;document.getElementById('langGlobeBtn').setAttribute('aria-controls','langDropdown');document.getElementById('langGlobeBtn').setAttribute('aria-expanded','false');
+document.addEventListener('focusin',e=>{const globe=document.getElementById('langGlobe');if(!globe.contains(e.target))closeLangMenu();});
+
+document.querySelector('.nav-logo')?.setAttribute('aria-label','Nahuel Villar');
+let scrollSaveFrame=0;document.querySelectorAll('.page').forEach(page=>page.addEventListener('scroll',()=>{if(!page.classList.contains('active'))return;cancelAnimationFrame(scrollSaveFrame);scrollSaveFrame=requestAnimationFrame(()=>saveRoutePosition());},{passive:true}));
+
+/* Add sketches here with ISO dates. The gallery groups and sorts them automatically. */
+const SKETCHES=[{
+ id:'2026-09-05-01',date:'2026-09-05',src:'/images/sketch-2026-09-05.webp',width:2360,height:1640,
+ alt:{en:'Industrial vehicle sketch in cream, gray and orange.',es:'Boceto de un vehículo industrial en tonos crema, gris y naranja.',de:'Skizze eines Industriefahrzeugs in Creme, Grau und Orange.'}
+}];
+function sortedSketches(){return [...SKETCHES].sort((a,b)=>b.date.localeCompare(a.date)||b.id.localeCompare(a.id));}
+function sketchDate(date,lang){return new Intl.DateTimeFormat(lang==='es'?'es-AR':lang==='de'?'de-DE':'en-US',{dateStyle:'long',timeZone:'UTC'}).format(new Date(date+'T12:00:00Z'));}
+function renderSketches(){
+ const lang=window.currentLang||'en',root=document.getElementById('sketchesContent');
+ const entries=sortedSketches();const groups=new Map();entries.forEach(item=>{const year=item.date.slice(0,4);if(!groups.has(year))groups.set(year,[]);groups.get(year).push(item);});
+ root.replaceChildren();const heading=document.createElement('h1');heading.className='sketches-title';heading.textContent=tri('Sketches','Bocetos','Skizzen');root.append(heading);
+ let imageIndex=0;
+ for(const [year,items]of groups){const section=document.createElement('section');section.className='sketch-year';section.setAttribute('aria-labelledby','sketch-year-'+year);const h2=document.createElement('h2');h2.id='sketch-year-'+year;h2.className='sketch-year-title';h2.textContent=year;section.append(h2);const grid=document.createElement('div');grid.className='sketch-grid'+(items.length===1?' sketch-grid-single':'');
+ for(const item of items){const figure=document.createElement('figure');figure.className='sketch-item';const button=document.createElement('button');button.type='button';button.className='sketch-image-button';button.setAttribute('aria-label',tri('Enlarge sketch','Ampliar boceto','Skizze vergrößern')+' · '+sketchDate(item.date,lang));const img=document.createElement('img');img.src=item.src;img.alt=item.alt[lang];img.width=item.width;img.height=item.height;img.loading=imageIndex++===0?'eager':'lazy';img.decoding='async';button.append(img);button.addEventListener('click',()=>{_curPanels=entries.map(entry=>entry.src);openLightbox(item.src,_curPanels.indexOf(item.src));});const caption=document.createElement('figcaption');const time=document.createElement('time');time.dateTime=item.date;time.textContent=sketchDate(item.date,lang);caption.append(time);figure.append(button,caption);grid.append(figure);}section.append(grid);root.append(section);}
+ const footer=document.createElement('footer');footer.className='sketches-footer';footer.textContent='© '+new Date().getFullYear()+' Nahuel Villar';root.append(footer);
+}
+window.TRANS.es.ui.nav_sketches='Bocetos';window.TRANS.de.ui.nav_sketches='Skizzen';
+const setLangWithSketches=window.setLang;window.setLang=function(lang){const page=document.getElementById('page-sketches'),top=page.scrollTop;setLangWithSketches(lang);document.querySelectorAll('[data-i18n="nav_sketches"]').forEach(el=>el.textContent=tri('Sketches','Bocetos','Skizzen'));if(page.classList.contains('active')){renderSketches();page.scrollTop=top;}};
+
+const INTENT_PARTS=[{"color":"#d24a1f","name":["Pusher","Pulsador","Drücker"],"text":["Aluminium · dyed and sealed anodic oxide layer (Al₂O₃) · thumb actuation","Aluminio · capa de óxido anódico (Al₂O₃) teñida y sellada · accionamiento con el pulgar","Aluminium · gefärbte und versiegelte Eloxalschicht (Al₂O₃) · Daumenbetätigung"]},{"color":"var(--color-text)","name":["Ratchet + cam","Trinquete + leva","Ratsche + Nocken"],"text":["Hardened steel · black oxide with protective sealer · three cam positions","Acero templado · pavonado con sellado protector · tres posiciones de leva","Gehärteter Stahl · brüniert mit Schutzversiegelung · drei Nockenpositionen"]},{"color":"#a8b4bc","name":["Bell shell","Cuerpo de campana","Klangkörper"],"text":["Brass · resonant shell · geometry influences tone and sound decay","Latón · cuerpo resonante · la geometría influye en el tono y el decaimiento sonoro","Messing · schwingender Klangkörper · die Geometrie beeinflusst Ton und Abklingzeit"]},{"color":"#d6e4ec","name":["Dome","Domo","Kuppel"],"text":["Translucent polycarbonate (PC) · protective cover for the mechanism","Policarbonato translúcido (PC) · cubierta protectora del mecanismo","Transluzentes Polycarbonat (PC) · Schutzabdeckung des Mechanismus"]},{"color":"var(--color-text)","name":["Hammer","Martillo","Hammer"],"text":["Hardened steel · black oxide with protective sealer · impact stroke controlled by the cam","Acero templado · pavonado con sellado protector · recorrido de impacto regulado por la leva","Gehärteter Stahl · brüniert mit Schutzversiegelung · durch den Nocken gesteuerter Schlagweg"]},{"color":"var(--color-text)","name":["Clamp","Abrazadera","Klemme"],"text":["Aluminium · dyed and sealed anodic oxide layer (Al₂O₃) · for 22.2 mm handlebars","Aluminio · capa de óxido anódico (Al₂O₃) teñida y sellada · para manubrios de 22,2 mm","Aluminium · gefärbte und versiegelte Eloxalschicht (Al₂O₃) · für Lenker mit 22,2 mm Durchmesser"]},{"color":"var(--color-text)","name":["Return springs","Resortes de retorno","Rückstellfedern"],"text":["Tempered spring steel · black oxide with protective sealer · resets the mechanism when pressing stops","Acero de resorte templado · pavonado con sellado protector · restituye el mecanismo al dejar de pulsar","Vergüteter Federstahl · brüniert mit Schutzversiegelung · Rückstellung nach Ende der Betätigung"]},{"color":"#d24a1f","name":["Screws","Tornillos","Schrauben"],"text":["Steel · PVC plastisol on the heads only · threads remain uncoated","Acero · plastisol de PVC solo en las cabezas · roscas sin recubrimiento plástico","Stahl · PVC-Plastisol nur auf den Köpfen · Gewinde ohne Kunststoffbeschichtung"]}];
+
+function renderIntentParts(lang){const i=lang==='es'?1:lang==='de'?2:0;const note=['Proposed materials and finishes for the concept.','Propuesta de materiales y acabados para el concepto.','Material- und Oberflächenvorschlag für das Konzept.'][i];return '<p style="font-size:.8rem;color:var(--color-muted);margin:0 0 24px;">'+note+'</p><div class="cmp-parts-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px 24px;">'+INTENT_PARTS.map(part=>'<div style="display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--color-border);padding-bottom:14px;min-width:0;"><span aria-hidden="true" style="flex-shrink:0;width:28px;height:28px;background:'+part.color+';border-radius:2px;"></span><div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">'+part.name[i]+'</div><div style="font-size:.78rem;line-height:1.5;color:var(--color-muted);margin-top:4px;">'+part.text[i]+'</div></div></div>').join('')+'</div>';}
+
+supplementaryCopy["Aluminium · Brass · Steel · Polycarbonate · PVC plastisol"]=["Aluminio · Latón · Acero · Policarbonato · Plastisol de PVC","Aluminium · Messing · Stahl · Polycarbonat · PVC-Plastisol"];
 </script>
 </body>
 </html>
