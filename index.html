@@ -696,6 +696,14 @@ a.project-card,a.extra-card-wrap,a.nav-logo,a.nav-back{color:inherit;text-decora
 h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none;}
 
 .process-header>div{min-width:0;}.process-title{overflow-wrap:anywhere;hyphens:auto;}
+
+/* Keep the requested signature effects, with minimal motion. */
+.type-cursor{animation:blink-cursor 1.4s step-end infinite!important;}
+@media(min-width:901px) and (any-hover:hover) and (any-pointer:fine){.image-trail-layer{display:block;}}
+@media(prefers-reduced-motion:reduce){
+ .image-trail-item,.image-trail-item.is-visible,.image-trail-item.is-hiding{transform:translate(-50%,-50%);transition:opacity .25s ease!important;}
+}
+
 </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFJGQKXNL"></script>
@@ -3636,7 +3644,7 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   document.addEventListener('mouseenter', ()=>{ cross.style.opacity=''; });
 })();
 
-/* ── DEBUG About trail only: mock cards, no images ── */
+/* About render trail */
 (function(){
   const layer = document.getElementById('imageTrailLayer');
   const aboutPage = document.getElementById('page-about');
@@ -3676,6 +3684,7 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   }
   var _aboutObserver = new MutationObserver(function(){
     if(aboutPage.classList.contains('active')) preloadTrailImages();
+    else clearTrail();
   });
   _aboutObserver.observe(aboutPage, { attributes:true, attributeFilter:['class'] });
 
@@ -3699,8 +3708,12 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
 
     const blocked = document.querySelectorAll('.nav, .nav-mobile, .about-photo-stack, .about-bio, .about-cv');
     for(const el of blocked){
+      const style = getComputedStyle(el);
+      if(style.display === 'none' || style.visibility === 'hidden' || el.closest('[inert]')) continue;
       const rect = el.getBoundingClientRect();
-      if(pointInsideRect(e.clientX, e.clientY, rect, 8)) return true;
+      // Reserve the complete thumbnail, its caption and its fade movement.
+      if(e.clientX + 105 > rect.left && e.clientX - 105 < rect.right &&
+         e.clientY + 90 > rect.top && e.clientY - 155 < rect.bottom) return true;
     }
     return false;
   }
@@ -3742,6 +3755,7 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
     card.innerHTML = '<div class="image-trail-file">' + label + '</div>';
     card.appendChild(visual);
 
+    while(layer.childElementCount >= 5) layer.firstElementChild.remove();
     layer.appendChild(card);
 
     requestAnimationFrame(() => card.classList.add('is-visible'));
@@ -3750,7 +3764,7 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   }
 
   document.addEventListener('mousemove', function(e){
-    if(window.innerWidth <= 900) return;
+    if(window.innerWidth <= 900 || !matchMedia('(any-hover:hover) and (any-pointer:fine)').matches) return;
     if(!aboutIsActive()) return;
     if(isBlockedZone(e)) return;
 
@@ -3777,6 +3791,7 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
     lastY = null;
   }
 
+  window.addEventListener('scroll', clearTrail, {passive:true,capture:true});
   window.addEventListener('resize', clearTrail);
   window.addEventListener('popstate', clearTrail);
 })();
