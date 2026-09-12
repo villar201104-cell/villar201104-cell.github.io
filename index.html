@@ -4288,56 +4288,7 @@ document.querySelector('.nav-logo')?.setAttribute('aria-label','Nahuel Villar');
 let scrollSaveFrame=0;document.querySelectorAll('.page').forEach(page=>page.addEventListener('scroll',()=>{if(!page.classList.contains('active'))return;cancelAnimationFrame(scrollSaveFrame);scrollSaveFrame=requestAnimationFrame(()=>saveRoutePosition());},{passive:true}));
 
 /* Add sketches here with ISO dates. The gallery groups and sorts them automatically. */
-const SKETCHES=[
-  {
-    "id": "2026-09-10-01",
-    "date": "2026-09-10",
-    "src": "/images/sketch-2026-09-10.webp",
-    "width": 2360,
-    "height": 1640,
-    "alt": {
-      "en": "Exosuit sketch study in cream, gray and orange.",
-      "es": "Estudio en boceto de un exoesqueleto en tonos crema, gris y naranja.",
-      "de": "Entwurfsskizze eines Exoskeletts in Creme, Grau und Orange."
-    }
-  },
-  {
-    "id": "2026-09-07-01",
-    "date": "2026-09-07",
-    "src": "/images/sketch-2026-09-07.webp",
-    "width": 2360,
-    "height": 1640,
-    "alt": {
-      "en": "Sketch study of a cargo drone in cream, gray and orange.",
-      "es": "Estudio en boceto de un dron de carga en tonos crema, gris y naranja.",
-      "de": "Entwurfsskizze einer Frachtdrohne in Creme, Grau und Orange."
-    }
-  },
-  {
-    "id": "2026-09-05-01",
-    "date": "2026-09-05",
-    "src": "/images/sketch-2026-09-05.webp",
-    "width": 2360,
-    "height": 1640,
-    "alt": {
-      "en": "Industrial vehicle sketch in cream, gray and orange.",
-      "es": "Boceto de un vehículo industrial en tonos crema, gris y naranja.",
-      "de": "Skizze eines Industriefahrzeugs in Creme, Grau und Orange."
-    }
-  },
-  {
-    "id": "2026-08-28-01",
-    "date": "2026-08-28",
-    "src": "/images/sketch-2026-08-28.webp",
-    "width": 2360,
-    "height": 1640,
-    "alt": {
-      "en": "Six form studies of a handle in dark gray with orange details.",
-      "es": "Seis exploraciones de forma de un mango en gris oscuro con detalles naranjas.",
-      "de": "Sechs Formstudien eines Griffs in Dunkelgrau mit orangefarbenen Details."
-    }
-  }
-];
+const SKETCHES=[{"id":"2026-09-12-01","date":"2026-09-12","src":"/images/sketch-2026-09-12.webp","width":2360,"height":1640,"alt":{"en":"Sports car sketches exploring side profile, proportions and body details.","es":"Bocetos de un auto deportivo que exploran el perfil lateral, las proporciones y los detalles de la carrocería.","de":"Sportwagenskizzen zur Untersuchung von Seitenprofil, Proportionen und Karosseriedetails."}},{"id":"2026-09-10-01","date":"2026-09-10","src":"/images/sketch-2026-09-10.webp","width":2360,"height":1640,"alt":{"en":"Exosuit sketch study in cream, gray and orange.","es":"Estudio en boceto de un exoesqueleto en tonos crema, gris y naranja.","de":"Entwurfsskizze eines Exoskeletts in Creme, Grau und Orange."}},{"id":"2026-09-07-01","date":"2026-09-07","src":"/images/sketch-2026-09-07.webp","width":2360,"height":1640,"alt":{"en":"Sketch study of a cargo drone in cream, gray and orange.","es":"Estudio en boceto de un dron de carga en tonos crema, gris y naranja.","de":"Entwurfsskizze einer Frachtdrohne in Creme, Grau und Orange."}},{"id":"2026-09-05-01","date":"2026-09-05","src":"/images/sketch-2026-09-05.webp","width":2360,"height":1640,"alt":{"en":"Industrial vehicle sketch in cream, gray and orange.","es":"Boceto de un vehículo industrial en tonos crema, gris y naranja.","de":"Skizze eines Industriefahrzeugs in Creme, Grau und Orange."}},{"id":"2026-08-28-01","date":"2026-08-28","src":"/images/sketch-2026-08-28.webp","width":2360,"height":1640,"alt":{"en":"Six form studies of a handle in dark gray with orange details.","es":"Seis exploraciones de forma de un mango en gris oscuro con detalles naranjas.","de":"Sechs Formstudien eines Griffs in Dunkelgrau mit orangefarbenen Details."}}];
 function sortedSketches(){return [...SKETCHES].sort((a,b)=>b.date.localeCompare(a.date)||b.id.localeCompare(a.id));}
 function sketchDate(date,lang){return new Intl.DateTimeFormat(lang==='es'?'es-AR':lang==='de'?'de-DE':'en-US',{dateStyle:'long',timeZone:'UTC'}).format(new Date(date+'T12:00:00Z'));}
 function renderSketches(){
