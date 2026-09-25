@@ -1480,7 +1480,7 @@ function buildProject(id) {
       cmf_high:'High', cmf_med:'Medium', cmf_low:'Low', cmf_vhigh:'Very high',
       cmf_none:'None', cmf_vlow:'Very low',
       cmf_dir_lbl:'Selected direction',
-      cmf_dir:"<strong>Brass</strong> for the resonant shell and <strong>hardened steel</strong> for the ratchet, cam and hammer. The pusher and clamp use anodised aluminium; the translucent dome uses polycarbonate. Tempered spring steel provides the return action, and PVC plastisol coats the screw heads.",
+      cmf_dir:"<strong>Brass</strong> for the resonant shell and <strong>hardened steel</strong> for the ratchet, cam and hammer. The aluminium pusher is dip-coated in PVC plastisol; the clamp uses anodised aluminium and the translucent dome uses polycarbonate. Tempered spring steel provides the return action, and PVC plastisol coats the screw heads.",
       prop_label:'Design Phase · Proposal',
       prop_title:'Intent · <em style="font-style:normal;color:#d24a1f;">design proposal</em>',
       stat_levels:'signal levels', stat_weight:'estimated weight', stat_mech:'mechanical · no battery',
@@ -1670,7 +1670,7 @@ function buildProject(id) {
       cmf_high:'Alta', cmf_med:'Media', cmf_low:'Baja', cmf_vhigh:'Muy alta',
       cmf_none:'Nula', cmf_vlow:'Muy bajo',
       cmf_dir_lbl:'Dirección seleccionada',
-      cmf_dir:"<strong>Latón</strong> para el cuerpo resonante y <strong>acero templado</strong> para el trinquete, la leva y el martillo. El pulsador y la abrazadera son de aluminio anodizado; el domo translúcido, de policarbonato. Los resortes de acero templado restituyen el mecanismo y las cabezas de los tornillos llevan plastisol de PVC.",
+      cmf_dir:"<strong>Latón</strong> para el cuerpo resonante y <strong>acero templado</strong> para el trinquete, la leva y el martillo. El pulsador de aluminio lleva un recubrimiento por inmersión en plastisol de PVC; la abrazadera es de aluminio anodizado y el domo translúcido, de policarbonato. Los resortes de acero templado restituyen el mecanismo y las cabezas de los tornillos llevan plastisol de PVC.",
       prop_label:'Fase de Diseño · Propuesta',
       prop_title:'Intent · <em style="font-style:normal;color:#d24a1f;">propuesta de diseño</em>',
       stat_levels:'niveles de señal', stat_weight:'peso estimado', stat_mech:'mecánico · sin batería',
@@ -1860,7 +1860,7 @@ function buildProject(id) {
       cmf_high:'Hoch', cmf_med:'Mittel', cmf_low:'Niedrig', cmf_vhigh:'Sehr hoch',
       cmf_none:'Keine', cmf_vlow:'Sehr niedrig',
       cmf_dir_lbl:'Gewählte Richtung',
-      cmf_dir:"<strong>Messing</strong> für den Klangkörper und <strong>gehärteter Stahl</strong> für Ratsche, Nocken und Hammer. Drücker und Klemme bestehen aus eloxiertem Aluminium, die transluzente Kuppel aus Polycarbonat. Vergüteter Federstahl übernimmt die Rückstellung; die Schraubenköpfe erhalten eine PVC-Plastisolbeschichtung.",
+      cmf_dir:"<strong>Messing</strong> für den Klangkörper und <strong>gehärteter Stahl</strong> für Ratsche, Nocken und Hammer. Der Aluminiumdrücker erhält eine PVC-Plastisol-Tauchbeschichtung; die Klemme besteht aus eloxiertem Aluminium und die transluzente Kuppel aus Polycarbonat. Vergüteter Federstahl übernimmt die Rückstellung; die Schraubenköpfe erhalten eine PVC-Plastisolbeschichtung.",
       prop_label:'Designphase · Vorschlag',
       prop_title:'Intent · <em style="font-style:normal;color:#d24a1f;">Designvorschlag</em>',
       stat_levels:'Signalpegel', stat_weight:'geschätztes Gewicht', stat_mech:'mechanisch · keine Batterie',
@@ -2044,9 +2044,9 @@ function buildProject(id) {
     .cmp-img-ph{background:#e8e3da;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#b0a898;}
     .cmp-img-ph svg{opacity:.25;}
     /* ── ANTECEDENTES ── */
-    .cmp-ante-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--color-border);}
+    .cmp-ante-groups{display:grid;gap:24px;}.cmp-ante-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--color-border);}
     @media(max-width:900px){.cmp-ante-grid{grid-template-columns:repeat(3,1fr);}}
-    @media(max-width:560px){.cmp-ante-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:560px){.cmp-ante-grid{grid-template-columns:minmax(0,1fr);}}
     .cmp-ante-group{background:var(--color-bg);}
     .cmp-ante-gh{font-size:.65rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--color-text);padding:clamp(10px,1.5vw,16px);border-bottom:1px solid var(--color-border);}
     .cmp-ante-gh span{color:#d24a1f;margin-right:6px;}
@@ -2334,64 +2334,64 @@ function buildProject(id) {
         <div class="cmp-section-title">${c.ante_title}</div>
       </div>
       <p style="font-size:.85rem;color:var(--color-muted);line-height:1.65;margin-bottom:clamp(18px,2.5vw,30px);max-width:620px;">${c.ante_intro}</p>
-      <div class="cmp-ante-grid">
-        <!-- Row 1: Group headers A + B (3 cols each) -->
-        <div class="cmp-ante-gh" style="grid-column:span 3;"><span>A</span>${c.ante_gh_a}</div>
-        <div class="cmp-ante-gh" style="grid-column:span 3;"><span>B</span>${c.ante_gh_b}</div>
-        <!-- Row 2: A items × 3, B items × 3 -->
-        <div class="cmp-ante-item">
-          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-clicker.webp" alt="Contador manual" style="width:100%;height:100%;object-fit:contain;"></div>
+<div class="cmp-ante-groups">
+<section class="cmp-ante-group"><div class="cmp-ante-gh"><span>A</span>${c.ante_gh_a}</div><div class="cmp-ante-grid">
+<div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-clicker.webp" alt="${c.ante_a1}" style="width:100%;height:100%;object-fit:contain;"></div>
           <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_a1}</div><div class="cmp-ante-txt">${c.ante_a1t}</div></div>
         </div>
-        <div class="cmp-ante-item">
-          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-disparador.webp" alt="Disparador de cámara" style="width:100%;height:100%;object-fit:contain;"></div>
+<div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-disparador.webp" alt="${c.ante_a2}" style="width:100%;height:100%;object-fit:contain;"></div>
           <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_a2}</div><div class="cmp-ante-txt">${c.ante_a2t}</div></div>
         </div>
-        <div class="cmp-ante-item">
-          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-gatillo-moto.webp" alt="Gatillo de moto" style="width:100%;height:100%;object-fit:contain;"></div>
+<div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-gatillo-moto.webp" alt="${c.ante_a3}" style="width:100%;height:100%;object-fit:contain;"></div>
           <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_a3}</div><div class="cmp-ante-txt">${c.ante_a3t}</div></div>
         </div>
-        <div class="cmp-ante-item">
-          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-linterna.webp" alt="Linterna delantera" style="width:100%;height:100%;object-fit:contain;"></div>
+</div></section>
+<section class="cmp-ante-group"><div class="cmp-ante-gh"><span>B</span>${c.ante_gh_b}</div><div class="cmp-ante-grid">
+<div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-linterna.webp" alt="${c.ante_b1}" style="width:100%;height:100%;object-fit:contain;"></div>
           <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_b1}</div><div class="cmp-ante-txt">${c.ante_b1t}</div></div>
         </div>
-        <div class="cmp-ante-item">
-          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-soporte-celular.webp" alt="Soporte de celular" style="width:100%;height:100%;object-fit:contain;"></div>
+<div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-soporte-celular.webp" alt="${c.ante_b2}" style="width:100%;height:100%;object-fit:contain;"></div>
           <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_b2}</div><div class="cmp-ante-txt">${c.ante_b2t}</div></div>
         </div>
-        <div class="cmp-ante-item">
-          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-espejo.webp" alt="Espejo retrovisor" style="width:100%;height:100%;object-fit:contain;"></div>
+<div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-espejo.webp" alt="${c.ante_b3}" style="width:100%;height:100%;object-fit:contain;"></div>
           <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_b3}</div><div class="cmp-ante-txt">${c.ante_b3t}</div></div>
         </div>
-        <!-- Row 3: Group headers C + D -->
-        <div class="cmp-ante-gh" style="grid-column:span 3;border-top:1px solid var(--color-border);"><span>C</span>${c.ante_gh_c}</div>
-        <div class="cmp-ante-gh" style="grid-column:span 3;border-top:1px solid var(--color-border);"><span>D</span>${c.ante_gh_d}</div>
-        <!-- Row 4: C items × 3, D items × 3 -->
-        <div class="cmp-ante-item">
-          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-bocina-auto.webp" alt="Bocina de automóvil" style="width:100%;height:100%;object-fit:contain;"></div>
+</div></section>
+<section class="cmp-ante-group"><div class="cmp-ante-gh"><span>C</span>${c.ante_gh_c}</div><div class="cmp-ante-grid">
+<div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-bocina-auto.webp" alt="${c.ante_c1}" style="width:100%;height:100%;object-fit:contain;"></div>
           <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_c1}</div><div class="cmp-ante-txt">${c.ante_c1t}</div></div>
         </div>
-        <div class="cmp-ante-item">
-          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-silbato.webp" alt="Silbato" style="width:100%;height:100%;object-fit:contain;"></div>
+<div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-silbato.webp" alt="${c.ante_c2}" style="width:100%;height:100%;object-fit:contain;"></div>
           <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_c2}</div><div class="cmp-ante-txt">${c.ante_c2t}</div></div>
         </div>
-        <div class="cmp-ante-item">
-          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-timbre-puerta.webp" alt="Timbre de puerta" style="width:100%;height:100%;object-fit:contain;"></div>
+<div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-timbre-puerta.webp" alt="${c.ante_c3}" style="width:100%;height:100%;object-fit:contain;"></div>
           <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_c3}</div><div class="cmp-ante-txt">${c.ante_c3t}</div></div>
         </div>
-        <div class="cmp-ante-item">
-          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-campana-iglesia.webp" alt="Campana de iglesia" style="width:100%;height:100%;object-fit:contain;"></div>
+</div></section>
+<section class="cmp-ante-group"><div class="cmp-ante-gh"><span>D</span>${c.ante_gh_d}</div><div class="cmp-ante-grid">
+<div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-campana-iglesia.webp" alt="${c.ante_d1}" style="width:100%;height:100%;object-fit:contain;"></div>
           <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_d1}</div><div class="cmp-ante-txt">${c.ante_d1t}</div></div>
         </div>
-        <div class="cmp-ante-item">
-          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-triangulo.webp" alt="Triángulo / agogô" style="width:100%;height:100%;object-fit:contain;"></div>
+<div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-triangulo.webp" alt="${c.ante_d2}" style="width:100%;height:100%;object-fit:contain;"></div>
           <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_d2}</div><div class="cmp-ante-txt">${c.ante_d2t}</div></div>
         </div>
-        <div class="cmp-ante-item">
-          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-cencerro.webp" alt="Cencerro" style="width:100%;height:100%;object-fit:contain;"></div>
+<div class="cmp-ante-item">
+          <div class="cmp-ante-img" style="background:var(--color-bg);"><img src="/images/ante-cencerro.webp" alt="${c.ante_d3}" style="width:100%;height:100%;object-fit:contain;"></div>
           <div class="cmp-ante-body"><div class="cmp-ante-name">${c.ante_d3}</div><div class="cmp-ante-txt">${c.ante_d3t}</div></div>
         </div>
-      </div>
+</div></section>
+</div>
       <div class="cmp-ante-band">
         <div class="cmp-ante-band-lbl">${_cl==='es'?'Lectura cruzada':_cl==='de'?'Querbezug':'Cross-reading'}</div>
         <div class="cmp-ante-band-txt">${c.ante_band}</div>
@@ -4288,7 +4288,7 @@ document.querySelector('.nav-logo')?.setAttribute('aria-label','Nahuel Villar');
 let scrollSaveFrame=0;document.querySelectorAll('.page').forEach(page=>page.addEventListener('scroll',()=>{if(!page.classList.contains('active'))return;cancelAnimationFrame(scrollSaveFrame);scrollSaveFrame=requestAnimationFrame(()=>saveRoutePosition());},{passive:true}));
 
 /* Add sketches here with ISO dates. The gallery groups and sorts them automatically. */
-const SKETCHES=[{"id":"2026-09-15-01","date":"2026-09-15","src":"/images/sketch-2026-09-15.webp","width":2360,"height":1640,"alt":{"en":"Black sports car sketch with a helmeted figure against a red circle.","es":"Boceto de un auto deportivo negro con una figura con casco frente a un círculo rojo.","de":"Skizze eines schwarzen Sportwagens mit einer behelmten Figur vor einem roten Kreis."}},{"id":"2026-09-12-01","date":"2026-09-12","src":"/images/sketch-2026-09-12.webp","width":2360,"height":1640,"alt":{"en":"Sports car sketches exploring side profile, proportions and body details.","es":"Bocetos de un auto deportivo que exploran el perfil lateral, las proporciones y los detalles de la carrocería.","de":"Sportwagenskizzen zur Untersuchung von Seitenprofil, Proportionen und Karosseriedetails."}},{"id":"2026-09-10-01","date":"2026-09-10","src":"/images/sketch-2026-09-10.webp","width":2360,"height":1640,"alt":{"en":"Exosuit sketch study in cream, gray and orange.","es":"Estudio en boceto de un exoesqueleto en tonos crema, gris y naranja.","de":"Entwurfsskizze eines Exoskeletts in Creme, Grau und Orange."}},{"id":"2026-09-07-01","date":"2026-09-07","src":"/images/sketch-2026-09-07.webp","width":2360,"height":1640,"alt":{"en":"Sketch study of a cargo drone in cream, gray and orange.","es":"Estudio en boceto de un dron de carga en tonos crema, gris y naranja.","de":"Entwurfsskizze einer Frachtdrohne in Creme, Grau und Orange."}},{"id":"2026-09-05-01","date":"2026-09-05","src":"/images/sketch-2026-09-05.webp","width":2360,"height":1640,"alt":{"en":"Industrial vehicle sketch in cream, gray and orange.","es":"Boceto de un vehículo industrial en tonos crema, gris y naranja.","de":"Skizze eines Industriefahrzeugs in Creme, Grau und Orange."}},{"id":"2026-08-28-01","date":"2026-08-28","src":"/images/sketch-2026-08-28.webp","width":2360,"height":1640,"alt":{"en":"Six form studies of a handle in dark gray with orange details.","es":"Seis exploraciones de forma de un mango en gris oscuro con detalles naranjas.","de":"Sechs Formstudien eines Griffs in Dunkelgrau mit orangefarbenen Details."}}];
+const SKETCHES=[{"id":"2026-09-23-01","date":"2026-09-23","src":"/images/sketch-2026-09-23.webp","width":2360,"height":1640,"alt":{"en":"Front and rear sketches of the Snake Eyes vehicle concept.","es":"Bocetos de frente y de atrás del vehículo conceptual inspirado en Snake Eyes.","de":"Front- und Heckansichten des von Snake Eyes inspirierten Fahrzeugkonzepts."}},{"id":"2026-09-15-01","date":"2026-09-15","src":"/images/sketch-2026-09-15.webp","width":2360,"height":1640,"alt":{"en":"Black sports car sketch with a helmeted figure against a red circle.","es":"Boceto de un auto deportivo negro con una figura con casco frente a un círculo rojo.","de":"Skizze eines schwarzen Sportwagens mit einer behelmten Figur vor einem roten Kreis."}},{"id":"2026-09-12-01","date":"2026-09-12","src":"/images/sketch-2026-09-12.webp","width":2360,"height":1640,"alt":{"en":"Sports car sketches exploring side profile, proportions and body details.","es":"Bocetos de un auto deportivo que exploran el perfil lateral, las proporciones y los detalles de la carrocería.","de":"Sportwagenskizzen zur Untersuchung von Seitenprofil, Proportionen und Karosseriedetails."}},{"id":"2026-09-10-01","date":"2026-09-10","src":"/images/sketch-2026-09-10.webp","width":2360,"height":1640,"alt":{"en":"Exosuit sketch study in cream, gray and orange.","es":"Estudio en boceto de un exoesqueleto en tonos crema, gris y naranja.","de":"Entwurfsskizze eines Exoskeletts in Creme, Grau und Orange."}},{"id":"2026-09-07-01","date":"2026-09-07","src":"/images/sketch-2026-09-07.webp","width":2360,"height":1640,"alt":{"en":"Sketch study of a cargo drone in cream, gray and orange.","es":"Estudio en boceto de un dron de carga en tonos crema, gris y naranja.","de":"Entwurfsskizze einer Frachtdrohne in Creme, Grau und Orange."}},{"id":"2026-09-05-01","date":"2026-09-05","src":"/images/sketch-2026-09-05.webp","width":2360,"height":1640,"alt":{"en":"Industrial vehicle sketch in cream, gray and orange.","es":"Boceto de un vehículo industrial en tonos crema, gris y naranja.","de":"Skizze eines Industriefahrzeugs in Creme, Grau und Orange."}},{"id":"2026-08-28-01","date":"2026-08-28","src":"/images/sketch-2026-08-28.webp","width":2360,"height":1640,"alt":{"en":"Six form studies of a handle in dark gray with orange details.","es":"Seis exploraciones de forma de un mango en gris oscuro con detalles naranjas.","de":"Sechs Formstudien eines Griffs in Dunkelgrau mit orangefarbenen Details."}}];
 function sortedSketches(){return [...SKETCHES].sort((a,b)=>b.date.localeCompare(a.date)||b.id.localeCompare(a.id));}
 function sketchDate(date,lang){return new Intl.DateTimeFormat(lang==='es'?'es-AR':lang==='de'?'de-DE':'en-US',{dateStyle:'long',timeZone:'UTC'}).format(new Date(date+'T12:00:00Z'));}
 function renderSketches(){
@@ -4303,7 +4303,7 @@ function renderSketches(){
 window.TRANS.es.ui.nav_sketches='Bocetos';window.TRANS.de.ui.nav_sketches='Skizzen';
 const setLangWithSketches=window.setLang;window.setLang=function(lang){const page=document.getElementById('page-sketches'),top=page.scrollTop;setLangWithSketches(lang);document.querySelectorAll('[data-i18n="nav_sketches"]').forEach(el=>el.textContent=tri('Sketches','Bocetos','Skizzen'));if(page.classList.contains('active')){renderSketches();page.scrollTop=top;}};
 
-const INTENT_PARTS=[{"color":"#d24a1f","name":["Pusher","Pulsador","Drücker"],"text":["Aluminium · dyed and sealed anodic oxide layer (Al₂O₃) · thumb actuation","Aluminio · capa de óxido anódico (Al₂O₃) teñida y sellada · accionamiento con el pulgar","Aluminium · gefärbte und versiegelte Eloxalschicht (Al₂O₃) · Daumenbetätigung"]},{"color":"var(--color-text)","name":["Ratchet + cam","Trinquete + leva","Ratsche + Nocken"],"text":["Hardened steel · black oxide with protective sealer · three cam positions","Acero templado · pavonado con sellado protector · tres posiciones de leva","Gehärteter Stahl · brüniert mit Schutzversiegelung · drei Nockenpositionen"]},{"color":"#a8b4bc","name":["Bell shell","Cuerpo de campana","Klangkörper"],"text":["Brass · resonant shell · geometry influences tone and sound decay","Latón · cuerpo resonante · la geometría influye en el tono y el decaimiento sonoro","Messing · schwingender Klangkörper · die Geometrie beeinflusst Ton und Abklingzeit"]},{"color":"#d6e4ec","name":["Dome","Domo","Kuppel"],"text":["Translucent polycarbonate (PC) · protective cover for the mechanism","Policarbonato translúcido (PC) · cubierta protectora del mecanismo","Transluzentes Polycarbonat (PC) · Schutzabdeckung des Mechanismus"]},{"color":"var(--color-text)","name":["Hammer","Martillo","Hammer"],"text":["Hardened steel · black oxide with protective sealer · impact stroke controlled by the cam","Acero templado · pavonado con sellado protector · recorrido de impacto regulado por la leva","Gehärteter Stahl · brüniert mit Schutzversiegelung · durch den Nocken gesteuerter Schlagweg"]},{"color":"var(--color-text)","name":["Clamp","Abrazadera","Klemme"],"text":["Aluminium · dyed and sealed anodic oxide layer (Al₂O₃) · for 22.2 mm handlebars","Aluminio · capa de óxido anódico (Al₂O₃) teñida y sellada · para manubrios de 22,2 mm","Aluminium · gefärbte und versiegelte Eloxalschicht (Al₂O₃) · für Lenker mit 22,2 mm Durchmesser"]},{"color":"var(--color-text)","name":["Return springs","Resortes de retorno","Rückstellfedern"],"text":["Tempered spring steel · black oxide with protective sealer · resets the mechanism when pressing stops","Acero de resorte templado · pavonado con sellado protector · restituye el mecanismo al dejar de pulsar","Vergüteter Federstahl · brüniert mit Schutzversiegelung · Rückstellung nach Ende der Betätigung"]},{"color":"#d24a1f","name":["Screws","Tornillos","Schrauben"],"text":["Steel · PVC plastisol on the heads only · threads remain uncoated","Acero · plastisol de PVC solo en las cabezas · roscas sin recubrimiento plástico","Stahl · PVC-Plastisol nur auf den Köpfen · Gewinde ohne Kunststoffbeschichtung"]}];
+const INTENT_PARTS=[{"color":"#d24a1f","name":["Pusher","Pulsador","Drücker"],"text":["Aluminium · PVC plastisol dip coating · thumb actuation","Aluminio · recubrimiento por inmersión en plastisol de PVC · accionamiento con el pulgar","Aluminium · PVC-Plastisol-Tauchbeschichtung · Daumenbetätigung"]},{"color":"var(--color-text)","name":["Ratchet + cam","Trinquete + leva","Ratsche + Nocken"],"text":["Hardened steel · black oxide with protective sealer · three cam positions","Acero templado · pavonado con sellado protector · tres posiciones de leva","Gehärteter Stahl · brüniert mit Schutzversiegelung · drei Nockenpositionen"]},{"color":"#a8b4bc","name":["Bell shell","Cuerpo de campana","Klangkörper"],"text":["Brass · resonant shell · geometry influences tone and sound decay","Latón · cuerpo resonante · la geometría influye en el tono y el decaimiento sonoro","Messing · schwingender Klangkörper · die Geometrie beeinflusst Ton und Abklingzeit"]},{"color":"#d6e4ec","name":["Dome","Domo","Kuppel"],"text":["Translucent polycarbonate (PC) · protective cover for the mechanism","Policarbonato translúcido (PC) · cubierta protectora del mecanismo","Transluzentes Polycarbonat (PC) · Schutzabdeckung des Mechanismus"]},{"color":"var(--color-text)","name":["Hammer","Martillo","Hammer"],"text":["Hardened steel · black oxide with protective sealer · impact stroke controlled by the cam","Acero templado · pavonado con sellado protector · recorrido de impacto regulado por la leva","Gehärteter Stahl · brüniert mit Schutzversiegelung · durch den Nocken gesteuerter Schlagweg"]},{"color":"var(--color-text)","name":["Clamp","Abrazadera","Klemme"],"text":["Aluminium · dyed and sealed anodic oxide layer (Al₂O₃) · for 22.2 mm handlebars","Aluminio · capa de óxido anódico (Al₂O₃) teñida y sellada · para manubrios de 22,2 mm","Aluminium · gefärbte und versiegelte Eloxalschicht (Al₂O₃) · für Lenker mit 22,2 mm Durchmesser"]},{"color":"var(--color-text)","name":["Return springs","Resortes de retorno","Rückstellfedern"],"text":["Tempered spring steel · black oxide with protective sealer · resets the mechanism when pressing stops","Acero de resorte templado · pavonado con sellado protector · restituye el mecanismo al dejar de pulsar","Vergüteter Federstahl · brüniert mit Schutzversiegelung · Rückstellung nach Ende der Betätigung"]},{"color":"#d24a1f","name":["Screws","Tornillos","Schrauben"],"text":["Steel · PVC plastisol on the heads only · threads remain uncoated","Acero · plastisol de PVC solo en las cabezas · roscas sin recubrimiento plástico","Stahl · PVC-Plastisol nur auf den Köpfen · Gewinde ohne Kunststoffbeschichtung"]}];
 
 function renderIntentParts(lang){const i=lang==='es'?1:lang==='de'?2:0;const note=['Proposed materials and finishes for the concept.','Propuesta de materiales y acabados para el concepto.','Material- und Oberflächenvorschlag für das Konzept.'][i];return '<p style="font-size:.8rem;color:var(--color-muted);margin:0 0 24px;">'+note+'</p><div class="cmp-parts-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px 24px;">'+INTENT_PARTS.map(part=>'<div style="display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--color-border);padding-bottom:14px;min-width:0;"><span aria-hidden="true" style="flex-shrink:0;width:28px;height:28px;background:'+part.color+';border-radius:2px;"></span><div><div style="font-size:.82rem;font-weight:700;color:var(--color-text);">'+part.name[i]+'</div><div style="font-size:.78rem;line-height:1.5;color:var(--color-muted);margin-top:4px;">'+part.text[i]+'</div></div></div>').join('')+'</div>';}
 
