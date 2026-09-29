@@ -96,7 +96,7 @@
   .extra-card-wrap:hover .extra-card-overlay, .extra-card-wrap:focus-visible .extra-card-overlay { background:rgba(10,10,10,.58); }
   .extra-card-meta { transform:translateY(10px); opacity:0; transition:transform .3s var(--ease), opacity .25s; }
   .extra-card-wrap:hover .extra-card-meta, .extra-card-wrap:focus-visible .extra-card-meta { transform:translateY(0); opacity:1; }
-  .extra-card-desc { font-size:.82rem; color:rgba(255,255,255,.7); line-height:1.5; }
+  .extra-card-desc { font-size:.82rem; color:var(--color-bg); line-height:1.5; }
   .extra-card-mobile-label { display:none; padding:10px 0 4px; }
   .addon-placeholder-wrap { cursor:default; }
   .addon-placeholder { position:relative; overflow:hidden; aspect-ratio:7/10; background:var(--color-bg); border:1px solid var(--color-border); }
@@ -122,7 +122,8 @@
   .project-card-wrap:hover .project-card-overlay, .project-card-wrap:focus-visible .project-card-overlay { background:rgba(10,10,10,.58); }
   .project-card-meta { transform:translateY(10px); opacity:0; transition:transform .3s var(--ease), opacity .25s; }
   .project-card-wrap:hover .project-card-meta, .project-card-wrap:focus-visible .project-card-meta { transform:translateY(0); opacity:1; }
-  .card-desc { font-size:.82rem; color:rgba(255,255,255,.7); line-height:1.6; max-width:280px; }
+  .card-hover-label { font-size:.68rem; font-weight:500; letter-spacing:.1em; word-spacing:.08em; text-transform:uppercase; color:var(--color-bg); line-height:1.6; margin:0 0 10px; }
+  .card-desc { font-size:.82rem; color:var(--color-bg); line-height:1.6; max-width:280px; }
 
   /* PROJECT PAGE */
   .proj-header { padding:clamp(56px,7vw,96px) clamp(80px,10vw,160px) clamp(40px,5vw,56px); display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; }
@@ -823,6 +824,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none;}
           <img class="project-card-img" src="/images/hero-home.webp" alt="Intent" style="object-position:center center">
           <div class="project-card-overlay">
             <div class="project-card-meta">
+              <p class="card-hover-label" data-copy="copy-001">Research + ID · 2026</p>
               <p class="card-desc" data-i18n-project="intent">A bicycle bell redesigned to distinguish courtesy from danger.</p>
             </div>
           </div>
@@ -834,6 +836,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none;}
           <img class="project-card-img" src="/images/flujo-hero.webp" alt="Flujo" style="object-position:center 20%">
           <div class="project-card-overlay">
             <div class="project-card-meta">
+              <p class="card-hover-label" data-copy="copy-002">Lighting · 2025</p>
               <p class="card-desc" data-i18n-project="flujo">A wall lamp built on the logic of breath, printed, minimal, meditative.</p>
             </div>
           </div>
@@ -845,6 +848,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none;}
           <img class="project-card-img" src="/images/incline-hero.webp" alt="Incline" style="object-position:center 30%">
           <div class="project-card-overlay">
             <div class="project-card-meta">
+              <p class="card-hover-label" data-copy="copy-003">Product · 2024</p>
               <p class="card-desc" data-i18n-project="incline">A modular planter system that adapts to the geometry of small-city living.</p>
             </div>
           </div>
@@ -856,6 +860,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none;}
           <img class="project-card-img" src="/images/core-hero.webp" alt="Core" style="object-position:right 15%">
           <div class="project-card-overlay">
             <div class="project-card-meta">
+              <p class="card-hover-label" data-copy="copy-004">Product Redesign · 2024</p>
               <p class="card-desc" data-i18n-project="core">Under Armour's performance identity, compressed into a roll-on.</p>
             </div>
           </div>
@@ -871,6 +876,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none;}
             <img loading="lazy" class="extra-card-img" src="/images/pausa-hero.webp" alt="Pausa" style="object-position:center 25%;">
             <div class="extra-card-overlay">
               <div class="extra-card-meta">
+              <p class="card-hover-label" data-copy="copy-006">Furniture · 2024</p>
                 <div class="extra-card-desc" data-i18n-project="pausa">Outdoor furniture that gives permission to stop.</div>
               </div>
             </div>
@@ -882,6 +888,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none;}
             <img loading="lazy" class="extra-card-img" src="/images/promix-hero.webp" alt="Promix" style="object-position:center center;">
             <div class="extra-card-overlay">
               <div class="extra-card-meta">
+              <p class="card-hover-label" data-copy="copy-008">Product Redesign · 2025</p>
                 <div class="extra-card-desc" data-i18n-project="promix">A cap redesign that integrates cable and plug storage into the Philips ProMix hand blender.</div>
               </div>
             </div>
@@ -893,6 +900,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none;}
             <img loading="lazy" class="extra-card-img" src="/images/ypf-hero.webp" alt="Intervalo" style="object-position:center center;">
             <div class="extra-card-overlay">
               <div class="extra-card-meta">
+              <p class="card-hover-label" data-copy="copy-010">Industrial Design · 2026</p>
                 <div class="extra-card-desc" data-i18n-project="intervalo">A self-service retail kiosk that brings the store to the pump.</div>
               </div>
             </div>
@@ -904,6 +912,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none;}
             <img loading="lazy" class="extra-card-img" src="/images/manta-hero.webp" alt="Manta Blast" style="object-position:center center;">
             <div class="extra-card-overlay">
               <div class="extra-card-meta">
+              <p class="card-hover-label" data-copy="copy-012">Product Design · 2024</p>
                 <div class="extra-card-desc" data-i18n-project="mantablast">A water gun shaped by the manta ray: flowing, minimal, 3D printed.</div>
               </div>
             </div>
