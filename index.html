@@ -6076,10 +6076,31 @@ function refineAdditionalCaseStudy(root,lang){
 function refinePortfolioAssets(root, lang) {
   const L=(en,es,de)=>tri(en,es,de,lang);
   if(root.dataset.project==='visor') {
-    const desert=root.querySelector('#visor-dust');
-    const overhead=desert?.querySelector('img[src="/images/visor/renders-2026-10-03/desert-5.webp"]')?.closest('figure');
-    // Hidden from the published sequence; the source render remains available.
-    overhead?.remove();
+    // Stable filenames keep the requested order consistent on every render/language.
+    // Both hidden renders remain in the source collection for future use.
+    for(const file of ['desert-5','snow-3']){
+      root.querySelector('img[src="/images/visor/renders-2026-10-03/'+file+'.webp"]')?.closest('.visor-context')?.remove();
+    }
+    const order=[
+      ['visor-blue-hour','night-sky',[4,5,2,3,1]],
+      ['visor-night','parking',[2,3,1,4]],
+      ['visor-forest','forest',[4,3,1,2]],
+      ['visor-concrete','garage',[3,1,2,4]],
+      ['visor-dust','desert',[1,4,2,3]],
+      ['visor-mountain','snow',[2,4,1]]
+    ];
+    let previous=root.querySelector('#visor-studio');
+    for(const [id,prefix,numbers] of order){
+      const section=root.querySelector('#'+id);
+      if(!section)continue;
+      for(const number of numbers){
+        const image=section.querySelector('img[src="/images/visor/renders-2026-10-03/'+prefix+'-'+number+'.webp"]');
+        const figure=image?.closest('.visor-context');
+        if(figure)section.append(figure);
+      }
+      if(previous)previous.after(section);
+      previous=section;
+    }
   }
   if(root.dataset.project!=='intent')return;
   const grid=root.querySelector('.cmp-cmf-grid');
