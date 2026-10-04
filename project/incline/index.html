@@ -947,8 +947,6 @@ html[data-input-mode="keyboard"] .page { transition:none; }
  .case-study .split-right,.case-study .split-right.flip{order:2;aspect-ratio:auto}
 }
 
-/* Mirror the third blue-hour render, preserving the original image and resolution. */
-.visor-context > img[src="/images/visor/renders-2026-10-03/night-sky-3.webp"]{transform:scaleX(-1)}
 .cmf-image-note{font-size:.75rem;line-height:1.5;color:var(--color-muted);margin:10px 0 20px}#intent-cmf{scroll-margin-top:80px}
 /* Keep the decision image flush with its row, without stretching the artwork. */
 .case-study .case-key-decisions{align-items:stretch;scroll-margin-top:64px}
@@ -6082,7 +6080,7 @@ function refinePortfolioAssets(root, lang) {
       root.querySelector('img[src="/images/visor/renders-2026-10-03/'+file+'.webp"]')?.closest('.visor-context')?.remove();
     }
     const order=[
-      ['visor-blue-hour','night-sky',[4,5,2,3,1]],
+      ['visor-blue-hour','night-sky',[4,5,3,2,1]],
       ['visor-night','parking',[2,3,1,4]],
       ['visor-forest','forest',[4,3,1,2]],
       ['visor-concrete','garage',[3,1,2,4]],
