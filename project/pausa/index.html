@@ -965,9 +965,58 @@ html[data-input-mode="keyboard"] .page { transition:none; }
  .case-study .case-key-decisions .split-body{max-width:68ch}
  .case-study .case-key-decisions .split-right{order:2;aspect-ratio:4/3}
 }
-</style><style>
-.visor-sketch,.case-sketch-drawing{position:relative;scroll-margin-top:80px}
-.case-sketch-drawing{margin:0}.case-sketch-drawing>img{display:block;width:100%;height:auto!important}.sketch-drawing-preview{position:absolute;top:0;left:0;display:block;width:100%;height:auto;pointer-events:none}
+
+/* Continue the same project language in Pausa, Core and ProMix. */
+.case-additional .proj-desc{padding-bottom:28px}
+.case-additional .case-editorial-row{align-items:stretch;scroll-margin-top:80px}
+.case-additional .case-editorial-row .split-left{padding:clamp(28px,3vw,52px) clamp(28px,4vw,70px)}
+.case-additional .case-editorial-row .split-tag{margin-bottom:12px}
+.case-additional .case-editorial-row .split-h{font-size:clamp(24px,2.2vw,34px);line-height:1.2;margin-bottom:20px}
+.case-additional .case-editorial-row .split-body{max-width:58ch;font-size:clamp(.9rem,1vw,1rem);line-height:1.65}
+.case-additional .case-editorial-row .split-body p{margin-bottom:16px}
+.case-additional .case-editorial-row .split-body p:last-child{margin-bottom:0}
+.case-additional .case-editorial-row .split-specs{margin-top:22px;padding-top:18px;gap:14px 24px}
+.case-additional .case-editorial-row .split-right{position:relative;aspect-ratio:4/3;align-self:stretch}
+.case-additional .case-editorial-row .split-right img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
+.case-additional .case-open-prototypes{padding:clamp(56px,7vw,104px) var(--case-gutter);border:0!important;scroll-margin-top:64px}
+.case-additional .case-prototype-intro{margin-bottom:clamp(32px,4vw,56px)}
+.case-additional .case-prototype-intro h2{font-family:var(--font-display);font-size:clamp(28px,3.3vw,46px);font-weight:600;letter-spacing:-.035em;line-height:1.15;margin:0 0 16px}
+.case-additional .case-prototype-intro>div{max-width:62ch!important;font-size:1rem!important;line-height:1.65!important}
+.case-additional .case-open-process{display:grid;grid-template-columns:repeat(var(--process-columns),minmax(0,1fr));gap:clamp(24px,4vw,64px);align-items:start;border:0;background:none}
+.case-additional .case-process-stage{background:none;border:0;min-width:0}
+.case-additional .case-process-stage .proto-item-img{padding:0;height:clamp(340px,42vw,600px);display:flex;align-items:center;justify-content:center;overflow:visible!important}
+.case-additional[data-project="core"] .case-process-stage .proto-item-img{height:auto;aspect-ratio:2400/2979}
+.case-additional .case-process-stage .proto-item-img img{width:auto!important;height:100%!important;max-width:100%;aspect-ratio:auto!important;object-fit:contain!important;display:block}
+.case-additional .case-process-stage .proto-item-text{padding:24px 0 0;gap:14px;flex:initial}
+.case-additional .case-process-stage h3{margin:0;font-family:var(--font-display);font-size:clamp(21px,2vw,28px);font-weight:500;line-height:1.2;letter-spacing:-.02em}
+.case-additional .case-process-stage h3 span{display:block;margin-top:8px;font-size:.82rem!important;font-family:var(--font-body);line-height:1.5}
+.case-additional .case-process-stage .proto-item-text>div{font-size:.95rem!important;line-height:1.7!important;max-width:52ch}
+@media(max-width:1100px){
+ .case-additional .case-editorial-row{grid-template-columns:1fr}
+ .case-additional .case-editorial-row .split-left{order:1;padding:36px 24px}
+ .case-additional .case-editorial-row .split-body{max-width:68ch}
+ .case-additional .case-editorial-row .split-right{order:2;aspect-ratio:4/3}
+}
+@media(max-width:640px){
+ .case-additional .case-open-process{grid-template-columns:1fr!important;gap:44px}
+ .case-additional .case-process-stage .proto-item-img{height:auto;max-height:none;aspect-ratio:auto}
+ .case-additional .case-process-stage .proto-item-img img{width:100%!important;height:auto!important;max-height:75vh}
+ .case-additional[data-project="core"] .case-process-stage .proto-item-img{aspect-ratio:auto}
+ .case-additional .case-open-prototypes{padding-inline:24px}
+}
+.case-additional:not([data-project="core"]) .case-process-stage{--prototype-height:clamp(340px,42vw,600px)}
+.case-additional:not([data-project="core"]) .case-process-stage .proto-item-text{align-self:center;width:100%;max-width:calc(var(--prototype-height)*var(--stage-ratio,1))}
+@media(max-width:640px){
+ .case-additional:not([data-project="core"]) .case-process-stage .proto-item-text{max-width:none}
+}
+</style><style>.visor-sketch,.case-sketch-drawing{position:relative;scroll-margin-top:80px}
+.case-sketch-drawing{margin:0}
+.case-sketch-drawing>img{display:block;width:100%;height:auto!important}
+.sketch-drawing-preview{position:absolute;top:0;left:0;display:block;width:100%;height:auto;pointer-events:none}
+[data-sketch-drawing]:is([data-drawing-state="waiting"],[data-drawing-state="loading"],[data-drawing-state="drawing"],[data-drawing-state="paused"],[data-drawing-state="review-frame"])>img{opacity:0!important;transition:none!important}
+.sketch-drawing-initial{display:none;position:absolute;inset:0;pointer-events:none;background-color:var(--sketch-paper,var(--color-bg));background-size:100% 100%;background-repeat:no-repeat}
+[data-sketch-drawing]:is([data-drawing-state="waiting"],[data-drawing-state="loading"])>.sketch-drawing-initial{display:block}
+.sketch-drawing-initial>img{width:100%;height:100%;display:block;object-fit:contain;mask-mode:luminance;mask-size:100% 100%;mask-repeat:no-repeat}
 </style></head>
 <body>
 <script>document.addEventListener('DOMContentLoaded',function(){ window.dispatchEvent(new CustomEvent('intro-done')); });</script>
@@ -5936,14 +5985,101 @@ function setupProjectMedia(root){
  root.querySelectorAll('video[data-video-src]').forEach(video=>projectVideoObserver.observe(video));
 }
 matchMedia('(max-width:900px)').addEventListener('change',()=>updateGalleryHint());
+// Extend the established case-study layout to the remaining product projects.
+// All imagery, technical evidence, route names and project titles stay in place.
+function refineAdditionalCaseStudy(root,lang){
+  const id=root.dataset.project,L=(en,es,de)=>tri(en,es,de,lang);
+  root.classList.add('case-additional');
+  const copy={
+    pausa:[
+      [
+        L('EASE, a stool, anchors the collection. DWELL, a side table, holds a coffee or a book; LINGER, a magazine rack, keeps reading within reach. Each piece works independently, while their proportions and material language create a coherent set.',
+          'EASE, un taburete, es la pieza principal. DWELL, una mesa auxiliar, sostiene un café o un libro; LINGER, un revistero, mantiene la lectura al alcance. Cada pieza funciona por separado y sus proporciones y materiales construyen un conjunto coherente.',
+          'Der Hocker EASE bildet den Ausgangspunkt. Der Beistelltisch DWELL bietet Platz für Kaffee oder ein Buch; der Zeitschriftenhalter LINGER hält Lektüre griffbereit. Jede Einheit funktioniert für sich, während Proportionen und Materialien die Kollektion verbinden.'),
+        L('The names describe states rather than objects: ease, dwell, linger. Together, the three pieces make room for a pause without prescribing how to spend it.',
+          'Los nombres describen estados, más que objetos: ease, dwell, linger. Las tres piezas crean un espacio para la pausa sin definir cómo ocuparla.',
+          'Die Namen bezeichnen Zustände statt Objekte: ease, dwell, linger. Gemeinsam schaffen die drei Möbel Raum für eine Pause, ohne deren Ablauf vorzugeben.')
+      ],[
+        L('Myke’s material vocabulary defined the brief. Every frame uses 40 × 20 mm aluminum profiles, welded, ground and powder-coated for weather resistance. Finishing the joints makes the structure read as a continuous element at a smaller scale.',
+          'Los materiales de Myke definieron la consigna. Las estructuras usan perfiles de aluminio de 40 × 20 mm, soldados, desbastados y pintados en polvo para resistir la intemperie. La terminación de las uniones permite leer cada estructura como un elemento continuo a menor escala.',
+          'Mykes Materialpalette bestimmte die Aufgabe. Alle Rahmen bestehen aus Aluminiumprofilen von 40 × 20 mm, verschweißt, verschliffen und zum Wetterschutz pulverbeschichtet. Die bearbeiteten Verbindungen lassen die Struktur auch im kleineren Maßstab durchgehend wirken.'),
+        L('UV- and weather-resistant nautical fabric forms the seat of EASE and the storage surface of LINGER, adding warmth against the aluminum. DWELL uses a dense, heat-resistant Dekton top, consistent with the existing catalog. No material substitutions were made.',
+          'La tela náutica, resistente al sol y la intemperie, forma el asiento de EASE y la superficie de guardado de LINGER, aportando calidez frente al aluminio. DWELL incorpora una tapa de Dekton, densa y resistente al calor, en continuidad con el catálogo. No se sustituyeron materiales.',
+          'UV- und wetterbeständiger Marine-Stoff bildet die Sitzfläche von EASE und die Ablage von LINGER und ergänzt das Aluminium durch Wärme. DWELL erhält eine dichte, hitzebeständige Dekton-Platte, passend zum bestehenden Katalog. Die vorgegebenen Materialien bleiben unverändert.')
+      ]
+    ],
+    core:[
+      [
+        L('Core names the first layer of protection, applied before the jersey or equipment. A smooth, tapered upper body conveys lightness, while the hexagonal relief below adds grip and the density of protective armor. Their contrast keeps the form both fluid and controlled.',
+          'Core nombra la primera capa de protección, anterior a la camiseta o al equipo. El cuerpo superior, liso y afinado, transmite ligereza; el relieve hexagonal inferior aporta agarre y la densidad de una armadura. El contraste equilibra fluidez y control.',
+          'Core bezeichnet die erste Schutzschicht, noch vor Trikot und Ausrüstung. Der glatte, verjüngte Oberkörper vermittelt Leichtigkeit; das hexagonale Relief darunter schafft Griff und die Dichte einer Schutzpanzerung. Ihr Kontrast verbindet fließende Form und Kontrolle.'),
+        L('The translucent cap keeps the applicator sphere visible when closed. Exposing this functional core connects the name to the product’s form and its role in the daily routine.',
+          'La tapa translúcida mantiene visible la esfera aplicadora incluso cerrada. Mostrar ese núcleo funcional vincula el nombre con la forma y con su lugar en la rutina diaria.',
+          'Die transluzente Kappe lässt die Applikatorkugel auch geschlossen sichtbar. Dieser funktionale Kern verbindet den Namen mit der Form und der Rolle in der täglichen Routine.')
+      ],[
+        L('The hexagonal bas-relief translates sports protective plating into a tactile grip. Sized to receive the fingers naturally, it serves both as the identity marker and as the ergonomic contact surface.',
+          'El bajorrelieve hexagonal traduce las placas de protección deportiva en un agarre táctil. Dimensionado para recibir los dedos de forma natural, funciona como rasgo de identidad y superficie de contacto ergonómica.',
+          'Das hexagonale Relief übersetzt sportliche Schutzplatten in eine griffige Oberfläche. Auf die Finger abgestimmt, dient es zugleich als Identitätsmerkmal und ergonomische Kontaktfläche.'),
+        L('The palette draws on Under Armour product launches: dark steel gray for the PP body and teal exclusively on the sphere. Keeping the body subdued directs attention to the functional core rather than the container.',
+          'La paleta toma como referencia lanzamientos de Under Armour: gris acero oscuro en el cuerpo de PP y verde azulado solo en la esfera. El cuerpo queda en segundo plano para dirigir la atención al núcleo funcional.',
+          'Die Palette orientiert sich an Under-Armour-Produkten: dunkles Stahlgrau für den PP-Körper und Petrol ausschließlich für die Kugel. Der zurückhaltende Körper lenkt den Blick auf den funktionalen Kern.')
+      ],[
+        L('The proposed production system uses blow-molded PP for the hollow body and injection-molded PP for the cap and other parts. Ultrasonic welding joins permanent structural connections without adhesives, keeping one material family. The model shown below was 3D printed to evaluate form and grip.',
+          'La producción propuesta utiliza PP soplado para el cuerpo hueco y PP inyectado para la tapa y las demás piezas. La soldadura ultrasónica resuelve las uniones permanentes sin adhesivos, dentro de una misma familia de materiales. El modelo mostrado abajo se imprimió en 3D para evaluar forma y agarre.',
+          'Vorgesehen sind blasgeformtes PP für den Hohlkörper und spritzgegossenes PP für Kappe und weitere Teile. Ultraschallschweißen verbindet die dauerhaften Strukturverbindungen ohne Klebstoff innerhalb einer Materialfamilie. Das unten gezeigte Modell wurde zur Beurteilung von Form und Griff 3D-gedruckt.'),
+        L('Internal cap pins follow an L-shaped neck channel and lock with a quarter-turn bayonet action. The applicator ball is retained by an interference fit, without additional fasteners.',
+          'Los pernos internos de la tapa recorren un canal en L del cuello y traban con un cuarto de vuelta mediante bayoneta. La esfera aplicadora queda retenida por interferencia, sin fijaciones adicionales.',
+          'Innere Kappenstifte folgen einem L-förmigen Halskanal und verriegeln per Bajonett mit einer Vierteldrehung. Die Applikatorkugel wird durch eine Presspassung ohne zusätzliche Befestigung gehalten.')
+      ]
+    ]
+  };
+  const rows=[...root.querySelectorAll('.split-block')];
+  rows.forEach((row,i)=>{
+    row.classList.add('case-editorial-row');
+    const body=row.querySelector('.split-body');
+    if(copy[id]?.[i]&&body){
+      body.replaceChildren(...copy[id][i].map(text=>{const p=document.createElement('p');p.textContent=text;return p;}));
+    }
+  });
+  const proto=root.querySelector('.proto-wrap');
+  if(proto){
+    proto.classList.add('case-open-prototypes');
+    const introduction=proto.firstElementChild;
+    introduction.classList.add('case-prototype-intro');introduction.removeAttribute('style');
+    const oldTitle=introduction.firstElementChild;
+    const title=document.createElement('h2');title.textContent=oldTitle.textContent;oldTitle.replaceWith(title);
+    const grid=proto.querySelector('.proto-2col,.proto-3col');
+    grid.classList.add('case-open-process');grid.style.setProperty('--process-columns',String(grid.children.length));
+    grid.querySelectorAll('.proto-item').forEach(item=>{
+      const image=item.querySelector('.proto-item-img');
+      const text=item.querySelector('.proto-item-text');
+      const sizes={'pausa-bocetos.webp':[928,1152],'pausa-maqueta.webp':[960,1280],'core-bocetos.webp':[2400,2979],'core-iteration.webp':[2400,2979],'core-proto-physical.webp':[2400,2979],'promix-iteration.webp':[1080,1920],'promix-fittest.webp':[1440,1920]};
+      const img=image.querySelector('img'),size=sizes[img.getAttribute('src').split('/').pop()];
+      if(size){img.width=size[0];img.height=size[1];item.style.setProperty('--stage-ratio',String(size[0]/size[1]));}
+      item.append(image,text);
+      const old=text.firstElementChild,h=document.createElement('h3');h.innerHTML=old.innerHTML;old.replaceWith(h);
+      item.classList.add('case-process-stage');
+    });
+  }
+  const nav=document.createElement('nav');nav.className='project-outline case-outline';nav.setAttribute('aria-label',L('On this page','En esta página','Auf dieser Seite'));
+  const chapters=[
+    [root.querySelector('.process-header'),id+'-process',L('Design process','Proceso de diseño','Entwurfsprozess')],
+    [rows[0],id+'-concept',L(id==='pausa'?'The collection':id==='promix'?'The opportunity':'The concept',id==='pausa'?'La colección':id==='promix'?'La oportunidad':'El concepto',id==='pausa'?'Die Kollektion':id==='promix'?'Der Ansatz':'Das Konzept')],
+    [rows.at(-1),id+'-details',L(id==='pausa'?'Materials & construction':id==='promix'?'The solution':'Production',id==='pausa'?'Materiales y construcción':id==='promix'?'La solución':'Producción',id==='pausa'?'Material & Aufbau':id==='promix'?'Die Lösung':'Fertigung')],
+    [proto,id+'-prototyping',L('Prototyping','Prototipado','Prototypenbau')]
+  ];
+  for(const [el,anchor,label] of chapters){if(!el)continue;el.id=anchor;const a=document.createElement('a');a.href='#'+anchor;a.textContent=label;nav.append(a);}
+  root.querySelector('.proj-desc').after(nav);
+}
+
 // User-selected image revisions for the local portfolio preview.
 function refinePortfolioAssets(root, lang) {
   const L=(en,es,de)=>tri(en,es,de,lang);
   if(root.dataset.project==='visor') {
     const desert=root.querySelector('#visor-dust');
     const overhead=desert?.querySelector('img[src="/images/visor/renders-2026-10-03/desert-5.webp"]')?.closest('figure');
-    const first=desert?.querySelector('figure');
-    if(overhead && first && overhead!==first) desert.insertBefore(overhead,first);
+    // Hidden from the published sequence; the source render remains available.
+    overhead?.remove();
   }
   if(root.dataset.project!=='intent')return;
   const grid=root.querySelector('.cmp-cmf-grid');
@@ -5978,7 +6114,7 @@ function refinePortfolioAssets(root, lang) {
 // No research, product claims or source media are generated here.
 function refineCaseStudy(root, lang) {
   const id=root.dataset.project;
-  if(!['intent','flujo','incline'].includes(id)||root.querySelector('[data-case-motion]'))return;
+  if(!['intent','flujo','incline','pausa','core','promix'].includes(id)||root.querySelector('[data-case-motion]'))return;
   root.dataset.caseRefined=id;
   root.classList.add('case-study');
   const L=(en,es,de)=>tri(en,es,de,lang);
@@ -5999,7 +6135,9 @@ function refineCaseStudy(root, lang) {
     button.addEventListener('click',()=>openLightbox('/images/flujo5.webp',0,['/images/flujo5.webp','/images/flujo6.webp']));
     return button;
   }
-  if(id==='flujo'||id==='incline'){
+  if(['pausa','core','promix'].includes(id)){
+    refineAdditionalCaseStudy(root,lang);
+  }else if(id==='flujo'||id==='incline'){
     const process=root.querySelector('.process-header');
     chapter(process,id+'-process',L('Design process','Proceso de diseño','Entwurfsprozess'));
     const splits=[...root.querySelectorAll('.split-block')];
@@ -6225,7 +6363,7 @@ function initSketchDrawing(root,lang){
     figure.id=key;figures.push(figure);
   }
   const keyOf=figure=>figure.dataset.guideKey||figure.querySelector('img').src.match(/sketch-\d+/)?.[0];
-  const running=new Map(),finishedDrawings=new Map(),pending=new Set(),completed=new Set(),guides=new Map();
+  const running=new Map(),finishedDrawings=new Map(),pending=new Set(),completed=new Set(),guides=new Map(),preparations=new Map();
   let observer,preloader;
   const allowed=()=>!document.hidden&&!motion.matches&&!abort.signal.aborted;
   function visible(figure){
@@ -6239,6 +6377,7 @@ function initSketchDrawing(root,lang){
   }
   function clear(){running.forEach((_,figure)=>restore(figure));finishedDrawings.forEach((_,figure)=>restore(figure));}
   function prepare(figure){
+    if(preparations.has(figure))return preparations.get(figure);
     const image=figure.querySelector('img'),key=keyOf(figure);
     image.loading='eager';image.removeAttribute('sizes');
     // Pin the full source at 1x so the former responsive candidate density cannot persist.
@@ -6251,7 +6390,7 @@ function initSketchDrawing(root,lang){
       if(!response.ok)throw new Error('Sketch guide unavailable');return response.json();
     });
     guides.set(key,guidePromise);
-    return Promise.all([guidePromise,image.decode()]).then(async result=>{
+    const preparation=Promise.all([guidePromise,image.decode()]).then(async result=>{
       if(result[0].pixelTimeline){
         if(!result[0]._pixelMap){const map=new Image();map.src='/assets/sketches/'+result[0].pixelTimeline.file+'?v=pixel-strokes-1';await map.decode();result[0]._pixelMap=map;}
         return result;
@@ -6259,6 +6398,7 @@ function initSketchDrawing(root,lang){
       await Promise.all([result[0].lineMask,result[0].toneMask,result[0].staticMask,result[0].washField,result[0].foregroundMask,result[0].backgroundLayer].filter(Boolean).map(file=>{
         const mask=new Image();mask.src='/assets/sketches/'+file+'?v=wash-continuous-2';return mask.decode();
       }));
+      if(abort.signal.aborted)return result;
       if(result[0].backgroundLayer){
         figure.style.backgroundImage='url(/assets/sketches/'+result[0].backgroundLayer+')';
         figure.style.backgroundSize='100% auto';figure.style.backgroundRepeat='no-repeat';
@@ -6266,6 +6406,7 @@ function initSketchDrawing(root,lang){
         image.style.maskMode='luminance';image.style.maskSize='100% 100%';
       }return result;
     });
+    preparations.set(figure,preparation);return preparation;
   }
   async function draw(figure){
     const key=keyOf(figure),existing=running.get(figure);
@@ -6291,26 +6432,30 @@ function initSketchDrawing(root,lang){
       const id='sketch-reveal-'+(++sketchMaskSequence);
       const overlay=el('svg',{viewBox:`0 0 ${data.width} ${data.height}`,class:'sketch-drawing-preview','aria-hidden':'true',focusable:'false'});
       const defs=el('defs'),mask=el('mask',{id,maskUnits:'userSpaceOnUse',maskContentUnits:'userSpaceOnUse',x:0,y:0,width:data.width,height:data.height,'mask-type':'luminance'});
-      mask.append(el('rect',{width:data.width,height:data.height,fill:'#fff'}));
+      mask.append(el('rect',{width:data.width,height:data.height,fill:'#000'}));
       function phase(name,file){
         const maskName=id+'-'+name;
         const selection=el('mask',{id:maskName,maskUnits:'userSpaceOnUse',x:0,y:0,width:data.width,height:data.height,'mask-type':'luminance'});
         selection.append(el('image',{href:'/assets/sketches/'+file+'?v=wash-continuous-2',width:data.width,height:data.height}));defs.append(selection);
-        const group=el('g',{fill:'none',stroke:'#000','stroke-width':data.brushWidth||7,'stroke-linecap':'round','stroke-linejoin':'round',mask:`url(#${maskName})`});
+        const group=el('g',{fill:'none',stroke:'#fff','stroke-width':data.brushWidth||7,'stroke-linecap':'round','stroke-linejoin':'round',mask:`url(#${maskName})`});
         mask.append(group);return group;
       }
       const ink=phase('line',data.lineMask),shade=phase('tone',data.toneMask);
-      if(data.staticMask)phase('static',data.staticMask).append(el('rect',{width:data.width,height:data.height,fill:'#000',stroke:'none'}));
-      const finished=el('g',{fill:'#000',stroke:'none'});mask.append(finished);defs.append(mask);overlay.append(defs);
-      const cover=el('g',{mask:`url(#${id})`});
-      cover.append(el('rect',{width:data.width,height:data.height,fill:data.background||'var(--color-bg)'}));
-      if(data.washField){
-        const washId=id+'-wash';
-        const selection=el('mask',{id:washId,maskUnits:'userSpaceOnUse',x:0,y:0,width:data.width,height:data.height,'mask-type':'luminance'});
-        selection.append(el('image',{href:'/assets/sketches/'+data.washField+'?v=field-1',width:data.width,height:data.height}));defs.append(selection);
-        cover.append(el('rect',{width:data.width,height:data.height,fill:'rgb(125,189,77)',mask:`url(#${washId})`}));
+      if(data.staticMask)phase('static',data.staticMask).append(el('rect',{width:data.width,height:data.height,fill:'#fff',stroke:'none'}));
+      const finished=el('g',{fill:'#fff',stroke:'none'});mask.append(finished);defs.append(mask);overlay.append(defs);
+      // Reveal the artwork itself; never expose the completed image underneath
+      // while external SVG masks are loading or being painted for the first time.
+      overlay.append(el('rect',{width:data.width,height:data.height,fill:data.background||'var(--color-bg)'}));
+      if(data.backgroundLayer)overlay.append(el('image',{href:'/assets/sketches/'+data.backgroundLayer,width:data.width,height:data.height}));
+      const revealed=el('g',{mask:`url(#${id})`});
+      const artwork=el('image',{href:figure.querySelector('img').currentSrc||figure.querySelector('img').src,width:data.width,height:data.height});
+      if(data.foregroundMask){
+        const foregroundId=id+'-foreground';
+        const foreground=el('mask',{id:foregroundId,maskUnits:'userSpaceOnUse',x:0,y:0,width:data.width,height:data.height,'mask-type':'luminance'});
+        foreground.append(el('image',{href:'/assets/sketches/'+data.foregroundMask+'?v=wash-continuous-2',width:data.width,height:data.height}));defs.append(foreground);
+        artwork.setAttribute('mask',`url(#${foregroundId})`);
       }
-      overlay.append(cover);
+      revealed.append(artwork);overlay.append(revealed);
       function tracer(group,paths){
         const frontier=el('path');group.append(frontier);
         const segments=[];let total=0,index=0,drawn=0,partial=0,done=[],chunk=0;
@@ -6356,7 +6501,7 @@ function initSketchDrawing(root,lang){
               if(ms>=phaseOffset){stage.trace(Math.min(1,(ms-phaseOffset)/stage.duration));if(ms<phaseOffset+stage.duration)overlay.dataset.lineStage=stage.name;}
               phaseOffset+=stage.duration;
             }
-            if(ms>=study.lineDuration&&!lineDone){lineDone=true;lines.append(el('polygon',{points,fill:'#000',stroke:'none'}));}
+            if(ms>=study.lineDuration&&!lineDone){lineDone=true;lines.append(el('polygon',{points,fill:'#fff',stroke:'none'}));}
             if(ms>study.lineDuration&&study.shadeDuration){
               const p=Math.min(1,(ms-study.lineDuration)/study.shadeDuration);
               if(hatch)hatch(p);
@@ -6388,16 +6533,31 @@ function initSketchDrawing(root,lang){
         overlay.dataset.phase=local<item.lineDuration?'linework':local<item.lineDuration+item.shadeDuration?'shading':'complete';
         overlay.dataset.progress=String(Math.round(Math.min(1,elapsed/total)*100));
         if(frozen){figure.dataset.drawingState='review-frame';return;}
-        if(elapsed>total)overlay.style.opacity=String(Math.max(0,1-(elapsed-total)/finish));
+        if(elapsed>total){figure.dataset.drawingState='finishing';overlay.style.opacity=String(Math.max(0,1-(elapsed-total)/finish));}
         if(elapsed>=total+finish){completed.add(figure);restore(figure);figure.dataset.drawingState='complete';return;}
         active.frame=requestAnimationFrame(tick);
       }
       active.resume();
     }catch(error){
-      if(!abort.signal.aborted){figure.dataset.drawingState='error';console.warn('Sketch animation could not start:',error);guides.delete(key);}restore(figure);
+      if(!abort.signal.aborted){completed.add(figure);figure.dataset.drawingState='error';console.warn('Sketch animation could not start:',error);guides.delete(key);}restore(figure);
     }finally{pending.delete(figure);}
   }
-  figures.forEach(figure=>{figure.dataset.sketchDrawing='true';if(!figure.id)figure.id='visor-'+keyOf(figure);});
+  figures.forEach(figure=>{
+    const key=keyOf(figure),source=figure.querySelector('img');
+    figure.dataset.sketchDrawing='true';
+    if(!figure.id)figure.id='visor-'+key;
+    // Set the first frame synchronously, before fetch/decode or the first paint.
+    figure.dataset.drawingState=motion.matches?'static':'waiting';
+    figure.style.setProperty('--sketch-paper',key==='flujo-sketch'?'rgb(5,135,191)':'var(--color-bg)');
+    if(!source.hasAttribute('width')){source.width=1920;source.height=1080;}
+    const initial=document.createElement('div');initial.className='sketch-drawing-initial';initial.setAttribute('aria-hidden','true');
+    if(key==='incline-sketch'){
+      initial.style.backgroundImage='url(/assets/sketches/incline-background.svg)';
+      const still=document.createElement('img');still.src=source.getAttribute('src');still.alt='';still.decoding='async';
+      still.style.maskImage='url(/assets/sketches/incline-sketch-static.png)';initial.append(still);
+    }
+    figure.append(initial);
+  });
   function check(){if(allowed())figures.forEach(figure=>{if(visible(figure))draw(figure);});}
   if('IntersectionObserver' in window){
     preloader=new IntersectionObserver(entries=>{for(const e of entries)if(e.isIntersecting){preloader.unobserve(e.target);if(!motion.matches)prepare(e.target).catch(()=>{});}},{root:page,rootMargin:'1400px 0px',threshold:0});
@@ -6411,9 +6571,9 @@ function initSketchDrawing(root,lang){
   page?.addEventListener('scroll',scheduleCheck,{...events,passive:true});
   window.addEventListener('resize',scheduleCheck,events);
   document.addEventListener('visibilitychange',scheduleCheck,events);
-  motion.addEventListener('change',()=>{if(motion.matches)clear();else check();},events);
+  motion.addEventListener('change',()=>{if(motion.matches){clear();figures.forEach(figure=>figure.dataset.drawingState='static');}else{figures.forEach(figure=>{if(!completed.has(figure))figure.dataset.drawingState='waiting';});check();}},events);
   scheduleCheck();
-  return ()=>{abort.abort();cancelAnimationFrame(scheduled);observer?.disconnect();preloader?.disconnect();clear();};
+  return ()=>{abort.abort();cancelAnimationFrame(scheduled);observer?.disconnect();preloader?.disconnect();clear();figures.forEach(figure=>{figure.dataset.drawingState='static';figure.querySelector('.sketch-drawing-initial')?.remove();});};
 }
 
 
