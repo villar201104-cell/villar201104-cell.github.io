@@ -747,7 +747,244 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none;}
   <link rel="preload" as="image" href="/images/incline-hero.webp">
   <link rel="preload" as="image" href="/images/hero-home.webp">
   <link rel="preload" as="image" href="/images/core-hero.webp">
-</head>
+<style id="visor-project-styles">
+/* Reuse Intent's section rhythm and type exactly, scoped to the new project.
+   Header, About, navigation, footer, fonts, colours and breakpoints are inherited. */
+#projContent[data-project="visor"] > .panels-wrap { display:none; }
+.visor-project .cmp-section { padding:clamp(40px,6vw,72px) var(--ph); }
+.visor-project .cmp-section-hd { margin-bottom:clamp(22px,3vw,40px); }
+.visor-project .cmp-section-label { font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--color-muted);margin-bottom:8px;display:block; }
+.visor-project .cmp-section-title { font-size:clamp(28px,4.2vw,52px);font-weight:800;letter-spacing:-.04em;word-spacing:.18em;line-height:1.1;color:var(--color-text);margin:0; }
+.visor-project section { border-top:1px solid var(--color-border);scroll-margin-top:var(--nav-height); }
+.visor-project .visor-heading { padding-bottom:0; }
+.visor-project .visor-intro { max-width:76ch;font-size:clamp(.9rem,1.1vw,1rem);line-height:1.75;color:var(--color-soft);margin:0 0 clamp(24px,3vw,40px); }
+.visor-project .visor-heading:not(:has(.visor-intro)) { padding-bottom:0; }
+/* Direct children span the page's content width, including at 4K, without a
+   viewport-width hack that could exceed the project scroll container. */
+.visor-context,.visor-sketch,.visor-slide { margin:0;width:100%; }
+.visor-context img { display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain; }
+.visor-context + .visor-context { margin-top:2px; }
+.visor-sketch img { display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain; }
+.visor-sketch figcaption { padding:16px var(--ph) clamp(30px,4vw,52px);font-size:.78rem;color:var(--color-muted); }
+.visor-moodboard { --board-width:1040;--offset:0;position:relative;aspect-ratio:1040/585;width:100%;max-width:1440px;margin:0 auto clamp(24px,3vw,40px); }
+.visor-mood-circle { position:absolute;left:calc((303 - var(--offset))/var(--board-width)*100%);top:calc(74/585*100%);width:calc(438/var(--board-width)*100%);aspect-ratio:1;border-radius:50%;background:#bd191b; }
+.visor-moodboard img { position:absolute;left:calc((var(--x) - var(--offset))/var(--board-width)*100%);top:calc(var(--y)/585*100%);width:calc(106/var(--board-width)*100%);height:calc(159/585*100%);object-fit:cover; }
+.visor-stage { width:100%;position:relative;touch-action:pan-y; }
+.visor-slide img { display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain; }
+.visor-slide[hidden] { display:none; }
+.visor-controls { display:flex;align-items:center;gap:18px;padding:18px var(--ph);border-top:1px solid var(--color-border); }
+.visor-controls[hidden] { display:none; }
+.visor-controls button,.visor-arrows button { font-family:var(--font-body);color:var(--color-text);background:transparent;border:1px solid var(--color-border);min-height:44px;cursor:pointer;transition:background .2s var(--ease); }
+.visor-arrows { position:absolute;inset:0;display:flex;justify-content:space-between;align-items:center;padding:0 clamp(12px,3vw,40px);pointer-events:none; }
+.visor-arrows[hidden] { display:none; }
+.visor-arrows button { width:48px;height:48px;font-size:1.5rem;pointer-events:auto;background:var(--color-bg); }
+.visor-arrows button:focus-visible { outline:2px solid #bd191b;outline-offset:4px; }
+.visor-status { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
+.visor-controls .visor-play { margin-left:auto;padding:8px 14px;font-size:.78rem; }
+.visor-controls button:disabled { color:var(--color-muted);cursor:default; }
+.visor-count { font-variant-numeric:tabular-nums;font-size:.75rem;white-space:nowrap; }
+.visor-caption { font-size:.85rem;color:var(--color-soft); }
+.visor-workflow-link { padding:0 var(--ph) clamp(48px,6vw,72px); }
+.visor-workflow-link a { display:inline-flex;align-items:center;justify-content:space-between;gap:28px;max-width:100%;padding:18px 24px;font-family:var(--font-display);font-size:clamp(1rem,1.7vw,1.3rem);font-weight:500;line-height:1.35;background:#bd191b;color:var(--color-bg);border:1px solid #bd191b;transition:background-color 180ms var(--ease),border-color 180ms var(--ease); }
+.visor-workflow-link a span { flex-shrink:0; }
+.visor-workflow-link a:focus-visible { outline:2px solid #bd191b;outline-offset:4px; }
+.visor-workflow-link p { font-size:.78rem;line-height:1.5;color:var(--color-soft);margin-top:14px; }
+@media(hover:hover) { .visor-workflow-link a:hover { background:#a51618;border-color:#a51618; } }
+@media(hover:hover) { .visor-controls button:not(:disabled):hover { background:var(--color-bg-alt); } }
+@media(max-width:640px) {
+  .visor-moodboard { --board-width:640;--offset:200;aspect-ratio:640/585; }
+  .visor-controls { gap:10px;flex-wrap:wrap; }
+  .visor-caption { flex:1;min-width:100px; }
+  .visor-controls .visor-play { order:5;margin-left:0; }
+}
+
+</style>
+<style id="portfolio-motion">
+/* Progressive enhancement: all content remains readable if observers fail. */
+body .fu,body .fu.in {
+  opacity:1;transform:none;transition:none;transition-delay:0s;
+}
+body.js-loaded :is(.split-block,.proto-wrap,.process-closing,.evo-wrap,.origins-grid,.origins-question) {
+  opacity:1;transform:none;transition:none;
+}
+.page { transition-duration:320ms; }
+.visor-workflow-link a span { transition:transform 180ms var(--ease); }
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+  .visor-workflow-link a:hover span { transform:translate(3px,-3px); }
+}
+html[data-input-mode="keyboard"] .page { transition:none; }
+@media(prefers-reduced-motion:reduce) {
+  .page { transition:none!important;transform:none!important; }
+  .type-cursor { animation:none!important;opacity:1; }
+  .image-trail-layer { display:none!important; }
+  .visor-workflow-link a span { transition:none!important;transform:none!important; }
+}
+
+</style>
+<style>/* Evolve the established Space Grotesk / Instrument Sans portfolio system. */
+.case-study{--case-gutter:clamp(24px,6vw,96px);--case-gap:clamp(28px,4.5vw,72px)}
+.case-study:is([data-project="flujo"],[data-project="incline"]) .proj-desc{padding-bottom:28px}
+.case-study .case-outline{padding:0 clamp(24px,10vw,160px) clamp(40px,5vw,64px);gap:8px 28px;border:0}
+.case-study .case-outline a{padding-block:8px;border:0;text-decoration:none;color:var(--color-muted);transition:color 180ms}
+.case-study .case-outline a:hover{color:var(--color-text);text-decoration:underline;text-underline-offset:5px}
+.case-study .origins-grid{background:transparent;gap:var(--case-gap)}
+.case-study .origins-col{border:0}
+.case-study .origins-cross{font-size:1.2rem;margin-top:20px}
+.case-study .evo-title,.case-study .proto-title,.case-study .case-incline-prototypes h2{font-family:var(--font-display);font-size:clamp(28px,3.3vw,46px)!important;letter-spacing:-.035em!important;line-height:1.15;font-weight:600!important}
+.case-study .case-evolution,.case-study .case-prototyping,.case-study .case-incline-prototypes{padding:clamp(60px,8vw,120px) var(--case-gutter);border:0}
+.case-study .evo-header{margin-bottom:48px}
+.case-study .case-evolution-sequence{display:grid;gap:clamp(64px,10vw,144px)}
+.case-study .case-iteration,.case-study .case-takeouts{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:var(--case-gap);align-items:center}
+.case-study .case-evolution-figure{min-width:0;margin:0}
+.case-study .case-evolution-figure img{width:100%;height:auto}
+.case-study .case-process-copy{border:0;padding:0;background:transparent;min-width:0;max-width:46ch}
+.case-study .evo-phase-name{font-family:var(--font-display);font-size:clamp(24px,2.7vw,36px);font-weight:500;line-height:1.15;letter-spacing:-.025em}
+.case-study .evo-phase-sub{margin:10px 0 20px;font-style:normal;color:var(--color-muted)}
+.case-study .evo-desc{font-size:1rem;line-height:1.75;max-width:44ch}
+.case-study .case-takeouts{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.case-study .case-takeouts .case-evolution-figure{padding:0;max-width:none;background:transparent}
+.case-study .case-takeouts img{display:block;max-height:760px;object-fit:contain}
+.case-study .case-technical-notes{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin:36px 0;border-top:1px solid var(--color-border);padding-top:24px}
+.case-study .case-technical-notes dt{font-size:.78rem;color:var(--color-muted);margin-bottom:6px}
+.case-study .case-technical-notes dd{font-family:var(--font-display);font-size:clamp(22px,2.5vw,32px);letter-spacing:-.04em}
+.case-study .case-detail-link{display:inline-flex;align-items:center;min-height:44px;padding:8px 0;background:none;border:0;border-bottom:1px solid currentColor;color:var(--color-text);font:inherit;font-size:.9rem;cursor:pointer;transition:opacity 180ms}
+.case-study .case-detail-link:hover{opacity:.65}
+.case-study .case-prototyping{border-top:1px solid var(--color-border)}
+.case-study .case-prototyping .proto-header{display:block;border:0;padding:0;margin-bottom:52px}
+.case-study .proto-intro{font-size:1rem;line-height:1.65;max-width:52ch;margin-top:16px}
+.case-study .case-prototype-sequence{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(22px,3vw,48px);align-items:stretch;padding-bottom:96px}
+.case-study .case-prototype-stage{min-width:0;position:relative;display:flex;flex-direction:column}
+.case-study .case-prototype-stage:nth-child(2){top:48px}
+.case-study .case-prototype-stage:nth-child(3){top:96px}
+.case-study .case-prototype-media{margin:0;aspect-ratio:4/5;overflow:hidden}
+.case-study .case-prototype-media :is(img,video){width:100%;height:100%;object-fit:cover}
+.case-study .case-prototype-caption{border:0;background:transparent;padding:22px 0 0}
+.case-study .proto-col-h{font-family:var(--font-display);font-size:1.35rem;font-weight:500;letter-spacing:-.02em;margin-bottom:12px}
+.case-study .proto-col-body{font-size:.92rem;line-height:1.7}
+.case-study .case-incline-prototypes .proto-2col{grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,4vw,64px);align-items:start;background:none;border:0}
+.case-study .case-model-stage{background:none;border:0;display:flex;flex-direction:column}
+.case-study .case-model-stage{max-width:none}
+.case-study .case-model-stage:nth-child(2){margin-top:0}
+.case-study .case-model-stage .proto-item-img{padding:0}
+.case-study .case-model-stage .proto-item-text{padding:24px 0 0;gap:16px}
+.case-study .case-model-stage h3{font-size:1.5rem!important;line-height:1.2;font-weight:500!important}
+.case-study .case-model-stage h3 span{display:block;margin-top:6px;font-size:.85rem!important}
+.case-study[data-project="intent"] .cmp-section-title{font-family:var(--font-display);font-weight:600;letter-spacing:-.035em;word-spacing:normal;max-width:25ch}
+.case-study[data-project="intent"] .cmp-section-label{font-weight:500;letter-spacing:.12em}
+.case-study[data-project="intent"] :is(.cmp-typo-grid,.cmp-context-grid,.cmp-cmf-grid){gap:clamp(20px,3vw,40px);background:none;border:0}
+.case-study[data-project="intent"] .cmp-typo-grid{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:44px}
+.case-study[data-project="intent"] .cmp-typo-img{aspect-ratio:3/2;max-height:220px}
+.case-study[data-project="intent"] :is(.cmp-typo-body,.cmp-ctx-body,.cmp-cmf-body){padding:18px 0 0}
+.case-study[data-project="intent"] :is(.cmp-typo-name,.cmp-ctx-name,.cmp-cmf-mat-name){font-size:1.05rem;font-weight:600}
+.case-study[data-project="intent"] .cmp-cmf-mat-tone{font-weight:500;font-size:.7rem;line-height:1.5}
+.case-study .case-findings{display:block;background:transparent;border:0}
+.case-study .case-findings .cmp-hallazgo{display:grid;grid-template-columns:64px minmax(180px,.7fr) minmax(0,1.3fr);column-gap:clamp(20px,3vw,48px);padding:28px 0;border-top:1px solid var(--color-border)}
+.case-study .case-findings .cmp-hallazgo-n{grid-column:1;grid-row:1/3;font-family:var(--font-display);font-size:30px;font-weight:400;color:#d24a1f}
+.case-study .case-findings .cmp-hallazgo-title{grid-column:2;grid-row:1/3;font-family:var(--font-display);font-size:clamp(19px,2vw,26px);font-weight:500;line-height:1.25;letter-spacing:-.02em}
+.case-study .case-findings .cmp-hallazgo-body{grid-column:3;font-size:.95rem!important;line-height:1.7;max-width:62ch}
+.case-study .case-findings .cmp-hallazgo-stat{grid-column:3;font-size:1rem;font-weight:500;margin-top:12px}
+.case-study .case-field-layout{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:var(--case-gap);align-items:start;margin-top:28px}
+.case-study .case-field-image{position:sticky;top:88px;margin:0}
+.case-study .case-field-image img{width:100%!important;height:auto!important;max-height:none!important;aspect-ratio:auto!important;object-fit:contain!important;margin:0!important}
+.case-study .case-field-study .cmp-log-wrap{border:0}
+.case-study .case-field-study .cmp-log-entry{grid-template-columns:60px minmax(0,1fr);background:none;border-bottom:0;position:relative}
+.case-study .case-field-study .cmp-log-entry:before{content:"";position:absolute;left:60px;top:0;bottom:0;width:1px;background:var(--color-border)}
+.case-study .case-field-study .cmp-log-t{padding:18px 12px 18px 0;border:0;font-size:.76rem;font-family:var(--font-display);font-weight:500}
+.case-study .case-field-study .cmp-log-body{padding:16px 0 20px 24px;font-size:.92rem!important;line-height:1.7}
+.case-study .case-field-study .cmp-log-sum{margin-top:28px;padding:24px 0;border:0;border-top:1px solid var(--color-border);background:none;font-size:1rem;max-width:78ch}
+.case-study .case-mechanism-steps{grid-template-columns:1fr!important;gap:0!important}
+.case-study .case-mechanism-steps>div{display:grid;grid-template-columns:64px minmax(0,1fr);gap:32px;padding:24px 0!important;grid-column:auto!important;border-top:1px solid var(--color-border)}
+.case-study .case-mechanism-steps>div>div:first-child{font-family:var(--font-display);font-size:32px!important;font-weight:400!important;margin:0!important}
+.case-study .case-mechanism-steps>div>div:last-child{max-width:70ch;font-size:1.05rem!important;font-weight:400!important;line-height:1.65!important}
+.case-study .case-parts-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:var(--case-gap);align-items:start}
+.case-study .case-parts-image{position:sticky;top:88px;margin:0;min-width:0}
+.case-study .case-parts-image img{width:100%!important;margin:0!important;object-fit:contain!important;height:auto!important;border:0!important}
+.case-study .case-parts-layout .cmp-parts-grid{grid-template-columns:1fr!important}
+.case-study .case-parts-layout .cmp-parts-grid>div{padding-block:8px 20px!important}
+.case-study .case-parts-layout .cmp-parts-grid>div>div>div:first-child{font-size:1rem!important;font-weight:600!important}
+.case-study .case-parts-layout .cmp-parts-grid>div>div>div:last-child{font-size:.9rem!important;line-height:1.65!important}
+@media(max-width:900px){
+ .case-study .case-field-layout{grid-template-columns:1fr}
+ .case-study .case-field-image{position:static;max-width:760px}
+ .case-study .case-findings .cmp-hallazgo{grid-template-columns:40px minmax(0,1fr);gap:12px 20px}
+ .case-study .case-findings .cmp-hallazgo-n{grid-row:1/4}
+ .case-study .case-findings .cmp-hallazgo-title{grid-column:2;grid-row:1}
+ .case-study .case-findings :is(.cmp-hallazgo-body,.cmp-hallazgo-stat){grid-column:2}
+ .case-study .case-parts-layout{grid-template-columns:1fr}
+ .case-study .case-parts-image{position:static}
+}
+@media(max-width:640px){
+ .case-study{--case-gutter:20px;--case-gap:28px}
+ .case-study .case-iteration,.case-study .case-takeouts,.case-study .case-prototype-sequence{grid-template-columns:1fr;gap:28px}
+ .case-study .case-iteration .case-process-copy{order:-1}
+ .case-study .case-takeouts .case-process-copy{order:-1}
+ .case-study .case-takeouts .case-evolution-figure{padding:0;max-width:none}
+ .case-study .case-prototype-sequence{gap:44px;padding-bottom:0}
+ .case-study .case-prototype-stage:nth-child(n){top:0;padding-top:0}
+ .case-study .case-prototype-media{max-width:460px;margin-inline:auto}
+ .case-study .case-incline-prototypes .proto-2col{grid-template-columns:1fr!important;gap:44px}
+ .case-study .case-model-stage:first-child{max-width:none}
+ .case-study .case-model-stage:nth-child(2){margin-top:0}
+ .case-study .case-mechanism-steps>div{grid-template-columns:36px minmax(0,1fr);gap:20px}
+ .case-study[data-project="intent"] .cmp-typo-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .case-study .case-outline{padding-inline:20px}
+}
+/* Full-bleed media follows the scroll container, including its scrollbar. */
+.case-study{container-type:inline-size}
+.case-study .cmp-render-full,.case-study .cmp-detail-grid{width:100cqw!important;margin-left:calc(50% - 50cqw)!important}
+.case-study .case-parts-image .cmp-render-full{width:100%!important;margin-left:0!important}
+
+
+/* Alternating rows, with room for copy at laptop widths and no nested scroll. */
+.case-study .split-block{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));height:auto;min-height:0;align-items:center}
+.case-study .split-left{min-width:0;padding:clamp(36px,5vw,80px);overflow:visible}
+.case-study .split-right{width:100%;min-width:0}
+.case-study .split-right img{width:100%;height:auto;display:block}
+.case-study .split-specs{flex-wrap:wrap}
+@media(max-width:900px){
+ .case-study .split-block{grid-template-columns:1fr}
+ .case-study .split-left{order:1;padding:42px 24px}
+ .case-study .split-right,.case-study .split-right.flip{order:2;aspect-ratio:auto}
+}
+
+/* Mirror the third blue-hour render, preserving the original image and resolution. */
+.visor-context > img[src="/images/visor/renders-2026-10-03/night-sky-3.webp"]{transform:scaleX(-1)}
+.cmf-image-note{font-size:.75rem;line-height:1.5;color:var(--color-muted);margin:10px 0 20px}#intent-cmf{scroll-margin-top:80px}
+/* Keep the decision image flush with its row, without stretching the artwork. */
+.case-study .case-key-decisions{align-items:stretch;scroll-margin-top:64px}
+.case-study .case-key-decisions .split-left{padding:clamp(28px,3vw,56px) clamp(28px,4vw,76px)}
+.case-study .case-key-decisions .split-body{max-width:58ch;line-height:1.65}
+.case-study .case-key-decisions .split-tag{margin-bottom:12px}
+.case-study .case-key-decisions .split-h{margin-bottom:20px}
+.case-study .case-key-decisions .split-specs{margin-top:20px;padding-top:18px;gap:16px 28px}
+.case-study .case-key-decisions .split-right{position:relative;aspect-ratio:4/3;align-self:stretch}
+.case-study .case-key-decisions .split-right img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media(max-width:1100px){
+ .case-study .case-key-decisions{grid-template-columns:1fr}
+ .case-study .case-key-decisions .split-left{order:1;padding:36px 24px}
+ .case-study .case-key-decisions .split-body{max-width:68ch}
+ .case-study .case-key-decisions .split-right{order:2;aspect-ratio:4/3}
+}
+</style><style>
+.visor-sketch,.case-sketch-drawing{position:relative;scroll-margin-top:80px}
+.case-sketch-drawing{margin:0}.case-sketch-drawing>img{display:block;width:100%;height:auto!important}.sketch-drawing-preview{position:absolute;top:0;left:0;display:block;width:100%;height:auto;pointer-events:none}
+</style><style>
+/* Temporary project availability; the full project is kept in the complete release. */
+.project-card-wrap.is-locked{cursor:default}
+.project-card-wrap.is-locked .project-card-img{filter:brightness(.65);transform:none!important}
+.project-card-wrap.is-locked .project-card-overlay{display:none}
+.project-lock-status{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:var(--color-bg);pointer-events:none}
+.project-lock-status span{font-size:.8rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase}
+.project-lock-status svg{width:28px;height:28px}
+.pnav-btn.is-locked{cursor:default;opacity:.6;transform:none!important}
+.pnav-btn.is-locked .pnav-lbl{display:flex;gap:8px;align-items:center}
+.pnav-btn.is-locked .pnav-lbl svg{width:14px;height:14px}
+.project-coming-soon{min-height:calc(100svh - var(--nav-height));display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 24px;text-align:center}
+.project-coming-soon .proj-title{margin:22px 0 16px}
+.project-coming-soon>svg{width:32px;height:32px;color:var(--color-muted)}
+.project-coming-soon p{font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:var(--color-muted)}
+.project-coming-soon a{margin-top:40px;padding-block:12px;min-height:44px;font-size:.9rem;color:var(--color-text);text-underline-offset:6px}
+</style></head>
 <body>
 <script>document.addEventListener('DOMContentLoaded',function(){ window.dispatchEvent(new CustomEvent('intro-done')); });</script>
 
@@ -819,7 +1056,18 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none;}
     </header>
     <span class="work-section-label fu d2" data-i18n="work_label">Selected work</span>
     <main class="projects-grid" data-cursor="light">
-      <div class="project-card-wrap fu d1" onclick="go('project','intent')">
+      <div class="project-card-wrap fu d1 is-locked" data-project-locked="visor" role="link" aria-disabled="true" aria-label="Visor · Coming soon">
+        <div class="project-card">
+          <img loading="eager" fetchpriority="high" decoding="async" class="project-card-img" src="/images/visor/visor-home-2026-10-03.webp" srcset="/images/visor/visor-home-2026-10-03-480.webp 480w, /images/visor/visor-home-2026-10-03-840.webp 840w, /images/visor/visor-home-2026-10-03.webp 1404w" sizes="(max-width:600px) 100vw, (max-width:900px) 50vw, 25vw" width="1404" height="2106" alt="Visor automotive concept, close front view with horizontal headlights" style="object-position:center center">
+          <div class="project-lock-status"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14v3"/></svg><span data-locked-status>Coming soon</span></div>
+          <div class="project-card-overlay"><div class="project-card-meta">
+            <p class="card-hover-label">Automotive + Visualisation · 2026</p>
+            <p class="card-desc" data-i18n-project="visor">A Snake Eyes-inspired automotive concept, developed from sketches into Vizcom visualisations.</p>
+          </div></div>
+        </div>
+        <div class="card-mobile-label"><span class="cml-num">01</span><h2 class="cml-title">Visor</h2><span class="cml-cat">Automotive + Visualisation · 2026</span></div>
+      </div>
+      <div class="project-card-wrap fu d2" onclick="go('project','intent')">
         <div class="project-card">
           <img class="project-card-img" src="/images/hero-home.webp" alt="Intent" style="object-position:center center">
           <div class="project-card-overlay">
@@ -829,9 +1077,9 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none;}
             </div>
           </div>
         </div>
-        <div class="card-mobile-label"><span class="cml-num">01</span><h2 class="cml-title">Intent</h2><span class="cml-cat">Research + ID · 2026</span></div>
+        <div class="card-mobile-label"><span class="cml-num">02</span><h2 class="cml-title">Intent</h2><span class="cml-cat">Research + ID · 2026</span></div>
       </div>
-      <div class="project-card-wrap fu d2" onclick="go('project','flujo')">
+      <div class="project-card-wrap fu d3" onclick="go('project','flujo')">
         <div class="project-card">
           <img class="project-card-img" src="/images/flujo-hero.webp" alt="Flujo" style="object-position:center 20%">
           <div class="project-card-overlay">
@@ -841,9 +1089,9 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none;}
             </div>
           </div>
         </div>
-        <div class="card-mobile-label"><span class="cml-num">02</span><h2 class="cml-title">Flujo</h2><span class="cml-cat">Lighting · 2025</span></div>
+        <div class="card-mobile-label"><span class="cml-num">03</span><h2 class="cml-title">Flujo</h2><span class="cml-cat">Lighting · 2025</span></div>
       </div>
-      <div class="project-card-wrap fu d3" onclick="go('project','incline')">
+      <div class="project-card-wrap fu d4" onclick="go('project','incline')">
         <div class="project-card">
           <img class="project-card-img" src="/images/incline-hero.webp" alt="Incline" style="object-position:center 30%">
           <div class="project-card-overlay">
@@ -853,19 +1101,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none;}
             </div>
           </div>
         </div>
-        <div class="card-mobile-label"><span class="cml-num">03</span><h2 class="cml-title">Incline</h2><span class="cml-cat">Product · 2024</span></div>
-      </div>
-      <div class="project-card-wrap fu d4" onclick="go('project','core')">
-        <div class="project-card">
-          <img class="project-card-img" src="/images/core-hero.webp" alt="Core" style="object-position:right 15%">
-          <div class="project-card-overlay">
-            <div class="project-card-meta">
-              <p class="card-hover-label" data-copy="copy-004">Product Redesign · 2024</p>
-              <p class="card-desc" data-i18n-project="core">Under Armour's performance identity, compressed into a roll-on.</p>
-            </div>
-          </div>
-        </div>
-        <div class="card-mobile-label"><span class="cml-num">04</span><h2 class="cml-title">Core</h2><span class="cml-cat">Product Redesign · 2024</span></div>
+        <div class="card-mobile-label"><span class="cml-num">04</span><h2 class="cml-title">Incline</h2><span class="cml-cat">Product · 2024</span></div>
       </div>
     </main>
     <div class="extras-section">
@@ -883,6 +1119,18 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none;}
           </div>
           <div class="extra-card-mobile-label"><h2 class="extra-cml-title">Pausa</h2><span class="extra-cml-cat">Furniture · 2025</span></div>
         </div>
+        <div class="extra-card-wrap" onclick="go('project','core')">
+        <div class="extra-card">
+          <img loading="lazy" class="extra-card-img" src="/images/core-hero.webp" alt="Core" style="object-position:right 15%">
+          <div class="extra-card-overlay">
+            <div class="extra-card-meta">
+              <p class="card-hover-label" data-copy="copy-004">Product Redesign · 2024</p>
+              <p class="extra-card-desc" data-i18n-project="core">Under Armour's performance identity, compressed into a roll-on.</p>
+            </div>
+          </div>
+        </div>
+        <div class="extra-card-mobile-label"><h2 class="extra-cml-title">Core</h2><span class="extra-cml-cat">Product Redesign · 2024</span></div>
+      </div>
         <div class="extra-card-wrap" onclick="go('project','promix')">
           <div class="extra-card">
             <img loading="lazy" class="extra-card-img" src="/images/promix-hero.webp" alt="Promix" style="object-position:center center;">
@@ -1082,7 +1330,37 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none;}
 </div>
 
 <script>
+
+const PROJECT_AVAILABILITY=Object.freeze({visor:'coming-soon'});
+const PROJECT_LOCK_ICON="<svg viewBox=\"0 0 24 24\" width=\"24\" height=\"24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"5\" y=\"10\" width=\"14\" height=\"11\" rx=\"2\"/><path d=\"M8 10V7a4 4 0 0 1 8 0v3\"/><path d=\"M12 14v3\"/></svg>";
+function isProjectLocked(id){return PROJECT_AVAILABILITY[id]==='coming-soon';}
+function projectAvailabilityLabel(){return tri('Coming soon','Próximamente','Demnächst');}
+function refreshProjectAvailability(){
+ document.querySelectorAll('[data-project-locked]').forEach(el=>{
+  el.setAttribute('aria-label','Visor · '+projectAvailabilityLabel());
+  el.querySelectorAll('[data-locked-status]').forEach(label=>label.textContent=projectAvailabilityLabel());
+ });
+}
+function showUnavailableProject(id){
+ const root=document.getElementById('projContent');
+ root.dataset.project=id;root.classList.remove('case-study');root.removeAttribute('data-case-refined');_curPanels=[];
+ root.innerHTML='<section class="project-coming-soon">'+PROJECT_LOCK_ICON+'<h1 class="proj-title">Visor</h1><p>'+projectAvailabilityLabel()+'</p><a href="/" onclick="go(\'home\')">'+tri('Back to work','Volver a proyectos','Zurück zu den Projekten')+' →</a></section>';
+ upgradeControls(root);
+}
+function updateUnavailableMetadata(id){
+ const title='Visor · '+projectAvailabilityLabel()+' | Nahuel Villar',desc='Visor — '+projectAvailabilityLabel()+'.';
+ document.title=title;
+ const values={'description':desc,'og:title':title,'og:description':desc,'twitter:title':title,'twitter:description':desc,'og:image:alt':title,'twitter:image:alt':title,'og:image':'https://nahuelvillar.com/images/visor/visor-home-2026-10-03.webp','twitter:image':'https://nahuelvillar.com/images/visor/visor-home-2026-10-03.webp','og:url':'https://nahuelvillar.com/project/visor/'};
+ for(const [key,value]of Object.entries(values))document.querySelector('meta[name="'+key+'"],meta[property="'+key+'"]')?.setAttribute('content',value);
+ document.querySelector('link[rel="canonical"]').href='https://nahuelvillar.com/project/visor/';
+ let robots=document.querySelector('meta[data-project-lock-robots]');
+ if(!robots){robots=document.createElement('meta');robots.name='robots';robots.dataset.projectLockRobots='true';document.head.append(robots);}
+ robots.content='noindex, follow';
+}
+
+const VISOR_COPY = {"en": {"project": {"title": "Visor", "eyebrow": "Automotive design + Visualisation", "tagline": "A Snake Eyes-inspired automotive concept, developed from sketches into Vizcom visualisations.", "specs": [{"l": "Category", "v": "Automotive concept"}, {"l": "Year", "v": "2026"}, {"l": "Tools", "v": "Sketching · Vizcom"}, {"l": "Status", "v": "Personal concept"}], "desc": ["A personal automotive design project inspired by Snake Eyes, conceived as an exercise in bringing Vizcom into my workflow.", "Starting from my own sketches, I used visualisation to explore the concept in different environments, working with lighting and image fidelity."]}, "mood_label": "Design phase · Inspiration", "mood_title": "Moodboard", "mood_text": "Snake Eyes provided the visual starting point: the helmet, the horizontal visor and the layered surfaces of the suit.", "sketch_label": "Design phase · Exploration", "sketch_title": "From sketch to form.", "sketch_text": "The concept develops through initial explorations, side proportions, orthographic views and a rendered sketch. These drawings formed the starting point for the work in Vizcom.", "sketch_names": ["Initial explorations", "Side development", "Front & rear", "Rendered sketch"], "sketch_alts": ["Five initial sports car explorations drawn in red", "Side profile development from proportion guides to a detailed drawing", "Orthographic front and rear views of the car", "Rendered car sketch with Snake Eyes against a red circle"], "studio_label": "Vizcom · Studio views", "studio_title": "Defined by light.", "studio_text": "Five views and a wheel detail of the concept, developed from the sketches in Vizcom.", "studio_names": ["Front", "Front three-quarter", "Side", "Rear three-quarter", "Rear", "Wheel detail"], "context_label": "Vizcom · Environments", "context_titles": ["A signature in the dark.", "Following the curve.", "Where red meets blue.", "Through light and shadow.", "Breaking the stillness.", "Leaving a trace."], "workflow_label": "Design workflow", "workflow_title": "Behind the images.", "workflow_text": "The original Vizcom workbench provides a view of the image development process.", "workflow_link": "Explore the workflow in Vizcom", "workflow_note": "View only · Opens Vizcom in a new tab", "prev": "Previous studio view", "next": "Next studio view", "play": "Play slideshow", "pause": "Pause slideshow", "view": "View", "of": "of", "markup": "<div class=\"visor-project\"><section id=\"visor-moodboard\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Design phase · Inspiration</p><h2 class=\"cmp-section-title\">Moodboard</h2></div><p class=\"visor-intro\">Snake Eyes provided the visual starting point: the helmet, the horizontal visor and the layered surfaces of the suit.</p></div><div class=\"visor-moodboard\" role=\"img\" aria-label=\"Nine Snake Eyes references arranged over a red circle\"><span class=\"visor-mood-circle\" aria-hidden=\"true\"></span><img src=\"/images/visor/mood-09.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:239;--y:213\" data-order=\"5\"><img src=\"/images/visor/mood-07.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:355;--y:130\" data-order=\"3\"><img src=\"/images/visor/mood-03.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:355;--y:296\" data-order=\"4\"><img src=\"/images/visor/mood-04.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:470;--y:47\" data-order=\"1\"><img src=\"/images/visor/mood-08.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:470;--y:213\" data-order=\"0\"><img src=\"/images/visor/mood-06.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:470;--y:378\" data-order=\"2\"><img src=\"/images/visor/mood-01.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:585;--y:127\" data-order=\"6\"><img src=\"/images/visor/mood-05.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:585;--y:296\" data-order=\"7\"><img src=\"/images/visor/mood-02.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:701;--y:213\" data-order=\"8\"></div></section><section id=\"visor-sketches\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Design phase · Exploration</p><h2 class=\"cmp-section-title\">From sketch to form.</h2></div><p class=\"visor-intro\">The concept develops through initial explorations, side proportions, orthographic views and a rendered sketch. These drawings formed the starting point for the work in Vizcom.</p></div><figure class=\"visor-sketch\"><img src=\"/images/visor/v4/sketch-01.webp\" srcset=\"/images/visor/v4/sketch-01-960.webp 960w, /images/visor/v4/sketch-01-1920.webp 1920w, /images/visor/v4/sketch-01.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Five initial sports car explorations drawn in red\" loading=\"lazy\" decoding=\"async\"><figcaption>Initial explorations</figcaption></figure><figure class=\"visor-sketch\"><img src=\"/images/visor/v4/sketch-02.webp\" srcset=\"/images/visor/v4/sketch-02-960.webp 960w, /images/visor/v4/sketch-02-1920.webp 1920w, /images/visor/v4/sketch-02.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Side profile development from proportion guides to a detailed drawing\" loading=\"lazy\" decoding=\"async\"><figcaption>Side development</figcaption></figure><figure class=\"visor-sketch\"><img src=\"/images/visor/v4/sketch-03.webp\" srcset=\"/images/visor/v4/sketch-03-960.webp 960w, /images/visor/v4/sketch-03-1920.webp 1920w, /images/visor/v4/sketch-03.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Orthographic front and rear views of the car\" loading=\"lazy\" decoding=\"async\"><figcaption>Front &amp; rear</figcaption></figure><figure class=\"visor-sketch\"><img src=\"/images/visor/v4/sketch-04.webp\" srcset=\"/images/visor/v4/sketch-04-960.webp 960w, /images/visor/v4/sketch-04-1920.webp 1920w, /images/visor/v4/sketch-04.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Rendered car sketch with Snake Eyes against a red circle\" loading=\"lazy\" decoding=\"async\"><figcaption>Rendered sketch</figcaption></figure></section><section id=\"visor-studio\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Vizcom · Studio views</p><h2 class=\"cmp-section-title\">Defined by light.</h2></div><p class=\"visor-intro\">Five views and a wheel detail of the concept, developed from the sketches in Vizcom.</p></div><div class=\"visor-carousel\" role=\"region\" aria-roledescription=\"carousel\" aria-label=\"Vizcom · Studio views\"><div class=\"visor-stage\"><figure class=\"visor-slide\" role=\"group\" aria-label=\"View 1 of 6: Front\" data-caption=\"Front\"><img src=\"/images/visor/renders-2026-10-03/studio-front.webp\" srcset=\"/images/visor/renders-2026-10-03/studio-front-960.webp 960w, /images/visor/renders-2026-10-03/studio-front-1920.webp 1920w, /images/visor/renders-2026-10-03/studio-front.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Straight front studio view of Visor with white horizontal headlights\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-slide\" role=\"group\" aria-label=\"View 2 of 6: Front three-quarter\" data-caption=\"Front three-quarter\"><img src=\"/images/visor/renders-2026-10-03/studio-front-three-quarter.webp\" srcset=\"/images/visor/renders-2026-10-03/studio-front-three-quarter-960.webp 960w, /images/visor/renders-2026-10-03/studio-front-three-quarter-1920.webp 1920w, /images/visor/renders-2026-10-03/studio-front-three-quarter.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Elevated front three-quarter studio view of Visor\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-slide\" role=\"group\" aria-label=\"View 3 of 6: Side\" data-caption=\"Side\"><img src=\"/images/visor/renders-2026-10-03/studio-side.webp\" srcset=\"/images/visor/renders-2026-10-03/studio-side-960.webp 960w, /images/visor/renders-2026-10-03/studio-side-1920.webp 1920w, /images/visor/renders-2026-10-03/studio-side.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Side profile of Visor in the studio\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-slide\" role=\"group\" aria-label=\"View 4 of 6: Rear three-quarter\" data-caption=\"Rear three-quarter\"><img src=\"/images/visor/renders-2026-10-03/studio-rear-three-quarter.webp\" srcset=\"/images/visor/renders-2026-10-03/studio-rear-three-quarter-960.webp 960w, /images/visor/renders-2026-10-03/studio-rear-three-quarter-1920.webp 1920w, /images/visor/renders-2026-10-03/studio-rear-three-quarter.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Rear three-quarter studio view of Visor\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-slide\" role=\"group\" aria-label=\"View 5 of 6: Rear\" data-caption=\"Rear\"><img src=\"/images/visor/renders-2026-10-03/studio-rear.webp\" srcset=\"/images/visor/renders-2026-10-03/studio-rear-960.webp 960w, /images/visor/renders-2026-10-03/studio-rear-1920.webp 1920w, /images/visor/renders-2026-10-03/studio-rear.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Straight rear studio view of Visor with red horizontal lights\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-slide\" role=\"group\" aria-label=\"View 6 of 6: Wheel detail\" data-caption=\"Wheel detail\"><img src=\"/images/visor/renders-2026-10-03/studio-wheel.webp\" srcset=\"/images/visor/renders-2026-10-03/studio-wheel-960.webp 960w, /images/visor/renders-2026-10-03/studio-wheel-1920.webp 1920w, /images/visor/renders-2026-10-03/studio-wheel.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Close studio view of the wheel of Visor, showing its spokes, red centre and brake caliper\" loading=\"lazy\" decoding=\"async\"></figure><div class=\"visor-arrows\" hidden><button type=\"button\" data-visor-prev aria-label=\"Previous studio view\"><span aria-hidden=\"true\">←</span></button><button type=\"button\" data-visor-next aria-label=\"Next studio view\"><span aria-hidden=\"true\">→</span></button></div></div><div class=\"visor-controls\" hidden><span class=\"visor-count\">01 / 06</span><span class=\"visor-caption\"></span></div><p class=\"visor-status\" role=\"status\" aria-live=\"polite\" aria-atomic=\"true\"></p></div></section><section id=\"visor-night\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Vizcom · Environments</p><h2 class=\"cmp-section-title\">A signature in the dark.</h2></div></div><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/parking-1.webp\" srcset=\"/images/visor/renders-2026-10-03/parking-1-960.webp 960w, /images/visor/renders-2026-10-03/parking-1-1920.webp 1920w, /images/visor/renders-2026-10-03/parking-1.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Straight front view of Visor at night, highlighting the horizontal light signature\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/parking-2.webp\" srcset=\"/images/visor/renders-2026-10-03/parking-2-960.webp 960w, /images/visor/renders-2026-10-03/parking-2-1920.webp 1920w, /images/visor/renders-2026-10-03/parking-2.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Front three-quarter view of Visor on dark asphalt, with horizontal white headlights\" loading=\"lazy\" decoding=\"async\"></figure></section><section id=\"visor-mountain\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Vizcom · Environments</p><h2 class=\"cmp-section-title\">Following the curve.</h2></div></div><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/snow-1.webp\" srcset=\"/images/visor/renders-2026-10-03/snow-1-960.webp 960w, /images/visor/renders-2026-10-03/snow-1-1920.webp 1920w, /images/visor/renders-2026-10-03/snow-1.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Visor on a winding snowy mountain road at blue hour\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/snow-2.webp\" srcset=\"/images/visor/renders-2026-10-03/snow-2-960.webp 960w, /images/visor/renders-2026-10-03/snow-2-1920.webp 1920w, /images/visor/renders-2026-10-03/snow-2.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Visor in motion through a curve on a snowy mountain road\" loading=\"lazy\" decoding=\"async\"></figure></section><section id=\"visor-blue-hour\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Vizcom · Environments</p><h2 class=\"cmp-section-title\">Where red meets blue.</h2></div></div><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/night-sky-1.webp\" srcset=\"/images/visor/renders-2026-10-03/night-sky-1-960.webp 960w, /images/visor/renders-2026-10-03/night-sky-1-1920.webp 1920w, /images/visor/renders-2026-10-03/night-sky-1.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Red rear lights of Visor reflected on a winding wet road at blue hour\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/night-sky-2.webp\" srcset=\"/images/visor/renders-2026-10-03/night-sky-2-960.webp 960w, /images/visor/renders-2026-10-03/night-sky-2-1920.webp 1920w, /images/visor/renders-2026-10-03/night-sky-2.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Low rear tracking view of Visor on a wet blue-hour road\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/night-sky-3.webp\" srcset=\"/images/visor/renders-2026-10-03/night-sky-3-960.webp 960w, /images/visor/renders-2026-10-03/night-sky-3-1920.webp 1920w, /images/visor/renders-2026-10-03/night-sky-3.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Low rear three-quarter view of Visor beneath an open blue evening sky\" loading=\"lazy\" decoding=\"async\"></figure></section><section id=\"visor-forest\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Vizcom · Environments</p><h2 class=\"cmp-section-title\">Through light and shadow.</h2></div></div><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/forest-1.webp\" srcset=\"/images/visor/renders-2026-10-03/forest-1-960.webp 960w, /images/visor/renders-2026-10-03/forest-1-1920.webp 1920w, /images/visor/renders-2026-10-03/forest-1.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Visor accelerating along a forest track with dust in the sunlight\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/forest-2.webp\" srcset=\"/images/visor/renders-2026-10-03/forest-2-960.webp 960w, /images/visor/renders-2026-10-03/forest-2-1920.webp 1920w, /images/visor/renders-2026-10-03/forest-2.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Rear three-quarter view of Visor on a sunlit forest track\" loading=\"lazy\" decoding=\"async\"></figure></section><section id=\"visor-concrete\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Vizcom · Environments</p><h2 class=\"cmp-section-title\">Breaking the stillness.</h2></div></div><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/garage-1.webp\" srcset=\"/images/visor/renders-2026-10-03/garage-1-960.webp 960w, /images/visor/renders-2026-10-03/garage-1-1920.webp 1920w, /images/visor/renders-2026-10-03/garage-1.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Front three-quarter view of Visor with tyre smoke inside a concrete parking structure\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/garage-2.webp\" srcset=\"/images/visor/renders-2026-10-03/garage-2-960.webp 960w, /images/visor/renders-2026-10-03/garage-2-1920.webp 1920w, /images/visor/renders-2026-10-03/garage-2.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Rear three-quarter view of Visor with tyre smoke inside a concrete parking structure\" loading=\"lazy\" decoding=\"async\"></figure></section><section id=\"visor-dust\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Vizcom · Environments</p><h2 class=\"cmp-section-title\">Leaving a trace.</h2></div></div><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/desert-1.webp\" srcset=\"/images/visor/renders-2026-10-03/desert-1-960.webp 960w, /images/visor/renders-2026-10-03/desert-1-1920.webp 1920w, /images/visor/renders-2026-10-03/desert-1.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Elevated rear three-quarter view of Visor circling through dust\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/desert-2.webp\" srcset=\"/images/visor/renders-2026-10-03/desert-2-960.webp 960w, /images/visor/renders-2026-10-03/desert-2-1920.webp 1920w, /images/visor/renders-2026-10-03/desert-2.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Close view through the windscreen showing Snake Eyes driving Visor through dust\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/desert-3.webp\" srcset=\"/images/visor/renders-2026-10-03/desert-3-960.webp 960w, /images/visor/renders-2026-10-03/desert-3-1920.webp 1920w, /images/visor/renders-2026-10-03/desert-3.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Elevated front three-quarter view of Visor turning on dusty ground\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/desert-4.webp\" srcset=\"/images/visor/renders-2026-10-03/desert-4-960.webp 960w, /images/visor/renders-2026-10-03/desert-4-1920.webp 1920w, /images/visor/renders-2026-10-03/desert-4.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Elevated rear view of Visor leaving a dust trail across pale ground\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/desert-5.webp\" srcset=\"/images/visor/renders-2026-10-03/desert-5-960.webp 960w, /images/visor/renders-2026-10-03/desert-5-1920.webp 1920w, /images/visor/renders-2026-10-03/desert-5.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Overhead view of Visor surrounded by circular tyre tracks and dust\" loading=\"lazy\" decoding=\"async\"></figure></section><section id=\"visor-workflow\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Design workflow</p><h2 class=\"cmp-section-title\">Behind the images.</h2></div><p class=\"visor-intro\">The original Vizcom workbench provides a view of the image development process.</p></div><div class=\"visor-workflow-link\"><a href=\"https://app.vizcom.com/workbench/c925350f-3dc9-467b-bfdd-15313a47238c#sharing_secret=6c4d3779-8fc9-4130-a1eb-b4205e86e440\" target=\"_blank\" rel=\"noopener noreferrer\" aria-describedby=\"visor-workflow-note\">Explore the workflow in Vizcom <span aria-hidden=\"true\">↗</span></a><p id=\"visor-workflow-note\">View only · Opens Vizcom in a new tab</p></div></section></div>"}, "es": {"project": {"title": "Visor", "eyebrow": "Diseño automotriz + Visualización", "tagline": "Un concepto automotriz inspirado en Snake Eyes, desarrollado desde sketches hasta visualizaciones en Vizcom.", "specs": [{"l": "Categoría", "v": "Concepto automotriz"}, {"l": "Año", "v": "2026"}, {"l": "Herramientas", "v": "Sketching · Vizcom"}, {"l": "Estado", "v": "Concepto personal"}], "desc": ["Un proyecto personal de diseño automotriz inspirado en Snake Eyes, pensado como ejercicio para incorporar Vizcom a mi proceso de trabajo.", "A partir de mis propios sketches, utilicé la visualización para explorar el concepto en distintos entornos, trabajando la iluminación y la fidelidad de imagen."]}, "mood_label": "Fase de diseño · Inspiración", "mood_title": "Moodboard", "mood_text": "Snake Eyes fue el punto de partida visual: el casco, el visor horizontal y las superficies superpuestas del traje.", "sketch_label": "Fase de diseño · Exploración", "sketch_title": "Del sketch a la forma.", "sketch_text": "El concepto se desarrolla a través de exploraciones iniciales, proporciones laterales, vistas ortográficas y un sketch renderizado. Estos dibujos fueron el punto de partida del trabajo en Vizcom.", "sketch_names": ["Exploraciones iniciales", "Desarrollo lateral", "Frente y trasera", "Sketch renderizado"], "sketch_alts": ["Cinco exploraciones iniciales de un deportivo dibujadas en rojo", "Desarrollo lateral desde las guías de proporción hasta el dibujo detallado", "Vistas ortográficas frontal y trasera del auto", "Sketch renderizado del auto con Snake Eyes sobre un círculo rojo"], "studio_label": "Vizcom · Vistas de estudio", "studio_title": "Definido por la luz.", "studio_text": "Cinco vistas y un detalle de la rueda del concepto, desarrollados en Vizcom a partir de los sketches.", "studio_names": ["Frontal", "Tres cuartos frontal", "Lateral", "Tres cuartos trasera", "Trasera", "Detalle de la rueda"], "context_label": "Vizcom · Entornos", "context_titles": ["Una firma en la oscuridad.", "Siguiendo la curva.", "Donde el rojo encuentra al azul.", "Entre luces y sombras.", "Romper la quietud.", "Dejar una huella."], "workflow_label": "Proceso de diseño", "workflow_title": "Detrás de las imágenes.", "workflow_text": "El workbench original de Vizcom permite recorrer el proceso de desarrollo de las imágenes.", "workflow_link": "Explorar el workflow en Vizcom", "workflow_note": "Solo lectura · Abre Vizcom en otra pestaña", "prev": "Vista de estudio anterior", "next": "Vista de estudio siguiente", "play": "Reproducir galería", "pause": "Pausar galería", "view": "Vista", "of": "de", "markup": "<div class=\"visor-project\"><section id=\"visor-moodboard\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Fase de diseño · Inspiración</p><h2 class=\"cmp-section-title\">Moodboard</h2></div><p class=\"visor-intro\">Snake Eyes fue el punto de partida visual: el casco, el visor horizontal y las superficies superpuestas del traje.</p></div><div class=\"visor-moodboard\" role=\"img\" aria-label=\"Nueve referencias de Snake Eyes sobre un círculo rojo\"><span class=\"visor-mood-circle\" aria-hidden=\"true\"></span><img src=\"/images/visor/mood-09.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:239;--y:213\" data-order=\"5\"><img src=\"/images/visor/mood-07.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:355;--y:130\" data-order=\"3\"><img src=\"/images/visor/mood-03.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:355;--y:296\" data-order=\"4\"><img src=\"/images/visor/mood-04.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:470;--y:47\" data-order=\"1\"><img src=\"/images/visor/mood-08.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:470;--y:213\" data-order=\"0\"><img src=\"/images/visor/mood-06.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:470;--y:378\" data-order=\"2\"><img src=\"/images/visor/mood-01.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:585;--y:127\" data-order=\"6\"><img src=\"/images/visor/mood-05.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:585;--y:296\" data-order=\"7\"><img src=\"/images/visor/mood-02.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:701;--y:213\" data-order=\"8\"></div></section><section id=\"visor-sketches\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Fase de diseño · Exploración</p><h2 class=\"cmp-section-title\">Del sketch a la forma.</h2></div><p class=\"visor-intro\">El concepto se desarrolla a través de exploraciones iniciales, proporciones laterales, vistas ortográficas y un sketch renderizado. Estos dibujos fueron el punto de partida del trabajo en Vizcom.</p></div><figure class=\"visor-sketch\"><img src=\"/images/visor/v4/sketch-01.webp\" srcset=\"/images/visor/v4/sketch-01-960.webp 960w, /images/visor/v4/sketch-01-1920.webp 1920w, /images/visor/v4/sketch-01.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Cinco exploraciones iniciales de un deportivo dibujadas en rojo\" loading=\"lazy\" decoding=\"async\"><figcaption>Exploraciones iniciales</figcaption></figure><figure class=\"visor-sketch\"><img src=\"/images/visor/v4/sketch-02.webp\" srcset=\"/images/visor/v4/sketch-02-960.webp 960w, /images/visor/v4/sketch-02-1920.webp 1920w, /images/visor/v4/sketch-02.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Desarrollo lateral desde las guías de proporción hasta el dibujo detallado\" loading=\"lazy\" decoding=\"async\"><figcaption>Desarrollo lateral</figcaption></figure><figure class=\"visor-sketch\"><img src=\"/images/visor/v4/sketch-03.webp\" srcset=\"/images/visor/v4/sketch-03-960.webp 960w, /images/visor/v4/sketch-03-1920.webp 1920w, /images/visor/v4/sketch-03.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Vistas ortográficas frontal y trasera del auto\" loading=\"lazy\" decoding=\"async\"><figcaption>Frente y trasera</figcaption></figure><figure class=\"visor-sketch\"><img src=\"/images/visor/v4/sketch-04.webp\" srcset=\"/images/visor/v4/sketch-04-960.webp 960w, /images/visor/v4/sketch-04-1920.webp 1920w, /images/visor/v4/sketch-04.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Sketch renderizado del auto con Snake Eyes sobre un círculo rojo\" loading=\"lazy\" decoding=\"async\"><figcaption>Sketch renderizado</figcaption></figure></section><section id=\"visor-studio\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Vizcom · Vistas de estudio</p><h2 class=\"cmp-section-title\">Definido por la luz.</h2></div><p class=\"visor-intro\">Cinco vistas y un detalle de la rueda del concepto, desarrollados en Vizcom a partir de los sketches.</p></div><div class=\"visor-carousel\" role=\"region\" aria-roledescription=\"carrusel\" aria-label=\"Vizcom · Vistas de estudio\"><div class=\"visor-stage\"><figure class=\"visor-slide\" role=\"group\" aria-label=\"Vista 1 de 6: Frontal\" data-caption=\"Frontal\"><img src=\"/images/visor/renders-2026-10-03/studio-front.webp\" srcset=\"/images/visor/renders-2026-10-03/studio-front-960.webp 960w, /images/visor/renders-2026-10-03/studio-front-1920.webp 1920w, /images/visor/renders-2026-10-03/studio-front.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Vista frontal de Visor en estudio con luces blancas horizontales\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-slide\" role=\"group\" aria-label=\"Vista 2 de 6: Tres cuartos frontal\" data-caption=\"Tres cuartos frontal\"><img src=\"/images/visor/renders-2026-10-03/studio-front-three-quarter.webp\" srcset=\"/images/visor/renders-2026-10-03/studio-front-three-quarter-960.webp 960w, /images/visor/renders-2026-10-03/studio-front-three-quarter-1920.webp 1920w, /images/visor/renders-2026-10-03/studio-front-three-quarter.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Vista elevada tres cuartos frontal de Visor en estudio\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-slide\" role=\"group\" aria-label=\"Vista 3 de 6: Lateral\" data-caption=\"Lateral\"><img src=\"/images/visor/renders-2026-10-03/studio-side.webp\" srcset=\"/images/visor/renders-2026-10-03/studio-side-960.webp 960w, /images/visor/renders-2026-10-03/studio-side-1920.webp 1920w, /images/visor/renders-2026-10-03/studio-side.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Perfil lateral de Visor en estudio\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-slide\" role=\"group\" aria-label=\"Vista 4 de 6: Tres cuartos trasera\" data-caption=\"Tres cuartos trasera\"><img src=\"/images/visor/renders-2026-10-03/studio-rear-three-quarter.webp\" srcset=\"/images/visor/renders-2026-10-03/studio-rear-three-quarter-960.webp 960w, /images/visor/renders-2026-10-03/studio-rear-three-quarter-1920.webp 1920w, /images/visor/renders-2026-10-03/studio-rear-three-quarter.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Vista tres cuartos trasera de Visor en estudio\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-slide\" role=\"group\" aria-label=\"Vista 5 de 6: Trasera\" data-caption=\"Trasera\"><img src=\"/images/visor/renders-2026-10-03/studio-rear.webp\" srcset=\"/images/visor/renders-2026-10-03/studio-rear-960.webp 960w, /images/visor/renders-2026-10-03/studio-rear-1920.webp 1920w, /images/visor/renders-2026-10-03/studio-rear.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Vista trasera de Visor en estudio con luces rojas horizontales\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-slide\" role=\"group\" aria-label=\"Vista 6 de 6: Detalle de la rueda\" data-caption=\"Detalle de la rueda\"><img src=\"/images/visor/renders-2026-10-03/studio-wheel.webp\" srcset=\"/images/visor/renders-2026-10-03/studio-wheel-960.webp 960w, /images/visor/renders-2026-10-03/studio-wheel-1920.webp 1920w, /images/visor/renders-2026-10-03/studio-wheel.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Detalle de la rueda de Visor en estudio, con sus radios, centro rojo y pinza de freno\" loading=\"lazy\" decoding=\"async\"></figure><div class=\"visor-arrows\" hidden><button type=\"button\" data-visor-prev aria-label=\"Vista de estudio anterior\"><span aria-hidden=\"true\">←</span></button><button type=\"button\" data-visor-next aria-label=\"Vista de estudio siguiente\"><span aria-hidden=\"true\">→</span></button></div></div><div class=\"visor-controls\" hidden><span class=\"visor-count\">01 / 06</span><span class=\"visor-caption\"></span></div><p class=\"visor-status\" role=\"status\" aria-live=\"polite\" aria-atomic=\"true\"></p></div></section><section id=\"visor-night\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Vizcom · Entornos</p><h2 class=\"cmp-section-title\">Una firma en la oscuridad.</h2></div></div><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/parking-1.webp\" srcset=\"/images/visor/renders-2026-10-03/parking-1-960.webp 960w, /images/visor/renders-2026-10-03/parking-1-1920.webp 1920w, /images/visor/renders-2026-10-03/parking-1.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Vista frontal de Visor de noche, destacando la firma luminosa horizontal\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/parking-2.webp\" srcset=\"/images/visor/renders-2026-10-03/parking-2-960.webp 960w, /images/visor/renders-2026-10-03/parking-2-1920.webp 1920w, /images/visor/renders-2026-10-03/parking-2.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Vista tres cuartos frontal de Visor sobre asfalto oscuro, con luces blancas horizontales\" loading=\"lazy\" decoding=\"async\"></figure></section><section id=\"visor-mountain\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Vizcom · Entornos</p><h2 class=\"cmp-section-title\">Siguiendo la curva.</h2></div></div><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/snow-1.webp\" srcset=\"/images/visor/renders-2026-10-03/snow-1-960.webp 960w, /images/visor/renders-2026-10-03/snow-1-1920.webp 1920w, /images/visor/renders-2026-10-03/snow-1.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Visor en una carretera de montaña nevada durante la hora azul\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/snow-2.webp\" srcset=\"/images/visor/renders-2026-10-03/snow-2-960.webp 960w, /images/visor/renders-2026-10-03/snow-2-1920.webp 1920w, /images/visor/renders-2026-10-03/snow-2.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Visor en movimiento por una curva de una carretera de montaña nevada\" loading=\"lazy\" decoding=\"async\"></figure></section><section id=\"visor-blue-hour\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Vizcom · Entornos</p><h2 class=\"cmp-section-title\">Donde el rojo encuentra al azul.</h2></div></div><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/night-sky-1.webp\" srcset=\"/images/visor/renders-2026-10-03/night-sky-1-960.webp 960w, /images/visor/renders-2026-10-03/night-sky-1-1920.webp 1920w, /images/visor/renders-2026-10-03/night-sky-1.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Luces traseras rojas de Visor reflejadas en una carretera húmeda y sinuosa durante la hora azul\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/night-sky-2.webp\" srcset=\"/images/visor/renders-2026-10-03/night-sky-2-960.webp 960w, /images/visor/renders-2026-10-03/night-sky-2-1920.webp 1920w, /images/visor/renders-2026-10-03/night-sky-2.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Vista baja trasera de Visor en movimiento sobre una carretera húmeda durante la hora azul\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/night-sky-3.webp\" srcset=\"/images/visor/renders-2026-10-03/night-sky-3-960.webp 960w, /images/visor/renders-2026-10-03/night-sky-3-1920.webp 1920w, /images/visor/renders-2026-10-03/night-sky-3.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Vista baja tres cuartos trasera de Visor bajo un cielo azul al anochecer\" loading=\"lazy\" decoding=\"async\"></figure></section><section id=\"visor-forest\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Vizcom · Entornos</p><h2 class=\"cmp-section-title\">Entre luces y sombras.</h2></div></div><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/forest-1.webp\" srcset=\"/images/visor/renders-2026-10-03/forest-1-960.webp 960w, /images/visor/renders-2026-10-03/forest-1-1920.webp 1920w, /images/visor/renders-2026-10-03/forest-1.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Visor avanzando por un camino de bosque con polvo iluminado por el sol\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/forest-2.webp\" srcset=\"/images/visor/renders-2026-10-03/forest-2-960.webp 960w, /images/visor/renders-2026-10-03/forest-2-1920.webp 1920w, /images/visor/renders-2026-10-03/forest-2.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Vista tres cuartos trasera de Visor en un camino de bosque iluminado por el sol\" loading=\"lazy\" decoding=\"async\"></figure></section><section id=\"visor-concrete\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Vizcom · Entornos</p><h2 class=\"cmp-section-title\">Romper la quietud.</h2></div></div><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/garage-1.webp\" srcset=\"/images/visor/renders-2026-10-03/garage-1-960.webp 960w, /images/visor/renders-2026-10-03/garage-1-1920.webp 1920w, /images/visor/renders-2026-10-03/garage-1.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Vista tres cuartos frontal de Visor entre humo de neumáticos en un estacionamiento de hormigón\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/garage-2.webp\" srcset=\"/images/visor/renders-2026-10-03/garage-2-960.webp 960w, /images/visor/renders-2026-10-03/garage-2-1920.webp 1920w, /images/visor/renders-2026-10-03/garage-2.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Vista tres cuartos trasera de Visor entre humo de neumáticos en un estacionamiento de hormigón\" loading=\"lazy\" decoding=\"async\"></figure></section><section id=\"visor-dust\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Vizcom · Entornos</p><h2 class=\"cmp-section-title\">Dejar una huella.</h2></div></div><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/desert-1.webp\" srcset=\"/images/visor/renders-2026-10-03/desert-1-960.webp 960w, /images/visor/renders-2026-10-03/desert-1-1920.webp 1920w, /images/visor/renders-2026-10-03/desert-1.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Vista elevada tres cuartos trasera de Visor trazando una curva entre polvo\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/desert-2.webp\" srcset=\"/images/visor/renders-2026-10-03/desert-2-960.webp 960w, /images/visor/renders-2026-10-03/desert-2-1920.webp 1920w, /images/visor/renders-2026-10-03/desert-2.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Detalle del parabrisas con Snake Eyes conduciendo Visor entre polvo\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/desert-3.webp\" srcset=\"/images/visor/renders-2026-10-03/desert-3-960.webp 960w, /images/visor/renders-2026-10-03/desert-3-1920.webp 1920w, /images/visor/renders-2026-10-03/desert-3.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Vista elevada tres cuartos frontal de Visor girando sobre tierra con polvo\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/desert-4.webp\" srcset=\"/images/visor/renders-2026-10-03/desert-4-960.webp 960w, /images/visor/renders-2026-10-03/desert-4-1920.webp 1920w, /images/visor/renders-2026-10-03/desert-4.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Vista elevada trasera de Visor dejando una estela de polvo sobre tierra clara\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/desert-5.webp\" srcset=\"/images/visor/renders-2026-10-03/desert-5-960.webp 960w, /images/visor/renders-2026-10-03/desert-5-1920.webp 1920w, /images/visor/renders-2026-10-03/desert-5.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Vista cenital de Visor entre marcas circulares de neumáticos y polvo\" loading=\"lazy\" decoding=\"async\"></figure></section><section id=\"visor-workflow\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Proceso de diseño</p><h2 class=\"cmp-section-title\">Detrás de las imágenes.</h2></div><p class=\"visor-intro\">El workbench original de Vizcom permite recorrer el proceso de desarrollo de las imágenes.</p></div><div class=\"visor-workflow-link\"><a href=\"https://app.vizcom.com/workbench/c925350f-3dc9-467b-bfdd-15313a47238c#sharing_secret=6c4d3779-8fc9-4130-a1eb-b4205e86e440\" target=\"_blank\" rel=\"noopener noreferrer\" aria-describedby=\"visor-workflow-note\">Explorar el workflow en Vizcom <span aria-hidden=\"true\">↗</span></a><p id=\"visor-workflow-note\">Solo lectura · Abre Vizcom en otra pestaña</p></div></section></div>"}, "de": {"project": {"title": "Visor", "eyebrow": "Automobildesign + Visualisierung", "tagline": "Ein von Snake Eyes inspiriertes Fahrzeugkonzept, von Skizzen zu Visualisierungen in Vizcom entwickelt.", "specs": [{"l": "Kategorie", "v": "Fahrzeugkonzept"}, {"l": "Jahr", "v": "2026"}, {"l": "Werkzeuge", "v": "Skizzen · Vizcom"}, {"l": "Status", "v": "Persönliches Konzept"}], "desc": ["Ein persönliches Automobildesignprojekt, inspiriert von Snake Eyes und als Übung zur Einbindung von Vizcom in meinen Workflow konzipiert.", "Ausgehend von meinen eigenen Skizzen erkundete ich das Konzept in verschiedenen Umgebungen und arbeitete dabei an Beleuchtung und Bildtreue."]}, "mood_label": "Designphase · Inspiration", "mood_title": "Moodboard", "mood_text": "Snake Eyes bildete den visuellen Ausgangspunkt: der Helm, das horizontale Visier und die geschichteten Oberflächen des Anzugs.", "sketch_label": "Designphase · Exploration", "sketch_title": "Von der Skizze zur Form.", "sketch_text": "Das Konzept entwickelt sich von ersten Formstudien über seitliche Proportionen und orthografische Ansichten zu einer gerenderten Skizze. Diese Zeichnungen bildeten den Ausgangspunkt für die Arbeit in Vizcom.", "sketch_names": ["Erste Formstudien", "Seitenentwicklung", "Front und Heck", "Gerenderte Skizze"], "sketch_alts": ["Fünf erste Sportwagenstudien in roten Linien", "Seitenentwicklung von Proportionslinien bis zur detaillierten Zeichnung", "Orthografische Front- und Heckansichten des Autos", "Gerenderte Fahrzeugskizze mit Snake Eyes vor einem roten Kreis"], "studio_label": "Vizcom · Studioansichten", "studio_title": "Durch Licht definiert.", "studio_text": "Fünf Ansichten und ein Raddetail des Konzepts, in Vizcom aus den Skizzen entwickelt.", "studio_names": ["Front", "Vordere Dreiviertelansicht", "Seite", "Hintere Dreiviertelansicht", "Heck", "Raddetail"], "context_label": "Vizcom · Umgebungen", "context_titles": ["Eine Signatur im Dunkeln.", "Der Kurve folgen.", "Wo Rot auf Blau trifft.", "Zwischen Licht und Schatten.", "Die Stille durchbrechen.", "Eine Spur hinterlassen."], "workflow_label": "Designprozess", "workflow_title": "Hinter den Bildern.", "workflow_text": "Die ursprüngliche Vizcom-Workbench bietet einen Einblick in den Prozess der Bildentwicklung.", "workflow_link": "Workflow in Vizcom erkunden", "workflow_note": "Nur ansehen · Öffnet Vizcom in einem neuen Tab", "prev": "Vorherige Studioansicht", "next": "Nächste Studioansicht", "play": "Diashow starten", "pause": "Diashow pausieren", "view": "Ansicht", "of": "von", "markup": "<div class=\"visor-project\"><section id=\"visor-moodboard\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Designphase · Inspiration</p><h2 class=\"cmp-section-title\">Moodboard</h2></div><p class=\"visor-intro\">Snake Eyes bildete den visuellen Ausgangspunkt: der Helm, das horizontale Visier und die geschichteten Oberflächen des Anzugs.</p></div><div class=\"visor-moodboard\" role=\"img\" aria-label=\"Neun Snake-Eyes-Referenzen vor einem roten Kreis\"><span class=\"visor-mood-circle\" aria-hidden=\"true\"></span><img src=\"/images/visor/mood-09.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:239;--y:213\" data-order=\"5\"><img src=\"/images/visor/mood-07.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:355;--y:130\" data-order=\"3\"><img src=\"/images/visor/mood-03.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:355;--y:296\" data-order=\"4\"><img src=\"/images/visor/mood-04.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:470;--y:47\" data-order=\"1\"><img src=\"/images/visor/mood-08.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:470;--y:213\" data-order=\"0\"><img src=\"/images/visor/mood-06.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:470;--y:378\" data-order=\"2\"><img src=\"/images/visor/mood-01.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:585;--y:127\" data-order=\"6\"><img src=\"/images/visor/mood-05.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:585;--y:296\" data-order=\"7\"><img src=\"/images/visor/mood-02.webp\" width=\"604\" height=\"900\" alt=\"\" aria-hidden=\"true\" loading=\"lazy\" style=\"--x:701;--y:213\" data-order=\"8\"></div></section><section id=\"visor-sketches\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Designphase · Exploration</p><h2 class=\"cmp-section-title\">Von der Skizze zur Form.</h2></div><p class=\"visor-intro\">Das Konzept entwickelt sich von ersten Formstudien über seitliche Proportionen und orthografische Ansichten zu einer gerenderten Skizze. Diese Zeichnungen bildeten den Ausgangspunkt für die Arbeit in Vizcom.</p></div><figure class=\"visor-sketch\"><img src=\"/images/visor/v4/sketch-01.webp\" srcset=\"/images/visor/v4/sketch-01-960.webp 960w, /images/visor/v4/sketch-01-1920.webp 1920w, /images/visor/v4/sketch-01.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Fünf erste Sportwagenstudien in roten Linien\" loading=\"lazy\" decoding=\"async\"><figcaption>Erste Formstudien</figcaption></figure><figure class=\"visor-sketch\"><img src=\"/images/visor/v4/sketch-02.webp\" srcset=\"/images/visor/v4/sketch-02-960.webp 960w, /images/visor/v4/sketch-02-1920.webp 1920w, /images/visor/v4/sketch-02.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Seitenentwicklung von Proportionslinien bis zur detaillierten Zeichnung\" loading=\"lazy\" decoding=\"async\"><figcaption>Seitenentwicklung</figcaption></figure><figure class=\"visor-sketch\"><img src=\"/images/visor/v4/sketch-03.webp\" srcset=\"/images/visor/v4/sketch-03-960.webp 960w, /images/visor/v4/sketch-03-1920.webp 1920w, /images/visor/v4/sketch-03.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Orthografische Front- und Heckansichten des Autos\" loading=\"lazy\" decoding=\"async\"><figcaption>Front und Heck</figcaption></figure><figure class=\"visor-sketch\"><img src=\"/images/visor/v4/sketch-04.webp\" srcset=\"/images/visor/v4/sketch-04-960.webp 960w, /images/visor/v4/sketch-04-1920.webp 1920w, /images/visor/v4/sketch-04.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Gerenderte Fahrzeugskizze mit Snake Eyes vor einem roten Kreis\" loading=\"lazy\" decoding=\"async\"><figcaption>Gerenderte Skizze</figcaption></figure></section><section id=\"visor-studio\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Vizcom · Studioansichten</p><h2 class=\"cmp-section-title\">Durch Licht definiert.</h2></div><p class=\"visor-intro\">Fünf Ansichten und ein Raddetail des Konzepts, in Vizcom aus den Skizzen entwickelt.</p></div><div class=\"visor-carousel\" role=\"region\" aria-roledescription=\"Karussell\" aria-label=\"Vizcom · Studioansichten\"><div class=\"visor-stage\"><figure class=\"visor-slide\" role=\"group\" aria-label=\"Ansicht 1 von 6: Front\" data-caption=\"Front\"><img src=\"/images/visor/renders-2026-10-03/studio-front.webp\" srcset=\"/images/visor/renders-2026-10-03/studio-front-960.webp 960w, /images/visor/renders-2026-10-03/studio-front-1920.webp 1920w, /images/visor/renders-2026-10-03/studio-front.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Frontansicht von Visor im Studio mit weißen horizontalen Scheinwerfern\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-slide\" role=\"group\" aria-label=\"Ansicht 2 von 6: Vordere Dreiviertelansicht\" data-caption=\"Vordere Dreiviertelansicht\"><img src=\"/images/visor/renders-2026-10-03/studio-front-three-quarter.webp\" srcset=\"/images/visor/renders-2026-10-03/studio-front-three-quarter-960.webp 960w, /images/visor/renders-2026-10-03/studio-front-three-quarter-1920.webp 1920w, /images/visor/renders-2026-10-03/studio-front-three-quarter.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Erhöhte vordere Dreiviertelansicht von Visor im Studio\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-slide\" role=\"group\" aria-label=\"Ansicht 3 von 6: Seite\" data-caption=\"Seite\"><img src=\"/images/visor/renders-2026-10-03/studio-side.webp\" srcset=\"/images/visor/renders-2026-10-03/studio-side-960.webp 960w, /images/visor/renders-2026-10-03/studio-side-1920.webp 1920w, /images/visor/renders-2026-10-03/studio-side.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Seitenprofil von Visor im Studio\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-slide\" role=\"group\" aria-label=\"Ansicht 4 von 6: Hintere Dreiviertelansicht\" data-caption=\"Hintere Dreiviertelansicht\"><img src=\"/images/visor/renders-2026-10-03/studio-rear-three-quarter.webp\" srcset=\"/images/visor/renders-2026-10-03/studio-rear-three-quarter-960.webp 960w, /images/visor/renders-2026-10-03/studio-rear-three-quarter-1920.webp 1920w, /images/visor/renders-2026-10-03/studio-rear-three-quarter.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Hintere Dreiviertelansicht von Visor im Studio\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-slide\" role=\"group\" aria-label=\"Ansicht 5 von 6: Heck\" data-caption=\"Heck\"><img src=\"/images/visor/renders-2026-10-03/studio-rear.webp\" srcset=\"/images/visor/renders-2026-10-03/studio-rear-960.webp 960w, /images/visor/renders-2026-10-03/studio-rear-1920.webp 1920w, /images/visor/renders-2026-10-03/studio-rear.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Heckansicht von Visor im Studio mit roten horizontalen Leuchten\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-slide\" role=\"group\" aria-label=\"Ansicht 6 von 6: Raddetail\" data-caption=\"Raddetail\"><img src=\"/images/visor/renders-2026-10-03/studio-wheel.webp\" srcset=\"/images/visor/renders-2026-10-03/studio-wheel-960.webp 960w, /images/visor/renders-2026-10-03/studio-wheel-1920.webp 1920w, /images/visor/renders-2026-10-03/studio-wheel.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Studio-Detail des Visor-Rads mit Speichen, roter Radmitte und Bremssattel\" loading=\"lazy\" decoding=\"async\"></figure><div class=\"visor-arrows\" hidden><button type=\"button\" data-visor-prev aria-label=\"Vorherige Studioansicht\"><span aria-hidden=\"true\">←</span></button><button type=\"button\" data-visor-next aria-label=\"Nächste Studioansicht\"><span aria-hidden=\"true\">→</span></button></div></div><div class=\"visor-controls\" hidden><span class=\"visor-count\">01 / 06</span><span class=\"visor-caption\"></span></div><p class=\"visor-status\" role=\"status\" aria-live=\"polite\" aria-atomic=\"true\"></p></div></section><section id=\"visor-night\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Vizcom · Umgebungen</p><h2 class=\"cmp-section-title\">Eine Signatur im Dunkeln.</h2></div></div><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/parking-1.webp\" srcset=\"/images/visor/renders-2026-10-03/parking-1-960.webp 960w, /images/visor/renders-2026-10-03/parking-1-1920.webp 1920w, /images/visor/renders-2026-10-03/parking-1.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Frontansicht von Visor bei Nacht mit horizontaler Lichtsignatur\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/parking-2.webp\" srcset=\"/images/visor/renders-2026-10-03/parking-2-960.webp 960w, /images/visor/renders-2026-10-03/parking-2-1920.webp 1920w, /images/visor/renders-2026-10-03/parking-2.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Vordere Dreiviertelansicht von Visor auf dunklem Asphalt mit horizontalen weißen Scheinwerfern\" loading=\"lazy\" decoding=\"async\"></figure></section><section id=\"visor-mountain\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Vizcom · Umgebungen</p><h2 class=\"cmp-section-title\">Der Kurve folgen.</h2></div></div><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/snow-1.webp\" srcset=\"/images/visor/renders-2026-10-03/snow-1-960.webp 960w, /images/visor/renders-2026-10-03/snow-1-1920.webp 1920w, /images/visor/renders-2026-10-03/snow-1.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Visor auf einer verschneiten Bergstraße zur blauen Stunde\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/snow-2.webp\" srcset=\"/images/visor/renders-2026-10-03/snow-2-960.webp 960w, /images/visor/renders-2026-10-03/snow-2-1920.webp 1920w, /images/visor/renders-2026-10-03/snow-2.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Visor in Bewegung durch eine Kurve auf einer verschneiten Bergstraße\" loading=\"lazy\" decoding=\"async\"></figure></section><section id=\"visor-blue-hour\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Vizcom · Umgebungen</p><h2 class=\"cmp-section-title\">Wo Rot auf Blau trifft.</h2></div></div><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/night-sky-1.webp\" srcset=\"/images/visor/renders-2026-10-03/night-sky-1-960.webp 960w, /images/visor/renders-2026-10-03/night-sky-1-1920.webp 1920w, /images/visor/renders-2026-10-03/night-sky-1.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Rote Rücklichter von Visor auf einer kurvigen nassen Straße zur blauen Stunde\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/night-sky-2.webp\" srcset=\"/images/visor/renders-2026-10-03/night-sky-2-960.webp 960w, /images/visor/renders-2026-10-03/night-sky-2-1920.webp 1920w, /images/visor/renders-2026-10-03/night-sky-2.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Tiefe hintere Fahrtansicht von Visor auf einer nassen Straße zur blauen Stunde\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/night-sky-3.webp\" srcset=\"/images/visor/renders-2026-10-03/night-sky-3-960.webp 960w, /images/visor/renders-2026-10-03/night-sky-3-1920.webp 1920w, /images/visor/renders-2026-10-03/night-sky-3.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Tiefe hintere Dreiviertelansicht von Visor unter einem weiten blauen Abendhimmel\" loading=\"lazy\" decoding=\"async\"></figure></section><section id=\"visor-forest\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Vizcom · Umgebungen</p><h2 class=\"cmp-section-title\">Zwischen Licht und Schatten.</h2></div></div><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/forest-1.webp\" srcset=\"/images/visor/renders-2026-10-03/forest-1-960.webp 960w, /images/visor/renders-2026-10-03/forest-1-1920.webp 1920w, /images/visor/renders-2026-10-03/forest-1.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Visor auf einem Waldweg mit Staub im Sonnenlicht\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/forest-2.webp\" srcset=\"/images/visor/renders-2026-10-03/forest-2-960.webp 960w, /images/visor/renders-2026-10-03/forest-2-1920.webp 1920w, /images/visor/renders-2026-10-03/forest-2.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Hintere Dreiviertelansicht von Visor auf einem sonnigen Waldweg\" loading=\"lazy\" decoding=\"async\"></figure></section><section id=\"visor-concrete\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Vizcom · Umgebungen</p><h2 class=\"cmp-section-title\">Die Stille durchbrechen.</h2></div></div><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/garage-1.webp\" srcset=\"/images/visor/renders-2026-10-03/garage-1-960.webp 960w, /images/visor/renders-2026-10-03/garage-1-1920.webp 1920w, /images/visor/renders-2026-10-03/garage-1.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Vordere Dreiviertelansicht von Visor mit Reifenrauch in einem Betonparkhaus\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/garage-2.webp\" srcset=\"/images/visor/renders-2026-10-03/garage-2-960.webp 960w, /images/visor/renders-2026-10-03/garage-2-1920.webp 1920w, /images/visor/renders-2026-10-03/garage-2.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Hintere Dreiviertelansicht von Visor mit Reifenrauch in einem Betonparkhaus\" loading=\"lazy\" decoding=\"async\"></figure></section><section id=\"visor-dust\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Vizcom · Umgebungen</p><h2 class=\"cmp-section-title\">Eine Spur hinterlassen.</h2></div></div><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/desert-1.webp\" srcset=\"/images/visor/renders-2026-10-03/desert-1-960.webp 960w, /images/visor/renders-2026-10-03/desert-1-1920.webp 1920w, /images/visor/renders-2026-10-03/desert-1.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Erhöhte hintere Dreiviertelansicht von Visor in einer staubigen Kurve\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/desert-2.webp\" srcset=\"/images/visor/renders-2026-10-03/desert-2-960.webp 960w, /images/visor/renders-2026-10-03/desert-2-1920.webp 1920w, /images/visor/renders-2026-10-03/desert-2.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Detail durch die Windschutzscheibe mit Snake Eyes am Steuer von Visor im Staub\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/desert-3.webp\" srcset=\"/images/visor/renders-2026-10-03/desert-3-960.webp 960w, /images/visor/renders-2026-10-03/desert-3-1920.webp 1920w, /images/visor/renders-2026-10-03/desert-3.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Erhöhte vordere Dreiviertelansicht von Visor in einer Kurve auf staubigem Boden\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/desert-4.webp\" srcset=\"/images/visor/renders-2026-10-03/desert-4-960.webp 960w, /images/visor/renders-2026-10-03/desert-4-1920.webp 1920w, /images/visor/renders-2026-10-03/desert-4.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Erhöhte Heckansicht von Visor mit einer Staubspur auf hellem Boden\" loading=\"lazy\" decoding=\"async\"></figure><figure class=\"visor-context\"><img src=\"/images/visor/renders-2026-10-03/desert-5.webp\" srcset=\"/images/visor/renders-2026-10-03/desert-5-960.webp 960w, /images/visor/renders-2026-10-03/desert-5-1920.webp 1920w, /images/visor/renders-2026-10-03/desert-5.webp 3840w\" sizes=\"100vw\" width=\"3840\" height=\"2160\" alt=\"Draufsicht auf Visor zwischen kreisförmigen Reifenspuren und Staub\" loading=\"lazy\" decoding=\"async\"></figure></section><section id=\"visor-workflow\"><div class=\"cmp-section visor-heading\" data-visor-reveal><div class=\"cmp-section-hd\"><p class=\"cmp-section-label\">Designprozess</p><h2 class=\"cmp-section-title\">Hinter den Bildern.</h2></div><p class=\"visor-intro\">Die ursprüngliche Vizcom-Workbench bietet einen Einblick in den Prozess der Bildentwicklung.</p></div><div class=\"visor-workflow-link\"><a href=\"https://app.vizcom.com/workbench/c925350f-3dc9-467b-bfdd-15313a47238c#sharing_secret=6c4d3779-8fc9-4130-a1eb-b4205e86e440\" target=\"_blank\" rel=\"noopener noreferrer\" aria-describedby=\"visor-workflow-note\">Workflow in Vizcom erkunden <span aria-hidden=\"true\">↗</span></a><p id=\"visor-workflow-note\">Nur ansehen · Öffnet Vizcom in einem neuen Tab</p></div></section></div>"}};
 const PROJECTS = {
+  visor: {"title": "Visor", "eyebrow": "Automotive design + Visualisation", "tagline": "A Snake Eyes-inspired automotive concept, developed from sketches into Vizcom visualisations.", "specs": [{"l": "Category", "v": "Automotive concept"}, {"l": "Year", "v": "2026"}, {"l": "Tools", "v": "Sketching · Vizcom"}, {"l": "Status", "v": "Personal concept"}], "desc": ["A personal automotive design project inspired by Snake Eyes, conceived as an exercise in bringing Vizcom into my workflow.", "Starting from my own sketches, I used visualisation to explore the concept in different environments, working with lighting and image fidelity."], "hPanels": [], "panels": [], prev:null, next:"intent"},
   intent: {
     hPanels:[],
     title:'Intent', eyebrow:'UX Research + ID',
@@ -1090,34 +1368,34 @@ const PROJECTS = {
     specs:[{l:'Category',v:'UX Research · Industrial Design'},{l:'Year',v:'2026'},{l:'Materials',v:"Aluminium · Brass · Steel · Polycarbonate · PVC plastisol"},{l:'Status',v:'Concept · 2026'}],
     desc:["Intent explores a bicycle bell with three levels of urgency, controlled through consecutive thumb presses. The aim is to give the rider a way to differentiate a polite request to pass from a more urgent warning.", "I compared existing bell types, observed a rider in traffic, and mapped the people and situations involved. The recurring issue was the gap between sending a sound and communicating the intention behind it. That finding guided the decision to explore a graduated mechanical signal.", "A ratchet holds the position between consecutive presses while a cam increases the hammer stroke. After a pause, a light spring return is intended to bring the mechanism back to its starting position. The project develops this mechanical concept without a battery."],
     panels:[],
-    prev:null, next:'flujo'
+    prev:"visor", next:"flujo"
   },
   flujo: {
     hPanels:[],
-    title:'Flujo', eyebrow:'02. Lighting',
+    title:'Flujo', eyebrow:'03. Lighting',
     tagline:'A wall lamp built on the logic of breath, printed, minimal, meditative.',
     specs:[{l:'Category',v:'Lighting Design'},{l:'Year',v:'2025'},{l:'Materials',v:'PETG, Standard Components'},{l:'Process',v:'FDM 3D Print'}],
     desc:["Flujo began with two constraints: use as few parts as possible and develop a geometry around the possibilities of 3D printing. The lamp uses two main bodies, a shade and a wall support, with a printed internal pattern that becomes visible when the light is on.", "Breathing provided the conceptual reference: an internal, rhythmic and continuous movement. This guided the flowing surfaces and the relationship between the quiet appearance of the object when off and the pattern revealed by light. PETG was selected for its translucency and thermal resistance."],
     panels:['/images/flujo_cover.webp','/images/flujo2.webp','/images/flujo4.webp','/videos/flujo-reel.mp4','/images/flujo5.webp','/images/flujo6.webp'],
-    prev:'intent', next:'incline'
+    prev:"intent", next:"incline"
   },
   incline: {
     hPanels:[2,3],
-    title:'Incline', eyebrow:'03. Product Design',
+    title:'Incline', eyebrow:'04. Product Design',
     tagline:'A modular planter system that adapts to the geometry of small-city living.',
     specs:[{l:'Category',v:'Product Design'},{l:'Year',v:'2024'},{l:'Materials',v:'Polypropylene'},{l:'Process',v:'Rotational Molding'}],
     desc:['INCLINE was born from a specific frustration: most outdoor planters are designed for space that compact city terraces simply do not have. The project responds with a system built around adaptability, configurable in height, length, and width without sacrificing visual coherence.','Two complementary modules form the core of the system. Their relationship is combinatorial, not fixed. The shared connection supports arrangements in height, length and width. Polypropylene rotational molding is the proposed manufacturing process.','The form was kept deliberately quiet. INCLINE does not compete with the plants, the furniture, or the architecture around it. It integrates. That restraint is not a stylistic choice, it is the design.'],
     panels:['/images/incline1.webp','/images/incline3.webp','/images/incline4.webp','/images/incline5.webp'],
-    prev:'flujo', next:'core'
+    prev:"flujo", next:"pausa"
   },
   core: {
     hPanels:[],
-    title:'Core', eyebrow:'04. Product Redesign',
+    title:'Core', eyebrow:'+ Product Redesign',
     tagline:'Under Armour\'s performance identity, compressed into a roll-on.',
     specs:[{l:'Category',v:'Product Redesign'},{l:'Year',v:'2024'},{l:'Client',v:'Under Armour (academic)'},{l:'Process',v:'Injection, Blow Molding & Ultrasonic Welding'}],
     desc:['CORE asks a single question: what would it look like if Under Armour designed a deodorant? The answer lives in the details, the grip geometry, the surface texture, the weight of the cap in hand. Every decision was calibrated to communicate precision and physical confidence at a scale the brand rarely operates in.','The real design challenge was technical: translating a brand language built for large-format products into a form compatible with injection molding, blow molding, and ultrasonic welding. Every radius and rib had to carry its weight. Decorative complexity was not an option.','The outcome is a compact, performance-coded object that holds its own next to an Under Armour sneaker. Small in scale, dense in intent.'],
     panels:['/images/core1.webp','/images/core2.webp','/images/core4.webp'],
-    prev:'incline', next:'pausa'
+    prev:"pausa", next:"promix"
   },
   promix: {
     hPanels:[],
@@ -1126,7 +1404,7 @@ const PROJECTS = {
     specs:[{l:'Category',v:'Product Redesign'},{l:'Year',v:'2025'},{l:'Client',v:'Philips (academic)'},{l:'Material',v:'PP'},{l:'Process',v:'Injection Molding'}],
     desc:["The project began with a component analysis of the Philips ProMix hand blender. I looked for an opportunity to improve the user experience through a change to one existing part.", "The cap offered space that was not contributing to use or storage. I chose to give that space a practical role: holding the cable and plug without changing the rest of the product.", "A recessed channel guides the cable from a dedicated plug housing to the storage wrap. The redesigned cap connects to the existing rear casing through lateral snap-fit tabs. A printed prototype was used to check the connection and cable fit."],
     panels:['/images/promix-panel.webp','/images/promix-plano-tapa.webp','/images/promix-plano-explotada.webp','/images/promix-plano-conjunto.webp'],
-    prev:'pausa', next:'intervalo'
+    prev:"core", next:"intervalo"
   },
   mantablast: {
     hPanels:[0,1,2,3],
@@ -1135,7 +1413,7 @@ const PROJECTS = {
     specs:[{l:'Category',v:'Product Design'},{l:'Year',v:'2024'},{l:'Materials',v:'PLA'},{l:'Process',v:'FDM 3D Print'}],
     desc:['Manta Blast started with a form study on the manta ray. Not its silhouette, but the qualities it moves with: the way it glides, the continuous curves of its body, the absence of sharp transitions. Translating those into a handheld object meant designing a form that felt resolved in the hand before it felt like anything else.','The geometry was developed entirely around grip and ergonomics. The handle falls naturally into the palm, the trigger is positioned for intuitive use, and the reload gesture follows a single linear motion. Every surface decision traces back to how the object is held, operated, and returned to.','Printed in PLA via FDM, the design exploits additive manufacturing to achieve the organic transitions developed in the form study. The result is a single fluid form split into only the components that the mechanism demands: body, plunger, nozzle, and cap.'],
     panels:['/images/manta-1.webp','/videos/manta-2.mp4','/images/manta-3.webp','/images/manta-4.webp'],
-    prev:'intervalo', next:null
+    prev:"intervalo", next:null
   },
   intervalo: {
     hPanels:[0,1,2],
@@ -1144,7 +1422,7 @@ const PROJECTS = {
     specs:[{l:'Category',v:'Industrial Design'},{l:'Year',v:'2026'},{l:'Client',v:'YPF (academic)'},{l:'Materials',v:'Steel, Sheet Metal, Wood, PVC'},{l:'Process',v:'Welding & Assembly'}],
     desc:['The project starts from a behavioral observation: drivers already wait at the pump. That downtime, usually dead, became the design opportunity. Intervalo is a self-service kiosk positioned at the fuel dispenser, allowing purchases directly from the car window: an opportunity to combine the waiting time with access to refreshments.','The product identity, "full," is embedded in the physical structure through LED lettering and PVC-clad wood slat paneling. A single cabinet integrates a coffee machine, refrigerated display, payment terminal, and removable bins, all accessible and restockable from the rear without disrupting the forecourt.','The manufacturing process runs through six stages: welded steel profiles, sheet metal cladding, surface treatment, cabinetry assembly, PVC cladding with LED signage, and equipment installation. The result is a kiosk concept that brings these functions into one unit.'],
     panels:['/images/ypf-1.webp','/images/ypf-2.webp','/images/ypf-3.webp'],
-    prev:'promix', next:'mantablast'
+    prev:"promix", next:"mantablast"
   },
   pausa: {
     hPanels:[],
@@ -1153,7 +1431,7 @@ const PROJECTS = {
     specs:[{l:'Category',v:'Furniture Design'},{l:'Year',v:'2025'},{l:'Client',v:'Myke Outdoors'},{l:'Materials',v:'Aluminum, Nautical Fabric, Dekton'}],
     desc:['PAUSA started as a brief from Myke Outdoors: expand the catalog, reach a younger audience, challenge the visual heaviness of traditional exterior furniture. What emerged was less a collection of objects and more a proposition about time, the kind of furniture that makes stopping feel earned.','The concept of pause shaped every decision. These are pieces designed for coffee, for reading, for sitting in stillness. Their proportions are controlled, their weight reduced, their presence understated, not as a stylistic choice, but because lightness is what makes a pause feel possible.','Three materials governed the entire collection: aluminum profiles, nautical fabric, and Dekton surfaces. Working within those limits turned out to be productive. It forced structural honesty and gave the collection a coherence that feels rigorous and natural at once.'],
     panels:['/images/pausa1.webp','/images/pausa2.webp','/images/pausa4.webp','/videos/pausa-reel.mp4'],
-    prev:'core', next:'promix'
+    prev:"incline", next:"core"
   }
 };
 window.PROJECTS = PROJECTS;
@@ -1191,6 +1469,7 @@ function routeFromLocation(){
 }
 function saveRoutePosition(){const page=document.querySelector('.page.active');if(!page||!history.state)return;history.replaceState({...history.state,scrollTop:page.scrollTop,panelScroll:document.getElementById('pt')?.scrollLeft||0},'',location.href);}
 function go(page,id,pushState=true){
+ window._sketchDrawingCleanup?.();window._visorCleanup?.();
  if(!['home','sketches','about','contact','project'].includes(page)||(page==='project'&&!PROJECTS[id])){page='home';id=null;}
  if(pushState)saveRoutePosition();
  closeLightbox();closeLangMenu();toggleMenu(false);
@@ -1204,7 +1483,7 @@ function go(page,id,pushState=true){
  if(pushState){const state={page,id:id||null,scrollTop:0,panelScroll:0};if(location.pathname+location.search===url)history.replaceState(state,'',url);else history.pushState(state,'',url);}
  const state=history.state||{};next.scrollTop=pushState?0:(state.scrollTop||0);
  const track=next.querySelector('#pt');if(track)track.scrollLeft=pushState?0:(state.panelScroll||0);
- requestAnimationFrame(()=>{if(!next.classList.contains('active'))return;next.querySelectorAll('.fu').forEach(el=>el.classList.add('in'));const target=next.querySelector('h1,h2')||next.querySelector('.page-content');if(target){target.tabIndex=-1;target.focus({preventScroll:true});}});
+ requestAnimationFrame(()=>{if(!next.classList.contains('active'))return;window.refreshPortfolioMotion?.(next);const target=next.querySelector('h1,h2')||next.querySelector('.page-content');if(target){target.tabIndex=-1;target.focus({preventScroll:true});}});
  updatePageMetadata(page,id);
 }
 window.addEventListener('popstate',()=>{const route=routeFromLocation();go(route.page,route.id,false);});
@@ -1248,7 +1527,9 @@ function _updateLbArrows() {
   prev.classList.toggle('vis', _lbIdx > 0);prev.disabled=_lbIdx<=0;
   next.classList.toggle('vis', _lbIdx < _curPanels.length-1);next.disabled=_lbIdx>=_curPanels.length-1;
 }
-function openLightbox(src, idx) {
+let _lbSavedPanels=null;
+function openLightbox(src, idx, panels) {
+  if(panels){if(_lbSavedPanels===null)_lbSavedPanels=_curPanels;_curPanels=panels;}
   _lbReturnFocus=document.activeElement;
   _lbIdx = idx ?? _curPanels.indexOf(src);
   _showInLightbox(src);
@@ -1265,6 +1546,7 @@ function lbNav(dir) {
   _updateLbArrows();
 }
 function closeLightbox() {
+  if(_lbSavedPanels!==null){_curPanels=_lbSavedPanels;_lbSavedPanels=null;}
   const vid=document.getElementById('lbVideo');
   vid.pause(); vid.src='';
   const box=document.getElementById('lightbox');const wasOpen=box.classList.contains('open');box.classList.remove('open');box.inert=true;box.setAttribute('aria-hidden','true');document.querySelector('.page.active')?.removeAttribute('inert');document.getElementById('nav').inert=false;if(wasOpen&&_lbReturnFocus?.isConnected)_lbReturnFocus.focus({preventScroll:true});
@@ -1354,8 +1636,10 @@ function _cmpGradoUI(reset) {
 }
 
 function buildProject(id) {
+  window._sketchDrawingCleanup?.();window._visorCleanup?.();
   window._currentProjectId = id;
-  const p = PROJECTS[id];
+  if(isProjectLocked(id)){showUnavailableProject(id);return;}
+  const p = id==='visor' ? {...PROJECTS[id],...VISOR_COPY[window.currentLang||'en'].project} : PROJECTS[id];
   const tr = (window.TRANS && window.currentLang && window.currentLang!=='en') ? (window.TRANS[window.currentLang]?.projects?.[id]||{}) : {};
   const ui = (window.TRANS && window.currentLang && window.currentLang!=='en') ? (window.TRANS[window.currentLang]?.ui||{}) : {};
   /* ── CAMPANA I18N ── */
@@ -1936,6 +2220,7 @@ function buildProject(id) {
   const prev   = p.prev ? `<div class="pnav-btn" onclick="go('project','${p.prev}')"><span class="pnav-lbl">${prevLbl}</span><span class="pnav-title">${PROJECTS[p.prev].title}</span></div>` : '<div style="flex:1"></div>';
   const next   = p.next ? `<div class="pnav-btn right" onclick="go('project','${p.next}')"><span class="pnav-lbl">${nextLbl}</span><span class="pnav-title">${PROJECTS[p.next].title}</span></div>` : '<div style="flex:1"></div>';
   const _projEl = document.getElementById('projContent');
+  _projEl.dataset.project=id;
   _projEl.innerHTML = `
     <header class="proj-header">
       <div><p class="proj-eyebrow fu">${p.eyebrow}</p><h1 class="proj-title fu d1">${p.title}</h1></div>
@@ -3489,11 +3774,90 @@ function buildProject(id) {
       <em>Everything else, untouched.</em>
     </div>
     ` : ''}
+    ${id==='visor' ? VISOR_COPY[_cl].markup : ''}
     <nav class="proj-footer-nav">${prev}${next}</nav>
     <footer class="footer"><p>© 2026 Nahuel Villar</p><p data-copy="copy-024">USA</p></footer>`;
   enhanceProject(_projEl,_cl);
+  if(id==='visor')initVisor(_projEl,_cl);
   initDrag(document.getElementById('pt'));
 
+}
+
+// Reveal observers follow the existing project's scroll root.
+// They are disposed on route or language changes, just like project media.
+function initVisor(root,lang) {
+  const page=root.closest('.page');
+  const motion=matchMedia('(prefers-reduced-motion: reduce)');
+  const abort=new AbortController();
+  const events={signal:abort.signal};
+  const animations=new Set(),observers=[];
+  function animate(el,frames,options={}) {
+    if(motion.matches||document.documentElement.dataset.inputMode==='keyboard'||!el.animate)return;
+    const a=el.animate(frames,{duration:450,easing:'cubic-bezier(.22,1,.36,1)',...options});
+    animations.add(a);a.finished.catch(()=>{}).finally(()=>animations.delete(a));
+  }
+  function respectMotion(){if(motion.matches)animations.forEach(a=>a.cancel());}
+  motion.addEventListener('change',respectMotion,events);
+  document.addEventListener('keydown',()=>animations.forEach(a=>a.cancel()),events);
+  const carousel=root.querySelector('.visor-carousel');
+  if(carousel){
+    const copy=VISOR_COPY[lang]||VISOR_COPY.en;
+    const slides=[...carousel.querySelectorAll('.visor-slide')];
+    const stage=carousel.querySelector('.visor-stage');
+    const count=carousel.querySelector('.visor-count');
+    const caption=carousel.querySelector('.visor-caption');
+    const status=carousel.querySelector('.visor-status');
+    let selected=0,requested=0,revision=0,gesture=null;
+    function render(index,announce){
+      slides.forEach((slide,i)=>{slide.hidden=i!==index;});
+      selected=index;
+      count.textContent=String(index+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+      caption.textContent=slides[index].dataset.caption;
+      if(announce)status.textContent=copy.view+' '+(index+1)+' '+copy.of+' '+slides.length+': '+caption.textContent;
+    }
+    async function show(index){
+      requested=(index+slides.length)%slides.length;
+      const target=requested,version=++revision;
+      if(target===selected)return;
+      const img=slides[target].querySelector('img');
+      img.loading='eager';
+      // Keep the current view visible until the requested image is decoded.
+      try{await img.decode();}catch{}
+      if(abort.signal.aborted||version!==revision)return;
+      animations.forEach(a=>a.cancel());
+      render(target,true);
+      animate(img,[{opacity:.35},{opacity:1}],{duration:240});
+    }
+    render(0,false);
+    carousel.querySelectorAll('.visor-controls,.visor-arrows').forEach(el=>{el.hidden=false;});
+    carousel.querySelector('[data-visor-prev]').addEventListener('click',()=>show(requested-1),events);
+    carousel.querySelector('[data-visor-next]').addEventListener('click',()=>show(requested+1),events);
+    carousel.addEventListener('keydown',e=>{
+      if(e.altKey||e.ctrlKey||e.metaKey)return;
+      const target={ArrowLeft:requested-1,ArrowRight:requested+1,Home:0,End:slides.length-1}[e.key];
+      if(target!==undefined){e.preventDefault();show(target);}
+    },events);
+    stage.addEventListener('pointerdown',e=>{
+      if(e.pointerType==='mouse'||!e.isPrimary||e.target.closest('button'))return;
+      gesture={id:e.pointerId,x:e.clientX,y:e.clientY};
+    },{...events,passive:true});
+    stage.addEventListener('pointerup',e=>{
+      if(!gesture||gesture.id!==e.pointerId)return;
+      const dx=e.clientX-gesture.x,dy=e.clientY-gesture.y;gesture=null;
+      if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.5)show(requested+(dx<0?1:-1));
+    },events);
+    stage.addEventListener('pointercancel',()=>{gesture=null;},events);
+  }
+  if('IntersectionObserver' in window){
+    const board=root.querySelector('.visor-moodboard');
+    const mood=new IntersectionObserver(entries=>{
+      if(!entries.some(e=>e.isIntersecting&&e.intersectionRatio>=.4))return;
+      animate(board.querySelector('.visor-mood-circle'),[{opacity:.15},{opacity:1}],{duration:1400});
+      board.querySelectorAll('img').forEach(el=>animate(el,[{opacity:0,transform:'translateY(24px)'},{opacity:1,transform:'none'}],{duration:1700,delay:300+Number(el.dataset.order)*340,easing:'cubic-bezier(.25,.1,.25,1)',fill:'backwards'}));mood.disconnect();
+    },{root:page,threshold:.4});mood.observe(board);observers.push(mood);
+  }
+  respectMotion();
+  window._visorCleanup=()=>{abort.abort();observers.forEach(o=>o.disconnect());animations.forEach(a=>a.cancel());window._visorCleanup=null;};
 }
 
 function initDrag(el) {
@@ -3501,7 +3865,7 @@ function initDrag(el) {
   let down=false, startX, startSL, velX=0, lastX, lastT, rafId, dragged=false;
 
   const momentum = () => {
-    if(Math.abs(velX) < 0.3) return;
+    if(Math.abs(velX) < 0.3 || !el.isConnected || !el.closest('.page.active') || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     el.scrollLeft += velX;
     velX *= 0.93;
     rafId = requestAnimationFrame(momentum);
@@ -3532,7 +3896,7 @@ function initDrag(el) {
     if(!down) return;
     down=false;
     el.style.cursor='grab';
-    requestAnimationFrame(momentum);
+    rafId=requestAnimationFrame(momentum);
   };
   el.addEventListener('mouseup', e => {
     if(dragged) e.stopPropagation();
@@ -3567,14 +3931,14 @@ document.querySelectorAll('.page').forEach(p=>p.addEventListener('scroll',()=>{
 },{passive:true}));
 
 // Init home animations
-requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el=>el.classList.add('in')));
+// Route initialization starts the shared entrance animations.
 
 // ── Custom cursor: crosshair ──
 (function(){
   const cross = document.getElementById('cCross');
   if(!cross) return;
 
-  const HOVER_SEL = 'a,button,[onclick],.project-card-wrap,.extra-card-wrap,.about-photo-stack,.nav-back,.pnav-btn,.nav-logo,.nav-hamburger,.lb-close,.lb-arrow,.c-item';
+  const HOVER_SEL = 'a,button,[onclick],.project-card-wrap:not(.is-locked),.extra-card-wrap,.about-photo-stack,.nav-back,.pnav-btn,.nav-logo,.nav-hamburger,.lb-close,.lb-arrow,.c-item';
   let activated = false;
 
   document.addEventListener('mousemove', e=>{
@@ -3645,9 +4009,10 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   ];
 
   // Preload trail images only on devices eligible to display the effect.
+  const trailMotion=matchMedia('(prefers-reduced-motion: reduce)');
   let _trailPreloaded = false;
   function preloadTrailImages(){
-    if(_trailPreloaded || innerWidth <= 900 || !matchMedia('(any-hover:hover) and (any-pointer:fine)').matches) return;
+    if(trailMotion.matches || _trailPreloaded || innerWidth <= 900 || !matchMedia('(any-hover:hover) and (any-pointer:fine)').matches) return;
     _trailPreloaded = true;
     files.forEach(function(f){
       var img = new Image();
@@ -3736,7 +4101,7 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   }
 
   document.addEventListener('mousemove', function(e){
-    if(window.innerWidth <= 900 || !matchMedia('(any-hover:hover) and (any-pointer:fine)').matches) return;
+    if(trailMotion.matches || window.innerWidth <= 900 || !matchMedia('(any-hover:hover) and (any-pointer:fine)').matches) return;
     if(!aboutIsActive()) return;
     if(isBlockedZone(e)) return;
 
@@ -3766,6 +4131,7 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
   window.addEventListener('scroll', clearTrail, {passive:true,capture:true});
   window.addEventListener('resize', clearTrail);
   window.addEventListener('popstate', clearTrail);
+  trailMotion.addEventListener('change',()=>{clearTrail();if(!trailMotion.matches&&aboutIsActive())preloadTrailImages();});
 })();
 
 // ── About photo: peek + tap to swap ──
@@ -3843,38 +4209,71 @@ requestAnimationFrame(()=>document.querySelectorAll('#page-home .fu').forEach(el
 
 /* ── Dice intro handled via CSS animation — no JS timeout needed ── */
 
-/* ── Scroll reveal (IntersectionObserver) ── */
+/* Shared motion uses each fixed page as its scroll root. Content is visible
+   without JavaScript; animation never controls whether it can be read. */
 (function(){
-  document.body.classList.add('js-loaded');
+  const preference=matchMedia('(prefers-reduced-motion: reduce)');
+  const seen=new WeakSet(), running=new Map();
+  const selector='.case-reveal,.fu,.process-header,.cmp-section-hd,.split-left,.proto-header,.process-closing,.origins-question,.sketches-title,.sketch-year-title,.sketch-item,.visor-heading,.visor-workflow-link,.visor-context,.visor-sketch:not([data-sketch-drawing]),img.cmp-render-full';
+  let page=null,observer=null,registered=new WeakSet();
+  let keyboard=false;
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Tab'||e.key==='Enter'||e.key===' '||e.key.startsWith('Arrow')){
+      keyboard=true;document.documentElement.dataset.inputMode='keyboard';
+      running.forEach(a=>a.cancel());running.clear();
+    }
+  },true);
+  document.addEventListener('pointerdown',()=>{
+    keyboard=false;delete document.documentElement.dataset.inputMode;
+  },{passive:true,capture:true});
 
-  const SEL = '.split-block,.proto-wrap,.process-closing,.evo-wrap,.origins-grid,.origins-question';
-  const obs = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){ e.target.classList.add('sr-in'); obs.unobserve(e.target); }
-    });
-  }, {threshold: 0.1});
-
-  function observe(){
-    document.querySelectorAll(SEL).forEach(el=>{
-      if(!el.classList.contains('sr-in')) obs.observe(el);
+  function reveal(el){
+    if(seen.has(el))return;
+    seen.add(el);el.dataset.motionSeen='true';
+    if(preference.matches||keyboard||!el.animate)return;
+    // Images fade at their existing size. Headings travel only 14px.
+    const image=el.matches('img,.sketch-item,.visor-context,.visor-sketch');
+    const delay=[1,2,3,4].find(n=>el.classList.contains('d'+n))||0;
+    const animation=el.animate([
+      {opacity:0,transform:image?'none':'translateY(14px)'},
+      {opacity:1,transform:'none'}
+    ],{duration:image?500:460,delay:delay*35,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'});
+    running.set(el,animation);
+    animation.finished.catch(()=>{}).finally(()=>{
+      if(running.get(el)===animation)running.delete(el);
     });
   }
-  observe();
 
-  // Re-observe after project pages are built
-  const _build = window.buildProject;
-  if(_build) window.buildProject = function(id){
-    _build(id);
-    requestAnimationFrame(observe);
+  window.refreshPortfolioMotion=function(next){
+    if(!next?.classList.contains('active'))return;
+    if(page!==next){
+      observer?.disconnect();running.forEach(a=>a.cancel());running.clear();
+      page=next;registered=new WeakSet();
+      observer='IntersectionObserver' in window?new IntersectionObserver(entries=>{
+        entries.forEach(({target,isIntersecting})=>{
+          if(!isIntersecting||!page.classList.contains('active'))return;
+          reveal(target);observer.unobserve(target);
+        });
+      },{root:page,threshold:.08}):null;
+    }
+    // Drop detached content after a language rebuild.
+    running.forEach((a,el)=>{if(!el.isConnected){a.cancel();running.delete(el);}});
+    page.querySelectorAll(selector).forEach(el=>{
+      if(seen.has(el)||registered.has(el)||el.parentElement.closest(selector))return;
+      registered.add(el);
+      if(observer&&!preference.matches)observer.observe(el);else reveal(el);
+    });
   };
-
-  // Also hook into go() to re-observe on page change
-  const _go = window.go;
-  if(_go) window.go = function(...args){
-    _go(...args);
-    setTimeout(observe, 150);
-  };
+  preference.addEventListener('change',()=>{
+    if(!preference.matches)return;
+    observer?.disconnect();running.forEach(a=>a.cancel());running.clear();
+    page?.querySelectorAll(selector).forEach(el=>{seen.add(el);el.dataset.motionSeen='true';});
+  });
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){running.forEach(a=>a.cancel());running.clear();}
+  });
 })();
+
 
 /* ── i18n: Language switcher ── */
 window.currentLang = 'en';
@@ -4511,9 +4910,9 @@ const STATIC_COPY = {
     "de": "Hammer"
   },
   "copy-073": {
-    "en": "02. Lighting",
-    "es": "02. Iluminación",
-    "de": "02. Lichtdesign"
+    "en": "03. Lighting",
+    "es": "03. Iluminación",
+    "de": "03. Lichtdesign"
   },
   "copy-074": {
     "en": "Lighting Design",
@@ -4746,9 +5145,9 @@ const STATIC_COPY = {
     "de": "Ein Objekt, das ausgeschaltet zum Betrachten einlädt.<br>Eingeschaltet <em>zeigt es, was schon immer in ihm war</em>."
   },
   "copy-120": {
-    "en": "03. Product Design",
-    "es": "03. Diseño de producto",
-    "de": "03. Produktdesign"
+    "en": "04. Product Design",
+    "es": "04. Diseño de producto",
+    "de": "04. Produktdesign"
   },
   "copy-121": {
     "en": "Product Design",
@@ -4916,9 +5315,9 @@ const STATIC_COPY = {
     "de": "Das gedruckte System wurde mit Erde und Pflanzen montiert, um das Verhalten der Verbindung unter Last und den Wasserabfluss zwischen den Modulen im Gebrauch zu prüfen."
   },
   "copy-154": {
-    "en": "04. Product Redesign",
-    "es": "04. Rediseño de producto",
-    "de": "04. Produktüberarbeitung"
+    "en": "+ Product Redesign",
+    "es": "+ Rediseño de producto",
+    "de": "+ Produktüberarbeitung"
   },
   "copy-155": {
     "en": "Product Redesign",
@@ -5543,8 +5942,10 @@ const STATIC_COPY = {
 };
 const supplementaryCopy=Object.fromEntries(Object.values(STATIC_COPY).map(row=>[row.en,[row.es,row.de]]));
 supplementaryCopy['Steel, Sheet Metal, Wood, PVC']=['Acero, chapa, madera, PVC','Stahl, Blech, Holz, PVC'];
+supplementaryCopy['Automotive + Visualisation · 2026']=['Automotriz + Visualización · 2026','Automobildesign + Visualisierung · 2026'];
 const originalCopy=new WeakMap();
 function tri(en,es,de,lang=window.currentLang){return lang==='es'?es:lang==='de'?de:en;}
+for(const lang of ['es','de'])window.TRANS[lang].projects.visor=VISOR_COPY[lang].project;
 function localText(key){const values={'At rest':['En reposo','In Ruhe'],'Close':['Cerrar','Schließen'],'Previous image':['Imagen anterior','Vorheriges Bild'],'Next image':['Imagen siguiente','Nächstes Bild'],'Menu':['Menú','Menü'],'Language':['Idioma','Sprache'],'Image gallery':['Galería de imágenes','Bildergalerie']};return window.currentLang==='en'?key:values[key]?.[window.currentLang==='es'?0:1]||key;}
 function applyStaticTranslations(root,lang){
  const visit=el=>{if(['SCRIPT','STYLE','SVG'].includes(el.tagName))return;
@@ -5557,11 +5958,16 @@ function applyStaticTranslations(root,lang){
 }
 function imageDescription(src){const sketch=SKETCHES.find(item=>item.src===src);if(sketch)return sketch.alt[window.currentLang||'en'];const name=(src||'').split('/').pop().replace(/\.(webp|png|jpg)$/i,'');const terms=[[/sketch|boceto/i,['Sketches','Bocetos','Skizzen']],[/moodboard/i,['Moodboard','Panel de referencias','Moodboard']],[/explot|explod/i,['Exploded view','Vista explotada','Explosionsansicht']],[/ambient|context/i,['Use context','Contexto de uso','Nutzungskontext']],[/prototype|proto|iteration|fittest|mockup/i,['Prototype','Prototipo','Prototyp']],[/cmf/i,['Material sample','Muestra de material','Materialmuster']],[/hero/i,['Product overview','Vista general del producto','Produktübersicht']]];const term=terms.find(([re])=>re.test(name))?.[1]||['Product view','Vista del producto','Produktansicht'];return (PROJECTS[window._currentProjectId]?.title||'')+' · '+term[window.currentLang==='es'?1:window.currentLang==='de'?2:0];}
 function trapFocus(e,root){if(e.key!=='Tab')return;const nodes=[...root.querySelectorAll('button:not(:disabled),a[href],[tabindex="0"]')].filter(x=>x.getClientRects().length&&!x.closest('[inert]'));if(!nodes.length)return;const first=nodes[0],last=nodes.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
-const ROUTE_SOCIAL_IMAGES = {"/": "https://nahuelvillar.com/images/render-hero-iso-2.webp", "/about/": "https://nahuelvillar.com/images/photo.webp", "/contact/": "https://nahuelvillar.com/images/render-hero-iso-2.webp", "/sketches/": "https://nahuelvillar.com/images/sketch-2026-09-23.webp", "/project/intent/": "https://nahuelvillar.com/images/render-hero-iso-2.webp", "/project/flujo/": "https://nahuelvillar.com/images/flujo_cover.webp", "/project/incline/": "https://nahuelvillar.com/images/incline1.webp", "/project/core/": "https://nahuelvillar.com/images/core1.webp", "/project/pausa/": "https://nahuelvillar.com/images/pausa1.webp", "/project/promix/": "https://nahuelvillar.com/images/promix-panel.webp", "/project/intervalo/": "https://nahuelvillar.com/images/ypf-1.webp", "/project/mantablast/": "https://nahuelvillar.com/images/manta-1.webp"};
-function updatePageMetadata(page,id){const project=PROJECTS[id],lang=window.currentLang||'en';const title=page==='sketches'?tri('Sketches','Bocetos','Skizzen'):page==='project'?project.title:page==='about'?tri('About','Sobre mí','Über mich'):page==='contact'?tri('Contact','Contacto','Kontakt'):tri('Industrial Design','Diseño industrial','Industriedesign');document.title=title+' | Nahuel Villar';let meta=document.querySelector('meta[name="description"]');if(!meta){meta=document.createElement('meta');meta.name='description';document.head.append(meta);}meta.content=project?(window.TRANS[lang]?.projects?.[id]?.tagline||project.tagline):tri('Industrial design portfolio of Nahuel Villar. Products, research and prototyping.','Portfolio de diseño industrial de Nahuel Villar. Productos, investigación y prototipado.','Industriedesign-Portfolio von Nahuel Villar. Produkte, Recherche und Prototypen.');let canon=document.querySelector('link[rel="canonical"]');if(!canon){canon=document.createElement('link');canon.rel='canonical';document.head.append(canon);}canon.href='https://nahuelvillar.com'+routeUrl(page,id);const socialImage=ROUTE_SOCIAL_IMAGES[routeUrl(page,id)];if(socialImage){document.querySelector('meta[property="og:image"]').content=socialImage;document.querySelector('meta[name="twitter:image"]').content=socialImage;document.querySelector('meta[property="og:image:alt"]').content=document.title;document.querySelector('meta[name="twitter:image:alt"]').content=document.title;}document.querySelector('meta[property="og:title"]').content=document.title;document.querySelector('meta[property="og:description"]').content=meta.content;document.querySelector('meta[property="og:url"]').content=canon.href;document.querySelector('meta[name="twitter:title"]')?.setAttribute('content',document.title);document.querySelector('meta[name="twitter:description"]')?.setAttribute('content',meta.content);document.querySelectorAll('#navLinks a').forEach(a=>{if(a.classList.contains('active'))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});}
+const ROUTE_SOCIAL_IMAGES = {"/": "https://nahuelvillar.com/images/render-hero-iso-2.webp", "/about/": "https://nahuelvillar.com/images/photo.webp", "/contact/": "https://nahuelvillar.com/images/render-hero-iso-2.webp", "/sketches/": "https://nahuelvillar.com/images/sketch-2026-09-23.webp", "/project/visor/": "https://nahuelvillar.com/images/visor/renders-2026-10-03/studio-front-three-quarter.webp", "/project/intent/": "https://nahuelvillar.com/images/render-hero-iso-2.webp", "/project/flujo/": "https://nahuelvillar.com/images/flujo_cover.webp", "/project/incline/": "https://nahuelvillar.com/images/incline1.webp", "/project/core/": "https://nahuelvillar.com/images/core1.webp", "/project/pausa/": "https://nahuelvillar.com/images/pausa1.webp", "/project/promix/": "https://nahuelvillar.com/images/promix-panel.webp", "/project/intervalo/": "https://nahuelvillar.com/images/ypf-1.webp", "/project/mantablast/": "https://nahuelvillar.com/images/manta-1.webp"};
+function updatePageMetadata(page,id){if(page==='project'&&isProjectLocked(id)){updateUnavailableMetadata(id);return;}document.querySelector('meta[data-project-lock-robots]')?.remove();const project=PROJECTS[id],lang=window.currentLang||'en';const title=page==='sketches'?tri('Sketches','Bocetos','Skizzen'):page==='project'?project.title:page==='about'?tri('About','Sobre mí','Über mich'):page==='contact'?tri('Contact','Contacto','Kontakt'):tri('Industrial Design','Diseño industrial','Industriedesign');document.title=title+' | Nahuel Villar';let meta=document.querySelector('meta[name="description"]');if(!meta){meta=document.createElement('meta');meta.name='description';document.head.append(meta);}meta.content=project?(window.TRANS[lang]?.projects?.[id]?.tagline||project.tagline):tri('Industrial design portfolio of Nahuel Villar. Products, research and prototyping.','Portfolio de diseño industrial de Nahuel Villar. Productos, investigación y prototipado.','Industriedesign-Portfolio von Nahuel Villar. Produkte, Recherche und Prototypen.');let canon=document.querySelector('link[rel="canonical"]');if(!canon){canon=document.createElement('link');canon.rel='canonical';document.head.append(canon);}canon.href='https://nahuelvillar.com'+routeUrl(page,id);const socialImage=ROUTE_SOCIAL_IMAGES[routeUrl(page,id)];if(socialImage){document.querySelector('meta[property="og:image"]').content=socialImage;document.querySelector('meta[name="twitter:image"]').content=socialImage;document.querySelector('meta[property="og:image:alt"]').content=document.title;document.querySelector('meta[name="twitter:image:alt"]').content=document.title;}document.querySelector('meta[property="og:title"]').content=document.title;document.querySelector('meta[property="og:description"]').content=meta.content;document.querySelector('meta[property="og:url"]').content=canon.href;document.querySelector('meta[name="twitter:title"]')?.setAttribute('content',document.title);document.querySelector('meta[name="twitter:description"]')?.setAttribute('content',meta.content);document.querySelectorAll('#navLinks a').forEach(a=>{if(a.classList.contains('active'))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});}
 function upgradeControls(root){
  root.querySelectorAll('[onclick]').forEach(el=>{
  const code=el.getAttribute('onclick'),m=code.match(/^go\('([^']+)'(?:,\s*'([^']+)')?\)/);
+ if(m&&m[1]==='project'&&isProjectLocked(m[2])){
+  el.removeAttribute('onclick');el.removeAttribute('href');el.setAttribute('role','link');el.setAttribute('aria-disabled','true');el.tabIndex=-1;el.classList.add('is-locked');el.dataset.projectLocked=m[2];
+  const label=el.querySelector('.pnav-lbl');if(label)label.innerHTML=PROJECT_LOCK_ICON+'<span data-locked-status>'+projectAvailabilityLabel()+'</span>';
+  el.setAttribute('aria-label','Visor · '+projectAvailabilityLabel());return;
+ }
  if(m){const a=el.tagName==='A'?el:document.createElement('a');if(a!==el){for(const attr of el.attributes)a.setAttribute(attr.name,attr.value);a.innerHTML=el.innerHTML;el.replaceWith(a);}a.href=routeUrl(m[1],m[2]);a.removeAttribute('onclick');a.addEventListener('click',e=>{if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||e.button!==0)return;e.preventDefault();go(m[1],m[2]);});}
  else if(!['A','BUTTON','INPUT'].includes(el.tagName)){el.setAttribute('role','button');el.tabIndex=0;if(!el.dataset.keyReady){el.dataset.keyReady='true';el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();if(el.hasAttribute('ondblclick'))el.dispatchEvent(new MouseEvent('dblclick',{bubbles:true}));else el.click();}});}}
  });
@@ -5581,15 +5987,508 @@ function setupProjectMedia(root){
  root.querySelectorAll('video[data-video-src]').forEach(video=>projectVideoObserver.observe(video));
 }
 matchMedia('(max-width:900px)').addEventListener('change',()=>updateGalleryHint());
+// User-selected image revisions for the local portfolio preview.
+function refinePortfolioAssets(root, lang) {
+  const L=(en,es,de)=>tri(en,es,de,lang);
+  if(root.dataset.project==='visor') {
+    const desert=root.querySelector('#visor-dust');
+    const overhead=desert?.querySelector('img[src="/images/visor/renders-2026-10-03/desert-5.webp"]')?.closest('figure');
+    const first=desert?.querySelector('figure');
+    if(overhead && first && overhead!==first) desert.insertBefore(overhead,first);
+  }
+  if(root.dataset.project!=='intent')return;
+  const grid=root.querySelector('.cmp-cmf-grid');
+  if(!grid)return;
+  const materials=[
+    ['brass',L('Brass','Latón','Messing')],
+    ['stainless-steel',L('Stainless steel','Acero inoxidable','Edelstahl')],
+    ['aluminium-6061',L('Aluminium','Aluminio','Aluminium')],
+    ['titanium',L('Titanium','Titanio','Titan')]
+  ];
+  grid.querySelectorAll('.cmp-cmf-card img').forEach((img,i)=>{
+    if(!materials[i])return;
+    const [key,name]=materials[i];
+    const path='/images/intent/cmf-2026-10-04/'+key;
+    img.src=path+'-960.webp';
+    img.srcset=path+'-480.webp 480w, '+path+'-960.webp 960w';
+    img.sizes='(max-width:560px) 100vw, (max-width:700px) 50vw, 25vw';
+    img.width=960;img.height=720;img.style.height='auto';
+    img.alt=L('AI-generated close-up texture reference: ','Referencia de textura en primer plano generada con IA: ','KI-generierte Texturreferenz in Nahaufnahme: ')+name;
+  });
+  const section=grid.closest('.cmp-section');
+  if(section)section.id='intent-cmf';
+  if(!section?.querySelector('.cmf-image-note')) {
+    const note=document.createElement('p');note.className='cmf-image-note';
+    note.textContent=L('AI-generated material texture references.','Referencias de texturas de materiales generadas con IA.','KI-generierte Referenzbilder der Materialtexturen.');
+    grid.after(note);
+  }
+}
+
+
+// Progressive composition pass over the existing, translated project content.
+// No research, product claims or source media are generated here.
+function refineCaseStudy(root, lang) {
+  const id=root.dataset.project;
+  if(!['intent','flujo','incline'].includes(id)||root.querySelector('[data-case-motion]'))return;
+  root.dataset.caseRefined=id;
+  root.classList.add('case-study');
+  const L=(en,es,de)=>tri(en,es,de,lang);
+  const make=(tag,cls)=>{const el=document.createElement(tag);el.className=cls;return el;};
+  const heading=(old,level=2)=>{
+    if(!old)return;
+    const h=document.createElement('h'+level);
+    for(const a of old.attributes)h.setAttribute(a.name,a.value);
+    h.innerHTML=old.innerHTML;old.replaceWith(h);return h;
+  };
+  const reveal=el=>{if(el)el.classList.add('case-reveal');};
+  const outline=[];
+  function chapter(el,anchor,label){
+    if(!el)return;el.id=anchor;outline.push([anchor,label]);
+  }
+  function detailLink(label){
+    const button=make('button','case-detail-link');button.type='button';button.textContent=label+' ↗';
+    button.addEventListener('click',()=>openLightbox('/images/flujo5.webp',0,['/images/flujo5.webp','/images/flujo6.webp']));
+    return button;
+  }
+  if(id==='flujo'||id==='incline'){
+    const process=root.querySelector('.process-header');
+    chapter(process,id+'-process',L('Design process','Proceso de diseño','Entwurfsprozess'));
+    const splits=[...root.querySelectorAll('.split-block')];
+    // Preserve the original alternating image/text rows.
+    if(splits[1]){
+      chapter(splits[1],id+'-system',L('The system','El sistema','Das System'));
+    }
+    const decisions=root.querySelector('img[src="/images/'+id+'-render-decisions.webp"]')?.closest('.split-block');
+    if(decisions){
+      decisions.classList.add('case-key-decisions');decisions.id=id+'-decisions';
+      const paragraphs=decisions.querySelectorAll('.split-body p');
+      const copy=id==='flujo'?[
+        L('The shade combines a 3D internal pattern with branching upper and lower edges that shape light on the wall. PETG provides both heat resistance and translucency, keeping the pattern concealed until lit.',
+          'La pantalla combina un patrón interno tridimensional con ramificaciones en los bordes superior e inferior que distribuyen la luz sobre la pared. El PETG aporta resistencia térmica y translucidez: el patrón permanece oculto hasta encender la lámpara.',
+          'Der Schirm verbindet ein inneres 3D-Muster mit verzweigten Ober- und Unterkanten, die das Licht an der Wand verteilen. PETG bietet Wärmebeständigkeit und Transluzenz: Das Muster bleibt bis zum Einschalten verborgen.'),
+        L('The matching wall support houses the bipin base and mounts to standard Argentine recessed electrical boxes with two screws. The shade slides over a channelled extruded ring and locks with a quarter-turn bayonet, allowing tool-free angle adjustment without screws or adhesives between the two bodies.',
+          'El soporte sigue el mismo lenguaje formal, integra la base bipin y se fija con dos tornillos a cajas eléctricas embutidas estándar argentinas. La pantalla se desliza sobre un anillo extruido con canal central y traba con un cuarto de vuelta: la unión de bayoneta permite ajustar el ángulo sin herramientas, tornillos ni adhesivos entre ambos cuerpos.',
+          'Die formal abgestimmte Wandhalterung nimmt den Bipin-Sockel auf und wird mit zwei Schrauben an argentinischen Standard-Unterputzdosen befestigt. Der Schirm gleitet über einen extrudierten Ring mit Mittelkanal und verriegelt durch eine Vierteldrehung. Der Bajonettverschluss erlaubt die werkzeuglose Winkelverstellung ohne Schrauben oder Klebstoff zwischen beiden Teilen.')
+      ]:[
+        L('The three-point snap fit connects the modules and doubles as their structural feet. The first module stands on the ground; each additional module rests on the one below through the same joint, combining connection and support in one component.',
+          'El encastre de tres puntos conecta los módulos y funciona como sus patas estructurales. El primero apoya en el suelo; cada módulo adicional descansa sobre el inferior mediante la misma unión, integrando conexión y soporte en una sola pieza.',
+          'Die Dreipunkt-Rastverbindung verbindet die Module und dient zugleich als Standfüße. Das erste Modul steht auf dem Boden; jedes weitere ruht über dieselbe Verbindung auf dem darunterliegenden. Verbindung und Stütze bilden ein Bauteil.'),
+        L('Drainage was integrated from the start: base perforations carry water from module to module, so the whole stack can be watered from above without moving it. Neutral gray blends into the terrace, keeping the focus on the plants and their arrangement.',
+          'El drenaje se integró desde el inicio: las perforaciones de la base conducen el agua de un módulo al siguiente y permiten regar toda la columna desde arriba, sin moverla. El gris neutro se integra a la terraza y deja el protagonismo a las plantas y su configuración.',
+          'Die Entwässerung war von Anfang an integriert: Bodenöffnungen leiten Wasser von Modul zu Modul, sodass der gesamte Aufbau von oben bewässert werden kann, ohne ihn zu bewegen. Neutrales Grau fügt sich in die Terrasse ein und lässt Pflanzen und Anordnung im Vordergrund stehen.')
+      ];
+      paragraphs.forEach((p,i)=>{if(copy[i]){p.removeAttribute('data-copy');p.textContent=copy[i];}});
+    }
+    root.querySelectorAll('.origins-col,.split-right').forEach(reveal);
+    const proto=root.querySelector('.proto-wrap');
+    chapter(proto,id+'-prototyping',L('Prototyping','Prototipado','Prototypenbau'));
+    if(id==='flujo'){
+      const evolution=root.querySelector('.evo-wrap');
+      chapter(evolution,'flujo-evolution',L('Design evolution','Evolución del diseño','Entwurfsentwicklung'));
+      evolution.classList.add('case-evolution');
+      const grid=evolution.querySelector('.evo-cols');
+      const copy=[...grid.querySelectorAll('.evo-col')];
+      const images=[...grid.querySelectorAll('img')];
+      const sequence=make('div','case-evolution-sequence');
+      for(let i=0;i<2;i++){
+        const article=make('article',i===0?'case-iteration':'case-takeouts');
+        const figure=make('figure','case-evolution-figure');figure.append(images[i]);
+        const text=copy[i];text.classList.add('case-process-copy');
+        heading(text.querySelector('.evo-phase-name'),3);
+        article.append(figure,text);sequence.append(article);reveal(figure);reveal(text);
+        if(i===1){
+          images[i].alt=L('Section drawing of the Flujo shade, support and bayonet connection','Plano en sección de la pantalla, el soporte y la unión de bayoneta de Flujo','Schnittzeichnung von Schirm, Halterung und Bajonettverbindung von Flujo');
+          const notes=make('dl','case-technical-notes');
+          for(const [value,label] of [
+            ['0.8–1 mm',L('Shade wall thickness','Espesor de la pantalla','Wandstärke des Schirms')],
+            ['0.4 mm',L('Print nozzle','Boquilla de impresión','Druckdüse')]
+          ]){
+            const pair=document.createElement('div');const dt=document.createElement('dt'),dd=document.createElement('dd');
+            dt.textContent=label;dd.textContent=value;pair.append(dt,dd);notes.append(pair);
+          }
+          text.append(notes,detailLink(L('View the technical drawings','Ver los planos completos','Technische Zeichnungen ansehen')));
+        }
+      }
+      grid.replaceWith(sequence);heading(evolution.querySelector('.evo-title'));
+      evolution.querySelector('.evo-subtitle')?.remove();
+      const columns=[...proto.querySelectorAll('.proto-col')];
+      const media=[...proto.querySelectorAll('.proto-imgs video,.proto-imgs img')];
+      const stages=make('div','case-prototype-sequence');
+      columns.forEach((copy,i)=>{
+        const stage=make('article','case-prototype-stage');
+        const figure=make('figure','case-prototype-media');figure.append(media[i]);
+        copy.classList.add('case-prototype-caption');copy.querySelector('.proto-col-arrow')?.remove();
+        heading(copy.querySelector('.proto-col-h'),3);stage.append(figure,copy);stages.append(stage);reveal(stage);
+      });
+      proto.querySelector('.proto-cols').replaceWith(stages);proto.querySelector('.proto-imgs').remove();
+      proto.classList.add('case-prototyping');heading(proto.querySelector('.proto-title'));
+    }else{
+      proto.classList.add('case-incline-prototypes');
+      const title=proto.querySelector('[data-copy="copy-111"]');heading(title);
+      proto.querySelectorAll('.proto-item').forEach((item,i)=>{
+        const text=item.querySelector('.proto-item-text');item.append(text);
+        item.classList.add('case-model-stage');reveal(item);
+        const h=text.firstElementChild;heading(h,3);
+      });
+    }
+    const nav=make('nav','project-outline case-outline');nav.setAttribute('aria-label',L('On this page','En esta página','Auf dieser Seite'));
+    // Match the actual document order after recomposition.
+    outline.sort((a,b)=>root.querySelector('#'+a[0]).compareDocumentPosition(root.querySelector('#'+b[0]))&Node.DOCUMENT_POSITION_FOLLOWING?-1:1);
+    outline.forEach(([anchor,label])=>{const a=document.createElement('a');a.href='#'+anchor;a.textContent=label;nav.append(a);});
+    root.querySelector('.proj-desc').after(nav);
+  }else{
+    // Research remains complete. Make the synthesis readable as five findings,
+    // rather than five narrow, equal-height cards.
+    const findings=root.querySelector('.cmp-hallazgos');findings?.classList.add('case-findings');
+    findings?.querySelectorAll('.cmp-hallazgo').forEach(reveal);
+    root.querySelectorAll('.cmp-cmf-card,.cmp-ctx-item,.cmp-typo-item,.cmp-ante-group').forEach(reveal);
+    const log=root.querySelector('.cmp-log-wrap');
+    if(log){
+      const section=log.closest('.cmp-section');section.classList.add('case-field-study');
+      const image=section.querySelector('img');
+      if(image){
+        const journal=make('div','case-field-layout'),figure=make('figure','case-field-image');
+        image.before(journal);figure.append(image);journal.append(figure,log);reveal(figure);
+      }
+    }
+    const mechanism=root.querySelector('.cmp-how-grid');
+    if(mechanism){mechanism.classList.add('case-mechanism-steps');[...mechanism.children].forEach(reveal);}
+    const parts=root.querySelector('.cmp-parts-grid');
+    if(parts){
+      const section=parts.closest('.cmp-section');
+      const exploded=root.querySelector('img[src="/images/render-explotada.webp"],img[src="/images/render-exploded.webp"]');
+      if(exploded){
+        const old=exploded.closest('.cmp-section');const layout=make('div','case-parts-layout');const figure=make('figure','case-parts-image');
+        figure.append(exploded);parts.before(layout);layout.append(figure,parts);
+        if(old!==section)old.remove();reveal(figure);
+      }
+    }
+  }
+  root.querySelectorAll('.case-reveal').forEach(el=>el.dataset.caseMotion='true');
+}
+
+
+
+
+
+// Pixel timestamps reveal the original image without broad spatial masks.
+const SKETCH_PLAYBACK_RATE=1.25;
+function createPixelSketchPlayback({figure,image,data,allowed,visible,onComplete,onFailure}){
+  const overlay=document.createElement('canvas');
+  overlay.className='sketch-drawing-preview';overlay.setAttribute('aria-hidden','true');
+  overlay.width=data.width;overlay.height=data.height;
+  overlay.style.background='var(--color-bg)';
+  overlay.dataset.renderer='pixel-timeline';overlay.dataset.playbackRate=String(SKETCH_PLAYBACK_RATE);
+  const gl=overlay.getContext('webgl2',{alpha:true,antialias:false,premultipliedAlpha:true,depth:false,stencil:false});
+  if(!gl)throw new Error('Pixel animation unavailable; keeping original artwork');
+  const shaders=[],textures=[];
+  function shader(type,source){
+    const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);shaders.push(s);
+    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(s));return s;
+  }
+  const program=gl.createProgram();
+  gl.attachShader(program,shader(gl.VERTEX_SHADER,`#version 300 es
+    in vec2 position;out vec2 uv;
+    void main(){uv=position*.5+.5;gl_Position=vec4(position,0.,1.);}`));
+  gl.attachShader(program,shader(gl.FRAGMENT_SHADER,`#version 300 es
+    precision highp float;
+    uniform sampler2D artwork;uniform sampler2D timeline;
+    uniform float elapsed;uniform float duration;
+    in vec2 uv;out vec4 colour;
+    void main(){
+      ivec2 pixel=clamp(ivec2(uv*vec2(textureSize(artwork,0))),ivec2(0),textureSize(artwork,0)-1);
+      vec4 source=texelFetch(artwork,pixel,0);
+      vec2 bytes=floor(texelFetch(timeline,pixel,0).rg*255.+.5);
+      float when=(bytes.r*256.+bytes.g)/65534.*duration;
+      float visible=smoothstep(when,when+16.,elapsed);
+      colour=source*visible;
+    }`));
+  gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(program));
+  gl.useProgram(program);
+  const buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  const position=gl.getAttribLocation(program,'position');gl.enableVertexAttribArray(position);gl.vertexAttribPointer(position,2,gl.FLOAT,false,0,0);
+  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);
+  function texture(unit,img,premultiplied,name){
+    const t=gl.createTexture();textures.push(t);gl.activeTexture(gl.TEXTURE0+unit);gl.bindTexture(gl.TEXTURE_2D,t);
+    gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,premultiplied);
+    gl.pixelStorei(gl.UNPACK_COLORSPACE_CONVERSION_WEBGL,premultiplied?gl.BROWSER_DEFAULT_WEBGL:gl.NONE);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.NEAREST);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+    gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);gl.uniform1i(gl.getUniformLocation(program,name),unit);
+  }
+  texture(0,image,true,'artwork');texture(1,data._pixelMap,false,'timeline');
+  const duration=data.pixelTimeline.duration,clock=gl.getUniformLocation(program,'elapsed');
+  gl.uniform1f(gl.getUniformLocation(program,'duration'),duration);gl.viewport(0,0,overlay.width,overlay.height);
+  const oldOpacity=image.style.opacity;
+  let elapsed=0,last=null,disposed=false,gpuReleased=false;
+  const reviewFrame=null;
+  function render(){
+    gl.uniform1f(clock,elapsed);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+    const current=data.pixelTimeline.phases.find(p=>elapsed<p.end)||data.pixelTimeline.phases.at(-1);
+    overlay.dataset.study=String(current.study);overlay.dataset.phase=current.phase;
+    overlay.dataset.progress=String(Math.round(elapsed/duration*100));overlay.dataset.elapsed=String(Math.round(elapsed));
+  }
+  const active={overlay,frame:0,
+    resume(){if(!disposed&&!active.frame&&allowed()&&visible(figure)&&reviewFrame===null){last=null;figure.dataset.drawingState='drawing';active.frame=requestAnimationFrame(tick);}},
+    freeze(){
+      // Keep exactly the last rendered pixels: no change in resampling at the end.
+      const still=document.createElement('canvas');still.width=overlay.width;still.height=overlay.height;
+      still.className=overlay.className;still.style.cssText=overlay.style.cssText;still.setAttribute('aria-hidden','true');
+      still.getContext('2d').drawImage(overlay,0,0);still.dataset.renderer='pixel-complete';
+      disposed=true;overlay.replaceWith(still);active.overlay=still;releaseGPU();
+    },
+    dispose(){disposed=true;cancelAnimationFrame(active.frame);image.style.opacity=oldOpacity;releaseGPU();}
+
+  };
+  function releaseGPU(){
+    if(gpuReleased)return;gpuReleased=true;
+    textures.forEach(t=>gl.deleteTexture(t));shaders.forEach(s=>gl.deleteShader(s));gl.deleteBuffer(buffer);gl.deleteProgram(program);
+    gl.getExtension('WEBGL_lose_context')?.loseContext();
+  }
+  function tick(time){
+    active.frame=0;if(disposed)return;
+    if(!allowed()||!visible(figure)){last=null;figure.dataset.drawingState='paused';return;}
+    if(last!==null)elapsed+=(time-last)*SKETCH_PLAYBACK_RATE;last=time;render();
+    if(elapsed>=duration+20){onComplete();return;}active.frame=requestAnimationFrame(tick);
+  }
+  overlay.addEventListener('webglcontextlost',()=>{if(!disposed)onFailure();},{once:true});
+  elapsed=reviewFrame??0;render();figure.append(overlay);image.style.opacity='0';
+  figure.dataset.drawingState=reviewFrame===null?'drawing':'review-frame';
+  return active;
+}
+
+
+
+// Reveal the supplied pixels, finishing one complete study at a time.
+let sketchMaskSequence=0;
+function initSketchDrawing(root,lang){
+  const abort=new AbortController(),events={signal:abort.signal};
+  const motion=matchMedia('(prefers-reduced-motion: reduce)');
+  const page=root.closest('.page');
+  const figures=[...root.querySelectorAll('.visor-sketch')].slice(0,3);
+  for(const [name,key] of [['flujo-sketches-new.webp','flujo-sketch'],['incline-sketches.webp','incline-sketch']]){
+    const image=root.querySelector('img[src="/images/'+name+'"]');
+    if(!image)continue;
+    let figure=image.parentElement;
+    if(image.classList.contains('cmp-render-full')){figure=document.createElement('figure');image.before(figure);figure.append(image);}
+    figure.classList.add('case-sketch-drawing');figure.dataset.guideKey=key;
+    figure.id=key;figures.push(figure);
+  }
+  const keyOf=figure=>figure.dataset.guideKey||figure.querySelector('img').src.match(/sketch-\d+/)?.[0];
+  const running=new Map(),finishedDrawings=new Map(),pending=new Set(),completed=new Set(),guides=new Map();
+  let observer,preloader;
+  const allowed=()=>!document.hidden&&!motion.matches&&!abort.signal.aborted;
+  function visible(figure){
+    const box=figure.getBoundingClientRect(),area=page?.getBoundingClientRect();
+    const top=Math.max(64,area?.top||0),bottom=Math.min(innerHeight,area?.bottom||innerHeight);
+    return Math.min(box.bottom,bottom)-Math.max(box.top,top)>=Math.min(180,box.height*.28);
+  }
+  function restore(figure){
+    const active=running.get(figure)||finishedDrawings.get(figure);
+    if(active){cancelAnimationFrame(active.frame);active.dispose?.();active.overlay.remove();running.delete(figure);finishedDrawings.delete(figure);}
+  }
+  function clear(){running.forEach((_,figure)=>restore(figure));finishedDrawings.forEach((_,figure)=>restore(figure));}
+  function prepare(figure){
+    const image=figure.querySelector('img'),key=keyOf(figure);
+    image.loading='eager';image.removeAttribute('sizes');
+    // Pin the full source at 1x so the former responsive candidate density cannot persist.
+    if(!image.dataset.drawingSource){
+      const original=image.getAttribute('src');image.dataset.drawingSource=original;
+      const full=new URL(original,location.href);full.searchParams.set('sketch-quality','original-20261003-v3');image.src=full.href;image.srcset=full.href+' 1x';
+    }
+    const pixelGuide=/^sketch-0[123]$/.test(key);
+    const guidePromise=guides.get(key)||fetch('/assets/sketches/'+key+(pixelGuide?'-pixels':'')+'.json?v=pixel-strokes-1',{signal:abort.signal}).then(response=>{
+      if(!response.ok)throw new Error('Sketch guide unavailable');return response.json();
+    });
+    guides.set(key,guidePromise);
+    return Promise.all([guidePromise,image.decode()]).then(async result=>{
+      if(result[0].pixelTimeline){
+        if(!result[0]._pixelMap){const map=new Image();map.src='/assets/sketches/'+result[0].pixelTimeline.file+'?v=pixel-strokes-1';await map.decode();result[0]._pixelMap=map;}
+        return result;
+      }
+      await Promise.all([result[0].lineMask,result[0].toneMask,result[0].staticMask,result[0].washField,result[0].foregroundMask,result[0].backgroundLayer].filter(Boolean).map(file=>{
+        const mask=new Image();mask.src='/assets/sketches/'+file+'?v=wash-continuous-2';return mask.decode();
+      }));
+      if(result[0].backgroundLayer){
+        figure.style.backgroundImage='url(/assets/sketches/'+result[0].backgroundLayer+')';
+        figure.style.backgroundSize='100% auto';figure.style.backgroundRepeat='no-repeat';
+        image.style.maskImage='url(/assets/sketches/'+result[0].foregroundMask+')';
+        image.style.maskMode='luminance';image.style.maskSize='100% 100%';
+      }return result;
+    });
+  }
+  async function draw(figure){
+    const key=keyOf(figure),existing=running.get(figure);
+    if(existing){existing.resume();return;}
+    if(!key||pending.has(figure)||!allowed()||!visible(figure)||completed.has(figure))return;
+    pending.add(figure);figure.dataset.drawingState='loading';
+    try{
+      const [data]=await prepare(figure);
+      if(!allowed()||!visible(figure))return;
+      if(data.pixelTimeline){
+        const active=createPixelSketchPlayback({figure,image:figure.querySelector('img'),data,allowed,visible,
+          onComplete(){completed.add(figure);active.freeze();running.delete(figure);finishedDrawings.set(figure,active);figure.dataset.drawingState='complete';},
+          onFailure(){restore(figure);completed.add(figure);figure.dataset.drawingState='static';}
+        });running.set(figure,active);active.resume();return;
+      }
+      if(!data.sequence?.length)throw new Error('Complete sketch sequence unavailable');
+      const ns='http://www.w3.org/2000/svg';
+      function el(name,attributes){
+        const node=document.createElementNS(ns,name);
+        for(const [attribute,value] of Object.entries(attributes||{}))node.setAttribute(attribute,String(value));
+        return node;
+      }
+      const id='sketch-reveal-'+(++sketchMaskSequence);
+      const overlay=el('svg',{viewBox:`0 0 ${data.width} ${data.height}`,class:'sketch-drawing-preview','aria-hidden':'true',focusable:'false'});
+      const defs=el('defs'),mask=el('mask',{id,maskUnits:'userSpaceOnUse',maskContentUnits:'userSpaceOnUse',x:0,y:0,width:data.width,height:data.height,'mask-type':'luminance'});
+      mask.append(el('rect',{width:data.width,height:data.height,fill:'#fff'}));
+      function phase(name,file){
+        const maskName=id+'-'+name;
+        const selection=el('mask',{id:maskName,maskUnits:'userSpaceOnUse',x:0,y:0,width:data.width,height:data.height,'mask-type':'luminance'});
+        selection.append(el('image',{href:'/assets/sketches/'+file+'?v=wash-continuous-2',width:data.width,height:data.height}));defs.append(selection);
+        const group=el('g',{fill:'none',stroke:'#000','stroke-width':data.brushWidth||7,'stroke-linecap':'round','stroke-linejoin':'round',mask:`url(#${maskName})`});
+        mask.append(group);return group;
+      }
+      const ink=phase('line',data.lineMask),shade=phase('tone',data.toneMask);
+      if(data.staticMask)phase('static',data.staticMask).append(el('rect',{width:data.width,height:data.height,fill:'#000',stroke:'none'}));
+      const finished=el('g',{fill:'#000',stroke:'none'});mask.append(finished);defs.append(mask);overlay.append(defs);
+      const cover=el('g',{mask:`url(#${id})`});
+      cover.append(el('rect',{width:data.width,height:data.height,fill:data.background||'var(--color-bg)'}));
+      if(data.washField){
+        const washId=id+'-wash';
+        const selection=el('mask',{id:washId,maskUnits:'userSpaceOnUse',x:0,y:0,width:data.width,height:data.height,'mask-type':'luminance'});
+        selection.append(el('image',{href:'/assets/sketches/'+data.washField+'?v=field-1',width:data.width,height:data.height}));defs.append(selection);
+        cover.append(el('rect',{width:data.width,height:data.height,fill:'rgb(125,189,77)',mask:`url(#${washId})`}));
+      }
+      overlay.append(cover);
+      function tracer(group,paths){
+        const frontier=el('path');group.append(frontier);
+        const segments=[];let total=0,index=0,drawn=0,partial=0,done=[],chunk=0;
+        for(const p of paths)for(let i=2;i<p.length;i+=2){
+          const length=Math.hypot(p[i]-p[i-2],p[i+1]-p[i-1]);
+          if(length){segments.push({x:p[i-2],y:p[i-1],ex:p[i],ey:p[i+1],length});total+=length;}
+        }
+        return progress=>{
+          const target=progress*total;
+          while(index<segments.length&&drawn<target){
+            const s=segments[index],step=Math.min(target-drawn,s.length-partial);drawn+=step;partial+=step;
+            if(partial>=s.length-.001){
+              done.push(`M${s.x},${s.y}L${s.ex},${s.ey}`);index++;partial=0;chunk++;
+              if(chunk>=128){group.insertBefore(el('path',{d:done.join('')}),frontier);done=[];chunk=0;}
+            }
+          }
+          let tail='';
+          if(partial&&index<segments.length){const s=segments[index],p=partial/s.length;tail=`M${s.x},${s.y}L${s.x+(s.ex-s.x)*p},${s.y+(s.ey-s.y)*p}`;}
+          frontier.setAttribute('d',done.join('')+tail);
+        };
+      }
+      function startStudy(study,index){
+        const clipId=id+'-study-'+index,points=study.polygon.map(p=>p.join(',')).join(' ');
+        const clip=el('mask',{id:clipId,maskUnits:'userSpaceOnUse',x:0,y:0,width:data.width,height:data.height,'mask-type':'luminance'});
+        clip.append(el('polygon',{points,fill:'#fff'}));
+        for(const later of data.sequence.slice(index+1))clip.append(el('polygon',{points:later.polygon.map(p=>p.join(',')).join(' '),fill:'#000'}));
+        defs.append(clip);
+        const lines=el('g',{mask:`url(#${clipId})`}),tones=el('g',{mask:`url(#${clipId})`});ink.append(lines);shade.append(tones);
+        const stages=(study.lineStages||[{name:'linework',duration:study.lineDuration,paths:study.paths}]).map(stage=>({...stage,trace:tracer(lines,stage.paths)}));
+        const hatch=data.shadeStyle==='hatching'?tracer(tones,study.shadows.map(s=>s.points)):null;
+        const brushes=[];let length=0;
+        if(!hatch)for(const s of study.shadows){
+          const p=s.points;let d=`M${p[0]},${p[1]}`,weight=0;
+          for(let i=2;i<p.length;i+=2){d+=`L${p[i]},${p[i+1]}`;weight+=Math.hypot(p[i]-p[i-2],p[i+1]-p[i-1]);}
+          const brush=el('path',{d,'stroke-width':s.width,'stroke-linecap':'butt',pathLength:1,'stroke-dasharray':'1 1','stroke-dashoffset':1,opacity:0});tones.append(brush);
+          weight=Math.max(120,weight);brushes.push({brush,start:length,length:weight});length+=weight;
+        }
+        let lineDone=false,committed=false;
+        return {
+          advance(ms){
+            let phaseOffset=0;
+            for(const stage of stages){
+              if(ms>=phaseOffset){stage.trace(Math.min(1,(ms-phaseOffset)/stage.duration));if(ms<phaseOffset+stage.duration)overlay.dataset.lineStage=stage.name;}
+              phaseOffset+=stage.duration;
+            }
+            if(ms>=study.lineDuration&&!lineDone){lineDone=true;lines.append(el('polygon',{points,fill:'#000',stroke:'none'}));}
+            if(ms>study.lineDuration&&study.shadeDuration){
+              const p=Math.min(1,(ms-study.lineDuration)/study.shadeDuration);
+              if(hatch)hatch(p);
+              else for(const b of brushes){const amount=Math.max(0,Math.min(1,(p*length-b.start)/b.length));if(amount){b.brush.setAttribute('opacity','1');b.brush.setAttribute('stroke-dashoffset',String(1-amount));}}
+            }
+            if(ms>=study.lineDuration+study.shadeDuration&&!committed){
+              committed=true;finished.append(el('polygon',{points,mask:`url(#${clipId})`}));lines.remove();tones.remove();overlay.dataset.completedStudies=String(index+1);
+            }
+          }
+        };
+      }
+      overlay.dataset.playbackRate=String(SKETCH_PLAYBACK_RATE);figure.append(overlay);figure.dataset.drawingState='drawing';
+      const timeline=data.sequence.map((s,i)=>({...s,index:i,duration:s.lineDuration+s.shadeDuration+180}));
+      const total=timeline.reduce((n,s)=>n+s.duration,0),finish=220;
+      const freezeParam=null,frozen=false;
+      let elapsed=frozen?Math.max(0,Math.min(total,Number(freezeParam)||0)):0,last=null,index=0,offset=0,study=startStudy(timeline[0],0);
+      const active={overlay,frame:0,resume(){if(!active.frame&&allowed()&&visible(figure)){last=null;figure.dataset.drawingState='drawing';active.frame=requestAnimationFrame(tick);}}};
+      running.set(figure,active);
+      function tick(time){
+        active.frame=0;
+        if(abort.signal.aborted||motion.matches){restore(figure);return;}
+        if(!allowed()||!visible(figure)){last=null;figure.dataset.drawingState='paused';return;}
+        if(last!==null&&!frozen)elapsed+=(time-last)*SKETCH_PLAYBACK_RATE;last=time;
+        while(index<timeline.length-1&&elapsed-offset>=timeline[index].duration){
+          study.advance(timeline[index].duration);offset+=timeline[index].duration;index++;study=startStudy(timeline[index],index);
+        }
+        const item=timeline[index],local=elapsed-offset;study.advance(local);
+        overlay.dataset.study=String(index+1);overlay.dataset.studyCount=String(timeline.length);
+        overlay.dataset.phase=local<item.lineDuration?'linework':local<item.lineDuration+item.shadeDuration?'shading':'complete';
+        overlay.dataset.progress=String(Math.round(Math.min(1,elapsed/total)*100));
+        if(frozen){figure.dataset.drawingState='review-frame';return;}
+        if(elapsed>total)overlay.style.opacity=String(Math.max(0,1-(elapsed-total)/finish));
+        if(elapsed>=total+finish){completed.add(figure);restore(figure);figure.dataset.drawingState='complete';return;}
+        active.frame=requestAnimationFrame(tick);
+      }
+      active.resume();
+    }catch(error){
+      if(!abort.signal.aborted){figure.dataset.drawingState='error';console.warn('Sketch animation could not start:',error);guides.delete(key);}restore(figure);
+    }finally{pending.delete(figure);}
+  }
+  figures.forEach(figure=>{figure.dataset.sketchDrawing='true';if(!figure.id)figure.id='visor-'+keyOf(figure);});
+  function check(){if(allowed())figures.forEach(figure=>{if(visible(figure))draw(figure);});}
+  if('IntersectionObserver' in window){
+    preloader=new IntersectionObserver(entries=>{for(const e of entries)if(e.isIntersecting){preloader.unobserve(e.target);if(!motion.matches)prepare(e.target).catch(()=>{});}},{root:page,rootMargin:'1400px 0px',threshold:0});
+    observer=new IntersectionObserver(check,{root:page,threshold:[0,.1,.25,.5,.75,1]});
+    figures.forEach(figure=>{preloader.observe(figure);observer.observe(figure);});
+  }
+  // Recheck after page/anchor scrolling and focus changes. A suspended drawing
+  // resumes where it stopped and is only considered seen when it is complete.
+  let scheduled=0;
+  function scheduleCheck(){if(!scheduled)scheduled=requestAnimationFrame(()=>{scheduled=0;check();});}
+  page?.addEventListener('scroll',scheduleCheck,{...events,passive:true});
+  window.addEventListener('resize',scheduleCheck,events);
+  document.addEventListener('visibilitychange',scheduleCheck,events);
+  motion.addEventListener('change',()=>{if(motion.matches)clear();else check();},events);
+  scheduleCheck();
+  return ()=>{abort.abort();cancelAnimationFrame(scheduled);observer?.disconnect();preloader?.disconnect();clear();};
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 function enhanceProject(root,lang){
- applyStaticTranslations(root,lang);upgradeControls(root);
- requestAnimationFrame(()=>{if(root.isConnected)root.querySelectorAll('.fu').forEach(el=>el.classList.add('in'));});
+ applyStaticTranslations(root,lang);refinePortfolioAssets(root,lang);refineCaseStudy(root,lang);upgradeControls(root);
+ requestAnimationFrame(()=>{if(root.isConnected)window.refreshPortfolioMotion?.(root.closest('.page'));});
  root.querySelectorAll('.cmp-section-title,.process-title,.split-h').forEach(el=>{el.setAttribute('role','heading');el.setAttribute('aria-level','2');});
  root.querySelectorAll('img').forEach((img,i)=>{img.decoding='async';if(!img.alt)img.alt=imageDescription(img.getAttribute('src'));img.loading=i===0?'eager':'lazy';if(i===0)img.fetchPriority='high';});
  const status=root.querySelector('#cmp-grado-level-tag');if(status){status.setAttribute('aria-live','polite');status.setAttribute('aria-atomic','true');_cmpGradoUI(_cmpGrado.level===0);}
  updateGalleryHint(root);
  root.querySelectorAll('.panel-item').forEach((panel,i)=>panel.setAttribute('aria-label',tri('Enlarge media','Ampliar imagen o video','Bild oder Video vergrößern',lang)+' '+(i+1)+' · '+PROJECTS[window._currentProjectId].title));
  setupProjectMedia(root);
+ window._sketchDrawingCleanup?.();window._sketchDrawingCleanup=initSketchDrawing(root,lang);
  if(window._currentProjectId==='intent'){
   const phases=root.querySelectorAll('.process-header');if(phases[0])phases[0].id='intent-research';if(phases[1])phases[1].id='intent-design';
   root.querySelector('.cmp-how-grid')?.closest('.cmp-section')?.setAttribute('id','intent-mechanism');
@@ -5639,6 +6538,7 @@ function renderSketches(){
  for(const [year,items]of groups){const section=document.createElement('section');section.className='sketch-year';section.setAttribute('aria-labelledby','sketch-year-'+year);const h2=document.createElement('h2');h2.id='sketch-year-'+year;h2.className='sketch-year-title';h2.textContent=year;section.append(h2);const grid=document.createElement('div');grid.className='sketch-grid'+(items.length===1?' sketch-grid-single':'');
  for(const item of items){const figure=document.createElement('figure');figure.className='sketch-item';const button=document.createElement('button');button.type='button';button.className='sketch-image-button';button.setAttribute('aria-label',tri('Enlarge sketch','Ampliar boceto','Skizze vergrößern')+' · '+sketchDate(item.date,lang));const img=document.createElement('img');if(item.responsive){img.srcset=item.src.replace('.webp','-720.webp')+' 720w, '+item.src.replace('.webp','-1200.webp')+' 1200w, '+item.src+' '+item.width+'w';img.sizes='(max-width:600px) calc(100vw - 40px), (max-width:900px) calc(100vw - 48px), min(1100px, 80vw)';}img.src=item.src;img.alt=item.alt[lang];img.width=item.width;img.height=item.height;img.loading=imageIndex++===0?'eager':'lazy';img.decoding='async';button.append(img);button.addEventListener('click',()=>{_curPanels=entries.map(entry=>entry.src);openLightbox(item.src,_curPanels.indexOf(item.src));});const caption=document.createElement('figcaption');const time=document.createElement('time');time.dateTime=item.date;time.textContent=sketchDate(item.date,lang);caption.append(time);figure.append(button,caption);grid.append(figure);}section.append(grid);root.append(section);}
  const footer=document.createElement('footer');footer.className='sketches-footer';footer.textContent='© '+new Date().getFullYear()+' Nahuel Villar';root.append(footer);
+ requestAnimationFrame(()=>window.refreshPortfolioMotion?.(root.closest('.page')));
 }
 window.TRANS.es.ui.nav_sketches='Bocetos';window.TRANS.de.ui.nav_sketches='Skizzen';
 const setLangWithSketches=window.setLang;window.setLang=function(lang){const page=document.getElementById('page-sketches'),top=page.scrollTop;setLangWithSketches(lang);document.querySelectorAll('[data-i18n="nav_sketches"]').forEach(el=>el.textContent=tri('Sketches','Bocetos','Skizzen'));if(page.classList.contains('active')){renderSketches();page.scrollTop=top;}};
@@ -5649,5 +6549,7 @@ function renderIntentParts(lang){const i=lang==='es'?1:lang==='de'?2:0;const not
 
 supplementaryCopy["Aluminium · Brass · Steel · Polycarbonate · PVC plastisol"]=["Aluminio · Latón · Acero · Policarbonato · Plastisol de PVC","Aluminium · Messing · Stahl · Polycarbonat · PVC-Plastisol"];
 </script>
-</body>
+<script>if(/^#(?:visor-sketches|visor-sketch-0[123]|flujo-sketch|incline-sketch|intent-sketch|flujo-decisions|incline-decisions|flujo-evolution|flujo-prototyping|incline-prototyping|intent-parts|intent-cmf)$/.test(location.hash))requestAnimationFrame(()=>document.querySelector(location.hash)?.scrollIntoView({block:'start',behavior:'instant'}));
+const setLangWithAvailability=window.setLang;window.setLang=function(lang){setLangWithAvailability(lang);refreshProjectAvailability();};refreshProjectAvailability();
+</script></body>
 </html>
