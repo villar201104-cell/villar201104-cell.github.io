@@ -1018,6 +1018,9 @@ html[data-input-mode="keyboard"] .page { transition:none; }
 .sketch-drawing-initial>img{width:100%;height:100%;display:block;object-fit:contain;mask-mode:luminance;mask-size:100% 100%;mask-repeat:no-repeat}
 
 [data-sketch-drawing]:focus-visible{outline:2px solid var(--color-muted);outline-offset:4px}
+/* These waiting styles also cover image decode and delayed observer delivery. */
+.visor-moodboard[data-mood-state="waiting"] img{opacity:0;transform:translateY(24px)}
+.visor-moodboard[data-mood-state="waiting"] .visor-mood-circle{opacity:.15}
 </style></head>
 <body>
 <script>document.addEventListener('DOMContentLoaded',function(){ window.dispatchEvent(new CustomEvent('intro-done')); });</script>
@@ -3789,6 +3792,40 @@ function buildProject(id) {
 
 // Reveal observers follow the existing project's scroll root.
 // They are disposed on route or language changes, just like project media.
+// Prepare the complete reveal before the board can intersect the viewport.
+function prepareVisorMoodboard(root,{page,motion,abort,animations,observers}){
+  const board=root.querySelector('.visor-moodboard');
+  if(!board)return;
+  if(motion.matches||document.documentElement.dataset.inputMode==='keyboard'||!board.animate||!('IntersectionObserver' in window)){
+    board.dataset.moodState='static';return;
+  }
+  board.dataset.moodState='waiting';
+  const staged=[];
+  function stage(el,frames,options){
+    const animation=el.animate(frames,{easing:'cubic-bezier(.25,.1,.25,1)',fill:'both',...options});
+    animation.pause();animation.currentTime=0;
+    staged.push(animation);animations.add(animation);
+  }
+  stage(board.querySelector('.visor-mood-circle'),[{opacity:.15},{opacity:1}],{duration:1400});
+  board.querySelectorAll('img').forEach(el=>stage(el,[{opacity:0,transform:'translateY(24px)'},{opacity:1,transform:'none'}],{duration:1700,delay:300+Number(el.dataset.order)*340}));
+  let started=false;
+  function finish(){
+    // Set the final state before clearing the animation fill.
+    board.dataset.moodState='complete';
+    staged.forEach(animation=>{animations.delete(animation);animation.cancel();});
+    mood.disconnect();
+  }
+  const mood=new IntersectionObserver(entries=>{
+    if(started||!entries.some(e=>e.isIntersecting&&e.intersectionRatio>=.4))return;
+    if(motion.matches||abort.signal.aborted){finish();return;}
+    started=true;board.dataset.moodState='playing';
+    staged.forEach(animation=>animation.play());mood.disconnect();
+  },{root:page,threshold:.4});
+  mood.observe(board);observers.push(mood);
+  Promise.allSettled(staged.map(animation=>animation.finished)).then(finish);
+  motion.addEventListener('change',()=>{if(motion.matches)finish();},{signal:abort.signal});
+}
+
 function initVisor(root,lang) {
   const page=root.closest('.page');
   const motion=matchMedia('(prefers-reduced-motion: reduce)');
@@ -3852,14 +3889,7 @@ function initVisor(root,lang) {
     },events);
     stage.addEventListener('pointercancel',()=>{gesture=null;},events);
   }
-  if('IntersectionObserver' in window){
-    const board=root.querySelector('.visor-moodboard');
-    const mood=new IntersectionObserver(entries=>{
-      if(!entries.some(e=>e.isIntersecting&&e.intersectionRatio>=.4))return;
-      animate(board.querySelector('.visor-mood-circle'),[{opacity:.15},{opacity:1}],{duration:1400});
-      board.querySelectorAll('img').forEach(el=>animate(el,[{opacity:0,transform:'translateY(24px)'},{opacity:1,transform:'none'}],{duration:1700,delay:300+Number(el.dataset.order)*340,easing:'cubic-bezier(.25,.1,.25,1)',fill:'backwards'}));mood.disconnect();
-    },{root:page,threshold:.4});mood.observe(board);observers.push(mood);
-  }
+  prepareVisorMoodboard(root,{page,motion,abort,animations,observers});
   respectMotion();
   window._visorCleanup=()=>{abort.abort();observers.forEach(o=>o.disconnect());animations.forEach(a=>a.cancel());window._visorCleanup=null;};
 }
@@ -6383,6 +6413,7 @@ let sketchMaskSequence=0;
 function initSketchDrawing(root,lang){
   const abort=new AbortController(),events={signal:abort.signal};
   const motion=matchMedia('(prefers-reduced-motion: reduce)');
+  const hover=matchMedia('(any-hover: hover)');
   const page=root.closest('.page');
   const figures=[...root.querySelectorAll('.visor-sketch')].filter(figure=>/sketch-0[123]\.webp/.test(figure.querySelector('img')?.getAttribute('src')||''));
   for(const [name,key] of [['flujo-sketches-new.webp','flujo-sketch'],['incline-sketches.webp','incline-sketch']]){
@@ -6397,7 +6428,7 @@ function initSketchDrawing(root,lang){
   const running=new Map(),finishedDrawings=new Map(),pending=new Set(),completed=new Set(),guides=new Map(),preparations=new Map();
   const interacting=new Set();
   let observer,preloader;
-  const allowed=()=>!document.hidden&&!motion.matches&&!abort.signal.aborted;
+  const allowed=()=>!document.hidden&&!motion.matches&&hover.matches&&!abort.signal.aborted;
   function visible(figure){
     const box=figure.getBoundingClientRect(),area=page?.getBoundingClientRect();
     const top=Math.max(64,area?.top||0),bottom=Math.min(innerHeight,area?.bottom||innerHeight);
@@ -6442,14 +6473,14 @@ function initSketchDrawing(root,lang){
   }
   async function draw(figure){
     const key=keyOf(figure),existing=running.get(figure);
-    if(existing){existing.resume();return;}
+    if(existing){if(interacting.has(figure))existing.resume();return;}
     if(!key||pending.has(figure)||!allowed()||!visible(figure)||!interacting.has(figure)||completed.has(figure))return;
     pending.add(figure);figure.dataset.drawingState='loading';
     try{
       const [data]=await prepare(figure);
       if(!allowed()||!visible(figure)||!interacting.has(figure))return;
       if(data.pixelTimeline){
-        const active=createPixelSketchPlayback({figure,image:figure.querySelector('img'),data,allowed,visible,
+        const active=createPixelSketchPlayback({figure,image:figure.querySelector('img'),data,allowed:()=>allowed()&&interacting.has(figure),visible,
           onComplete(){completed.add(figure);active.freeze();running.delete(figure);finishedDrawings.set(figure,active);figure.dataset.drawingState='complete';},
           onFailure(){restore(figure);completed.add(figure);figure.dataset.drawingState='static';}
         });running.set(figure,active);active.resume();return;
@@ -6551,12 +6582,12 @@ function initSketchDrawing(root,lang){
       const freezeParam=null,frozen=false;
       let elapsed=frozen?Math.max(0,Math.min(total,Number(freezeParam)||0)):0,last=null;
       const studies=timeline.map((item,i)=>({item,playback:startStudy(item,i)}));
-      const active={overlay,frame:0,resume(){if(!active.frame&&allowed()&&visible(figure)){last=null;figure.dataset.drawingState='drawing';active.frame=requestAnimationFrame(tick);}}};
+      const active={overlay,frame:0,resume(){if(!active.frame&&allowed()&&visible(figure)&&interacting.has(figure)){last=null;figure.dataset.drawingState='drawing';active.frame=requestAnimationFrame(tick);}}};
       running.set(figure,active);
       function tick(time){
         active.frame=0;
         if(abort.signal.aborted||motion.matches){restore(figure);return;}
-        if(!allowed()||!visible(figure)){last=null;figure.dataset.drawingState='paused';return;}
+        if(!allowed()||!visible(figure)||!interacting.has(figure)){last=null;figure.dataset.drawingState='paused';return;}
         if(last!==null&&!frozen)elapsed+=(time-last)*SKETCH_PLAYBACK_RATE;last=time;
         for(const {item,playback} of studies)playback.advance(Math.min(1,elapsed/total)*item.duration);
         overlay.dataset.study='all';overlay.dataset.studyCount=String(studies.length);
@@ -6574,19 +6605,22 @@ function initSketchDrawing(root,lang){
     }finally{pending.delete(figure);}
   }
   function stop(figure){
-    interacting.delete(figure);completed.delete(figure);restore(figure);figure.dataset.drawingState='static';
+    interacting.delete(figure);
+    const active=running.get(figure);
+    if(active){cancelAnimationFrame(active.frame);active.frame=0;figure.dataset.drawingState='paused';}
+    else if(!completed.has(figure))figure.dataset.drawingState=motion.matches?'static':'waiting';
   }
   function start(figure){
-    if(!allowed())return;
-    if(completed.has(figure)){restore(figure);completed.delete(figure);}
+    if(!allowed()||completed.has(figure))return;
     interacting.add(figure);draw(figure);
   }
   figures.forEach(figure=>{
     const key=keyOf(figure),source=figure.querySelector('img');
     figure.dataset.sketchDrawing='true';figure.dataset.drawingTrigger='hover';
     if(!figure.id)figure.id='visor-'+key;
-    // The complete sheet is the default: no empty artwork while scrolling.
-    figure.dataset.drawingState='static';
+    // Establish the first frame synchronously, before decoding or intersection callbacks.
+    figure.dataset.drawingState=motion.matches||!hover.matches?'static':'waiting';
+    if(!hover.matches){completed.add(figure);return;}
     figure.tabIndex=0;figure.setAttribute('role','button');
     figure.setAttribute('aria-label',lang==='es'?'Animar los sketches':lang==='de'?'Skizzen animieren':'Animate the sketches');
     figure.style.setProperty('--sketch-paper',key==='flujo-sketch'?'rgb(5,135,191)':'var(--color-bg)');
@@ -6613,7 +6647,7 @@ function initSketchDrawing(root,lang){
     }
   }
   if('IntersectionObserver' in window){
-    preloader=new IntersectionObserver(entries=>{for(const e of entries)if(e.isIntersecting){preloader.unobserve(e.target);if(!motion.matches)prepare(e.target).catch(()=>{});}},{root:page,rootMargin:'1400px 0px',threshold:0});
+    preloader=new IntersectionObserver(entries=>{for(const e of entries)if(e.isIntersecting){preloader.unobserve(e.target);if(!motion.matches&&hover.matches)prepare(e.target).catch(()=>{if(!abort.signal.aborted){completed.add(e.target);restore(e.target);e.target.dataset.drawingState='error';}});}},{root:page,rootMargin:'1400px 0px',threshold:0});
     observer=new IntersectionObserver(check,{root:page,threshold:[0,.1,.25,.5,.75,1]});
     figures.forEach(figure=>{preloader.observe(figure);observer.observe(figure);});
   }
@@ -6623,7 +6657,7 @@ function initSketchDrawing(root,lang){
   page?.addEventListener('scroll',scheduleCheck,{...events,passive:true});
   window.addEventListener('resize',scheduleCheck,events);
   document.addEventListener('visibilitychange',scheduleCheck,events);
-  motion.addEventListener('change',()=>{if(motion.matches)figures.forEach(stop);},events);
+  motion.addEventListener('change',()=>{if(motion.matches){interacting.clear();clear();figures.forEach(figure=>{completed.add(figure);figure.dataset.drawingState='static';});}},events);
   scheduleCheck();
   return ()=>{abort.abort();cancelAnimationFrame(scheduled);observer?.disconnect();preloader?.disconnect();clear();figures.forEach(figure=>{figure.dataset.drawingState='static';figure.querySelector('.sketch-drawing-initial')?.remove();});};
 }
