@@ -1061,13 +1061,14 @@ html[data-input-mode="keyboard"] .page { transition:none; }
 @media(max-width:640px){
  .case-additional:not([data-project="core"]) .case-process-stage .proto-item-text{max-width:none}
 }
-/* Shared project introduction: a centred reading column and a distinct index. */
-#projContent .proj-desc{display:block;box-sizing:border-box;width:calc(100% - 48px);max-width:820px;margin:0 auto;padding:0!important;}
+/* Shared project introduction: a left-aligned reading column and a distinct index. */
+#projContent{--opening-gutter:clamp(80px,10vw,160px);}
+#projContent .proj-desc{display:block;box-sizing:border-box;width:calc(100% - 2 * var(--opening-gutter));max-width:820px;margin:0 auto 0 var(--opening-gutter);padding:0!important;}
 #projContent .proj-desc .desc-label{margin:0 0 22px;padding:0;font-size:.75rem;font-weight:500;letter-spacing:.13em;line-height:1.5;}
 #projContent .proj-desc .desc-body{max-width:none;width:100%;}
 #projContent .proj-desc .desc-body p{font-size:clamp(1rem,1.25vw,1.125rem);line-height:1.8;text-align:left;margin:0 0 20px;text-wrap:pretty;}
 #projContent .proj-desc .desc-body p:last-child{margin-bottom:0;}
-#projContent .project-index{display:block;box-sizing:border-box;width:calc(100% - 48px);max-width:820px;margin:44px auto clamp(48px,6vw,80px);padding:24px 0 0!important;border:0;border-top:1px solid var(--color-border);}
+#projContent .project-index{display:block;box-sizing:border-box;width:calc(100% - 2 * var(--opening-gutter));max-width:820px;margin:44px auto clamp(48px,6vw,80px) var(--opening-gutter);padding:24px 0 0!important;border:0;border-top:1px solid var(--color-border);}
 #projContent .project-index-label{margin:0 0 14px;font-size:.68rem;line-height:1.5;letter-spacing:.13em;text-transform:uppercase;color:var(--color-muted);}
 #projContent .project-index-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 32px;list-style:none;margin:0;padding:0;}
 #projContent .project-index a{display:flex;align-items:baseline;gap:12px;min-height:44px;box-sizing:border-box;padding:10px 0;border:0;font-size:.88rem;line-height:1.5;text-decoration:none;color:var(--color-text);}
@@ -1085,6 +1086,18 @@ html[data-input-mode="keyboard"] .page { transition:none; }
 #visor-cmf .visor-glazing-proposal>:not(img){grid-column:2;}
 #visor-cmf .visor-glazing-proposal h3{margin-top:8px;}
 @media(max-width:640px){#visor-cmf .visor-glazing-proposal{grid-template-columns:1fr;gap:0;}#visor-cmf .visor-glazing-proposal>.visor-cmf-texture{grid-row:auto;margin-bottom:22px;}#visor-cmf .visor-glazing-proposal>:not(img){grid-column:1;}}
+
+@media(max-width:900px){#projContent{--opening-gutter:20px;}}
+@media(max-width:600px){#projContent{--opening-gutter:18px;}}
+.intent-plastisol{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);margin:44px 0 32px;padding-top:32px;border-top:1px solid var(--color-border);align-items:center;}
+.intent-plastisol figure{margin:0;min-width:0;}
+.intent-plastisol img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;}
+.intent-plastisol figcaption{font-size:.72rem;color:var(--color-muted);line-height:1.5;margin-top:12px;}
+.intent-plastisol h3{font-family:var(--font-display);font-size:clamp(24px,2.4vw,36px);font-weight:500;letter-spacing:-.025em;line-height:1.18;margin:12px 0 20px;}
+.intent-plastisol h4{font-size:1rem;font-weight:600;margin:24px 0 10px;}
+.intent-plastisol p:not(.cmp-section-label){font-size:.95rem;line-height:1.75;max-width:60ch;margin:0 0 16px;}
+.intent-plastisol a{font-size:.78rem;line-height:1.5;color:var(--color-muted);text-decoration:underline;text-underline-offset:4px;}
+@media(max-width:700px){.intent-plastisol{grid-template-columns:1fr;gap:24px;align-items:start;}}
 </style><style>.visor-sketch,.case-sketch-drawing{position:relative;scroll-margin-top:80px}
 .case-sketch-drawing{margin:0}
 .case-sketch-drawing>img{display:block;width:100%;height:auto!important}
@@ -3343,7 +3356,7 @@ function buildProject(id) {
         <div class="origins-stat" data-copy="copy-080">A zen object doesn't decorate, it <strong>accompanies</strong>. The intent was to go beyond the lamp concept: create something sculptural that makes people question what it is and how it's made.</div>
       </div>
       <div class="origins-col">
-        <img loading="lazy" src="/images/flujo-process-2.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
+        <img loading="lazy" src="/images/flujo-nozzle-selected-v4.webp" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;">
         <div class="origins-cross">+</div>
         <div class="origins-stat" data-copy="copy-273">3D printing made it possible to integrate the <strong>three-dimensional pattern inside the shade</strong> as part of a single printed body. The geometry was developed around that manufacturing opportunity.</div>
       </div>
@@ -6369,6 +6382,24 @@ function refineProjectOpening(root,lang){
       glass.append(image,label,title,copy,ref);note.before(glass);
     }
   }
+  if(id==='intent' && !root.querySelector('.intent-plastisol')){
+    const grid=root.querySelector('.cmp-cmf-grid');
+    if(grid){
+      const block=document.createElement('article');block.className='intent-plastisol';
+      const figure=document.createElement('figure');
+      const image=document.createElement('img');image.src='/images/intent/plastisol-orange-v1.webp';image.width=1448;image.height=1086;image.loading='lazy';image.alt=L('Orange PVC plastisol finish, AI-generated material reference','Acabado de plastisol de PVC naranja, referencia material generada con IA','Orange PVC-Plastisoloberfläche, KI-generierte Materialreferenz');
+      const caption=document.createElement('figcaption');caption.textContent=L('AI-generated finish reference.','Referencia de acabado generada con IA.','KI-generierte Oberflächenreferenz.');figure.append(image,caption);
+      const text=document.createElement('div');
+      const label=document.createElement('p');label.className='cmp-section-label';label.textContent=L('Touchpoint · colour & finish','Punto de contacto · color y acabado','Kontaktfläche · Farbe & Oberfläche');
+      const title=document.createElement('h3');title.textContent=L('Orange PVC plastisol / dip coating','Plastisol de PVC naranja / inmersión','Oranges PVC-Plastisol / Tauchbeschichtung');
+      const body=document.createElement('p');body.textContent=L('The aluminium thumb pusher is proposed with a flexible PVC plastisol coating, applied by dipping and heat curing. It introduces a softer contact surface over the metal and is intended to improve grip during repeated presses. Coating thickness and hardness would be defined through prototype testing.','Para el pulsador de aluminio se propone un recubrimiento flexible de plastisol de PVC, aplicado por inmersión y curado térmico. Aporta una superficie de contacto más blanda sobre el metal y busca mejorar el agarre durante las pulsaciones repetidas. El espesor y la dureza se definirían mediante pruebas de prototipo.','Für den Aluminium-Daumendrücker ist eine flexible PVC-Plastisolbeschichtung vorgesehen, die durch Tauchen und thermisches Aushärten aufgebracht wird. Sie schafft eine weichere Kontaktfläche auf dem Metall und soll den Griff bei wiederholter Betätigung verbessern. Schichtdicke und Härte würden durch Prototypentests bestimmt.');
+      const sub=document.createElement('h4');sub.textContent=L('Why orange?','¿Por qué naranja?','Warum Orange?');
+      const colour=document.createElement('p');colour.textContent=L('Orange marks the point of interaction. Against the brass shell and neutral metal components, it draws attention to where the thumb presses and gives the bell a recognisable accent. The colour identifies the control; the sequence of presses communicates the level of urgency.','El naranja señala el punto de interacción. Frente al cuerpo de latón y los componentes metálicos neutros, dirige la atención hacia donde presiona el pulgar y le da al timbre un acento reconocible. El color identifica el control; la secuencia de pulsaciones comunica el nivel de urgencia.','Orange kennzeichnet den Interaktionspunkt. Im Kontrast zum Messingkörper und den neutralen Metallteilen lenkt es den Blick auf die Daumenauflage und verleiht der Klingel einen wiedererkennbaren Akzent. Die Farbe markiert das Bedienelement; die Folge der Betätigungen vermittelt die Dringlichkeitsstufe.');
+      const ref=document.createElement('a');ref.href='https://www.piper-plastics.com/faqs/';ref.target='_blank';ref.rel='noopener noreferrer';ref.textContent=L('Process reference · PVC dip coating ↗','Referencia del proceso · inmersión en PVC ↗','Verfahrensreferenz · PVC-Tauchbeschichtung ↗');
+      text.append(label,title,body,sub,colour,ref);block.append(figure,text);grid.after(block);
+    }
+  }
+
   const old=about.querySelector('.desc-label');
   if(old){const h=document.createElement('h2');h.className=old.className;h.textContent=old.textContent;old.replaceWith(h);}
   let nav=root.querySelector('.project-outline');
