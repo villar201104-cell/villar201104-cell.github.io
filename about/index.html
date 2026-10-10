@@ -1120,17 +1120,10 @@ html[data-input-mode="keyboard"] .page { transition:none; }
  #projContent .proj-header-right .proj-specs{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 20px;}
  #projContent .project-index-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px;}
 }
-</style><style>.visor-sketch,.case-sketch-drawing{position:relative;scroll-margin-top:80px}
-.case-sketch-drawing{margin:0}
-.case-sketch-drawing>img{display:block;width:100%;height:auto!important}
-.sketch-drawing-preview{position:absolute;top:0;left:0;display:block;width:100%;height:auto;pointer-events:none}
-[data-sketch-drawing]:is([data-drawing-state="waiting"],[data-drawing-state="loading"],[data-drawing-state="drawing"],[data-drawing-state="paused"],[data-drawing-state="review-frame"])>img{opacity:0!important;transition:none!important}
-.sketch-drawing-initial{display:none;position:absolute;inset:0;pointer-events:none;background-color:var(--sketch-paper,var(--color-bg));background-size:100% 100%;background-repeat:no-repeat}
-[data-sketch-drawing]:is([data-drawing-state="waiting"],[data-drawing-state="loading"])>.sketch-drawing-initial{display:block}
-.sketch-drawing-initial>img{width:100%;height:100%;display:block;object-fit:contain;mask-mode:luminance;mask-size:100% 100%;mask-repeat:no-repeat}
-
-[data-sketch-drawing]:focus-visible{outline:2px solid var(--color-muted);outline-offset:4px}
-/* These waiting styles also cover image decode and delayed observer delivery. */
+</style><style>
+.visor-sketch,.case-sketch-static{position:relative;scroll-margin-top:80px}
+.case-sketch-static{margin:0}
+.case-sketch-static>img{display:block;width:100%;height:auto!important}
 .visor-moodboard[data-mood-state="waiting"] img{opacity:0;transform:translateY(24px)}
 .visor-moodboard[data-mood-state="waiting"] .visor-mood-circle{opacity:.15}
 </style></head>
@@ -1589,7 +1582,7 @@ function routeFromLocation(){
 }
 function saveRoutePosition(){const page=document.querySelector('.page.active');if(!page||!history.state)return;history.replaceState({...history.state,scrollTop:page.scrollTop,panelScroll:document.getElementById('pt')?.scrollLeft||0},'',location.href);}
 function go(page,id,pushState=true){
- window._sketchDrawingCleanup?.();window._visorCleanup?.();
+ window._visorCleanup?.();
  if(!['home','sketches','about','contact','project'].includes(page)||(page==='project'&&!PROJECTS[id])){page='home';id=null;}
  if(pushState)saveRoutePosition();
  closeLightbox();closeLangMenu();toggleMenu(false);
@@ -1756,7 +1749,7 @@ function _cmpGradoUI(reset) {
 }
 
 function buildProject(id) {
-  window._sketchDrawingCleanup?.();window._visorCleanup?.();
+  window._visorCleanup?.();
   window._currentProjectId = id;
   const p = id==='visor' ? {...PROJECTS[id],...VISOR_COPY[window.currentLang||'en'].project} : PROJECTS[id];
   const tr = (window.TRANS && window.currentLang && window.currentLang!=='en') ? (window.TRANS[window.currentLang]?.projects?.[id]||{}) : {};
@@ -4462,7 +4455,7 @@ document.querySelectorAll('.page').forEach(p=>p.addEventListener('scroll',()=>{
 (function(){
   const preference=matchMedia('(prefers-reduced-motion: reduce)');
   const seen=new WeakSet(), running=new Map();
-  const selector='.case-reveal,.fu,.process-header,.cmp-section-hd,.split-left,.proto-header,.process-closing,.origins-question,.sketches-title,.sketch-year-title,.sketch-item,.visor-heading,.visor-workflow-link,.visor-context,.visor-sketch:not([data-sketch-drawing]),img.cmp-render-full';
+  const selector='.case-reveal,.fu,.process-header,.cmp-section-hd,.split-left,.proto-header,.process-closing,.origins-question,.sketches-title,.sketch-year-title,.sketch-item,.visor-heading,.visor-workflow-link,.visor-context,.visor-sketch,img.cmp-render-full';
   let page=null,observer=null,registered=new WeakSet();
   let keyboard=false;
   document.addEventListener('keydown',e=>{
@@ -4476,7 +4469,7 @@ document.querySelectorAll('.page').forEach(p=>p.addEventListener('scroll',()=>{
   },{passive:true,capture:true});
 
   function reveal(el){
-    if(seen.has(el))return;
+    if(seen.has(el)||el.matches('.sketch-item,.visor-sketch,.case-sketch-static')||el.querySelector('img[src*="sketch"]'))return;
     seen.add(el);el.dataset.motionSeen='true';
     if(preference.matches||keyboard||!el.animate)return;
     // Images fade at their existing size. Headings travel only 14px.
@@ -6594,369 +6587,22 @@ function refineCaseStudy(root, lang) {
 
 
 
-// Pixel timestamps reveal the original image without broad spatial masks.
-const SKETCH_PLAYBACK_RATE=1.25;
-function createPixelSketchPlayback({figure,image,data,allowed,visible,onComplete,onFailure}){
-  // Keep every original pixel timestamp, removing only the delay between studies.
-  const studies=[...new Set(data.pixelTimeline.phases.map(p=>p.study))].map(id=>{
-    const phases=data.pixelTimeline.phases.filter(p=>p.study===id);
-    return {id,start:phases[0].start,end:phases.at(-1).end,phases};
+
+function prepareStaticSketches(root){
+  root.querySelectorAll('.visor-sketch').forEach(figure=>{
+    const key=figure.querySelector('img')?.getAttribute('src')?.match(/sketch-\d+/)?.[0];
+    if(key&&!figure.id)figure.id='visor-'+key;
   });
-  const duration=Math.max(...studies.map(s=>s.end-s.start))+240;
-  const simultaneousTimes=studies.map((s,i)=>`${i?'else ':''}if(when >= ${(s.start-2).toFixed(1)}${i<studies.length-1?' && when < '+(studies[i+1].start-2).toFixed(1):''}) when=max(0.,when-${s.start.toFixed(1)});`).join('\n');
-  const overlay=document.createElement('canvas');
-  overlay.className='sketch-drawing-preview';overlay.setAttribute('aria-hidden','true');
-  overlay.width=data.width;overlay.height=data.height;
-  overlay.style.background='var(--color-bg)';
-  overlay.dataset.renderer='pixel-timeline';overlay.dataset.playbackRate=String(SKETCH_PLAYBACK_RATE);
-  const gl=overlay.getContext('webgl2',{alpha:true,antialias:false,premultipliedAlpha:true,depth:false,stencil:false});
-  if(!gl)throw new Error('Pixel animation unavailable; keeping original artwork');
-  const shaders=[],textures=[];
-  function shader(type,source){
-    const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);shaders.push(s);
-    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(s));return s;
-  }
-  const program=gl.createProgram();
-  gl.attachShader(program,shader(gl.VERTEX_SHADER,`#version 300 es
-    in vec2 position;out vec2 uv;
-    void main(){uv=position*.5+.5;gl_Position=vec4(position,0.,1.);}`));
-  gl.attachShader(program,shader(gl.FRAGMENT_SHADER,`#version 300 es
-    precision highp float;
-    uniform sampler2D artwork;uniform sampler2D timeline;
-    uniform float elapsed;uniform float duration;
-    in vec2 uv;out vec4 colour;
-    void main(){
-      ivec2 pixel=clamp(ivec2(uv*vec2(textureSize(artwork,0))),ivec2(0),textureSize(artwork,0)-1);
-      vec4 source=texelFetch(artwork,pixel,0);
-      vec2 bytes=floor(texelFetch(timeline,pixel,0).rg*255.+.5);
-      float when=(bytes.r*256.+bytes.g)/65534.*duration;
-      ${simultaneousTimes}
-      float visible=smoothstep(when,when+16.,elapsed);
-      colour=source*visible;
-    }`));
-  gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(program));
-  gl.useProgram(program);
-  const buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
-  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
-  const position=gl.getAttribLocation(program,'position');gl.enableVertexAttribArray(position);gl.vertexAttribPointer(position,2,gl.FLOAT,false,0,0);
-  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);
-  function texture(unit,img,premultiplied,name){
-    const t=gl.createTexture();textures.push(t);gl.activeTexture(gl.TEXTURE0+unit);gl.bindTexture(gl.TEXTURE_2D,t);
-    gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,premultiplied);
-    gl.pixelStorei(gl.UNPACK_COLORSPACE_CONVERSION_WEBGL,premultiplied?gl.BROWSER_DEFAULT_WEBGL:gl.NONE);
-    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.NEAREST);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);
-    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
-    gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);gl.uniform1i(gl.getUniformLocation(program,name),unit);
-  }
-  texture(0,image,true,'artwork');texture(1,data._pixelMap,false,'timeline');
-  const clock=gl.getUniformLocation(program,'elapsed');
-  gl.uniform1f(gl.getUniformLocation(program,'duration'),data.pixelTimeline.duration);gl.viewport(0,0,overlay.width,overlay.height);
-  const oldOpacity=image.style.opacity;
-  let elapsed=0,last=null,disposed=false,gpuReleased=false;
-  const reviewFrame=null;
-  function render(){
-    gl.uniform1f(clock,elapsed);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
-    const current=studies[0].phases.find(p=>elapsed<p.end-studies[0].start)||studies[0].phases.at(-1);
-    overlay.dataset.study='all';overlay.dataset.studyCount=String(studies.length);overlay.dataset.phase=current.phase;
-    overlay.dataset.studyProgress=JSON.stringify(studies.map(s=>Math.min(1,elapsed/(s.end-s.start))));
-    overlay.dataset.progress=String(Math.round(elapsed/duration*100));overlay.dataset.elapsed=String(Math.round(elapsed));
-  }
-  const active={overlay,frame:0,
-    resume(){if(!disposed&&!active.frame&&allowed()&&visible(figure)&&reviewFrame===null){last=null;figure.dataset.drawingState='drawing';active.frame=requestAnimationFrame(tick);}},
-    freeze(){
-      // Keep exactly the last rendered pixels: no change in resampling at the end.
-      const still=document.createElement('canvas');still.width=overlay.width;still.height=overlay.height;
-      still.className=overlay.className;still.style.cssText=overlay.style.cssText;still.setAttribute('aria-hidden','true');
-      still.getContext('2d').drawImage(overlay,0,0);still.dataset.renderer='pixel-complete';
-      disposed=true;overlay.replaceWith(still);active.overlay=still;releaseGPU();
-    },
-    dispose(){disposed=true;cancelAnimationFrame(active.frame);image.style.opacity=oldOpacity;releaseGPU();}
-
-  };
-  function releaseGPU(){
-    if(gpuReleased)return;gpuReleased=true;
-    textures.forEach(t=>gl.deleteTexture(t));shaders.forEach(s=>gl.deleteShader(s));gl.deleteBuffer(buffer);gl.deleteProgram(program);
-    gl.getExtension('WEBGL_lose_context')?.loseContext();
-  }
-  function tick(time){
-    active.frame=0;if(disposed)return;
-    if(!allowed()||!visible(figure)){last=null;figure.dataset.drawingState='paused';return;}
-    if(last!==null)elapsed+=(time-last)*SKETCH_PLAYBACK_RATE;last=time;render();
-    if(elapsed>=duration+20){onComplete();return;}active.frame=requestAnimationFrame(tick);
-  }
-  overlay.addEventListener('webglcontextlost',()=>{if(!disposed)onFailure();},{once:true});
-  elapsed=reviewFrame??0;render();figure.append(overlay);image.style.opacity='0';
-  figure.dataset.drawingState=reviewFrame===null?'drawing':'review-frame';
-  return active;
-}
-
-
-
-// Reveal all studies together, only when the visitor interacts with the sheet.
-let sketchMaskSequence=0;
-function initSketchDrawing(root,lang){
-  const abort=new AbortController(),events={signal:abort.signal};
-  const motion=matchMedia('(prefers-reduced-motion: reduce)');
-  const hover=matchMedia('(any-hover: hover)');
-  const page=root.closest('.page');
-  const figures=[...root.querySelectorAll('.visor-sketch')].filter(figure=>/sketch-0[123]\.webp/.test(figure.querySelector('img')?.getAttribute('src')||''));
   for(const [name,key] of [['flujo-sketches-new.webp','flujo-sketch'],['incline-sketches.webp','incline-sketch']]){
     const image=root.querySelector('img[src="/images/'+name+'"]');
     if(!image)continue;
     let figure=image.parentElement;
-    if(image.classList.contains('cmp-render-full')){figure=document.createElement('figure');image.before(figure);figure.append(image);}
-    figure.classList.add('case-sketch-drawing');figure.dataset.guideKey=key;
-    figure.id=key;figures.push(figure);
-  }
-  const keyOf=figure=>figure.dataset.guideKey||figure.querySelector('img').src.match(/sketch-\d+/)?.[0];
-  const running=new Map(),finishedDrawings=new Map(),pending=new Set(),completed=new Set(),guides=new Map(),preparations=new Map();
-  const interacting=new Set();
-  let observer,preloader;
-  const allowed=()=>!document.hidden&&!motion.matches&&hover.matches&&!abort.signal.aborted;
-  function visible(figure){
-    const box=figure.getBoundingClientRect(),area=page?.getBoundingClientRect();
-    const top=Math.max(64,area?.top||0),bottom=Math.min(innerHeight,area?.bottom||innerHeight);
-    return Math.min(box.bottom,bottom)-Math.max(box.top,top)>=Math.min(180,box.height*.28);
-  }
-  function restore(figure){
-    const active=running.get(figure)||finishedDrawings.get(figure);
-    if(active){cancelAnimationFrame(active.frame);active.dispose?.();active.overlay.remove();running.delete(figure);finishedDrawings.delete(figure);}
-  }
-  function clear(){running.forEach((_,figure)=>restore(figure));finishedDrawings.forEach((_,figure)=>restore(figure));}
-  function prepare(figure){
-    if(preparations.has(figure))return preparations.get(figure);
-    const image=figure.querySelector('img'),key=keyOf(figure);
-    image.loading='eager';image.removeAttribute('sizes');
-    // Pin the full source at 1x so the former responsive candidate density cannot persist.
-    if(!image.dataset.drawingSource){
-      const original=image.getAttribute('src');image.dataset.drawingSource=original;
-      const full=new URL(original,location.href);full.searchParams.set('sketch-quality','original-20261006-v5');image.src=full.href;image.srcset=full.href+' 1x';
+    if(image.classList.contains('cmp-render-full')){
+      figure=document.createElement('figure');image.before(figure);figure.append(image);
     }
-    const pixelGuide=/^sketch-0[123]$/.test(key);
-    const guidePromise=guides.get(key)||fetch('/assets/sketches/'+key+(pixelGuide?'-pixels':'')+'.json?v=orthographic-restored-20261006',{signal:abort.signal}).then(response=>{
-      if(!response.ok)throw new Error('Sketch guide unavailable');return response.json();
-    });
-    guides.set(key,guidePromise);
-    const preparation=Promise.all([guidePromise,image.decode()]).then(async result=>{
-      if(result[0].pixelTimeline){
-        if(!result[0]._pixelMap){const map=new Image();map.src='/assets/sketches/'+result[0].pixelTimeline.file+'?v=orthographic-restored-20261006';await map.decode();result[0]._pixelMap=map;}
-        return result;
-      }
-      await Promise.all([result[0].lineMask,result[0].toneMask,result[0].staticMask,result[0].washField,result[0].foregroundMask,result[0].backgroundLayer].filter(Boolean).map(file=>{
-        const mask=new Image();mask.src='/assets/sketches/'+file+'?v=wash-continuous-2';return mask.decode();
-      }));
-      if(abort.signal.aborted)return result;
-      if(result[0].backgroundLayer){
-        figure.style.backgroundImage='url(/assets/sketches/'+result[0].backgroundLayer+')';
-        figure.style.backgroundSize='100% auto';figure.style.backgroundRepeat='no-repeat';
-        image.style.maskImage='url(/assets/sketches/'+result[0].foregroundMask+')';
-        image.style.maskMode='luminance';image.style.maskSize='100% 100%';
-      }return result;
-    });
-    preparations.set(figure,preparation);return preparation;
+    figure.classList.add('case-sketch-static');figure.id=key;
   }
-  async function draw(figure){
-    const key=keyOf(figure),existing=running.get(figure);
-    if(existing){if(interacting.has(figure))existing.resume();return;}
-    if(!key||pending.has(figure)||!allowed()||!visible(figure)||!interacting.has(figure)||completed.has(figure))return;
-    pending.add(figure);figure.dataset.drawingState='loading';
-    try{
-      const [data]=await prepare(figure);
-      if(!allowed()||!visible(figure)||!interacting.has(figure))return;
-      if(data.pixelTimeline){
-        const active=createPixelSketchPlayback({figure,image:figure.querySelector('img'),data,allowed:()=>allowed()&&interacting.has(figure),visible,
-          onComplete(){completed.add(figure);active.freeze();running.delete(figure);finishedDrawings.set(figure,active);figure.dataset.drawingState='complete';},
-          onFailure(){restore(figure);completed.add(figure);figure.dataset.drawingState='static';}
-        });running.set(figure,active);active.resume();return;
-      }
-      if(!data.sequence?.length)throw new Error('Complete sketch sequence unavailable');
-      const ns='http://www.w3.org/2000/svg';
-      function el(name,attributes){
-        const node=document.createElementNS(ns,name);
-        for(const [attribute,value] of Object.entries(attributes||{}))node.setAttribute(attribute,String(value));
-        return node;
-      }
-      const id='sketch-reveal-'+(++sketchMaskSequence);
-      const overlay=el('svg',{viewBox:`0 0 ${data.width} ${data.height}`,class:'sketch-drawing-preview','aria-hidden':'true',focusable:'false'});
-      const defs=el('defs'),mask=el('mask',{id,maskUnits:'userSpaceOnUse',maskContentUnits:'userSpaceOnUse',x:0,y:0,width:data.width,height:data.height,'mask-type':'luminance'});
-      mask.append(el('rect',{width:data.width,height:data.height,fill:'#000'}));
-      function phase(name,file){
-        const maskName=id+'-'+name;
-        const selection=el('mask',{id:maskName,maskUnits:'userSpaceOnUse',x:0,y:0,width:data.width,height:data.height,'mask-type':'luminance'});
-        selection.append(el('image',{href:'/assets/sketches/'+file+'?v=wash-continuous-2',width:data.width,height:data.height}));defs.append(selection);
-        const group=el('g',{fill:'none',stroke:'#fff','stroke-width':data.brushWidth||7,'stroke-linecap':'round','stroke-linejoin':'round',mask:`url(#${maskName})`});
-        mask.append(group);return group;
-      }
-      const ink=phase('line',data.lineMask),shade=phase('tone',data.toneMask);
-      if(data.staticMask)phase('static',data.staticMask).append(el('rect',{width:data.width,height:data.height,fill:'#fff',stroke:'none'}));
-      const finished=el('g',{fill:'#fff',stroke:'none'});mask.append(finished);defs.append(mask);overlay.append(defs);
-      // Reveal the artwork itself; never expose the completed image underneath
-      // while external SVG masks are loading or being painted for the first time.
-      overlay.append(el('rect',{width:data.width,height:data.height,fill:data.background||'var(--color-bg)'}));
-      if(data.backgroundLayer)overlay.append(el('image',{href:'/assets/sketches/'+data.backgroundLayer,width:data.width,height:data.height}));
-      const revealed=el('g',{mask:`url(#${id})`});
-      const artwork=el('image',{href:figure.querySelector('img').currentSrc||figure.querySelector('img').src,width:data.width,height:data.height});
-      if(data.foregroundMask){
-        const foregroundId=id+'-foreground';
-        const foreground=el('mask',{id:foregroundId,maskUnits:'userSpaceOnUse',x:0,y:0,width:data.width,height:data.height,'mask-type':'luminance'});
-        foreground.append(el('image',{href:'/assets/sketches/'+data.foregroundMask+'?v=wash-continuous-2',width:data.width,height:data.height}));defs.append(foreground);
-        artwork.setAttribute('mask',`url(#${foregroundId})`);
-      }
-      revealed.append(artwork);overlay.append(revealed);
-      function tracer(group,paths){
-        const frontier=el('path');group.append(frontier);
-        const segments=[];let total=0,index=0,drawn=0,partial=0,done=[],chunk=0;
-        for(const p of paths)for(let i=2;i<p.length;i+=2){
-          const length=Math.hypot(p[i]-p[i-2],p[i+1]-p[i-1]);
-          if(length){segments.push({x:p[i-2],y:p[i-1],ex:p[i],ey:p[i+1],length});total+=length;}
-        }
-        return progress=>{
-          const target=progress*total;
-          while(index<segments.length&&drawn<target){
-            const s=segments[index],step=Math.min(target-drawn,s.length-partial);drawn+=step;partial+=step;
-            if(partial>=s.length-.001){
-              done.push(`M${s.x},${s.y}L${s.ex},${s.ey}`);index++;partial=0;chunk++;
-              if(chunk>=128){group.insertBefore(el('path',{d:done.join('')}),frontier);done=[];chunk=0;}
-            }
-          }
-          let tail='';
-          if(partial&&index<segments.length){const s=segments[index],p=partial/s.length;tail=`M${s.x},${s.y}L${s.x+(s.ex-s.x)*p},${s.y+(s.ey-s.y)*p}`;}
-          frontier.setAttribute('d',done.join('')+tail);
-        };
-      }
-      function startStudy(study,index){
-        const clipId=id+'-study-'+index,points=study.polygon.map(p=>p.join(',')).join(' ');
-        const clip=el('mask',{id:clipId,maskUnits:'userSpaceOnUse',x:0,y:0,width:data.width,height:data.height,'mask-type':'luminance'});
-        clip.append(el('polygon',{points,fill:'#fff'}));
-        for(const later of data.sequence.slice(index+1))clip.append(el('polygon',{points:later.polygon.map(p=>p.join(',')).join(' '),fill:'#000'}));
-        defs.append(clip);
-        const lines=el('g',{mask:`url(#${clipId})`}),tones=el('g',{mask:`url(#${clipId})`});ink.append(lines);shade.append(tones);
-        const stages=(study.lineStages||[{name:'linework',duration:study.lineDuration,paths:study.paths}]).map(stage=>({...stage,trace:tracer(lines,stage.paths)}));
-        const hatch=data.shadeStyle==='hatching'?tracer(tones,study.shadows.map(s=>s.points)):null;
-        const brushes=[];let length=0;
-        if(!hatch)for(const s of study.shadows){
-          const p=s.points;let d=`M${p[0]},${p[1]}`,weight=0;
-          for(let i=2;i<p.length;i+=2){d+=`L${p[i]},${p[i+1]}`;weight+=Math.hypot(p[i]-p[i-2],p[i+1]-p[i-1]);}
-          const brush=el('path',{d,'stroke-width':s.width,'stroke-linecap':'butt',pathLength:1,'stroke-dasharray':'1 1','stroke-dashoffset':1,opacity:0});tones.append(brush);
-          weight=Math.max(120,weight);brushes.push({brush,start:length,length:weight});length+=weight;
-        }
-        let lineDone=false,committed=false;
-        return {
-          advance(ms){
-            let phaseOffset=0;
-            for(const stage of stages){
-              if(ms>=phaseOffset){stage.trace(Math.min(1,(ms-phaseOffset)/stage.duration));if(ms<phaseOffset+stage.duration)overlay.dataset.lineStage=stage.name;}
-              phaseOffset+=stage.duration;
-            }
-            if(ms>=study.lineDuration&&!lineDone){lineDone=true;lines.append(el('polygon',{points,fill:'#fff',stroke:'none'}));}
-            if(ms>study.lineDuration&&study.shadeDuration){
-              const p=Math.min(1,(ms-study.lineDuration)/study.shadeDuration);
-              if(hatch)hatch(p);
-              else for(const b of brushes){const amount=Math.max(0,Math.min(1,(p*length-b.start)/b.length));if(amount){b.brush.setAttribute('opacity','1');b.brush.setAttribute('stroke-dashoffset',String(1-amount));}}
-            }
-            if(ms>=study.lineDuration+study.shadeDuration&&!committed){
-              committed=true;finished.append(el('polygon',{points,mask:`url(#${clipId})`}));lines.remove();tones.remove();overlay.dataset.completedStudies=String(Number(overlay.dataset.completedStudies||0)+1);
-            }
-          }
-        };
-      }
-      overlay.dataset.playbackRate=String(SKETCH_PLAYBACK_RATE);figure.append(overlay);figure.dataset.drawingState='drawing';
-      const timeline=data.sequence.map((s,i)=>({...s,index:i,duration:s.lineDuration+s.shadeDuration+180}));
-      const total=Math.max(4800,...timeline.map(s=>s.duration)),finish=120;
-      const freezeParam=null,frozen=false;
-      let elapsed=frozen?Math.max(0,Math.min(total,Number(freezeParam)||0)):0,last=null;
-      const studies=timeline.map((item,i)=>({item,playback:startStudy(item,i)}));
-      const active={overlay,frame:0,resume(){if(!active.frame&&allowed()&&visible(figure)&&interacting.has(figure)){last=null;figure.dataset.drawingState='drawing';active.frame=requestAnimationFrame(tick);}}};
-      running.set(figure,active);
-      function tick(time){
-        active.frame=0;
-        if(abort.signal.aborted||motion.matches){restore(figure);return;}
-        if(!allowed()||!visible(figure)||!interacting.has(figure)){last=null;figure.dataset.drawingState='paused';return;}
-        if(last!==null&&!frozen)elapsed+=(time-last)*SKETCH_PLAYBACK_RATE;last=time;
-        for(const {item,playback} of studies)playback.advance(Math.min(1,elapsed/total)*item.duration);
-        overlay.dataset.study='all';overlay.dataset.studyCount=String(studies.length);
-        overlay.dataset.phase=elapsed<total?'parallel':'complete';
-        overlay.dataset.studyProgress=JSON.stringify(studies.map(()=>Math.min(1,elapsed/total)));
-        overlay.dataset.progress=String(Math.round(Math.min(1,elapsed/total)*100));
-        if(frozen){figure.dataset.drawingState='review-frame';return;}
-        if(elapsed>total){figure.dataset.drawingState='finishing';overlay.style.opacity=String(Math.max(0,1-(elapsed-total)/finish));}
-        if(elapsed>=total+finish){completed.add(figure);restore(figure);figure.dataset.drawingState='complete';return;}
-        active.frame=requestAnimationFrame(tick);
-      }
-      active.resume();
-    }catch(error){
-      if(!abort.signal.aborted){completed.add(figure);figure.dataset.drawingState='error';console.warn('Sketch animation could not start:',error);guides.delete(key);}restore(figure);
-    }finally{pending.delete(figure);}
-  }
-  function stop(figure){
-    interacting.delete(figure);
-    const active=running.get(figure);
-    if(active){cancelAnimationFrame(active.frame);active.frame=0;figure.dataset.drawingState='paused';}
-    else if(!completed.has(figure))figure.dataset.drawingState=motion.matches?'static':'waiting';
-  }
-  function start(figure){
-    if(!allowed()||completed.has(figure))return;
-    interacting.add(figure);draw(figure);
-  }
-  figures.forEach(figure=>{
-    const key=keyOf(figure),source=figure.querySelector('img');
-    figure.dataset.sketchDrawing='true';figure.dataset.drawingTrigger='hover';
-    if(!figure.id)figure.id='visor-'+key;
-    // Establish the first frame synchronously, before decoding or intersection callbacks.
-    figure.dataset.drawingState=motion.matches||!hover.matches?'static':'waiting';
-    if(!hover.matches){completed.add(figure);return;}
-    figure.tabIndex=0;figure.setAttribute('role','button');
-    figure.setAttribute('aria-label',lang==='es'?'Animar los sketches':lang==='de'?'Skizzen animieren':'Animate the sketches');
-    figure.style.setProperty('--sketch-paper',key==='flujo-sketch'?'rgb(5,135,191)':'var(--color-bg)');
-    if(!source.hasAttribute('width')){source.width=1920;source.height=1080;}
-    const initial=document.createElement('div');initial.className='sketch-drawing-initial';initial.setAttribute('aria-hidden','true');
-    if(key==='incline-sketch'){
-      initial.style.backgroundImage='url(/assets/sketches/incline-background.svg)';
-      const still=document.createElement('img');still.src=source.getAttribute('src');still.alt='';still.decoding='async';
-      still.style.maskImage='url(/assets/sketches/incline-sketch-static.png)';initial.append(still);
-    }
-    figure.append(initial);
-    figure.addEventListener('pointerenter',event=>{if(event.pointerType!=='touch')start(figure);},events);
-    figure.addEventListener('pointermove',event=>{if(event.pointerType!=='touch'&&!interacting.has(figure))start(figure);},events);
-    figure.addEventListener('pointerleave',()=>stop(figure),events);
-    figure.addEventListener('focusin',()=>{if(figure.matches(':focus-visible'))start(figure);},events);
-    figure.addEventListener('focusout',()=>stop(figure),events);
-    figure.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();start(figure);}},events);
-    figure.addEventListener('click',()=>start(figure),events);
-  });
-  function check(){
-    for(const figure of interacting){
-      if(!visible(figure))stop(figure);
-      else if(allowed())draw(figure);
-    }
-  }
-  if('IntersectionObserver' in window){
-    preloader=new IntersectionObserver(entries=>{for(const e of entries)if(e.isIntersecting){preloader.unobserve(e.target);if(!motion.matches&&hover.matches)prepare(e.target).catch(()=>{if(!abort.signal.aborted){completed.add(e.target);restore(e.target);e.target.dataset.drawingState='error';}});}},{root:page,rootMargin:'1400px 0px',threshold:0});
-    observer=new IntersectionObserver(check,{root:page,threshold:[0,.1,.25,.5,.75,1]});
-    figures.forEach(figure=>{preloader.observe(figure);observer.observe(figure);});
-  }
-  // Stop on scroll-away; resume an active interaction after tab visibility changes.
-  let scheduled=0;
-  function scheduleCheck(){if(!scheduled)scheduled=requestAnimationFrame(()=>{scheduled=0;check();});}
-  page?.addEventListener('scroll',scheduleCheck,{...events,passive:true});
-  window.addEventListener('resize',scheduleCheck,events);
-  document.addEventListener('visibilitychange',scheduleCheck,events);
-  motion.addEventListener('change',()=>{if(motion.matches){interacting.clear();clear();figures.forEach(figure=>{completed.add(figure);figure.dataset.drawingState='static';});}},events);
-  scheduleCheck();
-  return ()=>{abort.abort();cancelAnimationFrame(scheduled);observer?.disconnect();preloader?.disconnect();clear();figures.forEach(figure=>{figure.dataset.drawingState='static';figure.querySelector('.sketch-drawing-initial')?.remove();});};
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 function enhanceProject(root,lang){
  applyStaticTranslations(root,lang);refinePortfolioAssets(root,lang);refineCaseStudy(root,lang);refineProjectOpening(root,lang);upgradeControls(root);
@@ -6967,7 +6613,7 @@ function enhanceProject(root,lang){
  updateGalleryHint(root);
  root.querySelectorAll('.panel-item').forEach((panel,i)=>panel.setAttribute('aria-label',tri('Enlarge media','Ampliar imagen o video','Bild oder Video vergrößern',lang)+' '+(i+1)+' · '+PROJECTS[window._currentProjectId].title));
  setupProjectMedia(root);
- window._sketchDrawingCleanup?.();window._sketchDrawingCleanup=initSketchDrawing(root,lang);
+ prepareStaticSketches(root);
  if(window._currentProjectId==='intent'){
   const phases=root.querySelectorAll('.process-header');if(phases[0])phases[0].id='intent-research';if(phases[1])phases[1].id='intent-design';
   root.querySelector('.cmp-how-grid')?.closest('.cmp-section')?.setAttribute('id','intent-mechanism');
