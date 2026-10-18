@@ -19,6 +19,7 @@ export function createVisit(order='coffee',clean=true,waste=false){
  if(order!=='coffee')add('closeFridge',2,'Cierra la heladera');
  add('toWindow',4,'Lleva el pedido al auto');
  add('deliver',3,'Entrega en la ventanilla');
+ add('stowProduct',3.5,'El conductor guarda el pedido');
  add('takeCard',3,'Recibe la tarjeta');
  add('toTerminal',4,'Se acerca al terminal');
  add('pay',4,'Procesa el pago');

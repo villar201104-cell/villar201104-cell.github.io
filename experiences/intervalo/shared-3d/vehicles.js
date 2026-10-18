@@ -42,6 +42,30 @@ function installWindowReach(T,driver){
  driver.setWindowReach(0);
 }
 
+
+// Keep the imported shell/dashboard; replace the rounded seat volumes with upholstery.
+function refineInterior(T,model){
+ const interior=model.getObjectByName('body-static__interior');if(!interior?.geometry)return null;
+ const source=interior.geometry,positions=source.attributes.position,index=source.index;
+ const kept=[];for(let i=0;i<(index?.count||positions.count);i+=3){const ids=[0,1,2].map(k=>index?index.getX(i+k):i+k);
+  const seat=ids.every(v=>Math.abs(positions.getX(v))>.15&&positions.getY(v)>.39&&positions.getZ(v)<.65);
+  if(!seat)kept.push(...ids);
+ }
+ interior.geometry=source.clone();interior.geometry.setIndex(kept);interior.geometry.computeBoundingBox();interior.geometry.computeBoundingSphere();
+ const seats=new T.Group();seats.name='Upholstery and console';model.add(seats);
+ const cloth=new T.MeshStandardMaterial({color:0x313a40,roughness:.96,metalness:0}),insert=new T.MeshStandardMaterial({color:0x495258,roughness:1}),metal=new T.MeshStandardMaterial({color:0x737c80,roughness:.4,metalness:.65});
+ function panel(w,h,d,x,y,z,mat=cloth){const r=Math.min(.035,w/5,h/5),shape=new T.Shape();shape.moveTo(-w/2+r,-h/2);shape.lineTo(w/2-r,-h/2);shape.quadraticCurveTo(w/2,-h/2,w/2,-h/2+r);shape.lineTo(w/2,h/2-r);shape.quadraticCurveTo(w/2,h/2,w/2-r,h/2);shape.lineTo(-w/2+r,h/2);shape.quadraticCurveTo(-w/2,h/2,-w/2,h/2-r);shape.lineTo(-w/2,-h/2+r);shape.quadraticCurveTo(-w/2,-h/2,-w/2+r,-h/2);const geo=new T.ExtrudeGeometry(shape,{depth:d-.012,bevelEnabled:true,bevelSize:.006,bevelThickness:.006,bevelSegments:2,curveSegments:5,steps:1});geo.translate(0,0,-d/2+.006);const m=new T.Mesh(geo,mat);m.position.set(x,y,z);m.castShadow=m.receiveShadow=true;seats.add(m);return m;}
+ for(const x of [-.4,.4]){panel(.47,.095,.48,x,.485,.28);panel(.46,.51,.13,x,.80,.01);panel(.30,.36,.014,x,.80,.084,insert);
+  // Wide, low head restraint with visible posts; no rounded head/torso silhouette.
+  for(const dx of [-.07,.07])panel(.012,.10,.012,x+dx,1.095,.005,metal);
+  panel(.27,.135,.10,x,1.19,.005);for(const y of [.70,.80,.90])panel(.29,.006,.008,x,y,.095,cloth);
+ }
+ panel(1.30,.12,.50,0,.66,-1.12);panel(1.30,.48,.13,0,.96,-1.37);panel(1.12,.32,.014,0,.96,-1.292,insert);
+ const tray=panel(.27,.045,.42,.045,.55,.30);tray.name='Console tray supporting delivered products';
+ for(const x of [-.09,.18])panel(.012,.055,.42,x,.575,.30);for(const z of [.09,.51])panel(.27,.055,.012,.045,.575,z);
+ return {seats,geometry:interior.geometry,materials:[cloth,insert,metal]};
+}
+
 export function createImportedCar(T,template,createPerson){
  const source=template?.scene||template;
  if(!source?.isObject3D)throw new TypeError('Expected a loaded hatchback scene or GLTF result');
@@ -58,6 +82,7 @@ export function createImportedCar(T,template,createPerson){
   o.castShadow=![].concat(o.material).every(m=>m.transparent);o.receiveShadow=true;
  });
  if(!paints.size)throw new Error('Hatchback body-paint material is missing');
+ const interiorRefinement=refineInterior(T,model);
  const group=new T.Group();group.name='shared-imported-hatchback';group.add(model);
  let driver;
  try{
@@ -78,11 +103,13 @@ export function createImportedCar(T,template,createPerson){
  group.userData.interactionPoints=interactionPoints;
  let disposed=false;
  return {group,model,staticGroup,wheels,driver,steeringWheel,interactionPoints,
+  productStorage:{coffee:new T.Vector3(.045,.598,.36),drink:new T.Vector3(.045,.648,.36),snack:new T.Vector3(.045,.598,.22)},
   setColor(value){for(const material of paints.values())material.color.set(value);},
   dispose(){
    if(disposed)return;disposed=true;
    for(const material of paints.values())material.dispose();
    const geometries=new Set(),materials=new Set(),textures=new Set();
+   if(interiorRefinement){geometries.add(interiorRefinement.geometry);interiorRefinement.seats.traverse(o=>{if(o.geometry)geometries.add(o.geometry);});for(const m of interiorRefinement.materials)materials.add(m);}
    driver.group.traverse(o=>{if(!o.isMesh)return;geometries.add(o.geometry);for(const m of [].concat(o.material)){materials.add(m);for(const value of Object.values(m))if(value?.isTexture)textures.add(value);}});
    for(const x of textures)x.dispose();for(const x of materials)x.dispose();for(const x of geometries)x.dispose();group.removeFromParent();
   }
