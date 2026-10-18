@@ -1,3 +1,4 @@
+import {createCameraMotion} from './camera-motion.js';
 import {caption} from './storytelling.js';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
@@ -17,7 +18,8 @@ import {createAmbientLife} from './ambient-life.js';
 const $=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];
 const V=(x=0,y=0,z=0)=>new THREE.Vector3(x,y,z),ease=t=>t*t*(3-2*t),lerp=THREE.MathUtils.lerp;
 const canvas=$('#scene'),wrap=$('#scene-wrap'),loading=$('#loading');
-let renderer,scene,camera,controls,station,modelTemplate,modelMetadata={},lanes=[],running=true,speed=1,selected=1,view='general',time=INITIAL_TIME,lastTime=0,roofHidden=false,ready=false,cameraMove=null;
+let renderer,scene,camera,controls,station,modelTemplate,modelMetadata={},lanes=[],running=true,speed=1,selected=1,view='follow',time=0,lastTime=0,roofHidden=false,ready=false,cameraMove=null;
+const cameraMotion=createCameraMotion(THREE);
 let activeService=null;
 let lastSceneTime=-1,ambientLife,displayMode,appearance='focus',scrubbing=false,resumeAfterScrub=false;
 let parentVisible=new URLSearchParams(location.search).get('embed')!=='1';let pageVisible=parentVisible;const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -269,13 +271,24 @@ function animateLane(l,dt){
 
 }
 
+function followView(){
+ const lane=lanes[selected],step=lane?.currentStep||'idle';
+ let target=V(1,1,-1),offset=V(7.5,6,8);
+ if(lane){
+  if(step==='arrive'||step==='depart'){target.copy(lane.car.group.position);target.y=1;target.x=Math.max(lane.x-14,Math.min(lane.x+14,target.x));target.z=Math.max(-16,Math.min(16,target.z));offset.set(12,9,14);}
+  else if(step!=='idle'&&step!=='wait'){target.copy(lane.person.group.position);target.y=1.1;offset.set(5.8,4.8,6.5*Math.tanh((target.z+.2)*.7));}
+ }
+ if(!reduced){offset.x+=Math.sin(time*.09)*.6;offset.z+=Math.cos(time*.09)*.6;}
+ return {target,pos:target.clone().add(offset)};
+}
 function changeCamera(which,instant=false){
- view=which==='general'?'general':'service';which=view;selected=SERVICE_LANE;const x=[-10,0,10][selected];let pos,target;
+ cameraMotion.reset();
+ view=['general','service','follow'].includes(which)?which:'service';which=view;selected=SERVICE_LANE;const x=[-10,0,10][selected];let pos,target;
  // Open the canopy for the service framing; restore it for the overall station view.
- roofHidden=view==='service';station.roof.visible=!roofHidden;$('#roof').setAttribute('aria-pressed',String(roofHidden));refreshLabels();
+ roofHidden=view!=='general';station.roof.visible=!roofHidden;$('#roof').setAttribute('aria-pressed',String(roofHidden));refreshLabels();
  if(which==='general'){pos=V(36,25,49);target=V(0,2.8,3);}
  else if(which==='service'){pos=V(x+6.6,6.2,5.6);target=V(x+1.1,1.05,-1.1);}
- else {pos=V(x+4.6,3.25,-4.2);target=V(x,1.4,-1.3);}
+ else {const shot=followView();pos=shot.pos;target=shot.target;}
  cameraMove={from:camera.position.clone(),to:pos,fromTarget:controls.target.clone(),toTarget:target,t:instant?1:0};
  if(instant){camera.position.copy(pos);controls.target.copy(target);cameraMove=null;controls.update();}
  all('[data-view]').forEach(b=>{b.classList.toggle('selected',b.dataset.view===which);b.setAttribute('aria-pressed',b.dataset.view===which);});
@@ -310,7 +323,7 @@ function bindUI(){
  $('#timeline').addEventListener('keydown',()=>setRunning(false));
  all('[data-view]').forEach(b=>b.onclick=()=>changeCamera(b.dataset.view));
  all('[data-mode]').forEach(b=>b.onclick=()=>{appearance=b.dataset.mode;displayMode.set(appearance);all('[data-mode]').forEach(el=>{el.classList.toggle('selected',el===b);el.setAttribute('aria-pressed',el===b);});});
- all('[data-service]').forEach(b=>b.onclick=()=>{activeService=b.dataset.service;time=SERVICE_CUES[activeService].start;lastSceneTime=-1;selected=SERVICE_LANE;changeCamera('service');setRunning(true);updatePlayback();});
+ all('[data-service]').forEach(b=>b.onclick=()=>{activeService=b.dataset.service;time=SERVICE_CUES[activeService].start;lastSceneTime=-1;selected=SERVICE_LANE;for(const lane of lanes)animateLane(lane,0);changeCamera('follow');setRunning(true);updatePlayback();});
  $('#roof').onclick=()=>{roofHidden=!roofHidden;station.roof.visible=!roofHidden;$('#roof').setAttribute('aria-pressed',roofHidden);refreshLabels();};
  $('#fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await $('.experience').requestFullscreen();}catch{}};
  document.addEventListener('fullscreenchange',()=>{refreshLabels();resize();});
@@ -320,7 +333,7 @@ function bindUI(){
  addEventListener('message',e=>{if(e.source===parent&&e.origin===location.origin&&e.data?.type==='portfolio-visibility'){parentVisible=e.data.visible===true;pageVisible=inViewport&&parentVisible&&!document.hidden;lastTime=0;}});
  document.addEventListener('visibilitychange',()=>{pageVisible=inViewport&&parentVisible&&!document.hidden;lastTime=0;});
  new IntersectionObserver(entries=>{inViewport=entries[0].isIntersecting;pageVisible=inViewport&&parentVisible&&!document.hidden;lastTime=0;},{threshold:.05}).observe(wrap);
- controls.addEventListener('start',()=>cameraMove=null);
+ controls.addEventListener('start',()=>{cameraMotion.reset();cameraMove=null;if(view==='follow'){view='manual';all('[data-view]').forEach(b=>{b.classList.remove('selected');b.setAttribute('aria-pressed','false');});}});
 }
 function resize(){if(!renderer)return;const w=wrap.clientWidth,h=wrap.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.fov=Math.min(68,THREE.MathUtils.radToDeg(2*Math.atan(Math.tan(THREE.MathUtils.degToRad(20))*Math.max(1,1.25/camera.aspect))));camera.updateProjectionMatrix();}
 // Keep the station inspectable through the whole orbit: cut away only nearby
@@ -340,8 +353,9 @@ function updateCityCutaway(){
  }
 }
 function frame(now){requestAnimationFrame(frame);if(!ready||!pageVisible){lastTime=0;return;}const delta=lastTime?Math.min((now-lastTime)/1000,.25):0;lastTime=now;const dt=running?delta*speed:0;time=(time+dt)%LOOP_DURATION;
- if(time!==lastSceneTime){for(const l of lanes)animateLane(l,dt);ambientLife?.update(time);lastSceneTime=time;}updatePlayback();
+ if(time!==lastSceneTime){for(const l of lanes)animateLane(l,dt);ambientLife?.update(time);lastSceneTime=time;}if(view==='follow'&&!activeService&&['idle','wait'].includes(lanes[selected]?.currentStep)){const next=lanes.find(l=>!['idle','wait'].includes(l.currentStep));if(next)selected=next.i;}updatePlayback();
  if(cameraMove){cameraMove.t=Math.min(1,cameraMove.t+delta*1.7);const k=ease(cameraMove.t);camera.position.lerpVectors(cameraMove.from,cameraMove.to,k);controls.target.lerpVectors(cameraMove.fromTarget,cameraMove.toTarget,k);if(k===1)cameraMove=null;}
+ if(view==='follow'&&!cameraMove){const shot=followView();cameraMotion.update(camera.position,controls.target,{p:shot.pos.toArray(),t:shot.target.toArray()},delta);}
  controls.update();updateCityCutaway();renderer.render(scene,camera);canvas.dataset.drawCalls=renderer.info.render.calls;canvas.dataset.triangles=renderer.info.render.triangles;
 }
 async function init(){
@@ -362,7 +376,7 @@ async function init(){
   const highlights=lanes.flatMap(l=>[l.totem.group,l.person.group,l.car.driver.group,l.paymentLight,l.card,l.receipt,l.squeegee,l.nozzle,l.waste,...Object.values(l.products)]);
   displayMode=createDisplayMode(THREE,scene,highlights);displayMode.set(appearance);
 
-  resize();new ResizeObserver(resize).observe(wrap);changeCamera('general',true);bindUI();setRunning(new URLSearchParams(location.search).get('embed')==='1'||!reduced);
+  resize();new ResizeObserver(resize).observe(wrap);changeCamera(reduced?'general':'follow',true);bindUI();setRunning(!reduced);
  if(parent!==window)parent.postMessage({type:'intervalo-ready'},location.origin);
   const params=new URLSearchParams(location.search);if(params.has('reviewTime')){time=Math.max(0,Number(params.get('reviewTime'))||0)%LOOP_DURATION;setRunning(false);}
 

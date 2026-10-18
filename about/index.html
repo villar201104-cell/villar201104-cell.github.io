@@ -454,6 +454,9 @@
     transition:opacity .12s;
   }
   .c-cross.active{opacity:1}
+  /* Embedded scenes own their pointer; never leave the portfolio crosshair above them. */
+  body:has(iframe:hover) .c-cross{visibility:hidden;opacity:0;transition:none}
+  .has-custom-cursor iframe{cursor:auto!important}
   .c-arm{
     position:absolute;
     background:var(--color-text);
@@ -4192,6 +4195,7 @@ document.querySelectorAll('.page').forEach(p=>p.addEventListener('scroll',()=>{
     // Hide the custom cursor near native scrollbars.
     // Browser scrollbars live outside the page, so the default cursor can appear there;
     // hiding the cross prevents it from looking frozen while dragging the scrollbar.
+    if(e.target.closest('iframe')){ cross.classList.remove('active'); return; }
     const scrollbarZone = e.clientX >= window.innerWidth - 18;
     if(scrollbarZone){
       cross.classList.remove('active');
@@ -4206,6 +4210,15 @@ document.querySelectorAll('.page').forEach(p=>p.addEventListener('scroll',()=>{
     }
     cross.classList.add('active');
   }, {passive:true});
+
+  // Iframes do not bubble their pointer movements to the portfolio document.
+  document.addEventListener('mouseover', e=>{
+    if(e.target.closest('iframe')) cross.classList.remove('active','hover');
+  }, {passive:true});
+  document.addEventListener('mouseout', e=>{
+    if(!e.relatedTarget) cross.classList.remove('active','hover');
+  }, {passive:true});
+  window.addEventListener('blur', ()=>cross.classList.remove('active','hover'));
 
   // Dark zone: white arms
   document.addEventListener('mouseover', e=>{

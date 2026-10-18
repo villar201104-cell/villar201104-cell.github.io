@@ -6,7 +6,7 @@
   es:['EL SERVICIO EN MOVIMIENTO','Una parada, de principio a fin.','Recorré la estación, seguí la atención o arrastrá la barra de tiempo hasta cualquier momento.','Secuencia de atención interactiva en 3D'],
   de:['SERVICE IN BEWEGUNG','Ein Stopp, von der Ankunft bis zur Weiterfahrt.','Erkunde die Tankstelle, verfolge den Service oder springe über die Zeitleiste zu einem beliebigen Moment.','Interaktiver 3D-Serviceablauf']
  };
- const style=document.createElement('style');style.textContent='.intervalo-3d-block{padding:clamp(32px,5vw,72px) var(--ph,6%);border-top:1px solid var(--color-border)}.intervalo-3d-block .scene-kicker{font-size:.65rem;letter-spacing:.16em;color:var(--color-muted);margin-bottom:12px}.intervalo-3d-block h2{font-family:var(--font-display);font-size:clamp(24px,3vw,40px);font-weight:500;letter-spacing:-.04em;margin:0 0 14px}.intervalo-3d-block p{font-size:.9rem;line-height:1.6;color:var(--color-muted);margin:0 0 28px;max-width:620px}.intervalo-3d-block iframe{display:block;width:100%;height:720px;border:0;background:var(--color-bg-alt)}@media(max-width:800px){.intervalo-3d-block iframe{height:630px}.intervalo-3d-block{padding-left:20px;padding-right:20px}}';document.head.append(style);
+ const style=document.createElement('style');style.textContent='.intervalo-3d-block{padding:clamp(32px,5vw,72px) var(--ph,6%);border-top:1px solid var(--color-border)}.intervalo-3d-block .scene-kicker{font-size:.65rem;letter-spacing:.16em;color:var(--color-muted);margin-bottom:12px}.intervalo-3d-block h2{font-family:var(--font-display);font-size:clamp(24px,3vw,40px);font-weight:500;letter-spacing:-.04em;margin:0 0 14px}.intervalo-3d-block p{font-size:.9rem;line-height:1.6;color:var(--color-muted);margin:0 0 28px;max-width:620px}.intervalo-3d-block iframe{display:block;width:100%;height:840px;border:0;background:var(--color-bg-alt)}@media(max-width:800px){.intervalo-3d-block iframe{height:800px}.intervalo-3d-block{padding-left:20px;padding-right:20px}}';document.head.append(style);
 
  let record=null;
  function visible(){return !!record&&record.onScreen&&!document.hidden&&window._currentProjectId==='intervalo'&&record.section.isConnected;}
@@ -25,7 +25,7 @@
    const iframe=section.querySelector('iframe');record={section,frame:iframe,started:false,onScreen:false};
    const entry=record;
    const activate=()=>{if(!entry.started){entry.started=true;iframe.src='/experiences/intervalo/?embed=1&lang='+(['en','es','de'].includes(window.currentLang)?window.currentLang:'en');}sync();};
-   if('IntersectionObserver' in window){entry.observer=new IntersectionObserver(entries=>{entry.onScreen=entries[0].isIntersecting;if(entry.onScreen&&visible())activate();else sync();},{threshold:.01});entry.observer.observe(iframe);}else{entry.onScreen=true;activate();}
+   if('IntersectionObserver' in window){entry.observer=new IntersectionObserver(entries=>{entry.onScreen=entries[0].isIntersecting&&entries[0].intersectionRatio>=.2;if(entry.onScreen&&visible())activate();else sync();},{threshold:[0,.2]});entry.observer.observe(iframe);}else{entry.onScreen=true;activate();}
    section.querySelector('iframe').addEventListener('load',()=>mount());
   }
   section.querySelector('.scene-kicker').textContent=c[0];section.querySelector('h2').textContent=c[1];section.querySelector('p').textContent=c[2];
