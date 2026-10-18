@@ -1,0 +1,243 @@
+{
+  "asset": "tree-urban.glb",
+  "sourceAsset": "tree_small_02",
+  "sourceURL": "https://polyhaven.com/a/tree_small_02",
+  "license": "CC0-1.0",
+  "licenseURL": "https://polyhaven.com/license",
+  "legalCode": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "author": "Rico Cilliers",
+  "units": "meters",
+  "up": "+Y",
+  "origin": "Center of trunk base band (lowest 8 cm), not canopy center; base y=0",
+  "baseY": 0,
+  "trunkXZ": [
+    0,
+    0
+  ],
+  "height": 4.564037313684821,
+  "originalHeight": 4.564037313684821,
+  "sourceToOutput": {
+    "translation": [
+      0.0005162172019481659,
+      0.024194231256842613,
+      0.0007179640233516693
+    ],
+    "scale": 1,
+    "rotationY": 0,
+    "alreadyApplied": true,
+    "postQuantizationUniformScale": 1.0000355450906897,
+    "postQuantizationYTranslation": -0.00016223843378258663
+  },
+  "bounds": {
+    "min": [
+      -1.310263986726673,
+      4.440892098500626e-16,
+      -1.3823492922907037
+    ],
+    "max": [
+      1.6112937590095593,
+      4.564037313684821,
+      2.8918304924846017
+    ],
+    "size": [
+      2.9215577457362323,
+      4.564037313684821,
+      4.274179784775305
+    ]
+  },
+  "integration": {
+    "scaleFormula": "uniformScale = requestedHeight / metadata.height",
+    "loader": "Standard GLTFLoader; no Draco or Meshopt decoder required. KHR_mesh_quantization uses built-in GLTFLoader support; CPU world-matrix baking must decode normalized integer attributes to Float32 first; EXT_texture_webp images use native browser WebP.",
+    "leaves": {
+      "alphaMode": "MASK",
+      "alphaCutoff": 0.5,
+      "doubleSided": true,
+      "transparent": false
+    },
+    "materials": "Original green leaf diffuse + original alpha; bark and branches retain diffuse/normal/ARM maps. UV branch mapping baked from Blender original.",
+    "notes": "No lights, cameras, scene ground, animations or environment included.",
+    "important": "Decode normalized integer attributes to Float32 before CPU applyMatrix4/world-space batching (main scene fix already verified)."
+  },
+  "stats": {
+    "bytes": 8531456,
+    "triangles": 132354,
+    "primitives": 3,
+    "materials": 3,
+    "textures": 9
+  },
+  "sourceGeometry": {
+    "extraction": "Author-provided tree_small_02_LOD1 mesh from 1K Blender file, then Meshopt simplification offline",
+    "sourceTriangles": 495533,
+    "changes": [
+      {
+        "material": "tree_small_02_branches",
+        "before": 94814,
+        "after": 6893,
+        "target": 7000,
+        "error": 0.002,
+        "boundsBefore": {
+          "min": [
+            -1.095399022102356,
+            1.6240153312683105,
+            -1.2641923427581787
+          ],
+          "max": [
+            1.418749451637268,
+            4.392509460449219,
+            2.7931995391845703
+          ]
+        }
+      },
+      {
+        "material": "tree_small_02_leaves",
+        "before": 386574,
+        "after": 121964,
+        "target": 110000,
+        "error": 0.0015,
+        "boundsBefore": {
+          "min": [
+            -1.310724139213562,
+            1.4586527347564697,
+            -1.3830231428146362
+          ],
+          "max": [
+            1.610710859298706,
+            4.5398430824279785,
+            2.9096455574035645
+          ]
+        }
+      },
+      {
+        "material": "tree_small_02_trunk",
+        "before": 14145,
+        "after": 3497,
+        "target": 3500,
+        "error": 0.002,
+        "boundsBefore": {
+          "min": [
+            -0.7662621140480042,
+            -0.024194231256842613,
+            -0.39313820004463196
+          ],
+          "max": [
+            0.9302082657814026,
+            3.6643364429473877,
+            1.9226949214935303
+          ]
+        }
+      }
+    ]
+  },
+  "textures": [
+    {
+      "name": "tree_small_02_branch_nor_gl_1k",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 154188,
+      "hasAlpha": false
+    },
+    {
+      "name": "tree_small_02_branch_diff_1k",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 96636,
+      "hasAlpha": false
+    },
+    {
+      "name": "tree_small_02_leaves_nor_gl_1k",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 164434,
+      "hasAlpha": false
+    },
+    {
+      "name": "tree_small_02_leaves_diff_1k",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 177430,
+      "hasAlpha": true
+    },
+    {
+      "name": "tree_small_02_nor_gl_1k",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 476138,
+      "hasAlpha": false
+    },
+    {
+      "name": "tree_small_02_diff_1k",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 291118,
+      "hasAlpha": false
+    },
+    {
+      "name": "tree_small_02_branch_ARM_1k",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 55948,
+      "hasAlpha": false
+    },
+    {
+      "name": "tree_small_02_leaves_ARM_1k",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 106342,
+      "hasAlpha": false
+    },
+    {
+      "name": "tree_small_02_ARM_1k",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 135088,
+      "hasAlpha": false
+    }
+  ],
+  "leafAlphaCheck": {
+    "min": 0,
+    "max": 255,
+    "originalAlphaPixelsChanged": 0,
+    "coverageAtCutoff05": 0.5350217819213867
+  },
+  "sha256": "6c90576d5d3d44904af3018801416e1d1837e032b6664df1f0685cccc1b632cb",
+  "validation": {
+    "errors": 0,
+    "warnings": 3,
+    "nodeIOReload": true,
+    "visualReview": "Final EEVEE quarter/front renders inspected against original LOD1 and previous 56k candidate. Final foliage is visibly fuller, source branch silhouette retained.",
+    "blenderReimport": true,
+    "mainBatchStaticFloat32Verified": true,
+    "maxBatchBoundsErrorMeters": 0.0000012642367508419738,
+    "originalLeafAlphaByteIdentical": true
+  },
+  "extensionsUsed": [
+    "EXT_texture_webp",
+    "KHR_mesh_quantization"
+  ],
+  "foliageComparison": [
+    {
+      "name": "original_LOD1",
+      "leafTriangles": 386574,
+      "leafTriangleArea": 27.083057473612712,
+      "approximateAlphaVisibleSurfaceArea": 26.093844834711668,
+      "triangleAreaRelativeToSource": 1,
+      "alphaAreaRelativeToSource": 1
+    },
+    {
+      "name": "previous_56k",
+      "leafTriangles": 46000,
+      "leafTriangleArea": 6.893209399092695,
+      "approximateAlphaVisibleSurfaceArea": 6.646940290236364,
+      "triangleAreaRelativeToSource": 0.2545210933369992,
+      "alphaAreaRelativeToSource": 0.25473211526858575
+    },
+    {
+      "name": "detail_132k",
+      "leafTriangles": 121964,
+      "leafTriangleArea": 16.23202189202534,
+      "approximateAlphaVisibleSurfaceArea": 15.892342971320199,
+      "triangleAreaRelativeToSource": 0.5993422975910441,
+      "alphaAreaRelativeToSource": 0.6090456608440933
+    }
+  ]
+}

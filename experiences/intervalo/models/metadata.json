@@ -1,0 +1,867 @@
+{
+  "asset": "intervalo-totem-scene-detail.glb",
+  "candidateOriginalCoordinates": "intervalo-totem-draft.glb",
+  "units": "meters, uniformly resized to requested 2.6 m total height",
+  "front": "+Z (coffee/slats)",
+  "rear": "-Z (posters/bin/squeegees)",
+  "left": "-X (payment terminal)",
+  "height": 2.6,
+  "bounds": {
+    "min": [
+      -1.2254833985239688,
+      0,
+      -0.5742708596759754
+    ],
+    "max": [
+      1.2254833985239688,
+      2.6,
+      0.5742708596759755
+    ],
+    "size": [
+      2.4509667970479376,
+      2.6,
+      1.1485417193519507
+    ],
+    "method": "Tight transformed decoded vertex bounds before final Draco encoding"
+  },
+  "originalBounds": {
+    "min": [
+      -0.5172718477093559,
+      0.09743802590004944,
+      0.2536738724231181
+    ],
+    "max": [
+      0.5277033042907716,
+      2.4629902295529793,
+      2.4836315292834685
+    ]
+  },
+  "originalToFinal": {
+    "rotationY": -1.5707963267948966,
+    "scale": 1.0991091196317848,
+    "bottomCenter": [
+      0.005215728290707877,
+      0.09743802590004944,
+      1.3686527008532934
+    ],
+    "matrixColumnMajor": [
+      6.730102326353653e-17,
+      0,
+      1.0991091196317848,
+      0,
+      0,
+      1.0991091196317848,
+      0,
+      0,
+      -1.0991091196317848,
+      0,
+      6.730102326353653e-17,
+      0,
+      1.5042986651165278,
+      -0.10709502286566239,
+      -0.005732654529838621,
+      1
+    ],
+    "formula": "finalLocal = Ry(-PI/2) * scale * (originalWorld - bottomCenter)",
+    "warning": "Transform is already embedded in intervalo-totem-web.glb. Apply it only to draft, never twice."
+  },
+  "scenePlacement": {
+    "origin": [
+      0,
+      0.18,
+      -1.3
+    ],
+    "formula": "scene = finalLocal + [totemX, 0.18, -1.3]; add totemX to every scene point x",
+    "scale": 1,
+    "rotationY": 0
+  },
+  "points": {
+    "coffee": {
+      "sourceNode": 991,
+      "sourceName": "WMF_vending",
+      "originalCenter": [
+        0.0005734062239526883,
+        1.425536355858636,
+        1.4731455856742521
+      ],
+      "localCenter": [
+        -0.11484908264334948,
+        1.4597249862252257,
+        -0.005102418519838497
+      ],
+      "localInteraction": [
+        -0.11485393446903602,
+        1.376702288637247,
+        0.3168228988085014
+      ],
+      "localApproach": [
+        -0.11485393446903602,
+        0,
+        1.15
+      ],
+      "sceneInteractionAtOriginX0": [
+        -0.11485393446903602,
+        1.556702288637247,
+        -0.9831771011914987
+      ],
+      "sceneApproachAtOriginX0": [
+        -0.11485393446903602,
+        0.18,
+        -0.15000000000000013
+      ]
+    },
+    "cups": {
+      "sourceNode": 968,
+      "sourceName": "sghrh",
+      "originalCenter": [
+        -0.06111765431179203,
+        1.309344480084731,
+        1.7458472093894253
+      ],
+      "localCenter": [
+        -0.4145779242070917,
+        1.3320174359350032,
+        -0.072907625754432
+      ]
+    },
+    "terminal": {
+      "sourceNode": 1001,
+      "sourceName": "Card payment gadget",
+      "originalCenter": [
+        0.1315519480130654,
+        1.1833764318383562,
+        2.1933040788680813
+      ],
+      "localCenter": [
+        -0.9063818500929719,
+        1.1935648053251962,
+        0.13885729123664817
+      ],
+      "localInteraction": [
+        -0.9063818500929719,
+        1.1935648053251962,
+        0.13885729123664817
+      ],
+      "localApproach": [
+        -1.85,
+        0,
+        0.13885729123664817
+      ],
+      "sceneInteractionAtOriginX0": [
+        -0.9063818500929719,
+        1.373564805325196,
+        -1.161142708763352
+      ],
+      "sceneApproachAtOriginX0": [
+        -1.85,
+        0.18,
+        -1.161142708763352
+      ]
+    },
+    "receipt": {
+      "sourceNode": 998,
+      "sourceName": "Receipt",
+      "originalCenter": [
+        -0.20247278969571353,
+        1.2579129619991605,
+        2.1601345012117474
+      ],
+      "localCenter": [
+        -0.8699248647965605,
+        1.2754885853706457,
+        -0.22827234416168568
+      ]
+    },
+    "fridge": {
+      "sourceNode": 46890,
+      "sourceName": "Body15",
+      "originalCenter": [
+        0.012750015258775393,
+        1.3209611277066897,
+        0.8236738724231176
+      ],
+      "localCenter": [
+        0.5989912003338519,
+        1.344785399275847,
+        0.00828100351652588
+      ],
+      "localInteraction": [
+        0.5989954565494156,
+        1.34478415980314,
+        0.3545003594294789
+      ],
+      "localApproach": [
+        0.5989954565494156,
+        0,
+        1.15
+      ],
+      "sceneInteractionAtOriginX0": [
+        0.5989954565494156,
+        1.52478415980314,
+        -0.9454996405705212
+      ],
+      "sceneApproachAtOriginX0": [
+        0.5989954565494156,
+        0.18,
+        -0.15000000000000013
+      ]
+    },
+    "bin": {
+      "sourceNode": 47668,
+      "sourceName": "Body1013",
+      "originalCenter": [
+        -0.45045508142633534,
+        0.5949301611229876,
+        2.0286738724231173
+      ],
+      "localCenter": [
+        -0.7254352888224485,
+        0.5467981427686204,
+        -0.5008319425100018
+      ],
+      "localInteraction": [
+        -0.7254310326068849,
+        0.9700319143734868,
+        -0.5706747420205759
+      ],
+      "localApproach": [
+        -0.7254310326068849,
+        0,
+        -1.15
+      ],
+      "sceneInteractionAtOriginX0": [
+        -0.7254310326068849,
+        1.1500319143734867,
+        -1.8706747420205758
+      ],
+      "sceneApproachAtOriginX0": [
+        -0.7254310326068849,
+        0.18,
+        -2.45
+      ]
+    },
+    "squeegee": {
+      "sourceNode": 46859,
+      "sourceName": "cgt_fmcg_broom_mop_squeegee_030",
+      "originalCenter": [
+        -0.4683328134153965,
+        0.6391937280828043,
+        1.5323115180518265
+      ],
+      "localCenter": [
+        -0.1798788984910591,
+        0.595448632881587,
+        -0.5204815207775119
+      ],
+      "localInteraction": [
+        -0.1798772299864524,
+        0.7612011816434476,
+        -0.5552872143457309
+      ],
+      "localApproach": [
+        -0.1798772299864524,
+        0,
+        -1.15
+      ],
+      "sceneInteractionAtOriginX0": [
+        -0.1798772299864524,
+        0.9412011816434476,
+        -1.855287214345731
+      ],
+      "sceneApproachAtOriginX0": [
+        -0.1798772299864524,
+        0.18,
+        -2.45
+      ]
+    }
+  },
+  "door": {
+    "status": "not_present_as_independent_leaf",
+    "originalMeshName": null,
+    "originalPivot": null,
+    "evidence": "Front and rear visual views show open refrigerator. Body15 (source nodes 46890/46891) is cabinet; Body5..Body12 are fixed perimeter frame. No door/glass material, leaf group or authored animation found.",
+    "fixedFrameGroup": "Fridge_Frame_Fixed",
+    "cabinetGroup": "Fridge_Cabinet_And_Shelves",
+    "suggestedAddedDoor": {
+      "isOriginalGeometry": false,
+      "face": "front +Z",
+      "localCenter": [
+        0.5989954565494156,
+        1.34478415980314,
+        0.3545003594294789
+      ],
+      "width": 0.7693763837422494,
+      "height": 1.5874502258716405,
+      "localHinge": [
+        0.9836792519840619,
+        0.5510603108428074,
+        0.35450035942947894
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "openRadians": 1.5707963267948966,
+      "note": "Inferred glass inside the opening, right-hand hinge viewed from +Z. Positive Y rotation opens outward. Not original geometry or an original pivot."
+    }
+  },
+  "navigation": {
+    "note": "Suggested waypoints, not collision-tested against main station.",
+    "frontToLeftTerminal": [
+      [
+        0.64,
+        0,
+        1.15
+      ],
+      [
+        -1.85,
+        0,
+        1.15
+      ],
+      [
+        -1.85,
+        0,
+        0.16
+      ]
+    ],
+    "leftToRearSqueegee": [
+      [
+        -1.85,
+        0,
+        0.16
+      ],
+      [
+        -1.85,
+        0,
+        -1.15
+      ],
+      [
+        -0.1798772299864524,
+        0,
+        -1.15
+      ]
+    ]
+  },
+  "optimization": {
+    "removed": "Old Entorno YPF/v63, cameras, ~14980 1mm condensation droplets on cans; no generic replacement geometry.",
+    "retained": "Exact v127 design and all slats/branding/coffee/payment/squeegee/bin; 28 original cans, 28 bottles, 10 sandwiches; original material assignments.",
+    "geometryError": "meshoptimizer relative error limit 0.001 totem, 0.008 accessories; source materials retained; textures resized max512px WebP quality88",
+    "staticBatching": [
+      "Opaque textures at original decoded resolution, lossless WebP atlas encoding.",
+      "Only identical non-texture material parameters are batched. No recoloring or factor approximation.",
+      "16px periodic gutters reproduce repeat edges at base level; mip behavior can differ at distant views.",
+      "Transparent/transmission primitives kept separately sortable. Fixed fridge groups retained.",
+      "Original component node names are not an animation API in the static variant; use metadata interaction points."
+    ],
+    "drawReductionPercent": 82.6879271070615,
+    "runtimeNotes": "76 base primitive submissions, including 46 independently sorted transparent/transmission primitives. Double-sided transparency, transmission, shadows and additional passes increase actual renderer calls. Load once and clone the scene while sharing geometry/material/texture resources for three copies."
+  },
+  "stats": {
+    "triangles": 819722,
+    "primitives": 82,
+    "materials": 36,
+    "textures": 17,
+    "bytes": 7054148
+  },
+  "threeBox3Bounds": {
+    "note": "Inherited conservative boxes removed for this merged variant. See stats.decodedBounds for measured vertex bounds; no browser validation requested."
+  },
+  "validation": {
+    "errors": 0,
+    "warnings": 12,
+    "nodeIOReload": true,
+    "originalAndPreviousFilesUnchanged": true,
+    "visual": "Inspected both portfolio boards and original/previous/detail CPU projection images for front lower vent, top strip, rear perforated panel. No browser/headless render."
+  },
+  "normalized": true,
+  "detailRestoration": {
+    "asset": "intervalo-totem-scene-detail.glb",
+    "source": "ypf.glb",
+    "sourceSha256": "a027bbeba014da091490cccd7d98e3ff2896ba0adf6ff32deb1af6d51b11827d",
+    "preservedHashes": {
+      "intervalo-totem-scene.glb": "5d29e1c19d7f0b76166e0e31fbea03f4a5f78b8d1324e76ea5de4eb9a0f97405",
+      "intervalo-totem-web.glb": "5a31c446df7071ff420dd2481ec511e1c02f11a50f38e94538996c748ddf4545"
+    },
+    "sha256": "56e8b99b498e6aeb4a0bafb1daaeadc2f6efb1ef80e251c681d95207443d8554",
+    "stats": {
+      "triangles": 819722,
+      "primitives": 82,
+      "materials": 36,
+      "textures": 17,
+      "bytes": 7054148
+    },
+    "decodedBounds": {
+      "min": [
+        -1.2254834239916401,
+        -5.7458084956607536e-9,
+        -0.5742708596759751
+      ],
+      "max": [
+        1.2254832586389255,
+        2.6000000000000005,
+        0.5742708387121327
+      ]
+    },
+    "changes": [
+      {
+        "sourceNode": 47434,
+        "sourceName": "Body906",
+        "sourceMesh": 15852,
+        "sourceMaterial": 127,
+        "originalMaterial": {
+          "doubleSided": true,
+          "name": "Paint Metallic Dark Grey #3",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.05667540431022644,
+              0.05667540431022644,
+              0.05667540431022644,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.273861289024353
+          }
+        },
+        "sourceBaseColorTexture": null,
+        "sourceImage": null,
+        "sourceTriangles": 241260,
+        "outputTriangles": 116698,
+        "change": "Replace coarse geometry with finer simplification of original actual perforations"
+      },
+      {
+        "sourceNode": 47437,
+        "sourceName": "Body907",
+        "sourceMesh": 15853,
+        "sourceMaterial": 127,
+        "originalMaterial": {
+          "doubleSided": true,
+          "name": "Paint Metallic Dark Grey #3",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.05667540431022644,
+              0.05667540431022644,
+              0.05667540431022644,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.273861289024353
+          }
+        },
+        "sourceBaseColorTexture": null,
+        "sourceImage": null,
+        "sourceTriangles": 241286,
+        "outputTriangles": 117208,
+        "change": "Replace coarse geometry with finer simplification of original actual perforations"
+      },
+      {
+        "sourceNode": 47440,
+        "sourceName": "Body908",
+        "sourceMesh": 15854,
+        "sourceMaterial": 127,
+        "originalMaterial": {
+          "doubleSided": true,
+          "name": "Paint Metallic Dark Grey #3",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.05667540431022644,
+              0.05667540431022644,
+              0.05667540431022644,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.273861289024353
+          }
+        },
+        "sourceBaseColorTexture": null,
+        "sourceImage": null,
+        "sourceTriangles": 61426,
+        "outputTriangles": 28208,
+        "change": "Replace coarse geometry with finer simplification of original actual perforations"
+      },
+      {
+        "sourceNode": 47443,
+        "sourceName": "Body909",
+        "sourceMesh": 15855,
+        "sourceMaterial": 127,
+        "originalMaterial": {
+          "doubleSided": true,
+          "name": "Paint Metallic Dark Grey #3",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.05667540431022644,
+              0.05667540431022644,
+              0.05667540431022644,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.273861289024353
+          }
+        },
+        "sourceBaseColorTexture": null,
+        "sourceImage": null,
+        "sourceTriangles": 61566,
+        "outputTriangles": 27556,
+        "change": "Replace coarse geometry with finer simplification of original actual perforations"
+      },
+      {
+        "sourceNode": 47668,
+        "sourceName": "Body1013",
+        "sourceMesh": 15930,
+        "sourceMaterial": 127,
+        "originalMaterial": {
+          "doubleSided": true,
+          "name": "Paint Metallic Dark Grey #3",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.05667540431022644,
+              0.05667540431022644,
+              0.05667540431022644,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.273861289024353
+          }
+        },
+        "sourceBaseColorTexture": null,
+        "sourceImage": null,
+        "sourceTriangles": 395882,
+        "outputTriangles": 196090,
+        "change": "Replace coarse geometry with finer simplification of original actual perforations"
+      },
+      {
+        "sourceNode": 19,
+        "sourceName": "Body22",
+        "sourceMesh": 2,
+        "sourceMaterial": 2,
+        "originalMaterial": {
+          "doubleSided": true,
+          "name": "Emissive White #3",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 3
+            }
+          }
+        },
+        "sourceBaseColorTexture": 3,
+        "sourceImage": 3,
+        "sourceTriangles": 23,
+        "outputTriangles": 23,
+        "change": "White emissive only on outward letter face; original reverse/shell untouched"
+      },
+      {
+        "sourceNode": 22,
+        "sourceName": "Body20",
+        "sourceMesh": 4,
+        "sourceMaterial": 4,
+        "originalMaterial": {
+          "doubleSided": true,
+          "name": "Emissive White #3",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 7
+            }
+          }
+        },
+        "sourceBaseColorTexture": 7,
+        "sourceImage": 7,
+        "sourceTriangles": 50,
+        "outputTriangles": 50,
+        "change": "White emissive only on outward letter face; original reverse/shell untouched"
+      },
+      {
+        "sourceNode": 25,
+        "sourceName": "Body23",
+        "sourceMesh": 6,
+        "sourceMaterial": 6,
+        "originalMaterial": {
+          "doubleSided": true,
+          "name": "Emissive White #3",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 11
+            }
+          }
+        },
+        "sourceBaseColorTexture": 11,
+        "sourceImage": 11,
+        "sourceTriangles": 16,
+        "outputTriangles": 16,
+        "change": "White emissive only on outward letter face; original reverse/shell untouched"
+      },
+      {
+        "sourceNode": 28,
+        "sourceName": "Body21",
+        "sourceMesh": 8,
+        "sourceMaterial": 8,
+        "originalMaterial": {
+          "doubleSided": true,
+          "name": "Emissive White #3",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 15
+            }
+          }
+        },
+        "sourceBaseColorTexture": 15,
+        "sourceImage": 15,
+        "sourceTriangles": 14,
+        "outputTriangles": 14,
+        "change": "White emissive only on outward letter face; original reverse/shell untouched"
+      },
+      {
+        "sourceNode": 32,
+        "sourceName": "Body1145",
+        "sourceMesh": 11,
+        "sourceMaterial": 11,
+        "originalMaterial": {
+          "doubleSided": true,
+          "name": "Emissive White #3",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 20
+            }
+          }
+        },
+        "sourceBaseColorTexture": 20,
+        "sourceImage": 20,
+        "sourceTriangles": 14,
+        "outputTriangles": 14,
+        "change": "White emissive only on outward letter face; original reverse/shell untouched"
+      },
+      {
+        "sourceNode": 35,
+        "sourceName": "Body1147",
+        "sourceMesh": 13,
+        "sourceMaterial": 13,
+        "originalMaterial": {
+          "doubleSided": true,
+          "name": "Emissive White #3",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 24
+            }
+          }
+        },
+        "sourceBaseColorTexture": 24,
+        "sourceImage": 24,
+        "sourceTriangles": 16,
+        "outputTriangles": 16,
+        "change": "White emissive only on outward letter face; original reverse/shell untouched"
+      },
+      {
+        "sourceNode": 38,
+        "sourceName": "Body1146",
+        "sourceMesh": 15,
+        "sourceMaterial": 15,
+        "originalMaterial": {
+          "doubleSided": true,
+          "name": "Emissive White #3",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 28
+            }
+          }
+        },
+        "sourceBaseColorTexture": 28,
+        "sourceImage": 28,
+        "sourceTriangles": 24,
+        "outputTriangles": 24,
+        "change": "White emissive only on outward letter face; original reverse/shell untouched"
+      },
+      {
+        "sourceNode": 41,
+        "sourceName": "Body1144",
+        "sourceMesh": 17,
+        "sourceMaterial": 17,
+        "originalMaterial": {
+          "doubleSided": true,
+          "name": "Emissive White #3",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 32
+            }
+          }
+        },
+        "sourceBaseColorTexture": 32,
+        "sourceImage": 32,
+        "sourceTriangles": 50,
+        "outputTriangles": 50,
+        "change": "White emissive only on outward letter face; original reverse/shell untouched"
+      }
+    ],
+    "triangleMatching": {
+      "tolerance": 0.00035,
+      "sourceStats": {
+        "19": {
+          "triangles": 23,
+          "nearZero": 0,
+          "matched": 23,
+          "maxError": 9.281680714079274e-7
+        },
+        "22": {
+          "triangles": 49,
+          "nearZero": 0,
+          "matched": 49,
+          "maxError": 0.00000102877802269747
+        },
+        "25": {
+          "triangles": 16,
+          "nearZero": 0,
+          "matched": 16,
+          "maxError": 9.38585680299617e-7
+        },
+        "28": {
+          "triangles": 14,
+          "nearZero": 0,
+          "matched": 14,
+          "maxError": 9.15054326912176e-7
+        },
+        "32": {
+          "triangles": 14,
+          "nearZero": 0,
+          "matched": 14,
+          "maxError": 8.916413024077244e-7
+        },
+        "35": {
+          "triangles": 16,
+          "nearZero": 0,
+          "matched": 16,
+          "maxError": 7.599212294356366e-7
+        },
+        "38": {
+          "triangles": 24,
+          "nearZero": 0,
+          "matched": 24,
+          "maxError": 7.934648317915041e-7
+        },
+        "41": {
+          "triangles": 49,
+          "nearZero": 0,
+          "matched": 49,
+          "maxError": 7.576043879850564e-7
+        },
+        "47434": {
+          "triangles": 32066,
+          "nearZero": 0,
+          "matched": 32059,
+          "maxError": 0.00012424739962998825
+        },
+        "47437": {
+          "triangles": 31998,
+          "nearZero": 0,
+          "matched": 31990,
+          "maxError": 0.00010936474818929813
+        },
+        "47440": {
+          "triangles": 8284,
+          "nearZero": 0,
+          "matched": 8283,
+          "maxError": 0.00011651784123720778
+        },
+        "47443": {
+          "triangles": 8112,
+          "nearZero": 0,
+          "matched": 8111,
+          "maxError": 0.00010963555145490227
+        },
+        "47668": {
+          "triangles": 51772,
+          "nearZero": 12,
+          "matched": 51765,
+          "maxError": 0.00005473496317567887
+        }
+      },
+      "matchedPrimitives": 3
+    },
+    "referenceBoards": [
+      "intervalo-reference-1.webp",
+      "intervalo-reference-2.webp"
+    ],
+    "evidence": "Original opaque material 127 has no maps or alpha. Circular perforations are source geometry. Original Emissive White #3 maps do not include glTF emission; emissiveFactor was absent. Only the exact white face geometries were reassigned.",
+    "validation": {
+      "errors": 0,
+      "warnings": 12,
+      "nodeIOReload": true,
+      "originalAndPreviousFilesUnchanged": true,
+      "visual": "Inspected both portfolio boards and original/previous/detail CPU projection images for front lower vent, top strip, rear perforated panel. No browser/headless render."
+    },
+    "preservation": {
+      "all17TextureImagesByteIdentical": true,
+      "unchangedGeometryVerticesChecked": 247401,
+      "unchangedGeometryTriangles": 333757,
+      "unchangedGeometryMissingVertices": 0,
+      "maxUnchangedVertexErrorMeters": 8.714505788898792e-7,
+      "decodedOutputVertices": 667990,
+      "emissiveMaterialCount": 1,
+      "emissiveOnlyOnRoofLetterFaces": true,
+      "ledDoubleSided": false,
+      "ledFaceTriangles": 205,
+      "outwardFrontTotemFaceTriangles": 102,
+      "outwardRearTotemFaceTriangles": 103,
+      "clarification": "Each rooftop sign has a white outward front face and grey reverse. Both signs have their own white front face. Emission is single-sided; aluminum backs and edges stay grey."
+    },
+    "projectionValidation": [
+      {
+        "id": 47434,
+        "width": 1500,
+        "height": 722,
+        "originalHolePixels": 180882,
+        "previousHolePixelsFilled": 64001,
+        "detailHolePixelsFilled": 6453,
+        "previousExtraHolePixels": 3,
+        "detailExtraHolePixels": 99,
+        "previousHoleLossPercent": 35.382735706150974,
+        "detailHoleLossPercent": 3.5675191561349386
+      },
+      {
+        "id": 47437,
+        "width": 1500,
+        "height": 721,
+        "originalHolePixels": 180195,
+        "previousHolePixelsFilled": 63824,
+        "detailHolePixelsFilled": 6105,
+        "previousExtraHolePixels": 0,
+        "detailExtraHolePixels": 95,
+        "previousHoleLossPercent": 35.4194067537945,
+        "detailHoleLossPercent": 3.387996337301257
+      },
+      {
+        "id": 47440,
+        "width": 1500,
+        "height": 185,
+        "originalHolePixels": 45031,
+        "previousHolePixelsFilled": 15854,
+        "detailHolePixelsFilled": 1482,
+        "previousExtraHolePixels": 1,
+        "detailExtraHolePixels": 26,
+        "previousHoleLossPercent": 35.20685749816793,
+        "detailHoleLossPercent": 3.29106615442695
+      },
+      {
+        "id": 47443,
+        "width": 1500,
+        "height": 185,
+        "originalHolePixels": 45031,
+        "previousHolePixelsFilled": 17065,
+        "detailHolePixelsFilled": 1611,
+        "previousExtraHolePixels": 1,
+        "detailExtraHolePixels": 16,
+        "previousHoleLossPercent": 37.896116008971596,
+        "detailHoleLossPercent": 3.57753547556128
+      },
+      {
+        "id": 47668,
+        "width": 1500,
+        "height": 2930,
+        "originalHolePixels": 807616,
+        "previousHolePixelsFilled": 270683,
+        "detailHolePixelsFilled": 28324,
+        "previousExtraHolePixels": 18267,
+        "detailExtraHolePixels": 4538,
+        "previousHoleLossPercent": 33.51629982565972,
+        "detailHoleLossPercent": 3.5071122909897774
+      }
+    ]
+  }
+}
