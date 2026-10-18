@@ -2,7 +2,7 @@ import {createMaterial,createSurfaceMaterial,createAsphaltMaterial,createTree,cr
 import {addUrbanBackground,CITY_GRID} from './urban-background.js';
 import {installSourcePumps} from './pump.js';
 import {brandMark} from './brand.js';
-import {createTextPlane,createPerson} from './assets.js';
+import {createTextPlane} from './assets.js';
 import {createImportedCar} from './shared-3d/index.js';
 import {createBrickMaterial} from './facade-material.js';
 
@@ -65,14 +65,9 @@ export function upgradeEnvironment(T,station,{models={}}={}){
  const rearPumps=new T.Group();rearPumps.name='rear-fuel-dispensers';g.add(rearPumps);
  for(const pump of station.pumps){const copy=pump.group.clone(true);copy.position.z=-6.4;copy.rotation.y=Math.PI/2;copy.name='rear-dispenser-'+pump.index;rearPumps.add(copy);}
  station.rearPumps=rearPumps;
- // Two longitudinal bays on each side of every inner aisle. The right-hand lane
- // stays open for the moving service car; opposite-side vehicles have seated drivers.
- const parking=new T.Group();parking.name='opposite-side-service-vehicles';g.add(parking);
+ // Keep all marked bays available; only the three fully animated service cars occupy them.
+ // Decorative parked cars and their frozen occupants used to obscure the active lanes.
  for(const x of [-7,-3,3,7])for(const z of [-6.1,.4])for(const sign of [-1,1])box(g,.06,.005,5.1,mark,x+sign*1.32,.005,z);
- if(models.car)for(const [i,x,z]of [[0,-3,.4],[1,-3,-6.1],[2,7,.4],[3,7,-6.1]]){
-  const car=createImportedCar(T,models.car,createPerson);car.setColor?.([0x727f84,0xb3aaa0,0x5c7278,0xa6a89d][i]);car.group.position.set(x,0,z);car.group.name='parked-service-car-'+i;parking.add(car.group);
- }
- station.parking=parking;
 
  // FULL shop: actual brand sign, transparent frontage, shelving and a service annex.
  const store=new T.Group();store.position.set(0,0,-20.5);store.name='full-shop-and-service-annex';g.add(store);

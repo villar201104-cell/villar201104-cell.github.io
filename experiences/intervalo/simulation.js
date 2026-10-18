@@ -21,6 +21,7 @@ const canvas=$('#scene'),wrap=$('#scene-wrap'),loading=$('#loading');
 let renderer,scene,camera,controls,station,modelTemplate,modelMetadata={},lanes=[],running=true,speed=1,selected=1,view='follow',time=0,lastTime=0,roofHidden=false,ready=false,cameraMove=null;
 const cameraMotion=createCameraMotion(THREE);
 let activeService=null;
+let needsRender=true;
 let lastSceneTime=-1,ambientLife,displayMode,appearance='focus',scrubbing=false,resumeAfterScrub=false;
 let parentVisible=new URLSearchParams(location.search).get('embed')!=='1';let pageVisible=parentVisible;const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const colors=[0x903c37,0xe4dfd2,0x426474,0x333d49,0x7c8b82,0xaaa8a3];
@@ -114,6 +115,11 @@ function createTotem(x){
 }
 function point(l,x,y,z){return V(l.x+x,y,z);}
 function localModelPoint(l,name,fallback){const raw=modelMetadata.points?.[name];const p=Array.isArray(raw)?raw:raw?.localInteraction;return p?l.totem.group.localToWorld(V(...p)):fallback;}
+function createLaneRoutes(l){
+ const arrive=(()=>{const route=new THREE.CurvePath();route.add(new THREE.LineCurve3(V(-24,0,-115),V(-24,0,-16.2)));route.add(new THREE.QuadraticBezierCurve3(V(-24,0,-16.2),V(-24,0,-12.2),V(-20,0,-12.2)));route.add(new THREE.LineCurve3(V(-20,0,-12.2),V(l.x+.8,0,-12.2)));route.add(new THREE.QuadraticBezierCurve3(V(l.x+.8,0,-12.2),V(l.x+3,0,-12.2),V(l.x+3,0,-9.8)));route.add(new THREE.LineCurve3(V(l.x+3,0,-9.8),V(l.x+3,0,.4)));return route;})();
+ const depart=(()=>{const x=l.x+3,route=new THREE.CurvePath();route.add(new THREE.LineCurve3(V(x,0,.4),V(x,0,14)));route.add(new THREE.QuadraticBezierCurve3(V(x,0,14),V(x,0,17),V(x+3,0,17)));route.add(new THREE.LineCurve3(V(x+3,0,17),V(160,0,17)));return route;})();
+ arrive.getLength();depart.getLength();return {arrive,depart};
+}
 function initLane(i,models={}){
  const x=[-10,0,10][i],person=createPerson(THREE),totem=createTotem(x);
  let car;try{car=models.car?createImportedCar(THREE,models.car,createPerson):createCar(THREE,colors[i]);}catch(error){console.warn('Using fallback car',error);car=createCar(THREE,colors[i]);}car.setColor?.(colors[i]);
@@ -121,6 +127,7 @@ function initLane(i,models={}){
  batchStatic(car.group,[car.driver.group,...car.wheels]);for(const wheel of car.wheels)batchStatic(wheel);
  scene.add(car.group,person.group);car.group.position.set(x+3,0,-18);
  const l={i,x,car,person,totem,clock:0,delay:i*16,visit:createVisit(['coffee','drink','snack'][i],i!==1,i===1),visits:0};
+ l.routes=createLaneRoutes(l);
  l.points={idle:point(l,1.55,0,-.3),window:point(l,1.67,0,.65),pump:point(l,1.0,.18,2.0),tank:point(l,1.78,0,-1.13),front:point(l,.94,.18,-1.58),coffee:point(l,.78,.18,-1.185),fridge:point(l,.80,.18,-1.90),terminal:point(l,.14,.18,.08),rack:point(l,-.88,.18,-1.12),glass:point(l,1.78,0,1.50),bin:point(l,-.90,.18,-.575)};
  l.points.doorOpen=doorPosition(l,1);l.points.doorClosed=doorPosition(l,0);
  l.targets={window:point(l,2.11,1.12,.65),tank:point(l,2.075,.839,-1.16),dock:point(l,.50,1.3,2.0),glass:point(l,2.55,1.32,1.17),coffee:localModelPoint(l,'coffee',point(l,.32,1.55,-1.185)),fridge:localModelPoint(l,'fridge',point(l,.355,1.525,-1.9)),terminal:localModelPoint(l,'terminal',point(l,.14,1.37,-.394)),rack:localModelPoint(l,'squeegee',point(l,-.555,.94,-1.12)),bin:localModelPoint(l,'bin',point(l,-.571,1.15,-.575))};
@@ -137,6 +144,9 @@ function initLane(i,models={}){
  lanes.push(l);return l;
 }
 function updateHose(l,end){
+ // The dock and hose radius are fixed. Reuse the exact mesh while the nozzle is still.
+ if(l.lastHoseEnd?.equals(end))return;
+ if(!l.lastHoseEnd)l.lastHoseEnd=new THREE.Vector3();l.lastHoseEnd.copy(end);
  const start=l.targets.dock,low=Math.max(.12,Math.min(start.y,end.y)-1.1);
  const curve=new THREE.CatmullRomCurve3([start,start.clone().add(V(.45,-.5,0)),V((start.x+end.x)/2,low,(start.z+end.z)/2),end.clone().add(V(-.12,-.12,0)),end]);
  const pos=l.hose.geometry.attributes.position;for(let j=0;j<=30;j++){const p=curve.getPoint(j/30),t=curve.getTangent(j/30),n=V(0,1,0).cross(t).normalize(),bn=t.clone().cross(n).normalize();for(let k=0;k<6;k++){const a=k/6*Math.PI*2;pos.setXYZ(j*6+k,p.x+.022*(n.x*Math.cos(a)+bn.x*Math.sin(a)),p.y+.022*(n.y*Math.cos(a)+bn.y*Math.sin(a)),p.z+.022*(n.z*Math.cos(a)+bn.z*Math.sin(a)));}}pos.needsUpdate=true;l.hose.geometry.computeVertexNormals();
@@ -184,7 +194,7 @@ function animateLane(l,dt){
  const carryingSqueegee=['toGlass','clean','backSqueegee'].includes(id);
  switch(id){
  case 'arrive': {
-  const route=new THREE.CurvePath();route.add(new THREE.LineCurve3(V(-24,0,-115),V(-24,0,-16.2)));route.add(new THREE.QuadraticBezierCurve3(V(-24,0,-16.2),V(-24,0,-12.2),V(-20,0,-12.2)));route.add(new THREE.LineCurve3(V(-20,0,-12.2),V(l.x+.8,0,-12.2)));route.add(new THREE.QuadraticBezierCurve3(V(l.x+.8,0,-12.2),V(l.x+3,0,-12.2),V(l.x+3,0,-9.8)));route.add(new THREE.LineCurve3(V(l.x+3,0,-9.8),V(l.x+3,0,.4)));
+  const route=l.routes.arrive;
   l.car.group.position.copy(route.getPoint(ease(p)));const tangent=route.getTangent(ease(p));l.car.group.rotation.y=Math.atan2(tangent.x,tangent.z);at(actor,P.idle,T.window);if(p<.72)idleMotion(l,l.clock,28*.72);else actor.rightForearm.rotation.x=-.08-.04*Math.sin(time*1.5+l.i);break;}
  case 'greet':if(p<.6)walk(actor,[P.idle,P.window],p/.6);else reach(actor,'right',T.window.clone().add(V(-.18,.15,0)));break;
  case 'toPump':walk(actor,[P.window,P.pump],p);break;
@@ -255,7 +265,7 @@ function animateLane(l,dt){
   if(p<.45)held(l.waste,actor);else{l.waste.visible=p<.94;l.waste.position.copy(release).add(V(.025*ease((p-.45)/.55),-.34*Math.pow((p-.45)/.55,2),0));}
   break;}
  case 'standClear':walk(actor,l.visit.waste||l.visit.clean?[l.visit.waste?P.bin:P.rack,point(l,-1.12,.18,.50),P.window,P.idle]:[P.window,P.idle],p);break;
- case 'depart':{at(actor,P.idle,T.window);const x=l.x+3,route=new THREE.CurvePath();route.add(new THREE.LineCurve3(V(x,0,.4),V(x,0,14)));route.add(new THREE.QuadraticBezierCurve3(V(x,0,14),V(x,0,17),V(x+3,0,17)));route.add(new THREE.LineCurve3(V(x+3,0,17),V(160,0,17)));l.car.group.position.copy(route.getPoint(ease(p)));const tangent=route.getTangent(ease(p));l.car.group.rotation.y=Math.atan2(tangent.x,tangent.z);break;}
+ case 'depart':{at(actor,P.idle,T.window);const route=l.routes.depart;l.car.group.position.copy(route.getPoint(ease(p)));const tangent=route.getTangent(ease(p));l.car.group.rotation.y=Math.atan2(tangent.x,tangent.z);break;}
  case 'wait':at(actor,P.idle,T.window);break;
  }
  if(sample.offsite)idleMotion(l,((time-l.i*32)%LOOP_DURATION+LOOP_DURATION)%180-l.visit.duration,180-l.visit.duration);
@@ -282,7 +292,7 @@ function followView(){
  return {target,pos:target.clone().add(offset)};
 }
 function changeCamera(which,instant=false){
- cameraMotion.reset();
+ needsRender=true;cameraMotion.reset();
  view=['general','service','follow'].includes(which)?which:'service';which=view;selected=SERVICE_LANE;const x=[-10,0,10][selected];let pos,target;
  // Open the canopy for the service framing; restore it for the overall station view.
  roofHidden=view!=='general';station.roof.visible=!roofHidden;$('#roof').setAttribute('aria-pressed',String(roofHidden));refreshLabels();
@@ -294,6 +304,7 @@ function changeCamera(which,instant=false){
  all('[data-view]').forEach(b=>{b.classList.toggle('selected',b.dataset.view===which);b.setAttribute('aria-pressed',b.dataset.view===which);});
 }
 function refreshLabels(){
+ const hint=$('#camera-description');if(hint)hint.textContent=t(view+'Description');
  $('#play').textContent=running?'Ⅱ':'▷';$('#play').setAttribute('aria-label',t(running?'pause':'play'));$('#play').title=t(running?'pause':'play');
  $('#roof').textContent=t(roofHidden?'showRoof':'roof');
  $('#fullscreen').textContent=t(document.fullscreenElement?'exitFullscreen':'fullscreen');
@@ -322,9 +333,9 @@ function bindUI(){
  window.addEventListener('pointerup',finishScrub);window.addEventListener('pointercancel',finishScrub);
  $('#timeline').addEventListener('keydown',()=>setRunning(false));
  all('[data-view]').forEach(b=>b.onclick=()=>changeCamera(b.dataset.view));
- all('[data-mode]').forEach(b=>b.onclick=()=>{appearance=b.dataset.mode;displayMode.set(appearance);all('[data-mode]').forEach(el=>{el.classList.toggle('selected',el===b);el.setAttribute('aria-pressed',el===b);});});
+ all('[data-mode]').forEach(b=>b.onclick=()=>{appearance=b.dataset.mode;displayMode.set(appearance);needsRender=true;all('[data-mode]').forEach(el=>{el.classList.toggle('selected',el===b);el.setAttribute('aria-pressed',el===b);});});
  all('[data-service]').forEach(b=>b.onclick=()=>{activeService=b.dataset.service;time=SERVICE_CUES[activeService].start;lastSceneTime=-1;selected=SERVICE_LANE;for(const lane of lanes)animateLane(lane,0);changeCamera('follow');setRunning(true);updatePlayback();});
- $('#roof').onclick=()=>{roofHidden=!roofHidden;station.roof.visible=!roofHidden;$('#roof').setAttribute('aria-pressed',roofHidden);refreshLabels();};
+ $('#roof').onclick=()=>{needsRender=true;roofHidden=!roofHidden;station.roof.visible=!roofHidden;$('#roof').setAttribute('aria-pressed',roofHidden);refreshLabels();};
  $('#fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await $('.experience').requestFullscreen();}catch{}};
  document.addEventListener('fullscreenchange',()=>{refreshLabels();resize();});
  document.addEventListener('intervalo-language',()=>{refreshLabels();updatePlayback();});
@@ -333,9 +344,9 @@ function bindUI(){
  addEventListener('message',e=>{if(e.source===parent&&e.origin===location.origin&&e.data?.type==='portfolio-visibility'){parentVisible=e.data.visible===true;pageVisible=inViewport&&parentVisible&&!document.hidden;lastTime=0;}});
  document.addEventListener('visibilitychange',()=>{pageVisible=inViewport&&parentVisible&&!document.hidden;lastTime=0;});
  new IntersectionObserver(entries=>{inViewport=entries[0].isIntersecting;pageVisible=inViewport&&parentVisible&&!document.hidden;lastTime=0;},{threshold:.05}).observe(wrap);
- controls.addEventListener('start',()=>{cameraMotion.reset();cameraMove=null;if(view==='follow'){view='manual';all('[data-view]').forEach(b=>{b.classList.remove('selected');b.setAttribute('aria-pressed','false');});}});
+ controls.addEventListener('start',()=>{cameraMotion.reset();cameraMove=null;if(view==='follow'){view='manual';all('[data-view]').forEach(b=>{b.classList.remove('selected');b.setAttribute('aria-pressed','false');});refreshLabels();}});
 }
-function resize(){if(!renderer)return;const w=wrap.clientWidth,h=wrap.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.fov=Math.min(68,THREE.MathUtils.radToDeg(2*Math.atan(Math.tan(THREE.MathUtils.degToRad(20))*Math.max(1,1.25/camera.aspect))));camera.updateProjectionMatrix();}
+function resize(){if(!renderer)return;needsRender=true;const w=wrap.clientWidth,h=wrap.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.fov=Math.min(68,THREE.MathUtils.radToDeg(2*Math.atan(Math.tan(THREE.MathUtils.degToRad(20))*Math.max(1,1.25/camera.aspect))));camera.updateProjectionMatrix();}
 // Keep the station inspectable through the whole orbit: cut away only nearby
 // buildings that intersect the camera or the sight line to the current subject.
 const cityRay=new THREE.Ray(),cityHit=new THREE.Vector3(),cityAim=new THREE.Vector3(),cityBox=new THREE.Box3();
@@ -352,11 +363,13 @@ function updateCityCutaway(){
   object.visible=!blocked;
  }
 }
+let lastUiTime=-Infinity;
 function frame(now){requestAnimationFrame(frame);if(!ready||!pageVisible){lastTime=0;return;}const delta=lastTime?Math.min((now-lastTime)/1000,.25):0;lastTime=now;const dt=running?delta*speed:0;time=(time+dt)%LOOP_DURATION;
- if(time!==lastSceneTime){for(const l of lanes)animateLane(l,dt);ambientLife?.update(time);lastSceneTime=time;}if(view==='follow'&&!activeService&&['idle','wait'].includes(lanes[selected]?.currentStep)){const next=lanes.find(l=>!['idle','wait'].includes(l.currentStep));if(next)selected=next.i;}updatePlayback();
+ const sceneChanged=time!==lastSceneTime;if(sceneChanged){for(const l of lanes)animateLane(l,dt);ambientLife?.update(time);lastSceneTime=time;}if(view==='follow'&&!activeService&&['idle','wait'].includes(lanes[selected]?.currentStep)){const next=lanes.find(l=>!['idle','wait'].includes(l.currentStep));if(next)selected=next.i;}if(now-lastUiTime>=100){updatePlayback();lastUiTime=now;}
  if(cameraMove){cameraMove.t=Math.min(1,cameraMove.t+delta*1.7);const k=ease(cameraMove.t);camera.position.lerpVectors(cameraMove.from,cameraMove.to,k);controls.target.lerpVectors(cameraMove.fromTarget,cameraMove.toTarget,k);if(k===1)cameraMove=null;}
  if(view==='follow'&&!cameraMove){const shot=followView();cameraMotion.update(camera.position,controls.target,{p:shot.pos.toArray(),t:shot.target.toArray()},delta);}
- controls.update();updateCityCutaway();renderer.render(scene,camera);canvas.dataset.drawCalls=renderer.info.render.calls;canvas.dataset.triangles=renderer.info.render.triangles;
+ const cameraChanged=controls.update();
+ if(sceneChanged||cameraChanged||needsRender){updateCityCutaway();renderer.render(scene,camera);canvas.dataset.drawCalls=renderer.info.render.calls;canvas.dataset.triangles=renderer.info.render.triangles;needsRender=false;}
 }
 async function init(){
  try{

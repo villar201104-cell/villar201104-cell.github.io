@@ -10,3 +10,5 @@
 
 .embedded .scene-wrap{height:calc(100vh - 240px);min-height:420px;max-height:none}
 @media(max-width:800px){.embedded .scene-wrap{height:calc(100vh - 280px);min-height:380px}}
+
+.camera-description{font-size:11px;line-height:1.45;color:var(--muted);margin:8px 10px;max-width:75ch}.view-tools button{text-transform:none}
