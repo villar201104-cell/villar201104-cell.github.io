@@ -1,3 +1,5 @@
+import {reachHuman} from './shared-3d/human-motion.js';
+import {createCrewDialogue} from './crew-dialogue.js';
 import {createCameraMotion} from './camera-motion.js';
 import {caption} from './storytelling.js';
 import * as THREE from 'three';
@@ -18,6 +20,8 @@ import {createAmbientLife} from './ambient-life.js';
 const $=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];
 const V=(x=0,y=0,z=0)=>new THREE.Vector3(x,y,z),ease=t=>t*t*(3-2*t),lerp=THREE.MathUtils.lerp;
 const canvas=$('#scene'),wrap=$('#scene-wrap'),loading=$('#loading');
+const dialoguePreview=new URLSearchParams(location.search).get('dialogues')==='1';
+const crewDialogue=dialoguePreview?createCrewDialogue(wrap,THREE):null;
 let renderer,scene,camera,controls,station,modelTemplate,modelMetadata={},lanes=[],running=true,speed=1,selected=1,view='follow',time=0,lastTime=0,roofHidden=false,ready=false,cameraMove=null;
 const cameraMotion=createCameraMotion(THREE);
 let activeService=null;
@@ -55,27 +59,7 @@ function walk(p,points,t){
  if(p.leftArm)p.leftArm.rotation.x=-stride*.25;if(p.rightArm)p.rightArm.rotation.x=stride*.25;
  p.group.position.y+=Math.abs(stride)*.018;
 }
-// Two-segment arm IK, solving in world space from the rig's shoulder.
-function reach(p,side,target){
- const upper=p[side+'Arm'],fore=p[side+'Forearm'];if(!upper||!fore)return;
- p.group.updateMatrixWorld(true);
- const origin=upper.getWorldPosition(V()),l1=Math.abs(fore.position.y)||.29;
- const hand=p[side+'Hand'];const l2=hand?(Math.abs(hand.position.y)||.29)+.035:.325;
- const dir=target.clone().sub(origin);const d=Math.max(.06,Math.min(dir.length(),l1+l2-.018));dir.normalize();
- // Anatomical pole follows the torso, with elbow slightly out and down.
- const pole=V(side==='right'?.55:-.55,-1,.15).applyQuaternion(p.group.getWorldQuaternion(new THREE.Quaternion()));
- const bend=pole.clone().addScaledVector(dir,-pole.dot(dir));
- if(bend.lengthSq()<1e-8)bend.copy(V(0,0,1).applyQuaternion(p.group.quaternion)).addScaledVector(dir,-dir.dot(V(0,0,1).applyQuaternion(p.group.quaternion)));
- bend.normalize();
- const a=(l1*l1-l2*l2+d*d)/(2*Math.max(d,.01)),h=Math.sqrt(Math.max(0,l1*l1-a*a));
- const elbow=origin.clone().addScaledVector(dir,a).addScaledVector(bend,h);
- const parentQ=upper.parent.getWorldQuaternion(new THREE.Quaternion()).invert();
- const upperDir=elbow.clone().sub(origin).normalize().applyQuaternion(parentQ);
- upper.quaternion.setFromUnitVectors(V(0,-1,0),upperDir);p.group.updateMatrixWorld(true);
- const foreParentQ=fore.parent.getWorldQuaternion(new THREE.Quaternion()).invert();
- const effective=origin.clone().addScaledVector(dir,d);
- fore.quaternion.setFromUnitVectors(V(0,-1,0),effective.sub(elbow).normalize().applyQuaternion(foreParentQ));p.group.updateMatrixWorld(true);
-}
+function reach(p,side,target){reachHuman(THREE,p,side,target);}
 function handPos(p,side='right'){return p[side+'Hand']?.localToWorld(V(0,-.035,0))||p.group.localToWorld(V(.2,1,.3));}
 function held(obj,p,side='right'){p.group.updateMatrixWorld(true);obj.position.copy(handPos(p,side));obj.quaternion.copy(p.group.getWorldQuaternion(new THREE.Quaternion()));obj.visible=true;}
 function at(p,position,target){p.group.position.copy(position);if(target)face(p,target);}
@@ -132,7 +116,11 @@ function initLane(i,models={}){
  l.points.doorOpen=doorPosition(l,1);l.points.doorClosed=doorPosition(l,0);
  l.targets={window:point(l,2.11,1.12,.65),tank:point(l,2.075,.839,-1.16),dock:point(l,.50,1.3,2.0),glass:point(l,2.55,1.32,1.17),coffee:localModelPoint(l,'coffee',point(l,.32,1.55,-1.185)),fridge:localModelPoint(l,'fridge',point(l,.355,1.525,-1.9)),terminal:localModelPoint(l,'terminal',point(l,.14,1.37,-.394)),rack:localModelPoint(l,'squeegee',point(l,-.555,.94,-1.12)),bin:localModelPoint(l,'bin',point(l,-.571,1.15,-.575))};
  l.targets.bin.add(V(.09,0,0));
- if(car.interactionPoints){l.targets.window.copy(car.interactionPoints.window).add(V(x+3,0,.4));l.targets.tank.copy(car.interactionPoints.fuel).add(V(x+3,0,.4));}
+ if(car.interactionPoints){l.targets.window.copy(car.interactionPoints.window).add(V(x+3,0,.4));l.targets.tank.copy(car.interactionPoints.fuel).add(V(x+3,0,.4));
+  // Stand slightly forward of the receiving hand so the attendant's right arm
+  // reaches across a short, open span instead of crossing behind the driver.
+  l.points.window.set(l.targets.window.x-.44,0,l.targets.window.z+.20);
+ }
  l.storage=car.productStorage||{coffee:V(.05,.66,.38),drink:V(.05,.71,.38),snack:V(.25,.64,.16)};
  l.products={};for(const type of ['coffee','drink','snack']){const raw=createProduct(THREE,type);const g=raw.group||raw;l.products[type]=g;scene.add(g);g.visible=false;}
  l.paymentLight=mesh(new THREE.SphereGeometry(.035,12,8),new THREE.MeshBasicMaterial({color:0x65c985}));l.paymentLight.position.copy(l.targets.terminal).add(V(.035,.065,.04));scene.add(l.paymentLight);l.paymentLight.visible=false;
@@ -179,7 +167,7 @@ function idleMotion(l,elapsed,duration){
 }
 
 function animateLane(l,dt){
- const sample=sampleLoop(time,l.i);l.visit=sample.visit;l.clock=sample.clock;l.visits=sample.index;
+ const sample=sampleLoop(time,l.i);l.visit=sample.visit;l.clock=sample.clock;l.visits=sample.index;l.offsite=sample.offsite;
  const color=colors[(l.i+sample.index)%colors.length];if(l.paint!==color){l.car.setColor?.(color);l.paint=color;}
  const s=sampleVisit(l.visit,l.clock),p=s.p,id=s.id,P=l.points,T=l.targets,actor=l.person;
  if(l.visit.order==='coffee')P.front.copy(P.coffee);else P.front.copy(P.doorClosed);
@@ -323,6 +311,7 @@ function updatePlayback(){
  all('[data-service]').forEach(b=>{const on=b.dataset.service===activeService;b.classList.toggle('selected',on);b.setAttribute('aria-pressed',on);});
 }
 function bindUI(){
+ $('#dialogues').hidden=!dialoguePreview;$('#dialogues').onclick=()=>{const button=$('#dialogues');button.setAttribute('aria-pressed',String(button.getAttribute('aria-pressed')!=='true'));};
  $('#captions').onclick=()=>{const on=$('#captions').getAttribute('aria-pressed')!=='true';$('#captions').setAttribute('aria-pressed',String(on));$('#story').hidden=!on;};
  $('#play').onclick=()=>setRunning(!running);$('#restart').onclick=restart;
  $('#speed').onchange=e=>speed=Number(e.target.value);
@@ -369,6 +358,7 @@ function frame(now){requestAnimationFrame(frame);if(!ready||!pageVisible){lastTi
  if(cameraMove){cameraMove.t=Math.min(1,cameraMove.t+delta*1.7);const k=ease(cameraMove.t);camera.position.lerpVectors(cameraMove.from,cameraMove.to,k);controls.target.lerpVectors(cameraMove.fromTarget,cameraMove.toTarget,k);if(k===1)cameraMove=null;}
  if(view==='follow'&&!cameraMove){const shot=followView();cameraMotion.update(camera.position,controls.target,{p:shot.pos.toArray(),t:shot.target.toArray()},delta);}
  const cameraChanged=controls.update();
+ crewDialogue?.update(lanes[selected],camera,getLanguage(),$('#dialogues').getAttribute('aria-pressed')==='true');
  if(sceneChanged||cameraChanged||needsRender){updateCityCutaway();renderer.render(scene,camera);canvas.dataset.drawCalls=renderer.info.render.calls;canvas.dataset.triangles=renderer.info.render.triangles;needsRender=false;}
 }
 async function init(){
