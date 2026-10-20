@@ -35,8 +35,8 @@
   "interactionPoints": {
     "window": [
       -0.89,
-      1.12,
-      0.25
+      1.22,
+      0.53
     ],
     "fuel": [
       -0.925,
@@ -101,7 +101,8 @@
     "Removed 10 invalid texCoord=-1 fields; default UV0, binary geometry unchanged",
     "Adapter removes cloned body-paint map so setColor yields exact flat colors",
     "Added deterministic reversible driver.setWindowReach(progress) with two intermediate waypoints",
-    "Converted all ten near-uniform 64x64 sRGB base-color maps to mean linear material factors; removed texture references and payloads; geometry bytes unchanged."
+    "Converted all ten near-uniform 64x64 sRGB base-color maps to mean linear material factors; removed texture references and payloads; geometry bytes unchanged.",
+    "2026-10-19: receiving point moved 28 cm forward and 10 cm upward; forward elbow and neutral wrist replace raised-elbow waypoints. No car or human geometry change."
   ],
   "validation": {
     "status": "pass-for-rest-and-window-reach",
@@ -129,116 +130,51 @@
   "windowPose": {
     "coordinateSpace": "driver-local joint quaternions, xyzw; apply to left arm only",
     "leftArm": [
+      -0.7062866615348484,
       0,
-      0,
-      -0.970834386382726,
-      0.23975110889602955
+      0.004348905064638473,
+      0.707912592600737
     ],
     "leftForearm": [
-      0,
-      0,
-      0.8850388115662481,
-      0.4655172413793103
+      0.4248889107211477,
+      0.5791292235483446,
+      -0.5830786478874839,
+      0.37960248465492374
     ],
     "leftHand": [
       0,
       0,
-      -0.516953943122929,
-      0.8560132129176833
+      0,
+      1
     ],
     "wristCarLocal": [
       -0.89,
-      1.12,
-      0.25
+      1.22,
+      0.53
     ],
-    "transition": "Use driver.setWindowReach(progress), not direct joint slerp. Two intermediate waypoints, per-segment smoothstep. Reverse by decreasing progress."
+    "transition": "Use driver.setWindowReach(progress). Single smoothstep from steering to forward elbow pose; wrist stays neutral. Reverse by decreasing progress."
   },
   "windowReach": {
     "api": "driver.setWindowReach(progress)",
     "durationSeconds": 0.9,
     "keyframeProgress": [
       0,
-      0.36,
-      0.76,
       1
     ],
     "samplesPerDirection": 481,
     "collisionSampleCount": 0,
     "testMarginMetres": 0.001,
-    "waypoints": [
-      {
-        "label": {
-          "w": [
-            -0.14,
-            0.7,
-            0.04
-          ],
-          "pole": [
-            0,
-            0,
-            1
-          ]
-        },
-        "quaternions": [
-          [
-            -0.7534167372596247,
-            0,
-            0.04735556870535883,
-            0.6558358560872176
-          ],
-          [
-            0.9311455051587363,
-            -0.19757499164082426,
-            0.11345890609077025,
-            -0.2847090576878362
-          ],
-          [
-            -0.5901085077417165,
-            -0.5901085077417165,
-            -0.5085720240351673,
-            0.2118924126779007
-          ]
-        ]
-      },
-      {
-        "label": {
-          "w": [
-            -0.45,
-            0.56,
-            0.14
-          ],
-          "pole": [
-            -1,
-            2,
-            0
-          ]
-        },
-        "quaternions": [
-          [
-            0.06449919417330321,
-            0,
-            -0.9750883113364017,
-            0.21223251175566607
-          ],
-          [
-            -0.11822255675019375,
-            -0.2772244131389023,
-            0.8750713931604471,
-            0.3787084745651626
-          ],
-          [
-            0.19161360830349866,
-            0.19161360830349866,
-            -0.5231423730434174,
-            0.8080164031455851
-          ]
-        ]
-      }
-    ],
+    "waypoints": [],
     "limits": [
       "Numerical sampled collision validation, not continuous collision proof.",
       "Attached cards, products or waste meshes are not included: position them beyond the palm and check their own volume.",
       "Validated with the current shared createHuman driver rig (.29 m upper arm and forearm), driver root (-.4,.60,.25)."
-    ]
+    ],
+    "wristBendDegrees": 0
+  },
+  "runtimeRefinements": {
+    "source": "../vehicles.js and ../car-mirrors.js",
+    "binaryChanged": false,
+    "notes": "Adapter replaces bulky seats and stacked oval mirror caps with upholstery and tapered single-shell rear-facing mirrors. Materials reused to retain the ambient draw-call budget."
   }
 }

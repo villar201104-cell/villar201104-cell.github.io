@@ -12,3 +12,9 @@
 @media(max-width:800px){.embedded .scene-wrap{height:calc(100vh - 280px);min-height:380px}}
 
 .camera-description{font-size:11px;line-height:1.45;color:var(--muted);margin:8px 10px;max-width:75ch}.view-tools button{text-transform:none}
+
+/* Quiet narration band; dialogue stays anchored to its speaker. */
+.story-caption{background:rgba(25,31,30,.88);color:#fff;border:0;border-radius:2px;padding:8px 12px;box-shadow:none;max-width:min(680px,calc(100% - 32px));z-index:6}
+.story-caption .narration-context{display:none}
+.story-caption p{font-size:13px;font-weight:400;line-height:1.5;margin:0;text-wrap:pretty}
+@media(max-width:600px){.story-caption{bottom:10px;padding:7px 10px;max-width:calc(100% - 24px)}}

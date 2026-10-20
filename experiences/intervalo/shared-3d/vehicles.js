@@ -7,35 +7,36 @@
  * Template geometry is shared; body paint is cloned per car. dispose() releases only
  * adapter-owned paint and generated driver resources, never cached template geometry.
  */
+import {refineCarMirrors} from './car-mirrors.js';
 export const HATCHBACK_MODEL_URL = new URL('./models/car-hatchback.glb', import.meta.url);
 export const HATCHBACK_METADATA_URL = new URL('./models/car-hatchback.json', import.meta.url);
 const WHEELS=['wheel-FL','wheel-FR','wheel-RL','wheel-RR'];
-function aimDriverArm(T,driver,side,target){
+function aimDriverArm(T,driver,side,target,pole=new T.Vector3(0,-1,0)){
  const arm=driver[side+'Arm'],forearm=driver[side+'Forearm'];
  const shoulder=arm.position.clone(),end=new T.Vector3(...target),direction=end.clone().sub(shoulder);
  const a=Math.abs(forearm.position.y),b=Math.abs(driver[side+'Hand'].position.y),length=direction.length();
  if(length>=a+b||length<Math.abs(a-b)+1e-6)throw new Error('Driver rig cannot reach hatchback steering wheel');
  direction.normalize();const along=(a*a+length*length-b*b)/(2*length),height=Math.sqrt(Math.max(0,a*a-along*along));
- const bend=new T.Vector3(0,-1,0).addScaledVector(direction,direction.y).normalize();
+ const bend=pole.clone().addScaledVector(direction,-pole.dot(direction)).normalize();
  const elbow=shoulder.clone().addScaledVector(direction,along).addScaledVector(bend,height);
  arm.quaternion.setFromUnitVectors(new T.Vector3(0,-1,0),elbow.clone().sub(shoulder).normalize());
  const distal=new T.Quaternion().setFromUnitVectors(new T.Vector3(0,-1,0),end.sub(elbow).normalize());
  forearm.quaternion.copy(arm.quaternion).invert().multiply(distal);
 }
-// Validated for the shared .29 m + .29 m seated arm rig. Joint-local XYZW.
-// Retract forward/up, raise elbow beside the head, then extend through the window.
-const WINDOW_REACH_FRAMES = [[[-0.7534167372596247,0,0.04735556870535883,0.6558358560872176],[0.9311455051587363,-0.19757499164082426,0.11345890609077025,-0.2847090576878362],[-0.5901085077417165,-0.5901085077417165,-0.5085720240351673,0.2118924126779007]],[[0.06449919417330321,0,-0.9750883113364017,0.21223251175566607],[-0.11822255675019375,-0.2772244131389023,0.8750713931604471,0.3787084745651626],[0.19161360830349866,0.19161360830349866,-0.5231423730434174,0.8080164031455851]],[[0,0,-0.970834386382726,0.23975110889602955],[0,0,0.8850388115662481,0.4655172413793103],[0,0,-0.5169539431229291,0.8560132129176834]]];
+// Receive forward of the shoulder, with the elbow forward and wrist neutral.
+// The old raised-elbow route cleared the shell but visibly folded the wrist.
+const WINDOW_WRIST=[-.49,.62,.28];
 function installWindowReach(T,driver){
  const joints=[driver.leftArm,driver.leftForearm,driver.leftHand];
- const frames=[joints.map(o=>o.quaternion.clone()),...WINDOW_REACH_FRAMES.map(f=>f.map(q=>new T.Quaternion().fromArray(q)))];
- const stops=[0,.36,.76,1];
+ const rest=joints.map(o=>o.quaternion.clone());
+ aimDriverArm(T,driver,'left',WINDOW_WRIST,new T.Vector3(0,0,1));
+ driver.leftHand.quaternion.identity();
+ const receiving=joints.map(o=>o.quaternion.clone());
  driver.windowReachDuration=.9;
  driver.setWindowReach=function(progress){
   const p=Number.isFinite(progress)?Math.max(0,Math.min(1,progress)):0;
-  const segment=p<stops[1]?0:p<stops[2]?1:2;
-  const t=(p-stops[segment])/(stops[segment+1]-stops[segment]);
-  const eased=t*t*(3-2*t);
-  for(let i=0;i<joints.length;i++)joints[i].quaternion.copy(frames[segment][i]).slerp(frames[segment+1][i],eased);
+  const eased=p*p*(3-2*p);
+  for(let i=0;i<joints.length;i++)joints[i].quaternion.copy(rest[i]).slerp(receiving[i],eased);
   driver.windowReachProgress=p;
   return driver;
  };
@@ -82,7 +83,7 @@ export function createImportedCar(T,template,createPerson){
   o.castShadow=![].concat(o.material).every(m=>m.transparent);o.receiveShadow=true;
  });
  if(!paints.size)throw new Error('Hatchback body-paint material is missing');
- const interiorRefinement=refineInterior(T,model);
+ const interiorRefinement=refineInterior(T,model),mirrorRefinement=refineCarMirrors(T,model,interiorRefinement?.materials);
  const group=new T.Group();group.name='shared-imported-hatchback';group.add(model);
  let driver;
  try{
@@ -98,7 +99,7 @@ export function createImportedCar(T,template,createPerson){
  group.add(driver.group);driver.restPose={};
  for(const side of ['left','right'])for(const part of ['Arm','Forearm','Hand','Leg','Knee'])driver.restPose[side+part]=driver[side+part].quaternion.clone();
  installWindowReach(T,driver);
- const interactionPoints={window:new T.Vector3(-.89,1.12,.25),fuel:new T.Vector3(-.925,.94,-1.56)};
+ const interactionPoints={window:new T.Vector3(...WINDOW_WRIST).add(driver.group.position),fuel:new T.Vector3(-.925,.94,-1.56)};
  group.userData.dimensions={length:4.5,width:1.88,mirrorsWidth:2.233635,height:1.672539};
  group.userData.interactionPoints=interactionPoints;
  let disposed=false;
@@ -108,7 +109,7 @@ export function createImportedCar(T,template,createPerson){
   dispose(){
    if(disposed)return;disposed=true;
    for(const material of paints.values())material.dispose();
-   const geometries=new Set(),materials=new Set(),textures=new Set();
+   const geometries=new Set(mirrorRefinement.geometries),materials=new Set(mirrorRefinement.materials),textures=new Set();
    if(interiorRefinement){geometries.add(interiorRefinement.geometry);interiorRefinement.seats.traverse(o=>{if(o.geometry)geometries.add(o.geometry);});for(const m of interiorRefinement.materials)materials.add(m);}
    driver.group.traverse(o=>{if(!o.isMesh)return;geometries.add(o.geometry);for(const m of [].concat(o.material)){materials.add(m);for(const value of Object.values(m))if(value?.isTexture)textures.add(value);}});
    for(const x of textures)x.dispose();for(const x of materials)x.dispose();for(const x of geometries)x.dispose();group.removeFromParent();
