@@ -3,7 +3,7 @@ export const ORDER_NAMES={coffee:'Café',drink:'Refresco',snack:'Snack'};
 export function createVisit(order='coffee',clean=true,waste=false){
  const steps=[];
  const add=(id,duration,label)=>steps.push({id,duration,label});
- add('arrive',28,'Llegada a la isla');
+ add('arrive',14,'Llegada a la isla');
  add('greet',3,'El playero recibe el pedido');
  add('toPump',3,'Retira la manguera');
  add('takeNozzle',2,'Retira la manguera');
