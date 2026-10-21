@@ -1,0 +1,323 @@
+{
+  "date": "2026-10-20",
+  "destination": "villar201104-cell/villar201104-cell.github.io (PÚBLICO)",
+  "files": [
+    {
+      "relative": "experiences/intervalo/ambient-life.js",
+      "bytes": 13280,
+      "sha256": "126c887e97e3a8199fc90dcb8299cdb8613ab951dd69f296723f5911cf515c6e"
+    },
+    {
+      "relative": "experiences/intervalo/assets.js",
+      "bytes": 34326,
+      "sha256": "ed54b078870800f7a67a3fa8144ebc9287b60b188f6ca3863801497d3ef09703"
+    },
+    {
+      "relative": "experiences/intervalo/brand/full.svg",
+      "bytes": 686,
+      "sha256": "cb6b8041b7beefcbd8117bff067e4bac0c13ae963f5fdff02304a02c0530610f"
+    },
+    {
+      "relative": "experiences/intervalo/brand/infinia.webp",
+      "bytes": 5652,
+      "sha256": "1c230ea4b10534024233d970193e9cc8fa5b27e581f822f702d080b7c6a521e0"
+    },
+    {
+      "relative": "experiences/intervalo/brand/ypf-white.svg",
+      "bytes": 4144,
+      "sha256": "7f1d6e557506c50ebd3832f72fa3eb09681db81f0abec8eb5085551a4a502b07"
+    },
+    {
+      "relative": "experiences/intervalo/brand/ypf.svg",
+      "bytes": 4142,
+      "sha256": "872913cd167716e6e75aa6f694413236f67b5cccafeec74af8a1582cee49fe13"
+    },
+    {
+      "relative": "experiences/intervalo/brand.js",
+      "bytes": 817,
+      "sha256": "92482d3cc691c0e461a002cfdedd9ef3de52c5044ed32e4253015c293809d18f"
+    },
+    {
+      "relative": "experiences/intervalo/camera-motion.js",
+      "bytes": 1099,
+      "sha256": "8ca4a9027a2170527cb668540505b871bcc8126369819f58df21b7c7273d2d5c"
+    },
+    {
+      "relative": "experiences/intervalo/crew-dialogue.js",
+      "bytes": 5132,
+      "sha256": "8a1fd0290f56dedada87f9d0fef8b61fa9f66e661c09351b307282c6dbba4628"
+    },
+    {
+      "relative": "experiences/intervalo/display-mode.js",
+      "bytes": 1063,
+      "sha256": "2c39b662de1414c9268f4485c1afb7c6f8566596a6ee42049fed4f97efa14f8b"
+    },
+    {
+      "relative": "experiences/intervalo/environment.js",
+      "bytes": 19299,
+      "sha256": "333928fb5d6de7a118915739a964d53c0340ba9b421303c4a151f6857eb9dd98"
+    },
+    {
+      "relative": "experiences/intervalo/facade-material.js",
+      "bytes": 1163,
+      "sha256": "4506eaf666fad8b65969c77c92ac9b95ad3e5b8c9183941434872379000b46f0"
+    },
+    {
+      "relative": "experiences/intervalo/i18n.js",
+      "bytes": 7372,
+      "sha256": "6099843a12c258a429a29c91f102bd35c3b960f45b426ff294404af8357f7e99"
+    },
+    {
+      "relative": "experiences/intervalo/index.html",
+      "bytes": 4169,
+      "sha256": "92beb81c2a90dd4eb3c5b43cfd949b1cdbf2b1c370ea907777af9ce92c301b09"
+    },
+    {
+      "relative": "experiences/intervalo/models/intervalo.glb",
+      "bytes": 7054148,
+      "sha256": "56e8b99b498e6aeb4a0bafb1daaeadc2f6efb1ef80e251c681d95207443d8554"
+    },
+    {
+      "relative": "experiences/intervalo/models/metadata.json",
+      "bytes": 25085,
+      "sha256": "ea14e07d33ace1aa8ce021e73b544f11d4188bb6a07eac8cf706c6149954c9b8"
+    },
+    {
+      "relative": "experiences/intervalo/models/ypf-source-pump.glb",
+      "bytes": 550684,
+      "sha256": "44423f8e0a098aa38f0520ff1e796cd3fb6fd3a9c9102dca666bfe17fb4ab393"
+    },
+    {
+      "relative": "experiences/intervalo/pump-source-data.js",
+      "bytes": 724327,
+      "sha256": "ac34536fd40fc287de44db569c552939272ddbdbb7c87ce34b49f7517f0d383e"
+    },
+    {
+      "relative": "experiences/intervalo/pump.js",
+      "bytes": 5033,
+      "sha256": "d2590e4b2628fc0777b2d6edb8573038f9796f6c353f8620d9f6e89e4a1d505b"
+    },
+    {
+      "relative": "experiences/intervalo/sequence.js",
+      "bytes": 1760,
+      "sha256": "a83c35d742125f87fef39a99955c05b121f5117da8398d68d5eb9af7bf86df54"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/car-mirrors.js",
+      "bytes": 2815,
+      "sha256": "6d739627c2cbcd1d2f031b05a7d2299e4c7d4c64c2d0d17fd690cf401e939c4f"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/crown-human.js",
+      "bytes": 2627,
+      "sha256": "14f765de4365951858bf973f804aae5a35b21904b256489d35ee5e8dd75750f4"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/geometry.js",
+      "bytes": 1904,
+      "sha256": "558ac3e46c30bfbb35ced9b40a6c1ae0d8965b0b3e08f48dd2e453f2b02da7a7"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/human-motion.js",
+      "bytes": 1433,
+      "sha256": "68d1e0abfa763d3d3918df1f3deec7b01946ef84a0bc74d36b5537485e575d4a"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/human.js",
+      "bytes": 10862,
+      "sha256": "8f14ab3dc2cfeee3d701fbeacb79cd1d3fca88edf114be294bd11f494dfe7b6f"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/index.js",
+      "bytes": 292,
+      "sha256": "24d39aab3f8294d3e3a69123e340a5f06538b2bf75624cc736c3326d2837f848"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/manifest.json",
+      "bytes": 2066,
+      "sha256": "072a322b2678a07c455756fd0ec8390e9adce6e25d631e68215116574c912ff3"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/materials.js",
+      "bytes": 2281,
+      "sha256": "1deb2de2e33050531bcdbc459b1d063d6427c7cef370aea2477eca545f0766e7"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/models/car-hatchback.glb",
+      "bytes": 4056780,
+      "sha256": "b3c91f64e922bfdd2f2d6e30345d930fa91445e12546aefdefa51da7522817e6"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/models/car-hatchback.json",
+      "bytes": 5431,
+      "sha256": "80c159c6124f97943745bb8635066e7124661b4e2a118d8604ea107b7144714a"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/models/street-bench.glb",
+      "bytes": 1236352,
+      "sha256": "a41c37e804789b89d5a25b7d3184744310ca39dddc558bdc15b5f22463d05c28"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/models/tree-jacaranda.glb",
+      "bytes": 14148864,
+      "sha256": "db21442e5613fc8060945e43384959a5eb787adad884f93c4012a66d220c5ba6"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/models/tree-urban.glb",
+      "bytes": 8531456,
+      "sha256": "6c90576d5d3d44904af3018801416e1d1837e032b6664df1f0685cccc1b632cb"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/models/tree-urban.metadata.json",
+      "bytes": 6682,
+      "sha256": "10265182d47a675634d10338ca0d6cc9b45a943d2c10fb01ca6e8468fab87dd8"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/models.js",
+      "bytes": 1411,
+      "sha256": "0fca0254c7c6d8008fabf2905f515957dcef4ebc0e2d4478799c625e88564439"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/palette.js",
+      "bytes": 1356,
+      "sha256": "ac65161c921939771e91cee6bc92e4c6adf4544c3c80d98d65072da54c5f4995"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/textures/asphalt/color.jpg",
+      "bytes": 697630,
+      "sha256": "ddf9224e9cfa3eb2998d9097e4cd34bd3630c85e0e6798e5a0a000415a684083"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/textures/asphalt/normal.jpg",
+      "bytes": 776360,
+      "sha256": "99cdf6b6f0b8a319d206e1d561bf2a5d9933d8d33e1d685f8e25388101d21310"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/textures/asphalt/roughness.jpg",
+      "bytes": 641634,
+      "sha256": "2280be133c104eb04370b625ebcc7f6709d2173b43ae2cd15a0074c26f492bf9"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/textures/asphalt/SOURCE.md",
+      "bytes": 292,
+      "sha256": "e31395d596a8d6ed600b33dc67a702cc6f13272686d89d6efb83191cdea45eae"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/vegetation.js",
+      "bytes": 1824,
+      "sha256": "0ec01e065550907faec3a01b956b1cf06bcb49a1d15a70727c2fec1a6d170d9f"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/vehicles.js",
+      "bytes": 9256,
+      "sha256": "e9bc33b5a53efe94d33eada7e86ba49acc0ffe2ead0e85a0c898a16dac47e563"
+    },
+    {
+      "relative": "experiences/intervalo/shared-3d/world-style.js",
+      "bytes": 1343,
+      "sha256": "0f389259fc7ac45b2f22084703fc206401c70b8f17eba0a0c13812e60eb2f4a9"
+    },
+    {
+      "relative": "experiences/intervalo/simulation.js",
+      "bytes": 37398,
+      "sha256": "84cba469cf87bae996a8471efd9ed9fa58ee74c64e290234930f84b6b3b595fc"
+    },
+    {
+      "relative": "experiences/intervalo/storytelling.js",
+      "bytes": 7356,
+      "sha256": "dd70a3d11150672565f6195727e453b7875b5f354428451219f2b76cae830c07"
+    },
+    {
+      "relative": "experiences/intervalo/style.css",
+      "bytes": 8116,
+      "sha256": "bd99e088df2413a985e3b212b48e0918ab02a5162fc5cba573fd46f45fe5b928"
+    },
+    {
+      "relative": "experiences/intervalo/timeline.js",
+      "bytes": 3305,
+      "sha256": "f59ee44cba9d6f7606bb9148928ba6d78c52d027368bf20cdcdcc03a94cb3d3a"
+    },
+    {
+      "relative": "experiences/intervalo/urban-background.js",
+      "bytes": 4068,
+      "sha256": "c23375d187c02e6a109022c5c3d44f3d1bd9df1b5479400af9da822cb862d756"
+    },
+    {
+      "relative": "experiences/intervalo/vendor/three/build/three.core.js",
+      "bytes": 1403455,
+      "sha256": "eb077d2417f61d3e6d9264c317cabc4ea35769ed6b0ab533067292a550784c20"
+    },
+    {
+      "relative": "experiences/intervalo/vendor/three/build/three.module.js",
+      "bytes": 603113,
+      "sha256": "c8211c69345d2e9949dc7a8ac969380497aa0600a5a8ac6a459c8cd02dd9cb8a"
+    },
+    {
+      "relative": "experiences/intervalo/vendor/three/examples/jsm/controls/OrbitControls.js",
+      "bytes": 38703,
+      "sha256": "b97879c748170baadeb3fb84cea1ffdf4674e283dc06042f34e2acb95a76042c"
+    },
+    {
+      "relative": "experiences/intervalo/vendor/three/examples/jsm/environments/RoomEnvironment.js",
+      "bytes": 4899,
+      "sha256": "c20f0b4677f6128a138d7152b85cbef9091f4f45cdfa05adca04d40c1697c7ae"
+    },
+    {
+      "relative": "experiences/intervalo/vendor/three/examples/jsm/libs/draco/gltf/draco_decoder.wasm",
+      "bytes": 192420,
+      "sha256": "a680d927bed9cb864ddbd63521868891af2bfbe755092761b4837487618df8ac"
+    },
+    {
+      "relative": "experiences/intervalo/vendor/three/examples/jsm/libs/draco/gltf/draco_wasm_wrapper.js",
+      "bytes": 58456,
+      "sha256": "8bb2952d2ba7d67e1414f8df819410cb0434a666be53f671fff75f68843d76f6"
+    },
+    {
+      "relative": "experiences/intervalo/vendor/three/examples/jsm/loaders/DRACOLoader.js",
+      "bytes": 16781,
+      "sha256": "7a4a51c694a6c9f983be452cc82b365e69ce08424654e3f245b4115e6efef258"
+    },
+    {
+      "relative": "experiences/intervalo/vendor/three/examples/jsm/loaders/GLTFLoader.js",
+      "bytes": 114739,
+      "sha256": "67ac5551fdafa6e349bd80c8f8e5e39c136d6b2fb1ad647db9abb21dc86f9e4a"
+    },
+    {
+      "relative": "experiences/intervalo/vendor/three/examples/jsm/utils/BufferGeometryUtils.js",
+      "bytes": 35539,
+      "sha256": "fda7e946b8e0b5ab39b779206589e7a1079a22eb24efb89d7223e03fdfb1f751"
+    },
+    {
+      "relative": "experiences/intervalo/vendor/three/LICENSE",
+      "bytes": 1081,
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
+    },
+    {
+      "relative": "experiences/portfolio-intervalo-3d.js",
+      "bytes": 5184,
+      "sha256": "9cc8d0abc2cfdf9dc1accf74bf3ab47d8e5b5d1d4ced732125eeae6a17c646d1"
+    }
+  ],
+  "batches": [
+    {
+      "name": "LOTE-01-RECURSOS",
+      "files": 20,
+      "bytes": 40961469
+    },
+    {
+      "name": "LOTE-02-RECURSOS",
+      "files": 20,
+      "bytes": 146252
+    },
+    {
+      "name": "LOTE-03-RECURSOS",
+      "files": 17,
+      "bytes": 21871
+    },
+    {
+      "name": "LOTE-04-FINAL",
+      "files": 2,
+      "bytes": 9353
+    }
+  ]
+}
