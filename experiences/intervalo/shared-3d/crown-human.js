@@ -1,5 +1,5 @@
 import {createHuman} from './human.js';
-import {reachHuman} from './human-motion.js';
+import {reachHuman,walkHuman} from './human-motion.js';
 // Compatibility adapter only: Crown's -Z/front and root/body API use the exact
 // same mesh factory, proportions and joints as Intervalo's +Z/group API.
 export function createCrownHuman(T,{vestColor='#FAA61A'}={}){
@@ -14,9 +14,13 @@ export function createCrownHuman(T,{vestColor='#FAA61A'}={}){
   const k=Math.PI-Math.acos(T.MathUtils.clamp((a*a+b*b-d*d)/(2*a*b),-1,1));
   return {theta,k};
  }
+ let distance=0,lastTime=null,previous=new T.Vector3(),lastHeading=0;
  function walk(time,speed){
-  const blend=T.MathUtils.smoothstep(speed,0,.55),phase=time*6.8,bob=Math.abs(Math.sin(phase))*.012*blend;body.position.y=bob;
-  legs.forEach(({hip,knee,foot},i)=>{const p=phase+i*Math.PI,z=Math.cos(p)*.19*blend,lift=Math.max(0,Math.sin(p))*.065*blend,{theta,k}=legPose(z,lift,bob);hip.rotation.x=-theta;knee.rotation.x=k;foot.rotation.x=theta-k;arms[i].rotation.set(-Math.sin(p)*.3*blend+.08,0,0);human[sides[i]+'Forearm'].rotation.set(.08,0,0);});
+  const delta=lastTime===null?0:time-lastTime,travel=root.position.distanceTo(previous),turn=Math.abs(Math.atan2(Math.sin(root.rotation.y-lastHeading),Math.cos(root.rotation.y-lastHeading)));
+  if(delta<0||delta>.5){distance=time*.75;}else if(delta>0){distance+=travel+Math.min(turn,.3)*.18;}
+  const turnSpeed=delta>0&&delta<.5?turn*.18/delta:0;
+  body.position.y=walkHuman(T,human,distance,Math.max(speed,turnSpeed));
+  previous.copy(root.position);lastTime=time;lastHeading=root.rotation.y;
  }
  function crouch(amount){const drop=Math.max(0,Math.min(.30,amount));body.position.y=-drop;const {theta,k}=legPose(0,0,-drop);legs.forEach(({hip,knee,foot})=>{hip.rotation.x=-theta;knee.rotation.x=k;foot.rotation.x=theta-k;});}
  function seated(){body.position.y=0;legs.forEach(({hip,knee,foot})=>{hip.rotation.x=-Math.PI/2;knee.rotation.x=Math.PI/2;foot.rotation.x=0;});reach([[-.115,1.18,-.45],[.115,1.18,-.45]]);}
