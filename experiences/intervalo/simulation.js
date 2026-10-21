@@ -20,7 +20,7 @@ import {createAmbientLife} from './ambient-life.js';
 const $=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];
 const V=(x=0,y=0,z=0)=>new THREE.Vector3(x,y,z),ease=t=>t*t*(3-2*t),lerp=THREE.MathUtils.lerp;
 const canvas=$('#scene'),wrap=$('#scene-wrap'),loading=$('#loading');
-const dialoguePreview=new URLSearchParams(location.search).get('dialogues')==='1';
+const dialoguePreview=true;
 const crewDialogue=dialoguePreview?createCrewDialogue(wrap,THREE):null;
 let renderer,scene,camera,controls,station,modelTemplate,modelMetadata={},lanes=[],running=true,speed=1,selected=1,view='follow',time=0,lastTime=0,roofHidden=false,ready=false,cameraMove=null;
 const cameraMotion=createCameraMotion(THREE);
@@ -297,9 +297,10 @@ function refreshLabels(){
  $('#roof').textContent=t(roofHidden?'showRoof':'roof');
  $('#fullscreen').textContent=t(document.fullscreenElement?'exitFullscreen':'fullscreen');
 }
-function setRunning(value){running=value;refreshLabels();}
+function setRunning(value){running=value;refreshLabels();updatePlayback();}
 function restart(){activeService=null;time=0;updatePlayback();setRunning(!reduced);}
 function updatePlayback(){
+ $('#story').hidden=!ready||!running||!pageVisible||document.hidden||$('#captions').getAttribute('aria-pressed')!=='true';
  const value=Math.min(time,LOOP_DURATION);$('#timeline').value=value;$('#timeline').style.setProperty('--progress',value/LOOP_DURATION*100+'%');
  $('#timecode').value=formatTime(value)+' / '+formatTime(LOOP_DURATION);
  $('#timeline').setAttribute('aria-valuetext',formatTime(value)+' / '+formatTime(LOOP_DURATION));
@@ -312,7 +313,7 @@ function updatePlayback(){
 }
 function bindUI(){
  $('#dialogues').hidden=!dialoguePreview;$('#dialogues').onclick=()=>{const button=$('#dialogues');button.setAttribute('aria-pressed',String(button.getAttribute('aria-pressed')!=='true'));};
- $('#captions').onclick=()=>{const on=$('#captions').getAttribute('aria-pressed')!=='true';$('#captions').setAttribute('aria-pressed',String(on));$('#story').hidden=!on;};
+ $('#captions').onclick=()=>{const on=$('#captions').getAttribute('aria-pressed')!=='true';$('#captions').setAttribute('aria-pressed',String(on));updatePlayback();};
  $('#play').onclick=()=>setRunning(!running);$('#restart').onclick=restart;
  $('#speed').onchange=e=>speed=Number(e.target.value);
  $('#timeline').max=LOOP_DURATION;
@@ -353,12 +354,12 @@ function updateCityCutaway(){
  }
 }
 let lastUiTime=-Infinity;
-function frame(now){requestAnimationFrame(frame);if(!ready||!pageVisible){lastTime=0;return;}const delta=lastTime?Math.min((now-lastTime)/1000,.25):0;lastTime=now;const dt=running?delta*speed:0;time=(time+dt)%LOOP_DURATION;
+function frame(now){requestAnimationFrame(frame);if(!ready||!pageVisible){$('#story').hidden=true;crewDialogue?.update(lanes[selected],camera,getLanguage(),false);lastTime=0;return;}const delta=lastTime?Math.min((now-lastTime)/1000,.25):0;lastTime=now;const dt=running?delta*speed:0;time=(time+dt)%LOOP_DURATION;
  const sceneChanged=time!==lastSceneTime;if(sceneChanged){for(const l of lanes)animateLane(l,dt);ambientLife?.update(time);lastSceneTime=time;}if(view==='follow'&&!activeService&&['idle','wait'].includes(lanes[selected]?.currentStep)){const next=lanes.find(l=>!['idle','wait'].includes(l.currentStep));if(next)selected=next.i;}if(now-lastUiTime>=100){updatePlayback();lastUiTime=now;}
  if(cameraMove){cameraMove.t=Math.min(1,cameraMove.t+delta*1.7);const k=ease(cameraMove.t);camera.position.lerpVectors(cameraMove.from,cameraMove.to,k);controls.target.lerpVectors(cameraMove.fromTarget,cameraMove.toTarget,k);if(k===1)cameraMove=null;}
  if(view==='follow'&&!cameraMove){const shot=followView();cameraMotion.update(camera.position,controls.target,{p:shot.pos.toArray(),t:shot.target.toArray()},delta);}
  const cameraChanged=controls.update();
- crewDialogue?.update(lanes[selected],camera,getLanguage(),$('#dialogues').getAttribute('aria-pressed')==='true');
+ crewDialogue?.update(lanes[selected],camera,getLanguage(),ready&&running&&pageVisible&&!document.hidden&&$('#dialogues').getAttribute('aria-pressed')==='true');
  if(sceneChanged||cameraChanged||needsRender){updateCityCutaway();renderer.render(scene,camera);canvas.dataset.drawCalls=renderer.info.render.calls;canvas.dataset.triangles=renderer.info.render.triangles;needsRender=false;}
 }
 async function init(){
