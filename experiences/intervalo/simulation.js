@@ -398,11 +398,11 @@ async function init(){
   const highlights=lanes.flatMap(l=>[l.totem.group,l.person.group,l.car.driver.group,l.paymentLight,l.card,l.receipt,l.squeegee,l.nozzle,l.waste,...Object.values(l.products)]);
   displayMode=createDisplayMode(THREE,scene,highlights);displayMode.set(appearance);
 
-  resize();new ResizeObserver(resize).observe(wrap);time=INITIAL_TIME;for(const lane of lanes)animateLane(lane,0);changeCamera(reduced?'general':'follow',true);bindUI();setRunning(!reduced);
+  resize();new ResizeObserver(resize).observe(wrap);time=INITIAL_TIME;for(const lane of lanes)animateLane(lane,0);changeCamera('follow',true);bindUI();setRunning(!reduced);
  if(parent!==window)parent.postMessage({type:'intervalo-ready'},location.origin);
   const params=new URLSearchParams(location.search);if(params.has('reviewTime')){time=Math.max(0,Number(params.get('reviewTime'))||0)%LOOP_DURATION;setRunning(false);}
 
-  for(const lane of lanes)animateLane(lane,0);changeCamera(params.get('view')||(reduced?'general':'follow'),true);
+  for(const lane of lanes)animateLane(lane,0);changeCamera(params.get('view')||'follow',true);
   updatePlayback();
   ready=true;loading.hidden=true;document.body.dataset.ready='true';requestAnimationFrame(frame);
  }catch(error){console.error(error);loading.innerHTML='<strong>'+t('error')+'</strong><span>'+t('errorDetail')+'</span><button class="error-action" id="retry">'+t('retry')+'</button>';$('#retry').onclick=()=>location.reload();}
