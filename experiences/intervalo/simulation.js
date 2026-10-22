@@ -1,5 +1,6 @@
 import {reachHuman,walkHuman} from './shared-3d/human-motion.js';
 import {createCrewDialogue} from './crew-dialogue.js';
+import {bindActivation} from './control-input.js';
 import {createCameraMotion} from './camera-motion.js';
 import {caption} from './storytelling.js';
 import * as THREE from 'three';
@@ -18,6 +19,7 @@ import {createDisplayMode} from './display-mode.js';
 import {createAmbientLife} from './ambient-life.js';
 
 const $=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];
+const setText=(element,text)=>{if(element&&element.textContent!==text)element.textContent=text;};
 const V=(x=0,y=0,z=0)=>new THREE.Vector3(x,y,z),ease=t=>t*t*(3-2*t),lerp=THREE.MathUtils.lerp;
 const canvas=$('#scene'),wrap=$('#scene-wrap'),loading=$('#loading');
 const dialoguePreview=true;
@@ -310,10 +312,10 @@ function changeCamera(which,instant=false){
  all('[data-view]').forEach(b=>{b.classList.toggle('selected',b.dataset.view===which);b.setAttribute('aria-pressed',b.dataset.view===which);});
 }
 function refreshLabels(){
- const hint=$('#camera-description');if(hint)hint.textContent=t(view+'Description');
- $('#play').textContent=running?'Ⅱ':'▷';$('#play').setAttribute('aria-label',t(running?'pause':'play'));$('#play').title=t(running?'pause':'play');
- $('#roof').textContent=t(roofHidden?'showRoof':'roof');
- $('#fullscreen').textContent=t(document.fullscreenElement?'exitFullscreen':'fullscreen');
+ setText($('#camera-description'),t(view+'Description'));
+ setText($('#play'),running?'Ⅱ':'▷');$('#play').setAttribute('aria-label',t(running?'pause':'play'));$('#play').title=t(running?'pause':'play');
+ setText($('#roof'),t(roofHidden?'showRoof':'roof'));
+ setText($('#fullscreen'),t(document.fullscreenElement?'exitFullscreen':'fullscreen'));
 }
 function setRunning(value){running=value;refreshLabels();updatePlayback();}
 function restart(){activeService=null;time=0;lastTime=0;lastSceneTime=-1;selected=SERVICE_LANE;for(const lane of lanes)animateLane(lane,0);changeCamera('follow',true);updatePlayback();setRunning(!reduced);}
@@ -325,14 +327,15 @@ function updatePlayback(){
  const lane=lanes[selected];
  const text=caption(getLanguage(),lane?.currentStep||'idle',lane?.visit.order||'coffee');
  const subtitle=$('#subtitle');if(subtitle.textContent!==text)subtitle.textContent=text;
- const label=t('island')+' '+String(selected+1).padStart(2,'0');if($('#subtitle-island').textContent!==label)$('#subtitle-island').textContent=label;$('#activity').textContent=view==='general'?'':t(lane?.currentPhase||'idle');
+ const label=t('island')+' '+String(selected+1).padStart(2,'0');if($('#subtitle-island').textContent!==label)$('#subtitle-island').textContent=label;setText($('#activity'),view==='general'?'':t(lane?.currentPhase||'idle'));
  if(activeService&&(time<SERVICE_CUES[activeService].start||time>=SERVICE_CUES[activeService].end))activeService=null;
  all('[data-service]').forEach(b=>{const on=b.dataset.service===activeService;b.classList.toggle('selected',on);b.setAttribute('aria-pressed',on);});
 }
 function bindUI(){
- $('#dialogues').hidden=!dialoguePreview;$('#dialogues').onclick=()=>{const button=$('#dialogues');button.setAttribute('aria-pressed',String(button.getAttribute('aria-pressed')!=='true'));};
+ const dialogueButton=$('#dialogues');dialogueButton.hidden=!dialoguePreview;dialogueButton.classList.toggle('selected',dialogueButton.getAttribute('aria-pressed')==='true');
+ bindActivation(dialogueButton,()=>{const on=dialogueButton.getAttribute('aria-pressed')!=='true';dialogueButton.setAttribute('aria-pressed',String(on));dialogueButton.classList.toggle('selected',on);});
  $('#captions').onclick=()=>{const on=$('#captions').getAttribute('aria-pressed')!=='true';$('#captions').setAttribute('aria-pressed',String(on));updatePlayback();};
- $('#play').onclick=()=>setRunning(!running);$('#restart').onclick=restart;
+ bindActivation($('#play'),()=>setRunning(!running));bindActivation($('#restart'),restart);
  $('#speed').onchange=e=>speed=Number(e.target.value);
  $('#timeline').max=LOOP_DURATION;
  $('#timeline').addEventListener('pointerdown',()=>{scrubbing=true;resumeAfterScrub=running;setRunning(false);});
@@ -342,7 +345,7 @@ function bindUI(){
  $('#timeline').addEventListener('keydown',()=>setRunning(false));
  all('[data-view]').forEach(b=>b.onclick=()=>changeCamera(b.dataset.view));
  all('[data-mode]').forEach(b=>b.onclick=()=>{appearance=b.dataset.mode;displayMode.set(appearance);needsRender=true;all('[data-mode]').forEach(el=>{el.classList.toggle('selected',el===b);el.setAttribute('aria-pressed',el===b);});});
- all('[data-service]').forEach(b=>b.onclick=()=>{activeService=b.dataset.service;time=SERVICE_CUES[activeService].start;lastSceneTime=-1;selected=SERVICE_LANE;for(const lane of lanes)animateLane(lane,0);changeCamera('follow');setRunning(true);updatePlayback();});
+ all('[data-service]').forEach(b=>bindActivation(b,()=>{activeService=b.dataset.service;time=SERVICE_CUES[activeService].start;lastSceneTime=-1;selected=SERVICE_LANE;for(const lane of lanes)animateLane(lane,0);changeCamera('follow');setRunning(true);updatePlayback();}));
  $('#roof').onclick=()=>{needsRender=true;roofHidden=!roofHidden;station.roof.visible=!roofHidden;$('#roof').setAttribute('aria-pressed',roofHidden);refreshLabels();};
  $('#fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await $('.experience').requestFullscreen();}catch{}};
  document.addEventListener('fullscreenchange',()=>{refreshLabels();resize();});
