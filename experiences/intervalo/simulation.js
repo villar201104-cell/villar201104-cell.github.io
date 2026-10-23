@@ -1,3 +1,6 @@
+import {shadowCadence} from './shared-3d/shadow-cadence.js';
+import {resizeDrawing} from './shared-3d/render-size.js';
+import {orientPalm,gripHuman} from './shared-3d/hand-grip.js';
 import {reachHuman,walkHuman} from './shared-3d/human-motion.js';
 import {createCrewDialogue} from './crew-dialogue.js';
 import {bindActivation} from './control-input.js';
@@ -24,7 +27,7 @@ const V=(x=0,y=0,z=0)=>new THREE.Vector3(x,y,z),ease=t=>t*t*(3-2*t),lerp=THREE.M
 const canvas=$('#scene'),wrap=$('#scene-wrap'),loading=$('#loading');
 const dialoguePreview=true;
 const crewDialogue=dialoguePreview?createCrewDialogue(wrap,THREE):null;
-let renderer,scene,camera,controls,station,modelTemplate,modelMetadata={},lanes=[],running=true,speed=1,selected=SERVICE_LANE,view='follow',time=0,lastTime=0,roofHidden=false,ready=false,cameraMove=null;
+let updateShadows,renderer,scene,camera,controls,station,modelTemplate,modelMetadata={},lanes=[],running=true,speed=1,selected=SERVICE_LANE,view='follow',time=0,lastTime=0,roofHidden=false,ready=false,cameraMove=null;
 const cameraMotion=createCameraMotion(THREE);
 let activeService=null;
 let needsRender=true;
@@ -42,6 +45,7 @@ function safeDispose(object){object.traverse(o=>{if(o.geometry)o.geometry.dispos
 function batchStatic(root,excluded=[]){return batchStaticMeshes(THREE,root,excluded,mergeGeometries);}
 
 function resetPose(p,seated=false){
+ for(const side of ['left','right'])p[side+'Hand']?.quaternion.identity();
  if(seated&&p.restPose){for(const [key,quaternion]of Object.entries(p.restPose))p[key]?.quaternion.copy(quaternion);return;}
  for(const n of ['leftArm','rightArm','leftForearm','rightForearm'])if(p[n])p[n].rotation.set(0,0,0);
  if(seated){for(const side of ['left','right']){p[side+'Arm'].rotation.x=-.75;p[side+'Forearm'].rotation.x=-.85;}}
@@ -69,7 +73,20 @@ function walk(p,points,t){
 }
 function reach(p,side,target){reachHuman(THREE,p,side,target);}
 function handPos(p,side='right'){return p[side+'Hand']?.localToWorld(V(0,-.035,0))||p.group.localToWorld(V(.2,1,.3));}
-function held(obj,p,side='right'){p.group.updateMatrixWorld(true);obj.position.copy(handPos(p,side));obj.quaternion.copy(p.group.getWorldQuaternion(new THREE.Quaternion()));obj.visible=true;}
+function gripDepth(obj){return obj.userData.gripDepth??({'prop-coffee':.045,'prop-drink':.034,'prop-snack':.024}[obj.name]??.027);}
+function palmOrientation(direction){return new THREE.Quaternion().setFromEuler(new THREE.Euler(0,Math.atan2(direction.x,direction.z)+Math.PI,Math.PI));}
+function holdAt(obj,p,side,centre){
+ const shoulder=p[side+'Arm'].getWorldPosition(V()),out=centre.clone().sub(shoulder);out.y=0;out.normalize();
+ const palm=centre.clone().addScaledVector(out,-gripDepth(obj)-.024);
+ gripHuman(THREE,p,side,palm,palmOrientation(out));
+}
+function held(obj,p,side='right'){
+ const palm=p[side+'Hand'].localToWorld(V(0,-.045,0)),shoulder=p[side+'Arm'].getWorldPosition(V()),out=palm.clone().sub(shoulder);out.y=0;out.normalize();
+ const actual=orientPalm(THREE,p,side,palmOrientation(out));
+ obj.position.copy(actual).addScaledVector(out,gripDepth(obj)+.024);
+ obj.quaternion.copy(p.group.getWorldQuaternion(new THREE.Quaternion()));obj.visible=true;
+}
+
 function at(p,position,target){p.group.position.copy(position);if(target)face(p,target);}
 
 async function loadModel(){
@@ -132,7 +149,7 @@ function initLane(i,models={}){
  l.storage=car.productStorage||{coffee:V(.05,.66,.38),drink:V(.05,.71,.38),snack:V(.25,.64,.16)};
  l.products={};for(const type of ['coffee','drink','snack']){const raw=createProduct(THREE,type);const g=raw.group||raw;l.products[type]=g;scene.add(g);g.visible=false;}
  l.paymentLight=mesh(new THREE.SphereGeometry(.035,12,8),new THREE.MeshBasicMaterial({color:0x65c985}));l.paymentLight.position.copy(l.targets.terminal).add(V(.035,.065,.04));scene.add(l.paymentLight);l.paymentLight.visible=false;
- l.card=card();l.receipt=mesh(new THREE.BoxGeometry(.07,.13,.002),new THREE.MeshStandardMaterial({color:0xf8f6ec}));l.squeegee=squeegee();l.nozzle=nozzle();l.waste=mesh(new THREE.SphereGeometry(.047,7,5),handheldMat);l.waste.scale.set(1,1.5,.7);
+ l.card=card();l.card.userData.gripDepth=.003;l.receipt=mesh(new THREE.BoxGeometry(.07,.13,.002),new THREE.MeshStandardMaterial({color:0xf8f6ec}));l.squeegee=squeegee();l.squeegee.userData.gripDepth=.013;l.nozzle=nozzle();l.nozzle.userData.gripDepth=.05;l.waste=mesh(new THREE.SphereGeometry(.047,7,5),handheldMat);l.waste.scale.set(1,1.5,.7);
  for(const prop of [l.card,l.receipt,l.squeegee,l.nozzle,l.waste]){scene.add(prop);prop.visible=false;}
  const geo=new THREE.BufferGeometry(),segments=30,ring=6;const positions=new Float32Array((segments+1)*ring*3),indices=[];
  for(let j=0;j<segments;j++)for(let k=0;k<ring;k++){const a=j*ring+k,b=j*ring+(k+1)%ring,c=(j+1)*ring+k,d=(j+1)*ring+(k+1)%ring;indices.push(a,c,b,b,c,d);}
@@ -159,10 +176,19 @@ function handover(l,obj,p,receiving=false){
  const actor=l.person,driver=l.car.driver;
  at(actor,l.points.window,l.targets.window);actor.group.updateMatrixWorld(true);
  const contact=driver?.group?handPos(driver,'left'):l.targets.window;
+ const away=actor.group.getWorldPosition(V()).sub(contact);away.y=0;away.normalize();
+ const centre=contact.clone().addScaledVector(away,gripDepth(obj)+.024);
  const rest=carryTarget(actor),u=p<.4?ease(p/.4):p>.7?1-ease((p-.7)/.3):1;
- reach(actor,'right',rest.clone().lerp(contact,u));
- held(obj,(receiving?p<.55:p>=.55)&&driver?.group?driver:actor,(receiving?p<.55:p>=.55)&&driver?.group?'left':'right');
+ reach(actor,'right',rest.clone().lerp(centre,u));
+ const recipientOwns=receiving?p<.55:p>=.55;
+ held(obj,recipientOwns&&driver?.group?driver:actor,recipientOwns&&driver?.group?'left':'right');
+ // Both hands meet opposite surfaces during the hand-off; ownership changes
+ // while the object remains at one world-space contact point.
+ const contactWeight=p<.4?ease(p/.4):p>.7?1-ease((p-.7)/.3):1;
+ obj.position.lerp(centre,contactWeight);
+ if(contactWeight>.001){holdAt(obj,actor,'right',obj.position);if(driver?.group)holdAt(obj,driver,'left',centre);}
 }
+
 function driverReach(l,target){const d=l.car.driver;if(d?.group&&!d.setWindowReach)reach(d,'left',target);}
 function transfer(obj,from,to,p){obj.visible=true;obj.position.lerpVectors(from,to,ease(p));}
 
@@ -196,8 +222,8 @@ function animateLane(l,dt){
  case 'toPump':walk(actor,[P.window,P.pump],p);break;
  case 'takeNozzle':at(actor,P.pump,T.dock);reach(actor,'right',T.dock);if(p>.5)held(l.nozzle,actor);break;
  case 'toTank':walk(actor,[P.pump,P.tank],p);reach(actor,'right',actor.group.position.clone().add(V(.3,1.05,.2)));held(l.nozzle,actor);break;
- case 'insert':at(actor,P.tank,T.tank);reach(actor,'right',T.tank);l.nozzle.position.copy(T.tank);l.nozzle.rotation.y=Math.PI/2;break;
- case 'fuel':at(actor,P.tank,T.tank);reach(actor,'right',T.tank);l.nozzle.position.copy(T.tank);l.nozzle.rotation.y=Math.PI/2;break;
+ case 'insert':at(actor,P.tank,T.tank);reach(actor,'right',T.tank);l.nozzle.position.copy(T.tank);l.nozzle.rotation.y=Math.PI/2;holdAt(l.nozzle,actor,'right',l.nozzle.position);break;
+ case 'fuel':at(actor,P.tank,T.tank);reach(actor,'right',T.tank);l.nozzle.position.copy(T.tank);l.nozzle.rotation.y=Math.PI/2;holdAt(l.nozzle,actor,'right',l.nozzle.position);break;
  case 'remove':at(actor,P.tank,T.tank);reach(actor,'right',T.tank.clone().add(V(-.2*ease(p),0,0)));held(l.nozzle,actor);break;
  case 'returnNozzle':walk(actor,[P.tank,P.pump],p);reach(actor,'right',actor.group.position.clone().add(V(.2,1.05,.15)));held(l.nozzle,actor);break;
  case 'dock':at(actor,P.pump,T.dock);reach(actor,'right',T.dock);if(p<.5)held(l.nozzle,actor);break;
@@ -222,8 +248,8 @@ function animateLane(l,dt){
   at(actor,P.window,T.window);const driver=l.car.driver;
   driver?.setWindowReach?.(1-ease(Math.min(1,p/.4)));
   const left=driver?.group?handPos(driver,'left'):T.window,storage=l.car.group.localToWorld(l.storage[l.visit.order].clone());
-  product.visible=true;product.position.copy(left);
-  if(p>.4){const u=ease(Math.min(1,(p-.4)/.35)),grip=left.clone().lerp(storage,u);reach(driver,'right',grip);product.position.copy(p<.75?handPos(driver,'right'):storage);if(l.visit.order==='snack')product.rotation.x=-Math.PI/2*u;}
+  product.visible=true;product.position.copy(left);if(driver?.group)held(product,driver,'left');
+  if(p>.4){const u=ease(Math.min(1,(p-.4)/.35)),grip=left.clone().lerp(storage,u);reach(driver,'right',grip);if(p<.75)held(product,driver,'right');else product.position.copy(storage);if(l.visit.order==='snack')product.rotation.x=-Math.PI/2*u;}
   if(p>.8)driver?.setWindowReach?.(ease((p-.8)/.2));
   break;}
  case 'takeCard':handover(l,l.card,p,true);break;
@@ -248,6 +274,7 @@ function animateLane(l,dt){
   reach(actor,'right',grip);l.squeegee.visible=true;l.squeegee.position.copy(grip);
   l.squeegee.quaternion.setFromUnitVectors(V(0,1,0),direction);
   l.squeegee.userData.blade.quaternion.copy(l.squeegee.quaternion).invert().multiply(new THREE.Quaternion().setFromEuler(new THREE.Euler(.50,0,0)));
+  holdAt(l.squeegee,actor,'right',grip);
   reach(actor,'left',point(l,2.14,1.02,1.69));break;}
  case 'backSqueegee':walk(actor,[P.glass,P.window,point(l,-1.12,.18,.50),P.rack],p);break;
  case 'rackSqueegee':at(actor,P.rack,T.rack);crouch(actor,.24*Math.sin(Math.PI*p));reach(actor,'right',T.rack);l.squeegee.visible=true;l.squeegee.position.copy(T.rack);if(p<.5)held(l.squeegee,actor);break;
@@ -357,7 +384,7 @@ function bindUI(){
  new IntersectionObserver(entries=>{inViewport=entries[0].isIntersecting;pageVisible=inViewport&&parentVisible&&!document.hidden;lastTime=0;},{threshold:.05}).observe(wrap);
  controls.addEventListener('start',()=>{cameraMotion.reset();cameraMove=null;if(view==='follow'){view='manual';all('[data-view]').forEach(b=>{b.classList.remove('selected');b.setAttribute('aria-pressed','false');});refreshLabels();}});
 }
-function resize(){if(!renderer)return;needsRender=true;const w=wrap.clientWidth,h=wrap.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.fov=Math.min(68,THREE.MathUtils.radToDeg(2*Math.atan(Math.tan(THREE.MathUtils.degToRad(20))*Math.max(1,1.25/camera.aspect))));camera.updateProjectionMatrix();}
+function resize(){if(!renderer)return;needsRender=true;const {width:w,height:h}=resizeDrawing(renderer,wrap.clientWidth,wrap.clientHeight,devicePixelRatio);camera.aspect=w/h;camera.fov=Math.min(68,THREE.MathUtils.radToDeg(2*Math.atan(Math.tan(THREE.MathUtils.degToRad(20))*Math.max(1,1.25/camera.aspect))));camera.updateProjectionMatrix();}
 // Keep the station inspectable through the whole orbit: cut away only nearby
 // buildings that intersect the camera or the sight line to the current subject.
 const cityRay=new THREE.Ray(),cityHit=new THREE.Vector3(),cityAim=new THREE.Vector3(),cityBox=new THREE.Box3();
@@ -381,12 +408,12 @@ function frame(now){requestAnimationFrame(frame);if(!ready||!pageVisible){$('#st
  if(view==='follow'&&!cameraMove){const shot=followView();cameraMotion.update(camera.position,controls.target,{p:shot.pos.toArray(),t:shot.target.toArray()},delta);}
  const cameraChanged=controls.update();
  crewDialogue?.update(lanes[selected],camera,getLanguage(),ready&&running&&pageVisible&&!document.hidden&&$('#dialogues').getAttribute('aria-pressed')==='true');
- if(sceneChanged||cameraChanged||needsRender){updateCityCutaway();renderer.render(scene,camera);canvas.dataset.drawCalls=renderer.info.render.calls;canvas.dataset.triangles=renderer.info.render.triangles;needsRender=false;}
+ if(sceneChanged||cameraChanged||needsRender){updateCityCutaway();updateShadows(now,running,needsRender);renderer.render(scene,camera);canvas.dataset.drawCalls=renderer.info.render.calls;canvas.dataset.triangles=renderer.info.render.triangles;needsRender=false;}
 }
 async function init(){
  try{
-  renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.65));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.NeutralToneMapping;renderer.toneMappingExposure=1.05;
-  scene=new THREE.Scene();
+  renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.NeutralToneMapping;renderer.toneMappingExposure=1.05;
+  updateShadows=shadowCadence(renderer);scene=new THREE.Scene();
   camera=new THREE.PerspectiveCamera(40,1,.1,3000);controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.dampingFactor=.075;controls.minDistance=3;controls.maxDistance=65;controls.enablePan=false;controls.maxPolarAngle=Math.PI*.48;controls.target.set(0,1,0);
   // Same neutral colour response and daylight palette as Crown; a low-intensity
   // reflection environment keeps the imported metal/glass legible under the roof.
