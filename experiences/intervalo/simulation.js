@@ -1,3 +1,4 @@
+import {serviceCamera} from './service-camera.js';
 import {shadowCadence} from './shared-3d/shadow-cadence.js';
 import {resizeDrawing} from './shared-3d/render-size.js';
 import {orientPalm,gripHuman} from './shared-3d/hand-grip.js';
@@ -304,27 +305,7 @@ function animateLane(l,dt){
 
 }
 
-function followView(){
- const lane=lanes[selected],step=lane?.currentStep||'idle';
- let target=V(1,1,-1),pos=V(7,3.8,7);
- if(lane){
-  if(step==='arrive'||step==='depart'){
-   target.copy(lane.car.group.position);target.y=.9;
-   // Track the actual vehicle from street level, without clamping its position.
-   pos=target.clone().add(V(8,2.7,10));
-   if(step==='arrive'){
-    const u=THREE.MathUtils.smoothstep(lane.stepProgress,.65,1);
-    pos.lerp(V(lane.x+7.2,3.35,6.8),u);target.lerp(V(lane.x+2,1.1,.3),u);
-   }
-  }else{
-   const actor=lane.person.group.position;target.set(actor.x,1.1,actor.z);
-   const rear=['toTotem','openFridge','prepare','closeFridge','toTerminal','pay','toBin','dispose'].includes(step);
-   // Every service view stays below the 5.3 m soffit, outside the car and product.
-   const side=rear?-1:1;pos.set(lane.x+6.5,3.35,actor.z+side*6.8);
-  }
- }
- return {target,pos};
-}
+function followView(){return serviceCamera(lanes[selected],THREE);}
 function changeCamera(which,instant=false){
  needsRender=true;cameraMotion.reset();
  view=['general','service','follow'].includes(which)?which:'service';which=view;selected=SERVICE_LANE;const x=[-10,0,10][selected];let pos,target;
@@ -403,10 +384,11 @@ function updateCityCutaway(){
 }
 let lastUiTime=-Infinity;
 function frame(now){requestAnimationFrame(frame);if(!ready||!pageVisible){$('#story').hidden=true;crewDialogue?.update(lanes[selected],camera,getLanguage(),false);lastTime=0;return;}const delta=lastTime?Math.min((now-lastTime)/1000,.25):0;lastTime=now;const dt=running?delta*speed*(time<28?2:1):0;time=(time+dt)%LOOP_DURATION;
- const sceneChanged=time!==lastSceneTime;if(sceneChanged){for(const l of lanes)animateLane(l,dt);ambientLife?.update(time);lastSceneTime=time;}if(view==='follow'&&!activeService&&['idle','wait'].includes(lanes[selected]?.currentStep)){const next=lanes.find(l=>!['idle','wait'].includes(l.currentStep));if(next)selected=next.i;}if(now-lastUiTime>=100){updatePlayback();lastUiTime=now;}
+ const sceneChanged=time!==lastSceneTime;if(sceneChanged){for(const l of lanes)animateLane(l,dt);ambientLife?.update(time);lastSceneTime=time;}// Keep the chosen service island throughout its visit; never jump to another car.
+if(now-lastUiTime>=100){updatePlayback();lastUiTime=now;}
  if(cameraMove){cameraMove.t=Math.min(1,cameraMove.t+delta*(cameraMove.crossing?.28:.7));const k=ease(cameraMove.t);if(cameraMove.crossing){const a=cameraMove.from,b=cameraMove.to,edgeA=V(22,a.y,16),edgeB=V(22,b.y,16);if(k<.35)camera.position.lerpVectors(a,edgeA,ease(k/.35));else if(k<.65)camera.position.lerpVectors(edgeA,edgeB,ease((k-.35)/.3));else camera.position.lerpVectors(edgeB,b,ease((k-.65)/.35));}else camera.position.lerpVectors(cameraMove.from,cameraMove.to,k);controls.target.lerpVectors(cameraMove.fromTarget,cameraMove.toTarget,k);if(k===1)cameraMove=null;}
- if(view==='follow'&&!cameraMove){const shot=followView();cameraMotion.update(camera.position,controls.target,{p:shot.pos.toArray(),t:shot.target.toArray()},delta);}
- const cameraChanged=controls.update();
+ if(view==='follow'&&!cameraMove){const shot=followView();cameraMotion.update(camera.position,controls.target,{p:shot.pos.toArray(),t:shot.target.toArray()},delta,false,running?speed:1);}
+ controls.enableDamping=view==='manual';const cameraChanged=controls.update();
  crewDialogue?.update(lanes[selected],camera,getLanguage(),ready&&running&&pageVisible&&!document.hidden&&$('#dialogues').getAttribute('aria-pressed')==='true');
  if(sceneChanged||cameraChanged||needsRender){updateCityCutaway();updateShadows(now,running,needsRender);renderer.render(scene,camera);canvas.dataset.drawCalls=renderer.info.render.calls;canvas.dataset.triangles=renderer.info.render.triangles;needsRender=false;}
 }
@@ -417,8 +399,8 @@ async function init(){
   camera=new THREE.PerspectiveCamera(40,1,.1,3000);controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.dampingFactor=.075;controls.minDistance=3;controls.maxDistance=65;controls.enablePan=false;controls.maxPolarAngle=Math.PI*.48;controls.target.set(0,1,0);
   // Same neutral colour response and daylight palette as Crown; a low-intensity
   // reflection environment keeps the imported metal/glass legible under the roof.
-  const pmrem=new THREE.PMREMGenerator(renderer),room=new RoomEnvironment();scene.environment=pmrem.fromScene(room,.04).texture;room.dispose();pmrem.dispose();scene.environmentIntensity=.48;
-  const {sun,hemisphere}=applyDaylight(THREE,renderer,scene,{fogNear:180,fogFar:1250});hemisphere.intensity=1.6;sun.intensity=2.1;sun.position.set(-18,28,16);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-26,right:26,top:26,bottom:-26,near:.5,far:90});sun.shadow.bias=-.00035;sun.shadow.normalBias=.035;scene.add(sun);
+  const pmrem=new THREE.PMREMGenerator(renderer),room=new RoomEnvironment();scene.environment=pmrem.fromScene(room,.04).texture;room.dispose();pmrem.dispose();scene.environmentIntensity=.24;
+  const {sun,hemisphere}=applyDaylight(THREE,renderer,scene,{fogNear:180,fogFar:1250});hemisphere.intensity=1.25;sun.intensity=2.4;sun.position.set(-18,28,16);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-26,right:26,top:26,bottom:-26,near:.5,far:90});sun.shadow.bias=-.00035;sun.shadow.normalBias=.035;scene.add(sun);
   const fill=new THREE.DirectionalLight(0xeaf2ff,.45);fill.position.set(12,10,-14);scene.add(fill);
   for(const x of [-8,0,8]){const lamp=new THREE.SpotLight(0xfff7e7,32,13,1.1,.9,1.5);lamp.position.set(x,5.25,0);lamp.target.position.set(x,0,0);scene.add(lamp,lamp.target);}
   const [sharedModels]=await Promise.all([loadSharedModels(new GLTFLoader()),loadModel()]);

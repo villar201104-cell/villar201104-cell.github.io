@@ -78,7 +78,7 @@ export function createImportedCar(T,template,createPerson){
  const paints=new Map();
  model.traverse(o=>{
   if(!o.isMesh)return;
-  const replace=material=>{if(material.name!=='body-paint')return material;if(!paints.has(material)){const paint=material.clone();paint.map=null;paint.needsUpdate=true;paints.set(material,paint);}return paints.get(material);};
+  const replace=material=>{if(material.name!=='body-paint')return material;if(!paints.has(material)){const paint=material.clone();paint.map=null;paint.roughness=.48;paint.metalness=.12;paint.needsUpdate=true;paints.set(material,paint);}return paints.get(material);};
   o.material=Array.isArray(o.material)?o.material.map(replace):replace(o.material);
   o.castShadow=![].concat(o.material).every(m=>m.transparent);o.receiveShadow=true;
  });
