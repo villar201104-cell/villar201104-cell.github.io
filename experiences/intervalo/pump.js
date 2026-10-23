@@ -6,7 +6,7 @@ function typed(base64,Type){const raw=atob(base64),bytes=new Uint8Array(raw.leng
 /** Original source geometry. Parent pose and dock remain owned by simulation.js. */
 export function installSourcePumps(T,station){
  let entries=cache.get(T);if(!entries){
-  const white=new T.MeshStandardMaterial({color:0xe3e6e2,roughness:.42,metalness:.28}),blue=new T.MeshStandardMaterial({color:0x0064be,roughness:.35,metalness:.3}),black=new T.MeshStandardMaterial({color:0x252c31,roughness:.62,metalness:.12});
+  const white=new T.MeshStandardMaterial({color:0xe3e6e2,roughness:.65,metalness:.12}),blue=new T.MeshStandardMaterial({color:0x0064be,roughness:.65,metalness:.12}),black=new T.MeshStandardMaterial({color:0x252c31,roughness:.62,metalness:.12});
   entries=PUMP_PARTS.map(part=>{const g=new T.BufferGeometry();g.setAttribute('position',new T.BufferAttribute(typed(part.position,Float32Array),3));g.setAttribute('normal',new T.BufferAttribute(typed(part.normal,Float32Array),3));g.setIndex(new T.BufferAttribute(typed(part.index,Uint32Array),1));
    if(part.role==='housing'){const a=g.attributes.position,idx=g.index,buckets=[[],[],[]];for(let i=0;i<idx.count;i+=3){const tri=[idx.getX(i),idx.getX(i+1),idx.getX(i+2)],y=tri.reduce((sum,k)=>sum+a.getY(k),0)/3,mi=y<.16?2:y<.72||y>2.04?1:0;buckets[mi].push(...tri);}g.setIndex(new T.BufferAttribute(new Uint32Array(buckets.flat()),1));let offset=0;for(let i=0;i<3;i++){g.addGroup(offset,buckets[i].length,i);offset+=buckets[i].length;}}
    return {geometry:g,material:part.role==='housing'?[white,blue,black]:black,id:part.sourceNode};});cache.set(T,entries);
