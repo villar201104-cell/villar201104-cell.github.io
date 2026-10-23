@@ -33,6 +33,20 @@ function shell(T,parent,name,sections,material,round=false){
  for(let i=1;i<sides-1;i++){indices.push(0,i,i+1);const a=(rings.length-1)*sides;indices.push(a,a+i+1,a+i);}
  const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(vertices,3));geometry.setIndex(indices);geometry.computeVertexNormals();const out=mesh(T,parent,geometry,material);out.name=name;return out;
 }
+const handGeometryCache=new WeakMap();
+function fingersGeometry(T,sign,closed){
+ let cache=handGeometryCache.get(T);if(!cache){cache=new Map();handGeometryCache.set(T,cache);}const key=sign+':'+closed;if(cache.has(key))return cache.get(key);
+ const parts=[];
+ for(let n=0;n<4;n++){
+  const x=(n-1.5)*.014,length=[.032,.040,.038,.028][n];
+  const points=closed?[[x,-.057,0],[x,-.075,-.008],[x,-.080,-.030],[x,-.062,-.048]]:[[x,-.057,0],[x,-.057-length*.55,-.003],[x,-.057-length,-.008]];
+  parts.push(new T.TubeGeometry(new T.CatmullRomCurve3(points.map(p=>new T.Vector3(...p))),7,.008,5,false));
+ }
+ const thumb=closed?[[-sign*.025,-.025,.002],[-sign*.043,-.037,-.015],[-sign*.038,-.051,-.042]]:[[-sign*.025,-.025,.002],[-sign*.039,-.045,.002],[-sign*.036,-.062,-.008]];
+ parts.push(new T.TubeGeometry(new T.CatmullRomCurve3(thumb.map(p=>new T.Vector3(...p))),7,.011,5,false));
+ const position=[],normal=[];for(const part of parts){const g=part.toNonIndexed();position.push(...g.attributes.position.array);normal.push(...g.attributes.normal.array);g.dispose();part.dispose();}
+ const result=new T.BufferGeometry();result.setAttribute('position',new T.Float32BufferAttribute(position,3));result.setAttribute('normal',new T.Float32BufferAttribute(normal,3));cache.set(key,result);return result;
+}
 export function createHuman(T,{driver=false,shirtColor=PALETTE.cloth,pantsColor=PALETTE.cloth,skinColor=PALETTE.skin,vestColor=shirtColor,headwear='cap',gloves=false,badge=null}={}){
  const group=new T.Group();group.name=driver?'seated-driver':'station-attendant';
  const fabric=color=>mat(T,color,{...WORLD_STYLE.materials.worker,flatShading:false});
@@ -89,7 +103,9 @@ export function createHuman(T,{driver=false,shirtColor=PALETTE.cloth,pantsColor=
   shell(T,forearm,'Sleeve cuff',[[-.242,.066,.074],[-.265,.064,.071]],pants,true);
   cyl(T,forearm,.029,.027,.04,skin,0,-.277,0,10);
   const hand=new T.Group();hand.name=side+'-hand-grip';hand.position.y=-forearmLength;forearm.add(hand);
-  ball(hand,.033,.053,.024,handMaterial,0,-.045,0);ball(hand,.014,.029,.016,handMaterial,-sign*.029,-.029,.010);
+  ball(hand,.029,.035,.024,handMaterial,0,-.036,0);
+  const fingers=mesh(T,hand,fingersGeometry(T,sign,false),handMaterial);fingers.name='Articulated fingers and opposed thumb';
+  hand.userData.setGrip=closed=>{fingers.geometry=fingersGeometry(T,sign,!!closed);};
   const leg=new T.Group();leg.name=side+'-hip';leg.position.set(sign*.098,hipHeight,0);group.add(leg);
   shell(T,leg,'Trouser thigh',[[0,.16,.19],[-.40,.13,.145]],pants);
   const knee=new T.Group();knee.name=side+'-knee';knee.position.y=-.40;leg.add(knee);

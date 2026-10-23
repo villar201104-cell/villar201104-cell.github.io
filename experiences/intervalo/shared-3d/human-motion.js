@@ -1,7 +1,7 @@
 // Shared anatomical arm solver. Targets and elbow poles use world coordinates.
 export function reachHuman(T,p,side,target){
  const upper=p[side+'Arm'],fore=p[side+'Forearm'],hand=p[side+'Hand'];if(!upper||!fore||!hand)return;
- p.group.updateMatrixWorld(true);
+ upper.updateWorldMatrix(true,false);
  const V=(x=0,y=0,z=0)=>new T.Vector3(x,y,z),origin=upper.getWorldPosition(V());
  const l1=Math.abs(fore.position.y),l2=Math.abs(hand.position.y)+.035,dir=target.clone().sub(origin);
  const d=Math.max(.08,Math.min(dir.length(),l1+l2-.018));dir.normalize();
@@ -12,9 +12,9 @@ export function reachHuman(T,p,side,target){
  const a=(l1*l1-l2*l2+d*d)/(2*d),h=Math.sqrt(Math.max(0,l1*l1-a*a));
  const elbow=origin.clone().addScaledVector(dir,a).addScaledVector(bend,h);
  upper.quaternion.setFromUnitVectors(V(0,-1,0),elbow.clone().sub(origin).normalize().applyQuaternion(upper.parent.getWorldQuaternion(new T.Quaternion()).invert()));
- p.group.updateMatrixWorld(true);
+ fore.updateWorldMatrix(true,false);
  fore.quaternion.setFromUnitVectors(V(0,-1,0),origin.clone().addScaledVector(dir,d).sub(elbow).normalize().applyQuaternion(fore.parent.getWorldQuaternion(new T.Quaternion()).invert()));
- hand.quaternion.identity();p.group.updateMatrixWorld(true);
+ hand.userData.setGrip?.(false);hand.quaternion.identity();hand.updateWorldMatrix(true,true);
 }
 
 // Shared distance-driven gait. The planted foot moves backward at body speed;
@@ -23,6 +23,7 @@ export function walkHuman(T,p,distance,speed){
  const blend=T.MathUtils.smoothstep(Math.abs(speed),.005,.08),cycle=.64;
  const bob=(-.035+.006*Math.cos(distance/cycle*Math.PI*4))*blend;
  for(const [i,side]of ['left','right'].entries()){
+  p[side+'Hand'].userData.setGrip?.(false);
   const phase=((distance/cycle+i*.5)%1+1)%1,stance=.60;
   const swing=phase<stance?0:(phase-stance)/(1-stance);
   const z=(phase<stance?.192-.384*phase/stance:-.192+.384*(swing*swing*(3-2*swing)))*blend;
