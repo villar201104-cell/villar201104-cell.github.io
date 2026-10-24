@@ -1129,7 +1129,18 @@ html[data-input-mode="keyboard"] .page { transition:none; }
 .case-sketch-static>img{display:block;width:100%;height:auto!important}
 .visor-moodboard[data-mood-state="waiting"] img{opacity:0;transform:translateY(24px)}
 .visor-moodboard[data-mood-state="waiting"] .visor-mood-circle{opacity:.15}
-</style><link rel="stylesheet" href="/case-studies/crown/public-entry.css"><script src="/case-studies/crown/public-entry.js"></script></head>
+</style><link rel="stylesheet" href="/case-studies/crown/public-entry.css?v=20261023-r15"><script src="/case-studies/crown/public-entry.js"></script><style id="project-alignment-r15">
+/* Shared project reading axis. Media keeps its existing width. */
+#projContent :is(h1,h2,h3)[tabindex="-1"]:focus{outline:none}
+#projContent .cmp-section-hd,#projContent .cmp-section>.visor-intro{margin-inline:calc(var(--opening-gutter) - var(--ph))}
+#projContent .process-header{padding-inline:var(--opening-gutter)!important}
+#projContent :is(.evo-header,.proto-header,.case-prototype-intro),#projContent .case-incline-prototypes>div:has(>h2){margin-inline:calc(var(--opening-gutter) - var(--case-gutter))}
+#projContent .intervalo-3d-block{--scene-gutter:var(--ph)}
+#projContent .intervalo-3d-block>:is(.scene-kicker,h2,p){margin-left:calc(var(--opening-gutter) - var(--scene-gutter));margin-right:calc(var(--opening-gutter) - var(--scene-gutter))}
+@media(max-width:800px){#projContent .intervalo-3d-block{--scene-gutter:20px}}
+
+@media(max-width:700px){#projContent .case-open-prototypes .case-prototype-intro{margin-inline:calc(var(--opening-gutter) - 24px)}}
+</style></head>
 <body>
 <script>document.addEventListener('DOMContentLoaded',function(){ window.dispatchEvent(new CustomEvent('intro-done')); });</script>
 
