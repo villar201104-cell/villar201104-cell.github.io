@@ -3,7 +3,7 @@ import {reachHuman,walkHuman} from './human-motion.js';
 // Compatibility adapter only: Crown's -Z/front and root/body API use the exact
 // same mesh factory, proportions and joints as Intervalo's +Z/group API.
 export function createCrownHuman(T,{vestColor='#FAA61A'}={}){
- const human=createHuman(T,{vestColor,headwear:'helmet',gloves:true});
+ const human=createHuman(T,{vestColor,headwear:'helmet',gloves:false});
  const root=new T.Group(),body=new T.Group();root.name='Operator / shared portfolio human';root.add(body);body.add(human.group);human.group.rotation.y=Math.PI;
  const sides=['right','left'],arms=sides.map(s=>human[s+'Arm']),hands=sides.map(s=>human[s+'Hand']);
  const legs=sides.map(s=>({hip:human[s+'Leg'],knee:human[s+'Knee'],foot:human[s+'Foot']}));

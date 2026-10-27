@@ -1,3 +1,4 @@
+import {refineTyres} from './vehicle-geometry.js';
 /**
  * Shared imported hatchback adapter. No Three import, loader, brand or human asset.
  * Load ./models/car-hatchback.glb with the host GLTFLoader, then call:
@@ -62,6 +63,12 @@ function refineInterior(T,model){
   panel(.27,.135,.10,x,1.19,.005);for(const y of [.70,.80,.90])panel(.29,.006,.008,x,y,.095,cloth);
  }
  panel(1.30,.12,.50,0,.66,-1.12);panel(1.30,.48,.13,0,.96,-1.37);panel(1.12,.32,.014,0,.96,-1.292,insert);
+ // Continuous footwell pans close the cabin below the seated occupants.
+ for(const x of [-.40,.40]){
+  panel(.53,.035,.95,x,.19,.67,cloth).name='Closed front footwell';
+  panel(.53,.31,.035,x,.35,1.13,cloth).name='Footwell firewall';
+  panel(.05,.10,.025,x-.08,.26,1.09,metal).name='Pedal';
+ }
  const tray=panel(.27,.045,.42,.045,.55,.30);tray.name='Console tray supporting delivered products';
  for(const x of [-.09,.18])panel(.012,.055,.42,x,.575,.30);for(const z of [.09,.51])panel(.27,.055,.012,.045,.575,z);
  return {seats,geometry:interior.geometry,materials:[cloth,insert,metal]};
@@ -73,6 +80,7 @@ export function createImportedCar(T,template,createPerson){
  if(typeof createPerson!=='function')throw new TypeError('A createPerson(THREE, {driver:true}) callback is required');
  const model=source.clone(true);model.name='shared-hatchback-model';
  const wheels=WHEELS.map(name=>{const node=model.getObjectByName(name);if(!node)throw new Error('Missing hatchback pivot: '+name);return node;});
+ refineTyres(T,wheels);
  const staticGroup=model.getObjectByName('body-static'),steeringWheel=model.getObjectByName('steering-wheel');
  if(!staticGroup||!steeringWheel)throw new Error('Hatchback static/steering groups are missing');
  const paints=new Map();
@@ -90,7 +98,7 @@ export function createImportedCar(T,template,createPerson){
   driver=createPerson(T,{driver:true});
   for(const key of ['group','head','leftArm','rightArm','leftForearm','rightForearm','leftHand','rightHand','leftLeg','rightLeg','leftKnee','rightKnee'])if(!driver?.[key]?.isObject3D)throw new Error('Driver rig missing '+key);
   driver.group.position.set(-.4,.60,.25);
-  for(const side of ['left','right']){driver[side+'Leg'].rotation.x=-Math.PI/2;driver[side+'Knee'].rotation.x=Math.PI/2;}
+  for(const side of ['left','right']){driver[side+'Leg'].rotation.x=-Math.PI/2;driver[side+'Knee'].rotation.x=.80;driver[side+'Foot'].rotation.x=Math.PI/2-.80;}
   aimDriverArm(T,driver,'left',[-.14,.435,.392]);aimDriverArm(T,driver,'right',[.14,.435,.392]);
  }catch(error){for(const m of paints.values())m.dispose();throw error;}
  driver.group.userData.dynamic=true;

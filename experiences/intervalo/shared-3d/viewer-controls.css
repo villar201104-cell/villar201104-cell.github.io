@@ -1,0 +1,32 @@
+/* Two compact rows: playback, then current scene and on-demand controls. */
+.timeline-meta,.camera-description,.scene-heading .hint{display:none}
+.timeline,.timeline-row{gap:6px;min-height:48px;padding:0 6px;border:0}
+.timeline-panel{padding:0;border:0}
+.timeline #speed,.timeline-row #speed{min-width:52px;min-height:44px;font-size:11px;padding:8px}
+.timeline #fullscreen,.timeline-row #fullscreen{font-size:11px;white-space:nowrap;padding:8px}
+.timeline input{accent-color:#FAA61A}
+.viewer-controls{position:relative;display:flex;align-items:center;gap:12px;padding:0 10px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);min-height:42px;font-size:11px}
+.active-scene{margin-right:auto;font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.control-menu{position:static}
+.control-menu>summary{display:flex;gap:8px;align-items:center;cursor:pointer;list-style:none;min-height:40px;padding:0 10px}
+.control-menu>summary::-webkit-details-marker{display:none}
+.control-menu>summary::after{content:'⌄';font-size:13px}
+.control-menu[open]>summary{text-decoration:underline;text-underline-offset:7px;text-decoration-color:var(--viewer-accent,#FAA61A);text-decoration-thickness:2px}
+.control-menu>.toolbar,.control-menu>.chapters,.control-menu>.service-selector{position:absolute;bottom:calc(100% + 4px);right:8px;z-index:25;width:min(340px,calc(100% - 16px));max-height:65vh;overflow:auto;padding:12px;background:var(--paper);border:1px solid var(--line);box-shadow:0 6px 22px #00000012;display:flex;flex-direction:column;align-items:stretch;gap:0}
+.control-menu .toolbar>.option-group{display:flex;width:100%;flex-wrap:wrap;align-items:center;justify-content:flex-start;margin:0;padding:8px 0;border:0}
+.control-menu .toolbar>.option-group+.option-group{border-top:1px solid var(--line)}
+.option-group-label{width:100%;padding:3px 9px;font-size:10px;letter-spacing:.04em;color:var(--muted)}
+.control-menu .toolbar button,.control-menu .chapters button,.control-menu .service-selector button{min-height:42px;font-size:12px;text-align:left;padding:10px}
+.control-menu .chapters>span,.control-menu .service-selector>.control-label{display:none}
+.control-menu:not([open])>.toolbar,.control-menu:not([open])>.chapters,.control-menu:not([open])>.service-selector{display:none}
+.embedded .scene,.embedded .scene-wrap{height:calc(100vh - 96px);min-height:360px}
+#experience:fullscreen,.experience:fullscreen,#experience.expanded{padding:0 12px}
+#experience:fullscreen .scene,.experience:fullscreen .scene-wrap,#experience.expanded .scene{flex:1;min-height:0;margin:0 -12px}
+.control-menu summary:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+@media(max-width:550px){.timeline,.timeline-row{gap:1px;padding:0 2px}.timeline output,.timeline-row output{min-width:72px;font-size:10px}.timeline #fullscreen,.timeline-row #fullscreen{font-size:10px;padding:6px}.timeline #speed,.timeline-row #speed{min-width:44px;padding:6px}.viewer-controls{gap:3px;padding:0 6px}.active-scene{max-width:50%;font-size:10px}.control-menu>summary{padding:0 7px}.embedded .scene,.embedded .scene-wrap{height:calc(100vh - 96px);min-height:320px}}
+.timeline input{appearance:none;background:transparent;height:44px}
+.timeline input::-webkit-slider-runnable-track{height:3px;background:#c9ccc6}
+.timeline input::-webkit-slider-thumb{appearance:none;width:12px;height:12px;background:#FAA61A;border-radius:50%;margin-top:-4.5px}
+.timeline input::-moz-range-track{height:3px;background:#c9ccc6}
+.timeline input::-moz-range-thumb{width:12px;height:12px;border:0;background:#FAA61A;border-radius:50%}
+footer a[data-copy=study]{display:none}

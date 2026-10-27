@@ -4,13 +4,13 @@ import {PALETTE} from './palette.js';
 function mat(T,color,extra={}){return new T.MeshStandardMaterial({color,...WORLD_STYLE.materials.product,flatShading:false,...extra});}
 function mesh(T,p,g,m,x=0,y=0,z=0){const o=new T.Mesh(g,m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;p.add(o);return o;}
 function box(T,p,w,h,d,m,x=0,y=0,z=0){return mesh(T,p,new T.BoxGeometry(w,h,d),m,x,y,z);}
-function cyl(T,p,rt,rb,h,m,x=0,y=0,z=0,n=12){return mesh(T,p,new T.CylinderGeometry(rt,rb,h,n),m,x,y,z);}
-function orb(T,p,rx,ry,rz,m,x=0,y=0,z=0,n=12){const o=mesh(T,p,new T.SphereGeometry(1,n,6),m,x,y,z);o.scale.set(rx,ry,rz);return o;}
+function cyl(T,p,rt,rb,h,m,x=0,y=0,z=0,n=24){return mesh(T,p,new T.CylinderGeometry(rt,rb,h,n),m,x,y,z);}
+function orb(T,p,rx,ry,rz,m,x=0,y=0,z=0,n=24){const o=mesh(T,p,new T.SphereGeometry(1,n,16),m,x,y,z);o.scale.set(rx,ry,rz);return o;}
 function rod(T,p,a,b,r,m,r2=r){const av=new T.Vector3(...a),bv=new T.Vector3(...b),v=bv.clone().sub(av);const o=cyl(T,p,r2,r,v.length(),m);o.position.copy(av).add(bv).multiplyScalar(.5);o.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),v.normalize());return o;}
 function roundShape(T,w,h,r){const s=new T.Shape(),x=-w/2,y=-h/2;r=Math.min(r,w/2,h/2);s.moveTo(x+r,y);s.lineTo(x+w-r,y);s.quadraticCurveTo(x+w,y,x+w,y+r);s.lineTo(x+w,y+h-r);s.quadraticCurveTo(x+w,y+h,x+w-r,y+h);s.lineTo(x+r,y+h);s.quadraticCurveTo(x,y+h,x,y+h-r);s.lineTo(x,y+r);s.quadraticCurveTo(x,y,x+r,y);return s;}
 function rounded(T,p,w,h,d,r,m,x=0,y=0,z=0){const b=Math.min(.025,r*.4,w/8,h/8,d/4);const g=new T.ExtrudeGeometry(roundShape(T,w-2*b,h-2*b,Math.max(.001,r-b)),{depth:d-2*b,bevelEnabled:true,bevelSize:b,bevelThickness:b,bevelSegments:2,steps:1,curveSegments:3});g.translate(0,0,-d/2+b);return mesh(T,p,g,m,x,y,z);}
 function slab(T,p,w,d,h,r,m,x=0,y=0,z=0){const o=rounded(T,p,w,d,h,r,m,x,y,z);o.rotation.x=-Math.PI/2;return o;}
-function tube(T,p,points,r,m){const curve=new T.CatmullRomCurve3(points.map(v=>new T.Vector3(...v)));return mesh(T,p,new T.TubeGeometry(curve,28,r,6,false),m);}
+function tube(T,p,points,r,m){const curve=new T.CatmullRomCurve3(points.map(v=>new T.Vector3(...v)));return mesh(T,p,new T.TubeGeometry(curve,28,r,10,false),m);}
 function quad(T,p,points,m){const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(points.flat(),3));g.setIndex([0,1,2,0,2,3]);g.computeVertexNormals();const o=mesh(T,p,g,m);if(m.transparent)o.castShadow=false;return o;}
 function createTextPlane(T,text,options={}){
  const {width=1,height=.3,color='#ffffff',background=null,font='700 76px Arial',resolution=512}=options;
@@ -24,13 +24,15 @@ function createTextPlane(T,text,options={}){
  const out=new T.Mesh(geometry,new T.MeshBasicMaterial({map:texture,transparent:true,depthWrite:false,side:T.DoubleSide,toneMapped:false}));out.userData.generatedTexture=texture;return out;
 }
 function label(T,p,text,w,h,x,y,z,options={}){const o=createTextPlane(T,text,{width:w,height:h,...options});o.position.set(x,y,z);p.add(o);return o;}
-// Crown operator's eight-corner section construction, adapted to Intervalo +Z and rig.
+// Rounded rectangular garment sections retain the rig and actual garment envelope.
 function shell(T,parent,name,sections,material,round=false){
- const rings=[...sections].sort((a,b)=>a[0]-b[0]),vertices=[],indices=[];
- const sides=round?12:8;
- for(const [y,w,d,zc=0]of rings){const c=Math.min(w,d)*.2;const ring=round?Array.from({length:sides},(_,i)=>[Math.cos(i/sides*Math.PI*2)*w/2,Math.sin(i/sides*Math.PI*2)*d/2]):[[-w/2+c,-d/2],[w/2-c,-d/2],[w/2,-d/2+c],[w/2,d/2-c],[w/2-c,d/2],[-w/2+c,d/2],[-w/2,d/2-c],[-w/2,-d/2+c]];for(const [x,z]of ring)vertices.push(x,y,z+zc);}
+ const original=[...sections].sort((a,b)=>a[0]-b[0]),rings=[],vertices=[],indices=[],sides=32;
+ for(let k=0;k<original.length-1;k++)for(let n=0;n<4;n++){const t=n/4,e=t*t*(3-2*t),a=original[k],b=original[k+1];rings.push([a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*e,a[2]+(b[2]-a[2])*e,(a[3]||0)+((b[3]||0)-(a[3]||0))*e]);}rings.push(original.at(-1));
+ const power=round?1:2/4.5;
+ for(const [y,w,d,zc=0]of rings)for(let i=0;i<sides;i++){const a=i/sides*Math.PI*2,c=Math.cos(a),s=Math.sin(a);vertices.push(Math.sign(c)*Math.pow(Math.abs(c),power)*w/2,y,Math.sign(s)*Math.pow(Math.abs(s),power)*d/2+zc);}
  for(let j=0;j<rings.length-1;j++)for(let i=0;i<sides;i++){const a=j*sides+i,b=j*sides+(i+1)%sides;indices.push(a,b+sides,b,a,a+sides,b+sides);}
- for(let i=1;i<sides-1;i++){indices.push(0,i,i+1);const a=(rings.length-1)*sides;indices.push(a,a+i+1,a+i);}
+ // Duplicate cap vertices so cap normals cannot soften the clothing profile.
+ for(const top of [false,true]){const start=vertices.length/3,k=top?(rings.length-1)*sides:0;for(let i=0;i<sides;i++)vertices.push(...vertices.slice((k+i)*3,(k+i)*3+3));for(let i=1;i<sides-1;i++)indices.push(start, start+(top?i+1:i), start+(top?i:i+1));}
  const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(vertices,3));geometry.setIndex(indices);geometry.computeVertexNormals();const out=mesh(T,parent,geometry,material);out.name=name;return out;
 }
 const handGeometryCache=new WeakMap();
@@ -51,7 +53,7 @@ export function createHuman(T,{driver=false,shirtColor=PALETTE.cloth,pantsColor=
  const group=new T.Group();group.name=driver?'seated-driver':'station-attendant';
  const fabric=color=>mat(T,color,{...WORLD_STYLE.materials.worker,flatShading:false});
  const shirt=fabric(shirtColor),pants=fabric(pantsColor),skin=fabric(skinColor),vest=fabric(vestColor),handMaterial=gloves?fabric(PALETTE.glove):skin,shoe=fabric(PALETTE.shoe),sole=fabric(PALETTE.sole),seam=fabric(PALETTE.charcoal),reflect=fabric(PALETTE.reflective),metal=fabric(PALETTE.steel);
- const ball=(p,rx,ry,rz,m,x=0,y=0,z=0)=>{const o=mesh(T,p,new T.SphereGeometry(1,10,6),m,x,y,z);o.scale.set(rx,ry,rz);return o;};
+ const ball=(p,rx,ry,rz,m,x=0,y=0,z=0)=>{const o=mesh(T,p,new T.SphereGeometry(1,32,20),m,x,y,z);o.scale.set(rx,ry,rz);return o;};
  const upperArmLength=.29,forearmLength=.29,hipHeight=.88,shoulderHeight=1.40;
  shell(T,group,'Tailored shirt torso',[[.89,.29,.22],[1.14,.35,.235],[1.37,.43,.22],[1.43,.29,.19]],shirt);
  shell(T,group,'Work trousers waist',[[.82,.29,.23],[.94,.31,.235]],pants);
@@ -77,14 +79,14 @@ export function createHuman(T,{driver=false,shirtColor=PALETTE.cloth,pantsColor=
  const hair=fabric(0x3d342e),hairCap=mesh(T,head,new T.SphereGeometry(1,10,6,0,Math.PI*2,0,Math.PI/2),hair,0,.080,0);hairCap.scale.set(.095,.055,.098);
  if(!driver&&headwear==='cap'){
   // A fabric baseball cap, retaining Crown's 1.75 m overall scale without its helmet.
-  const cap=mesh(T,head,new T.SphereGeometry(1,14,7,0,Math.PI*2,0,Math.PI/2),pants,0,.080,0);cap.name='Fabric cap';cap.scale.set(.111,.105,.113);
+  const cap=mesh(T,head,new T.SphereGeometry(1,32,16,0,Math.PI*2,0,Math.PI/2),pants,0,.080,0);cap.name='Fabric cap';cap.scale.set(.111,.105,.113);
   const band=cyl(T,head,.111,.111,.020,pants,0,.081,0,14);band.scale.z=1.02;
   slab(T,head,.215,.145,.012,.055,pants,0,.079,.105);
   if(badge)badge(head,{width:.083,height:.032,x:0,y:.116,z:.109});
  }
  if(!driver&&headwear==='helmet'){
   const helmet=fabric(PALETTE.ivory);
-  const cap=mesh(T,head,new T.SphereGeometry(1,14,7,0,Math.PI*2,0,Math.PI/2),helmet,0,.080,0);cap.name='Safety helmet';cap.scale.set(.121,.105,.127);
+  const cap=mesh(T,head,new T.SphereGeometry(1,32,16,0,Math.PI*2,0,Math.PI/2),helmet,0,.080,0);cap.name='Safety helmet';cap.scale.set(.121,.105,.127);
   const brim=cyl(T,head,1,1,.016,helmet,0,.080,.017,16);brim.name='Safety helmet brim';brim.scale.set(.136,1,.153);
   box(T,head,.024,.012,.12,helmet,0,.182,.008);
   const glass=fabric(PALETTE.glass);box(T,head,.165,.037,.023,glass,0,.025,.085);

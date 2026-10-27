@@ -1,0 +1,5 @@
+// Profiled tyre with recessed longitudinal grooves. Original wheel pivots, rims,
+// sidewall width and ground radius remain authoritative; geometry shared by cars.
+const tyreCache=new WeakMap();
+export function refineTyres(T,wheels){let geometry=tyreCache.get(T);if(!geometry){const profile=[[.235,-.099],[.24,-.111],[.265,-.1187],[.296,-.116],[.318,-.100],[.329,-.081],[.332,-.068],[.33357,-.061],[.327,-.058],[.327,-.052],[.33357,-.049],[.33357,-.020],[.327,-.017],[.327,-.011],[.33357,-.008],[.33357,.008],[.327,.011],[.327,.017],[.33357,.020],[.33357,.049],[.327,.052],[.327,.058],[.33357,.061],[.332,.068],[.329,.081],[.318,.100],[.296,.116],[.265,.1187],[.24,.111],[.235,.099],[.235,-.099]];geometry=new T.LatheGeometry(profile.map(p=>new T.Vector2(...p)),64);geometry.rotateZ(Math.PI/2);geometry.computeBoundingBox();tyreCache.set(T,geometry);}
+for(const wheel of wheels){const rubber=wheel.children.find(c=>c.material?.name==='rubber.001');if(rubber){rubber.geometry=geometry;rubber.userData.geometryRevision='r26-profiled-tyre';}}return geometry;}

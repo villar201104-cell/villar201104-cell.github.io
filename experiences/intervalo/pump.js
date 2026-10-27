@@ -35,14 +35,16 @@ export function installSourcePumps(T,station){
   bracket('seat-lip',[.15,.035,.012],[0,-.073,.045]);
   cradle.userData={replacesSourceNodes:[46812,46815],dockLocal:[.2,1.12,.5],parentYaw:Math.PI/2,animatedNozzleOwnedBy:'simulation.js'};
   const header=new T.Mesh(new T.BoxGeometry(1.06,.31,.89),new T.MeshStandardMaterial({color:0x0064be,roughness:.42,metalness:.2}));header.name='integrated-dispenser-header';header.position.y=2.07;header.castShadow=header.receiveShadow=true;housing.add(header);
+  // Close the source display aperture with a full-depth instrument enclosure.
+  const consoleBody=new T.Mesh(new T.BoxGeometry(.86,.52,.50),new T.MeshStandardMaterial({color:0xe3e6e2,roughness:.58,metalness:.12}));consoleBody.name='Integrated meter enclosure';consoleBody.position.y=1.64;consoleBody.castShadow=consoleBody.receiveShadow=true;housing.add(consoleBody);
   for(const side of [-1,1]){
-   const face=new T.Group();face.rotation.y=side<0?Math.PI:0;face.position.z=side*.437;housing.add(face);
-   const panel=new T.Mesh(new T.BoxGeometry(.82,.40,.012),new T.MeshStandardMaterial({color:0x1c2629,roughness:.3}));panel.position.y=1.62;face.add(panel);
+   const face=new T.Group();face.rotation.y=side<0?Math.PI:0;face.position.z=side*.257;housing.add(face);
+   const panel=new T.Mesh(new T.BoxGeometry(.82,.48,.016),new T.MeshStandardMaterial({color:0x1c2629,roughness:.3}));panel.position.y=1.62;face.add(panel);
    for(const [label,y,w,h]of [['IMPORTE $',1.75,.34,.055],['00000.00',1.64,.57,.13],['LITROS',1.53,.25,.05],['000.00',1.45,.40,.09]]){const t=createTextPlane(T,label,{width:w,height:h,color:'#d7e5c7',font:'500 60px monospace',resolution:512});t.position.set(0,y,.012);face.add(t);}
-   const badge=new T.Mesh(new T.BoxGeometry(1.02,.30,.055),new T.MeshStandardMaterial({color:0x0064be,roughness:.4,metalness:.25}));badge.name='attached-brand-header';badge.position.set(0,2.07,-.025);face.add(badge);
-   brandMark(T,face,'ypf-white',{width:.53,height:.134,y:2.07,z:.016});
-   const num=createTextPlane(T,String(pump.index+1).padStart(2,'0'),{width:.16,height:.15,color:'#ffffff',resolution:256});num.position.set(.40,2.07,.016);face.add(num);
-   brandMark(T,face,'infinia',{width:.45,height:.09,y:.46,z:.013});
+   const badge=new T.Mesh(new T.BoxGeometry(1.02,.30,.055),new T.MeshStandardMaterial({color:0x0064be,roughness:.4,metalness:.25}));badge.name='attached-brand-header';badge.position.set(0,2.07,.155);face.add(badge);
+   brandMark(T,face,'ypf-white',{width:.53,height:.134,y:2.07,z:.196});
+   const num=createTextPlane(T,String(pump.index+1).padStart(2,'0'),{width:.16,height:.15,color:'#ffffff',resolution:256});num.position.set(.40,2.07,.196);face.add(num);
+   brandMark(T,face,'infinia',{width:.45,height:.09,y:.46,z:-.017});
   }
   pump.group.userData.sourcePump={sourceNode:46830,height:2.239844,baseY:0,front:'+Z',longAxis:'X before parent yaw'};
  }

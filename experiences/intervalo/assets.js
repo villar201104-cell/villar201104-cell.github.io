@@ -1,3 +1,4 @@
+import {coffeeCup} from './service-geometry.js';
 import {createHuman,PALETTE,createMaterial} from './shared-3d/index.js';
 import {brandMark} from './brand.js';
 /**
@@ -61,7 +62,7 @@ export function createProduct(T,type='bottle'){
   const shape=new T.Shape();shape.moveTo(-.05,-.08);shape.lineTo(.045,-.08);shape.lineTo(.095,.12);shape.quadraticCurveTo(.09,.20,.01,.20);shape.lineTo(-.065,.13);shape.closePath();
   const hole=new T.Path();hole.moveTo(-.017,-.035);hole.lineTo(.022,-.035);hole.lineTo(.056,.105);hole.lineTo(.005,.13);hole.closePath();shape.holes.push(hole);
   const geo=new T.ExtrudeGeometry(shape,{depth:.045,bevelEnabled:true,bevelThickness:.005,bevelSize:.005,bevelSegments:2});geo.translate(0,0,-.0225);mesh(T,group,geo,dark);rounded(T,group,.13,.13,.06,.025,blue,-.005,.16,0);tube(T,group,[[.02,.21,0],[.04,.29,0],[.16,.34,0],[.24,.34,0]],.018,silver);cyl(T,group,.025,.027,.08,dark,0,-.10,0);
- }else if(type==='cup'){cyl(T,group,.045,.033,.12,white,0,.035,0);cyl(T,group,.049,.048,.014,dark,0,.102,0);cyl(T,group,.041,.037,.038,mat(T,C.wood),0,.035,0);}
+ }else if(type==='cup'){return coffeeCup(T);}
  else if(type==='snack'){rounded(T,group,.10,.17,.042,.018,mat(T,0xdab56f),0,.03,0);for(const y of [-.057,.117])box(T,group,.107,.014,.045,blue,0,y,0);brandMark(T,group,'full',{width:.046,height:.035,x:0,y:.045,z:.023});}
  else if(type==='bag'){rounded(T,group,.23,.29,.13,.018,mat(T,0xc3a581),0,.04,0);for(const z of [-.045,.045])tube(T,group,[[-.065,.18,z],[-.06,.28,z],[.06,.28,z],[.065,.18,z]],.008,dark);brandMark(T,group,'full',{width:.09,height:.069,x:0,y:.04,z:.067});}
  else if(type==='oil'){rounded(T,group,.15,.23,.085,.022,blue,0,.06,0);cyl(T,group,.025,.025,.04,dark,.035,.19,0);label(T,group,'ELAION',.11,.037,0,.065,.044);}
