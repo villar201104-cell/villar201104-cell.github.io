@@ -1,3 +1,4 @@
+import {createFinish,createGroundFinish} from './intervalo-materials.js';
 import {createMaterial,createSurfaceMaterial,createAsphaltMaterial,createTree,createBench,seededRandom,PALETTE} from './shared-3d/index.js';
 import {addUrbanBackground,CITY_GRID} from './urban-background.js';
 import {installSourcePumps} from './pump.js';
@@ -12,8 +13,8 @@ export function upgradeEnvironment(T,station,{models={}}={}){
  const g=station.group,keep=new Set([...station.islands.map(x=>x.group),...station.pumps.map(x=>x.group)]);
  for(const child of [...g.children])if(!keep.has(child))g.remove(child);
  const materialCache=new Map();
- const M=(c,o={})=>{const key=String(c)+JSON.stringify(o);if(!materialCache.has(key))materialCache.set(key,createMaterial(T,c,o));return materialCache.get(key);},white=M(0xd9d9d6,{roughness:.82,metalness:0}),blue=M(0x0063c2,{roughness:.75,metalness:0}),dark=M(0x454447,{roughness:.82,metalness:0}),steel=M(PALETTE.steel),wood=M(0x9b8668,{roughness:.9,metalness:0});
- const concrete=createSurfaceMaterial(T,{color:0xb8bdb8,grain:.0025,repeat:20}),asphalt=createAsphaltMaterial(T),pavement=createSurfaceMaterial(T,{color:0xb7b9b2,grain:.002,repeat:16}),plaster=createSurfaceMaterial(T,{color:0xd1d0c9,grain:.002,repeat:8}),mark=M(0xe5e3d6,{roughness:.95,metalness:0});
+ const M=(c,o={})=>{const key=String(c)+JSON.stringify(o);if(!materialCache.has(key))materialCache.set(key,createMaterial(T,c,o));return materialCache.get(key);},white=createFinish(T,'paint',0xd9d9d6),blue=createFinish(T,'paint',0x0063c2),dark=createFinish(T,'plastic',0x454447),steel=createFinish(T,'metal',PALETTE.steel),wood=M(0x9b8668,{roughness:.9,metalness:0});
+ const concrete=createGroundFinish(T,{color:0xb8bdb8}),asphalt=createAsphaltMaterial(T),pavement=createGroundFinish(T,{color:0xb7b9b2}),plaster=createSurfaceMaterial(T,{color:0xd1d0c9,grain:.002,repeat:8}),mark=M(0xe5e3d6,{roughness:.95,metalness:0});
  const box=(p,w,h,d,m,x=0,y=0,z=0)=>{const geo=new T.BoxGeometry(w,h,d);if(m.userData.tileSize){const uv=geo.attributes.uv,n=geo.attributes.normal,pos=geo.attributes.position,tile=m.userData.tileSize;for(let i=0;i<uv.count;i++){const nx=Math.abs(n.getX(i)),ny=Math.abs(n.getY(i));uv.setXY(i,(nx>.5?pos.getZ(i):pos.getX(i))/tile,(ny>.5?pos.getZ(i):pos.getY(i))/tile);}}const o=new T.Mesh(geo,m);o.position.set(x,y,z);o.castShadow=o.receiveShadow=true;p.add(o);return o;};
  const cyl=(p,rt,rb,h,m,x=0,y=0,z=0,n=12)=>{const o=new T.Mesh(new T.CylinderGeometry(rt,rb,h,n),m);o.position.set(x,y,z);o.castShadow=o.receiveShadow=true;p.add(o);return o;};
  const line=(p,a,b,r,m)=>{const av=new T.Vector3(...a),bv=new T.Vector3(...b),v=bv.clone().sub(av),o=cyl(p,r,r,v.length(),m);o.position.copy(av).add(bv).multiplyScalar(.5);o.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),v.normalize());return o;};

@@ -1,3 +1,4 @@
+import {finishVehicle} from './intervalo-materials.js';
 import {frameShot} from './shared-3d/camera-framing.js';
 import {serviceNozzle,serviceSqueegee,reinforceCanopy} from './service-geometry.js';
 import {serviceCamera} from './service-camera.js';
@@ -132,7 +133,7 @@ function createLaneRoutes(l){
 }
 function initLane(i,models={}){
  const x=[-10,0,10][i],person=createPerson(THREE),totem=createTotem(x);
- let car;try{car=models.car?createImportedCar(THREE,models.car,createPerson):createCar(THREE,colors[i]);}catch(error){console.warn('Using fallback car',error);car=createCar(THREE,colors[i]);}car.setColor?.(colors[i]);
+ let car;try{car=models.car?createImportedCar(THREE,models.car,createPerson):createCar(THREE,colors[i]);}catch(error){console.warn('Using fallback car',error);car=createCar(THREE,colors[i]);}car.setColor?.(colors[i]);finishVehicle(THREE,car.group);
  person.group.userData.islandX=x;
  batchStatic(car.group,[car.driver.group,...car.wheels]);for(const wheel of car.wheels)batchStatic(wheel);
  scene.add(car.group,person.group);car.group.position.set(x+3,0,-18);
