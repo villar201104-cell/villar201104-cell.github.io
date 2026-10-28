@@ -15,7 +15,7 @@ export function upgradeEnvironment(T,station,{models={}}={}){
  const materialCache=new Map();
  const M=(c,o={})=>{const key=String(c)+JSON.stringify(o);if(!materialCache.has(key))materialCache.set(key,createMaterial(T,c,o));return materialCache.get(key);},white=createFinish(T,'paint',0xd9d9d6),blue=createFinish(T,'paint',0x0063c2),dark=createFinish(T,'plastic',0x454447),steel=createFinish(T,'metal',PALETTE.steel),wood=M(0x9b8668,{roughness:.9,metalness:0});
  const concrete=createGroundFinish(T,{color:0xb8bdb8}),asphalt=createAsphaltMaterial(T),pavement=createGroundFinish(T,{color:0xb7b9b2}),plaster=createSurfaceMaterial(T,{color:0xd1d0c9,grain:.002,repeat:8}),mark=M(0xe5e3d6,{roughness:.95,metalness:0});
- const box=(p,w,h,d,m,x=0,y=0,z=0)=>{const geo=new T.BoxGeometry(w,h,d);if(m.userData.tileSize){const uv=geo.attributes.uv,n=geo.attributes.normal,pos=geo.attributes.position,tile=m.userData.tileSize;for(let i=0;i<uv.count;i++){const nx=Math.abs(n.getX(i)),ny=Math.abs(n.getY(i));uv.setXY(i,(nx>.5?pos.getZ(i):pos.getX(i))/tile,(ny>.5?pos.getZ(i):pos.getY(i))/tile);}}const o=new T.Mesh(geo,m);o.position.set(x,y,z);o.castShadow=o.receiveShadow=true;p.add(o);return o;};
+ const box=(p,w,h,d,m,x=0,y=0,z=0)=>{const geo=new T.BoxGeometry(w,h,d);if(m.userData.tileSize){const uv=geo.attributes.uv,n=geo.attributes.normal,pos=geo.attributes.position,tile=m.userData.tileSize;for(let i=0;i<uv.count;i++){const nx=Math.abs(n.getX(i)),ny=Math.abs(n.getY(i));uv.setXY(i,(nx>.5?pos.getZ(i):pos.getX(i))/tile,(ny>.5?pos.getZ(i):pos.getY(i))/tile);}}const o=new T.Mesh(geo,m);o.position.set(x,y,z);o.castShadow=!(h<.2&&y<.2);o.receiveShadow=true;p.add(o);return o;};
  const cyl=(p,rt,rb,h,m,x=0,y=0,z=0,n=12)=>{const o=new T.Mesh(new T.CylinderGeometry(rt,rb,h,n),m);o.position.set(x,y,z);o.castShadow=o.receiveShadow=true;p.add(o);return o;};
  const line=(p,a,b,r,m)=>{const av=new T.Vector3(...a),bv=new T.Vector3(...b),v=bv.clone().sub(av),o=cyl(p,r,r,v.length(),m);o.position.copy(av).add(bv).multiplyScalar(.5);o.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),v.normalize());return o;};
  const text=(p,t,w,h,x,y,z,color='#ffffff',rotation=0)=>{const o=createTextPlane(T,t,{width:w,height:h,color,font:`600 ${Math.round(Math.max(64,2048*h/w)*.82)}px Arial`,resolution:2048});o.position.set(x,y,z);o.rotation.y=rotation;p.add(o);return o;};
@@ -47,7 +47,8 @@ export function upgradeEnvironment(T,station,{models={}}={}){
  // Expansion joints stay on actual curb segments, not across vehicle exits.
  for(const [x,w]of [[-17,6],[-10,1.4],[0,1.4],[10,1.4],[17.7,4.6]])for(let dx=-w/2+.5;dx<w/2;dx+=1.2)box(g,.009,.002,1.72,joint,x+dx,.151,13.125);
  box(g,1,.13,9,concrete,-20.5,-.065,-9.5); // Continuous side-entry apron.
- box(g,10,.13,8,concrete,18,-.065,-19);
+ // Meet the forecourt at z=-16 instead of overlapping its coplanar surface.
+ box(g,10,.13,7,concrete,18,-.065,-19.5);
  for(let i=0;i<7;i++){box(road,.58,.008,3.6,mark,-21.7+i*1.3,.006,20.8);box(road,3.6,.008,.58,mark,-27.8,.006,12.3+i*1.3);}
  for(const x of [-14,4,18]){box(g,1,.012,.28,dark,x,.004,10.7);for(let i=0;i<13;i++)box(g,.025,.013,.26,steel,x-.45+i*.075,.011,10.7);}
  // White deep fascia and blue cap from the Flores reference; light ribbed soffit.
