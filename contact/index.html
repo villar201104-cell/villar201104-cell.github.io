@@ -1140,7 +1140,7 @@ html[data-input-mode="keyboard"] .page { transition:none; }
 @media(max-width:800px){#projContent .intervalo-3d-block{--scene-gutter:20px}}
 
 @media(max-width:700px){#projContent .case-open-prototypes .case-prototype-intro{margin-inline:calc(var(--opening-gutter) - 24px)}}
-</style><link rel="stylesheet" href="/case-studies/intent/intent-layout.css?v=20261029"><script src="/case-studies/intent/intent-layout.js?v=20261029"></script></head>
+</style><link rel="stylesheet" href="/case-studies/intent/intent-layout.css?v=20261029-r2"><script src="/case-studies/intent/intent-layout.js?v=20261029-r2"></script></head>
 <body>
 <script>document.addEventListener('DOMContentLoaded',function(){ window.dispatchEvent(new CustomEvent('intro-done')); });</script>
 
@@ -6610,7 +6610,7 @@ function refineCaseStudy(root, lang) {
       }
     }
   }
-  if(id==='intent')window.refineIntentLayout(root,L);
+
   root.querySelectorAll('.case-reveal').forEach(el=>el.dataset.caseMotion='true');
 }
 
@@ -6649,6 +6649,7 @@ function enhanceProject(root,lang){
   const phases=root.querySelectorAll('.process-header');if(phases[0])phases[0].id='intent-research';if(phases[1])phases[1].id='intent-design';
   root.querySelector('.cmp-how-grid')?.closest('.cmp-section')?.setAttribute('id','intent-mechanism');
   root.querySelector('.cmp-parts-grid')?.closest('.cmp-section')?.setAttribute('id','intent-parts');
+  window.refineIntentLayout(root,(en,es,de)=>tri(en,es,de,lang));
  }
  root.querySelectorAll('.project-outline a').forEach(a=>a.addEventListener('click',e=>{const target=root.querySelector(a.hash);if(!target)return;e.preventDefault();target.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'});target.tabIndex=-1;target.focus({preventScroll:true});}));
 }
