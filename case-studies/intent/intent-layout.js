@@ -1,6 +1,6 @@
 /* Intent: visible evidence, concise copy and a consistent presentation grid. */
 window.refineIntentLayout=function(root,L){
- const all=s=>[...root.querySelectorAll(s)], one=s=>root.querySelector(s);
+ const all=(s,scope=root)=>[...scope.querySelectorAll(s)], one=(s,scope=root)=>scope.querySelector(s);
  const text=(el,value)=>{if(el){el.removeAttribute('data-copy');el.textContent=value;}};
  const set=(sel,rows)=>all(sel).forEach((el,i)=>rows[i]&&text(el,L(...rows[i])));
  const mark=(sel,cls)=>one(sel)?.closest('.cmp-section')?.classList.add(cls);
@@ -85,6 +85,68 @@ window.refineIntentLayout=function(root,L){
  const graph=one('.journey-frame svg');if(graph){graph.setAttribute('viewBox','0 0 1100 170');graph.querySelectorAll('[y]').forEach(e=>{e.setAttribute('y',Number(e.getAttribute('y'))*.57);if(e.tagName==='text')e.setAttribute('font-size','15');});graph.querySelectorAll('line').forEach(e=>['y1','y2'].forEach(k=>e.setAttribute(k,Number(e.getAttribute(k))*.57)));graph.querySelectorAll('circle').forEach(e=>e.setAttribute('cy',Number(e.getAttribute('cy'))*.57));const line=graph.querySelector('polyline');line.setAttribute('points',line.getAttribute('points').split(' ').map(p=>{const [x,y]=p.split(',');return x+','+(Number(y)*.57);}).join(' '));}
  const heading=one('.cmp-findings-title');if(heading){heading.setAttribute('role','heading');heading.setAttribute('aria-level','2');}
 
+
+ // Observation symbols describe the event; timestamps remain the reading anchor.
+ const eventPaths=[
+ '<path d="M4 13v-3a8 8 0 0 1 16 0v3M4 12h3v8H4zM17 12h3v8h-3zM9 9l6 6m0-6-6 6"/>',
+ '<path d="M5 15h14l-2-3V9a5 5 0 0 0-10 0v3zM10 19h4M18 3l3 3m-2-5 3 3"/>',
+ '<path d="M3 20 12 4l9 16zM12 10v4m0 3h.01"/>',
+ '<path d="M3 19h5V9h7m-4-4 4 4-4 4M16 19h5M3 4v8"/>',
+ '<path d="M3 10h4l5-5v14l-5-5H3zM15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/>',
+ '<path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12M3 3l18 18"/><circle cx="12" cy="12" r="2"/>',
+ '<path d="M3 12h4l5-4v10l-5-4H3zM16 10l2 2 4-5"/>',
+ '<path d="M3 4h18v12H9l-6 4zM7 9h10m-10 3h6"/>',
+ '<circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/>',
+ '<path d="M5 4h14v17H5zM9 4V2h6v2M8 9l1 1 2-2m2 1h3M8 15l1 1 2-2m2 1h3"/>'
+ ];
+ all('.cmp-log-entry').forEach((e,i)=>{const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('aria-hidden','true');svg.classList.add('intent-event-icon');svg.innerHTML=eventPaths[i]||eventPaths[9];e.prepend(svg);});
+ // Supporting numbers share one evidence band, keeping all five finding rows aligned.
+ const findingSection=one('.intent-findings');if(findingSection){const band=document.createElement('div');band.className='intent-evidence-band';all('.cmp-hallazgo-stat').forEach(e=>band.append(e));findingSection.append(band);}
+ // Independent viewports over the supplied moodboard; source artwork stays unchanged.
+ const moodImage=one('img[src="/images/render-moodboard.webp"]');if(moodImage){
+  const board=document.createElement('div');board.className='intent-moodboard';
+  const groups=[
+   [['Morphology','Morfología','Morphologie'],[[129,0,342,253],[129,267,340,428],[129,713,342,278]]],
+   [['Materials','Materiales','Materialien'],[[577,0,392,583],[577,620,392,371]]],
+   [['Kinetics','Cinética','Kinetik'],[[1076,0,410,381],[1076,452,410,539]]],
+   [['Anatomy','Anatomía','Anatomie'],[[1610,0,310,559],[1610,573,310,418]]]
+  ];
+  groups.forEach(([label,rects])=>{const col=document.createElement('div');col.className='intent-mood-column';const h=document.createElement('h3');h.textContent=L(...label);col.append(h);rects.forEach((rect,i)=>{const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox',rect.join(' '));svg.setAttribute('preserveAspectRatio','xMidYMid slice');svg.setAttribute('role','img');svg.setAttribute('aria-label',L(...label)+' · '+(i+1));svg.style.setProperty('--crop-weight',rect[3]/rect[2]);const im=document.createElementNS('http://www.w3.org/2000/svg','image');im.setAttribute('href',moodImage.getAttribute('src'));im.setAttribute('width','1920');im.setAttribute('height','991');svg.append(im);col.append(svg);});board.append(col);});
+  moodImage.replaceWith(board);
+ }
+
+
+ // A compact contextual header leaves the observation sequence the full reading width.
+ const field=one('.case-field-study'),meta=one('.cmp-obs-log-meta'),fieldImage=one('.case-field-image'),log=one('.cmp-log-wrap');
+ if(field&&meta&&fieldImage&&log){meta.prepend(fieldImage);const wrapper=log.parentElement;wrapper.replaceWith(log);}
+ // Dimension names already express the criteria; repeated subtitles dilute the scale.
+ all('.cmp-dim-sub').forEach(e=>e.remove());
+ set('.cmp-km-item>div>div:last-child>div:last-child',[
+ ['Moving the thumb away from the grip adds a step before reacting.','Separar el pulgar del agarre añade un paso antes de reaccionar.','Den Daumen vom Griff zu lösen verzögert die Reaktion.'],
+ ['One tone cannot distinguish a polite request from an urgent warning.','Un solo tono no distingue un pedido de paso de una alerta urgente.','Ein Ton unterscheidet keine höfliche Bitte von einer dringenden Warnung.'],
+ ['Less traffic noise makes the bell and the listener’s response clearer.','Menos ruido facilita oír el timbre y reconocer la respuesta.','Weniger Verkehrslärm macht Signal und Reaktion deutlicher.'],
+ ['No visible response means no confirmation that the signal was heard.','Sin respuesta visible, no hay confirmación de que se oyó la señal.','Ohne sichtbare Reaktion bleibt unklar, ob das Signal gehört wurde.']
+ ]);
+
+ // Align the qualitative trajectory with the five phase columns; labels already appear below.
+ const trajectory=one('.journey-frame svg');
+ if(trajectory){const title=trajectory.querySelector('title')?.textContent||'Journey';trajectory.setAttribute('viewBox','0 0 1000 80');trajectory.setAttribute('preserveAspectRatio','none');trajectory.innerHTML='<title>'+title+'</title><path d="M100 31 L300 18 L500 65 L700 40 L900 12" fill="none" stroke="#d24a1f" stroke-width="2" vector-effect="non-scaling-stroke"/>'+[[100,31],[300,18],[500,65],[700,40],[900,12]].map(([x,y])=>'<line x1="'+x+'" y1="'+y+'" x2="'+x+'" y2="80" stroke="var(--color-border)" vector-effect="non-scaling-stroke"/><circle cx="'+x+'" cy="'+y+'" r="3.5" fill="#d24a1f"/>').join('');}
+ // Make SVG type readable at the actual rendered size without enlarging the section heading.
+ const network=one('.network-desktop svg');
+ if(network){network.setAttribute('viewBox','0 0 720 500');network.querySelector('circle[fill="none"]')?.remove();network.querySelectorAll('*').forEach(el=>{['y','y1','y2','cy','height'].forEach(a=>{if(el.hasAttribute(a))el.setAttribute(a,String(Number(el.getAttribute(a))*.8));});if(el.tagName.toLowerCase()==='text'){const old=Number(el.getAttribute('font-size'));el.setAttribute('font-size',old>=21?'22':old>=16?'18':'16');}});}
+ const market=one('.intent-typologies');if(market)all('div[style*="font-size:.75rem"]',market).forEach(e=>e.classList.add('intent-annotation'));
+ const material=one('.intent-cmf');if(material)all('span[style*="font-size:"]',material).forEach(e=>e.classList.add(e.style.fontSize==='.65rem'||e.style.fontSize==='0.65rem'?'intent-annotation':'intent-material-summary'));
+ all('.intent-levels [style*="font-size"]').forEach(e=>{const size=e.style.fontSize;if((size.endsWith('rem')&&parseFloat(size)<.875)||(size.endsWith('px')&&parseFloat(size)<14))e.classList.add('intent-annotation');});
+ // Keep proposal copy at reading size by removing repetition.
+ const proposal=one('#intent-mechanism')||one('.intent-operation-steps')?.closest('.cmp-section');
+ if(proposal)text(proposal.querySelector('.cmp-section-hd>p'),L('Foam models checked overall size; 3D prints checked fit. Acoustic performance, signal progression and timed reset still require a functional prototype.','Los modelos de espuma permitieron revisar el tamaño y las impresiones 3D, el encastre. El sonido, la progresión y el retorno temporizado requieren un prototipo funcional.','Schaummodelle prüften die Größe, 3D-Drucke die Passung. Akustik, Signalabstufung und zeitgesteuerte Rückstellung erfordern noch einen Funktionsprototyp.'));
+ set('.case-mechanism-steps>div>div:last-child',[
+ ['Consecutive presses advance a ratchet and cam, increasing the hammer stroke while holding each position.','Las pulsaciones avanzan un trinquete y una leva: aumenta el recorrido del percutor y se mantiene cada posición.','Aufeinanderfolgende Betätigungen bewegen Ratsche und Nocke, vergrößern den Hammerhub und halten jede Position.'],
+ ['A longer stroke is intended to create a stronger impact and louder signal.','Un recorrido mayor busca generar un impacto más fuerte y una señal más intensa.','Ein längerer Hub soll einen stärkeren Schlag und ein lauteres Signal erzeugen.'],
+ ['The third consecutive press reaches the highest proposed level.','La tercera pulsación consecutiva alcanza el nivel máximo propuesto.','Die dritte aufeinanderfolgende Betätigung erreicht die höchste vorgesehene Stufe.'],
+ ['Fits standard 22.2 mm handlebars.','Se adapta a manillares estándar de 22,2 mm.','Für Standardlenker mit 22,2 mm Durchmesser.'],
+ ['A light spring returns the mechanism after a pause. The physical reset interval still needs calibration.','Un resorte suave devuelve el mecanismo tras una pausa. El intervalo de retorno todavía requiere calibración.','Eine leichte Feder stellt den Mechanismus nach einer Pause zurück. Das Rückstellintervall muss noch kalibriert werden.']
+ ]);
  // Index follows the actual section order; no second, competing hierarchy.
  const nav=one('.project-index');if(nav){nav.classList.add('intent-index');const links=document.createElement('div');links.className='intent-index-links';all(':scope > .cmp-section').forEach((s,i)=>{const h=s.querySelector('.cmp-section-title,.cmp-findings-title');if(!h)return;if(!s.id)s.id='intent-section-'+(i+1);const a=document.createElement('a');a.href='#'+s.id;const n=document.createElement('span');n.textContent=String(i+1).padStart(2,'0');a.append(n,document.createTextNode(h.textContent));links.append(a);});const label=document.createElement('p');label.className='project-index-label';label.id='intent-index-label';label.textContent=L('In this project','En este proyecto','In diesem Projekt');nav.replaceChildren(label,links);}
 };

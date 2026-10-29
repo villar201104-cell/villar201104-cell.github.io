@@ -1,0 +1,37 @@
+/* Shared editorial scale. Product imagery and project layouts stay independent. */
+:root{--type-body:1.125rem;--type-compact:1rem;--type-note:.875rem;--type-subtitle:1.375rem;--type-section:clamp(2rem,3.3vw,2.625rem);--type-title:clamp(3rem,2rem + 3vw,5.5rem)}
+#projContent .proj-title{font-size:var(--type-title);line-height:1.06}
+#projContent :is(.proj-tagline){font-size:1.375rem;line-height:1.5}
+#projContent :is(.desc-body p,.origins-stat,.split-body,.split-body p,.evo-desc,.proto-intro,.proto-col-body,.visor-intro,.visor-cmf-materials article>p:last-child,.visor-colour-heading p,.visor-glazing-proposal>p:not(.cmp-section-label),.case-process-stage .proto-item-text>div){font-size:var(--type-body)!important;line-height:1.6!important}
+#projContent :is(.process-title,.cmp-section-title,.evo-title,.proto-title,.case-prototype-intro h2){font-size:var(--type-section)!important;line-height:1.15!important;letter-spacing:-.035em}
+#projContent :is(.split-h,.proto-col-h,.evo-phase-name,.case-process-stage h3,.case-model-stage h3){font-size:clamp(1.375rem,1.125rem + .8vw,1.875rem)!important;line-height:1.25!important}
+#projContent :is(.spec-value,.project-index a,.project-outline a,.case-detail-link,.visor-caption,.visor-colour-palette p,.visor-controls .visor-play){font-size:var(--type-compact)!important;line-height:1.5}
+#projContent :is(.proj-eyebrow,.spec-label,.desc-label,.project-index-label,.project-index-number,.process-kicker,.split-tag,.evo-phase-sub,.evo-subtitle,.cmp-section-label,.case-technical-notes dt,.case-model-stage h3 span,.case-process-stage h3 span,.visor-colour-count,.visor-colour-finish,.visor-count,.visor-cmf-note,.visor-cmf-sources,.visor-colour-palette span:not(.visor-colour-chip),.visor-workflow-link p,.visor-glazing-proposal>a,.demo-note,.cmf-image-note,.pnav-lbl,.hint-click-label,.scroll-hint,.panel-play-label,.panels-bar span){font-size:var(--type-note)!important;line-height:1.5!important;letter-spacing:.04em}
+#projContent :is(figcaption,.footer p){font-size:var(--type-note)!important;line-height:1.5}
+#projContent .project-index{max-width:none}
+#projContent .project-index-links{column-gap:28px}
+#projContent :is(.split-right,.proto-col,.case-process-copy,.case-prototype-caption,.visor-controls){min-width:0}
+#projContent .proj-specs{row-gap:20px}
+#projContent .split-body{max-width:58ch}
+#projContent .case-additional .case-prototype-intro>div{font-size:var(--type-body)!important;line-height:1.6!important}
+#projContent .visor-cmf-materials h3{font-size:var(--type-subtitle)}
+#projContent .visor-controls{flex-wrap:wrap}
+#projContent .visor-caption{flex:1 1 240px}
+#projContent .visor-colour-caption{min-width:0}
+#projContent .visor-colour-navigation{flex-wrap:wrap}
+/* Site chrome: descriptive copy is not metadata. */
+:is(.hero-desc,.about-bio p){font-size:var(--type-body)!important;line-height:1.6!important}
+:is(.cv-item-title,.cv-honors .cv-item-title,.card-desc,.extra-card-desc,.cml-title,.extra-cml-title){font-size:var(--type-compact)!important;line-height:1.5}
+:is(.cv-item-sub,.cv-heading,.cv-block .cv-heading,.c-lbl,.cml-cat,.extra-cml-cat,.sketch-item figcaption,.sketches-footer,.footer p,.rights,.work-section-label,.card-hover-label,.about-resume-link){font-size:var(--type-note)!important;line-height:1.5}
+@media(max-width:700px){
+ #projContent .proj-tagline{font-size:1.25rem}
+ #projContent .proj-specs{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #projContent .split-body{max-width:none}
+ #projContent .project-index-links{grid-template-columns:1fr}
+}
+
+/* Anchor targets retain the navigation clearance. Section headings use Crown's 42px ceiling. */
+#projContent :is(.process-header[id],.case-additional[id],.evo-section[id],.proto-section[id],.split-section[id],.visor-section[id],.scene-section[id]){scroll-margin-top:80px}
+#projContent :is(.scene-kicker){font-size:var(--type-note)!important;line-height:1.5}
+
+#page-about .cv-item>p:not(.cv-item-sub){font-size:var(--type-compact)!important;line-height:1.5}
