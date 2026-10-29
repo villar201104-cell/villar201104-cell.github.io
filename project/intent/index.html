@@ -1140,7 +1140,7 @@ html[data-input-mode="keyboard"] .page { transition:none; }
 @media(max-width:800px){#projContent .intervalo-3d-block{--scene-gutter:20px}}
 
 @media(max-width:700px){#projContent .case-open-prototypes .case-prototype-intro{margin-inline:calc(var(--opening-gutter) - 24px)}}
-</style></head>
+</style><link rel="stylesheet" href="/case-studies/intent/intent-layout.css?v=20261029"><script src="/case-studies/intent/intent-layout.js?v=20261029"></script></head>
 <body>
 <script>document.addEventListener('DOMContentLoaded',function(){ window.dispatchEvent(new CustomEvent('intro-done')); });</script>
 
@@ -6606,10 +6606,11 @@ function refineCaseStudy(root, lang) {
       if(exploded){
         const old=exploded.closest('.cmp-section');const layout=make('div','case-parts-layout');const figure=make('figure','case-parts-image');
         figure.append(exploded);parts.before(layout);layout.append(figure,parts);
-        if(old!==section)old.remove();reveal(figure);
+        if(old!==section)old.remove();
       }
     }
   }
+  if(id==='intent')window.refineIntentLayout(root,L);
   root.querySelectorAll('.case-reveal').forEach(el=>el.dataset.caseMotion='true');
 }
 
