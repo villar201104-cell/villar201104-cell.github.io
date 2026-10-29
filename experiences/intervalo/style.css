@@ -27,3 +27,5 @@ button.selected,button[aria-pressed="true"]:not(#play),.chapters button.selected
 #dialogues::before,#captions::before,.service-selector .selected::after{content:none!important}
 
 .view-tools .selected::after,.appearance .selected::after,.island-selector .selected::after{content:none!important}
+
+#loading .nv-loading-mark{width:72px;height:72px;animation:nv-appear .2s .18s both}@keyframes nv-appear{from{opacity:0}to{opacity:1}}

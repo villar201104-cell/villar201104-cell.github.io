@@ -394,7 +394,7 @@ if(now-lastUiTime>=100){updatePlayback();lastUiTime=now;}
  if(view==='follow'&&!cameraMove){const shot=followView();cameraMotion.update(camera.position,controls.target,{p:shot.pos.toArray(),t:shot.target.toArray()},delta,false,running?speed:1);}
  controls.enableDamping=view==='manual';const cameraChanged=controls.update();
  crewDialogue?.update(lanes[selected],camera,getLanguage(),ready&&running&&pageVisible&&!document.hidden&&$('#dialogues').getAttribute('aria-pressed')==='true');
- if(sceneChanged||cameraChanged||needsRender){updateCityCutaway();updateShadows(now,running,needsRender);renderer.render(scene,camera);canvas.dataset.drawCalls=renderer.info.render.calls;canvas.dataset.triangles=renderer.info.render.triangles;needsRender=false;}
+ if(sceneChanged||cameraChanged||needsRender){updateCityCutaway();updateShadows(now,running,needsRender);renderer.render(scene,camera);if(ready&&!loading.hidden){loading.hidden=true;document.body.dataset.ready='true';}canvas.dataset.drawCalls=renderer.info.render.calls;canvas.dataset.triangles=renderer.info.render.triangles;needsRender=false;}
 }
 async function init(){
  try{
@@ -420,7 +420,7 @@ async function init(){
 
   for(const lane of lanes)animateLane(lane,0);changeCamera(params.get('view')||'follow',true);
   updatePlayback();
-  ready=true;loading.hidden=true;document.body.dataset.ready='true';requestAnimationFrame(frame);
+  ready=true;requestAnimationFrame(frame);
  }catch(error){console.error(error);loading.innerHTML='<strong>'+t('error')+'</strong><span>'+t('errorDetail')+'</span><button class="error-action" id="retry">'+t('retry')+'</button>';$('#retry').onclick=()=>location.reload();}
 }
 initLanguage();init();
