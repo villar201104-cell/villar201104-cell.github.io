@@ -1,5 +1,5 @@
 import {finishVehicle} from './intervalo-materials.js';
-import {installIntervaloFinishes} from './industrial-finish-adapter.js';
+// Simple authored finishes; no added industrial texture layer.
 import {frameShot} from './shared-3d/camera-framing.js';
 import {serviceNozzle,serviceSqueegee,reinforceCanopy} from './service-geometry.js';
 import {serviceCamera} from './service-camera.js';
@@ -32,9 +32,9 @@ const V=(x=0,y=0,z=0)=>new THREE.Vector3(x,y,z),ease=t=>t*t*(3-2*t),lerp=THREE.M
 const canvas=$('#scene'),wrap=$('#scene-wrap'),loading=$('#loading');
 const dialoguePreview=true;
 const crewDialogue=dialoguePreview?createCrewDialogue(wrap,THREE):null;
-let updateShadows,renderer,scene,camera,controls,station,modelTemplate,modelMetadata={},lanes=[],running=true,speed=1,selected=SERVICE_LANE,view='follow',time=0,lastTime=0,roofHidden=false,ready=false,cameraMove=null;
+let updateShadows,renderer,scene,camera,controls,station,modelTemplate,modelMetadata={},lanes=[],running=true,speed=2,selected=SERVICE_LANE,view='follow',time=0,lastTime=0,roofHidden=false,ready=false,cameraMove=null;
 const cameraMotion=createCameraMotion(THREE);
-let activeService=null,industrialFinishes=null;
+let activeService=null;
 let needsRender=true;
 let lastSceneTime=-1,ambientLife,displayMode,appearance='focus',scrubbing=false,resumeAfterScrub=false;
 let parentVisible=new URLSearchParams(location.search).get('embed')!=='1';let pageVisible=parentVisible;const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -54,7 +54,11 @@ function resetPose(p,seated=false){
  if(seated){for(const side of ['left','right']){p[side+'Arm'].rotation.x=-.75;p[side+'Forearm'].rotation.x=-.85;}}
  if(!seated){for(const side of ['left','right'])for(const part of ['Leg','Knee','Foot'])p[side+part]?.rotation.set(0,0,0);}
 }
-function crouch(p,drop){const angle=Math.acos(1-drop/.79);p.group.position.y-=drop;for(const side of ['left','right']){p[side+'Leg'].rotation.x=-angle;p[side+'Knee'].rotation.x=2*angle;p[side+'Foot'].rotation.x=-angle;}}
+function crouch(p,drop){
+ // Solve from the actual thigh/shin lengths, retaining a level planted foot.
+ p.group.position.y-=drop;
+ for(const side of ['left','right']){const hip=p[side+'Leg'],knee=p[side+'Knee'],foot=p[side+'Foot'];const a=Math.abs(knee.position.y),b=Math.abs(foot.position.y),d=Math.max(.01,Math.min(a+b-.00001,hip.position.y-drop-.15));const theta=Math.acos(THREE.MathUtils.clamp((a*a+d*d-b*b)/(2*a*d),-1,1)),k=Math.PI-Math.acos(THREE.MathUtils.clamp((a*a+b*b-d*d)/(2*a*b),-1,1));hip.rotation.set(-theta,0,0);knee.rotation.set(k,0,0);foot.rotation.set(theta-k,0,0);}
+}
 function face(p,target){const pos=p.group.position;p.group.rotation.y=Math.atan2(target.x-pos.x,target.z-pos.z);}
 function walk(p,points,t){
  // Clear the raised kerb before crossing it; do not interpolate feet through it.
@@ -335,7 +339,8 @@ function restart(){activeService=null;time=0;lastTime=0;lastSceneTime=-1;selecte
 function updatePlayback(){
  $('#story').hidden=!ready||!running||!pageVisible||document.hidden||$('#captions').getAttribute('aria-pressed')!=='true';
  const value=Math.min(time,LOOP_DURATION);$('#timeline').value=value;$('#timeline').style.setProperty('--progress',value/LOOP_DURATION*100+'%');
- $('#timecode').value=formatTime(value)+' / '+formatTime(LOOP_DURATION);
+ const playbackSeconds=t=>(Math.min(t,28)/2+Math.max(0,t-28))/speed;
+ $('#timecode').value=formatTime(playbackSeconds(value))+' / '+formatTime(playbackSeconds(LOOP_DURATION));
  $('#timeline').setAttribute('aria-valuetext',formatTime(value)+' / '+formatTime(LOOP_DURATION));
  const lane=lanes[selected];
  const text=caption(getLanguage(),lane?.currentStep||'idle',lane?.visit.order||'coffee');
@@ -349,7 +354,8 @@ function bindUI(){
  bindActivation(dialogueButton,()=>{const on=dialogueButton.getAttribute('aria-pressed')!=='true';dialogueButton.setAttribute('aria-pressed',String(on));dialogueButton.classList.toggle('selected',on);});
  $('#captions').onclick=()=>{const on=$('#captions').getAttribute('aria-pressed')!=='true';$('#captions').setAttribute('aria-pressed',String(on));updatePlayback();};
  bindActivation($('#play'),()=>setRunning(!running));bindActivation($('#restart'),restart);
- $('#speed').onchange=e=>speed=Number(e.target.value);
+ $('#speed').value=String(speed);
+ $('#speed').onchange=e=>{speed=Number(e.target.value);updatePlayback();};
  $('#timeline').max=LOOP_DURATION;
  $('#timeline').addEventListener('pointerdown',()=>{scrubbing=true;resumeAfterScrub=running;setRunning(false);});
  $('#timeline').addEventListener('input',e=>{activeService=null;time=Number(e.target.value);updatePlayback();});
@@ -401,7 +407,7 @@ async function init(){
  try{
   renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.NeutralToneMapping;renderer.toneMappingExposure=1.05;
   updateShadows=shadowCadence(renderer);scene=new THREE.Scene();
-  camera=new THREE.PerspectiveCamera(40,1,.1,3000);controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.dampingFactor=.075;controls.minDistance=3;controls.maxDistance=65;controls.enablePan=false;controls.maxPolarAngle=Math.PI*.48;controls.target.set(0,1,0);
+  camera=new THREE.PerspectiveCamera(40,1,.15,1800);controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.dampingFactor=.075;controls.minDistance=3;controls.maxDistance=65;controls.enablePan=false;controls.maxPolarAngle=Math.PI*.48;controls.target.set(0,1,0);
   // Same neutral colour response and daylight palette as Crown; a low-intensity
   // reflection environment keeps the imported metal/glass legible under the roof.
   const pmrem=new THREE.PMREMGenerator(renderer),room=new RoomEnvironment();scene.environment=pmrem.fromScene(room,.04).texture;room.dispose();pmrem.dispose();scene.environmentIntensity=.24;
@@ -412,7 +418,7 @@ async function init(){
   station=upgradeEnvironment(THREE,createStation(THREE),{models:sharedModels});for(const p of station.pumps){p.group.rotation.y=Math.PI/2;p.dock.position.set(.2,1.12,.5);}reinforceCanopy(THREE,station);batchStatic(station.group,[station.roof,...station.cityBuildings]);batchStatic(station.roof);for(const building of station.cityBuildings)batchStatic(building);scene.add(station.group);station.cityOccluders=station.cityBuildings.map(object=>({object,bounds:new THREE.Box3().setFromObject(object)}));
   for(let i=0;i<3;i++)initLane(i,sharedModels);
   ambientLife=createAmbientLife(THREE,{models:sharedModels,createPerson,batchStaticMeshes:batchStatic,loopDuration:LOOP_DURATION});scene.add(ambientLife.group);
-  industrialFinishes=await installIntervaloFinishes(THREE,{renderer,roots:[scene]});
+
   const highlights=lanes.flatMap(l=>[l.totem.group,l.person.group,l.car.driver.group,l.paymentLight,l.card,l.receipt,l.squeegee,l.nozzle,l.waste,...Object.values(l.products)]);
   displayMode=createDisplayMode(THREE,scene,highlights);displayMode.set(appearance);
 
@@ -443,4 +449,4 @@ initLanguage();init();
 
 
 
-if(new URLSearchParams(location.search).has('review'))window.__intervaloReview={get scene(){return scene},get camera(){return camera},get renderer(){return renderer},get station(){return station},get lanes(){return lanes},get controls(){return controls},get finishes(){return industrialFinishes?.report},get state(){return {time,running,speed,view}},seek(t){time=t;running=false;for(const l of lanes)animateLane(l,0);ambientLife?.update(time);needsRender=true;changeCamera('follow',true);},play(value=true,rate=1){speed=rate;setRunning(value)},view:changeCamera,shot:followView,pose(p,t){view='manual';cameraMove=null;camera.position.fromArray(p);controls.target.fromArray(t);controls.update();needsRender=true;},clay(){scene.traverse(o=>{if(o.isMesh)o.material=new THREE.MeshStandardMaterial({color:0xb8b9b6,roughness:.8});});needsRender=true;}};
+if(new URLSearchParams(location.search).has('review'))window.__intervaloReview={get scene(){return scene},get camera(){return camera},get renderer(){return renderer},get station(){return station},get lanes(){return lanes},get controls(){return controls},get finishes(){return {quality:'simple',loadedTextureBytes:0}},get state(){return {time,running,speed,view}},seek(t){time=t;running=false;for(const l of lanes)animateLane(l,0);ambientLife?.update(time);needsRender=true;changeCamera('follow',true);},play(value=true,rate=1){speed=rate;setRunning(value)},view:changeCamera,shot:followView,pose(p,t){view='manual';cameraMove=null;camera.position.fromArray(p);controls.target.fromArray(t);controls.update();needsRender=true;},clay(){scene.traverse(o=>{if(o.isMesh)o.material=new THREE.MeshStandardMaterial({color:0xb8b9b6,roughness:.8});});needsRender=true;}};

@@ -16,7 +16,16 @@ export function createCameraMotion(T){
   goal.set(...shot.t);const s=new T.Spherical().setFromVector3(new T.Vector3(...shot.p).sub(goal));
   desired.set(Math.log(Math.max(.2,s.radius)),s.phi,orbit.z+Math.atan2(Math.sin(s.theta-orbit.z),Math.cos(s.theta-orbit.z)));
   const elapsed=Math.min(dt,.1)*Math.max(.25,rate),steps=Math.max(1,Math.ceil(elapsed/.025));
-  for(let i=0;i<steps;i++){spring(aim,targetVelocity,goal,elapsed/steps,shot.response||.85);spring(orbit,orbitVelocity,desired,elapsed/steps,shot.response||.85);}
+  for(let i=0;i<steps;i++){
+   const h=elapsed/steps,realStep=h/Math.max(.25,rate),phi=orbit.y,theta=orbit.z;
+   spring(aim,targetVelocity,goal,h,shot.response||.85);spring(orbit,orbitVelocity,desired,h,shot.response||.85);
+   // Limit physical pan/tilt speed, independent of the playback multiplier.
+   // Fast playback may move the subject faster; it must not whip the camera.
+   for(const [axis,before,limit] of [['y',phi,.65],['z',theta,1.05]]){
+    const step=orbit[axis]-before,bounded=Math.max(-limit*realStep,Math.min(limit*realStep,step));
+    if(bounded!==step){orbit[axis]=before+bounded;orbitVelocity[axis]=bounded/h;}
+   }
+  }
   target.copy(aim);position.copy(aim).add(new T.Vector3().setFromSpherical(new T.Spherical(Math.exp(orbit.x),orbit.y,orbit.z)));
  }};
 }
