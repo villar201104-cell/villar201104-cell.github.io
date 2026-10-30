@@ -1,7 +1,7 @@
-// Intervalo-only finish library. No network textures, geometry changes or shared overrides.
+// Intervalo base finishes. R44 optimized finishes are installed once after batching.
 // Values are plausible dry, clean finishes in the existing metre/daylight scene,
 // not measurements of the original manufactured products.
-const cache=new WeakMap();
+
 const presets={
  paint:{roughness:.36,metalness:0},
  metal:{roughness:.29,metalness:1},

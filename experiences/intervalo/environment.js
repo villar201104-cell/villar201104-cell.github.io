@@ -60,7 +60,7 @@ export function upgradeEnvironment(T,station,{models={}}={}){
  for(let x=-17;x<18;x+=1.15)box(roof,.018,.01,21.8,joint,x,5.325,-2.6);
  box(roof,4.5,.88,.045,blue,-12,5.92,8.43);brandMark(T,roof,'ypf-white',{width:3.25,height:.822,x:-12,y:5.92,z:8.46});
  box(roof,.035,.88,4.5,blue,-17.515,5.92,-2.8);brandMark(T,roof,'ypf-white',{width:3.25,height:.822,x:-17.54,y:5.92,z:-2.8,rotation:-Math.PI/2});
- const columns=new T.Group();g.add(columns);for(const x of [-16.5,16.5])for(const z of [-10,6]){cyl(columns,.20,.24,5.34,white,x,2.67,z,20);cyl(columns,.28,.29,.20,steel,x,.10,z,20);}
+ const columns=new T.Group();g.add(columns);for(const x of [-16.5,16.5])for(const z of [-10,6]){cyl(columns,.20,.24,4.9775,white,x,2.48875,z,20);cyl(columns,.28,.29,.20,steel,x,.10,z,20);}
  const led=M(0xf3f4eb,{emissive:0xf3f4eb,emissiveIntensity:.65,roughness:.4}),canopyFixtures=[],canopyFixturePositions=[-10,0,10].map(x=>new T.Vector3(x,5.28,-2.6));for(const x of [-10,0,10])for(const z of [-8,-1,5]){const fixture=box(roof,2.5,.025,.12,led,x,5.315,z);fixture.name='canopy-emissive-fixture';canopyFixtures.push(fixture);}
  // Reuse the eleven original pump parts, preserving source silhouettes and service anchors.
  installSourcePumps(T,station);

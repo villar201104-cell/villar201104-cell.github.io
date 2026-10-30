@@ -95,6 +95,8 @@ export function createCar(T,color=0x789aab){
  const group=new T.Group();group.name='C-segment hollow-cabin hatchback';
  const staticGroup=new T.Group();staticGroup.name='car-static-panels-and-interior';staticGroup.userData.staticBatchRoot=true;group.add(staticGroup);
  const paint=mat(T,color,{roughness:.65,metalness:.12}),trim=mat(T,0x30383c,{roughness:.83,metalness:0}),rubber=mat(T,0x20272b,{roughness:.93,metalness:0});
+ // Explicit fallback families survive batching; paint keeps setColor ownership.
+ for(const [material,family]of [[paint,'paint'],[trim,'polymer'],[rubber,'rubber']])material.userData.finishFamily=family;
  const silver=mat(T,0x8e9b9e,{roughness:.60,metalness:.25}),cloth=mat(T,0x4a5052,{roughness:.90,metalness:0}),insert=mat(T,0x656c6c,{roughness:.94,metalness:0}),seam=mat(T,0x92998f,{roughness:.86,metalness:0});
  const glass=mat(T,0xa9c0c1,{roughness:.32,metalness:0,transparent:true,opacity:.14,depthWrite:false,flatShading:false,side:T.DoubleSide});
  const led=mat(T,0xf1efdf,{roughness:.35,emissive:0xe5e4cf,emissiveIntensity:.35}),red=mat(T,0xa7473d,{roughness:.48,emissive:0x6e201b,emissiveIntensity:.20});

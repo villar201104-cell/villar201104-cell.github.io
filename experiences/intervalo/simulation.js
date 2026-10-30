@@ -1,4 +1,5 @@
 import {finishVehicle} from './intervalo-materials.js';
+import {installIntervaloFinishes} from './industrial-finish-adapter.js';
 import {frameShot} from './shared-3d/camera-framing.js';
 import {serviceNozzle,serviceSqueegee,reinforceCanopy} from './service-geometry.js';
 import {serviceCamera} from './service-camera.js';
@@ -33,7 +34,7 @@ const dialoguePreview=true;
 const crewDialogue=dialoguePreview?createCrewDialogue(wrap,THREE):null;
 let updateShadows,renderer,scene,camera,controls,station,modelTemplate,modelMetadata={},lanes=[],running=true,speed=1,selected=SERVICE_LANE,view='follow',time=0,lastTime=0,roofHidden=false,ready=false,cameraMove=null;
 const cameraMotion=createCameraMotion(THREE);
-let activeService=null;
+let activeService=null,industrialFinishes=null;
 let needsRender=true;
 let lastSceneTime=-1,ambientLife,displayMode,appearance='focus',scrubbing=false,resumeAfterScrub=false;
 let parentVisible=new URLSearchParams(location.search).get('embed')!=='1';let pageVisible=parentVisible;const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -411,6 +412,7 @@ async function init(){
   station=upgradeEnvironment(THREE,createStation(THREE),{models:sharedModels});for(const p of station.pumps){p.group.rotation.y=Math.PI/2;p.dock.position.set(.2,1.12,.5);}reinforceCanopy(THREE,station);batchStatic(station.group,[station.roof,...station.cityBuildings]);batchStatic(station.roof);for(const building of station.cityBuildings)batchStatic(building);scene.add(station.group);station.cityOccluders=station.cityBuildings.map(object=>({object,bounds:new THREE.Box3().setFromObject(object)}));
   for(let i=0;i<3;i++)initLane(i,sharedModels);
   ambientLife=createAmbientLife(THREE,{models:sharedModels,createPerson,batchStaticMeshes:batchStatic,loopDuration:LOOP_DURATION});scene.add(ambientLife.group);
+  industrialFinishes=await installIntervaloFinishes(THREE,{renderer,roots:[scene]});
   const highlights=lanes.flatMap(l=>[l.totem.group,l.person.group,l.car.driver.group,l.paymentLight,l.card,l.receipt,l.squeegee,l.nozzle,l.waste,...Object.values(l.products)]);
   displayMode=createDisplayMode(THREE,scene,highlights);displayMode.set(appearance);
 
@@ -441,4 +443,4 @@ initLanguage();init();
 
 
 
-if(new URLSearchParams(location.search).has('review'))window.__intervaloReview={get scene(){return scene},get camera(){return camera},get renderer(){return renderer},get station(){return station},get lanes(){return lanes},get controls(){return controls},get state(){return {time,running,speed,view}},seek(t){time=t;running=false;for(const l of lanes)animateLane(l,0);ambientLife?.update(time);needsRender=true;changeCamera('follow',true);},play(value=true,rate=1){speed=rate;setRunning(value)},view:changeCamera,shot:followView,pose(p,t){view='manual';cameraMove=null;camera.position.fromArray(p);controls.target.fromArray(t);controls.update();needsRender=true;},clay(){scene.traverse(o=>{if(o.isMesh)o.material=new THREE.MeshStandardMaterial({color:0xb8b9b6,roughness:.8});});needsRender=true;}};
+if(new URLSearchParams(location.search).has('review'))window.__intervaloReview={get scene(){return scene},get camera(){return camera},get renderer(){return renderer},get station(){return station},get lanes(){return lanes},get controls(){return controls},get finishes(){return industrialFinishes?.report},get state(){return {time,running,speed,view}},seek(t){time=t;running=false;for(const l of lanes)animateLane(l,0);ambientLife?.update(time);needsRender=true;changeCamera('follow',true);},play(value=true,rate=1){speed=rate;setRunning(value)},view:changeCamera,shot:followView,pose(p,t){view='manual';cameraMove=null;camera.position.fromArray(p);controls.target.fromArray(t);controls.update();needsRender=true;},clay(){scene.traverse(o=>{if(o.isMesh)o.material=new THREE.MeshStandardMaterial({color:0xb8b9b6,roughness:.8});});needsRender=true;}};
