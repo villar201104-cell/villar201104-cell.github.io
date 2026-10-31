@@ -69,9 +69,8 @@ window.refineIntentLayout=function(root,L){
  const phase=one('#intent-design'),statement=one('.cmp-statement');
  if(phase&&statement){phase.className='cmp-section intent-question';phase.innerHTML='<div class="cmp-section-hd"><div class="cmp-section-label">'+L('Design phase · Problem statement','Fase de diseño · Pregunta problema','Entwurfsphase · Problemstellung')+'</div><h2 class="cmp-section-title">'+L('How can a bicycle bell distinguish <em>courtesy from urgency?</em>','¿Cómo puede un timbre distinguir <em>cortesía de urgencia?</em>','Wie kann eine Fahrradklingel <em>Höflichkeit von Dringlichkeit unterscheiden?</em>')+'</h2></div><p>'+L('A mechanical response that lets the rider graduate the alert with one familiar gesture.','Una respuesta mecánica para graduar la alerta con un gesto familiar.','Eine mechanische Antwort, die das Signal mit einer vertrauten Bewegung abstufbar macht.')+'</p>';statement.remove();}
  const steps=one('.case-mechanism-steps');if(steps)steps.parentElement.classList.add('intent-operation-steps');
- const exploded=one('.case-parts-image');if(exploded){const partsSection=exploded.closest('.cmp-section');const stage=document.createElement('section');stage.className='cmp-section intent-exploded';stage.innerHTML='<div class="cmp-section-hd"><div class="cmp-section-label">'+L('Design and components','Diseño y componentes','Design und Komponenten')+'</div><h2 class="cmp-section-title">'+L('Exploded view','Vista explotada','Explosionsansicht')+'</h2></div>';partsSection.before(stage);stage.append(exploded);exploded.querySelector('img').classList.add('cmp-render-full');}
  all('.case-parts-image,.case-parts-image img').forEach(e=>{e.classList.remove('case-reveal','fu');delete e.dataset.caseMotion;e.removeAttribute('data-portfolio-motion');});
- const closing=one('.cmp-closing');if(closing)closing.innerHTML=L('One bell.<br><em>Three levels of urgency.</em>','Un timbre.<br><em>Tres niveles de urgencia.</em>','Eine Klingel.<br><em>Drei Dringlichkeitsstufen.</em>');
+ const closing=one('.cmp-closing');if(closing)closing.innerHTML=L('A clearer signal.<br><em>From courtesy to urgency.</em>','Una señal más clara.<br><em>De la cortesía a la urgencia.</em>','Ein klareres Signal.<br><em>Von Höflichkeit bis Dringlichkeit.</em>');
 
  // Material exploration and the touchpoint each have their own readable frame.
  const finish=one('.intent-plastisol');if(finish){const section=document.createElement('section');section.className='cmp-section intent-finish';section.innerHTML='<div class="cmp-section-hd"><div class="cmp-section-label">'+L('Colour and finish','Color y acabado','Farbe und Oberfläche')+'</div><h2 class="cmp-section-title">'+L('A clear point of interaction','Un punto de interacción claro','Ein klarer Interaktionspunkt')+'</h2></div>';finish.closest('.cmp-section').after(section);section.append(finish);}
@@ -81,8 +80,6 @@ window.refineIntentLayout=function(root,L){
  const central=one('.cmp-central-finding');if(central){const copy=central.lastElementChild;text(copy,L('Prioritise graduated signals and actuation close to the grip.','Priorizar señales graduadas y accionamiento junto al agarre.','Abgestufte Signale und eine Betätigung nahe am Griff priorisieren.'));}
 
 
- const levels=one('.intent-levels'),levelImage=levels?.querySelector('.cmp-render-full');if(levelImage){const visual=document.createElement('section');visual.className='cmp-section intent-signal-render';visual.innerHTML='<div class="cmp-section-hd"><div class="cmp-section-label">'+L('Design · Signal progression','Diseño · Progresión de señal','Design · Signalabstufung')+'</div><h2 class="cmp-section-title">'+L('Three levels, one gesture','Tres niveles, un gesto','Drei Stufen, eine Bewegung')+'</h2></div>';levels.before(visual);visual.append(levelImage);}
- const graph=one('.journey-frame svg');if(graph){graph.setAttribute('viewBox','0 0 1100 170');graph.querySelectorAll('[y]').forEach(e=>{e.setAttribute('y',Number(e.getAttribute('y'))*.57);if(e.tagName==='text')e.setAttribute('font-size','15');});graph.querySelectorAll('line').forEach(e=>['y1','y2'].forEach(k=>e.setAttribute(k,Number(e.getAttribute(k))*.57)));graph.querySelectorAll('circle').forEach(e=>e.setAttribute('cy',Number(e.getAttribute('cy'))*.57));const line=graph.querySelector('polyline');line.setAttribute('points',line.getAttribute('points').split(' ').map(p=>{const [x,y]=p.split(',');return x+','+(Number(y)*.57);}).join(' '));}
  const heading=one('.cmp-findings-title');if(heading){heading.setAttribute('role','heading');heading.setAttribute('aria-level','2');}
 
 
@@ -102,23 +99,11 @@ window.refineIntentLayout=function(root,L){
  all('.cmp-log-entry').forEach((e,i)=>{const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('aria-hidden','true');svg.classList.add('intent-event-icon');svg.innerHTML=eventPaths[i]||eventPaths[9];e.prepend(svg);});
  // Supporting numbers share one evidence band, keeping all five finding rows aligned.
  const findingSection=one('.intent-findings');if(findingSection){const band=document.createElement('div');band.className='intent-evidence-band';all('.cmp-hallazgo-stat').forEach(e=>band.append(e));findingSection.append(band);}
- // Independent viewports over the supplied moodboard; source artwork stays unchanged.
- const moodImage=one('img[src="/images/render-moodboard.webp"]');if(moodImage){
-  const board=document.createElement('div');board.className='intent-moodboard';
-  const groups=[
-   [['Morphology','Morfología','Morphologie'],[[129,0,342,253],[129,267,340,428],[129,713,342,278]]],
-   [['Materials','Materiales','Materialien'],[[577,0,392,583],[577,620,392,371]]],
-   [['Kinetics','Cinética','Kinetik'],[[1076,0,410,381],[1076,452,410,539]]],
-   [['Anatomy','Anatomía','Anatomie'],[[1610,0,310,559],[1610,573,310,418]]]
-  ];
-  groups.forEach(([label,rects])=>{const col=document.createElement('div');col.className='intent-mood-column';const h=document.createElement('h3');h.textContent=L(...label);col.append(h);rects.forEach((rect,i)=>{const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox',rect.join(' '));svg.setAttribute('preserveAspectRatio','xMidYMid slice');svg.setAttribute('role','img');svg.setAttribute('aria-label',L(...label)+' · '+(i+1));svg.style.setProperty('--crop-weight',rect[3]/rect[2]);const im=document.createElementNS('http://www.w3.org/2000/svg','image');im.setAttribute('href',moodImage.getAttribute('src'));im.setAttribute('width','1920');im.setAttribute('height','991');svg.append(im);col.append(svg);});board.append(col);});
-  moodImage.replaceWith(board);
- }
-
-
- // A compact contextual header leaves the observation sequence the full reading width.
- const field=one('.case-field-study'),meta=one('.cmp-obs-log-meta'),fieldImage=one('.case-field-image'),log=one('.cmp-log-wrap');
- if(field&&meta&&fieldImage&&log){meta.prepend(fieldImage);const wrapper=log.parentElement;wrapper.replaceWith(log);}
+ // Preserve the original artwork and keep related product views together.
+ const moodImage=one('img[src="/images/render-moodboard.webp"]');
+ if(moodImage){const section=moodImage.closest('.cmp-section');section.classList.add('intent-moodboard-section');all(':scope > p',section).forEach(e=>e.remove());}
+ mark('img[src="/images/render-sketches.webp"]','intent-sketches');mark('.case-parts-layout','intent-components');mark('.cmp-detail-grid','intent-details');
+ const field=one('.case-field-study');if(field){const layout=one('.case-field-layout',field),meta=one('.cmp-obs-log-meta',field);if(layout&&meta){const visual=document.createElement('div');visual.className='intent-observation-visual';visual.append(one('.case-field-image',field),meta);layout.prepend(visual);}}
  // Dimension names already express the criteria; repeated subtitles dilute the scale.
  all('.cmp-dim-sub').forEach(e=>e.remove());
  set('.cmp-km-item>div>div:last-child>div:last-child',[
@@ -128,12 +113,17 @@ window.refineIntentLayout=function(root,L){
  ['No visible response means no confirmation that the signal was heard.','Sin respuesta visible, no hay confirmación de que se oyó la señal.','Ohne sichtbare Reaktion bleibt unklar, ob das Signal gehört wurde.']
  ]);
 
- // Align the qualitative trajectory with the five phase columns; labels already appear below.
- const trajectory=one('.journey-frame svg');
- if(trajectory){const title=trajectory.querySelector('title')?.textContent||'Journey';trajectory.setAttribute('viewBox','0 0 1000 80');trajectory.setAttribute('preserveAspectRatio','none');trajectory.innerHTML='<title>'+title+'</title><path d="M100 31 L300 18 L500 65 L700 40 L900 12" fill="none" stroke="#d24a1f" stroke-width="2" vector-effect="non-scaling-stroke"/>'+[[100,31],[300,18],[500,65],[700,40],[900,12]].map(([x,y])=>'<line x1="'+x+'" y1="'+y+'" x2="'+x+'" y2="80" stroke="var(--color-border)" vector-effect="non-scaling-stroke"/><circle cx="'+x+'" cy="'+y+'" r="3.5" fill="#d24a1f"/>').join('');}
- // Make SVG type readable at the actual rendered size without enlarging the section heading.
+ // Keep circular actor groupings and the journey's original vertical amplitude.
  const network=one('.network-desktop svg');
- if(network){network.setAttribute('viewBox','0 0 720 500');network.querySelector('circle[fill="none"]')?.remove();network.querySelectorAll('*').forEach(el=>{['y','y1','y2','cy','height'].forEach(a=>{if(el.hasAttribute(a))el.setAttribute(a,String(Number(el.getAttribute(a))*.8));});if(el.tagName.toLowerCase()==='text'){const old=Number(el.getAttribute('font-size'));el.setAttribute('font-size',old>=21?'22':old>=16?'18':'16');}});}
+ if(network){
+  const nodes=[...network.querySelectorAll('g')].map(g=>[...g.querySelectorAll('text')].map(t=>({text:t.textContent,fill:t.getAttribute('fill')})));
+  const title=network.querySelector('title').textContent;
+  const positions=[[110,90],[335,90],[560,90],[110,390],[335,390],[560,390]];
+  const center=[...network.querySelectorAll(':scope > text')].map(t=>t.textContent);
+  const lineStyles=[['var(--color-text)',''],['#d24a1f','8 5'],['var(--color-text)','8 5'],['#d24a1f','8 5'],['var(--color-muted)','2 6'],['var(--color-muted)','2 6']];
+  network.setAttribute('viewBox','-20 -4 710 488');
+  network.innerHTML='<title>'+title+'</title>'+positions.map(([x,y],i)=>'<line x1="335" y1="240" x2="'+x+'" y2="'+y+'" stroke="'+lineStyles[i][0]+'" stroke-width="1.5" stroke-dasharray="'+lineStyles[i][1]+'"/>').join('')+'<circle cx="335" cy="240" r="57" fill="#d24a1f"/><text x="335" y="236" text-anchor="middle" fill="white" font-size="18" font-weight="600">'+center[0]+'</text><text x="335" y="259" text-anchor="middle" fill="white" font-size="15">'+L('Bicycle bell','Timbre','Klingel')+'</text>'+nodes.map((row,i)=>{const[x,y]=positions[i];return '<g><circle cx="'+x+'" cy="'+y+'" r="90" fill="var(--color-bg)" stroke="#c8c5c0"/>'+row.map((t,j)=>{const longTitle=row[0].text.length>20;let label=t.text;if(j===0&&longTitle){const words=label.split(' '),cut=Math.ceil(words.length/2);label='<tspan x="'+x+'">'+words.slice(0,cut).join(' ')+'</tspan><tspan x="'+x+'" dy="20">'+words.slice(cut).join(' ')+'</tspan>';}return '<text x="'+x+'" y="'+(y+(longTitle?(j===0?-28:12+(j-1)*23):-18+j*23))+'" text-anchor="middle" fill="'+t.fill+'" font-size="'+(j===0?16:14)+'" font-weight="'+(j===0?600:400)+'">'+label+'</text>';}).join('')+'</g>';}).join('');
+ }
  const market=one('.intent-typologies');if(market)all('div[style*="font-size:.75rem"]',market).forEach(e=>e.classList.add('intent-annotation'));
  const material=one('.intent-cmf');if(material)all('span[style*="font-size:"]',material).forEach(e=>e.classList.add(e.style.fontSize==='.65rem'||e.style.fontSize==='0.65rem'?'intent-annotation':'intent-material-summary'));
  all('.intent-levels [style*="font-size"]').forEach(e=>{const size=e.style.fontSize;if((size.endsWith('rem')&&parseFloat(size)<.875)||(size.endsWith('px')&&parseFloat(size)<14))e.classList.add('intent-annotation');});
@@ -147,6 +137,21 @@ window.refineIntentLayout=function(root,L){
  ['Fits standard 22.2 mm handlebars.','Se adapta a manillares estándar de 22,2 mm.','Für Standardlenker mit 22,2 mm Durchmesser.'],
  ['A light spring returns the mechanism after a pause. The physical reset interval still needs calibration.','Un resorte suave devuelve el mecanismo tras una pausa. El intervalo de retorno todavía requiere calibración.','Eine leichte Feder stellt den Mechanismus nach einer Pause zurück. Das Rückstellintervall muss noch kalibriert werden.']
  ]);
+ const phases=all('.cmp-jp');if(phases.length){
+ const table=document.createElement('table');table.className='intent-journey-table';table.setAttribute('aria-label',one('.intent-journey h2').textContent);
+ const head=document.createElement('thead'),tr=document.createElement('tr'),corner=document.createElement('th');corner.textContent=L('Experience','Experiencia','Erlebnis');tr.append(corner);
+ phases.forEach(p=>{const th=document.createElement('th');th.scope='col';const num=document.createElement('small');num.textContent=p.querySelector('.cmp-jp-num').textContent;th.append(num,document.createTextNode(p.querySelector('.cmp-jp-name').textContent));tr.append(th);});head.append(tr);table.append(head);
+ const compactRows=[
+ [['Start the ride','Iniciar viaje','Fahrt beginnen'],['Join traffic','Entrar al tránsito','Einordnen'],['Warn and pass','Avisar y pasar','Warnen, überholen'],['Brake or evade','Frenar o esquivar','Bremsen, ausweichen'],['Slow down','Reducir velocidad','Abbremsen']],
+ [['Slight rush','Algo de apuro','Leichte Eile'],['Attention rises','Más atención','Aufmerksamkeit'],['Uncertainty','Incertidumbre','Unsicherheit'],['Stress','Estrés','Stress'],['Relief','Alivio','Erleichterung']],
+ [['Grip and pedals','Agarre y pedales','Griff und Pedale'],['Traffic noise','Ruido de tránsito','Verkehrslärm'],['Bell and response','Timbre y respuesta','Klingel, Reaktion'],['Voice and brakes','Voz y frenos','Stimme, Bremsen'],['Clearer response','Respuesta más clara','Klarere Reaktion']],
+ [['Bell unchecked','Timbre sin revisar','Klingel ungeprüft'],['Masked signal','Señal enmascarada','Signal überdeckt'],['Unclear urgency','Urgencia poco clara','Unklare Dringlichkeit'],['Grip interrupted','Se pierde el agarre','Griff unterbrochen'],['Ambiguous intent','Intención ambigua','Mehrdeutiges Signal']],
+ [['Cyclist','Ciclista','Radfahrerin'],['Drivers, walkers','Autos, peatones','Fahrer, Fußgänger'],['Riders, walkers','Ciclistas, peatones','Radfahrer, Fußgänger'],['Nearby road users','Usuarios cercanos','Nahe Verkehrsteilnehmer'],['Pedestrians','Peatones','Fußgänger']]
+ ];
+ const body=document.createElement('tbody');[...phases[0].querySelectorAll('.cmp-jp-row')].forEach((row,i)=>{const r=document.createElement('tr');r.className=i===1?'emotion':i===3?'pain':'';const label=document.createElement('th');label.scope='row';label.textContent=row.querySelector('.cmp-jp-row-h').textContent;r.append(label);phases.forEach((p,j)=>{const td=document.createElement('td');td.textContent=L(...compactRows[i][j]);r.append(td);});body.append(r);});table.append(body);one('.cmp-journey-phases').before(table);
+ const curve=one('.journey-frame svg');curve.setAttribute('viewBox','0 20 1100 250');const xs=[233.75,426.25,618.75,811.25,1003.75];const dots=[...curve.querySelectorAll('circle')];dots.forEach((c,i)=>c.setAttribute('cx',xs[i]));const lines=[...curve.querySelectorAll('line')].slice(1);lines.forEach((l,i)=>{l.setAttribute('x1',xs[i]);l.setAttribute('x2',xs[i]);});[...curve.querySelectorAll('text')].slice(2).forEach((t,i)=>t.setAttribute('x',xs[i]));curve.querySelector('polyline').setAttribute('points',dots.map((d,i)=>xs[i]+','+d.getAttribute('cy')).join(' '));
+ }
+ const references=one('.intent-references');if(references){const intro=document.createElement('div');intro.className='intent-reference-intro';[one('.cmp-section-hd',references),one(':scope > p',references),one('.cmp-ante-band',references)].filter(Boolean).forEach(e=>intro.append(e));references.prepend(intro);}
  // Index follows the actual section order; no second, competing hierarchy.
  const nav=one('.project-index');if(nav){nav.classList.add('intent-index');const links=document.createElement('div');links.className='intent-index-links';all(':scope > .cmp-section').forEach((s,i)=>{const h=s.querySelector('.cmp-section-title,.cmp-findings-title');if(!h)return;if(!s.id)s.id='intent-section-'+(i+1);const a=document.createElement('a');a.href='#'+s.id;const n=document.createElement('span');n.textContent=String(i+1).padStart(2,'0');a.append(n,document.createTextNode(h.textContent));links.append(a);});const label=document.createElement('p');label.className='project-index-label';label.id='intent-index-label';label.textContent=L('In this project','En este proyecto','In diesem Projekt');nav.replaceChildren(label,links);}
 };
