@@ -35,3 +35,6 @@
 #projContent :is(.scene-kicker){font-size:var(--type-note)!important;line-height:1.5}
 
 #page-about .cv-item>p:not(.cv-item-sub){font-size:var(--type-compact)!important;line-height:1.5}
+
+/* Long project introductions share the full text-content margins. Visor stays concise. */
+#projContent[data-project]:not([data-project="visor"]):not([data-project="crown"]) .proj-desc{max-width:none}

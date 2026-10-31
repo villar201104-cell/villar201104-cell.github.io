@@ -1140,7 +1140,7 @@ html[data-input-mode="keyboard"] .page { transition:none; }
 @media(max-width:800px){#projContent .intervalo-3d-block{--scene-gutter:20px}}
 
 @media(max-width:700px){#projContent .case-open-prototypes .case-prototype-intro{margin-inline:calc(var(--opening-gutter) - 24px)}}
-</style><link rel="stylesheet" href="/case-studies/intent/intent-layout.css?v=20261031-r1"><script src="/case-studies/intent/intent-layout.js?v=20261031-r1"></script><link rel="stylesheet" href="/styles/portfolio-type.css?v=20261029-r1"></head>
+</style><link rel="stylesheet" href="/case-studies/intent/intent-layout.css?v=20261031-r2"><script src="/case-studies/intent/intent-layout.js?v=20261031-r2"></script><link rel="stylesheet" href="/styles/portfolio-type.css?v=20261031-r2"><link rel="stylesheet" href="/case-studies/visor/visor-galleries.css?v=20261031-r1"><script src="/case-studies/visor/visor-galleries.js?v=20261031-r1"></script></head>
 <body>
 <script>document.addEventListener('DOMContentLoaded',function(){ window.dispatchEvent(new CustomEvent('intro-done')); });</script>
 
@@ -4057,7 +4057,7 @@ function initVisor(root,lang) {
   const motion=matchMedia('(prefers-reduced-motion: reduce)');
   const abort=new AbortController();
   const events={signal:abort.signal};
-  initVisorColours(root,lang,abort.signal);
+  window.initVisorGalleries(root,lang,abort.signal);
   const animations=new Set(),observers=[];
   function animate(el,frames,options={}) {
     if(motion.matches||document.documentElement.dataset.inputMode==='keyboard'||!el.animate)return;
@@ -4067,55 +4067,6 @@ function initVisor(root,lang) {
   function respectMotion(){if(motion.matches)animations.forEach(a=>a.cancel());}
   motion.addEventListener('change',respectMotion,events);
   document.addEventListener('keydown',()=>animations.forEach(a=>a.cancel()),events);
-  const carousel=root.querySelector('.visor-carousel');
-  if(carousel){
-    const copy=VISOR_COPY[lang]||VISOR_COPY.en;
-    const slides=[...carousel.querySelectorAll('.visor-slide')];
-    const stage=carousel.querySelector('.visor-stage');
-    const count=carousel.querySelector('.visor-count');
-    const caption=carousel.querySelector('.visor-caption');
-    const status=carousel.querySelector('.visor-status');
-    let selected=0,requested=0,revision=0,gesture=null;
-    function render(index,announce){
-      slides.forEach((slide,i)=>{slide.hidden=i!==index;});
-      selected=index;
-      count.textContent=String(index+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
-      caption.textContent=slides[index].dataset.caption;
-      if(announce)status.textContent=copy.view+' '+(index+1)+' '+copy.of+' '+slides.length+': '+caption.textContent;
-    }
-    async function show(index){
-      requested=(index+slides.length)%slides.length;
-      const target=requested,version=++revision;
-      if(target===selected)return;
-      const img=slides[target].querySelector('img');
-      img.loading='eager';
-      // Keep the current view visible until the requested image is decoded.
-      try{await img.decode();}catch{}
-      if(abort.signal.aborted||version!==revision)return;
-      animations.forEach(a=>a.cancel());
-      render(target,true);
-      animate(img,[{opacity:.35},{opacity:1}],{duration:240});
-    }
-    render(0,false);
-    carousel.querySelectorAll('.visor-controls,.visor-arrows').forEach(el=>{el.hidden=false;});
-    carousel.querySelector('[data-visor-prev]').addEventListener('click',()=>show(requested-1),events);
-    carousel.querySelector('[data-visor-next]').addEventListener('click',()=>show(requested+1),events);
-    carousel.addEventListener('keydown',e=>{
-      if(e.altKey||e.ctrlKey||e.metaKey)return;
-      const target={ArrowLeft:requested-1,ArrowRight:requested+1,Home:0,End:slides.length-1}[e.key];
-      if(target!==undefined){e.preventDefault();show(target);}
-    },events);
-    stage.addEventListener('pointerdown',e=>{
-      if(e.pointerType==='mouse'||!e.isPrimary||e.target.closest('button'))return;
-      gesture={id:e.pointerId,x:e.clientX,y:e.clientY};
-    },{...events,passive:true});
-    stage.addEventListener('pointerup',e=>{
-      if(!gesture||gesture.id!==e.pointerId)return;
-      const dx=e.clientX-gesture.x,dy=e.clientY-gesture.y;gesture=null;
-      if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.5)show(requested+(dx<0?1:-1));
-    },events);
-    stage.addEventListener('pointercancel',()=>{gesture=null;},events);
-  }
   prepareVisorMoodboard(root,{page,motion,abort,animations,observers});
   respectMotion();
   window._visorCleanup=()=>{abort.abort();observers.forEach(o=>o.disconnect());animations.forEach(a=>a.cancel());window._visorCleanup=null;};

@@ -220,3 +220,49 @@
 #projContent[data-project="intent"] .intent-journey-table .pain th{color:var(--intent-accent)}
 @media(min-width:801px){#projContent[data-project="intent"] .intent-journey .cmp-journey-phases{display:none}}
 @media(max-width:800px){#projContent[data-project="intent"] .intent-journey-table{display:none}}
+
+/* Desktop study frames follow the usable browser height, not physical screen pixels. */
+#projContent[data-project="intent"] .cmp-persona-photo{background:transparent}
+#projContent[data-project="intent"] .cmp-persona-photo img{object-fit:contain!important;object-position:center top!important}
+#projContent[data-project="intent"] .cmp-obs-log-h{color:var(--intent-accent);font-weight:600;margin-bottom:8px}
+#projContent[data-project="intent"] .cmp-obs-log-v{color:var(--color-text);font-size:18px!important}
+#projContent[data-project="intent"] .cmp-log-sum{font-size:18px!important;font-weight:500;color:var(--color-text);border-top:2px solid var(--intent-accent)}
+#projContent[data-project="intent"] .intent-sketches img{max-height:calc(100svh - 220px)!important;mix-blend-mode:darken}
+@media(min-width:1060px){
+ #projContent[data-project="intent"]{--intent-space:32px;--intent-frame:calc(100svh - 64px)}
+ #projContent[data-project="intent"]>.cmp-section:not(.intent-levels):not(.intent-components):not(.intent-details){min-height:var(--intent-frame)}
+ #projContent[data-project="intent"] :is(.intent-profile,.intent-evaluation,.intent-findings,.intent-proposal,.intent-journey){display:flex;flex-direction:column}
+ #projContent[data-project="intent"] .cmp-typo-img{height:clamp(170px,calc((100svh - 440px)/2),270px);max-height:none;aspect-ratio:auto}
+ #projContent[data-project="intent"] .intent-typologies{align-content:stretch;grid-template-rows:auto auto 1fr}
+ #projContent[data-project="intent"] .cmp-typo-grid{align-content:space-between}
+ #projContent[data-project="intent"] .intent-references{display:flex;flex-direction:column;align-items:stretch;gap:16px}
+ #projContent[data-project="intent"] .intent-reference-intro{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+ #projContent[data-project="intent"] .intent-reference-intro .cmp-section-hd{margin:0}
+ #projContent[data-project="intent"] .intent-reference-intro>p{margin:0}
+ #projContent[data-project="intent"] .intent-references .cmp-ante-groups{flex:1;gap:24px 48px;align-content:space-between}
+ #projContent[data-project="intent"] .intent-references .cmp-ante-img{height:clamp(135px,calc((100svh - 610px)/2),240px)}
+ #projContent[data-project="intent"] .intent-references>.cmp-ante-band{margin:0;padding-top:12px}
+ #projContent[data-project="intent"] .cmp-persona-wrap{flex:1;align-items:stretch;grid-template-columns:minmax(260px,1fr) minmax(0,2fr)}
+ #projContent[data-project="intent"] .cmp-persona-photo{height:clamp(300px,calc(100svh - 480px),530px)}
+ #projContent[data-project="intent"] .cmp-persona-pg{align-content:stretch;grid-template-rows:repeat(3,1fr);gap:20px}
+ #projContent[data-project="intent"] .cmp-pb{padding:24px}
+ #projContent[data-project="intent"] .cmp-pb li{font-size:18px!important}
+ #projContent[data-project="intent"] .network-desktop svg{max-height:calc(100svh - 275px)}
+ #projContent[data-project="intent"] .network-context{gap:24px}
+ #projContent[data-project="intent"] .network-context p{font-size:18px!important}
+ #projContent[data-project="intent"] .intent-journey-table{font-size:18px;flex:1}
+ #projContent[data-project="intent"] .intent-journey-table td,#projContent[data-project="intent"] .intent-journey-table th{padding:12px;vertical-align:middle}
+ #projContent[data-project="intent"] .intent-journey-table th:first-child{font-size:16px}
+ #projContent[data-project="intent"] .cmp-ux-layout{flex:1;align-items:stretch}
+ #projContent[data-project="intent"] .cmp-ux-layout>div:first-child{display:flex;flex-direction:column;justify-content:space-between}
+ #projContent[data-project="intent"] .cmp-dim{padding:16px 0!important}
+ #projContent[data-project="intent"] .cmp-dim-h,#projContent[data-project="intent"] .cmp-km-item>div>div:last-child>div{font-size:18px!important}
+ #projContent[data-project="intent"] .cmp-km-wrap{display:flex;flex-direction:column;justify-content:space-between}
+ #projContent[data-project="intent"] .cmp-km-item{padding:24px 0!important}
+ #projContent[data-project="intent"] .cmp-hallazgos{flex:1;display:grid;grid-template-columns:1fr;grid-template-rows:repeat(5,1fr);grid-auto-flow:row}
+ #projContent[data-project="intent"] .cmp-hallazgo-body{font-size:18px!important}
+ #projContent[data-project="intent"] .intent-operation-steps{flex:1;display:flex;flex-direction:column}
+ #projContent[data-project="intent"] .case-mechanism-steps{flex:1;grid-template-rows:repeat(2,1fr)}
+}
+
+@media(min-width:1060px){#projContent[data-project="intent"] .case-field-image img{max-height:calc(100svh - 430px)}#projContent[data-project="intent"] .intent-sketches .cmp-section-hd{margin-bottom:16px}}
