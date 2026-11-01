@@ -407,7 +407,7 @@ async function init(){
  try{
   renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.NeutralToneMapping;renderer.toneMappingExposure=1.05;
   updateShadows=shadowCadence(renderer);scene=new THREE.Scene();
-  camera=new THREE.PerspectiveCamera(40,1,.15,1800);controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.dampingFactor=.075;controls.minDistance=3;controls.maxDistance=65;controls.enablePan=false;controls.maxPolarAngle=Math.PI*.48;controls.target.set(0,1,0);
+  camera=new THREE.PerspectiveCamera(40,1,.15,1800);controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.dampingFactor=.075;controls.minDistance=3;controls.maxDistance=65;controls.enablePan=true;controls.screenSpacePanning=true;controls.mouseButtons={LEFT:THREE.MOUSE.ROTATE,MIDDLE:THREE.MOUSE.PAN,RIGHT:null};controls.maxPolarAngle=Math.PI*.48;controls.target.set(0,1,0);
   // Same neutral colour response and daylight palette as Crown; a low-intensity
   // reflection environment keeps the imported metal/glass legible under the roof.
   const pmrem=new THREE.PMREMGenerator(renderer),room=new RoomEnvironment();scene.environment=pmrem.fromScene(room,.04).texture;room.dispose();pmrem.dispose();scene.environmentIntensity=.24;
@@ -450,3 +450,5 @@ initLanguage();init();
 
 
 if(new URLSearchParams(location.search).has('review'))window.__intervaloReview={get scene(){return scene},get camera(){return camera},get renderer(){return renderer},get station(){return station},get lanes(){return lanes},get controls(){return controls},get finishes(){return {quality:'simple',loadedTextureBytes:0}},get state(){return {time,running,speed,view}},seek(t){time=t;running=false;for(const l of lanes)animateLane(l,0);ambientLife?.update(time);needsRender=true;changeCamera('follow',true);},play(value=true,rate=1){speed=rate;setRunning(value)},view:changeCamera,shot:followView,pose(p,t){view='manual';cameraMove=null;camera.position.fromArray(p);controls.target.fromArray(t);controls.update();needsRender=true;},clay(){scene.traverse(o=>{if(o.isMesh)o.material=new THREE.MeshStandardMaterial({color:0xb8b9b6,roughness:.8});});needsRender=true;}};
+
+
