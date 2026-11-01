@@ -48,3 +48,16 @@
 
 #projContent[data-project="visor"] .visor-cmf-wrap{max-width:none;padding:0 var(--gallery-gutter)}
 #projContent[data-project="visor"] .visor-workflow-link{padding-inline:var(--gallery-gutter)}
+
+/* Center the active view; adjacent images are narrow hints, never competing panels. */
+.visor-gallery{--gallery-peek:48px;--gallery-gap:28px}
+.visor-gallery-track{width:min(100%,calc(var(--gallery-card) + 2 * var(--gallery-peek)));margin-inline:auto;padding-inline:var(--gallery-peek);scroll-padding:0;scroll-snap-type:x mandatory;mask-image:linear-gradient(to right,transparent,#000 32px,#000 calc(100% - 32px),transparent)}
+#projContent[data-project="visor"] .visor-gallery-card{scroll-snap-align:center;transform:none;transform-origin:center;opacity:.2;transition:opacity 220ms cubic-bezier(.22,1,.36,1)}
+#projContent[data-project="visor"] .visor-gallery-card.is-current{transform:none;opacity:1}
+.visor-gallery-track.is-dragging .visor-gallery-card{transition:none}
+.visor-gallery-arrows button{transition:background-color 160ms ease,border-color 160ms ease}
+.visor-gallery-arrows button:not(:disabled):hover{background:#bd191b0c;border-color:#bd191b}
+.visor-scroll-reveal{opacity:var(--visor-reveal,1);translate:0 calc((1 - var(--visor-reveal,1))*10px)}
+.visor-scroll-reveal:focus-within{opacity:1;translate:none}
+@media(max-width:700px){.visor-gallery,.visor-gallery.is-colour{--gallery-card:calc(100vw - 64px);--gallery-peek:32px;--gallery-gap:20px}.visor-gallery-track{mask-image:linear-gradient(to right,transparent,#000 20px,#000 calc(100% - 20px),transparent)}}
+@media(prefers-reduced-motion:reduce){.visor-scroll-reveal{opacity:1;translate:none}.visor-gallery-card{transition:none!important}}
