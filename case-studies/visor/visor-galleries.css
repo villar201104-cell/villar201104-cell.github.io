@@ -61,3 +61,8 @@
 .visor-scroll-reveal:focus-within{opacity:1;translate:none}
 @media(max-width:700px){.visor-gallery,.visor-gallery.is-colour{--gallery-card:calc(100vw - 64px);--gallery-peek:32px;--gallery-gap:20px}.visor-gallery-track{mask-image:linear-gradient(to right,transparent,#000 20px,#000 calc(100% - 20px),transparent)}}
 @media(prefers-reduced-motion:reduce){.visor-scroll-reveal{opacity:1;translate:none}.visor-gallery-card{transition:none!important}}
+
+/* Render galleries share the heading margins; keep the existing centred navigation. */
+#projContent[data-project="visor"] .visor-gallery:not(.is-sketch){--gallery-card:100%;width:calc(100% - 2 * var(--gallery-gutter));margin-inline:auto}
+#projContent[data-project="visor"] .visor-gallery:not(.is-sketch) .visor-gallery-track{width:100%}
+#projContent[data-project="visor"] .visor-gallery:not(.is-sketch) .visor-gallery-controls{margin-inline:0}

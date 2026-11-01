@@ -736,6 +736,12 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none;}
 .panel-video{position:relative;}.panel-video::after{content:none;}.panel-play-label{position:absolute;bottom:20px;left:20px;padding:10px 16px;background:var(--color-bg);color:var(--color-text);font-size:.8rem;pointer-events:none;}
 @media(min-width:901px){#navLinks.is-hidden{display:flex;}.nav-links{gap:24px;}#navBack.is-visible{display:flex;margin-right:20px;}}
 @media(max-width:560px){.cmp-cmf-grid{grid-template-columns:1fr!important;}.project-outline{gap:4px 20px;}.intent-opening img{min-height:0;}.about-heading{margin-bottom:24px;}}
+
+/* Consistent home labels and continuous project numbering. */
+#page-home :is(.card-mobile-label,.extra-card-mobile-label){display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:8px;row-gap:3px;align-items:baseline}
+#page-home .cml-num{grid-column:1;grid-row:1;margin:0;font-size:14px;font-variant-numeric:tabular-nums}
+#page-home :is(.cml-title,.extra-cml-title){grid-column:2;grid-row:1;display:block;margin:0}
+#page-home :is(.cml-cat,.extra-cml-cat){grid-column:2;grid-row:2;display:block;margin:0}
 </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFJGQKXNL"></script>
@@ -1140,7 +1146,7 @@ html[data-input-mode="keyboard"] .page { transition:none; }
 @media(max-width:800px){#projContent .intervalo-3d-block{--scene-gutter:20px}}
 
 @media(max-width:700px){#projContent .case-open-prototypes .case-prototype-intro{margin-inline:calc(var(--opening-gutter) - 24px)}}
-</style><link rel="stylesheet" href="/case-studies/intent/intent-layout.css?v=20261031-r2"><script src="/case-studies/intent/intent-layout.js?v=20261031-r2"></script><link rel="stylesheet" href="/styles/portfolio-type.css?v=20261031-r2"><link rel="stylesheet" href="/case-studies/visor/visor-galleries.css?v=20261101-motion3"><script src="/case-studies/visor/visor-galleries.js?v=20261101-motion3"></script></head>
+</style><link rel="stylesheet" href="/case-studies/intent/intent-layout.css?v=20261031-r2"><script src="/case-studies/intent/intent-layout.js?v=20261031-r2"></script><link rel="stylesheet" href="/styles/portfolio-type.css?v=20261031-r2"><link rel="stylesheet" href="/case-studies/visor/visor-galleries.css?v=20261101-margins"><script src="/case-studies/visor/visor-galleries.js?v=20261101-motion3"></script></head>
 <body>
 <script>document.addEventListener('DOMContentLoaded',function(){ window.dispatchEvent(new CustomEvent('intro-done')); });</script>
 
@@ -1223,7 +1229,7 @@ html[data-input-mode="keyboard"] .page { transition:none; }
             <p class="card-desc" data-i18n-project="visor">A Snake Eyes-inspired automotive concept, developed from sketches into Vizcom visualizations.</p>
           </div></div>
         </div>
-        <div class="card-mobile-label"><span class="cml-num">01</span><h2 class="cml-title">Visor</h2><span class="cml-cat">Automotive + Visualization · 2026</span></div>
+        <div class="card-mobile-label"><span class="cml-num">02</span><h2 class="cml-title">Visor</h2><span class="cml-cat">Automotive + Visualization · 2026</span></div>
       </div>
       <div class="project-card-wrap fu d2" onclick="go('project','intent')">
         <div class="project-card">
@@ -1235,7 +1241,7 @@ html[data-input-mode="keyboard"] .page { transition:none; }
             </div>
           </div>
         </div>
-        <div class="card-mobile-label"><span class="cml-num">02</span><h2 class="cml-title">Intent</h2><span class="cml-cat">Research + ID · 2026</span></div>
+        <div class="card-mobile-label"><span class="cml-num">03</span><h2 class="cml-title">Intent</h2><span class="cml-cat">Research + ID · 2026</span></div>
       </div>
       <div class="project-card-wrap fu d3" onclick="go('project','flujo')">
         <div class="project-card">
@@ -1247,7 +1253,7 @@ html[data-input-mode="keyboard"] .page { transition:none; }
             </div>
           </div>
         </div>
-        <div class="card-mobile-label"><span class="cml-num">03</span><h2 class="cml-title">Flujo</h2><span class="cml-cat">Lighting · 2025</span></div>
+        <div class="card-mobile-label"><span class="cml-num">04</span><h2 class="cml-title">Flujo</h2><span class="cml-cat">Lighting · 2025</span></div>
       </div>
       
     </main>
@@ -1264,7 +1270,7 @@ html[data-input-mode="keyboard"] .page { transition:none; }
             </div>
           </div>
         </div>
-        <div class="extra-card-mobile-label"><h2 class="extra-cml-title">Incline</h2><span class="extra-cml-cat">Product · 2024</span></div>
+        <div class="extra-card-mobile-label"><span class="cml-num">05</span><h2 class="extra-cml-title">Incline</h2><span class="extra-cml-cat">Product · 2024</span></div>
       </div>
         <div class="extra-card-wrap" onclick="go('project','intervalo')">
           <div class="extra-card">
@@ -1276,7 +1282,7 @@ html[data-input-mode="keyboard"] .page { transition:none; }
               </div>
             </div>
           </div>
-          <div class="extra-card-mobile-label"><h2 class="extra-cml-title">Intervalo</h2><span class="extra-cml-cat">Industrial Design · 2026</span></div>
+          <div class="extra-card-mobile-label"><span class="cml-num">06</span><h2 class="extra-cml-title">Intervalo</h2><span class="extra-cml-cat">Industrial Design · 2026</span></div>
         </div>
         <div class="extra-card-wrap" onclick="go('project','pausa')">
           <div class="extra-card">
@@ -1288,7 +1294,7 @@ html[data-input-mode="keyboard"] .page { transition:none; }
               </div>
             </div>
           </div>
-          <div class="extra-card-mobile-label"><h2 class="extra-cml-title">Pausa</h2><span class="extra-cml-cat">Furniture · 2025</span></div>
+          <div class="extra-card-mobile-label"><span class="cml-num">07</span><h2 class="extra-cml-title">Pausa</h2><span class="extra-cml-cat">Furniture · 2025</span></div>
         </div>
         <div class="extra-card-wrap" onclick="go('project','core')">
         <div class="extra-card">
@@ -1300,7 +1306,7 @@ html[data-input-mode="keyboard"] .page { transition:none; }
             </div>
           </div>
         </div>
-        <div class="extra-card-mobile-label"><h2 class="extra-cml-title">Core</h2><span class="extra-cml-cat">Product Redesign · 2024</span></div>
+        <div class="extra-card-mobile-label"><span class="cml-num">08</span><h2 class="extra-cml-title">Core</h2><span class="extra-cml-cat">Product Redesign · 2024</span></div>
       </div>
         <div class="extra-card-wrap" onclick="go('project','promix')">
           <div class="extra-card">
@@ -1312,7 +1318,7 @@ html[data-input-mode="keyboard"] .page { transition:none; }
               </div>
             </div>
           </div>
-          <div class="extra-card-mobile-label"><h2 class="extra-cml-title">Promix</h2><span class="extra-cml-cat">Product Redesign · 2025</span></div>
+          <div class="extra-card-mobile-label"><span class="cml-num">09</span><h2 class="extra-cml-title">Promix</h2><span class="extra-cml-cat">Product Redesign · 2025</span></div>
         </div>
         <div class="extra-card-wrap" onclick="go('project','mantablast')">
           <div class="extra-card">
@@ -1324,7 +1330,7 @@ html[data-input-mode="keyboard"] .page { transition:none; }
               </div>
             </div>
           </div>
-          <div class="extra-card-mobile-label"><h2 class="extra-cml-title">Manta Blast</h2><span class="extra-cml-cat">Product Design · 2024</span></div>
+          <div class="extra-card-mobile-label"><span class="cml-num">10</span><h2 class="extra-cml-title">Manta Blast</h2><span class="extra-cml-cat">Product Design · 2024</span></div>
         </div>
       </div>    </div>
     <div class="home-footer">
