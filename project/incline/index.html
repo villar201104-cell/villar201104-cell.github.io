@@ -1135,7 +1135,7 @@ html[data-input-mode="keyboard"] .page { transition:none; }
 .case-sketch-static>img{display:block;width:100%;height:auto!important}
 .visor-moodboard[data-mood-state="waiting"] img{opacity:0;transform:translateY(24px)}
 .visor-moodboard[data-mood-state="waiting"] .visor-mood-circle{opacity:.15}
-</style><link rel="stylesheet" href="/case-studies/crown/public-entry.css?v=20261023-r15"><script src="/case-studies/crown/public-entry.js"></script><style id="project-alignment-r15">
+</style><link rel="stylesheet" href="/case-studies/crown/public-entry.css?v=20261023-r15"><script src="/case-studies/crown/public-entry.js?v=20261107-nav"></script><style id="project-alignment-r15">
 /* Shared project reading axis. Media keeps its existing width. */
 #projContent :is(h1,h2,h3)[tabindex="-1"]:focus{outline:none}
 #projContent .cmp-section-hd,#projContent .cmp-section>.visor-intro{margin-inline:calc(var(--opening-gutter) - var(--ph))}
@@ -1146,7 +1146,7 @@ html[data-input-mode="keyboard"] .page { transition:none; }
 @media(max-width:800px){#projContent .intervalo-3d-block{--scene-gutter:20px}}
 
 @media(max-width:700px){#projContent .case-open-prototypes .case-prototype-intro{margin-inline:calc(var(--opening-gutter) - 24px)}}
-</style><link rel="stylesheet" href="/case-studies/intent/intent-layout.css?v=20261031-r2"><script src="/case-studies/intent/intent-layout.js?v=20261031-r2"></script><link rel="stylesheet" href="/styles/portfolio-type.css?v=20261031-r2"><link rel="stylesheet" href="/case-studies/visor/visor-galleries.css?v=20261101-edge"><script src="/case-studies/visor/visor-galleries.js?v=20261101-motion3"></script></head>
+</style><link rel="stylesheet" href="/case-studies/intent/intent-layout.css?v=20261107-gallery"><script src="/case-studies/intent/intent-layout.js?v=20261107-gallery"></script><link rel="stylesheet" href="/styles/portfolio-type.css?v=20261031-r2"><link rel="stylesheet" href="/case-studies/visor/visor-galleries.css?v=20261101-edge"><script src="/case-studies/visor/visor-galleries.js?v=20261107-gallery"></script></head>
 <body>
 <script>document.addEventListener('DOMContentLoaded',function(){ window.dispatchEvent(new CustomEvent('intro-done')); });</script>
 
@@ -1607,6 +1607,7 @@ function routeFromLocation(){
 }
 function saveRoutePosition(){const page=document.querySelector('.page.active');if(!page||!history.state)return;history.replaceState({...history.state,scrollTop:page.scrollTop,panelScroll:document.getElementById('pt')?.scrollLeft||0},'',location.href);}
 function go(page,id,pushState=true){
+ if(page==='project' && id==='crown' && window.crownProjectURL){location.assign(window.crownProjectURL());return;}
  window._visorCleanup?.();
  if(!['home','sketches','about','contact','project'].includes(page)||(page==='project'&&!Object.hasOwn(PROJECTS,id))){page='home';id=null;}
  if(pushState)saveRoutePosition();
@@ -3271,7 +3272,7 @@ function buildProject(id) {
     <div class="cmp-section cmp-render-section" style="border-top:1px solid var(--color-border);padding-bottom:0;">
       <div class="cmp-section-hd">
         <div class="cmp-section-label">${_cl==='es'?'Concepto · Contexto de uso':_cl==='de'?'Konzept · Nutzungskontext':'Concept · Use context'}</div>
-        <h2 class="cmp-section-title">${_cl==='es'?'La propuesta en contexto':_cl==='de'?'Der Entwurf im Kontext':'The proposal in context'}</h2>
+        <h2 class="cmp-section-title">${_cl==='es'?'El timbre en contexto':_cl==='de'?'Die Klingel im Kontext':'The bell in context'}</h2>
       </div>
       <img loading="lazy" src="/images/render-contexto.webp" class="cmp-render-full" style="aspect-ratio:16/9;object-fit:cover;display:block;border-top:1px solid var(--color-border);">
     </div>
@@ -3490,11 +3491,11 @@ function buildProject(id) {
       </div>
       <div class="proto-cols">
         <div class="proto-col">
-          <div class="proto-col-h" data-copy="copy-113">Building <span class="proto-col-arrow">→</span></div>
+          <div class="proto-col-h" data-copy="copy-113">Printing <span class="proto-col-arrow">→</span></div>
           <div class="proto-col-body" data-copy="copy-114">FDM prints in PETG at 1:1 scale to evaluate how the internal pattern interacts with the light source and what it projects onto the wall and surrounding space.</div>
         </div>
         <div class="proto-col">
-          <div class="proto-col-h" data-copy="copy-115">Parts <span class="proto-col-arrow">→</span></div>
+          <div class="proto-col-h" data-copy="copy-115">Components <span class="proto-col-arrow">→</span></div>
           <div class="proto-col-body" data-copy="copy-116">Two bodies, one system. Screen and support printed separately, assembled through the bayonet joint. Each piece functional and independent before becoming a whole.</div>
         </div>
         <div class="proto-col">
@@ -5338,9 +5339,9 @@ const STATIC_COPY = {
     "de": "Physische Validierung in jeder Phase. Der Prototyp als Entwurfswerkzeug, über seine Funktion als Präsentationsmodell hinaus."
   },
   "copy-113": {
-    "en": "Building <span class=\"proto-col-arrow\">→</span>",
-    "es": "Construcción <span class=\"proto-col-arrow\">→</span>",
-    "de": "Aufbau <span class=\"proto-col-arrow\">→</span>"
+    "en": "Printing <span class=\"proto-col-arrow\">→</span>",
+    "es": "Impresión <span class=\"proto-col-arrow\">→</span>",
+    "de": "Druck <span class=\"proto-col-arrow\">→</span>"
   },
   "copy-114": {
     "en": "FDM prints in PETG at 1:1 scale to evaluate how the internal pattern interacts with the light source and what it projects onto the wall and surrounding space.",
@@ -5348,9 +5349,9 @@ const STATIC_COPY = {
     "de": "FDM-Drucke aus PETG im Maßstab 1:1 zur Untersuchung des Zusammenspiels von Innenmuster und Lichtquelle sowie der Projektion auf Wand und Umgebung."
   },
   "copy-115": {
-    "en": "Parts <span class=\"proto-col-arrow\">→</span>",
-    "es": "Piezas <span class=\"proto-col-arrow\">→</span>",
-    "de": "Bauteile <span class=\"proto-col-arrow\">→</span>"
+    "en": "Components <span class=\"proto-col-arrow\">→</span>",
+    "es": "Componentes <span class=\"proto-col-arrow\">→</span>",
+    "de": "Komponenten <span class=\"proto-col-arrow\">→</span>"
   },
   "copy-116": {
     "en": "Two bodies, one system. Screen and support printed separately, assembled through the bayonet joint. Each piece functional and independent before becoming a whole.",
@@ -6191,7 +6192,7 @@ function updatePageMetadata(page,id){const project=PROJECTS[id],lang=window.curr
 function upgradeControls(root){
  root.querySelectorAll('[onclick]').forEach(el=>{
  const code=el.getAttribute('onclick'),m=code.match(/^go\('([^']+)'(?:,\s*'([^']+)')?\)/);
- if(m){const a=el.tagName==='A'?el:document.createElement('a');if(a!==el){for(const attr of el.attributes)a.setAttribute(attr.name,attr.value);a.innerHTML=el.innerHTML;el.replaceWith(a);}a.href=routeUrl(m[1],m[2]);a.removeAttribute('onclick');a.addEventListener('click',e=>{if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||e.button!==0)return;e.preventDefault();go(m[1],m[2]);});}
+ if(m){const a=el.tagName==='A'?el:document.createElement('a');if(a!==el){for(const attr of el.attributes)a.setAttribute(attr.name,attr.value);a.innerHTML=el.innerHTML;el.replaceWith(a);}a.href=routeUrl(m[1],m[2]);a.removeAttribute('onclick');if(m[1]==='project' && m[2]==='crown' && window.crownProjectURL){a.href=window.crownProjectURL();a.addEventListener('click',()=>{a.href=window.crownProjectURL();});return;}a.addEventListener('click',e=>{if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||e.button!==0)return;e.preventDefault();go(m[1],m[2]);});}
  else if(!['A','BUTTON','INPUT'].includes(el.tagName)){el.setAttribute('role','button');el.tabIndex=0;if(!el.dataset.keyReady){el.dataset.keyReady='true';el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();if(el.hasAttribute('ondblclick'))el.dispatchEvent(new MouseEvent('dblclick',{bubbles:true}));else el.click();}});}}
  });
  root.querySelectorAll('[ondblclick]').forEach(el=>{if(el.dataset.keyReady)return;el.tabIndex=0;el.setAttribute('role','button');el.dataset.keyReady='true';el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.dispatchEvent(new MouseEvent('dblclick',{bubbles:true}));}});});

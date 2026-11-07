@@ -8,13 +8,16 @@
   de:{category:'Persönliches Projekt',private:'Private Fallstudie',body:'Recherche, Entwurfsentwicklung und ein interaktiver Vorschlag. Zugang für eingeladene Personen.',enter:'Projekt öffnen',request:'Zugang anfragen'}
  };
  const current=()=>copy[window.currentLang]||copy.en;
+ if(CONFIG.privateOrigin)window.crownProjectURL=()=>{
+  const destination=new URL('/project/crown/',CONFIG.privateOrigin);
+  if(destination.protocol!=='https:')throw new Error('Private project requires HTTPS');
+  destination.searchParams.set('lang',['en','es','de'].includes(window.currentLang)?window.currentLang:'en');
+  return destination.href;
+ };
  window.renderCrownEntry=()=>{
   // Only Crown navigates to the protected hostname; configure after remote checks.
-  if(CONFIG.privateOrigin){
-   const destination=new URL('/project/crown/',CONFIG.privateOrigin);
-   if(destination.protocol!=='https:')throw new Error('Private project requires HTTPS');
-   destination.searchParams.set('lang',['en','es','de'].includes(window.currentLang)?window.currentLang:'en');
-   window.location.assign(destination.href);
+  if(window.crownProjectURL){
+   window.location.assign(window.crownProjectURL());
    return;
   }
   window._visorCleanup?.();window._currentProjectId='crown';

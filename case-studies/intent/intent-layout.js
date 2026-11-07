@@ -123,10 +123,39 @@ window.refineIntentLayout=function(root,L){
   const env=[...one('.network-context').querySelectorAll('strong')].map(x=>x.textContent);
   network.setAttribute('viewBox','0 0 900 760');
   const positions=[[450,210],[620,282],[620,455],[450,530],[280,455],[280,282]];
-  network.innerHTML='<title>'+esc(title)+'</title><circle cx="450" cy="370" r="345" fill="var(--color-text)" fill-opacity=".025" stroke="#c8c5c0"/><circle cx="450" cy="370" r="260" fill="var(--color-bg)" stroke="#c8c5c0"/><circle cx="450" cy="370" r="90" fill="#d24a1f"/>'+labels(450,365,[L('Cyclist','Ciclista','Radfahrer'),L('Bicycle bell','Timbre','Klingel')],20)+nodes.map((row,i)=>{const[x,y]=positions[i];let name=row[0].text;const words=name.split(' '),split=name.length>20;const lines=split?[words.slice(0,Math.ceil(words.length/2)).join(' '),words.slice(Math.ceil(words.length/2)).join(' '),row[1].text]:[name,row[1].text];return labels(x,y-(split?12:0),lines,18);}).join('')+env.map((name,i)=>{const positions=[[240,150],[660,150],[660,580],[240,580]];const words=name.split(' ');const mid=Math.ceil(words.length/2);return labels(...positions[i],[words.slice(0,mid).join(' '),words.slice(mid).join(' ')],18);}).join('');
+  const signalKinds=[
+   [L('Receives the signal','Recibe la señal','Signal empfangen'),'#33454a',''],
+   [L('Partial reception','Recepción parcial','Teilweiser Empfang'),'#b55232','8 5'],
+   [L('Reception at risk','Recepción en riesgo','Empfang gefährdet'),'#716861','2 5'],
+   [L('Shared signal code','Código compartido','Gemeinsamer Signalcode'),'#365b83','9 4 2 4']
+  ];
+  const actorKinds=[0,1,3,1,2,2];
+  function connection(x,y,kind,inset){
+   const dx=x-450,dy=y-370,length=Math.hypot(dx,dy);
+   const endX=x-inset*dx/length,endY=y-inset*dy/length;
+   const [,stroke,dash]=signalKinds[kind];
+   return '<line x1="450" y1="370" x2="'+endX+'" y2="'+endY+'" stroke="'+stroke+'" stroke-width="2.4" stroke-dasharray="'+dash+'" stroke-linecap="round"/><circle cx="'+endX+'" cy="'+endY+'" r="3" fill="'+stroke+'"/>';
+  }
+  const connectors=positions.map(([x,y],i)=>connection(x,y,actorKinds[i],i===0?21:i===3?28:65)).join('');
+  network.innerHTML='<title>'+esc(title)+'</title><circle cx="450" cy="370" r="345" fill="var(--color-text)" fill-opacity=".025" stroke="#c8c5c0"/><circle cx="450" cy="370" r="260" fill="var(--color-bg)" stroke="#c8c5c0"/>'+connectors+'<circle cx="450" cy="370" r="90" fill="#d24a1f"/>'+labels(450,365,[L('Cyclist','Ciclista','Radfahrer'),L('Bicycle bell','Timbre','Klingel')],20)+nodes.map((row,i)=>{const[x,y]=positions[i];let name=row[0].text;const words=name.split(' '),split=name.length>20;const lines=split?[words.slice(0,Math.ceil(words.length/2)).join(' '),words.slice(Math.ceil(words.length/2)).join(' '),row[1].text]:[name,row[1].text];return labels(x,y-(split?12:0),lines,18);}).join('')+env.map((name,i)=>{const positions=[[240,150],[660,150],[660,580],[240,580]];const words=name.split(' ');const mid=Math.ceil(words.length/2);return labels(...positions[i],[words.slice(0,mid).join(' '),words.slice(mid).join(' ')],18);}).join('');
   [...network.querySelectorAll('text')].slice(0,2).forEach(t=>t.setAttribute('fill','white'));
   const aside=one('.network-context');aside.innerHTML='<h3>'+L('Levels of involvement','Niveles de participación','Beteiligungsebenen')+'</h3><div><strong>01 · '+L('Primary user','Usuario principal','Primärnutzer')+'</strong><p>'+L('The cyclist activates the signal and controls its intention.','El ciclista activa la señal y define su intención.','Der Radfahrer betätigt das Signal und bestimmt seine Absicht.')+'</p></div><div><strong>02 · '+L('Direct recipients','Receptores directos','Direkte Empfänger')+'</strong><p>'+L('Pedestrians, other cyclists and drivers receive the warning under different conditions.','Peatones, otros ciclistas y conductores reciben el aviso en distintas condiciones.','Fußgänger, andere Radfahrer und Autofahrer empfangen die Warnung unter unterschiedlichen Bedingungen.')+'</p></div><div><strong>03 · '+L('Surrounding context','Contexto del entorno','Umfeld')+'</strong><p>'+L('Cycling culture, motor traffic, infrastructure and regulation shape how the signal is used and understood.','La cultura ciclística, el tránsito, la infraestructura y la normativa condicionan el uso y la interpretación.','Radfahrkultur, Kraftverkehr, Infrastruktur und Vorschriften prägen Nutzung und Verständnis.')+'</p></div>';
 
+ }
+ const researchHeader=one('#intent-research');if(researchHeader?.classList.contains('process-header')){researchHeader.remove();one('.intent-typologies').id='intent-research';}
+ const legend=one('.network-context');
+ if(legend && network){
+  const group=document.createElement('div');group.className='intent-signal-legend';
+  const title=document.createElement('h3');title.textContent=L('Signal reception','Recepción de la señal','Signalempfang');group.append(title);
+  const actors=all('.network-mobile .network-actor');
+  const lines=[...network.querySelectorAll('line')];
+  [0,1,4,2].forEach(i=>{
+   const item=document.createElement('div'),sample=document.createElementNS('http://www.w3.org/2000/svg','svg');
+   sample.setAttribute('aria-hidden','true');sample.setAttribute('viewBox','0 0 52 12');
+   const line=lines[i].cloneNode(false);Object.entries({x1:1,x2:51,y1:6,y2:6}).forEach(([key,v])=>line.setAttribute(key,v));
+   sample.append(line);item.append(sample,actors[i].querySelector('b').textContent);group.append(item);
+  });
+  legend.append(group);
  }
  const market=one('.intent-typologies');if(market)all('div[style*="font-size:.75rem"]',market).forEach(e=>e.classList.add('intent-annotation'));
  const material=one('.intent-cmf');if(material)all('span[style*="font-size:"]',material).forEach(e=>e.classList.add(e.style.fontSize==='.65rem'||e.style.fontSize==='0.65rem'?'intent-annotation':'intent-material-summary'));
@@ -152,10 +181,30 @@ window.refineIntentLayout=function(root,L){
  [['Bell unchecked','Timbre sin revisar','Klingel ungeprüft'],['Masked signal','Señal enmascarada','Signal überdeckt'],['Unclear urgency','Urgencia poco clara','Unklare Dringlichkeit'],['Grip interrupted','Se pierde el agarre','Griff unterbrochen'],['Ambiguous intent','Intención ambigua','Mehrdeutiges Signal']],
  [['Cyclist','Ciclista','Radfahrerin'],['Drivers, walkers','Autos, peatones','Fahrer, Fußgänger'],['Riders, walkers','Ciclistas, peatones','Radfahrer, Fußgänger'],['Nearby road users','Usuarios cercanos','Nahe Verkehrsteilnehmer'],['Pedestrians','Peatones','Fußgänger']]
  ];
- const body=document.createElement('tbody');[...phases[0].querySelectorAll('.cmp-jp-row')].forEach((row,i)=>{const r=document.createElement('tr');r.className=i===1?'emotion':i===3?'pain':'';const label=document.createElement('th');label.scope='row';label.textContent=row.querySelector('.cmp-jp-row-h').textContent;r.append(label);phases.forEach((p,j)=>{const td=document.createElement('td');td.textContent=L(...compactRows[i][j]);r.append(td);});body.append(r);});table.append(body);one('.cmp-journey-phases').before(table);
+ const painDetails=[
+  ['The rider sets off before checking whether the bell works.','La ciclista sale sin comprobar que el timbre funcione.','Die Fahrerin fährt los, ohne die Klingel zu prüfen.'],
+  ['Traffic noise can drown out a single ring.','El ruido del tránsito puede tapar un toque.','Verkehrslärm kann ein einzelnes Klingeln übertönen.'],
+  ['A polite request and an urgent warning sound alike.','Pedir paso y advertir de un peligro suenan igual.','Eine Bitte um Platz klingt wie eine Warnung.'],
+  ['After ringing, the thumb has to return to the braking position.','Después del toque, el pulgar debe volver a la posición de frenado.','Nach dem Klingeln muss der Daumen zurück in die Bremsposition.'],
+  ['Even a gentle ring can sound like a demand to move.','Hasta un toque suave puede sonar como una exigencia de paso.','Selbst leises Klingeln kann wie eine Aufforderung zum Ausweichen klingen.']
+ ];
+ function painCell(el,index){
+  const title=document.createElement('strong'),detail=document.createElement('span');
+  title.textContent=L(...compactRows[3][index]);detail.textContent=L(...painDetails[index]);detail.className='intent-pain-detail';el.replaceChildren(title,detail);
+ }
+ phases.forEach((phase,j)=>{const cell=phase.querySelector('.is-pain .cmp-jp-row-t');if(cell)painCell(cell,j);});
+ const body=document.createElement('tbody');[...phases[0].querySelectorAll('.cmp-jp-row')].forEach((row,i)=>{const r=document.createElement('tr');r.className=i===1?'emotion':i===3?'pain':'';const label=document.createElement('th');label.scope='row';label.textContent=row.querySelector('.cmp-jp-row-h').textContent;r.append(label);phases.forEach((p,j)=>{const td=document.createElement('td');if(i===3)painCell(td,j);else td.textContent=L(...compactRows[i][j]);r.append(td);});body.append(r);});table.append(body);one('.cmp-journey-phases').before(table);
  const curve=one('.journey-frame svg');curve.setAttribute('viewBox','0 0 1100 180');curve.querySelector('line').setAttribute('y1','86');curve.querySelector('line').setAttribute('y2','86');[...curve.querySelectorAll('circle')].forEach(c=>c.setAttribute('cy',30+Number(c.getAttribute('cy'))*.45));[...curve.querySelectorAll('line')].slice(1).forEach((l,i)=>{l.setAttribute('y1',40+Number(curve.querySelectorAll('circle')[i].getAttribute('cy'))-30);l.setAttribute('y2','139');});[...curve.querySelectorAll('text')].forEach((t,i)=>{t.setAttribute('y',i===0?'47':i===1?'126':'165');if(i>1)t.setAttribute('font-size','18');});const xs=[233.75,426.25,618.75,811.25,1003.75];const dots=[...curve.querySelectorAll('circle')];dots.forEach((c,i)=>c.setAttribute('cx',xs[i]));const lines=[...curve.querySelectorAll('line')].slice(1);lines.forEach((l,i)=>{l.setAttribute('x1',xs[i]);l.setAttribute('x2',xs[i]);});[...curve.querySelectorAll('text')].slice(2).forEach((t,i)=>t.setAttribute('x',xs[i]));curve.querySelector('polyline').setAttribute('points',dots.map((d,i)=>xs[i]+','+d.getAttribute('cy')).join(' '));
  }
+ const axisMarks=all('.journey-frame svg text').slice(0,2);
+ const ends=[L('Less friction','Menor dificultad','Weniger Hürden'),L('More friction','Mayor dificultad','Mehr Hürden')];
+ axisMarks.forEach((t,i)=>{t.textContent=(i?'− ':'+ ')+ends[i];t.setAttribute('x','3');t.setAttribute('font-size','15');t.setAttribute('font-weight','600');});
  const references=one('.intent-references');if(references){const intro=document.createElement('div');intro.className='intent-reference-intro';[one('.cmp-section-hd',references),one(':scope > p',references),one('.cmp-ante-band',references)].filter(Boolean).forEach(e=>intro.append(e));references.prepend(intro);const band=one('.cmp-ante-band',intro);if(band)references.append(band);}
+ for(const section of all('.intent-contexts,.intent-cmf,.intent-finish')){
+  const body=document.createElement('div');body.className='intent-frame-content';
+  const children=[...section.children].filter(el=>!el.classList.contains('cmp-section-hd'));
+  body.append(...children);section.append(body);
+ }
  // Index follows the actual section order; no second, competing hierarchy.
  const nav=one('.project-index');if(nav){nav.classList.add('intent-index');const links=document.createElement('div');links.className='intent-index-links';all(':scope > .cmp-section').forEach((s,i)=>{const h=s.querySelector('.cmp-section-title,.cmp-findings-title');if(!h)return;if(!s.id)s.id='intent-section-'+(i+1);const a=document.createElement('a');a.href='#'+s.id;const n=document.createElement('span');n.textContent=String(i+1).padStart(2,'0');a.append(n,document.createTextNode(h.textContent));links.append(a);});const label=document.createElement('p');label.className='project-index-label';label.id='intent-index-label';label.textContent=L('In this project','En este proyecto','In diesem Projekt');nav.replaceChildren(label,links);}
 };

@@ -266,3 +266,24 @@
 }
 
 @media(min-width:1060px){#projContent[data-project="intent"] .case-field-image img{max-height:calc(100svh - 430px)}#projContent[data-project="intent"] .intent-sketches .cmp-section-hd{margin-bottom:16px}}
+
+#projContent[data-project="intent"]{--intent-rule:#b1aea9}
+#projContent[data-project="intent"] .cmp-persona-photo img{object-position:left top!important}
+#projContent[data-project="intent"] .network-context .intent-signal-legend{grid-column:1/-1;display:grid;gap:8px;padding:12px 0 0;border-top:1px solid var(--intent-inner-rule)}
+#projContent[data-project="intent"] .intent-signal-legend h3{margin:0 0 3px}
+#projContent[data-project="intent"] .intent-signal-legend>div{display:flex;align-items:center;gap:12px;font-size:15px;line-height:1.35}
+#projContent[data-project="intent"] .intent-signal-legend svg{display:block;width:44px;height:12px;flex:none}
+#projContent[data-project="intent"] .intent-pain-detail{display:block;margin-top:5px;font-size:15px;line-height:1.4;color:var(--color-soft)}
+#projContent[data-project="intent"] .intent-frame-content>p{font-size:18px!important;line-height:1.5;max-width:85ch}
+@media(min-width:1060px){
+ #projContent[data-project="intent"]{--intent-space:clamp(42px,5.6vh,64px)}
+ #projContent[data-project="intent"]>:is(.intent-contexts,.intent-cmf,.intent-finish){display:flex;flex-direction:column}
+ #projContent[data-project="intent"] .intent-frame-content{display:flex;flex-direction:column;justify-content:center;flex:1}
+ #projContent[data-project="intent"] .intent-frame-content>.cmp-context-grid{align-items:start}
+ #projContent[data-project="intent"] .network-context{gap:17px}
+ #projContent[data-project="intent"] .cmp-dim-score{font-size:34px}
+ #projContent[data-project="intent"] .cmp-dim-h,#projContent[data-project="intent"] .cmp-hallazgo-title{font-size:clamp(21px,1.65vw,25px)!important}
+ #projContent[data-project="intent"] .cmp-hallazgo-n{font-size:34px}
+ #projContent[data-project="intent"] .cmp-hallazgo-body,#projContent[data-project="intent"] .case-mechanism-steps>div>div:last-child{font-size:clamp(18px,1.4vw,22px)!important}
+ #projContent[data-project="intent"] .intent-evidence-band .cmp-hallazgo-stat{font-size:18px}
+}
