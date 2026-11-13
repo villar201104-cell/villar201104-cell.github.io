@@ -20,3 +20,5 @@
 @media(max-width:800px){#projContent .intervalo-3d-block{--scene-gutter:20px}}
 
 @media(max-width:700px){#projContent .case-open-prototypes .case-prototype-intro{margin-inline:calc(var(--opening-gutter) - 24px)}}
+
+.crown-card-surface .crown-process-label{margin-top:8px;color:#515451;font:400 14px/1.4 var(--font-body,'Instrument Sans',sans-serif);text-align:center}

@@ -7,10 +7,16 @@
   return url.href;
  };
  window.renderCrownEntry=()=>location.assign(window.crownProjectURL());
+ const captions={en:'Explore the process',es:'Explorá el proceso',de:'Designprozess entdecken'};
  function labels(){
   for(const icon of document.querySelectorAll('.crown-card-surface>svg')){
    const mark=document.createElement('img');
    mark.src='/experiences/intervalo/nv-loader.svg';mark.className='crown-nv-mark';mark.alt='';mark.width=85;mark.height=54;icon.replaceWith(mark);
+  }
+  for(const surface of document.querySelectorAll('.crown-card-surface')){
+   let label=surface.querySelector('.crown-process-label');
+   if(!label){label=document.createElement('span');label.className='crown-process-label';surface.append(label);}
+   label.textContent=captions[window.currentLang]||captions.en;
   }
   document.querySelectorAll('.projects-grid .cml-num').forEach((el,i)=>el.textContent=String(i+1).padStart(2,'0'));
  }
