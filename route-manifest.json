@@ -4,90 +4,90 @@
     "file": "index.html",
     "title": "Nahuel Villar | Industrial Design",
     "image": "/images/render-hero-iso-2.webp",
-    "sha256": "2dc0009792759639977cb4d88278aa710a6c9d711eff6da0ab128828c29b9e37"
+    "sha256": "5cde2c25b9a546b636409b40f5b5c7c676884c078c2e4625edd112bd936671d6"
   },
   {
     "route": "/about/",
     "file": "about/index.html",
     "title": "About | Nahuel Villar",
     "image": "/images/photo.webp",
-    "sha256": "cfb225ce9def8a43ee88fb9b543fa995e6f69c22d6ad46bfa48aba3816d469cb"
+    "sha256": "3eee6de6f6f516f2d69c5f01046ad0a7fe406939f4c724fb8d7e53012384936f"
   },
   {
     "route": "/contact/",
     "file": "contact/index.html",
     "title": "Contact | Nahuel Villar",
     "image": "/images/render-hero-iso-2.webp",
-    "sha256": "e3c4c0c5ac2a4d11c4e227f8fb6c7603ca3dda4fecd0deefb13d4924dd1d13ff"
+    "sha256": "134a9859b17a091c385c2ebfefb78de8b6ef4a7976741a17b20a193834890ab4"
   },
   {
     "route": "/sketches/",
     "file": "sketches/index.html",
     "title": "Sketches | Nahuel Villar",
     "image": "/images/sketch-2026-09-23.webp",
-    "sha256": "d53ee8c8ae86ff7f49316a2283417db9b79bbe036509cd2816c0b4c6d75fc799"
+    "sha256": "3e042349370b481f513333a442fff248f1f0190e13c0f59cbeecb38f3c0b0c3a"
   },
   {
     "route": "/project/visor/",
     "file": "project/visor/index.html",
     "title": "Visor | Nahuel Villar",
     "image": "/images/visor/renders-2026-10-03/studio-front-three-quarter.webp",
-    "sha256": "25fbad5d15666900c3d3037d1d94cce99914a26df3f0e823fc48ed8104c258a2"
+    "sha256": "d58f1dd78a2d181aa5bd95b0e158abfa2f35edb79113d17f379090083c48f5b0"
   },
   {
     "route": "/project/intent/",
     "file": "project/intent/index.html",
     "title": "Intent | Nahuel Villar",
     "image": "/images/render-hero-iso-2.webp",
-    "sha256": "39baaa0ff034e67a390a4cb65515f55eaaa4a790c09eab3a9205ca67f6d97961"
+    "sha256": "80860763e90a79a14dd8014cef28bd13db0411f440d1f8f186811cde6bc38982"
   },
   {
     "route": "/project/flujo/",
     "file": "project/flujo/index.html",
     "title": "Flujo | Nahuel Villar",
     "image": "/images/flujo_cover.webp",
-    "sha256": "aa932418749b06eba468a1abb04cf37561cb9f14f97063072f6ee35ccceb11fa"
+    "sha256": "cd4b2c1cec522e96e76661f8a12fa3c7cc7c631bcbcbf725c4cce2973ff1efc0"
   },
   {
     "route": "/project/incline/",
     "file": "project/incline/index.html",
     "title": "Incline | Nahuel Villar",
     "image": "/images/incline1.webp",
-    "sha256": "8b3f2f9a41326c6be38a32f57f38267d7262eaa684188ff0264be0a57ce54e6f"
+    "sha256": "ef3f20910172c531cf9adacf49612d6d85b86bf7d019c5f74ba7ec667d646590"
   },
   {
     "route": "/project/core/",
     "file": "project/core/index.html",
     "title": "Core | Nahuel Villar",
     "image": "/images/core1.webp",
-    "sha256": "17d7815c36c452e8551fcf2e8e03b3fc52035761041a3c81cf8e95e8fdfbbb9a"
+    "sha256": "dd176b702ab4fd7a9c46e6a5898f0429995f8ff5c4f5f2d305fdef12e8cf6b58"
   },
   {
     "route": "/project/pausa/",
     "file": "project/pausa/index.html",
     "title": "Pausa | Nahuel Villar",
     "image": "/images/pausa1.webp",
-    "sha256": "213e422c958718ea666793f98ea1e59d47273f49f1fdbd1cdba6168039d9f6e5"
+    "sha256": "3a1539e2215292d72a880a8d540cf29b9fc17a071ddc119fc71bf1d8be858a57"
   },
   {
     "route": "/project/promix/",
     "file": "project/promix/index.html",
     "title": "Promix | Nahuel Villar",
     "image": "/images/promix-panel.webp",
-    "sha256": "19e20c9c5fda0d110d40aa32b0150d2235420705d80c2996da677c412e613695"
+    "sha256": "c71242c64818691eba56bb385807a8677be4673ea6b16d69ce9242c81f225f04"
   },
   {
     "route": "/project/intervalo/",
     "file": "project/intervalo/index.html",
     "title": "Intervalo | Nahuel Villar",
     "image": "/images/ypf-1.webp",
-    "sha256": "cb3ba89b9bf78d37da78de5a152258e675f85957911959286552525b08348cb2"
+    "sha256": "d9e4413acac46fb7bd7f131d9e2bde0fc5ed30aed13c3106918957433be15738"
   },
   {
     "route": "/project/mantablast/",
     "file": "project/mantablast/index.html",
     "title": "Manta Blast | Nahuel Villar",
     "image": "/images/manta-1.webp",
-    "sha256": "367380cade30875c9e77554fc4bc101a089f8aa442f506134878fe5a7ebd52da"
+    "sha256": "06861c0e017d2fdff6eac6191d2e0e83024116d32a3c73f1ca728a191d2d98e3"
   }
 ]

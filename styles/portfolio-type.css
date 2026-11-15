@@ -38,3 +38,30 @@
 
 /* Long project introductions share the full text-content margins. Visor stays concise. */
 #projContent[data-project]:not([data-project="visor"]):not([data-project="crown"]) .proj-desc{max-width:none}
+
+.cv-software-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 138px), 1fr));
+  gap: 14px 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.cv-software-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  line-height: 1.35;
+}
+.cv-software-list img {
+  flex: none;
+  width: 27px;
+  height: 27px;
+  object-fit: contain;
+}
+.cv-software-list small {
+  display: block;
+  color: var(--color-muted);
+  font-size: 14px;
+}
