@@ -22,3 +22,10 @@
 @media(max-width:700px){#projContent .case-open-prototypes .case-prototype-intro{margin-inline:calc(var(--opening-gutter) - 24px)}}
 
 .crown-card-surface .crown-process-label{margin-top:8px;color:#515451;font:400 14px/1.4 var(--font-body,'Instrument Sans',sans-serif);text-align:center}
+
+/* Crown project cover: original artwork, slight blur, sharp animated NV above. */
+.crown-entry .crown-card-surface{isolation:isolate;overflow:hidden;background:#333e46;border:0}
+.crown-entry .crown-card-surface::before{content:"";position:absolute;inset:-3px;z-index:-2;background:url('/images/crown-project-cover-20261119.png') center center/cover no-repeat;filter:blur(1px);pointer-events:none}
+.crown-entry .crown-card-surface::after{content:"";position:absolute;inset:0;z-index:-1;background:rgba(12,20,27,.14);pointer-events:none}
+.crown-entry .crown-card-surface .crown-nv-mark{position:relative;filter:invert(1);flex-shrink:0}
+.crown-entry .crown-card-surface .crown-process-label{position:relative;color:#fff;text-shadow:0 1px 5px rgba(0,0,0,.65)}
